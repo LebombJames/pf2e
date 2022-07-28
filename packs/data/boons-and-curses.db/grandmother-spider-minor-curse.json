@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> When your pranks start going wrong, they dissolve into a string of catastrophic failures. When you roll a failure on a Deception or Stealth check, you get a critical failure instead.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1
@@ -14,26 +14,7 @@
         "level": {
             "value": 0
         },
-        "rules": [
-            {
-                "adjustment": {
-                    "failure": "one-degree-worse"
-                },
-                "key": "AdjustDegreeOfSuccess",
-                "label": "Grandmother Spider - Minor Curse",
-                "selector": "stealth",
-                "type": "skill"
-            },
-            {
-                "adjustment": {
-                    "failure": "one-degree-worse"
-                },
-                "key": "AdjustDegreeOfSuccess",
-                "label": "Grandmother Spider - Minor Curse",
-                "selector": "deception",
-                "type": "skill"
-            }
-        ],
+        "rules": [],
         "source": {
             "value": "Pathfinder Lost Omens: Gods and Magic"
         },

@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Boon:</strong> You fear no exertion. You can employ exploration tactics normally while @Compendium[pf2e.conditionitems.Fatigued]{Fatigued}.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

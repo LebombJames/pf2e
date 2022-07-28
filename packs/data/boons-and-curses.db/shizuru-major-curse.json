@@ -3,10 +3,10 @@
     "data": {
         "badge": null,
         "description": {
-            "value": "<p><strong>Major Curse:</strong> Those who incite Shizuru's personal wrath earn the hatred of all of her subjects. All imperial dragons and animals you encounter are automatically hostile to you, and you gain weakness 15 to draconic breath weapons.</p>"
+            "value": "<p><strong>Major Curse:</strong> Those who incite Shizuru’s personal wrath earn the hatred of all of her subjects. All imperial dragons and animals you encounter are automatically hostile to you, and you gain weakness 15 to draconic breath weapons.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

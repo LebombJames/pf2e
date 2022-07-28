@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> Difficulty lifting burdens is a sign of divine disapproval. Your maximum and encumbered Bulk limits decrease by 2.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Boon:</strong> Your organs are partially transformed into mechanical counterparts. You gain resistance 10 to negative damage, and the DC of your flat check to remove persistent bleed damage is only 5.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

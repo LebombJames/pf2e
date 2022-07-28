@@ -3,10 +3,10 @@
     "data": {
         "badge": null,
         "description": {
-            "value": "<p><strong>Moderate Curse:</strong> Your heart is as quick to change as Hei Feng's. If you roll a failure on a saving throw against an emotion effect, you get a critical failure instead.</p>"
+            "value": "<p><strong>Moderate Curse:</strong> Your heart is as quick to change as Hei Feng’s. If you roll a failure on a saving throw against an emotion effect, you get a critical failure instead.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Boon:</strong> You are at home on the seas and always ready to plunder an enemy vessel or defend your own. When aboard a boat, you gain a +2 status bonus to all initiative rolls, Acrobatics checks to Balance, and Athletics checks to Climb. In addition, you never get seasick.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

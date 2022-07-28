@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Curse:</strong> The horrors at the end of reality become overwhelming and constantly race through your mind. You are permanently@Compendium[pf2e.conditionitems.Stupefied]{Stupefied 2}.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

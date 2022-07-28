@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> Your hands shake when attempting delicate work. All your failures to @Compendium[pf2e.actionspf2e.Craft]{Craft} or @Compendium[pf2e.actionspf2e.Repair]{Repair} items are instead critical failures.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

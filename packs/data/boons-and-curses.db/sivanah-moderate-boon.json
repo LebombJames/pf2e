@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Boon:</strong> You wear a veil of illusion wherever you go. You can cast <em>@Compendium[pf2e.spells-srd.Illusory Disguise]{Illusory Disguise}</em> at will as an innate divine spell.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> Community opinion turns against you. Humanoids in your community who would normally start as indifferent toward you start as unfriendly instead.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

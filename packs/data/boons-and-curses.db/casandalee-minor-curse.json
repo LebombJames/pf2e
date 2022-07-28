@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> Your joints stiffen, and your mind becomes clouded. You take a –2 status penalty to all rolls for initiative.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

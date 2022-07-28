@@ -3,10 +3,10 @@
     "data": {
         "badge": null,
         "description": {
-            "value": "<p><strong>Moderate Curse:</strong> Kurgess's displeasure breaks your competitive edge, causing you to fail at the cusp of success. If your check result exactly equals the DC, you fail instead of succeeding.</p>"
+            "value": "<p><strong>Moderate Curse:</strong> Kurgess’s displeasure breaks your competitive edge, causing you to fail at the cusp of success. If your check result exactly equals the DC, you fail instead of succeeding.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

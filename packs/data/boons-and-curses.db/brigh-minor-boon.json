@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Boon:</strong> Knowledge floods your mind. Once, you can reroll a failed skill check to Recall Knowledge; you must use the second result, even if it's worse.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

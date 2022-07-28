@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Curse:</strong> Ghlaunder leeches your energy from you as easily as blood. Any time you fail a Fortitude save, you become @Compendium[pf2e.conditionitems.Fatigued]{Fatigued} in addition to all other effects.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

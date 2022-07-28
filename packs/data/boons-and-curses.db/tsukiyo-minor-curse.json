@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> Those who offend Tsukiyo find that light actively shuns them. You lose any low-light vision or darkvision you have, and you treat all light levels as one step lower.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

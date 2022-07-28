@@ -3,10 +3,10 @@
     "data": {
         "badge": null,
         "description": {
-            "value": "<p><strong>Major Curse:</strong> You are exiled from companionship. You can't communicate with any other creature, nor can you feel other creatures' touch.</p>"
+            "value": "<p><strong>Major Curse:</strong> You are exiled from companionship. You can’t communicate with any other creature, nor can you feel other creatures’ touch.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

@@ -3,10 +3,10 @@
     "data": {
         "badge": null,
         "description": {
-            "value": "<p><strong>Minor Curse:</strong> Ghlaunder drains away your life force for himself. You become @Compendium[pf2e.conditionitems.Drained]{Drained 1} and can't reduce your drained condition below 1.</p>"
+            "value": "<p><strong>Minor Curse:</strong> Ghlaunder drains away your life force for himself. You become @Compendium[pf2e.conditionitems.Drained]{Drained 1} and can’t reduce your drained condition below 1.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

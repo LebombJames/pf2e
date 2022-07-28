@@ -6,7 +6,7 @@
             "value": "<p><strong>Minor Curse:</strong> Achaekek's minions seek vengeance. Nonsapient insects (especially mantises) become hostile against you.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

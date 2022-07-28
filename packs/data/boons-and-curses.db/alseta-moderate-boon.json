@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Boon:</strong> New doors open themselves for you. You can cast <em>@Compendium[pf2e.spells-srd.Knock]{Knock}</em> once per day as a divine innate spell.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

@@ -6,7 +6,7 @@
             "value": "<p><strong>Moderate Curse:</strong> Shizuru decrees that her light is no longer your ally. You gain@Compendium[pf2e.bestiary-ability-glossary-srd.Light Blindness]{Light Blindness}.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1

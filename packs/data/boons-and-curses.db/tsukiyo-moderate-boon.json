@@ -3,10 +3,10 @@
     "data": {
         "badge": null,
         "description": {
-            "value": "<p><strong>Moderate Boon:</strong> Tsukiyo watches over you and guards your sleep. You are guaranteed a peaceful night's rest no matter what conditions you are sleeping in. Even nightmare and similar abilities can't disrupt your sleep unless they come from a deity, artifact, or similarly powerful source.</p>"
+            "value": "<p><strong>Moderate Boon:</strong> Tsukiyo watches over you and guards your sleep. You are guaranteed a peaceful night’s rest no matter what conditions you are sleeping in. Even nightmare and similar abilities can’t disrupt your sleep unless they come from a deity, artifact, or similarly powerful source.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "unlimited",
             "value": -1
