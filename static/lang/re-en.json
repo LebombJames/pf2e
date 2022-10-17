@@ -1160,6 +1160,10 @@
                     "Moderate": {
                         "SecretLabel": "Moderate Eagle Eye Elixir (To Find Secret Doors or Traps)"
                     }
+                },
+                "NosoiCharm": {
+                    "RequestLabel": "Nosoi Charm (Request)",
+                    "PerformanceLabel": "Nosoi Charm (Play an instrument, orate or sing)"
                 }
             },
             "Fetchling": {
@@ -1314,6 +1318,22 @@
                 "TrackHuntedPrey": "To Track hunted prey",
                 "FirstHitDamage": "First Hit on Hunted Prey",
                 "FirstHitSwitch": "Hitting Hunted Prey for the First Time This Round"
+            },
+            "Inventor": {
+                "Innovation": {
+                    "Prompt": "Select an innovation.",
+                    "Armor": {
+                        "AllowedDrops": "level-zero unique armor",
+                        "Prompt": "Select an armor innovation."
+                    },
+                    "Construct": {
+                        "Prompt": "Select a construct innovation."
+                    },
+                    "Weapon": {
+                        "AllowedDrops": "level 0 or 1 simple or martial weapon",
+                        "Prompt": "Select a weapon innovation."
+                    }
+                }
             },
             "Kobold": {
                 "DragonsPresence": {
