@@ -195,6 +195,14 @@ class ChoiceSetRuleElement extends RuleElementPF2e {
             }
             this.data.containsUUIDs = true;
         } else {
+            // If some but not all choices are UUIDs, find which aren't and print a warning
+            choices.forEach((c) => {
+                const validUUID = isItemUUID(c.value);
+                if (!validUUID)
+                    console.warn(
+                        `PF2E System | Invalid UUID ("${c.value}") detected in ${this.key} rule element on item ${this.item.name} (${this.item.uuid})}`
+                    );
+            });
             this.data.containsUUIDs = false;
         }
 
