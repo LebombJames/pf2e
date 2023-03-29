@@ -6,9 +6,9 @@ import { UserPF2e } from "@module/user";
 import { TokenDocumentPF2e } from "@scene";
 import { Statistic } from "@system/statistic";
 import { ActorPF2e, HitPointsSummary } from "../base";
-import { TokenDimensions, VehicleData, VehicleSource, VehicleSystemData } from "./data";
+import { TokenDimensions, VehicleSource, VehicleSystemData } from "./data";
 
-class VehiclePF2e extends ActorPF2e {
+class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     override get allowedItemTypes(): (ItemType | "physical")[] {
         return [...super.allowedItemTypes, "physical", "action"];
     }
@@ -167,7 +167,7 @@ class VehiclePF2e extends ActorPF2e {
 
     protected override async _preUpdate(
         changed: DeepPartial<VehicleSource>,
-        options: DocumentModificationContext<this>,
+        options: DocumentModificationContext<TParent>,
         user: UserPF2e
     ): Promise<void> {
         await super._preUpdate(changed, options, user);
@@ -190,9 +190,10 @@ class VehiclePF2e extends ActorPF2e {
     }
 }
 
-interface VehiclePF2e extends ActorPF2e {
-    readonly data: VehicleData;
-    readonly system: VehicleSystemData;
+interface VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
+    readonly _source: VehicleSource;
+    readonly abilities?: never;
+    system: VehicleSystemData;
 
     get hitPoints(): HitPointsSummary;
 

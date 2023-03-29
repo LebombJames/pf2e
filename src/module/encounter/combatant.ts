@@ -1,12 +1,13 @@
-import type { ActorPF2e } from "@actor/base";
 import { SkillLongForm } from "@actor/types";
+import { TokenDocumentPF2e } from "@scene";
 import { ErrorPF2e } from "@util";
 import { EncounterPF2e } from ".";
+import { ActorPF2e } from "@actor";
 
 class CombatantPF2e<
     TParent extends EncounterPF2e | null = EncounterPF2e | null,
-    TActor extends ActorPF2e | null = ActorPF2e | null
-> extends Combatant<TParent, TActor> {
+    TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null
+> extends Combatant<TParent, TTokenDocument> {
     get encounter(): TParent {
         return this.parent;
     }
@@ -36,7 +37,36 @@ class CombatantPF2e<
         return this.parent.getCombatantWithHigherInit(this, than) === this;
     }
 
-    async startTurn() {
+    /** Get the active Combatant for the given actor, creating one if necessary */
+    static async fromActor(actor: ActorPF2e, render = true): Promise<CombatantPF2e<EncounterPF2e> | null> {
+        if (!game.combat) {
+            ui.notifications.error(game.i18n.localize("PF2E.Encounter.NoActiveEncounter"));
+            return null;
+        }
+        const token = actor.getActiveTokens().pop();
+        const existing = game.combat.combatants.find((combatant) => combatant.actor === actor);
+        if (existing) {
+            return existing;
+        } else if (token) {
+            const combatants = await game.combat.createEmbeddedDocuments(
+                "Combatant",
+                [
+                    {
+                        tokenId: token.id,
+                        actorId: token.actor?.id,
+                        sceneId: token.scene.id,
+                        hidden: token.document.hidden,
+                    },
+                ],
+                { render }
+            );
+            return combatants.at(0) ?? null;
+        }
+        ui.notifications.error(game.i18n.format("PF2E.Encounter.NoTokenInScene", { actor: actor.name }));
+        return null;
+    }
+
+    async startTurn(): Promise<void> {
         const { actor, encounter } = this;
         if (!encounter || !actor) return;
 
@@ -57,13 +87,13 @@ class CombatantPF2e<
         Hooks.callAll("pf2e.startTurn", this, encounter, game.user.id);
     }
 
-    async endTurn(options: { round: number }) {
+    async endTurn(options: { round: number }): Promise<void> {
         const round = options.round;
         const { actor, encounter } = this;
         if (!encounter || !actor) return;
 
         // Run condition end of turn effects
-        const activeConditions = actor.itemTypes.condition.filter((c) => c.active);
+        const activeConditions = actor.conditions.active;
         for (const condition of activeConditions) {
             await condition.onEndTurn({ token: this.token });
         }
@@ -83,7 +113,7 @@ class CombatantPF2e<
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
     async toggleDefeated(): Promise<void> {
         await this.update({ defeated: !this.defeated });
-        await this.token?.object.toggleEffect(game.settings.get("pf2e", "deathIcon"), { overlay: true });
+        await this.token?.object?.toggleEffect(game.settings.get("pf2e", "deathIcon"), { overlay: true });
 
         /** Remove this combatant's token as a target if it died */
         if (this.isDefeated && this.token?.object?.isTargeted) {
@@ -105,9 +135,7 @@ class CombatantPF2e<
         if (!actor) return "1d20";
         let bonus = 0;
 
-        if (actor.isOfType("hazard")) {
-            bonus = actor.attributes.stealth.value ?? 0;
-        } else if (typeof actor.attributes.initiative?.totalModifier === "number") {
+        if (typeof actor.attributes.initiative?.totalModifier === "number") {
             bonus = actor.attributes.initiative.totalModifier;
         } else if (actor.attributes.perception) {
             bonus = actor.attributes.perception.value;
@@ -142,7 +170,7 @@ class CombatantPF2e<
 
     protected override _onUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: DocumentUpdateContext<this>,
+        options: DocumentUpdateContext<TParent>,
         userId: string
     ): void {
         super._onUpdate(changed, options, userId);
@@ -162,7 +190,7 @@ class CombatantPF2e<
         }
     }
 
-    protected override _onDelete(options: DocumentModificationContext, userId: string): void {
+    protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
         super._onDelete(options, userId);
         // Reset actor data in case initiative order changed
         if (this.encounter?.started) {
@@ -173,21 +201,22 @@ class CombatantPF2e<
 
 interface CombatantPF2e<
     TParent extends EncounterPF2e | null = EncounterPF2e | null,
-    TActor extends ActorPF2e | null = ActorPF2e | null
-> extends Combatant<TParent, TActor> {
+    TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null
+> extends Combatant<TParent, TTokenDocument> {
     flags: CombatantFlags;
 }
 
-type CombatantFlags = {
+interface CombatantFlags extends DocumentFlags {
     pf2e: {
         initiativeStatistic: SkillLongForm | "perception" | null;
         roundOfLastTurn: number | null;
         roundOfLastTurnEnd: number | null;
         overridePriority: Record<number, number | null | undefined>;
     };
-    [key: string]: unknown;
-};
+}
 
-type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter> & { get initiative(): number };
+type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter, TokenDocumentPF2e> & {
+    get initiative(): number;
+};
 
 export { CombatantPF2e, CombatantFlags, RolledCombatant };

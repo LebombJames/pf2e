@@ -1,4 +1,4 @@
-import { CharacterPF2e, NPCPF2e } from "@actor";
+import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { ActorType } from "@actor/data";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { NPCAttackTrait } from "@item/melee/data";
@@ -34,7 +34,9 @@ const { fields } = foundry.data;
 class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     protected static override validActorTypes: ActorType[] = ["character", "npc"];
 
-    constructor(source: StrikeSource, item: Embedded<ItemPF2e>, options?: RuleElementOptions) {
+    constructor(source: StrikeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions) {
+        source.img ??= item.img;
+
         super(source, item, options);
 
         // Force a label of "Fist" if the `fist` shorthand is being used
@@ -62,9 +64,10 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
             }),
             group: new fields.StringField({
                 required: true,
+                nullable: true,
                 blank: false,
                 choices: CONFIG.PF2E.weaponGroups,
-                initial: "brawling",
+                initial: null,
             }),
             baseType: new fields.StringField({
                 required: true,
@@ -231,7 +234,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
      * Construct a `WeaponPF2e` instance for use as the synthetic strike
      * @param damageType The resolved damage type for the strike
      */
-    #constructWeapon(damageType: DamageType): Embedded<WeaponPF2e> {
+    #constructWeapon(damageType: DamageType): WeaponPF2e<ActorPF2e> {
         const source: PreCreate<WeaponSource> = deepClone({
             _id: this.item.id,
             name: this.label,
@@ -257,7 +260,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
             },
         });
 
-        return new WeaponPF2e(source, { parent: this.actor, pf2e: { ready: true } }) as Embedded<WeaponPF2e>;
+        return new WeaponPF2e(source, { parent: this.actor, pf2e: { ready: true } }) as WeaponPF2e<ActorPF2e>;
     }
 }
 
@@ -276,7 +279,7 @@ type StrikeSchema = RuleElementSchema & {
     /** A weapon category */
     category: StringField<WeaponCategory, WeaponCategory, true, false, true>;
     /** A weapon group */
-    group: StringField<WeaponGroup, WeaponGroup, true, false, true>;
+    group: StringField<WeaponGroup, WeaponGroup, true, true, true>;
     /** A weapon base type */
     baseType: StringField<BaseWeaponType, BaseWeaponType, true, true, true>;
     /** Permit NPC attack traits to sneak in for battle forms */

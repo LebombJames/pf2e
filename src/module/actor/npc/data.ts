@@ -1,11 +1,12 @@
+import { ActorPF2e } from "@actor/base";
 import {
     Abilities,
-    BaseCreatureData,
     BaseCreatureSource,
     CreatureAttributes,
     CreatureDetails,
     CreatureHitPoints,
-    CreatureInitiative,
+    CreatureInitiativeSource,
+    CreatureInitiativeData,
     CreatureResources,
     CreatureResourcesSource,
     CreatureSpeeds,
@@ -16,7 +17,6 @@ import {
     HeldShieldData,
     LabeledSpeed,
     SaveData,
-    SkillAbbreviation,
     SkillData,
 } from "@actor/creature/data";
 import { ActorAttributesSource, ActorFlagsPF2e, ArmorClassData, PerceptionData, StrikeData } from "@actor/data/base";
@@ -26,15 +26,10 @@ import { AbilityString, ActorAlliance, SaveType } from "@actor/types";
 import { MeleePF2e } from "@item";
 import { Rarity, Size } from "@module/data";
 import { IdentifyCreatureData } from "@module/recall-knowledge";
-import type { NPCPF2e } from ".";
 
 interface NPCSource extends BaseCreatureSource<"npc", NPCSystemSource> {
     flags: DeepPartial<NPCFlags>;
 }
-
-interface NPCData
-    extends Omit<NPCSource, "flags" | "prototypeToken" | "system" | "type">,
-        BaseCreatureData<NPCPF2e, "npc", NPCSource> {}
 
 type NPCFlags = ActorFlagsPF2e & {
     pf2e: { lootable: boolean };
@@ -77,9 +72,7 @@ interface NPCAttributesSource extends Required<ActorAttributesSource> {
         temp: number;
         details: string;
     };
-    initiative: {
-        ability: SkillAbbreviation | "perception";
-    };
+    initiative: CreatureInitiativeSource;
     perception: {
         value: number;
     };
@@ -167,7 +160,7 @@ interface NPCAttributes
     hp: NPCHitPoints;
     perception: NPCPerception;
 
-    initiative: CreatureInitiative;
+    initiative: CreatureInitiativeData;
 
     speed: NPCSpeeds;
     /**
@@ -199,7 +192,7 @@ interface NPCDetails extends NPCDetailsSource {
 
 /** The full data for a NPC action (used primarily for strikes.) */
 interface NPCStrike extends StrikeData {
-    item: Embedded<MeleePF2e>;
+    item: MeleePF2e<ActorPF2e>;
     /** The type of attack as a localization string */
     attackRollType?: string;
     /** The id of the item this strike is generated from */
@@ -258,7 +251,6 @@ export {
     NPCArmorClass,
     NPCAttributes,
     NPCAttributesSource,
-    NPCData,
     NPCFlags,
     NPCHitPoints,
     NPCPerception,

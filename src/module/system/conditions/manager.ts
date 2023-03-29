@@ -10,7 +10,7 @@ import { CONDITION_SLUGS } from "@actor/values";
 export class ConditionManager {
     static #initialized = false;
 
-    static conditions: Map<ConditionSlug | ItemUUID, ConditionPF2e> = new Map();
+    static conditions: Map<ConditionSlug | ItemUUID, ConditionPF2e<null>> = new Map();
 
     /** Gets a list of condition slugs. */
     static get conditionsSlugs(): string[] {
@@ -20,11 +20,11 @@ export class ConditionManager {
     static async initialize(force = false): Promise<void> {
         if (this.#initialized && !force) return;
 
-        type ConditionCollection = CompendiumCollection<ConditionPF2e>;
+        type ConditionCollection = CompendiumCollection<ConditionPF2e<null>>;
         const content = (await game.packs.get<ConditionCollection>("pf2e.conditionitems")?.getDocuments()) ?? [];
         const entries = [
-            ...content.map((c): [ConditionSlug, ConditionPF2e] => [c.slug, c]),
-            ...content.map((c): [ItemUUID, ConditionPF2e] => [c.uuid, c]),
+            ...content.map((c): [ConditionSlug, ConditionPF2e<null>] => [c.slug, c]),
+            ...content.map((c): [ItemUUID, ConditionPF2e<null>] => [c.uuid, c]),
         ];
         this.conditions = new Map(entries);
         this.#initialized = true;
@@ -34,9 +34,9 @@ export class ConditionManager {
      * Get a condition using the condition name.
      * @param slug A condition slug
      */
-    static getCondition(slug: ConditionSlug, modifications?: DeepPartial<ConditionSource>): ConditionPF2e;
-    static getCondition(slug: string, modifications?: DeepPartial<ConditionSource>): ConditionPF2e | null;
-    static getCondition(slug: string, modifications: DeepPartial<ConditionSource> = {}): ConditionPF2e | null {
+    static getCondition(slug: ConditionSlug, modifications?: DeepPartial<ConditionSource>): ConditionPF2e<null>;
+    static getCondition(slug: string, modifications?: DeepPartial<ConditionSource>): ConditionPF2e<null> | null;
+    static getCondition(slug: string, modifications: DeepPartial<ConditionSource> = {}): ConditionPF2e<null> | null {
         slug = sluggify(slug);
         if (!setHasElement(CONDITION_SLUGS, slug)) return null;
 
@@ -72,15 +72,17 @@ export class ConditionManager {
         }
     }
 
-    static getFlattenedConditions(items: Embedded<ConditionPF2e>[]): FlattenedCondition[] {
+    static getFlattenedConditions(actor: ActorPF2e): FlattenedCondition[] {
+        const items = actor.conditions.active;
         const flatteneds: Map<string, FlattenedCondition> = new Map();
 
-        for (const condition of items.sort(this.sortConditions)) {
+        for (const condition of items.sort(this.#sortConditions)) {
             // Sorted list of conditions.
             // First by active, then by base (lexicographically), then by value (descending).
 
             const flattened = flatteneds.get(condition.key) ?? {
                 id: condition.id,
+                type: "condition",
                 badge: condition.badge,
                 active: condition.active,
                 name: condition.name,
@@ -91,6 +93,7 @@ export class ConditionManager {
                 isIdentified: condition.isIdentified,
                 references: false,
                 isLocked: condition.isLocked,
+                temporary: condition.isTemporary,
                 parents: [],
                 children: [],
                 overrides: [],
@@ -106,29 +109,24 @@ export class ConditionManager {
             // Update any references
             const systemData = condition.system;
             if (systemData.references.parent) {
-                const refCondition = items.find((other) => other.id === systemData.references.parent?.id);
+                const appliedBy =
+                    items.find((other) => other.id === systemData.references.parent?.id) ??
+                    condition.actor?.items.get(systemData.references.parent.id);
 
-                if (refCondition) {
+                if (appliedBy) {
                     const ref: ConditionReference = {
                         id: systemData.references.parent,
-                        name: refCondition.name,
-                        base: refCondition.slug,
-                        text: "",
+                        name: appliedBy.name,
+                        base: appliedBy.slug ?? sluggify(appliedBy.name),
+                        text: appliedBy.sourceId ? `@UUID[${appliedBy.sourceId}]` : "",
                     };
-
-                    if (refCondition.value) {
-                        ref.name = `${ref.name} ${refCondition.value}`;
-                    }
-
-                    const compendiumLink = refCondition.sourceId?.replace(/^Compendium\./, "");
-                    ref.text = compendiumLink ? `@Compendium[${compendiumLink}]` : "";
 
                     flattened.references = true;
                     flattened.isLocked = true;
                     flattened.parents.push(ref);
                 }
             } else if (condition.flags.pf2e.grantedBy) {
-                const granter = condition.actor.items.get(condition.flags.pf2e.grantedBy.id);
+                const granter = condition.actor?.items.get(condition.flags.pf2e.grantedBy.id);
                 if (granter) {
                     flattened.parents.push({
                         id: { id: granter.id, type: granter.type },
@@ -225,7 +223,7 @@ export class ConditionManager {
         return Array.from(flatteneds.values());
     }
 
-    private static sortConditions(conditionA: ConditionPF2e, conditionB: ConditionPF2e): number {
+    static #sortConditions(conditionA: ConditionPF2e, conditionB: ConditionPF2e): number {
         return conditionA.slug === conditionB.slug
             ? conditionA.active
                 ? -1

@@ -726,7 +726,6 @@
                 },
                 "location": {
                     "heightenedLevel": 1,
-                    "signature": false,
                     "value": "IwBguu4yMR2YlPne"
                 },
                 "materials": {
@@ -1796,7 +1795,7 @@
                 "value": 50
             },
             "initiative": {
-                "ability": "perception"
+                "statistic": "perception"
             },
             "perception": {
                 "value": 13

@@ -2,12 +2,11 @@ import { CraftingEntryData } from "@actor/character/crafting/entry";
 import { CraftingFormulaData } from "@actor/character/crafting/formula";
 import {
     AbilityData,
-    BaseCreatureData,
     BaseCreatureSource,
     CreatureAttributes,
     CreatureDetails,
     CreatureHitPoints,
-    CreatureInitiative,
+    CreatureInitiativeData,
     CreatureResources,
     CreatureSystemData,
     CreatureTraitsData,
@@ -37,21 +36,19 @@ import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types"
 import { ZeroToFour } from "@module/data";
 import { PredicatePF2e } from "@system/predication";
 import { StatisticTraceData } from "@system/statistic";
-import type { CharacterPF2e } from "..";
 import { CharacterSheetTabVisibility } from "./sheet";
+import { CharacterPF2e } from "..";
 
 interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
     flags: DeepPartial<CharacterFlags>;
 }
 
-interface CharacterData
-    extends Omit<CharacterSource, "flags" | "prototypeToken" | "system" | "type">,
-        BaseCreatureData<CharacterPF2e, "character", CharacterSource> {}
-
 type CharacterFlags = ActorFlagsPF2e & {
     pf2e: {
         /** If applicable, the character's proficiency rank in their deity's favored weapon */
         favoredWeaponRank: number;
+        /** The highest number of damage dice among the character's equipped weapons and available unarmed attacks */
+        highestWeaponDamageDice: number;
         /** Whether items are crafted without consuming resources */
         freeCrafting: boolean;
         /** Whether the alchemist's (and related dedications) Quick Alchemy ability is enabled */
@@ -181,23 +178,23 @@ interface CharacterSaveData extends SaveData {
 type CharacterSaves = Record<SaveType, CharacterSaveData>;
 
 interface CharacterProficiency {
+    label?: string;
     /** The actual modifier for this martial type. */
     value: number;
     /** Describes how the value was computed. */
     breakdown: string;
     /** The proficiency rank (0 untrained - 4 legendary). */
     rank: ZeroToFour;
-    label?: string;
+    /** Can this proficiency be edited or deleted? */
+    immutable?: boolean;
     /** A proficiency in a non-armor/weapon category and not added by a feat or feature */
-    custom?: true;
+    custom?: boolean;
 }
 
 /** A proficiency with a rank that depends on another proficiency */
 interface MartialProficiency extends Omit<CharacterProficiency, "custom"> {
     /** A predicate to match against weapons and unarmed attacks */
     definition: PredicatePF2e;
-    /** Can this proficiency be edited or deleted? */
-    immutable?: boolean;
     /** The category to which this proficiency is linked */
     sameAs?: WeaponCategory;
     /** The maximum rank this proficiency can reach */
@@ -235,7 +232,7 @@ interface ClassDCData extends Required<AbilityBasedStatistic>, StatisticTraceDat
 
 /** The full data for a character strike */
 interface CharacterStrike extends StrikeData {
-    item: Embedded<WeaponPF2e>;
+    item: WeaponPF2e<CharacterPF2e>;
     /** Whether this attack is visible on the sheet */
     visible: boolean;
     altUsages: CharacterStrike[];
@@ -377,7 +374,7 @@ interface CharacterAttributes extends CreatureAttributes {
     /** Creature armor class, used to defend against attacks. */
     ac: CharacterArmorClass;
     /** Initiative, used to determine turn order in combat. */
-    initiative: CreatureInitiative;
+    initiative: CreatureInitiativeData;
     /** The amount of HP provided per level by the character's class. */
     classhp: number;
     /** The amount of HP provided at level 1 by the character's ancestry. */
@@ -456,7 +453,6 @@ export {
     CategoryProficiencies,
     CharacterArmorClass,
     CharacterAttributes,
-    CharacterData,
     CharacterDetails,
     CharacterFlags,
     CharacterProficiency,

@@ -1,27 +1,28 @@
 import { ActorPF2e, CharacterPF2e } from "@actor";
-import { AttackTarget } from "@actor/types";
 import { StrikeData, TraitViewData } from "@actor/data/base";
+import { CheckModifier, StatisticModifier } from "@actor/modifiers";
+import { AttackTarget } from "@actor/types";
 import { WeaponPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message";
 import { ChatMessageSourcePF2e, CheckRollContextFlag, TargetFlag } from "@module/chat-message/data";
+import { isCheckContextFlag } from "@module/chat-message/helpers";
 import { RollNotePF2e } from "@module/notes";
-import { TokenDocumentPF2e } from "@scene";
+import { ScenePF2e, TokenDocumentPF2e } from "@scene";
 import { eventToRollParams } from "@scripts/sheet-util";
+import { StatisticDifficultyClass } from "@system/statistic";
 import { ErrorPF2e, fontAwesomeIcon, objectHasKey, parseHTML, signedInteger, sluggify, traitSlugToObject } from "@util";
-import { CheckModifier, StatisticModifier } from "@actor/modifiers";
-import { CheckModifiersDialog } from "./dialog";
-import { CheckRoll, CheckRollDataPF2e } from "./roll";
 import {
+    DEGREE_OF_SUCCESS_STRINGS,
     DegreeAdjustmentsRecord,
     DegreeOfSuccess,
     DegreeOfSuccessString,
-    DEGREE_OF_SUCCESS_STRINGS,
 } from "../degree-of-success";
 import { LocalizePF2e } from "../localize";
 import { TextEditorPF2e } from "../text-editor";
-import { CheckRollContext } from "./types";
+import { CheckModifiersDialog } from "./dialog";
+import { CheckRoll, CheckRollDataPF2e } from "./roll";
 import { StrikeAttackRoll } from "./strike/attack-roll";
-import { isCheckContextFlag } from "@module/chat-message/helpers";
+import { CheckRollContext } from "./types";
 
 interface RerollOptions {
     heroPoint?: boolean;
@@ -511,7 +512,7 @@ class CheckPF2e {
                 if (targetActor?.token) return targetActor.token;
 
                 // This is from a context flag: get the actor via UUID
-                return fromUuid(target.token);
+                return fromUuid(target.token) as Promise<TokenDocumentPF2e<ScenePF2e> | null>;
             })();
 
             const canSeeTokenName = (token ?? new TokenDocumentPF2e(targetActor?.prototypeToken.toObject() ?? {}))
@@ -536,15 +537,14 @@ class CheckPF2e {
             );
 
             // Get any circumstance penalties or bonuses to the target's DC
-            const targetAC = targetActor?.attributes.ac;
             const circumstances =
-                dc.slug === "ac" && targetAC instanceof StatisticModifier
-                    ? targetAC.modifiers.filter((m) => m.enabled && m.type === "circumstance")
+                dc.statistic instanceof StatisticModifier || dc.statistic instanceof StatisticDifficultyClass
+                    ? dc.statistic.modifiers.filter((m) => m.enabled && m.type === "circumstance")
                     : [];
             const preadjustedDC =
-                circumstances.length > 0 && targetAC
-                    ? targetAC.value - circumstances.reduce((total, c) => total + c.modifier, 0)
-                    : targetAC?.value ?? null;
+                circumstances.length > 0 && dc.statistic
+                    ? dc.value - circumstances.reduce((total, c) => total + c.modifier, 0)
+                    : dc.value ?? null;
 
             const visible = targetActor?.hasPlayerOwner || dc.visible || game.settings.get("pf2e", "metagame_showDC");
 
@@ -552,8 +552,7 @@ class CheckPF2e {
                 const labelKey = targetData
                     ? translations.DC.Label.WithTarget
                     : customLabel ?? translations.DC.Label.NoTarget;
-                const dcValue = dc.slug === "ac" && targetAC ? targetAC.value : dc.value;
-                const markup = game.i18n.format(labelKey, { dcType, dc: dcValue, target: targetData?.name ?? null });
+                const markup = game.i18n.format(labelKey, { dcType, dc: dc.value, target: targetData?.name ?? null });
 
                 return { markup, visible };
             }

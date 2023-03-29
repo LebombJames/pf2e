@@ -1,18 +1,20 @@
 import { ActorPF2e } from "@actor";
 import { strikeFromMeleeItem } from "@actor/helpers";
-import { ModifierPF2e, MODIFIER_TYPE, StatisticModifier } from "@actor/modifiers";
+import { ActorInitiative } from "@actor/initiative";
+import { MODIFIER_TYPE, ModifierPF2e, StatisticModifier } from "@actor/modifiers";
 import { SaveType } from "@actor/types";
 import { SAVE_TYPES } from "@actor/values";
 import { ConditionPF2e } from "@item";
 import { ItemType } from "@item/data";
 import { Rarity } from "@module/data";
 import { extractModifiers } from "@module/rules/helpers";
+import { TokenDocumentPF2e } from "@scene";
 import { DamageType } from "@system/damage";
 import { Statistic } from "@system/statistic";
 import { isObject, objectHasKey } from "@util";
-import { HazardData, HazardSystemData } from "./data";
+import { HazardSource, HazardSystemData } from "./data";
 
-class HazardPF2e extends ActorPF2e {
+class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     override get allowedItemTypes(): (ItemType | "physical")[] {
         return [...super.allowedItemTypes, "action", "melee"];
     }
@@ -56,7 +58,6 @@ class HazardPF2e extends ActorPF2e {
         super.prepareBaseData();
 
         const { attributes, details } = this.system;
-        attributes.initiative = { tiebreakPriority: this.hasPlayerOwner ? 2 : 1 };
         attributes.hp.negativeHealing = false;
         attributes.hp.brokenThreshold = Math.floor(attributes.hp.max / 2);
         attributes.hasHealth = attributes.hp.max > 0;
@@ -69,6 +70,7 @@ class HazardPF2e extends ActorPF2e {
         const { system } = this;
 
         this.prepareSynthetics();
+        this.prepareInitiative();
 
         // Armor Class
         {
@@ -129,11 +131,33 @@ class HazardPF2e extends ActorPF2e {
             return saves;
         }, {});
     }
+
+    protected prepareInitiative(): void {
+        if (!this.isComplex) return;
+
+        const skillName = game.i18n.localize(CONFIG.PF2E.skillList.stealth);
+        const label = game.i18n.format("PF2E.InitiativeWithSkill", { skillName });
+        const baseMod = this.system.attributes.stealth.value || 0;
+        const statistic = new Statistic(this, {
+            slug: "initiative",
+            label,
+            domains: ["initiative"],
+            check: {
+                type: "initiative",
+                modifiers: [new ModifierPF2e("PF2E.ModifierTitle", baseMod, MODIFIER_TYPE.UNTYPED)],
+            },
+        });
+
+        this.initiative = new ActorInitiative(this, statistic);
+        const tiebreakPriority: 1 | 2 = this.hasPlayerOwner ? 2 : 1;
+        this.system.attributes.initiative = mergeObject({ tiebreakPriority }, statistic.getTraceData());
+    }
 }
 
-interface HazardPF2e extends ActorPF2e {
-    readonly data: HazardData;
-    readonly system: HazardSystemData;
+interface HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
+    readonly _source: HazardSource;
+    readonly abilities?: never;
+    system: HazardSystemData;
 
     saves: { [K in SaveType]?: Statistic };
 }

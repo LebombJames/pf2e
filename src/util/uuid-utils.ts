@@ -19,7 +19,7 @@ class UUIDUtils {
     static async fromUUIDs(uuids: Exclude<ActorUUID | TokenDocumentUUID, CompendiumUUID>[]): Promise<ActorPF2e[]>;
     static async fromUUIDs(uuids: Exclude<ItemUUID, CompendiumUUID>[]): Promise<ItemPF2e[]>;
     static async fromUUIDs(uuids: string[]): Promise<ClientDocument[]>;
-    static async fromUUIDs(uuids: string[]): Promise<ClientDocument[]> {
+    static async fromUUIDs(uuids: string[]): Promise<foundry.abstract.Document[] | ActorPF2e[] | ItemPF2e[]> {
         const actors: ActorPF2e[] = [];
         const items: ItemPF2e[] = [];
 
@@ -53,7 +53,9 @@ class UUIDUtils {
 
     static isItemUUID(uuid: unknown): uuid is ItemUUID {
         if (typeof uuid !== "string") return false;
-        if (uuid.startsWith("Item.")) return true;
+        if (/^(?:Actor\.[a-zA-Z0-9]{16}\.)?Item\.[a-zA-Z0-9]{16}$/.test(uuid)) {
+            return true;
+        }
 
         const [type, scope, packId, id]: (string | undefined)[] = uuid.split(".");
         if (type !== "Compendium") return false;

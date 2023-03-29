@@ -23,15 +23,16 @@ type CheckType =
 interface CheckRollContext extends BaseRollContext {
     /** The type of this roll, like 'perception-check' or 'saving-throw'. */
     type?: CheckType;
+    /** Targeting data for the check, if applicable */
     target?: AttackTarget | null;
     /** Should this roll be rolled twice? If so, should it keep highest or lowest? */
     rollTwice?: RollTwiceOption;
     /** The actor which initiated this roll. */
     actor?: ActorPF2e;
     /** The token which initiated this roll. */
-    token?: TokenDocumentPF2e;
+    token?: TokenDocumentPF2e | null;
     /** The originating item of this attack, if any */
-    item?: Embedded<ItemPF2e> | null;
+    item?: ItemPF2e<ActorPF2e> | null;
     /** Optional title of the roll options dialog; defaults to the check name */
     title?: string;
     /** Optional DC data for the check */

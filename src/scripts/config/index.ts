@@ -29,7 +29,7 @@ import { AfflictionPF2e } from "@item/affliction/document";
 import { ConditionSlug } from "@item/condition/data";
 import { RANGE_TRAITS } from "@item/data/values";
 import { DeityDomain } from "@item/deity/types";
-import { FeatType } from "@item/feat/data";
+import { FeatCategory } from "@item/feat";
 import { WEAPON_PROPERTY_RUNES } from "@item/physical/runes";
 import { PreciousMaterialGrade } from "@item/physical/types";
 import {
@@ -650,14 +650,13 @@ const sizeTypes: Record<Size, string> = {
     grg: "PF2E.ActorSizeGargantuan",
 };
 
-const featTypes: Record<FeatType, string> = {
+const featCategories: Record<FeatCategory, string> = {
     ancestry: "PF2E.FeatTypeAncestry",
     ancestryfeature: "PF2E.FeatTypeAncestryfeature",
     class: "PF2E.FeatTypeClass",
     classfeature: "PF2E.FeatTypeClassfeature",
     skill: "PF2E.FeatTypeSkill",
     general: "PF2E.FeatTypeGeneral",
-    archetype: "PF2E.FeatTypeArchetype",
     bonus: "PF2E.FeatTypeBonus",
     pfsboon: "PF2E.FeatPFSBoonHeader",
     deityboon: "PF2E.FeatDeityBoonHeader",
@@ -771,17 +770,6 @@ export const PF2ECONFIG = {
         ste: "PF2E.SkillSte",
         sur: "PF2E.SkillSur",
         thi: "PF2E.SkillThi",
-    },
-
-    martialSkills: {
-        unarmored: "PF2E.MartialUnarmored",
-        light: "PF2E.MartialLight",
-        medium: "PF2E.MartialMedium",
-        heavy: "PF2E.MartialHeavy",
-        simple: "PF2E.MartialSimple",
-        martial: "PF2E.MartialMartial",
-        advanced: "PF2E.MartialAdvanced",
-        unarmed: "PF2E.MartialUnarmed",
     },
 
     saves: {
@@ -972,6 +960,7 @@ export const PF2ECONFIG = {
         "affixed-to-unarmored-defense-item": "PF2E.TraitAffixedToUnarmoredItem",
         "affixed-to-weapon": "PF2E.TraitAffixedToWeapon",
         "applied-to-a-basket-bag-or-other-container": "PF2E.TraitAppliedToBasketBagOrContainer",
+        "applied-to-a-weapon": "PF2E.TraitAppliedToAWeapon",
         "applied-to-a-wind-powered-vehicle": "PF2E.TraitAppliedToAWindPoweredVehicle",
         "applied-to-a-non-injection-melee-weapon-piercing-damage":
             "PF2E.TraitAppliedToANoninjectionMeleePiercingWeapon",
@@ -1136,12 +1125,14 @@ export const PF2ECONFIG = {
 
     weaponReload,
 
-    armorTypes: {
+    armorCategories: {
         unarmored: "PF2E.ArmorTypeUnarmored",
         light: "PF2E.ArmorTypeLight",
         medium: "PF2E.ArmorTypeMedium",
         heavy: "PF2E.ArmorTypeHeavy",
         shield: "PF2E.ArmorTypeShield",
+        "light-barding": "PF2E.Item.Armor.Category.light-barding",
+        "heavy-barding": "PF2E.Item.Armor.Category.heavy-barding",
     },
 
     armorGroups: {
@@ -1279,7 +1270,7 @@ export const PF2ECONFIG = {
         10: "PF2E.SpellLevel10",
     }, // TODO: Compute levels!
 
-    featTypes,
+    featCategories,
 
     actionTypes: {
         action: "PF2E.ActionTypeAction",
