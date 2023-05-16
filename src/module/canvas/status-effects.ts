@@ -1,12 +1,13 @@
-import { LocalizePF2e } from "@system/localize";
-import { StatusEffectIconTheme } from "@scripts/config";
+import { resetActors } from "@actor/helpers.ts";
+import { PersistentDialog } from "@item/condition/persistent-damage-dialog.ts";
+import { CONDITION_SLUGS } from "@item/condition/values.ts";
+import { ConditionSlug } from "@item/condition/types.ts";
+import { TokenPF2e } from "@module/canvas/token/index.ts";
+import { ChatMessagePF2e } from "@module/chat-message/index.ts";
+import { EncounterPF2e } from "@module/encounter/index.ts";
+import { StatusEffectIconTheme } from "@scripts/config/index.ts";
+import Translations from "static/lang/en.json";
 import { ErrorPF2e, fontAwesomeIcon, htmlQueryAll, objectHasKey, setHasElement } from "@util";
-import { TokenPF2e } from "@module/canvas/token";
-import { EncounterPF2e } from "@module/encounter";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { PersistentDialog } from "@item/condition/persistent-damage-dialog";
-import { resetActors } from "@actor/helpers";
-import { CONDITION_SLUGS } from "@actor/values";
 
 const debouncedRender = foundry.utils.debounce(() => {
     canvas.tokens.hud.render();
@@ -38,8 +39,8 @@ export class StatusEffects {
         this.#updateStatusIcons();
     }
 
-    static get conditions() {
-        return LocalizePF2e.translations.PF2E.condition;
+    static get conditions(): Record<ConditionSlug, { name: string; rules: string; summary: string }> {
+        return Translations.PF2E.condition;
     }
 
     /**
@@ -196,7 +197,9 @@ export class StatusEffects {
         event.stopPropagation();
 
         const slug = control.dataset.statusId;
-        if (!setHasElement(CONDITION_SLUGS, slug)) return;
+        if (!setHasElement(CONDITION_SLUGS, slug) && slug !== "dead") {
+            return;
+        }
 
         for (const token of canvas.tokens.controlled) {
             const { actor } = token;
@@ -222,7 +225,7 @@ export class StatusEffects {
                 }
             } else if (event.type === "contextmenu") {
                 // Remove or decrement condition
-                if (event.ctrlKey) {
+                if (event.ctrlKey && slug !== "dead") {
                     // Remove all conditions
                     const conditionIds = actor.conditions.bySlug(slug, { temporary: false }).map((c) => c.id);
                     await token.actor?.deleteEmbeddedDocuments("Item", conditionIds);
@@ -240,7 +243,9 @@ export class StatusEffects {
         if (!actor) return;
 
         const slug = control.dataset.statusId ?? "";
-        if (!setHasElement(CONDITION_SLUGS, slug)) return;
+        if (!setHasElement(CONDITION_SLUGS, slug) && slug !== "dead") {
+            return;
+        }
 
         const imgElement = control.querySelector("img");
         const iconSrc = imgElement?.getAttribute("src") as ImageFilePath | null | undefined;

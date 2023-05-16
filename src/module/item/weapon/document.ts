@@ -1,30 +1,31 @@
 import { ActorPF2e } from "@actor";
-import { AutomaticBonusProgression as ABP } from "@actor/character/automatic-bonus-progression";
-import { ActorSizePF2e } from "@actor/data/size";
+import { AutomaticBonusProgression as ABP } from "@actor/character/automatic-bonus-progression.ts";
+import { ActorSizePF2e } from "@actor/data/size.ts";
+import { AbilityString } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
-import { ItemSummaryData, MeleeSource } from "@item/data";
-import { NPCAttackDamage, NPCAttackTrait } from "@item/melee/data";
+import { ItemSummaryData, MeleeSource } from "@item/data/index.ts";
+import { NPCAttackDamage, NPCAttackTrait } from "@item/melee/data.ts";
 import {
     Bulk,
     CoinsPF2e,
-    getPropertySlots,
     IdentificationStatus,
     MaterialGradeData,
     MystifiedData,
     RuneValuationData,
-    WeaponPropertyRuneData,
     WEAPON_MATERIAL_VALUATION_DATA,
     WEAPON_PROPERTY_RUNES,
     WEAPON_VALUATION_DATA,
-} from "@item/physical";
-import { MAGIC_SCHOOLS, MAGIC_TRADITIONS } from "@item/spell/values";
-import { OneToThree } from "@module/data";
-import { UserPF2e } from "@module/user";
-import { DamageCategorization } from "@system/damage/helpers";
-import { LocalizePF2e } from "@system/localize";
+    WeaponPropertyRuneData,
+    getPropertySlots,
+} from "@item/physical/index.ts";
+import { MAGIC_SCHOOLS, MAGIC_TRADITIONS } from "@item/spell/values.ts";
+import { OneToThree } from "@module/data.ts";
+import { UserPF2e } from "@module/user/index.ts";
+import { DamageCategorization } from "@system/damage/helpers.ts";
 import { ErrorPF2e, objectHasKey, setHasElement, sluggify } from "@util";
-import { WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponSource, WeaponSystemData } from "./data";
-import {
+import type { WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponSource, WeaponSystemData } from "./data.ts";
+import { WeaponTraitToggles, prunePropertyRunes } from "./helpers.ts";
+import type {
     BaseWeaponType,
     OtherWeaponTag,
     StrikingRuneType,
@@ -34,8 +35,8 @@ import {
     WeaponRangeIncrement,
     WeaponReloadTime,
     WeaponTrait,
-} from "./types";
-import { CROSSBOW_WEAPONS, MANDATORY_RANGED_GROUPS, THROWN_RANGES } from "./values";
+} from "./types.ts";
+import { CROSSBOW_WEAPONS, MANDATORY_RANGED_GROUPS, THROWN_RANGES } from "./values.ts";
 
 class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     /** Given this weapon is an alternative usage, whether it is melee or thrown */
@@ -72,6 +73,11 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     get category(): WeaponCategory {
         return this.system.category;
+    }
+
+    /** The default ability used in attack rolls */
+    get defaultAbility(): AbilityString {
+        return this.system.ability ?? (this.isRanged ? "dex" : "str");
     }
 
     get hands(): "0" | "1" | "1+" | "2" {
@@ -124,7 +130,15 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     /** This weapon's damage before modification by creature abilities, effects, etc. */
     get baseDamage(): WeaponDamage {
-        return deepClone(this.system.damage);
+        return {
+            ...deepClone(this.system.damage),
+            // Damage types from trait toggles are not applied as data mutations so as to delay it for rule elements to
+            // add options
+            damageType:
+                this.system.traits.toggles.versatile.selection ??
+                this.system.traits.toggles.modular.selection ??
+                this.system.damage.damageType,
+        };
     }
 
     /** Does this weapon deal damage? */
@@ -252,7 +266,14 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         systemData.propertyRune2.value ||= null;
         systemData.propertyRune3.value ||= null;
         systemData.propertyRune4.value ||= null;
-        systemData.reload.value ||= null;
+
+        const reloadValue = (systemData.reload.value ||= null);
+        systemData.reload.label = reloadValue
+            ? game.i18n.format("PF2E.Item.Weapon.Reload.LabelN", {
+                  value: CONFIG.PF2E.weaponReload[reloadValue],
+              })
+            : null;
+
         systemData.selectedAmmoId ||= null;
         systemData.damage.die ||= null;
         systemData.damage.modifier ??= 0;
@@ -287,6 +308,9 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
                 systemData.traits.otherTags.push("crossbow");
             }
         }
+
+        // Lazy-load toggleable traits
+        systemData.traits.toggles = new WeaponTraitToggles(this);
 
         // Ensure unarmed attacks always have the unarmed trait
         if (systemData.category === "unarmed" && !traitsArray.includes("unarmed")) {
@@ -331,18 +355,17 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         const runes = (this.system.runes = {
             potency: potencyRune.value ?? 0,
             striking: strikingRuneDice.get(strikingRune.value) ?? 0,
-            property: [propertyRune1.value, propertyRune2.value, propertyRune3.value, propertyRune4.value].filter(
-                (r): r is WeaponPropertyRuneType => !!r && r in WEAPON_PROPERTY_RUNES
+            property: prunePropertyRunes(
+                [propertyRune1.value, propertyRune2.value, propertyRune3.value, propertyRune4.value].filter(
+                    (r): r is WeaponPropertyRuneType => !!r && r in WEAPON_PROPERTY_RUNES
+                )
             ),
             effects: [],
         });
 
         // Limit property rune slots
-        const propertyRuneSlots =
-            ABP.isEnabled(this.actor) && this.actor?.isOfType("character")
-                ? ABP.getAttackPotency(this.actor.level)
-                : getPropertySlots(this);
-        runes.property.length = Math.min(runes.property.length, propertyRuneSlots);
+        const maxPropertySlots = getPropertySlots(this);
+        runes.property.length = Math.min(runes.property.length, maxPropertySlots);
 
         // Set damage dice according to striking rune
         // Only increase damage dice from ABP if the dice number is 1
@@ -403,7 +426,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
     override prepareSiblingData(): void {
         super.prepareSiblingData();
         // Set the default label to the ammunition item's name
-        const ammoRules = (this.ammo?.system.rules ?? []).map((r) => ({ label: this.ammo?.name, ...deepClone(r) }));
+        const ammoRules = this.ammo?.system.rules.map((r) => ({ label: this.ammo?.name, ...deepClone(r) })) ?? [];
         this.system.rules.push(...ammoRules);
     }
 
@@ -412,7 +435,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         if (!(this.isMagical || materialData) || this.isSpecific) return null;
 
         // Adjust the weapon price according to precious material and runes
-        // Base Prices are not included in these cases
+        // Base prices are not included in these cases
         // https://2e.aonprd.com/Rules.aspx?ID=731
         // https://2e.aonprd.com/Equipment.aspx?ID=380
         const runesData = this.getRunesValuationData();
@@ -421,9 +444,8 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         const bulk = Math.max(Math.ceil(heldOrStowedBulk.normal), 1);
         const materialValue = materialPrice + (bulk * materialPrice) / 10;
         const runeValue = runesData.reduce((sum, rune) => sum + rune.price, 0);
-        const modifiedPrice = new CoinsPF2e({ gp: runeValue + materialValue });
 
-        return modifiedPrice;
+        return new CoinsPF2e({ gp: runeValue + materialValue });
     }
 
     private getRunesValuationData(): RuneValuationData[] {
@@ -432,7 +454,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             WEAPON_VALUATION_DATA.potency[this.system.runes.potency],
             WEAPON_VALUATION_DATA.striking[this.system.runes.striking],
             ...this.system.runes.property.map((p) => propertyRuneData[p]),
-        ].filter((datum): datum is RuneValuationData => !!datum);
+        ].filter((d): d is RuneValuationData => !!d);
     }
 
     private getMaterialValuationData(): MaterialGradeData | null {
@@ -458,17 +480,21 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         return this.processChatData(htmlOptions, {
             ...chatData,
             traits,
-            properties: [CONFIG.PF2E.weaponCategories[this.category], rangeIncrement, maxRange].filter((p) => !!p),
+            properties: [
+                CONFIG.PF2E.weaponCategories[this.category],
+                this.system.reload.label,
+                rangeIncrement,
+                maxRange,
+            ].filter((p) => !!p),
         });
     }
 
     /** Generate a weapon name base on precious-material composition and runes */
     generateMagicName(): string {
-        const translations = LocalizePF2e.translations.PF2E;
-        const baseWeapons = translations.Weapon.Base;
+        const baseWeapons = CONFIG.PF2E.baseWeaponTypes;
 
         const storedName = this._source.name;
-        if (this.isSpecific || !this.baseType || storedName !== baseWeapons[this.baseType]) {
+        if (this.isSpecific || !this.baseType || storedName !== game.i18n.localize(baseWeapons[this.baseType])) {
             return this.name;
         }
 
@@ -481,7 +507,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         })();
 
         const params = {
-            base: this.baseType ? baseWeapons[this.baseType] : this.name,
+            base: this.baseType ? game.i18n.localize(baseWeapons[this.baseType]) : this.name,
             material: material.precious && game.i18n.localize(CONFIG.PF2E.preciousMaterials[material.precious.type]),
             potency: potencyRune,
             striking: strikingRune && game.i18n.localize(CONFIG.PF2E.weaponStrikingRunes[strikingRune]),
@@ -490,7 +516,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             property3: runes.property[2] && game.i18n.localize(CONFIG.PF2E.weaponPropertyRunes[runes.property[2]]),
             property4: runes.property[3] && game.i18n.localize(CONFIG.PF2E.weaponPropertyRunes[runes.property[3]]),
         };
-        const formatStrings = translations.Item.Weapon.GeneratedName;
+        const formatStrings = CONFIG.PF2E.weaponGeneratedNames;
         // Construct a localization key from the weapon material and runes
         const formatString = (() => {
             const potency = params.potency && "Potency";
@@ -508,7 +534,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             const key = ([potency, striking, properties, material]
                 .filter((keyPart): keyPart is string => !!keyPart)
                 .join("") || null) as keyof typeof formatStrings | null;
-            return key && formatStrings[key];
+            return key && game.i18n.localize(formatStrings[key]);
         })();
 
         return formatString ? game.i18n.format(formatString, params) : this.name;
@@ -521,16 +547,14 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
     }
 
     override generateUnidentifiedName({ typeOnly = false }: { typeOnly?: boolean } = { typeOnly: false }): string {
-        const translations = LocalizePF2e.translations.PF2E;
-        const base = this.baseType ? translations.Weapon.Base[this.baseType] : null;
+        const base = this.baseType ? CONFIG.PF2E.baseWeaponTypes[this.baseType] : null;
         const group = this.group ? CONFIG.PF2E.weaponGroups[this.group] : null;
         const fallback = "ITEM.TypeWeapon";
         const itemType = game.i18n.localize(base ?? group ?? fallback);
 
         if (typeOnly) return itemType;
 
-        const formatString = LocalizePF2e.translations.PF2E.identification.UnidentifiedItem;
-        return game.i18n.format(formatString, { item: itemType });
+        return game.i18n.format("PF2E.identification.UnidentifiedItem", { item: itemType });
     }
 
     /**

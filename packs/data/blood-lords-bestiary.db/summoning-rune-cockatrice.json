@@ -8,15 +8,13 @@
             "name": "Summon Monster",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature enters the cloud of magical sensors</p>\n<hr />\n<p><strong>Effect</strong> The trap summons a @UUID[Compendium.pf2e.pathfinder-bestiary.Cockatrice]{Cockatrice}. The cockatrice rolls initiative and remains for [[/br 2d6 #Summoning Duration]]{2d6 rounds}; after this duration, the spell ends and the cockatrice disappears. The cockatrice also disappears if someone disables the trap before the duration expires. The cockatrice can use 3 actions each round and can use reactions, unlike most summoned creatures.</p>"
                 },
@@ -73,7 +71,11 @@
                 "value": 3
             },
             "reset": "<p>The trap resets after 24 hours.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #181: Zombie Feast"
+            }
         },
         "saves": {
             "fortitude": {
@@ -88,10 +90,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #181: Zombie Feast"
         },
         "statusEffects": [],
         "traits": {

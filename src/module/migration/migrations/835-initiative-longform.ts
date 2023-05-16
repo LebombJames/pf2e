@@ -1,8 +1,8 @@
-import { CreatureInitiativeSource, CreatureInitiativeData, SkillAbbreviation } from "@actor/creature";
-import { ActorSourcePF2e } from "@actor/data";
-import { SKILL_DICTIONARY } from "@actor/values";
+import { CreatureInitiativeSource, SkillAbbreviation } from "@actor/creature/index.ts";
+import { ActorSourcePF2e } from "@actor/data/index.ts";
+import { SKILL_DICTIONARY } from "@actor/values.ts";
 import { objectHasKey } from "@util";
-import { MigrationBase } from "../base";
+import { MigrationBase } from "../base.ts";
 
 /** Converts sheet selected skills from shortform (ath) to longform (athletics) */
 export class Migration835InitiativeLongform extends MigrationBase {
@@ -26,7 +26,7 @@ export class Migration835InitiativeLongform extends MigrationBase {
     }
 }
 
-interface InitiativeSourceOld extends Partial<CreatureInitiativeData> {
+interface InitiativeSourceOld extends Partial<CreatureInitiativeSource> {
     statistic?: CreatureInitiativeSource["statistic"];
     ability?: SkillAbbreviation | "perception";
     "-=ability"?: null;

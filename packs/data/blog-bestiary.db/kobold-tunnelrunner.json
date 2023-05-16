@@ -276,15 +276,13 @@
             "name": "Sneak Attack",
             "sort": 400000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "offensive",
                 "description": {
                     "value": "<p>When the monster Strikes a creature that has the @UUID[Compendium.pf2e.conditionitems.Flat-Footed]{Flat-Footed} condition with an agile or finesse melee weapon, an agile or finesse unarmed attack, or a ranged weapon attack, it also deals the listed precision damage. For a ranged attack with a thrown weapon, that weapon must also be an agile or finesse weapon.</p>"
                 },
@@ -390,7 +388,7 @@
         {
             "_id": "E2RCzyCZRbmyQ2Wa",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Crafting (+4 traps)",
+            "name": "Crafting",
             "sort": 700000,
             "system": {
                 "description": {
@@ -402,10 +400,26 @@
                 "proficient": {
                     "value": 0
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "FlatModifier",
+                        "label": "PF2E.SkillVariant.Traps",
+                        "predicate": [
+                            "action:craft:trap"
+                        ],
+                        "selector": "crafting",
+                        "value": 2
+                    }
+                ],
                 "slug": null,
                 "source": {
                     "value": ""
+                },
+                "variants": {
+                    "0": {
+                        "label": "+4 traps",
+                        "options": "action:craft:trap"
+                    }
                 }
             },
             "type": "lore"

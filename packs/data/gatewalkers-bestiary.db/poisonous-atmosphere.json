@@ -8,15 +8,13 @@
             "name": "Poisonous Atmosphere",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A non-native creature breathes the atmosphere</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature must attempt a @Check[type:fortitude|dc:17] save. The hazard then rolls initiative.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is invigorated by the atmosphere and is @UUID[Compendium.pf2e.conditionitems.Quickened]{Quickened} for 1 round.</p>\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Clumsy]{Clumsy 1}.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Confused]{Confused} for 1 round.</p>"
                 },
@@ -71,7 +69,11 @@
                 "value": 1
             },
             "reset": "",
-            "routine": "<p>(1 action; illusion, mental, occult) The atmosphere continues to affect all creatures in the area, requiring a new Fortitude save each round against its Poisonous Atmosphere. A creature holding its breath gains a +2 circumstance bonus to the save.</p>"
+            "routine": "<p>(1 action; illusion, mental, occult) The atmosphere continues to affect all creatures in the area, requiring a new Fortitude save each round against its Poisonous Atmosphere. A creature holding its breath gains a +2 circumstance bonus to the save.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #187: The Seventh Arch"
+            }
         },
         "saves": {
             "fortitude": {
@@ -86,10 +88,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #187: The Seventh Arch"
         },
         "statusEffects": [],
         "traits": {

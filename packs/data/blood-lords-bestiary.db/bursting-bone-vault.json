@@ -8,15 +8,13 @@
             "name": "Collapse",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature opens the door to the vault</p>\n<hr />\n<p><strong>Effect</strong> The bones spill from the vault and into the adjacent corridor, dealing [[/r (2d10+13)[bludgeoning]]] damage to each creature within 10 feet of the door (@Check[type:reflex|dc:20|basic:true]). The area becomes difficult terrain.</p>"
                 },
@@ -66,7 +64,11 @@
                 "value": 3
             },
             "reset": "",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #181: Zombie Feast"
+            }
         },
         "saves": {
             "fortitude": {
@@ -81,10 +83,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #181: Zombie Feast"
         },
         "statusEffects": [],
         "traits": {

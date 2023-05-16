@@ -1,16 +1,17 @@
 import { ActorPF2e } from "@actor";
-import { FeatGroup } from "@actor/character/feats";
-import { ItemSummaryData } from "@item/data";
-import { Frequency } from "@item/data/base";
-import { OneToThree } from "@module/data";
-import { UserPF2e } from "@module/user";
+import { FeatGroup } from "@actor/character/feats.ts";
+import { ItemSummaryData } from "@item/data/index.ts";
+import { Frequency } from "@item/data/base.ts";
+import { OneToThree } from "@module/data.ts";
+import { UserPF2e } from "@module/user/index.ts";
 import { getActionTypeLabel, sluggify } from "@util";
-import { ItemPF2e } from "..";
-import { FeatSource, FeatSystemData } from "./data";
-import { FeatCategory, FeatTrait } from "./types";
+import { HeritagePF2e, ItemPF2e } from "../index.ts";
+import { FeatSource, FeatSystemData } from "./data.ts";
+import { FeatCategory, FeatTrait } from "./types.ts";
 
 class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
-    group!: FeatGroup | null;
+    declare group: FeatGroup | null;
+    declare grants: (FeatPF2e | HeritagePF2e)[];
 
     get category(): FeatCategory {
         return this.system.category;
@@ -24,7 +25,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
         return new Set(this.system.traits.value);
     }
 
-    get actionCost() {
+    get actionCost(): { type: "action" | "reaction" | "free"; value: OneToThree | null } | null {
         const actionType = this.system.actionType.value || "passive";
         if (actionType === "passive") return null;
 
@@ -111,6 +112,16 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
         const prefix = this.isFeature ? "feature" : "feat";
         const slug = this.slug ?? sluggify(this.name);
         this.actor.rollOptions.all[`${prefix}:${slug}`] = true;
+    }
+
+    override prepareSiblingData(): void {
+        super.prepareSiblingData?.();
+
+        const itemGrants = this.flags.pf2e.itemGrants;
+        this.grants = Object.values(itemGrants).flatMap((grant) => {
+            const item = this.actor?.items.get(grant.id);
+            return (item?.isOfType("feat") && !item.system.location) || item?.isOfType("heritage") ? [item] : [];
+        });
     }
 
     override async getChatData(

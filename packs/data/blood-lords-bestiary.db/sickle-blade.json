@@ -8,15 +8,13 @@
             "name": "Sickle",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature attempts to open the door</p>\n<hr />\n<p><strong>Effect</strong> A skeletal arm swings a sickle from the ceiling, making a Strike against the triggering creature.</p>"
                 },
@@ -116,7 +114,11 @@
                 "value": 3
             },
             "reset": "<p>The trap resets after 15 minutes. Additionally, a creature can manually Interact with the lever on the opposite side of the door to reset the trap.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #181: Zombie Feast"
+            }
         },
         "saves": {
             "fortitude": {
@@ -131,10 +133,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #181: Zombie Feast"
         },
         "statusEffects": [],
         "traits": {

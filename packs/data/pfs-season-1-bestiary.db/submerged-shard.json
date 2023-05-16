@@ -8,15 +8,13 @@
             "name": "Shard",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature or object moves into the shard's space.</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature takes [[/r (2d6+5)[piercing]]] damage (@Check[type:reflex|dc:17|basic:true] save).</p>"
                 },
@@ -83,7 +81,11 @@
                 "value": 1
             },
             "reset": "<p>The hazard still damages any creature or object that enters its space, but the surface doesn't become hidden again until it settles over the course of 1 minute.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Society Scenario #1-12: The Burden of Envy"
+            }
         },
         "saves": {
             "fortitude": {
@@ -98,10 +100,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder Society Scenario #1-12: The Burden of Envy"
         },
         "statusEffects": [],
         "traits": {

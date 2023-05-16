@@ -8,15 +8,13 @@
             "name": "Stasis Field",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A non-devil creature moves into the light</p>\n<hr />\n<p><strong>Effect</strong> The light expands to fill the room, and each nondevil creature within the room must attempt a @Check[type:will|dc:26] save. A high-pitched chime sounds in the barracks (area <strong>D15</strong>), audible in this room as well. The trap then rolls initiative.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Stunned]{Stunned 2}.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Paralyzed]{Paralyzed} for 1 round.</p>\n<p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Stupefied]{Stupefied 2} for [[/br 1d4 #Duration Stupefied]]{1d4 rounds} and paralyzed for 1 round.</p>"
                 },
@@ -76,7 +74,11 @@
                 "value": 8
             },
             "reset": "<p>The stasis magic in the light builds up over the course of an hour, after which the trap can trigger again.</p>",
-            "routine": "<p>(1 action) All @UUID[Compendium.pf2e.conditionitems.Stunned]{Stunned} and @UUID[Compendium.pf2e.conditionitems.Paralyzed]{Paralyzed} creatures in the room take [[/r 1d10[mental]]] damage (@Check[type:will|dc:26|basic:true|traits:magical,trap] save). Creatures who fail also become paralyzed for 1 round but can use a reaction to mentally fight off this stasis; creatures who do so take [[/r 5d10[mental]]] damage mental damage but are no longer paralyzed.</p>"
+            "routine": "<p>(1 action) All @UUID[Compendium.pf2e.conditionitems.Stunned]{Stunned} and @UUID[Compendium.pf2e.conditionitems.Paralyzed]{Paralyzed} creatures in the room take [[/r 1d10[mental]]] damage (@Check[type:will|dc:26|basic:true|traits:magical,trap] save). Creatures who fail also become paralyzed for 1 round but can use a reaction to mentally fight off this stasis; creatures who do so take [[/r 5d10[mental]]] damage mental damage but are no longer paralyzed.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #164: Hands of the Devil"
+            }
         },
         "saves": {
             "fortitude": {
@@ -91,9 +93,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #164: Hands of the Devil"
         },
         "statusEffects": [],
         "traits": {

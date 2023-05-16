@@ -8,15 +8,13 @@
             "name": "Shadow Rush",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature enters the room</p>\n<hr />\n<p><strong>Effect</strong> After waiting 1 round, the trap animates its shadowy stick figures and makes a painted spear Strike against each creature in the room. The trap rolls initiative.</p>"
                 },
@@ -106,7 +104,11 @@
                 "value": 2
             },
             "reset": "<p>The trap deactivates and resets after 1 minute. The drawings cannot pursue characters out of the room.</p>",
-            "routine": "<p>(1 action) The drawings stab at each character in the room with spears drawn from sharp lines.</p>"
+            "routine": "<p>(1 action) The drawings stab at each character in the room with spears drawn from sharp lines.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #187: The Seventh Arch"
+            }
         },
         "saves": {
             "fortitude": {
@@ -121,10 +123,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #187: The Seventh Arch"
         },
         "statusEffects": [],
         "traits": {

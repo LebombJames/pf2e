@@ -1,6 +1,6 @@
 {
     "_id": "iG1USiSRXMjCDGAr",
-    "img": "systems/pf2e/icons/default-icons/spell.svg",
+    "img": "systems/pf2e/icons/spells/percussive-impact.webp",
     "name": "Percussive Impact",
     "system": {
         "area": null,
@@ -56,7 +56,7 @@
             "type": "interval"
         },
         "level": {
-            "value": 1
+            "value": 3
         },
         "materials": {
             "value": ""

@@ -1,6 +1,6 @@
-import { Coins, PartialPrice } from "@item/physical/data";
-import { CoinsPF2e } from "@item/physical/helpers";
-import { getActionGlyph, ordinal, sluggify } from "../util";
+import { Coins, PartialPrice } from "@item/physical/data.ts";
+import { CoinsPF2e } from "@item/physical/helpers.ts";
+import { getActionGlyph, ordinal, sluggify } from "../util/index.ts";
 
 export function registerHandlebarsHelpers(): void {
     Handlebars.registerHelper("pad", (value: unknown, length: number, character: string): string => {
@@ -30,6 +30,10 @@ export function registerHandlebarsHelpers(): void {
 
     Handlebars.registerHelper("lower", (str: unknown): string => {
         return String(str).toLowerCase();
+    });
+
+    Handlebars.registerHelper("capitalize", (str: unknown): string => {
+        return String(str).capitalize();
     });
 
     Handlebars.registerHelper("multiply", (a: unknown, b: unknown): number => {

@@ -1,20 +1,19 @@
+import { SIZE_TO_REACH } from "@actor/creature/values.ts";
 import { ActorPF2e } from "@actor";
-import { SIZE_TO_REACH } from "@actor/creature/values";
-import { ItemPF2e } from "@item/base";
-import { ItemSummaryData } from "@item/data";
-import { WeaponPF2e } from "@item/weapon";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types";
-import { combineTerms } from "@scripts/dice";
-import { ConvertedNPCDamage, WeaponDamagePF2e } from "@system/damage/weapon";
-import { DamageCategorization } from "@system/damage/helpers";
+import { ItemSummaryData } from "@item/data/index.ts";
+import { ItemPF2e, WeaponPF2e } from "@item";
+import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types.ts";
+import { simplifyFormula } from "@scripts/dice.ts";
+import { DamageCategorization } from "@system/damage/helpers.ts";
+import { ConvertedNPCDamage, WeaponDamagePF2e } from "@system/damage/weapon.ts";
 import { tupleHasValue } from "@util";
-import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data";
+import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data.ts";
 
 class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** Set during data preparation if a linked weapon is found */
-    category!: WeaponCategory | null;
-    group!: WeaponGroup | null;
-    baseType!: BaseWeaponType | null;
+    declare category: WeaponCategory | null;
+    declare group: WeaponGroup | null;
+    declare baseType: BaseWeaponType | null;
 
     get traits(): Set<NPCAttackTrait> {
         return new Set(this.system.traits.value);
@@ -145,37 +144,12 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
                 instance.damage = "1d4";
             }
 
-            const roll = new Roll(instance.damage);
-            const { terms } = roll;
             const { isElite, isWeak } = this.actor;
             if ((isElite || isWeak) && damageInstances.indexOf(instance) === 0) {
-                // Add weak or elite adjustment: Foundry's `Roll` class makes all negative `NumericTerms` positive with
-                // a preceding negative `OperatorTerm`: change operator if adjustment would change the value's sign
-                const modifier =
-                    [...terms].reverse().find((t): t is NumericTerm => t instanceof NumericTerm) ??
-                    new NumericTerm({ number: 0 });
-                const previousTerm = terms[terms.indexOf(modifier) - 1];
-                const signFlip = previousTerm instanceof OperatorTerm && previousTerm.operator === "-" ? -1 : 1;
-                const baseValue = modifier.number * signFlip;
-                const adjustedBase = baseValue + (isElite ? 2 : -2);
-                modifier.number = Math.abs(adjustedBase);
-
-                if (previousTerm instanceof OperatorTerm) {
-                    if (baseValue < 0 && adjustedBase >= 0 && previousTerm.operator === "-") {
-                        previousTerm.operator = "+";
-                    }
-                    if (baseValue >= 0 && adjustedBase < 0 && previousTerm.operator === "+") {
-                        previousTerm.operator = "-";
-                    }
-                }
-
-                if (!terms.includes(modifier)) {
-                    const operator = new OperatorTerm({ operator: adjustedBase >= 0 ? "+" : "-" });
-                    terms.push(operator, modifier);
-                }
-                instance.damage = combineTerms(Roll.fromTerms(terms)._formula);
+                const adjustment = isElite ? 2 : -2;
+                instance.damage = simplifyFormula(`${instance.damage} + ${adjustment}`);
             } else {
-                instance.damage = roll._formula;
+                instance.damage = new Roll(instance.damage)._formula;
             }
         }
     }

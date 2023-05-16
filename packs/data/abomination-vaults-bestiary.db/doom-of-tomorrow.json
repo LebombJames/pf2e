@@ -8,15 +8,13 @@
             "name": "Apocalypse Beam",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature steps within 10 feet of the back of a diorama alcove</p>\n<hr />\n<p><strong>Effect</strong> The trap fires an apocalypse beam at that creature.</p>"
                 },
@@ -277,7 +275,11 @@
                 "value": 3
             },
             "reset": "<p>Each trap resets automatically after 1 hour.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #163: Ruins of Gauntlight"
+            }
         },
         "saves": {
             "fortitude": {
@@ -292,9 +294,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #163: Ruins of Gauntlight"
         },
         "statusEffects": [],
         "traits": {

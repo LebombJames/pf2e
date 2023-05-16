@@ -25,6 +25,12 @@
         },
         "rules": [
             {
+                "disabledIf": [
+                    {
+                        "not": "self:effect:crane-stance"
+                    }
+                ],
+                "disabledValue": false,
                 "domain": "all",
                 "key": "RollOption",
                 "option": "crane-flutter",
@@ -33,8 +39,7 @@
             {
                 "key": "FlatModifier",
                 "predicate": [
-                    "crane-flutter",
-                    "crane-stance"
+                    "crane-flutter"
                 ],
                 "selector": "ac",
                 "type": "circumstance",

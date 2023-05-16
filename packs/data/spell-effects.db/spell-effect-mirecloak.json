@@ -3,7 +3,6 @@
     "img": "systems/pf2e/icons/spells/mirecloak.webp",
     "name": "Spell Effect: Mirecloak",
     "system": {
-        "badge": null,
         "description": {
             "value": "<p>You wrap the targeted creatures in thin, sickly green shrouds that sap information from attackers. The shroud settles about each target's shoulders, granting a +1 status bonus to AC and a +2 status bonus to Stealth checks, both only while the target is in dim light or darkness.</p>"
         },
@@ -20,14 +19,20 @@
             {
                 "domain": "all",
                 "key": "RollOption",
-                "label": "In an Area of Dim Light or Darkness",
+                "label": "PF2E.SkillVariant.DimLightOrDarkness",
                 "option": "mireclock-darkness",
                 "toggleable": true
             },
             {
                 "key": "FlatModifier",
                 "predicate": [
-                    "mirecloak-darkness"
+                    {
+                        "or": [
+                            "mirecloak-darkness",
+                            "lighting:dim-light",
+                            "lighting:darkness"
+                        ]
+                    }
                 ],
                 "selector": "ac",
                 "type": "status",
@@ -39,8 +44,8 @@
                     {
                         "or": [
                             "mirecloak-darkness",
-                            "environment:lighting:lowLight",
-                            "environment:lighting:darkness"
+                            "lighting:dim-light",
+                            "lighting:darkness"
                         ]
                     }
                 ],

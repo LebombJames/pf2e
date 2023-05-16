@@ -8,15 +8,13 @@
             "name": "Long-Rage Lash",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "action"
                 },
                 "actions": {
                     "value": 2
                 },
+                "category": null,
                 "description": {
                     "value": "<p>The lash lengthens, increasing its reach to 60 feet, and makes a lash Strike. The lash's length then reverts to normal.</p>"
                 },
@@ -44,15 +42,13 @@
             "name": "Manifest",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature other than Kemnebi enters the chamber</p>\n<hr />\n<p><strong>Effect</strong> Four pillars manifest a writhing whip composed of solidified shadows. The trap then rolls initiative.</p>"
                 },
@@ -148,7 +144,11 @@
                 "value": 20
             },
             "reset": "",
-            "routine": "<p>(8 actions) This trap loses 2 actions each turn for each disabled shadow lash. Each shadow lash has 2 actions it can use to perform the following actions.</p>"
+            "routine": "<p>(8 actions) This trap loses 2 actions each turn for each disabled shadow lash. Each shadow lash has 2 actions it can use to perform the following actions.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #186: Ghost King's Rage"
+            }
         },
         "saves": {
             "fortitude": {
@@ -163,10 +163,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #186: Ghost King's Rage"
         },
         "statusEffects": [],
         "traits": {

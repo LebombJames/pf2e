@@ -8,15 +8,13 @@
             "name": "Slam Shut",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> The door is opened more than halfway</p>\n<hr />\n<p><strong>Effect</strong> The door slams shut and deals [[/r 3d8[bludgeoning]]] damage to any creature in the way (@Check[type:reflex|dc:17|basic:true]). On a critical failure, the creature is also @UUID[Compendium.pf2e.conditionitems.Restrained]{Restrained} by the closed door until it @UUID[Compendium.pf2e.actionspf2e.Escape]{Escapes} (DC 17)</p>"
                 },
@@ -77,7 +75,11 @@
                 "value": 1
             },
             "reset": "<p>The trap can be reactivated (or deactivated, if it's active) by flipping a lever hidden in the nearby wall. A character Searching the area finds it with a successful @Check[type:perception|dc:18|traits:action:seek] check.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #181: Zombie Feast"
+            }
         },
         "saves": {
             "fortitude": {
@@ -92,10 +94,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #181: Zombie Feast"
         },
         "statusEffects": [],
         "traits": {

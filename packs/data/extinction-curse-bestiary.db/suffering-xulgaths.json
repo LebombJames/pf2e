@@ -8,15 +8,13 @@
             "name": "Wendigo Remnants",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A living creature other than a wendigo gains the @UUID[Compendium.pf2e.conditionitems.Frightened]{Frightened} condition while within 100 feet of the way station</p>\n<hr />\n<p><strong>Effect</strong> The haunt rolls for initiative.</p>"
                 },
@@ -141,7 +139,11 @@
                 "value": 16
             },
             "reset": "<p>The haunt is deactivated and resets 1 minute after all non-wendigo creatures leave the area.</p>",
-            "routine": "<p>(4 actions) Each active spirit chooses a living non-wendigo creature within 120 feet and attempts to devour it, targeting different creatures if possible. Each calmed spirit reduces the hazard's actions by 1</p>"
+            "routine": "<p>(4 actions) Each active spirit chooses a living non-wendigo creature within 120 feet and attempts to devour it, targeting different creatures if possible. Each calmed spirit reduces the hazard's actions by 1</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #156: The Apocalypse Prophet"
+            }
         },
         "saves": {
             "fortitude": {
@@ -156,10 +158,6 @@
                 "saveDetail": "",
                 "value": 27
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #156: The Apocalypse Prophet"
         },
         "statusEffects": [],
         "traits": {

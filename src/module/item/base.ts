@@ -1,15 +1,15 @@
-import { ActorPF2e } from "@actor";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { preImportJSON } from "@module/doc-helpers";
-import { MigrationList, MigrationRunner } from "@module/migration";
-import { MigrationRunnerBase } from "@module/migration/runner/base";
-import { RuleElementOptions, RuleElementPF2e, RuleElements, RuleElementSource } from "@module/rules";
-import { processGrantDeletions } from "@module/rules/rule-element/grant-item/helpers";
-import { UserPF2e } from "@module/user";
-import { EnrichHTMLOptionsPF2e } from "@system/text-editor";
+import { ActorPF2e } from "@actor/base.ts";
+import { ChatMessagePF2e } from "@module/chat-message/document.ts";
+import { preImportJSON } from "@module/doc-helpers.ts";
+import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
+import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElements, RuleElementSource } from "@module/rules/index.ts";
+import { processGrantDeletions } from "@module/rules/rule-element/grant-item/helpers.ts";
+import { UserPF2e } from "@module/user/document.ts";
+import { EnrichHTMLOptionsPF2e } from "@system/text-editor.ts";
 import { ErrorPF2e, isObject, setHasElement, sluggify } from "@util";
-import { AfflictionSource } from "./affliction";
-import { ContainerPF2e } from "./container";
+import { AfflictionSource } from "./affliction/data.ts";
+import { ContainerPF2e } from "./container/document.ts";
 import {
     ConditionSource,
     EffectSource,
@@ -18,19 +18,19 @@ import {
     ItemSummaryData,
     ItemType,
     TraitChatData,
-} from "./data";
-import { isItemSystemData, isPhysicalData } from "./data/helpers";
-import { PhysicalItemPF2e } from "./physical/document";
-import { PHYSICAL_ITEM_TYPES } from "./physical/values";
-import { ItemSheetPF2e } from "./sheet/base";
-import { ItemFlagsPF2e, ItemSystemData } from "./data/base";
-import { ItemInstances } from "./types";
-import { UUIDUtils } from "@util/uuid-utils";
+} from "./data/index.ts";
+import { isItemSystemData, isPhysicalData } from "./data/helpers.ts";
+import { PhysicalItemPF2e } from "./physical/document.ts";
+import { PHYSICAL_ITEM_TYPES } from "./physical/values.ts";
+import { ItemSheetPF2e } from "./sheet/base.ts";
+import { ItemFlagsPF2e, ItemSystemData } from "./data/base.ts";
+import { ItemInstances } from "./types.ts";
+import { UUIDUtils } from "@util/uuid-utils.ts";
 
 /** Override and extend the basic :class:`Item` implementation */
 class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item<TParent> {
     /** Prepared rule elements from this item */
-    rules!: RuleElementPF2e[];
+    declare rules: RuleElementPF2e[];
 
     /** The sluggified name of the item **/
     get slug(): string | null {
@@ -141,7 +141,7 @@ class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
             options.push(`${prefix}:level:${level}`);
         }
 
-        if (prefix === "item") {
+        if (["item", "parent"].includes(prefix)) {
             const itemType = this.isOfType("feat") && this.isFeature ? "feature" : this.type;
             options.unshift(`${prefix}:type:${itemType}`);
         }
@@ -222,12 +222,6 @@ class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     override prepareData(): void {
         // If embedded, don't prepare data if the parent's data model hasn't initialized all its properties
         if (this.parent && !this.parent.flags?.pf2e) return;
-        // Also don't prepare data if this item is in a parent's data collection, the parent is initialized, but data
-        // preparation wasn't requested by the parent
-        // Related to https://github.com/foundryvtt/foundryvtt/issues/7987
-        if (this.parent?.items?.get(this.id) === this && !this.parent.preparingEmbeds) {
-            return;
-        }
 
         super.prepareData();
 
@@ -433,7 +427,7 @@ class ItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
         for (const source of [...sources]) {
             source.effects = []; // Never
 
-            if (!["flags", "system"].some((k) => k in source)) {
+            if (!Object.keys(source).some((k) => k.startsWith("flags") || k.startsWith("system"))) {
                 // The item has no migratable data: set schema version and skip
                 source.system = { schema: { version: MigrationRunnerBase.LATEST_SCHEMA_VERSION } };
                 continue;

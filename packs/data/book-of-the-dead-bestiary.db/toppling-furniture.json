@@ -8,15 +8,13 @@
             "name": "Topple Furniture",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature moves adjacent to the furniture</p>\n<hr />\n<p><strong>Effect</strong> The spirit shoves the furniture over in an attempt to crush the triggering creature. The triggering creature takes [[/r (2d10+7)[bludgeoning]]] damage (@Check[type:reflex|dc:22|basic:true]). On a failure, the creature is additionally knocked @UUID[Compendium.pf2e.conditionitems.Prone]{Prone}.</p>"
                 },
@@ -40,9 +38,6 @@
         }
     ],
     "name": "Toppling Furniture",
-    "prototypeToken": {
-        "name": "1"
-    },
     "system": {
         "attributes": {
             "ac": {
@@ -69,7 +64,11 @@
                 "value": 2
             },
             "reset": "<p>If the haunt successfully damages a creature with Topple Furniture, the spirit laughs for [[/br 1d4 #Laughing Duration]]{1d4 rounds} as the haunt resets; each subsequent time the haunt activates, it must topple a different piece of upright furniture. If the haunt fails to damage a creature, the spirit wails in frustration and resets after pouting for [[/br 1d4 #Haunt Reset]]{1d4 hours}.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Book of the Dead"
+            }
         },
         "saves": {
             "fortitude": {
@@ -84,9 +83,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder Book of the Dead"
         },
         "statusEffects": [],
         "traits": {

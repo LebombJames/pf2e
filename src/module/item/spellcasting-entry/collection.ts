@@ -1,10 +1,10 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e, SpellPF2e, SpellcastingEntryPF2e } from "@item";
-import { OneToTen, ValueAndMax, ZeroToTen } from "@module/data";
+import { OneToTen, ValueAndMax, ZeroToTen } from "@module/data.ts";
 import { ErrorPF2e, groupBy, ordinal } from "@util";
-import { SlotKey } from "./data";
-import { RitualSpellcasting } from "./rituals";
-import { ActiveSpell, BaseSpellcastingEntry, SpellcastingSlotLevel, SpellPrepEntry } from "./types";
+import { SlotKey } from "./data.ts";
+import { RitualSpellcasting } from "./rituals.ts";
+import { ActiveSpell, BaseSpellcastingEntry, SpellcastingSlotLevel, SpellPrepEntry } from "./types.ts";
 
 class SpellCollection<TActor extends ActorPF2e, TEntry extends BaseSpellcastingEntry<TActor | null>> extends Collection<
     SpellPF2e<TActor>
@@ -292,7 +292,8 @@ class SpellCollection<TActor extends ActorPF2e, TEntry extends BaseSpellcastingE
                     if (existing) {
                         existing.signature = true;
                     } else {
-                        result.active.push({ spell, signature: true, virtual: true });
+                        const castLevel = result.level;
+                        result.active.push({ spell, castLevel, signature: true, virtual: true });
                     }
                 }
             }
@@ -327,14 +328,16 @@ class SpellCollection<TActor extends ActorPF2e, TEntry extends BaseSpellcastingE
     async #getRitualData(): Promise<SpellCollectionData> {
         const groupedByLevel = groupBy(Array.from(this.values()), (s) => s.level);
         const levels = await Promise.all(
-            Array.from(groupedByLevel.entries()).map(
-                async ([level, spells]): Promise<SpellcastingSlotLevel> => ({
-                    label: CONFIG.PF2E.spellLevels[level as OneToTen],
-                    level: level as ZeroToTen,
-                    isCantrip: false,
-                    active: await Promise.all(spells.map(async (spell) => ({ spell }))),
-                })
-            )
+            Array.from(groupedByLevel.entries())
+                .sort(([a], [b]) => a - b)
+                .map(
+                    async ([level, spells]): Promise<SpellcastingSlotLevel> => ({
+                        label: CONFIG.PF2E.spellLevels[level as OneToTen],
+                        level: level as ZeroToTen,
+                        isCantrip: false,
+                        active: await Promise.all(spells.map(async (spell) => ({ spell }))),
+                    })
+                )
         );
 
         return { levels, spellPrepList: null };

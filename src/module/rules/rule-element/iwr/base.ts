@@ -1,14 +1,19 @@
 import { ActorPF2e } from "@actor";
-import { IWRSource, ImmunityData, ResistanceData, WeaknessData } from "@actor/data/iwr";
+import { IWRSource, ImmunityData, ResistanceData, WeaknessData } from "@actor/data/iwr.ts";
 import { ItemPF2e } from "@item";
-import { ArrayField, BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "../";
-import { AELikeChangeMode } from "../ae-like";
-
-const { fields } = foundry.data;
+import type {
+    ArrayField,
+    BooleanField,
+    ModelPropsFromSchema,
+    StringField,
+} from "types/foundry/common/data/fields.d.ts";
+import { AELikeChangeMode } from "../ae-like.ts";
+import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource, RuleValue } from "../index.ts";
 
 /** @category RuleElement */
 abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
+    abstract value: RuleValue;
+
     constructor(data: IWRRuleElementSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions) {
         if (typeof data.type === "string") {
             data.type = [data.type];
@@ -22,6 +27,8 @@ abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElement
     }
 
     static override defineSchema(): IWRRuleSchema {
+        const { fields } = foundry.data;
+
         return {
             ...super.defineSchema(),
             mode: new fields.StringField({ required: true, choices: ["add", "remove"], initial: "add" }),
@@ -78,11 +85,8 @@ abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElement
 
         this.type = this.resolveInjectedProperties(this.type);
 
-        const value = Math.floor(Number(this.resolveValue()));
-        if (!this.#isValid(value)) {
-            this.ignored = true;
-            return;
-        }
+        const value = Math.floor(Number(this.resolveValue(this.value)));
+        if (!this.#isValid(value)) return;
 
         if (this.mode === "add") {
             this.property.push(...this.getIWR(value));

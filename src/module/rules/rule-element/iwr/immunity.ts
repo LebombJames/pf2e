@@ -1,12 +1,15 @@
-import { ImmunityData } from "@actor/data/iwr";
-import { ImmunityType } from "@actor/types";
-import { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.mjs";
-import { IWRRuleElement, IWRRuleSchema } from "./base";
+import { ImmunityData } from "@actor/data/iwr.ts";
+import { ImmunityType } from "@actor/types.ts";
+import type { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import { IWRRuleElement, IWRRuleSchema } from "./base.ts";
 
 const { fields } = foundry.data;
 
 /** @category RuleElement */
 class ImmunityRuleElement extends IWRRuleElement<ImmunityRuleSchema> {
+    /** Immunities don't take values */
+    readonly value = null;
+
     static override defineSchema(): ImmunityRuleSchema {
         return {
             ...super.defineSchema(),

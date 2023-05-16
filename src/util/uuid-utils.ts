@@ -1,16 +1,18 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { ErrorPF2e } from "./misc";
+import { ErrorPF2e } from "./misc.ts";
 
 class UUIDUtils {
     /** A replacement for core fromUuidSync that returns cached compendium documents. Remove in v11. */
     static fromUuidSync(uuid: string, relative?: ClientDocument): ClientDocument | CompendiumIndexData | null {
-        const { doc, embedded } = this.#parseUuid(uuid, relative);
-        if (doc) {
-            if (embedded.length) {
-                return _resolveEmbedded(doc, embedded) ?? null;
+        if (game.release.generation === 10) {
+            const { doc, embedded } = this.#parseUuid(uuid, relative);
+            if (doc) {
+                if (embedded.length) {
+                    return _resolveEmbedded(doc, embedded) ?? null;
+                }
+                return doc;
             }
-            return doc;
         }
         return fromUuidSync(uuid, relative);
     }

@@ -3676,13 +3676,9 @@
                     "value": 24
                 },
                 "damageRolls": {
-                    "thl45xvk1gtuyjxi6qyz": {
+                    "0": {
                         "damage": "2d4+10",
                         "damageType": "piercing"
-                    },
-                    "ylhgcn0bwtf9owrfdv1m": {
-                        "damage": "2d6",
-                        "damageType": "poison"
                     }
                 },
                 "description": {
@@ -3736,7 +3732,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>[[/r 2d6[poison]]] damage and @UUID[Compendium.pf2e.equipment-srd.Shadow Essence]{Shadow Essence} on the first 3 arrows</p>"
+                    "value": "<p>@UUID[Compendium.pf2e.equipment-srd.Shadow Essence]{Shadow Essence} on the first 3 arrows</p>"
                 },
                 "rules": [],
                 "slug": null,
@@ -3764,15 +3760,13 @@
             "name": "Attack of Opportunity",
             "sort": 3500000,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "defensive",
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature within the monster's reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using.</p>\n<hr />\n<p><strong>Effect</strong> The monster attempts a melee Strike against the triggering creature. If the attack is a critical hit and the trigger was a manipulate action, the monster disrupts that action. This Strike doesn't count toward the monster's multiple attack penalty, and its multiple attack penalty doesn't apply to this Strike.</p>"
                 },
@@ -3803,22 +3797,28 @@
             "name": "Toxic Mastery",
             "sort": 3600000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "offensive",
                 "description": {
                     "value": "<p>Kalyn can masterfully manipulate vile, poisonous energy and increase its potency. Her melee and ranged Strikes deal an additional 2d6 poison damage, and a target that takes this poison damage has a -1 status penalty to saving throws against Kalyn's divine spells for 1 round. Poisons delivered by Kalyn have the virulent trait.</p>"
                 },
                 "requirements": {
                     "value": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "damageType": "poison",
+                        "diceNumber": 2,
+                        "dieSize": "d6",
+                        "key": "DamageDice",
+                        "selector": "strike-damage"
+                    }
+                ],
                 "slug": null,
                 "source": {
                     "value": ""

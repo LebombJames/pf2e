@@ -8,15 +8,13 @@
             "name": "Intruder Alert",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> An intruder enters the room</p>\n<hr />\n<p><strong>Effect</strong> The comets change from blue to red in color. The trap then rolls initiative.</p>"
                 },
@@ -124,7 +122,11 @@
                 "value": 16
             },
             "reset": "<p>The trap resets after 1 hour.</p>",
-            "routine": "<p>(3 action) The trap loses 1 action each turn for each comet disabled, counteracted, or destroyed. Each comet uses 1 action to attack the nearest intruder with a comet Strike.</p>"
+            "routine": "<p>(3 action) The trap loses 1 action each turn for each comet disabled, counteracted, or destroyed. Each comet uses 1 action to attack the nearest intruder with a comet Strike.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #186: Ghost King's Rage"
+            }
         },
         "saves": {
             "fortitude": {
@@ -139,10 +141,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #186: Ghost King's Rage"
         },
         "statusEffects": [],
         "traits": {

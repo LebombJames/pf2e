@@ -8,15 +8,13 @@
             "name": "Needle Rain",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature moves into the area indicated on the map</p>\n<hr />\n<p><strong>Effect</strong> The trap shoots an acidic needle at a random target in the area indicated on the map, then rolls initiative.</p>"
                 },
@@ -128,7 +126,11 @@
                 "value": 16
             },
             "reset": "",
-            "routine": "<p>(3 actions) The acidic needle launcher fires a needle at a random target in the area indicated on the map.</p>"
+            "routine": "<p>(3 actions) The acidic needle launcher fires a needle at a random target in the area indicated on the map.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #149: Against the Scarlet Triad"
+            }
         },
         "saves": {
             "fortitude": {
@@ -143,9 +145,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #149: Against the Scarlet Triad"
         },
         "statusEffects": [],
         "traits": {

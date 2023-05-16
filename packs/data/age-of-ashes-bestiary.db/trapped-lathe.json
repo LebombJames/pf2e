@@ -8,15 +8,13 @@
             "name": "Unleash Fragments",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> The lathe is jostled or damaged, or its trigger is remotely pulled.</p>\n<hr />\n<p><strong>Effect</strong> The trap makes a sharpened fragment Strike against a random target in area <strong>A1</strong>, then rolls for initiative.</p>"
                 },
@@ -91,15 +89,13 @@
             "name": "Persistent Bleed Critical",
             "sort": 300000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p>The sharpened fragments deal [[/r 1d8[bleed]]] on a critical hit.</p>"
                 },
@@ -166,7 +162,11 @@
                 "value": 10
             },
             "reset": "",
-            "routine": "<p>(4 actions) The lathe attempts four sharpened fragment attacks against creatures in the room, selecting a target randomly from all available targets in area A1. The trap does not take multiple attack penalties for any of its attacks. The trap loses 1 action each turn as its springs wind down, and becomes disabled when it has 0 actions.</p>"
+            "routine": "<p>(4 actions) The lathe attempts four sharpened fragment attacks against creatures in the room, selecting a target randomly from all available targets in area A1. The trap does not take multiple attack penalties for any of its attacks. The trap loses 1 action each turn as its springs wind down, and becomes disabled when it has 0 actions.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #147: Tomorrow Must Burn"
+            }
         },
         "saves": {
             "fortitude": {
@@ -181,9 +181,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #147: Tomorrow Must Burn"
         },
         "statusEffects": [],
         "traits": {

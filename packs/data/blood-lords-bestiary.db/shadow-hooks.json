@@ -8,15 +8,13 @@
             "name": "Tearing Hooks",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature reaches the hall's midpoint</p>\n<hr />\n<p><strong>Effect</strong> The trap attempts a shadow hook Strike against each creature in the hall. On a critical hit, a creature additionally takes [[/r 1d10[bleed]]] damage.</p>"
                 },
@@ -113,7 +111,11 @@
                 "value": 21
             },
             "reset": "",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #186: Ghost King's Rage"
+            }
         },
         "saves": {
             "fortitude": {
@@ -128,10 +130,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #186: Ghost King's Rage"
         },
         "statusEffects": [],
         "traits": {

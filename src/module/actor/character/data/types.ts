@@ -1,12 +1,11 @@
-import { CraftingEntryData } from "@actor/character/crafting/entry";
-import { CraftingFormulaData } from "@actor/character/crafting/formula";
+import { CraftingEntryData } from "@actor/character/crafting/entry.ts";
+import { CraftingFormulaData } from "@actor/character/crafting/formula.ts";
 import {
     AbilityData,
     BaseCreatureSource,
     CreatureAttributes,
     CreatureDetails,
     CreatureHitPoints,
-    CreatureInitiativeData,
     CreatureResources,
     CreatureSystemData,
     CreatureTraitsData,
@@ -14,30 +13,32 @@ import {
     SaveData,
     SkillAbbreviation,
     SkillData,
-} from "@actor/creature/data";
-import { CreatureSensePF2e } from "@actor/creature/sense";
+} from "@actor/creature/data.ts";
+import { CreatureSensePF2e } from "@actor/creature/sense.ts";
 import {
     AbilityBasedStatistic,
     ActorFlagsPF2e,
     ArmorClassData,
+    InitiativeData,
     PerceptionData,
     StrikeData,
     TraitViewData,
-} from "@actor/data/base";
-import { StatisticModifier } from "@actor/modifiers";
-import { AbilityString, SaveType } from "@actor/types";
-import { FeatPF2e, HeritagePF2e, WeaponPF2e } from "@item";
-import { ArmorCategory } from "@item/armor/types";
-import { ProficiencyRank } from "@item/data";
-import { DeitySystemData } from "@item/deity/data";
-import { DeityDomain } from "@item/deity/types";
-import { MagicTradition } from "@item/spell/types";
-import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types";
-import { ZeroToFour } from "@module/data";
-import { PredicatePF2e } from "@system/predication";
-import { StatisticTraceData } from "@system/statistic";
-import { CharacterSheetTabVisibility } from "./sheet";
-import { CharacterPF2e } from "..";
+} from "@actor/data/base.ts";
+import { StatisticModifier } from "@actor/modifiers.ts";
+import { AbilityString, SaveType } from "@actor/types.ts";
+import { FeatPF2e, WeaponPF2e } from "@item";
+import { ArmorCategory } from "@item/armor/types.ts";
+import { ProficiencyRank } from "@item/data/index.ts";
+import { DeitySystemData } from "@item/deity/data.ts";
+import { DeityDomain } from "@item/deity/types.ts";
+import { MagicTradition } from "@item/spell/types.ts";
+import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
+import { ZeroToFour } from "@module/data.ts";
+import { PredicatePF2e } from "@system/predication.ts";
+import { StatisticTraceData } from "@system/statistic/data.ts";
+import { CharacterPF2e } from "../document.ts";
+import { WeaponAuxiliaryAction } from "../helpers.ts";
+import { CharacterSheetTabVisibility } from "./sheet.ts";
 
 interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
     flags: DeepPartial<CharacterFlags>;
@@ -235,15 +236,11 @@ interface CharacterStrike extends StrikeData {
     item: WeaponPF2e<CharacterPF2e>;
     /** Whether this attack is visible on the sheet */
     visible: boolean;
+    /** Domains/selectors from which modifiers are drawn */
+    domains: string[];
     altUsages: CharacterStrike[];
-    auxiliaryActions: AuxiliaryAction[];
+    auxiliaryActions: WeaponAuxiliaryAction[];
     weaponTraits: TraitViewData[];
-}
-
-interface AuxiliaryAction {
-    label: string;
-    img: string;
-    execute: () => Promise<void>;
 }
 
 /** A Pathfinder Society Faction */
@@ -374,7 +371,7 @@ interface CharacterAttributes extends CreatureAttributes {
     /** Creature armor class, used to defend against attacks. */
     ac: CharacterArmorClass;
     /** Initiative, used to determine turn order in combat. */
-    initiative: CreatureInitiativeData;
+    initiative: InitiativeData;
     /** The amount of HP provided per level by the character's class. */
     classhp: number;
     /** The amount of HP provided at level 1 by the character's ancestry. */
@@ -429,25 +426,17 @@ interface CharacterTraitsData extends CreatureTraitsData {
     senses: CreatureSensePF2e[];
 }
 
-interface GrantedFeat {
-    feat: FeatPF2e | HeritagePF2e;
-    grants: GrantedFeat[];
-}
-
 interface SlottedFeat {
     id: string;
     level: number | string;
     feat?: FeatPF2e;
-    grants: GrantedFeat[];
 }
 
 interface BonusFeat {
     feat: FeatPF2e;
-    grants: GrantedFeat[];
 }
 
 export {
-    AuxiliaryAction,
     BaseWeaponProficiencyKey,
     BonusFeat,
     CategoryProficiencies,
@@ -465,7 +454,6 @@ export {
     CharacterSystemData,
     CharacterTraitsData,
     ClassDCData,
-    GrantedFeat,
     LinkedProficiency,
     MagicTraditionProficiencies,
     MartialProficiencies,

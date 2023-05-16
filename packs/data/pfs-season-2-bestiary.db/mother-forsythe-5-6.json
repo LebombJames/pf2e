@@ -1999,7 +1999,7 @@
                 "baseItem": null,
                 "containerId": null,
                 "description": {
-                    "value": "<p>This string of beads appears to be a hemp string with lustrous red beads of various sizes hanging from it. When activated, it briefly appears in its true form: a golden chain with golden spheres attached by fine threads.</p>\n<p>This necklace has one [[/r 8d6[fire]]], one [[/r 6d6[fire]]] and two [[/r 4d6[fire]]] beads with a Reflex save DC of 25. When all the beads are gone, the necklace becomes a non-magical hemp string.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<hr />\n<p><strong>Effect</strong> You detach a sphere from the necklace, causing it to glow with orange light. After you activate a sphere, if you or anyone else hurls it (an Interact action with the ranged trait), it detonates as a fireball where it lands. Your toss can place the center of the fireballed trait), it detonates as a fireball where it lands. Your toss can place the center of the fireball anywhere within 70 feet, though at the GM's discretion you might need to make an attack roll if the throw is unusually challenging. If no one hurls the sphere by the start of your next turn, it turns into a non-magical red bead.</p>"
+                    "value": "<p>This string of beads appears to be a hemp string with lustrous red beads of various sizes hanging from it. When activated, it briefly appears in its true form: a golden chain with golden spheres attached by fine threads.</p>\n<p>This necklace has one [[/r 8d6[fire]]], one [[/r 6d6[fire]]] and two [[/r 4d6[fire]]] beads with a Reflex save DC of 25. When all the beads are gone, the necklace becomes a non-magical hemp string.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<hr />\n<p><strong>Effect</strong> You detach a sphere from the necklace, causing it to glow with orange light. After you activate a sphere, if you or anyone else hurls it (an Interact action with the ranged trait), it detonates as a <em>@UUID[Compendium.pf2e.spells-srd.Fireball]{Fireball}</em> where it lands. Your toss can place the center of the fireball anywhere within 70 feet, though at the GM's discretion you might need to make an attack roll if the throw is unusually challenging. If no one hurls the sphere by the start of your next turn, it turns into a non-magical red bead.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -2057,18 +2057,21 @@
             "type": "equipment"
         },
         {
-            "_id": "fixQK2bmgiJrdI2y",
-            "img": "systems/pf2e/icons/equipment/consumables/talismans/sneaky-key.webp",
-            "name": "Jail Cell Keys",
+            "_id": "XSBPRo3zXU2gOlIt",
+            "img": "systems/pf2e/icons/equipment/held-items/key-steel.webp",
+            "name": "Keys",
             "sort": 2000000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "containerId": null,
                 "description": {
+                    "gm": "<p>To Jail Cell</p>",
                     "value": ""
                 },
                 "equipped": {
-                    "carryType": "worn"
+                    "carryType": "worn",
+                    "handsHeld": 0,
+                    "invested": null
                 },
                 "equippedBulk": {
                     "value": ""
@@ -2107,13 +2110,13 @@
                     "value": []
                 },
                 "usage": {
-                    "value": ""
+                    "value": "held-in-one-hand"
                 },
                 "weight": {
-                    "value": "-"
+                    "value": "L"
                 }
             },
-            "type": "treasure"
+            "type": "equipment"
         },
         {
             "_id": "ag3wx8DqbbWlmbrc",
@@ -2223,15 +2226,13 @@
             "name": "Low-Light Vision",
             "sort": 2300000,
             "system": {
-                "actionCategory": {
-                    "value": "interaction"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "interaction",
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
@@ -2262,15 +2263,13 @@
             "name": "Maiden's Mending",
             "sort": 2400000,
             "system": {
-                "actionCategory": {
-                    "value": "interaction"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "interaction",
                 "description": {
                     "value": "<p><strong>Frequency</strong> once per minute</p>\n<p><strong>Trigger</strong> Mother Forsythe casts a non-cantrip occult spell</p>\n<hr />\n<p><strong>Effect</strong> Mother Forsythe gains 3 temporary Hit Points that last until the end of her next turn.</p>"
                 },
@@ -2301,15 +2300,13 @@
             "name": "Mist Child",
             "sort": 2500000,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "defensive",
                 "description": {
                     "value": "<p>Mother Forsythe blends in with unnatural subtlety. When she is @UUID[Compendium.pf2e.conditionitems.Concealed]{Concealed} or @UUID[Compendium.pf2e.conditionitems.Hidden]{Hidden}, the DC of the flat check to target her is increased to 6 if she's concealed or 12 if she's hidden.</p>"
                 },
@@ -2345,15 +2342,13 @@
             "name": "Sneak Attack",
             "sort": 2600000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "offensive",
                 "description": {
                     "value": "<p>Mother Forsythe deals 2d6 extra precision damage to @UUID[Compendium.pf2e.conditionitems.Flat-Footed]{Flat-Footed} creatures.</p>"
                 },

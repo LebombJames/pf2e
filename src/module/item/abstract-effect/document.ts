@@ -1,18 +1,18 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { TokenDocumentPF2e } from "@scene";
+import { TokenDocumentPF2e } from "@scene/index.ts";
 import { ErrorPF2e, sluggify } from "@util";
-import { EffectBadge } from "./data";
-import { UUIDUtils } from "@util/uuid-utils";
-import { ShowFloatyEffectParams } from "@module/canvas/token/object";
-import { ConditionSource, ConditionSystemData } from "@item/condition";
-import { EffectSource, EffectSystemData } from "@item/effect";
-import { AfflictionSource, AfflictionSystemData } from "@item/affliction";
+import { EffectBadge } from "./data.ts";
+import { UUIDUtils } from "@util/uuid-utils.ts";
+import { ShowFloatyEffectParams } from "@module/canvas/token/object.ts";
+import { ConditionSource, ConditionSystemData } from "@item/condition/data.ts";
+import { EffectSource, EffectSystemData } from "@item/effect/data.ts";
+import { AfflictionSource, AfflictionSystemData } from "@item/affliction/data.ts";
 
 /** Base effect type for all PF2e effects including conditions and afflictions */
 abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     /** A normalized version of the slug that shows in roll options, removing certain prefixes */
-    rollOptionSlug!: string;
+    declare rollOptionSlug: string;
 
     abstract get badge(): EffectBadge | null;
 
@@ -42,9 +42,8 @@ abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e |
     }
 
     override getRollOptions(prefix = this.type): string[] {
-        const originRollOptions = new Set(
-            this.origin?.getRollOptions().map((o) => o.replace(/^(?:self:)?/, `${prefix}:origin:`)) ?? []
-        );
+        // If this effect came from another actor, get that actor's roll options as well
+        const originRollOptions = this.origin?.getSelfRollOptions("origin").map((o) => `${prefix}:${o}`) ?? [];
 
         return [
             ...super.getRollOptions(prefix),

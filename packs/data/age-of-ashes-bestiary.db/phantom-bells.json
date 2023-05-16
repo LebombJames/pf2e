@@ -8,15 +8,13 @@
             "name": "Distant Ringing",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "interaction"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A living creature approaches within 30 feet.</p>\n<hr />\n<p><strong>Effect</strong> Sounds of creaking metal fill the area as the phantom bells begin to swing and the haunt rolls initiative.</p>"
                 },
@@ -75,7 +73,11 @@
                 "value": 6
             },
             "reset": "<p>The bells cease ringing if there are no living creatures within 30 feet.</p>",
-            "routine": "<p>(1 action) The bells toll, dealing [[/r 4d6[sonic]]] damage to each living creature within @Template[type:emanation|distance:30]{30 feet} (@Check[type:fortitude|dc:24|basic:true|name:Phantom Bells Toll|traits:auditory,complex,haunt,sonic,hazard] save).</p>"
+            "routine": "<p>(1 action) The bells toll, dealing [[/r 4d6[sonic]]] damage to each living creature within @Template[type:emanation|distance:30]{30 feet} (@Check[type:fortitude|dc:24|basic:true|name:Phantom Bells Toll|traits:auditory,complex,haunt,sonic,hazard] save).</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #147: Tomorrow Must Burn"
+            }
         },
         "saves": {
             "fortitude": {
@@ -90,9 +92,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #147: Tomorrow Must Burn"
         },
         "statusEffects": [],
         "traits": {

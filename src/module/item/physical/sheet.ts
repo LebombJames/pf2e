@@ -1,5 +1,5 @@
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { createSheetTags, SheetOptions } from "@module/sheet/helpers";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { createSheetTags, SheetOptions } from "@module/sheet/helpers.ts";
 import { objectHasKey } from "@util";
 import {
     BasePhysicalItemSource,
@@ -10,9 +10,9 @@ import {
     PhysicalItemPF2e,
     PhysicalItemType,
     PreciousMaterialGrade,
-} from ".";
-import { ItemSheetPF2e } from "../sheet/base";
-import { PRECIOUS_MATERIAL_GRADES } from "./values";
+} from "./index.ts";
+import { ItemSheetPF2e } from "../sheet/base.ts";
+import { PRECIOUS_MATERIAL_GRADES } from "./values.ts";
 
 class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2e<TItem> {
     /** Show the identified data for editing purposes */
@@ -49,6 +49,9 @@ class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2
                 traits: createSheetTags(actionTraits, action.traits ?? { value: [] }),
             });
         }
+
+        // Show source value for item size in case it is changed by a rule element
+        sheetData.data.size = this.item._source.system.size;
 
         return {
             ...sheetData,
@@ -200,7 +203,7 @@ class PhysicalItemSheetPF2e<TItem extends PhysicalItemPF2e> extends ItemSheetPF2
         }
 
         // Convert price from a string to an actual object
-        if (formData["system.price.value"]) {
+        if ("system.price.value" in formData) {
             formData["system.price.value"] = CoinsPF2e.fromString(String(formData["system.price.value"]));
         }
 

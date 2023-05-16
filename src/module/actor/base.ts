@@ -4,59 +4,58 @@ import {
     ActorInstances,
     ApplyDamageParams,
     AttackItem,
-    AttackRollContext,
-    AttackRollContextParams,
     AuraData,
+    CheckContext,
+    CheckContextParams,
     EmbeddedItemInstances,
+    RollContext,
+    RollContextParams,
     SaveType,
-    StrikeRollContext,
-    StrikeRollContextParams,
     UnaffectedType,
-} from "@actor/types";
+} from "@actor/types.ts";
 import { AbstractEffectPF2e, ArmorPF2e, ContainerPF2e, ItemPF2e, ItemProxyPF2e, PhysicalItemPF2e } from "@item";
-import { ActionTrait } from "@item/action/data";
-import { AfflictionSource } from "@item/affliction";
-import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition";
-import { PersistentDialog } from "@item/condition/persistent-damage-dialog";
-import { isCycle } from "@item/container/helpers";
-import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data";
-import { ActionCost, ActionType } from "@item/data/base";
-import { hasInvestedProperty } from "@item/data/helpers";
-import { EffectFlags, EffectSource } from "@item/effect/data";
-import { RitualSpellcasting } from "@item/spellcasting-entry/rituals";
-import type { ActiveEffectPF2e } from "@module/active-effect";
-import { TokenPF2e } from "@module/canvas";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { OneToThree, Size } from "@module/data";
-import { preImportJSON } from "@module/doc-helpers";
-import { EncounterPF2e, RolledCombatant } from "@module/encounter";
-import { RuleElementSynthetics } from "@module/rules";
-import { extractEphemeralEffects, processPreUpdateActorHooks } from "@module/rules/helpers";
-import { RuleElementPF2e } from "@module/rules/rule-element/base";
-import { RollOptionRuleElement } from "@module/rules/rule-element/roll-option";
-import { RollOptionToggle } from "@module/rules/synthetics";
-import { LocalizePF2e } from "@module/system/localize";
-import { UserPF2e } from "@module/user";
-import { ScenePF2e, TokenDocumentPF2e } from "@scene";
-import { DicePF2e } from "@scripts/dice";
-import { DamageType } from "@system/damage";
-import { IWRApplicationData, applyIWR } from "@system/damage/iwr";
-import { Statistic, StatisticCheck } from "@system/statistic";
-import { TextEditorPF2e } from "@system/text-editor";
+import { ActionTrait } from "@item/action/data.ts";
+import { AfflictionSource } from "@item/affliction/index.ts";
+import { ConditionKey, ConditionSlug, ConditionSource, type ConditionPF2e } from "@item/condition/index.ts";
+import { PersistentDialog } from "@item/condition/persistent-damage-dialog.ts";
+import { CONDITION_SLUGS } from "@item/condition/values.ts";
+import { isCycle } from "@item/container/helpers.ts";
+import { ActionCost, ActionType } from "@item/data/base.ts";
+import { hasInvestedProperty } from "@item/data/helpers.ts";
+import { ItemSourcePF2e, ItemType, PhysicalItemSource } from "@item/data/index.ts";
+import { EffectFlags, EffectSource } from "@item/effect/data.ts";
+import { RitualSpellcasting } from "@item/spellcasting-entry/rituals.ts";
+import type { ActiveEffectPF2e } from "@module/active-effect.ts";
+import { TokenPF2e } from "@module/canvas/index.ts";
+import { OneToThree, Size } from "@module/data.ts";
+import { preImportJSON } from "@module/doc-helpers.ts";
+import { ChatMessagePF2e, ScenePF2e, TokenDocumentPF2e, UserPF2e } from "@module/documents.ts";
+import { CombatantPF2e, EncounterPF2e, RolledCombatant } from "@module/encounter/index.ts";
+import { extractEphemeralEffects, processPreUpdateActorHooks } from "@module/rules/helpers.ts";
+import { RuleElementSynthetics } from "@module/rules/index.ts";
+import { RuleElementPF2e } from "@module/rules/rule-element/base.ts";
+import { RollOptionRuleElement } from "@module/rules/rule-element/roll-option.ts";
+import { RollOptionToggle } from "@module/rules/synthetics.ts";
+import { DicePF2e } from "@scripts/dice.ts";
+import { IWRApplicationData, applyIWR } from "@system/damage/iwr.ts";
+import { DamageType } from "@system/damage/types.ts";
+import { CheckDC } from "@system/degree-of-success.ts";
+import { Statistic, StatisticCheck } from "@system/statistic/index.ts";
+import { TextEditorPF2e } from "@system/text-editor.ts";
 import {
     ErrorPF2e,
     getActionGlyph,
     getActionIcon,
     isObject,
+    localizer,
     objectHasKey,
     setHasElement,
     traitSlugToObject,
     tupleHasValue,
 } from "@util";
-import { ActorConditions } from "./conditions";
-import { Abilities, VisionLevel, VisionLevels } from "./creature/data";
-import { GetReachParameters, ModeOfBeing } from "./creature/types";
-import { ActorSourcePF2e, ActorType } from "./data";
+import { ActorConditions } from "./conditions.ts";
+import { Abilities, CreatureSkills, VisionLevel, VisionLevels } from "./creature/data.ts";
+import { GetReachParameters, ModeOfBeing } from "./creature/types.ts";
 import {
     ActorFlagsPF2e,
     ActorSystemData,
@@ -64,18 +63,25 @@ import {
     PrototypeTokenPF2e,
     RollOptionFlags,
     StrikeData,
-} from "./data/base";
-import { ImmunityData, ResistanceData, WeaknessData } from "./data/iwr";
-import { ActorSizePF2e } from "./data/size";
-import { calculateRangePenalty, checkAreaEffects, getRangeIncrement, isReallyPC, migrateActorSource } from "./helpers";
-import { ActorInitiative } from "./initiative";
-import { ActorInventory } from "./inventory";
-import { ItemTransfer } from "./item-transfer";
-import { StatisticModifier } from "./modifiers";
-import { ActorSheetPF2e } from "./sheet/base";
-import { ActorSpellcasting } from "./spellcasting";
-import { TokenEffect } from "./token-effect";
-import { CONDITION_SLUGS, CREATURE_ACTOR_TYPES, UNAFFECTED_TYPES } from "./values";
+} from "./data/base.ts";
+import { ActorSourcePF2e, ActorType } from "./data/index.ts";
+import { ImmunityData, ResistanceData, WeaknessData } from "./data/iwr.ts";
+import { ActorSizePF2e } from "./data/size.ts";
+import {
+    calculateRangePenalty,
+    checkAreaEffects,
+    getRangeIncrement,
+    isReallyPC,
+    migrateActorSource,
+} from "./helpers.ts";
+import { ActorInitiative } from "./initiative.ts";
+import { ActorInventory } from "./inventory/index.ts";
+import { ItemTransfer } from "./item-transfer.ts";
+import { StatisticModifier } from "./modifiers.ts";
+import { ActorSheetPF2e } from "./sheet/base.ts";
+import { ActorSpellcasting } from "./spellcasting.ts";
+import { TokenEffect } from "./token-effect.ts";
+import { CREATURE_ACTOR_TYPES, SAVE_TYPES, SKILL_LONG_FORMS, UNAFFECTED_TYPES } from "./values.ts";
 
 /**
  * Extend the base Actor class to implement additional logic specialized for PF2e.
@@ -85,34 +91,34 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     /** Has this actor completed construction? */
     private constructed = true;
 
-    /** Is this actor preparing its embedded documents? Used to prevent premature data preparation of embedded items */
-    preparingEmbeds?: boolean;
-
     /** Handles rolling initiative for the current actor */
-    initiative?: ActorInitiative;
+    declare initiative?: ActorInitiative;
 
     /** A separate collection of owned physical items for convenient access */
-    inventory!: ActorInventory<this>;
+    declare inventory: ActorInventory<this>;
 
     /** A separate collection of owned spellcasting entries for convenience */
-    spellcasting!: ActorSpellcasting<this>;
+    declare spellcasting: ActorSpellcasting<this>;
 
     /** Rule elements drawn from owned items */
-    rules!: RuleElementPF2e[];
+    declare rules: RuleElementPF2e[];
 
-    synthetics!: RuleElementSynthetics;
+    declare synthetics: RuleElementSynthetics;
 
     /** Saving throw statistics */
-    saves?: { [K in SaveType]?: Statistic };
+    declare saves?: { [K in SaveType]?: Statistic };
 
     /** Data from rule elements for auras this actor may be emanating */
-    auras!: Map<string, AuraData>;
+    declare auras: Map<string, AuraData>;
 
     /** A collection of this actor's conditions */
-    conditions!: ActorConditions<this>;
+    declare conditions: ActorConditions<this>;
+
+    /** Skill checks for the actor if supported by the actor type */
+    declare skills?: CreatureSkills;
 
     /** A cached copy of `Actor#itemTypes`, lazily regenerated every data preparation cycle */
-    private _itemTypes?: EmbeddedItemInstances<this> | null;
+    private declare _itemTypes: EmbeddedItemInstances<this> | null;
 
     constructor(data: PreCreate<ActorSourcePF2e>, context: DocumentConstructionContext<TParent> = {}) {
         super(data, context);
@@ -265,6 +271,11 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return null;
     }
 
+    /** The actor's hardness: zero with the exception of some hazards and NPCs */
+    get hardness(): number {
+        return 0;
+    }
+
     /** Most actor types can host rule elements */
     get canHostRuleElements(): boolean {
         return true;
@@ -272,6 +283,10 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
     get alliance(): ActorAlliance {
         return this.system.details.alliance;
+    }
+
+    get combatant(): CombatantPF2e<EncounterPF2e> | null {
+        return game.combat?.combatants.find((c) => c.actor?.uuid === this.uuid) ?? null;
     }
 
     /** Add effect icons from effect items and rule elements */
@@ -335,6 +350,18 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         };
 
         return damageIsApplicable[damageType];
+    }
+
+    /** Get (almost) any statistic by slug: handling expands in `ActorPF2e` subclasses */
+    getStatistic(slug: string): Statistic | null {
+        if (tupleHasValue(SAVE_TYPES, slug)) {
+            return this.saves?.[slug] ?? null;
+        }
+        if (setHasElement(SKILL_LONG_FORMS, slug)) {
+            return this.skills?.[slug] ?? null;
+        }
+
+        return null;
     }
 
     /** Get roll options from this actor's effects, traits, and other properties */
@@ -441,6 +468,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         context?: {
             parent?: TDocument["parent"];
             pack?: Collection<TDocument> | null;
+            types?: (ActorType | "creature")[];
         } & Partial<FormApplicationOptions>
     ): Promise<TDocument | null>;
     static override async createDialog(
@@ -448,16 +476,29 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         options: {
             parent?: TokenDocumentPF2e | null;
             pack?: Collection<ActorPF2e<null>> | null;
+            types?: (ActorType | "creature")[];
             [key: string]: unknown;
         } = {}
     ): Promise<Actor<TokenDocument<Scene | null> | null> | null> {
         const original = game.system.documentTypes.Actor;
-        game.system.documentTypes.Actor = original.filter(
-            (actorType: string) => actorType !== "party" || BUILD_MODE !== "production"
-        );
-        const newActor = super.createDialog(data, options);
-        game.system.documentTypes.Actor = original;
-        return newActor;
+        try {
+            game.system.documentTypes.Actor = original.filter(
+                (actorType: string) => actorType !== "party" || BUILD_MODE !== "production"
+            );
+
+            if (options.types) {
+                const validTypes = options.types ?? [];
+                if (validTypes.includes("creature")) validTypes.push(...CREATURE_ACTOR_TYPES);
+                game.system.documentTypes.Actor = game.system.documentTypes.Actor.filter((type) =>
+                    tupleHasValue(validTypes, type)
+                );
+            }
+
+            const newActor = super.createDialog(data, options);
+            return newActor;
+        } finally {
+            game.system.documentTypes.Actor = original;
+        }
     }
 
     /**
@@ -509,6 +550,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
                     merged.prototypeToken.vision = true;
                     break;
                 case "loot":
+                case "party":
                     // Make loot actors linked and interactable
                     merged.prototypeToken.actorLink = true;
                     merged.ownership.default = CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED;
@@ -541,6 +583,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
     protected override _initialize(): void {
         this.constructed ??= false;
+        this._itemTypes = null;
         this.rules = [];
         this.conditions = new ActorConditions();
         this.auras = new Map();
@@ -603,8 +646,6 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
     /** Prepare token data derived from this actor, refresh Effects Panel */
     override prepareData(): void {
-        delete this._itemTypes;
-
         // To prevent (or delay) console spam, will send out a deprecation notice in a later release
         Object.defineProperty(this.system, "toggles", {
             get: (): RollOptionToggle[] => this.synthetics.toggles,
@@ -659,9 +700,11 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
     /** Prepare the physical-item collection on this actor, item-sibling data, and rule elements */
     override prepareEmbeddedDocuments(): void {
-        this.preparingEmbeds = true;
-        super.prepareEmbeddedDocuments();
-        this.preparingEmbeds = false;
+        // Perform full reset instead of upstream's double data preparation
+        // See https://github.com/foundryvtt/foundryvtt/issues/7987
+        for (const item of this.items) {
+            item.reset();
+        }
 
         const physicalItems = this.items.filter((i): i is PhysicalItemPF2e<this> => i.isOfType("physical"));
         this.inventory = new ActorInventory(this, physicalItems);
@@ -765,26 +808,26 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     /*  Rolls                                       */
     /* -------------------------------------------- */
 
-    getRollContext<TStatistic extends StatisticModifier | StatisticCheck | null, TItem extends AttackItem | null>(
-        params: StrikeRollContextParams<TStatistic, TItem>
-    ): Promise<StrikeRollContext<this, TStatistic, TItem>>;
-    async getRollContext(params: StrikeRollContextParams): Promise<StrikeRollContext<this>> {
+    getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(
+        params: RollContextParams<TStatistic, TItem>
+    ): Promise<RollContext<this, TStatistic, TItem>>;
+    async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
         const [selfToken, targetToken] =
             canvas.ready && !params.viewOnly
                 ? [
                       canvas.tokens.controlled.find((t) => t.actor === this) ?? this.getActiveTokens().shift() ?? null,
-                      Array.from(game.user.targets).find((t) => !!t.actor) ?? null,
+                      params.target?.token ?? params.target?.actor?.getActiveTokens().shift() ?? null,
                   ]
                 : [null, null];
 
-        const reach = params.item?.isOfType("melee")
-            ? params.item.reach
+        const [reach, isMelee] = params.item?.isOfType("melee")
+            ? [params.item.reach, params.item.isMelee]
             : params.item?.isOfType("weapon")
-            ? this.getReach({ action: "attack", weapon: params.item })
-            : null;
+            ? [this.getReach({ action: "attack", weapon: params.item }), params.item.isMelee]
+            : [null, false];
 
         const selfOptions = this.getRollOptions(params.domains ?? []);
-        if (targetToken && typeof reach === "number" && selfToken?.isFlanking(targetToken, { reach })) {
+        if (targetToken && isMelee && typeof reach === "number" && selfToken?.isFlanking(targetToken, { reach })) {
             selfOptions.push("self:flanking");
         }
 
@@ -792,7 +835,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         const originEphemeralEffects = await extractEphemeralEffects({
             affects: "origin",
             origin: this,
-            target: targetToken?.actor ?? null,
+            target: params.target?.actor ?? targetToken?.actor ?? null,
             item: params.item ?? null,
             domains: params.domains,
             options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
@@ -805,11 +848,16 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
                       [...selfOptions, ...targetToken.actor.getSelfRollOptions("target")],
                       originEphemeralEffects
                   );
-        const actions: StrikeData[] = selfActor.system.actions?.flatMap((a) => [a, a.altUsages ?? []].flat()) ?? [];
+
+        const isStrike = params.statistic instanceof StatisticModifier;
+        const strikeActions: StrikeData[] = isStrike
+            ? selfActor.system.actions?.flatMap((a) => [a, a.altUsages ?? []].flat()) ?? []
+            : [];
 
         const statistic = params.viewOnly
             ? params.statistic
-            : actions.find((action): boolean => {
+            : isStrike
+            ? strikeActions.find((action): boolean => {
                   // Find the matching weapon or melee item
                   if (params.item?.id !== action.item.id || params?.item.name !== action.item.name) return false;
                   if (params.item.isOfType("melee") && action.item.isOfType("melee")) return true;
@@ -820,7 +868,9 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
                       action.item.isOfType("weapon") &&
                       params.item.isMelee === action.item.isMelee
                   );
-              }) ?? params.statistic;
+              }) ?? params.statistic
+            : params.statistic;
+
         const selfItem = ((): AttackItem | null => {
             // 1. Simplest case: no context clone, so used the item passed to this method
             if (selfActor === this) return params.item ?? null;
@@ -844,12 +894,17 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         })();
 
         const itemOptions = selfItem?.getRollOptions("item") ?? [];
+        const isAttackAction = ["attack", "strike-damage", "attack-spell-damage"].some((d) =>
+            params.domains.includes(d)
+        );
 
         const traitSlugs: ActionTrait[] = [
-            "attack" as const,
+            isAttackAction ? ("attack" as const) : [],
             // CRB p. 544: "Due to the complexity involved in preparing bombs, Strikes to throw alchemical bombs gain
             // the manipulate trait."
-            selfItem?.isOfType("weapon") && selfItem.baseType === "alchemical-bomb" ? ("manipulate" as const) : [],
+            isStrike && selfItem?.isOfType("weapon") && selfItem.baseType === "alchemical-bomb"
+                ? ("manipulate" as const)
+                : [],
         ].flat();
         for (const adjustment of this.synthetics.strikeAdjustments) {
             if (selfItem?.isOfType("weapon", "melee")) {
@@ -890,7 +945,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         // Clone the actor to recalculate its AC with contextual roll options
         const targetActor = params.viewOnly
             ? null
-            : targetToken?.actor?.getContextualClone(
+            : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
                   [
                       ...selfActor.getSelfRollOptions("origin"),
                       ...itemOptions,
@@ -938,9 +993,9 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
      * All attack rolls have the "all" and "attack-roll" domains and the "attack" trait,
      * but more can be added via the options.
      */
-    async getCheckRollContext<TStatistic extends StatisticCheck | StatisticModifier, TItem extends AttackItem | null>(
-        params: AttackRollContextParams<TStatistic, TItem>
-    ): Promise<AttackRollContext<this, TStatistic, TItem>> {
+    async getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(
+        params: CheckContextParams<TStatistic, TItem>
+    ): Promise<CheckContext<this, TStatistic, TItem>> {
         const context = await this.getRollContext(params);
         const targetActor = context.target?.actor;
         const rangeIncrement = context.target?.rangeIncrement ?? null;
@@ -948,18 +1003,32 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         const rangePenalty = calculateRangePenalty(this, rangeIncrement, params.domains, context.options);
         if (rangePenalty) context.self.modifiers.push(rangePenalty);
 
-        return {
-            ...context,
-            dc: targetActor?.attributes.ac
-                ? {
-                      scope: "attack",
-                      slug: "ac",
-                      statistic:
-                          targetActor.attributes.ac instanceof StatisticModifier ? targetActor.attributes.ac : null,
-                      value: targetActor.attributes.ac.value,
-                  }
-                : null,
-        };
+        const dcData = ((): CheckDC | null => {
+            const { domains, targetedDC } = params;
+            const scope = domains.includes("attack") ? "attack" : "check";
+
+            switch (targetedDC) {
+                case "ac":
+                case "armor":
+                    return targetActor?.attributes.ac
+                        ? {
+                              scope,
+                              slug: "ac",
+                              statistic:
+                                  targetActor.attributes.ac instanceof StatisticModifier
+                                      ? targetActor.attributes.ac
+                                      : null,
+                              value: targetActor.attributes.ac.value,
+                          }
+                        : null;
+                default: {
+                    const statistic = targetActor?.getStatistic(targetedDC)?.dc;
+                    return statistic ? { scope, statistic, slug: targetedDC, value: statistic.value } : null;
+                }
+            }
+        })();
+
+        return { ...context, dc: dcData };
     }
 
     /**
@@ -1061,6 +1130,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     async applyDamage({
         damage,
         token,
+        item,
         rollOptions = new Set(),
         skipIWR = false,
         shieldBlockRequest = false,
@@ -1079,27 +1149,29 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         const { finalDamage } = result;
 
         // Calculate damage to hit points and shield
-        const translations = LocalizePF2e.translations.PF2E.Actor.ApplyDamage;
+        const localize = localizer("PF2E.Actor.ApplyDamage");
         const actorShield = this.isOfType("character", "npc") ? this.attributes.shield : null;
         const shieldBlock =
             actorShield && shieldBlockRequest
                 ? ((): boolean => {
-                      const warnings = LocalizePF2e.translations.PF2E.Actions.RaiseAShield;
                       if (actorShield.broken) {
                           ui.notifications.warn(
-                              game.i18n.format(warnings.ShieldIsBroken, { actor: token.name, shield: actorShield.name })
+                              game.i18n.format("PF2E.Actions.RaiseAShield.ShieldIsBroken", {
+                                  actor: token.name,
+                                  shield: actorShield.name,
+                              })
                           );
                           return false;
                       } else if (actorShield.destroyed) {
                           ui.notifications.warn(
-                              game.i18n.format(warnings.ShieldIsDestroyed, {
+                              game.i18n.format("PF2E.Actions.RaiseAShield.ShieldIsDestroyed", {
                                   actor: token.name,
                                   shield: actorShield.name,
                               })
                           );
                           return false;
                       } else if (!actorShield.raised) {
-                          ui.notifications.warn(game.i18n.format(translations.ShieldNotRaised, { actor: token.name }));
+                          ui.notifications.warn(localize("ShieldNotRaised", { actor: token.name }));
                           return false;
                       } else {
                           return true;
@@ -1108,15 +1180,51 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
                 : false;
 
         const shieldHardness = shieldBlock ? actorShield?.hardness ?? 0 : 0;
-        const absorbedDamage = Math.min(shieldHardness, Math.abs(finalDamage));
+        const damageAbsorbedByShield = finalDamage > 0 ? Math.min(shieldHardness, finalDamage) : 0;
         const shieldDamage = shieldBlock
-            ? Math.min(actorShield?.hp.value ?? 0, Math.abs(finalDamage) - absorbedDamage)
+            ? Math.min(actorShield?.hp.value ?? 0, Math.abs(finalDamage) - damageAbsorbedByShield)
             : 0;
+
+        // Reduce damage by actor hardness
+        const baseActorHardness = this.hardness;
+        const effectiveActorHardness = ((): number => {
+            // "[Adamantine weapons] treat any object they hit as if it had half as much Hardness as usual, unless the
+            // object's Hardness is greater than that of the adamantine weapon."
+            const damageHasAdamantine = typeof damage === "number" ? false : damage.materials.includes("adamantine");
+            const materialGrade =
+                item?.isOfType("weapon") && item.material.precious?.type === "adamantine"
+                    ? item.material.precious.grade
+                    : "standard";
+            // Hardness values for thin adamantine items (inclusive of weapons):
+            const itemHardness = {
+                low: 0, // low-grade adamantine doesn't exist
+                standard: 10,
+                high: 13,
+            }[materialGrade];
+            return damageHasAdamantine && itemHardness >= baseActorHardness
+                ? Math.floor(baseActorHardness / 2)
+                : baseActorHardness;
+        })();
+
+        // Include actor-hardness absorption in list of damage modifications
+        const damageAbsorbedByActor =
+            finalDamage > 0 ? Math.min(finalDamage - damageAbsorbedByShield, effectiveActorHardness) : 0;
+        if (damageAbsorbedByActor > 0) {
+            const typeLabel =
+                effectiveActorHardness === baseActorHardness
+                    ? "PF2E.Damage.Hardness.Full"
+                    : "PF2E.Damage.Hardness.Half";
+            result.applications.push({
+                category: "reduction",
+                type: game.i18n.localize(typeLabel),
+                adjustment: -1 * damageAbsorbedByActor,
+            });
+        }
 
         const hpUpdate = this.calculateHealthDelta({
             hp: hitPoints,
             sp: this.isOfType("character") ? this.attributes.sp : undefined,
-            delta: finalDamage - absorbedDamage,
+            delta: finalDamage - damageAbsorbedByShield - damageAbsorbedByActor,
         });
         const hpDamage = hpUpdate.totalApplied;
 
@@ -1146,25 +1254,27 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         // Send chat message
         const hpStatement = ((): string => {
             // This would be a nested ternary, except prettier thoroughly mangles it
-            if (finalDamage === 0) return translations.TakesNoDamage;
-            if (finalDamage > 0) {
-                return absorbedDamage > 0
-                    ? hpDamage > 0
-                        ? translations.DamagedForNShield
-                        : translations.ShieldAbsorbsAll
-                    : translations.DamagedForN;
+            if (finalDamage - damageAbsorbedByActor === 0) {
+                return localize("TakesNoDamage");
             }
-            return hpDamage < 0 ? translations.HealedForN : translations.AtFullHealth;
+            if (finalDamage > 0) {
+                return damageAbsorbedByShield > 0
+                    ? hpDamage > 0
+                        ? localize("DamagedForNShield")
+                        : localize("ShieldAbsorbsAll")
+                    : localize("DamagedForN");
+            }
+            return hpDamage < 0 ? localize("HealedForN") : localize("AtFullHealth");
         })();
 
         const updatedShield = this.isOfType("character", "npc") ? this.attributes.shield : null;
         const shieldStatement =
             updatedShield && shieldDamage > 0
                 ? updatedShield.broken
-                    ? translations.ShieldDamagedForNBroken
+                    ? localize("ShieldDamagedForNBroken")
                     : updatedShield.destroyed
-                    ? translations.ShieldDamagedForNDestroyed
-                    : translations.ShieldDamagedForN
+                    ? localize("ShieldDamagedForNDestroyed")
+                    : localize("ShieldDamagedForN")
                 : null;
 
         const statements = ((): string => {
@@ -1174,7 +1284,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
                     game.i18n.format(s, {
                         actor: token.name.replace(/[<>]/g, ""),
                         hpDamage: Math.abs(hpDamage),
-                        absorbedDamage,
+                        absorbedDamage: damageAbsorbedByShield,
                         shieldDamage,
                     })
                 )
@@ -1229,7 +1339,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return this;
     }
 
-    isLootableBy(user: UserPF2e) {
+    isLootableBy(user: UserPF2e): boolean {
         return this.canUserModify(user, "update");
     }
 
@@ -1632,6 +1742,20 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         if (canvas.ready && changed.system?.details && "alliance" in changed.system.details) {
             for (const token of this.getActiveTokens(true, true)) {
                 token.reset();
+            }
+        }
+
+        // Remove the death overlay if present upon hit points being increased
+        const currentHP = this.hitPoints?.value ?? 0;
+        const hpChange = Number(changed.system?.attributes?.hp?.value) || 0;
+        if (currentHP > 0 && hpChange > 0 && this.isDead) {
+            const { combatant } = this;
+            if (combatant) {
+                combatant.toggleDefeated({ to: false });
+            } else {
+                for (const tokenDoc of this.getActiveTokens(false, true)) {
+                    tokenDoc.update({ overlayEffect: null });
+                }
             }
         }
     }

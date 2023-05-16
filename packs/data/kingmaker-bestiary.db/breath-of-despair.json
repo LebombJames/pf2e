@@ -8,15 +8,13 @@
             "name": "Draining Inhalation",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A non‑flying living creature moves more than 10 feet into the area</p>\n<p><strong>Effect</strong> Each face inhales then exhales, and all living creatures in the area feel their strength and vitality being drawn out of them as tendrils of shadow from the faces latch onto their bodies. Each creature must succeed at a @Check[type:fortitude|dc:22] save or become @UUID[Compendium.pf2e.conditionitems.Enfeebled]{Enfeebled 1} (@UUID[Compendium.pf2e.conditionitems.Enfeebled]{Enfeebled 2} on a critical failure).</p>"
                 },
@@ -133,7 +131,11 @@
                 "value": 5
             },
             "reset": "<p>The trap resets after 1 minute</p>",
-            "routine": "<p>(4 actions) The trap loses 1 action per disabled face each turn. On each action, a different face spews a writhing breath of darkness from its mouth to a target in the area. A creature can only be targeted once per round by the despairing breath, so if fewer than four creatures are in the room, the trap won't be able to take full advantage of all four of its actions.</p>"
+            "routine": "<p>(4 actions) The trap loses 1 action per disabled face each turn. On each action, a different face spews a writhing breath of darkness from its mouth to a target in the area. A creature can only be targeted once per round by the despairing breath, so if fewer than four creatures are in the room, the trap won't be able to take full advantage of all four of its actions.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Kingmaker"
+            }
         },
         "saves": {
             "fortitude": {
@@ -148,10 +150,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder Kingmaker"
         },
         "statusEffects": [],
         "traits": {

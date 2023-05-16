@@ -8,15 +8,13 @@
             "name": "Collapse",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p>If a creature walks on the area marked on the map, it falls through the weakened floorboards onto uneven rocks and sharp shards of wood, taking [[/r 1d4[piercing]]] damage and [[/r 1d6[bludgeoning]]] damage. The creature can use the @UUID[Compendium.pf2e.actionspf2e.Grab an Edge]{Grab an Edge} reaction to avoid the fall and the damage.</p>"
                 },
@@ -77,7 +75,11 @@
                 "value": 1
             },
             "reset": "<p>Once this section of the porch has collapsed, creatures can still fall through the hole until the porch is Repaired.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Adventure: Troubles in Otari"
+            }
         },
         "saves": {
             "fortitude": {
@@ -92,9 +94,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder Adventure: Troubles in Otari"
         },
         "statusEffects": [],
         "traits": {

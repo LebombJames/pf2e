@@ -1,16 +1,13 @@
-import { ActionTrait } from "@item/action/data";
-import { ItemPF2e } from "@item/base";
-import { ConditionPF2e } from "@item/condition";
-import { EffectPF2e } from "@item/effect";
-import { ItemSheetPF2e } from "@item/sheet";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types";
-import { ConditionManager } from "@system/conditions";
-import { DamageCategoryUnique } from "@system/damage/types";
-import { DAMAGE_CATEGORIES_UNIQUE } from "@system/damage/values";
-import { htmlClosest, htmlQuery, htmlQueryAll, pick, omit } from "@util";
-import { UUIDUtils } from "@util/uuid-utils";
-import { AfflictionConditionData, AfflictionDamage, AfflictionOnset, AfflictionStageData } from "./data";
-import { AfflictionPF2e } from "./document";
+import { ActionTrait } from "@item/action/data.ts";
+import { AfflictionPF2e, ConditionPF2e, EffectPF2e, ItemPF2e } from "@item";
+import { ItemSheetPF2e } from "@item/sheet/base.ts";
+import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ConditionManager } from "@system/conditions/index.ts";
+import { DamageCategoryUnique } from "@system/damage/types.ts";
+import { DAMAGE_CATEGORIES_UNIQUE } from "@system/damage/values.ts";
+import { htmlClosest, htmlQuery, htmlQueryAll, omit, pick } from "@util";
+import { UUIDUtils } from "@util/uuid-utils.ts";
+import { AfflictionConditionData, AfflictionDamage, AfflictionOnset, AfflictionStageData } from "./data.ts";
 
 class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {
     static override get defaultOptions(): DocumentSheetOptions {
@@ -107,7 +104,7 @@ class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {
                 const stageId = htmlClosest(event.target, "[data-stage-id]")?.dataset.stageId;
                 if (!this.item.system.stages[stageId ?? ""]) return;
 
-                const damage: AfflictionDamage = { value: "", type: "untyped" };
+                const damage: AfflictionDamage = { formula: "", type: "untyped" };
                 this.item.update({ [`system.stages.${stageId}.damage.${randomID()}`]: damage });
             });
         }
@@ -200,6 +197,18 @@ class AfflictionSheetPF2e extends ItemSheetPF2e<AfflictionPF2e> {
         } else {
             ui.notifications.error("PF2E.Item.Affliction.Error.RestrictedStageItem", { localize: true });
         }
+    }
+
+    protected override async _updateObject(event: Event, formData: Record<string, unknown>): Promise<void> {
+        // Set empty-string damage categories to `null`
+        const categories = Object.keys(formData).filter((k) =>
+            /^system\.stages\.[a-z0-9]+\.damage\.[a-z0-9]+\.category$/i.test(k)
+        );
+        for (const key of categories) {
+            formData[key] ||= null;
+        }
+
+        return super._updateObject(event, formData);
     }
 }
 

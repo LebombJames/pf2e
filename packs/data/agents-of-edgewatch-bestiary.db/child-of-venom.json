@@ -260,15 +260,13 @@
             "name": "Split",
             "sort": 500000,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "defensive",
                 "description": {
                     "value": "<p>When a child of venom is hit by an attack that would deal slashing or piercing damage and the child of venom has at least 20 HP, the creature splits into two identical children of venom with half the original's HP. One child of venom is in the same space as the original, and the other appears in an adjacent unoccupied space. If no adjacent space is unoccupied, they automatically push creatures and objects out of the way to fill a space.</p>"
                 },
@@ -294,30 +292,65 @@
             "type": "action"
         },
         {
-            "_id": "r2CSyvxtD75InoFP",
+            "_id": "aLH0uLhIjacpKBNC",
+            "flags": {
+                "core": {
+                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.AWvNPE4U0kEJSL1T"
+                }
+            },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Sneak Attack",
             "sort": 600000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "offensive",
                 "description": {
-                    "value": "<p>The child of venom deals an additional [[/r 3d6]] precision damage to flat-footed creatures.</p>"
+                    "value": "<p>The child of venom deals an additional 3d6 precision damage to flat-footed creatures.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
                 },
                 "requirements": {
                     "value": ""
                 },
-                "rules": [],
-                "slug": null,
+                "rules": [
+                    {
+                        "category": "precision",
+                        "diceNumber": 3,
+                        "dieSize": "d6",
+                        "key": "DamageDice",
+                        "predicate": [
+                            "target:condition:flat-footed",
+                            {
+                                "or": [
+                                    "item:trait:agile",
+                                    "item:trait:finesse",
+                                    {
+                                        "and": [
+                                            "item:ranged",
+                                            {
+                                                "not": "item:thrown-melee"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "selector": "strike-damage"
+                    },
+                    {
+                        "domain": "all",
+                        "key": "RollOption",
+                        "label": "PF2E.SpecificRule.TOTMToggle.FlatFooted",
+                        "option": "target:condition:flat-footed",
+                        "toggleable": "totm"
+                    }
+                ],
+                "slug": "sneak-attack",
                 "source": {
-                    "value": ""
+                    "value": "Pathfinder Bestiary"
                 },
                 "traits": {
                     "rarity": "common",
@@ -338,15 +371,13 @@
             "name": "Suction",
             "sort": 700000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": "offensive",
                 "description": {
                     "value": "<p>The child of venom can climb on ceilings and other inverted surfaces, though such surfaces are difficult terrain for them.</p>"
                 },
@@ -465,9 +496,6 @@
         }
     ],
     "name": "Child Of Venom",
-    "prototypeToken": {
-        "name": "Children Of Venom"
-    },
     "system": {
         "abilities": {
             "cha": {

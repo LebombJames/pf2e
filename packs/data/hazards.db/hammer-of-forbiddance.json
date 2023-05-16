@@ -8,15 +8,13 @@
             "name": "Forbid Entry",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature attempts to enter through the entrance.</p>\n<hr />\n<p><strong>Effect</strong> The hammer swings down, making an attack against the triggering creature.</p>"
                 },
@@ -125,7 +123,11 @@
                 "value": 11
             },
             "reset": "<p>The trap resets over the course of the round, and is ready to swing again 1 round later.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Core Rulebook"
+            }
         },
         "saves": {
             "fortitude": {
@@ -140,9 +142,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "statusEffects": [],
         "traits": {

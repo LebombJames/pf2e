@@ -8,15 +8,13 @@
             "name": "Echoes of Defeat",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "free"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature ends a move action within the trap's area</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature takes [[/r (2d10+10)[mental]]] damage (@Check[type:will|dc:32|basic:true] save) as it recalls its past failures. A creature that takes damage hears a soft whisper offering, “Let me take something from you and I can stop the pain.” A creature who agrees loses access to a random skill feat that isn't a prerequisite for another feat, and the creature doesn't take further damage from Echoes of Defeat. This effect lasts for 1 week and can be ended by effects that remove curses.</p>"
                 },
@@ -75,7 +73,11 @@
                 "value": 12
             },
             "reset": "<p>The trap resets immediately and can affect the same creature multiple times on the creature's turn.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #165: Eyes of Empty Death"
+            }
         },
         "saves": {
             "fortitude": {
@@ -90,9 +92,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #165: Eyes of Empty Death"
         },
         "statusEffects": [],
         "traits": {

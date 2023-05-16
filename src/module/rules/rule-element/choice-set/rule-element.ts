@@ -1,14 +1,14 @@
 import { ActorPF2e } from "@actor";
-import { StrikeData } from "@actor/data/base";
+import { StrikeData } from "@actor/data/base.ts";
 import { FeatPF2e, ItemPF2e } from "@item";
-import { ItemType } from "@item/data";
-import { PickableThing } from "@module/apps/pick-a-thing-prompt";
-import { PredicatePF2e } from "@system/predication";
-import { PredicateField } from "@system/schema-data-fields";
+import { ItemType } from "@item/data/index.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { PredicatePF2e } from "@system/predication.ts";
+import { PredicateField } from "@system/schema-data-fields.ts";
 import { isObject, objectHasKey, sluggify } from "@util";
-import { UUIDUtils } from "@util/uuid-utils";
-import { ModelPropsFromSchema } from "types/foundry/common/data/fields.mjs";
-import { RuleElementOptions, RuleElementPF2e } from "../";
+import { UUIDUtils } from "@util/uuid-utils.ts";
+import type { ModelPropsFromSchema } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementOptions, RuleElementPF2e } from "../index.ts";
 import {
     ChoiceSetData,
     ChoiceSetOwnedItems,
@@ -16,8 +16,8 @@ import {
     ChoiceSetSchema,
     ChoiceSetSource,
     UninflatedChoiceSet,
-} from "./data";
-import { ChoiceSetPrompt } from "./prompt";
+} from "./data.ts";
+import { ChoiceSetPrompt } from "./prompt.ts";
 
 const { fields } = foundry.data;
 
@@ -166,10 +166,10 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     }
 
     #setDefaultFlag(source: ChoiceSetSource): string {
-        if (typeof source.flag === "string" && source.flag.length > 0) {
-            return sluggify(source.flag, { camel: "dromedary" });
-        }
-        return (source.flag = sluggify(this.item.slug ?? this.item.name, { camel: "dromedary" }));
+        return (source.flag =
+            typeof source.flag === "string" && source.flag.length > 0
+                ? source.flag.replace(/[^-a-z0-9]/gi, "")
+                : sluggify(this.item.slug ?? this.item.name, { camel: "dromedary" }));
     }
 
     /**

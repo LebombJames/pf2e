@@ -8,15 +8,13 @@
             "name": "Glacial Gust",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> The characters' shared vision during <strong>Event 15</strong> subsides</p>\n<hr />\n<p><strong>Effect</strong> The memory of Osoyo unleashes a tremendous sigh of freezing wind, coating the deck of the Mermaid's Tears in ice in a @Template[type:cone|distance:60]. (The hazard can choose any point for the cone to originate.) The area becomes difficult terrain. Creatures in the area must succeed at a @Check[type:fortitude|dc:26] save or take [[/r 1d6[persistent,cold]]] as the freezing wind cuts to the bone. The hazard then rolls initiative.</p>"
                 },
@@ -66,7 +64,11 @@
                 "value": 5
             },
             "reset": "",
-            "routine": "<p>(1 action) The memory of Osoyo gives a keening scream that shatters the layer of ice coating the deck of the Mermaid's Tears. Any creature on difficult terrain created by the memory's Glacial Gust takes [[/r (2d8+7)[cold]]] (@Check[type:reflex|dc:26|basic:true]) from the icy shrapnel.</p>"
+            "routine": "<p>(1 action) The memory of Osoyo gives a keening scream that shatters the layer of ice coating the deck of the Mermaid's Tears. Any creature on difficult terrain created by the memory's Glacial Gust takes [[/r (2d8+7)[cold]]] (@Check[type:reflex|dc:26|basic:true]) from the icy shrapnel.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #188: They Watched the Stars"
+            }
         },
         "saves": {
             "fortitude": {
@@ -81,10 +83,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #188: They Watched the Stars"
         },
         "statusEffects": [],
         "traits": {

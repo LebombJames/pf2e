@@ -49,15 +49,13 @@
             "name": "Spike Jab",
             "sort": 200000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature enters the area adjacent to a barrier</p>\n<hr />\n<p><strong>Effect</strong> Wedges of sharpened stone extend from the barricade in all directions and attack all creatures within 10 feet.</p>"
                 },
@@ -132,7 +130,11 @@
                 "value": 13
             },
             "reset": "<p>The trap must be manually reset by pushing the wedges back into place.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #154: Siege of the Dinosaurs"
+            }
         },
         "saves": {
             "fortitude": {
@@ -147,10 +149,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #154: Siege of the Dinosaurs"
         },
         "statusEffects": [],
         "traits": {

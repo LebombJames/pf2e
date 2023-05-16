@@ -3,7 +3,6 @@
     "img": "systems/pf2e/icons/spells/blinding-fury.webp",
     "name": "Effect: Susceptible to Mockery (Critical Failure)",
     "system": {
-        "badge": null,
         "description": {
             "value": "<p>The creature gains a +1 status bonus to Strikes and damage rolls against foes.</p>"
         },
@@ -21,7 +20,7 @@
                 "key": "FlatModifier",
                 "selector": [
                     "strike-damage",
-                    "mundane-attack"
+                    "strike-attack-roll"
                 ],
                 "type": "status",
                 "value": 1
@@ -36,7 +35,7 @@
         },
         "target": null,
         "tokenIcon": {
-            "show": false
+            "show": true
         },
         "traits": {
             "rarity": "common",

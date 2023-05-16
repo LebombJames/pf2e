@@ -8,15 +8,13 @@
             "name": "Shrill Chime",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature other than Darius or one of his homonculi approaches within 5 feet of the table or attempts to Interact with the crystals in any way other than to attempt to disable the hazard.</p>\n<hr />\n<p><strong>Effect</strong> The three large crystals on the table begin vibrating and humming. The hazard rolls initiative.</p>"
                 },
@@ -83,7 +81,11 @@
                 "value": 3
             },
             "reset": "",
-            "routine": "<p>(3 actions) The hazard loses 1 action for each crystal that's disabled or destroyed. On each of the trap's actions, one of the crystals fires a blast of sound at a single Small or larger creature in the room. The target is randomly determined and takes [[/r 1d8[sonic]]] damage (@Check[type:fortitude|dc:20|basic:true]); a target who critically fails this save is @UUID[Compendium.pf2e.conditionitems.Deafened]{Deafened} for 1 minute. At the end of the hazard's routine, attempt a @Check[type:flat|dc:10|name:Destroy a Crystal]. On a success, one of the crystals shatters and is destroyed.</p>"
+            "routine": "<p>(3 actions) The hazard loses 1 action for each crystal that's disabled or destroyed. On each of the trap's actions, one of the crystals fires a blast of sound at a single Small or larger creature in the room. The target is randomly determined and takes [[/r 1d8[sonic]]] damage (@Check[type:fortitude|dc:20|basic:true]); a target who critically fails this save is @UUID[Compendium.pf2e.conditionitems.Deafened]{Deafened} for 1 minute. At the end of the hazard's routine, attempt a @Check[type:flat|dc:10|name:Destroy a Crystal]. On a success, one of the crystals shatters and is destroyed.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Adventure: A Fistful of Flowers"
+            }
         },
         "saves": {
             "fortitude": {
@@ -98,10 +100,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder Adventure: A Fistful of Flowers"
         },
         "statusEffects": [],
         "traits": {

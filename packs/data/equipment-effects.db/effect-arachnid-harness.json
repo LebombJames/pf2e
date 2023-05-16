@@ -3,7 +3,6 @@
     "img": "systems/pf2e/icons/default-icons/effect.svg",
     "name": "Effect: Arachnid Harness",
     "system": {
-        "badge": null,
         "description": {
             "value": "<p>You gain a climb Speed equal to half your land Speed and have your limbs free as you climb. If you use all your free limbs to help you Climb, your climb Speed equals your land Speed.</p>"
         },
@@ -20,7 +19,7 @@
             {
                 "key": "BaseSpeed",
                 "selector": "climb",
-                "value": "floor(@actor.details.speed.total/2)"
+                "value": "floor(@actor.attributes.speed.total/2)"
             },
             {
                 "key": "BaseSpeed",
@@ -28,7 +27,7 @@
                     "use-all-limbs"
                 ],
                 "selector": "climb",
-                "value": "@actor.details.speed.total"
+                "value": "@actor.attributes.speed.total"
             },
             {
                 "domain": "all",
@@ -52,8 +51,7 @@
         "traits": {
             "rarity": "common",
             "value": []
-        },
-        "unidentified": false
+        }
     },
     "type": "effect"
 }

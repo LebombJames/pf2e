@@ -1,18 +1,20 @@
+import { InitiativeData } from "@actor/data/base.ts";
+import { strikeFromMeleeItem } from "@actor/helpers.ts";
 import { ActorPF2e } from "@actor";
-import { strikeFromMeleeItem } from "@actor/helpers";
-import { ActorInitiative } from "@actor/initiative";
-import { MODIFIER_TYPE, ModifierPF2e, StatisticModifier } from "@actor/modifiers";
-import { SaveType } from "@actor/types";
-import { SAVE_TYPES } from "@actor/values";
+import { ActorInitiative, InitiativeRollResult } from "@actor/initiative.ts";
+import { MODIFIER_TYPE, ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
+import { SaveType } from "@actor/types.ts";
+import { SAVE_TYPES } from "@actor/values.ts";
+import { ItemType } from "@item/data/index.ts";
 import { ConditionPF2e } from "@item";
-import { ItemType } from "@item/data";
-import { Rarity } from "@module/data";
-import { extractModifiers } from "@module/rules/helpers";
-import { TokenDocumentPF2e } from "@scene";
-import { DamageType } from "@system/damage";
-import { Statistic } from "@system/statistic";
+import { Rarity } from "@module/data.ts";
+import { extractModifiers } from "@module/rules/helpers.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { DamageType } from "@system/damage/index.ts";
+import { Statistic } from "@system/statistic/index.ts";
 import { isObject, objectHasKey } from "@util";
-import { HazardSource, HazardSystemData } from "./data";
+import { HazardSource, HazardSystemData } from "./data.ts";
+import { RollParameters } from "@system/rolls.ts";
 
 class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     override get allowedItemTypes(): (ItemType | "physical")[] {
@@ -25,6 +27,10 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
 
     get isComplex(): boolean {
         return this.system.details.isComplex;
+    }
+
+    override get hardness(): number {
+        return Math.abs(this.system.attributes.hardness);
     }
 
     /** Minimal check since the disabled status of a hazard isn't logged */
@@ -61,6 +67,17 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
         attributes.hp.negativeHealing = false;
         attributes.hp.brokenThreshold = Math.floor(attributes.hp.max / 2);
         attributes.hasHealth = attributes.hp.max > 0;
+        if (this.isComplex) {
+            // Ensure stealth value is numeric and set baseline initiative data
+            attributes.stealth.value ??= 0;
+            const partialAttributes: { initiative?: Pick<InitiativeData, "statistic" | "tiebreakPriority"> } =
+                this.system.attributes;
+            partialAttributes.initiative = {
+                statistic: "stealth",
+                tiebreakPriority: this.hasPlayerOwner ? 2 : 1,
+            };
+        }
+
         details.alliance = null;
     }
 
@@ -132,12 +149,13 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
         }, {});
     }
 
-    protected prepareInitiative(): void {
-        if (!this.isComplex) return;
+    private prepareInitiative(): void {
+        const { attributes } = this;
+        if (!attributes.initiative) return;
 
         const skillName = game.i18n.localize(CONFIG.PF2E.skillList.stealth);
         const label = game.i18n.format("PF2E.InitiativeWithSkill", { skillName });
-        const baseMod = this.system.attributes.stealth.value || 0;
+        const baseMod = attributes.stealth.value || 0;
         const statistic = new Statistic(this, {
             slug: "initiative",
             label,
@@ -149,8 +167,19 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
         });
 
         this.initiative = new ActorInitiative(this, statistic);
-        const tiebreakPriority: 1 | 2 = this.hasPlayerOwner ? 2 : 1;
-        this.system.attributes.initiative = mergeObject({ tiebreakPriority }, statistic.getTraceData());
+        attributes.initiative = mergeObject(attributes.initiative, statistic.getTraceData());
+        attributes.initiative.roll = async (args: RollParameters): Promise<InitiativeRollResult | null> => {
+            console.warn(
+                `Rolling initiative via actor.attributes.initiative.roll() is deprecated: use actor.initiative.roll() instead.`
+            );
+
+            const result = await this.initiative?.roll({
+                extraRollOptions: args.options ? [...args.options] : [],
+                ...args,
+            });
+
+            return result ?? null;
+        };
     }
 }
 

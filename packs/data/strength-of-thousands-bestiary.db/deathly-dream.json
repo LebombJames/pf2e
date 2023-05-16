@@ -8,15 +8,13 @@
             "name": "Drawn to Nightmare",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature other than Dwandek opens the door</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature is drawn into a pocket plane of pure nightmare (@Check[type:will|dc:38] save to resist). Each round at the start of their turn, the creature takes [[/r 4d8[mental]]] damage as they are assaulted by otherworldly visions, and must succeed at a new Will save against the original DC to be ejected from the pocket plane and deposited in the center of area <strong>A5</strong>.</p>"
                 },
@@ -82,7 +80,11 @@
                 "value": 15
             },
             "reset": "<p>The deathly dream trap resets automatically as long as it hasn't been disabled or destroyed. Each time it resets, the tiny pocket plane of nightmare it sends its victim into resets as well, so no two victims will ever share the same deathly dream.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #173: Doorway to the Red Star"
+            }
         },
         "saves": {
             "fortitude": {
@@ -97,9 +99,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #173: Doorway to the Red Star"
         },
         "statusEffects": [],
         "traits": {

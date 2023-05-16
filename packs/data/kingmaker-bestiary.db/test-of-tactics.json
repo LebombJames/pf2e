@@ -8,15 +8,13 @@
             "name": "Conjure Daemon",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature moves past the bend in the middle of the hall</p>\n<p><strong>Effect</strong> A pair of @UUID[Compendium.pf2e.pathfinder-bestiary-2.Derghodaemon]{Derghodaemon} rise up from the floor to the north and southeast near the stairs; the daemons roll for initiative using Stealth, and fight to the death but do not pursue foes out of this area.</p>"
                 },
@@ -67,7 +65,11 @@
                 "value": 13
             },
             "reset": "<p>If at least one of the @UUID[Compendium.pf2e.pathfinder-bestiary-2.Derghodaemon]{Derghodaemons} survives, the trap resets after 1 hour, causing the surviving derghodaemons to be completely restored to full health and to merge with the floors.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Kingmaker"
+            }
         },
         "saves": {
             "fortitude": {
@@ -82,10 +84,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder Kingmaker"
         },
         "statusEffects": [],
         "traits": {

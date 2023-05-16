@@ -1,9 +1,8 @@
-import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types";
-import { CONDITION_SLUGS } from "@actor/values";
-import { MAGIC_SCHOOLS } from "@item/spell/values";
-import { WEAPON_MATERIAL_EFFECTS } from "@item/weapon/values";
-import { PredicatePF2e, PredicateStatement } from "@system/predication";
-import { setHasElement } from "@util";
+import { ImmunityType, IWRType, ResistanceType, WeaknessType } from "@actor/types.ts";
+import { CONDITION_SLUGS } from "@item/condition/values.ts";
+import { MAGIC_SCHOOLS } from "@item/spell/values.ts";
+import { PredicatePF2e, PredicateStatement } from "@system/predication.ts";
+import { objectHasKey, setHasElement } from "@util";
 
 abstract class IWRData<TType extends IWRType> {
     readonly type: TType;
@@ -118,12 +117,24 @@ abstract class IWRData<TType extends IWRType> {
                     return [`damage:type:${iwrType}`];
                 }
 
-                if (setHasElement(WEAPON_MATERIAL_EFFECTS, iwrType)) {
-                    return iwrType === "silver"
-                        ? [{ or: ["damage:material:silver", "damage:material:mithral"] }]
-                        : iwrType === "cold-iron"
-                        ? [{ or: ["damage:material:cold-iron", "damage:material:sovereign-steel"] }]
-                        : [`damage:material:${iwrType}`];
+                if (objectHasKey(CONFIG.PF2E.materialDamageEffects, iwrType)) {
+                    switch (iwrType) {
+                        case "cold-iron":
+                            return [{ or: ["damage:material:cold-iron", "damage:material:sovereign-steel"] }];
+                        case "darkwood":
+                            return [
+                                {
+                                    or: [
+                                        "damage:material:darkwood",
+                                        { and: ["self:mode:undead", "damage:material:peachwood"] },
+                                    ],
+                                },
+                            ];
+                        case "silver":
+                            return [{ or: ["damage:material:silver", "damage:material:mithral"] }];
+                        default:
+                            return [`damage:material:${iwrType}`];
+                    }
                 }
 
                 if (setHasElement(MAGIC_SCHOOLS, iwrType)) {

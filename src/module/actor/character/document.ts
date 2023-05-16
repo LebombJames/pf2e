@@ -1,11 +1,11 @@
 import { CreaturePF2e, FamiliarPF2e } from "@actor";
-import { Abilities, CreatureSpeeds, LabeledSpeed, MovementType, SkillAbbreviation } from "@actor/creature/data";
-import { CreatureUpdateContext } from "@actor/creature/types";
-import { ALLIANCES } from "@actor/creature/values";
-import { StrikeData } from "@actor/data/base";
-import { ActorSizePF2e } from "@actor/data/size";
-import { calculateMAPs } from "@actor/helpers";
-import { ActorInitiative } from "@actor/initiative";
+import { Abilities, CreatureSpeeds, LabeledSpeed, SkillAbbreviation } from "@actor/creature/data.ts";
+import { CreatureUpdateContext } from "@actor/creature/types.ts";
+import { ALLIANCES } from "@actor/creature/values.ts";
+import { StrikeData } from "@actor/data/base.ts";
+import { ActorSizePF2e } from "@actor/data/size.ts";
+import { calculateMAPs } from "@actor/helpers.ts";
+import { ActorInitiative } from "@actor/initiative.ts";
 import {
     CheckModifier,
     MODIFIER_TYPE,
@@ -14,24 +14,25 @@ import {
     createAbilityModifier,
     createProficiencyModifier,
     ensureProficiencyOption,
-} from "@actor/modifiers";
+} from "@actor/modifiers.ts";
 import {
     AbilityString,
     AttackItem,
-    AttackRollContext,
-    AttackRollContextParams,
+    CheckContext,
+    CheckContextParams,
+    MovementType,
+    RollContext,
+    RollContextParams,
     SaveType,
-    StrikeRollContext,
-    StrikeRollContextParams,
-} from "@actor/types";
+    SkillLongForm,
+} from "@actor/types.ts";
 import {
     ABILITY_ABBREVIATIONS,
     SAVE_TYPES,
     SKILL_ABBREVIATIONS,
     SKILL_DICTIONARY,
-    SKILL_DICTIONARY_REVERSE,
     SKILL_EXPANDED,
-} from "@actor/values";
+} from "@actor/values.ts";
 import {
     AncestryPF2e,
     BackgroundPF2e,
@@ -44,18 +45,16 @@ import {
     PhysicalItemPF2e,
     WeaponPF2e,
 } from "@item";
-import { ActionTrait } from "@item/action/data";
-import { ARMOR_CATEGORIES } from "@item/armor/values";
-import { ItemType, PhysicalItemSource } from "@item/data";
-import { ItemCarryType } from "@item/physical/data";
-import { getResilientBonus } from "@item/physical/runes";
-import { MagicTradition } from "@item/spell/types";
-import { MAGIC_TRADITIONS } from "@item/spell/values";
-import { WeaponDamage, WeaponSource, WeaponSystemSource } from "@item/weapon/data";
-import { WeaponCategory } from "@item/weapon/types";
-import { WEAPON_CATEGORIES } from "@item/weapon/values";
-import { ChatMessagePF2e } from "@module/chat-message";
-import { PROFICIENCY_RANKS, ZeroToFour, ZeroToThree, ZeroToTwo } from "@module/data";
+import { ActionTrait } from "@item/action/data.ts";
+import { ARMOR_CATEGORIES } from "@item/armor/values.ts";
+import { ItemType, PhysicalItemSource } from "@item/data/index.ts";
+import { getResilientBonus } from "@item/physical/runes.ts";
+import { MagicTradition } from "@item/spell/types.ts";
+import { MAGIC_TRADITIONS } from "@item/spell/values.ts";
+import { WeaponDamage, WeaponSource, WeaponSystemSource } from "@item/weapon/data.ts";
+import { WeaponCategory } from "@item/weapon/types.ts";
+import { WEAPON_CATEGORIES } from "@item/weapon/values.ts";
+import { PROFICIENCY_RANKS, ZeroToFour, ZeroToTwo } from "@module/data.ts";
 import {
     extractDegreeOfSuccessAdjustments,
     extractModifierAdjustments,
@@ -63,29 +62,27 @@ import {
     extractNotes,
     extractRollSubstitutions,
     extractRollTwice,
-} from "@module/rules/helpers";
-import { UserPF2e } from "@module/user";
-import { TokenDocumentPF2e } from "@scene";
-import { eventToRollParams } from "@scripts/sheet-util";
-import { CheckPF2e, CheckRoll, CheckRollContext } from "@system/check";
-import { DamagePF2e, DamageRollContext } from "@system/damage";
-import { DamageRoll } from "@system/damage/roll";
-import { WeaponDamagePF2e } from "@system/damage/weapon";
-import { PredicatePF2e } from "@system/predication";
-import { AttackRollParams, DamageRollParams, RollParameters } from "@system/rolls";
-import { Statistic, StatisticCheck } from "@system/statistic";
-import { ErrorPF2e, getActionGlyph, objectHasKey, sluggify, sortedStringify, traitSlugToObject } from "@util";
-import { UUIDUtils } from "@util/uuid-utils";
-import { CraftingEntry, CraftingEntryData, CraftingFormula } from "./crafting";
+} from "@module/rules/helpers.ts";
+import { UserPF2e } from "@module/user/document.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { eventToRollParams } from "@scripts/sheet-util.ts";
+import { CheckPF2e, CheckRoll, CheckRollContext } from "@system/check/index.ts";
+import { DamagePF2e, DamageRollContext } from "@system/damage/index.ts";
+import { DamageRoll } from "@system/damage/roll.ts";
+import { WeaponDamagePF2e } from "@system/damage/weapon.ts";
+import { PredicatePF2e } from "@system/predication.ts";
+import { AttackRollParams, DamageRollParams, RollParameters } from "@system/rolls.ts";
+import { Statistic, StatisticCheck } from "@system/statistic/index.ts";
+import { ErrorPF2e, objectHasKey, sluggify, sortedStringify, traitSlugToObject } from "@util";
+import { UUIDUtils } from "@util/uuid-utils.ts";
+import { CraftingEntry, CraftingEntryData, CraftingFormula } from "./crafting/index.ts";
 import {
-    AuxiliaryAction,
     BaseWeaponProficiencyKey,
     CharacterArmorClass,
     CharacterAttributes,
     CharacterFlags,
     CharacterProficiency,
     CharacterSaves,
-    CharacterSkillData,
     CharacterSource,
     CharacterStrike,
     CharacterSystemData,
@@ -95,45 +92,46 @@ import {
     MartialProficiencies,
     MartialProficiency,
     WeaponGroupProficiencyKey,
-} from "./data";
-import { CharacterSheetTabVisibility } from "./data/sheet";
-import { CharacterFeats } from "./feats";
+} from "./data/index.ts";
+import { CharacterSheetTabVisibility } from "./data/sheet.ts";
+import { CharacterFeats } from "./feats.ts";
 import {
-    StrikeWeaponTraits,
+    PCStrikeAttackTraits,
+    WeaponAuxiliaryAction,
     createForceOpenPenalty,
+    createHinderingPenalty,
     createShoddyPenalty,
     imposeOversizedWeaponCondition,
-} from "./helpers";
-import { CharacterHitPointsSummary, CharacterSkills, CreateAuxiliaryParams, DexterityModifierCapData } from "./types";
-import { CHARACTER_SHEET_TABS } from "./values";
+} from "./helpers.ts";
+import { CharacterHitPointsSummary, CharacterSkill, CharacterSkills, DexterityModifierCapData } from "./types.ts";
+import { CHARACTER_SHEET_TABS } from "./values.ts";
 
 class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
     /** Core singular embeds for PCs */
-    ancestry!: AncestryPF2e<this> | null;
-    heritage!: HeritagePF2e<this> | null;
-    background!: BackgroundPF2e<this> | null;
-    class!: ClassPF2e<this> | null;
-    deity!: DeityPF2e<this> | null;
+    declare ancestry: AncestryPF2e<this> | null;
+    declare heritage: HeritagePF2e<this> | null;
+    declare background: BackgroundPF2e<this> | null;
+    declare class: ClassPF2e<this> | null;
+    declare deity: DeityPF2e<this> | null;
 
     /** A cached reference to this PC's familiar */
-    familiar: FamiliarPF2e | null = null;
+    declare familiar: FamiliarPF2e | null;
 
-    feats!: CharacterFeats<this>;
-    pfsBoons!: FeatPF2e<this>[];
-    deityBoonsCurses!: FeatPF2e<this>[];
+    declare feats: CharacterFeats<this>;
+    declare pfsBoons: FeatPF2e<this>[];
+    declare deityBoonsCurses: FeatPF2e<this>[];
 
     /** All base casting tradition proficiences, which spellcasting build off of */
-    traditions!: Record<MagicTradition, Statistic>;
+    declare traditions: Record<MagicTradition, Statistic>;
 
     /** The primary class DC */
-    classDC!: Statistic | null;
-    /** All class DCs regardless of whether or not its the primary */
-    classDCs!: Record<string, Statistic>;
+    declare classDC: Statistic | null;
+    /** All class DCs, including the primary */
+    declare classDCs: Record<string, Statistic>;
+    /** Skills for the character, built during data prep */
+    declare skills: CharacterSkills;
 
-    override initiative!: ActorInitiative;
-
-    // Internal cached value of character skills
-    protected override _skills: CharacterSkills | null = null;
+    declare initiative: ActorInitiative;
 
     override get allowedItemTypes(): (ItemType | "physical")[] {
         const buildItems = ["ancestry", "heritage", "background", "class", "deity", "feat"] as const;
@@ -157,30 +155,17 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         };
     }
 
-    override get skills(): CharacterSkills {
-        if (this._skills) return this._skills;
-
-        const skills = super.skills;
-        for (const [key, skill] of Object.entries(skills)) {
-            if (!skill) continue;
-            const originalKey = SKILL_DICTIONARY_REVERSE[skill.slug] ?? skill.slug;
-            if (!objectHasKey(this.system.skills, originalKey)) continue;
-
-            const data = this.system.skills[originalKey];
-            skills[key] = mergeObject(skill, {
-                rank: data.rank,
-                ability: data.ability,
-                proficient: data.rank >= 1,
-                abilityModifier: data.modifiers.find((m) => m.enabled && m.type === "ability") ?? null,
-            });
-        }
-
-        this._skills = skills as CharacterSkills;
-        return this._skills;
-    }
-
     get heroPoints(): { value: number; max: number } {
         return deepClone(this.system.resources.heroPoints);
+    }
+
+    /** Retrieve lore skills, class statistics, and spellcasting */
+    override getStatistic(slug: SaveType | SkillLongForm | "perception" | "classDC" | MagicTradition): Statistic;
+    override getStatistic(slug: string): Statistic | null;
+    override getStatistic(slug: string): Statistic | null {
+        if (slug === "classDC") return this.classDC;
+        if (objectHasKey(this.traditions, slug)) return this.traditions[slug];
+        return this.classDCs[slug] ?? super.getStatistic(slug);
     }
 
     async getCraftingFormulas(): Promise<CraftingFormula[]> {
@@ -250,6 +235,11 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
                 await this.addToInventory(itemSource);
             }
         }
+    }
+
+    protected override _initialize(): void {
+        this.familiar ??= null;
+        super._initialize();
     }
 
     /** If one exists, prepare this character's familiar */
@@ -476,7 +466,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         game.pf2e.variantRules.AutomaticBonusProgression.concatModifiers(this);
 
         // Extract as separate variables for easier use in this method.
-        const { statisticsModifiers, rollNotes } = synthetics;
+        const { statisticsModifiers } = synthetics;
 
         // Update experience percentage from raw experience amounts.
         systemData.details.xp.pct = Math.min(
@@ -566,67 +556,21 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         this.prepareMartialProficiencies();
 
         // Perception
-        {
-            const domains = ["perception", "wis-based", "all"];
-            const proficiencyRank = systemData.attributes.perception.rank;
-            const modifiers = [
-                createAbilityModifier({ actor: this, ability: "wis", domains }),
-                createProficiencyModifier({ actor: this, rank: proficiencyRank, domains }),
-            ];
-
-            modifiers.push(...extractModifiers(synthetics, domains));
-
-            const stat = mergeObject(
-                new StatisticModifier("perception", modifiers, this.getRollOptions(domains)),
-                systemData.attributes.perception,
-                { overwrite: false }
-            );
-            stat.breakdown = stat.modifiers
-                .filter((m) => m.enabled)
-                .map((m) => `${m.label} ${m.modifier < 0 ? "" : "+"}${m.modifier}`)
-                .join(", ");
-            stat.notes = extractNotes(rollNotes, domains);
-            stat.value = stat.totalModifier;
-            stat.roll = async (params: RollParameters): Promise<Rolled<CheckRoll> | null> => {
-                const label = game.i18n.localize("PF2E.PerceptionCheck");
-                const rollOptions = new Set(params.options ?? []);
-                ensureProficiencyOption(rollOptions, proficiencyRank);
-
-                // Get just-in-time roll options from rule elements
-                for (const rule of this.rules.filter((r) => !r.ignored)) {
-                    rule.beforeRoll?.(domains, rollOptions);
-                }
-
-                const rollTwice = extractRollTwice(synthetics.rollTwice, domains, rollOptions);
-                const context: CheckRollContext = {
-                    actor: this,
-                    type: "perception-check",
-                    options: rollOptions,
-                    dc: params.dc,
-                    rollTwice,
-                    notes: stat.notes,
-                    dosAdjustments: extractDegreeOfSuccessAdjustments(synthetics, domains),
-                };
-
-                const roll = await CheckPF2e.roll(
-                    new CheckModifier(label, stat),
-                    context,
-                    params.event,
-                    params.callback
-                );
-
-                for (const rule of this.rules.filter((r) => !r.ignored)) {
-                    await rule.afterRoll?.({ roll, selectors: domains, domains, rollOptions });
-                }
-
-                return roll;
-            };
-
-            systemData.attributes.perception = stat;
-        }
+        this.perception = new Statistic(this, {
+            slug: "perception",
+            label: "PF2E.PerceptionLabel",
+            ability: "wis",
+            rank: systemData.attributes.perception.rank,
+            domains: ["perception", "wis-based", "all"],
+            check: { type: "perception-check" },
+        });
+        systemData.attributes.perception = mergeObject(
+            systemData.attributes.perception,
+            this.perception.getTraceData({ value: "mod", rollable: ["4.12", "5.0"] })
+        );
 
         // Skills
-        systemData.skills = this.prepareSkills();
+        this.skills = this.prepareSkills();
 
         // Senses
         this.system.traits.senses = this.prepareSenses(this.system.traits.senses, synthetics);
@@ -694,13 +638,13 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             }
 
             // Spellcasting entries extend other statistics, usually a tradition, but sometimes class dc
-            const baseStat = this.getProficiencyStatistic(entry.system.proficiency.slug);
+            const baseStat = this.getStatistic(entry.system.proficiency.slug);
             if (!baseStat) continue;
 
             entry.system.ability.value = baseStat.ability ?? entry.system.ability.value;
             entry.system.proficiency.value = Math.max(entry.rank, baseStat.rank ?? 0) as ZeroToFour;
             entry.statistic = baseStat.extend({
-                slug: entry.slug ?? sluggify(entry.name),
+                slug: entry.slug ?? sluggify(`${entry.name}-spellcasting`),
                 ability: entry.ability,
                 rank: entry.rank,
                 rollOptions: entry.getRollOptions("spellcasting"),
@@ -759,13 +703,6 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         if (systemData.attributes.familiarAbilities.value > 0) {
             this.rollOptions.all["self:has-familiar"] = true;
         }
-    }
-
-    /** Using a string, attempts to retrieve a statistic proficiency */
-    getProficiencyStatistic(slug: string): Statistic | null {
-        if (slug === "classDC") return this.classDC;
-        if (objectHasKey(this.traditions, slug)) return this.traditions[slug];
-        return this.classDCs[slug] ?? this.skills[slug] ?? null;
     }
 
     private setAbilityScores(): void {
@@ -882,6 +819,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
                     type: "item",
                     slug,
                     modifier: wornArmor.acBonus,
+                    item: wornArmor,
                     adjustments: extractModifierAdjustments(synthetics.modifierAdjustments, ["all", "ac"], slug),
                 })
             );
@@ -992,7 +930,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         this.saves = saves as Record<SaveType, Statistic>;
     }
 
-    private prepareSkills(): Record<SkillAbbreviation, CharacterSkillData> {
+    private prepareSkills(): CharacterSkills {
         const systemData = this.system;
 
         // rebuild the skills object to clear out any deleted or renamed skills from previous iterations
@@ -1001,12 +939,10 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         const skills = Array.from(SKILL_ABBREVIATIONS).reduce((builtSkills, shortForm) => {
             const skill = systemData.skills[shortForm];
             const longForm = SKILL_DICTIONARY[shortForm];
+            const label = CONFIG.PF2E.skillList[longForm] ?? longForm;
 
             const domains = [longForm, `${skill.ability}-based`, "skill-check", `${skill.ability}-skill-check`, "all"];
-            const modifiers = [
-                createAbilityModifier({ actor: this, ability: skill.ability, domains }),
-                createProficiencyModifier({ actor: this, rank: skill.rank, domains }),
-            ];
+            const modifiers: ModifierPF2e[] = [];
 
             // Indicate that the strength requirement of this actor's armor is met
             if (typeof wornArmor?.strength === "number" && this.system.abilities.str.value >= wornArmor.strength) {
@@ -1047,143 +983,50 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             // Add a penalty for attempting to Force Open without a crowbar or similar tool
             if (longForm === "athletics") modifiers.push(createForceOpenPenalty(this, domains));
 
-            modifiers.push(...extractModifiers(synthetics, domains));
+            const statistic = new Statistic(this, {
+                slug: longForm,
+                label,
+                rank: skill.rank,
+                ability: skill.ability,
+                domains,
+                modifiers,
+                lore: false,
+                check: { type: "skill-check" },
+            }) as CharacterSkill;
 
-            const stat = mergeObject(new StatisticModifier(longForm, modifiers, this.getRollOptions(domains)), skill, {
-                overwrite: false,
-            });
-            stat.breakdown = stat.modifiers
-                .filter((modifier) => modifier.enabled)
-                .map((modifier) => {
-                    const prefix = modifier.modifier < 0 ? "" : "+";
-                    return `${modifier.label} ${prefix}${modifier.modifier}`;
-                })
-                .join(", ");
-            stat.value = stat.totalModifier;
-            stat.notes = extractNotes(synthetics.rollNotes, domains);
-            stat.rank = skill.rank;
-            stat.roll = async (params: RollParameters): Promise<Rolled<CheckRoll> | null> => {
-                console.warn(
-                    `Rolling skill checks via actor.system.skills.${shortForm}.roll() is deprecated: use actor.skills.${longForm}.roll() instead.`
-                );
-                const label = game.i18n.format("PF2E.SkillCheckWithName", {
-                    skillName: game.i18n.localize(CONFIG.PF2E.skills[shortForm]),
-                });
-                const rollOptions = new Set(params.options ?? []);
-                ensureProficiencyOption(rollOptions, skill.rank);
-
-                // Get just-in-time roll options from rule elements
-                for (const rule of this.rules.filter((r) => !r.ignored)) {
-                    rule.beforeRoll?.(domains, rollOptions);
-                }
-
-                const rollTwice = extractRollTwice(synthetics.rollTwice, domains, rollOptions);
-                const substitutions = extractRollSubstitutions(synthetics.rollSubstitutions, domains, rollOptions);
-                const context: CheckRollContext = {
-                    actor: this,
-                    type: "skill-check",
-                    options: rollOptions,
-                    dc: params.dc,
-                    rollTwice,
-                    substitutions,
-                    notes: stat.notes,
-                    dosAdjustments: extractDegreeOfSuccessAdjustments(synthetics, domains),
-                };
-
-                const roll = await CheckPF2e.roll(
-                    new CheckModifier(label, stat),
-                    context,
-                    params.event,
-                    params.callback
-                );
-
-                for (const rule of this.rules.filter((r) => !r.ignored)) {
-                    await rule.afterRoll?.({ roll, selectors: domains, domains, rollOptions });
-                }
-
-                return roll;
-            };
-
-            builtSkills[shortForm] = stat;
+            builtSkills[longForm] = builtSkills[shortForm] = statistic;
+            this.system.skills[shortForm] = mergeObject(
+                this.system.skills[shortForm],
+                statistic.getTraceData({ rollable: ["4.12", "5.0"] })
+            );
             return builtSkills;
-        }, {} as Record<SkillAbbreviation, CharacterSkillData>);
+        }, {} as CharacterSkills);
 
         // Lore skills
         for (const loreItem of this.itemTypes.lore) {
             // normalize skill name to lower-case and dash-separated words
-            const shortForm = sluggify(loreItem.name) as SkillAbbreviation;
+            const longForm = sluggify(loreItem.name);
             const rank = loreItem.system.proficient.value;
 
-            const domains = [shortForm, "int-based", "skill-check", "lore-skill-check", "int-skill-check", "all"];
-            const modifiers = [
-                createAbilityModifier({ actor: this, ability: "int", domains }),
-                createProficiencyModifier({ actor: this, rank, domains }),
-                ...extractModifiers(synthetics, domains),
-            ];
+            const domains = [longForm, "int-based", "skill-check", "lore-skill-check", "int-skill-check", "all"];
 
-            const loreSkill = systemData.skills[shortForm];
-            const stat = mergeObject(
-                new StatisticModifier(shortForm, modifiers, this.getRollOptions(domains)),
-                loreSkill,
-                { overwrite: false }
-            );
-            const additionalData = {
-                itemID: loreItem.id,
-                shortform: shortForm,
-                expanded: loreItem,
+            const statistic = new Statistic(this, {
+                slug: longForm,
+                label: loreItem.name,
+                rank,
+                ability: "int",
+                domains,
                 lore: true,
+                check: { type: "skill-check" },
+            }) as CharacterSkill;
+
+            skills[longForm] = statistic;
+            this.system.skills[longForm as SkillAbbreviation] = {
+                armor: false,
+                ability: "int",
+                rank,
+                ...statistic.getTraceData(),
             };
-
-            stat.label = loreItem.name;
-            stat.ability = "int";
-            stat.notes = extractNotes(synthetics.rollNotes, domains);
-            stat.rank = rank ?? 0;
-            stat.value = stat.totalModifier;
-            stat.breakdown = stat.modifiers
-                .filter((m) => m.enabled)
-                .map((m) => `${m.label} ${m.modifier < 0 ? "" : "+"}${m.modifier}`)
-                .join(", ");
-            stat.roll = async (params: RollParameters): Promise<Rolled<CheckRoll> | null> => {
-                console.warn(
-                    `Rolling skill checks via actor.system.skills.${shortForm}.roll() is deprecated: use actor.skills.${shortForm}.roll() instead.`
-                );
-                const label = game.i18n.format("PF2E.SkillCheckWithName", { skillName: loreItem.name });
-                const rollOptions = new Set(params.options ?? []);
-                ensureProficiencyOption(rollOptions, rank);
-
-                // Get just-in-time roll options from rule elements
-                for (const rule of this.rules.filter((r) => !r.ignored)) {
-                    rule.beforeRoll?.(domains, rollOptions);
-                }
-
-                const rollTwice = extractRollTwice(synthetics.rollTwice, domains, rollOptions);
-                const substitutions = extractRollSubstitutions(synthetics.rollSubstitutions, domains, rollOptions);
-                const context: CheckRollContext = {
-                    actor: this,
-                    type: "skill-check",
-                    options: rollOptions,
-                    dc: params.dc,
-                    rollTwice,
-                    substitutions,
-                    notes: stat.notes,
-                    dosAdjustments: extractDegreeOfSuccessAdjustments(synthetics, domains),
-                };
-
-                const roll = await CheckPF2e.roll(
-                    new CheckModifier(label, stat),
-                    context,
-                    params.event,
-                    params.callback
-                );
-
-                for (const rule of this.rules.filter((r) => !r.ignored)) {
-                    await rule.afterRoll?.({ roll, selectors: domains, domains, rollOptions });
-                }
-
-                return roll;
-            };
-
-            skills[shortForm] = mergeObject(stat, additionalData);
         }
 
         return skills;
@@ -1193,38 +1036,45 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     override prepareSpeed(movementType: Exclude<MovementType, "land">): (LabeledSpeed & StatisticModifier) | null;
     override prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null;
     override prepareSpeed(movementType: MovementType): CreatureSpeeds | (LabeledSpeed & StatisticModifier) | null {
+        const statistic = super.prepareSpeed(movementType);
+        if (!statistic) return null;
+
         const { wornArmor } = this;
         const basePenalty = wornArmor?.speedPenalty ?? 0;
         const strength = this.system.abilities.str.value;
         const requirement = wornArmor?.strength ?? strength;
-        const value = strength >= requirement ? Math.min(basePenalty + 5, 0) : basePenalty;
+        const penaltyValue = strength >= requirement ? Math.min(basePenalty + 5, 0) : basePenalty;
 
         const modifierName = wornArmor?.name ?? "PF2E.ArmorSpeedLabel";
         const slug = "armor-speed-penalty";
-        const armorPenalty = value
+        const armorPenalty = penaltyValue
             ? new ModifierPF2e({
                   slug,
                   label: modifierName,
-                  modifier: value,
-                  type: MODIFIER_TYPE.UNTYPED,
+                  modifier: penaltyValue,
+                  type: "untyped",
+                  predicate: new PredicatePF2e({ not: "armor:ignore-speed-penalty" }),
                   adjustments: extractModifierAdjustments(
                       this.synthetics.modifierAdjustments,
-                      ["speed", "all-speeds", `${movementType}-speed`],
+                      ["all-speeds", "speed", `${movementType}-speed`],
                       slug
                   ),
               })
             : null;
+
         if (armorPenalty) {
-            const speedModifiers = (this.synthetics.statisticsModifiers["speed"] ??= []);
-            armorPenalty.predicate.push({ not: "armor:ignore-speed-penalty" });
-            armorPenalty.test(this.getRollOptions(["speed", `${movementType}-speed`]));
-            speedModifiers.push(() => armorPenalty);
+            statistic.push(armorPenalty);
+            statistic.calculateTotal(new Set(this.getRollOptions(["all-speeds", "speed", `${movementType}-speed`])));
         }
 
-        return super.prepareSpeed(movementType);
+        // A hindering penalty can't be removed or mitigated
+        const hinderingPenalty = createHinderingPenalty(this);
+        if (hinderingPenalty) statistic.push(hinderingPenalty);
+
+        return statistic;
     }
 
-    prepareFeats(): void {
+    private prepareFeats(): void {
         this.pfsBoons = [];
         this.deityBoonsCurses = [];
         this.feats = new CharacterFeats(this);
@@ -1265,74 +1115,6 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             domains: ["class", slug, `${classDC.ability}-based`, "all"],
             check: { type: "check" },
         });
-    }
-
-    /** Create an "auxiliary" action, an Interact or Release action using a weapon */
-    createAuxAction({ weapon, action, purpose, hands }: CreateAuxiliaryParams): AuxiliaryAction {
-        // A variant title reflects the options to draw, pick up, or retrieve a weapon with one or two hands */
-        const [actions, carryType, fullPurpose] = ((): [ZeroToThree, ItemCarryType, string] => {
-            switch (purpose) {
-                case "Draw":
-                    return [1, "held", `${purpose}${hands}H`];
-                case "PickUp":
-                    return [1, "held", `${purpose}${hands}H`];
-                case "Retrieve":
-                    return [weapon.container?.isHeld ? 2 : 3, "held", `${purpose}${hands}H`];
-                case "Grip":
-                    return [action === "Interact" ? 1 : 0, "held", purpose];
-                case "Sheathe":
-                    return [1, "worn", purpose];
-                case "Drop":
-                    return [0, "dropped", purpose];
-            }
-        })();
-        const actionGlyph = getActionGlyph(actions);
-
-        return {
-            label: game.i18n.localize(`PF2E.Actions.${action}.${fullPurpose}.Title`),
-            img: actionGlyph,
-            execute: async (): Promise<void> => {
-                await this.adjustCarryType(weapon, carryType, hands);
-
-                if (!game.combat) return; // Only send out messages if in encounter mode
-
-                const templates = {
-                    flavor: "./systems/pf2e/templates/chat/action/flavor.hbs",
-                    content: "./systems/pf2e/templates/chat/action/content.hbs",
-                };
-
-                const flavorAction = {
-                    title: `PF2E.Actions.${action}.Title`,
-                    subtitle: `PF2E.Actions.${action}.${fullPurpose}.Title`,
-                    typeNumber: actionGlyph,
-                };
-
-                const flavor = await renderTemplate(templates.flavor, {
-                    action: flavorAction,
-                    traits: [
-                        {
-                            name: CONFIG.PF2E.featTraits.manipulate,
-                            description: CONFIG.PF2E.traitsDescriptions.manipulate,
-                        },
-                    ],
-                });
-
-                const content = await renderTemplate(templates.content, {
-                    imgPath: weapon.img,
-                    message: game.i18n.format(`PF2E.Actions.${action}.${fullPurpose}.Description`, {
-                        actor: this.name,
-                        weapon: weapon.name,
-                    }),
-                });
-
-                await ChatMessagePF2e.create({
-                    content,
-                    speaker: ChatMessagePF2e.getSpeaker({ actor: this }),
-                    flavor,
-                    type: CONST.CHAT_MESSAGE_TYPES.EMOTE,
-                });
-            },
-        };
     }
 
     /** Prepare this character's strike actions */
@@ -1482,20 +1264,19 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
 
         const baseSelectors = [
             ...weaponSpecificSelectors,
-            "attack",
-            "mundane-attack",
             `${weapon.id}-attack`,
             `${slug}-attack`,
             `${slug}-attack-roll`,
-            "strike-attack-roll",
             `${unarmedOrWeapon}-attack-roll`,
             `${meleeOrRanged}-attack-roll`,
+            "strike-attack-roll",
             "attack-roll",
+            "attack",
             "all",
         ];
 
         // Determine the default ability and score for this attack.
-        const defaultAbility = options.defaultAbility ?? (weapon.isMelee ? "str" : "dex");
+        const defaultAbility = options.defaultAbility ?? weapon.defaultAbility;
         modifiers.push(createAbilityModifier({ actor: this, ability: defaultAbility, domains: baseSelectors }));
         if (weapon.isMelee && weaponTraits.has("finesse")) {
             modifiers.push(createAbilityModifier({ actor: this, ability: "dex", domains: baseSelectors }));
@@ -1592,9 +1373,12 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         // Multiple attack penalty
         const multipleAttackPenalty = calculateMAPs(weapon, { domains: selectors, options: baseOptions });
 
-        const auxiliaryActions: AuxiliaryAction[] = [];
+        const auxiliaryActions: WeaponAuxiliaryAction[] = [];
         const isRealItem = this.items.has(weapon.id);
 
+        if (weapon.system.traits.toggles.modular.options.length > 0) {
+            auxiliaryActions.push(new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "Modular" }));
+        }
         if (isRealItem && weapon.category !== "unarmed") {
             const traitsArray = weapon.system.traits.value;
             const hasFatalAimTrait = traitsArray.some((t) => t.startsWith("fatal-aim"));
@@ -1606,46 +1390,46 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
                 case "held": {
                     if (weapon.handsHeld === 2) {
                         auxiliaryActions.push(
-                            this.createAuxAction({ weapon, action: "Release", purpose: "Grip", hands: 1 })
+                            new WeaponAuxiliaryAction({ weapon, action: "Release", purpose: "Grip", hands: 1 })
                         );
                     } else if (weapon.handsHeld === 1 && canWield2H) {
                         auxiliaryActions.push(
-                            this.createAuxAction({ weapon, action: "Interact", purpose: "Grip", hands: 2 })
+                            new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "Grip", hands: 2 })
                         );
                     }
                     auxiliaryActions.push(
-                        this.createAuxAction({ weapon, action: "Interact", purpose: "Sheathe", hands: 0 })
+                        new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "Sheathe", hands: 0 })
                     );
                     auxiliaryActions.push(
-                        this.createAuxAction({ weapon, action: "Release", purpose: "Drop", hands: 0 })
+                        new WeaponAuxiliaryAction({ weapon, action: "Release", purpose: "Drop", hands: 0 })
                     );
                     break;
                 }
                 case "worn": {
                     if (canWield2H) {
                         auxiliaryActions.push(
-                            this.createAuxAction({ weapon, action: "Interact", purpose: "Draw", hands: 2 })
+                            new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "Draw", hands: 2 })
                         );
                     }
                     auxiliaryActions.push(
-                        this.createAuxAction({ weapon, action: "Interact", purpose: "Draw", hands: 1 })
+                        new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "Draw", hands: 1 })
                     );
                     break;
                 }
                 case "stowed": {
                     auxiliaryActions.push(
-                        this.createAuxAction({ weapon, action: "Interact", purpose: "Retrieve", hands: 1 })
+                        new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "Retrieve", hands: 1 })
                     );
                     break;
                 }
                 case "dropped": {
                     if (canWield2H) {
                         auxiliaryActions.push(
-                            this.createAuxAction({ weapon, action: "Interact", purpose: "PickUp", hands: 2 })
+                            new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "PickUp", hands: 2 })
                         );
                     }
                     auxiliaryActions.push(
-                        this.createAuxAction({ weapon, action: "Interact", purpose: "PickUp", hands: 1 })
+                        new WeaponAuxiliaryAction({ weapon, action: "Interact", purpose: "PickUp", hands: 1 })
                     );
                     break;
                 }
@@ -1662,6 +1446,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             imageUrl: weapon.img,
             quantity: weapon.quantity,
             ready: weapon.isEquipped,
+            domains: selectors,
             visible: weapon.slug !== "basic-unarmed" || this.flags.pf2e.showBasicUnarmed,
             glyph: "A",
             item: weapon,
@@ -1709,17 +1494,15 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             { weapon: weapon.name }
         );
 
-        const noMAPLabel = ((): string => {
-            const strike = game.i18n.localize("PF2E.WeaponStrikeLabel");
-            const value = action.totalModifier;
-            const sign = value < 0 ? "" : "+";
-            return `${strike} ${sign}${value}`;
-        })();
-
-        const labels: [string, string, string] = [
-            noMAPLabel,
-            game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: multipleAttackPenalty.map1 }),
-            game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: multipleAttackPenalty.map2 }),
+        const labels: [() => string, () => string, () => string] = [
+            () => {
+                const strike = game.i18n.localize("PF2E.WeaponStrikeLabel");
+                const value = action.totalModifier;
+                const sign = value < 0 ? "" : "+";
+                return `${strike} ${sign}${value}`;
+            },
+            () => game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: multipleAttackPenalty.map1 }),
+            () => game.i18n.format("PF2E.MAPAbbreviationLabel", { penalty: multipleAttackPenalty.map2 }),
         ];
         const checkModifiers = [
             (statistic: StrikeData, otherModifiers: ModifierPF2e[]) =>
@@ -1737,12 +1520,14 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         ];
 
         action.variants = [0, 1, 2]
-            .map((index): [string, (statistic: StrikeData, otherModifiers: ModifierPF2e[]) => CheckModifier] => [
+            .map((index): [() => string, (statistic: StrikeData, otherModifiers: ModifierPF2e[]) => CheckModifier] => [
                 labels[index],
                 checkModifiers[index],
             ])
-            .map(([label, constructModifier], mapIncreases) => ({
-                label,
+            .map(([getLabel, constructModifier], mapIncreases) => ({
+                get label(): string {
+                    return getLabel();
+                },
                 roll: async (params: AttackRollParams = {}): Promise<Rolled<CheckRoll> | null> => {
                     params.options ??= [];
                     params.consumeAmmo ??= weapon.requiresAmmo;
@@ -1754,10 +1539,12 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
                         return null;
                     }
 
-                    const context = await this.getCheckRollContext({
+                    const context = await this.getCheckContext({
                         item: weapon,
                         domains: selectors,
                         statistic: action,
+                        target: { token: game.user.targets.first() ?? null },
+                        targetedDC: "armor",
                         options: new Set([...baseOptions, ...params.options, ...action.options]),
                         viewOnly: params.getFormula,
                     });
@@ -1826,13 +1613,14 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
 
         for (const method of ["damage", "critical"] as const) {
             action[method] = async (params: DamageRollParams = {}): Promise<string | Rolled<DamageRoll> | null> => {
-                const domains = ["all", `{weapon.id}-damage`, "strike-damage", "damage-roll"];
+                const domains = ["all", `${weapon.id}-damage`, "strike-damage", "damage-roll"];
                 params.options ??= [];
 
                 const context = await this.getRollContext({
                     item: weapon,
                     viewOnly: params.getFormula ?? false,
                     statistic: action,
+                    target: { token: game.user.targets.first() ?? null },
                     domains,
                     options: new Set([...params.options, ...baseOptions, ...action.options]),
                 });
@@ -1915,28 +1703,29 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
     }
 
     /** Modify this weapon from AdjustStrike rule elements */
-    override getRollContext<
-        TStatistic extends StatisticModifier | StatisticCheck | null,
-        TItem extends AttackItem | null
-    >(params: StrikeRollContextParams<TStatistic, TItem>): Promise<StrikeRollContext<this, TStatistic, TItem>>;
-    override async getRollContext(params: StrikeRollContextParams): Promise<StrikeRollContext<this>> {
+    override getRollContext<TStatistic extends StatisticCheck | StrikeData | null, TItem extends AttackItem | null>(
+        params: RollContextParams<TStatistic, TItem>
+    ): Promise<RollContext<this, TStatistic, TItem>>;
+    override async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
         const context = await super.getRollContext(params);
-        if (context.self.item?.isOfType("weapon")) {
-            StrikeWeaponTraits.adjustWeapon(context.self.item);
+        if (params.statistic instanceof StatisticModifier && context.self.item?.isOfType("weapon")) {
+            PCStrikeAttackTraits.adjustWeapon(context.self.item);
         }
 
         return context;
     }
 
     /** Create attack-roll modifiers from weapon traits */
-    override getCheckRollContext<
-        TStatistic extends StatisticCheck | StatisticModifier,
-        TItem extends AttackItem | null
-    >(params: AttackRollContextParams<TStatistic, TItem>): Promise<AttackRollContext<this, TStatistic, TItem>>;
-    override async getCheckRollContext(params: AttackRollContextParams): Promise<AttackRollContext<this>> {
-        const context = await super.getCheckRollContext(params);
-        if (context.self.item?.isOfType("weapon")) {
-            const fromTraits = StrikeWeaponTraits.createAttackModifiers(context.self.item, params.domains);
+    override getCheckContext<TStatistic extends StatisticCheck | StrikeData, TItem extends AttackItem | null>(
+        params: CheckContextParams<TStatistic, TItem>
+    ): Promise<CheckContext<this, TStatistic, TItem>>;
+    override async getCheckContext(params: CheckContextParams): Promise<CheckContext<this>> {
+        const context = await super.getCheckContext(params);
+        if (params.statistic instanceof StatisticModifier && context.self.item?.isOfType("weapon")) {
+            const fromTraits = PCStrikeAttackTraits.createAttackModifiers({
+                weapon: context.self.item,
+                domains: params.domains,
+            });
             context.self.modifiers.push(...fromTraits);
         }
 
@@ -2012,7 +1801,8 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
 
         // If investing and unequipped, equip first
         if (!invested && !item.isEquipped) {
-            await this.adjustCarryType(item, item.system.usage.type, item.system.usage.hands, true);
+            const newCarryType = item.system.usage.type === "carried" ? "worn" : item.system.usage.type;
+            await this.adjustCarryType(item, newCarryType, item.system.usage.hands, true);
         }
 
         return !!(await item.update({ "system.equipped.invested": !invested }));

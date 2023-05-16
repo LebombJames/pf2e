@@ -8,15 +8,13 @@
             "name": "Deadfall",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature enters the area without taking care to avoid the hidden trigger plate</p>\n<hr />\n<p><strong>Effect</strong> Creatures within 10 feet of the cave entrance take [[/r (4d10+18)[bludgeoning]]] damage (@Check[type:reflex|dc:25|basic:true|name:Dodge Falling Rocks|traits:mechanical,trap] save).</p>"
                 },
@@ -70,7 +68,11 @@
                 "value": 7
             },
             "reset": "<p>Resetting the boulders in the trap is a labor-intensive project that takes 2 hours.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #170: Spoken on the Song Wind"
+            }
         },
         "saves": {
             "fortitude": {
@@ -85,9 +87,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #170: Spoken on the Song Wind"
         },
         "statusEffects": [],
         "traits": {

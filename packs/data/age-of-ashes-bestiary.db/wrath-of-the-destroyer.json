@@ -8,15 +8,13 @@
             "name": "Expunge",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A non-worshipper of Dahak touches either door leading to <strong>C7</strong></p>\n<hr />\n<p><strong>Effect</strong> The hazard targets the creature with Face of the Fatal Divine, then rolls initiative.</p>"
                 },
@@ -48,15 +46,13 @@
             "name": "Face of the Fatal Divine",
             "sort": 200000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "action"
                 },
                 "actions": {
                     "value": 1
                 },
+                "category": null,
                 "description": {
                     "value": "<p>The creature beholds the face of Dahak as it emerges to bite with its burning jaws, targeting the creature with <em>@UUID[Compendium.pf2e.spells-srd.Phantasmal Killer]{Phantasmal Killer}</em> (5th level, @Check[type:will|dc:29|traits:complex,hazard,magical,trap]).</p>"
                 },
@@ -132,7 +128,11 @@
                 "value": 10
             },
             "reset": "<p>The trap deactivates and resets if 1 minute passes without any creature being in range.</p>",
-            "routine": "<p>(1 action) On its initiative, the wrath of the destroyer targets the closest target in area <strong>C6</strong> with Face of the Fatal Divine.</p>"
+            "routine": "<p>(1 action) On its initiative, the wrath of the destroyer targets the closest target in area <strong>C6</strong> with Face of the Fatal Divine.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #146: Cult of Cinders"
+            }
         },
         "saves": {
             "fortitude": {
@@ -147,9 +147,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #146: Cult of Cinders"
         },
         "statusEffects": [],
         "traits": {

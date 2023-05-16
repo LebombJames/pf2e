@@ -13,15 +13,13 @@
             "name": "Negative Healing",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "defensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
@@ -59,15 +57,13 @@
             "name": "Spectral Uprising",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> More than three Small or larger living creatures are in area <strong>B7</strong> at the end of a turn.</p>\n<hr />\n<p><strong>Effect</strong> Spectral figures of the bandits and owlbears manifest in a sudden and overwhelming battle of endless violence. All living creatures in area <strong>B7</strong> must make a successful @Check[type:will|dc:28] save or become @UUID[Compendium.pf2e.conditionitems.Frightened]{Frightened 1} (@UUID[Compendium.pf2e.conditionitems.Frightened]{Frightened 3} on a critical failure).</p>"
                 },
@@ -189,7 +185,11 @@
                 "value": 8
             },
             "reset": "<p>The haunt resets after 24 hours; it can be permanently destroyed if it is either disabled or destroyed after the Beast itself has been slain.</p>",
-            "routine": "<p>(3 actions; emotion, fear, mental) The spectral violence churns and flashes through the room, targeting three separate creatures with ghostly claws, beaks, swords, and arrows. At the end of the haunt's turn, it takes its Spectral Uprising reaction.</p>"
+            "routine": "<p>(3 actions; emotion, fear, mental) The spectral violence churns and flashes through the room, targeting three separate creatures with ghostly claws, beaks, swords, and arrows. At the end of the haunt's turn, it takes its Spectral Uprising reaction.</p>",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Kingmaker"
+            }
         },
         "saves": {
             "fortitude": {
@@ -204,10 +204,6 @@
                 "saveDetail": "",
                 "value": 18
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder Kingmaker"
         },
         "statusEffects": [],
         "traits": {

@@ -8,15 +8,13 @@
             "name": "Explode",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> 4 rounds pass after the agents' arrival without anyone smothering them</p>\n<hr />\n<p><strong>Effect</strong> The barrels explode, dealing [[/r (3d6+8)[fire]]] damage to everything within a 20-foot radius (@Check[type:reflex|dc:20|basic:true|traits:fire] save).</p>"
                 },
@@ -80,7 +78,11 @@
                 "value": 2
             },
             "reset": "",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #157: Devil at the Dreaming Palace"
+            }
         },
         "saves": {
             "fortitude": {
@@ -95,9 +97,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder #157: Devil at the Dreaming Palace"
         },
         "statusEffects": [],
         "traits": {

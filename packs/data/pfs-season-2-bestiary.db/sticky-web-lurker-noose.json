@@ -8,15 +8,13 @@
             "name": "Web Noose",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": ""
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature steps into the square with the web tripwire.</p>\n<hr />\n<p><strong>Effect</strong> The web lurker noose makes a noose Strike against the triggering creature.</p>"
                 },
@@ -118,7 +116,11 @@
                 "value": 3
             },
             "reset": "",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Society Scenario #2-18: The Fanciful March of Urwal"
+            }
         },
         "saves": {
             "fortitude": {
@@ -133,9 +135,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder Society Scenario #2-18: The Fanciful March of Urwal"
         },
         "statusEffects": [],
         "traits": {

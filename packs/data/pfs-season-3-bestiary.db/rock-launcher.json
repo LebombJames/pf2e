@@ -8,15 +8,13 @@
             "name": "Launch Rock",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> The trip wire is pulled or severed</p>\n<hr />\n<p><strong>Effect</strong> The catapult launches its load at the triggering creature.</p>"
                 },
@@ -118,7 +116,11 @@
                 "value": 3
             },
             "reset": "",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Society Special #3-99: Fate in the Future"
+            }
         },
         "saves": {
             "fortitude": {
@@ -133,10 +135,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder Society Special #3-99: Fate in the Future"
         },
         "statusEffects": [],
         "traits": {

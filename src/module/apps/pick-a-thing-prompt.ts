@@ -1,6 +1,6 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { PredicatePF2e } from "@system/predication";
+import { PredicatePF2e } from "@system/predication.ts";
 import { ErrorPF2e, sluggify } from "@util";
 import Tagify from "@yaireo/tagify";
 
@@ -57,7 +57,7 @@ abstract class PickAThingPrompt<T> extends Application {
             event.currentTarget.closest(".content")?.querySelector<HTMLElement>("tag") ?? event.currentTarget;
         const selectedIndex = valueElement.getAttribute("value");
 
-        return selectedIndex === "" || !Number.isInteger(Number(selectedIndex))
+        return ["", null].includes(selectedIndex) || !Number.isInteger(Number(selectedIndex))
             ? null
             : this.choices.at(Number(selectedIndex)) ?? null;
     }

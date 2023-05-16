@@ -8,15 +8,13 @@
             "name": "Urxehl's Ire",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "reaction"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature who doesn't worship Urxehl walks into the hazard's area</p>\n<hr />\n<p><strong>Effect</strong> The hazard rolls initiative as bolts of profane fire begin to target the intruders.</p>"
                 },
@@ -44,15 +42,13 @@
             "name": "No MAP",
             "sort": 0,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "passive"
                 },
                 "actions": {
                     "value": null
                 },
+                "category": null,
                 "description": {
                     "value": "<p>Multiple Attack Penalties do not apply to the corrupted fire bolt strike.</p>"
                 },
@@ -156,7 +152,11 @@
                 "value": 6
             },
             "reset": "<p>The hazard activates when the PCs reach <strong>Event: Rain of Fire</strong>, area <strong>A1</strong>, and area <strong>A9</strong>. If the PCs defeat the Disciple of Urxehl, the hazard is permanently destroyed.</p>",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder Society Scenario #2-22: Breaking the Storm: Excising Ruination"
+            }
         },
         "saves": {
             "fortitude": {
@@ -171,9 +171,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "value": "Pathfinder Society Scenario #2-22: Breaking the Storm: Excising Ruination"
         },
         "statusEffects": [],
         "traits": {

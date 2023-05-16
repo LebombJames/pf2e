@@ -8,15 +8,13 @@
             "name": "Spikes",
             "sort": 100000,
             "system": {
-                "actionCategory": {
-                    "value": "offensive"
-                },
                 "actionType": {
                     "value": "action"
                 },
                 "actions": {
                     "value": 1
                 },
+                "category": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> The door is opened.</p>\n<hr />\n<p><strong>Effect</strong> The trap makes an attack against the creature that opened the door.</p>"
                 },
@@ -124,7 +122,11 @@
                 "value": 4
             },
             "reset": "",
-            "routine": ""
+            "routine": "",
+            "source": {
+                "author": "",
+                "value": "Pathfinder #145: Hellknight Hill"
+            }
         },
         "saves": {
             "fortitude": {
@@ -139,10 +141,6 @@
                 "saveDetail": "",
                 "value": 0
             }
-        },
-        "source": {
-            "author": "",
-            "value": "Pathfinder #145: Hellknight Hill"
         },
         "statusEffects": [],
         "traits": {

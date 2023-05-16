@@ -3,7 +3,6 @@
     "img": "systems/pf2e/icons/default-icons/effect.svg",
     "name": "Effect: Defensive Slice",
     "system": {
-        "badge": null,
         "description": {
             "value": "<p>Baron Drelev assumes a defensive position with his weapons out, then attempts a melee Strike. He takes a -2 status penalty on all Strikes (including this one) and gains a +2 status bonus to his AC until the start of his next turn.</p>"
         },
@@ -21,8 +20,7 @@
                 "domain": "all",
                 "key": "RollOption",
                 "option": "defensive-slice",
-                "toggleable": true,
-                "value": false
+                "toggleable": true
             },
             {
                 "key": "FlatModifier",
@@ -51,7 +49,7 @@
         },
         "target": null,
         "tokenIcon": {
-            "show": false
+            "show": true
         },
         "traits": {
             "rarity": "common",

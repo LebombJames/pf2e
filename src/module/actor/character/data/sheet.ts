@@ -1,14 +1,15 @@
 import { CharacterPF2e } from "@actor";
-import { CraftingEntry } from "@actor/character/crafting/entry";
-import { CraftingFormula } from "@actor/character/crafting/formula";
-import { CreatureSheetData } from "@actor/creature/types";
-import { SaveType } from "@actor/types";
+import { CraftingEntry } from "@actor/character/crafting/entry.ts";
+import { CraftingFormula } from "@actor/character/crafting/formula.ts";
+import { CreatureSheetData } from "@actor/creature/types.ts";
+import { SaveType } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, DeityPF2e, HeritagePF2e } from "@item";
-import { MagicTradition } from "@item/spell";
-import { SpellcastingSheetData } from "@item/spellcasting-entry";
-import { FlattenedCondition } from "@system/conditions";
-import { CHARACTER_SHEET_TABS } from "../values";
-import { BonusFeat, CharacterSaveData, CharacterSystemData, ClassDCData, SlottedFeat } from "./types";
+import { MagicTradition } from "@item/spell/index.ts";
+import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
+import { FlattenedCondition } from "@system/conditions/index.ts";
+import { CHARACTER_SHEET_TABS } from "../values.ts";
+import { CharacterSaveData, CharacterSystemData, ClassDCData } from "./types.ts";
+import { FeatGroup } from "../feats.ts";
 
 type CharacterSheetOptions = ActorSheetOptions;
 
@@ -91,7 +92,7 @@ interface CharacterSheetData<TActor extends CharacterPF2e> extends CreatureSheet
     showPFSTab: boolean;
     spellcastingEntries: SpellcastingSheetData[];
     tabVisibility: CharacterSheetTabVisibility;
-    feats: FeatCategorySheetData[];
+    feats: FeatGroup[];
 }
 
 interface ClassDCSheetData extends ClassDCData {
@@ -101,12 +102,4 @@ interface ClassDCSheetData extends ClassDCData {
     rankName: string;
 }
 
-interface FeatCategorySheetData {
-    id: string;
-    label: string;
-    feats: (SlottedFeat | BonusFeat)[];
-    /** Will move to sheet data later */
-    featFilter?: string | null;
-}
-
-export { CharacterSheetData, CharacterSheetTabVisibility, ClassDCSheetData, FeatCategorySheetData };
+export { CharacterSheetData, CharacterSheetTabVisibility, ClassDCSheetData };

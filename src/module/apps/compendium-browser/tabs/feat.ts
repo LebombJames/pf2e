@@ -1,8 +1,8 @@
 import { isObject, sluggify } from "@util";
-import { CompendiumBrowser } from "..";
-import { ContentTabName } from "../data";
-import { CompendiumBrowserTab } from "./base";
-import { CompendiumBrowserIndexData, FeatFilters } from "./data";
+import { CompendiumBrowser } from "../index.ts";
+import { ContentTabName } from "../data.ts";
+import { CompendiumBrowserTab } from "./base.ts";
+import { CompendiumBrowserIndexData, FeatFilters } from "./data.ts";
 
 export class CompendiumBrowserFeatTab extends CompendiumBrowserTab {
     tabName: ContentTabName = "feat";
@@ -27,13 +27,16 @@ export class CompendiumBrowserFeatTab extends CompendiumBrowserTab {
         const sources: Set<string> = new Set();
         const indexFields = [
             "img",
-            "system.prerequisites.value",
             "system.actionType.value",
             "system.actions.value",
             "system.category",
+            // Migrated to `system.category` but still retrieved in case of unmigrated items
+            // Remove in system version 5?
+            "system.featType.value",
             "system.level.value",
-            "system.traits",
+            "system.prerequisites.value",
             "system.source.value",
+            "system.traits",
         ];
 
         const translatedSkills = Object.entries(CONFIG.PF2E.skillList).reduce(
@@ -58,8 +61,8 @@ export class CompendiumBrowserFeatTab extends CompendiumBrowserTab {
                     featData.filters = {};
                     // Check separately for one of "system.category or "system.featType.value" to provide backward
                     // compatible support for unmigrated feats in non-system compendiums.
-                    const nonCategoryPaths = indexFields.filter((f) => f !== "system.category");
                     const categoryPaths = ["system.category", "system.featType.value"];
+                    const nonCategoryPaths = indexFields.filter((f) => !categoryPaths.includes(f));
                     const categoryPathFound = categoryPaths.some((p) => foundry.utils.hasProperty(featData, p));
 
                     if (!this.hasAllIndexFields(featData, nonCategoryPaths) || !categoryPathFound) {
@@ -95,9 +98,9 @@ export class CompendiumBrowserFeatTab extends CompendiumBrowserTab {
 
                     // Prepare source
                     const source = featData.system.source.value;
+                    const sourceSlug = sluggify(source);
                     if (source) {
                         sources.add(source);
-                        featData.system.source.value = sluggify(source);
                     }
 
                     // Only store essential data
@@ -111,7 +114,7 @@ export class CompendiumBrowserFeatTab extends CompendiumBrowserTab {
                         skills: [...skills],
                         traits: featData.system.traits.value,
                         rarity: featData.system.traits.rarity,
-                        source: featData.system.source.value,
+                        source: sourceSlug,
                     });
                 }
             }

@@ -1,12 +1,12 @@
-import { combatantAndTokenDoc } from "@module/doc-helpers";
-import { CombatantPF2e, EncounterPF2e, RolledCombatant } from "@module/encounter";
-import { TokenDocumentPF2e } from "@scene";
-import { eventToRollParams } from "@scripts/sheet-util";
+import { combatantAndTokenDoc } from "@module/doc-helpers.ts";
+import { CombatantPF2e, EncounterPF2e, RolledCombatant } from "@module/encounter/index.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
+import { eventToRollParams } from "@scripts/sheet-util.ts";
 import { ErrorPF2e, createHTMLElement, fontAwesomeIcon, htmlQuery, htmlQueryAll, localizeList } from "@util";
 import Sortable, { SortableEvent } from "sortablejs";
 
 export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> extends CombatTracker<TEncounter> {
-    sortable!: Sortable;
+    declare sortable: Sortable;
 
     /** Make the combatants sortable */
     override activateListeners($html: JQuery): void {
@@ -65,7 +65,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
                     controlIcon.classList.add("fa-signal-stream");
 
                     // Add a `targetCombatant` control after `toggleDefeated`
-                    if (game.scenes.viewed?.tokens.has(combatant.token.id!)) {
+                    if (game.scenes.viewed?.tokens.has(combatant.token?.id ?? "")) {
                         const targetControl = createHTMLElement("a", {
                             classes: ["combatant-control"],
                             dataset: { control: "toggleTarget", tooltip: "COMBAT.ToggleTargeting" },
@@ -222,7 +222,9 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
         return combatant.toggleDefeated();
     }
 
-    async #onToggleTarget(tokenDoc: TokenDocumentPF2e, event: MouseEvent | undefined): Promise<void> {
+    async #onToggleTarget(tokenDoc: TokenDocumentPF2e | null, event: MouseEvent | undefined): Promise<void> {
+        if (!tokenDoc) return;
+
         const isTargeted = Array.from(game.user.targets).some((t) => t.document === tokenDoc);
         if (!tokenDoc.object?.visible) {
             return ui.notifications.warn("COMBAT.PingInvisibleToken", { localize: true });

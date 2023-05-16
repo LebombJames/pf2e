@@ -1,20 +1,17 @@
-import { ActorPF2e } from "@module/documents";
-import { CombatantPF2e, EncounterPF2e } from "@module/encounter";
-import { CheckRoll } from "@system/check";
-import { RollParameters } from "@system/rolls";
-import { Statistic } from "@system/statistic";
-import { AbilityString } from "./types";
+import { ActorPF2e } from "@module/documents.ts";
+import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
+import { CheckRoll } from "@system/check/index.ts";
+import { Statistic, StatisticRollParameters } from "@system/statistic/index.ts";
+import { AbilityString } from "./types.ts";
 
 interface InitiativeRollResult {
     combatant: CombatantPF2e<EncounterPF2e>;
     roll: Rolled<CheckRoll>;
 }
 
-interface InitiativeRollParams extends RollParameters {
+interface InitiativeRollParams extends StatisticRollParameters {
     /** Whether the encounter tracker should be updated with the roll result */
     updateTracker?: boolean;
-    skipDialog?: boolean;
-    rollMode?: RollMode | "roll";
 }
 
 /** A statistic wrapper used to roll initiative for actors */

@@ -1,21 +1,20 @@
 import { ActorPF2e, CharacterPF2e } from "@actor";
 import { ConsumablePF2e } from "@item";
-import { calculateTrickMagicItemCheckDC, TrickMagicItemDifficultyData } from "@item/consumable/spell-consumables";
-import { TrickMagicItemEntry, TrickMagicItemSkill, TRICK_MAGIC_SKILLS } from "@item/spellcasting-entry/trick";
-import { LocalizePF2e } from "@module/system/localize";
-import { ErrorPF2e } from "@util";
+import { calculateTrickMagicItemCheckDC, TrickMagicItemDifficultyData } from "@item/consumable/spell-consumables.ts";
+import { TrickMagicItemEntry, TrickMagicItemSkill, TRICK_MAGIC_SKILLS } from "@item/spellcasting-entry/trick.ts";
+import { ErrorPF2e, localizer } from "@util";
 
 export class TrickMagicItemPopup {
     /** The wand or scroll being "tricked" */
     readonly item: ConsumablePF2e<ActorPF2e>;
 
     /** The actor doing the tricking */
-    readonly actor!: CharacterPF2e;
+    declare readonly actor: CharacterPF2e;
 
     /** The skill DC of the action's check */
     readonly checkDC: TrickMagicItemDifficultyData;
 
-    #translations = LocalizePF2e.translations.PF2E.TrickMagicItemPopup;
+    #localize = localizer("PF2E.TrickMagicItemPopup");
 
     constructor(item: ConsumablePF2e<ActorPF2e>) {
         if (!item.isOfType("consumable")) {
@@ -26,7 +25,7 @@ export class TrickMagicItemPopup {
         this.checkDC = calculateTrickMagicItemCheckDC(item);
 
         if (!(item.actor instanceof CharacterPF2e)) {
-            ui.notifications.warn(this.#translations.InvalidActor);
+            ui.notifications.warn(this.#localize("InvalidActor"));
             return;
         }
         this.actor = item.actor;
@@ -50,8 +49,8 @@ export class TrickMagicItemPopup {
         }, {});
         new Dialog(
             {
-                title: this.#translations.Title,
-                content: `<p>${this.#translations.Label}</p>`,
+                title: this.#localize("Title"),
+                content: `<p>${this.#localize("Label")}</p>`,
                 buttons,
             },
             { classes: ["dialog", "trick-magic-item"], width: "auto" }

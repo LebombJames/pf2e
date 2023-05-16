@@ -1,8 +1,6 @@
-import { Coins, PartialPrice } from "@item/physical/data";
-import { Size } from "@module/data";
-
-// Redefined to avoid cyclical reference
-const DENOMINATIONS = ["cp", "sp", "gp", "pp"] as const;
+import { Coins, PartialPrice } from "@item/physical/data.ts";
+import { Size } from "@module/data.ts";
+import { DENOMINATIONS } from "./values.ts";
 
 /** Coins class that exposes methods to perform operations on coins without side effects */
 class CoinsPF2e implements Coins {
@@ -23,6 +21,10 @@ class CoinsPF2e implements Coins {
     get copperValue(): number {
         const { cp, sp, gp, pp } = this;
         return cp + sp * 10 + gp * 100 + pp * 1000;
+    }
+
+    get goldValue(): number {
+        return this.copperValue / 100;
     }
 
     add(coins: Coins): CoinsPF2e {

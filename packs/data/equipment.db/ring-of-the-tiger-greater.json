@@ -51,14 +51,13 @@
                     "terrain:outdoor-wilderness"
                 ],
                 "selector": "perception",
-                "value": 21
+                "value": 2
             },
             {
                 "domain": "all",
                 "key": "RollOption",
                 "option": "tiger-strike-ring",
-                "toggleable": true,
-                "value": false
+                "toggleable": true
             },
             {
                 "category": "unarmed",

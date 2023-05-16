@@ -1,7 +1,7 @@
-import { SkillLongForm } from "@actor/types";
-import { TokenDocumentPF2e } from "@scene";
+import { SkillLongForm } from "@actor/types.ts";
+import { TokenDocumentPF2e } from "@scene/index.ts";
 import { ErrorPF2e } from "@util";
-import { EncounterPF2e } from ".";
+import { EncounterPF2e } from "./index.ts";
 import { ActorPF2e } from "@actor";
 
 class CombatantPF2e<
@@ -38,7 +38,11 @@ class CombatantPF2e<
     }
 
     /** Get the active Combatant for the given actor, creating one if necessary */
-    static async fromActor(actor: ActorPF2e, render = true): Promise<CombatantPF2e<EncounterPF2e> | null> {
+    static async fromActor(
+        actor: ActorPF2e,
+        render = true,
+        options: { combat?: EncounterPF2e } = {}
+    ): Promise<CombatantPF2e<EncounterPF2e> | null> {
         if (!game.combat) {
             ui.notifications.error(game.i18n.localize("PF2E.Encounter.NoActiveEncounter"));
             return null;
@@ -48,7 +52,8 @@ class CombatantPF2e<
         if (existing) {
             return existing;
         } else if (token) {
-            const combatants = await game.combat.createEmbeddedDocuments(
+            const combat = options.combat ?? game.combat;
+            const combatants = await combat.createEmbeddedDocuments(
                 "Combatant",
                 [
                     {
@@ -66,6 +71,34 @@ class CombatantPF2e<
         return null;
     }
 
+    static override async createDocuments<TDocument extends foundry.abstract.Document>(
+        this: ConstructorOf<TDocument>,
+        data?: (TDocument | PreCreate<TDocument["_source"]>)[],
+        context?: DocumentModificationContext<TDocument["parent"]>
+    ): Promise<TDocument[]>;
+    static override async createDocuments(
+        data: (CombatantPF2e | PreCreate<foundry.documents.CombatantSource>)[] = [],
+        context: DocumentModificationContext<EncounterPF2e> = {}
+    ): Promise<Combatant<EncounterPF2e, TokenDocument<Scene | null> | null>[]> {
+        type DataType = (typeof data)[number];
+        const entries: { token: TokenDocumentPF2e | null; data: DataType }[] = data.map((d) => {
+            const scene = d.sceneId ? game.scenes.get(d.sceneId) : context.parent?.scene;
+            const token = scene?.tokens.get(d.tokenId ?? "") || null;
+            return { token, data: d };
+        });
+
+        // Party actors add their members to initiative instead of themselves
+        const tokens = entries.map((e) => e.token);
+        for (const token of tokens) {
+            if (token?.actor?.isOfType("party")) {
+                await token?.actor.addToCombat({ combat: context.parent });
+            }
+        }
+
+        const nonPartyData = entries.filter((e) => !e.token?.actor?.isOfType("party")).map((e) => e.data);
+        return super.createDocuments<Combatant<EncounterPF2e, TokenDocument<Scene | null>>>(nonPartyData, context);
+    }
+
     async startTurn(): Promise<void> {
         const { actor, encounter } = this;
         if (!encounter || !actor) return;
@@ -81,7 +114,7 @@ class CombatantPF2e<
         // Now that a user has been found, make the updates if there are any
         await this.update({ "flags.pf2e.roundOfLastTurn": encounter.round });
         if (Object.keys(actorUpdates).length > 0) {
-            await actor.update(actorUpdates, { render: false });
+            await actor.update(actorUpdates);
         }
 
         Hooks.callAll("pf2e.startTurn", this, encounter, game.user.id);
@@ -111,9 +144,11 @@ class CombatantPF2e<
     }
 
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
-    async toggleDefeated(): Promise<void> {
-        await this.update({ defeated: !this.defeated });
-        await this.token?.object?.toggleEffect(game.settings.get("pf2e", "deathIcon"), { overlay: true });
+    async toggleDefeated({ to = !this.isDefeated } = {}): Promise<void> {
+        if (to === this.isDefeated) return;
+
+        await this.update({ defeated: to });
+        await this.token?.object?.toggleEffect(game.settings.get("pf2e", "deathIcon"), { active: to, overlay: true });
 
         /** Remove this combatant's token as a target if it died */
         if (this.isDefeated && this.token?.object?.isTargeted) {
