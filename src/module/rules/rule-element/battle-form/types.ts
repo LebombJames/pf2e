@@ -1,6 +1,6 @@
 import { CreatureTrait, SkillAbbreviation } from "@actor/creature/index.ts";
 import { SenseAcuity, SenseType } from "@actor/creature/sense.ts";
-import { AbilityString, MovementType } from "@actor/types.ts";
+import { AttributeString, MovementType } from "@actor/types.ts";
 import { WeaponDamage } from "@item/weapon/data.ts";
 import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponTrait } from "@item/weapon/types.ts";
 import { Size } from "@module/data.ts";
@@ -21,9 +21,9 @@ interface BattleFormOverrides {
     traits?: CreatureTrait[];
     armorClass?: BattleFormAC;
     tempHP?: number | null;
-    senses?: { [K in SenseType]?: BattleFormSense };
+    senses?: BattleFormSenses;
     size?: Size | null;
-    speeds?: { [K in MovementType]?: number };
+    speeds?: BattleFormSpeeds;
     skills?: BattleFormSkills;
     strikes?: Record<string, BattleFormStrike>;
     immunities?: Omit<ImmunityRuleElement["_source"], "key">[];
@@ -47,12 +47,14 @@ interface BattleFormSkill {
     ownIfHigher?: boolean;
 }
 
+type BattleFormSenses = { [K in SenseType]?: BattleFormSense };
 type BattleFormSkills = { [K in SkillAbbreviation]?: BattleFormSkill };
+type BattleFormSpeeds = { [K in MovementType]?: number };
 
 interface BattleFormStrike {
     label: string;
     img?: ImageFilePath;
-    ability?: AbilityString;
+    ability?: AttributeString;
     category: WeaponCategory;
     group: WeaponGroup | null;
     baseType?: BaseWeaponType | null;
@@ -74,8 +76,10 @@ interface BattleFormStrikeQuery {
 export {
     BattleFormAC,
     BattleFormOverrides,
+    BattleFormSenses,
     BattleFormSkills,
     BattleFormSource,
+    BattleFormSpeeds,
     BattleFormStrike,
     BattleFormStrikeQuery,
 };

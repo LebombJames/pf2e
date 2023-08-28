@@ -1,12 +1,6 @@
-import type { ItemPF2e } from "@item";
 import { LaxSchemaField } from "@system/schema-data-fields.ts";
-import type {
-    RuleElementData,
-    RuleElementOptions,
-    RuleElementSchema,
-    RuleElementSource,
-} from "./rule-element/index.ts";
 import { RuleElementPF2e } from "./rule-element/base.ts";
+
 import { ActorTraitsRuleElement } from "./rule-element/actor-traits.ts";
 import { AdjustDegreeOfSuccessRuleElement } from "./rule-element/adjust-degree-of-success.ts";
 import { AdjustModifierRuleElement } from "./rule-element/adjust-modifier.ts";
@@ -22,10 +16,13 @@ import { CreatureSizeRuleElement } from "./rule-element/creature-size.ts";
 import { CritSpecRuleElement } from "./rule-element/crit-spec.ts";
 import { DamageDiceRuleElement } from "./rule-element/damage-dice.ts";
 import { DexterityModifierCapRuleElement } from "./rule-element/dexterity-modifier-cap.ts";
+import { EphemeralEffectRuleElement } from "./rule-element/ephemeral-effect.ts";
 import { FastHealingRuleElement } from "./rule-element/fast-healing.ts";
 import { FixedProficiencyRuleElement } from "./rule-element/fixed-proficiency.ts";
 import { FlatModifierRuleElement } from "./rule-element/flat-modifier.ts";
 import { GrantItemRuleElement } from "./rule-element/grant-item/rule-element.ts";
+import type { RuleElementOptions, RuleElementSchema, RuleElementSource } from "./rule-element/index.ts";
+import { ItemAlterationRuleElement } from "./rule-element/item-alteration/rule-element.ts";
 import { ImmunityRuleElement } from "./rule-element/iwr/immunity.ts";
 import { ResistanceRuleElement } from "./rule-element/iwr/resistance.ts";
 import { WeaknessRuleElement } from "./rule-element/iwr/weakness.ts";
@@ -33,11 +30,11 @@ import { LoseHitPointsRuleElement } from "./rule-element/lose-hit-points.ts";
 import { MarkTokenRuleElement } from "./rule-element/mark-token/rule-element.ts";
 import { MartialProficiencyRuleElement } from "./rule-element/martial-proficiency.ts";
 import { MultipleAttackPenaltyRuleElement } from "./rule-element/multiple-attack-penalty.ts";
-import { EphemeralEffectRuleElement } from "./rule-element/ephemeral-effect.ts";
 import { RollNoteRuleElement } from "./rule-element/roll-note.ts";
 import { RollOptionRuleElement } from "./rule-element/roll-option.ts";
 import { RollTwiceRuleElement } from "./rule-element/roll-twice.ts";
 import { SenseRuleElement } from "./rule-element/sense.ts";
+import { SpecialStatisticRuleElement } from "./rule-element/special-statistic.ts";
 import { StrikeRuleElement } from "./rule-element/strike.ts";
 import { StrikingRuleElement } from "./rule-element/striking.ts";
 import { SubstituteRollRuleElement } from "./rule-element/substitute-roll.ts";
@@ -47,7 +44,6 @@ import { TokenImageRuleElement } from "./rule-element/token-image.ts";
 import { TokenLightRuleElement } from "./rule-element/token-light.ts";
 import { TokenNameRuleElement } from "./rule-element/token-name.ts";
 import { WeaponPotencyRuleElement } from "./rule-element/weapon-potency.ts";
-import { ActorPF2e } from "@actor";
 export type { RuleElementSynthetics } from "./synthetics.ts";
 
 /**
@@ -76,6 +72,7 @@ class RuleElements {
         FlatModifier: FlatModifierRuleElement,
         GrantItem: GrantItemRuleElement,
         Immunity: ImmunityRuleElement,
+        ItemAlteration: ItemAlterationRuleElement,
         LoseHitPoints: LoseHitPointsRuleElement,
         MarkToken: MarkTokenRuleElement,
         MartialProficiency: MartialProficiencyRuleElement,
@@ -85,6 +82,7 @@ class RuleElements {
         RollOption: RollOptionRuleElement,
         RollTwice: RollTwiceRuleElement,
         Sense: SenseRuleElement,
+        SpecialStatistic: SpecialStatisticRuleElement,
         Strike: StrikeRuleElement,
         Striking: StrikingRuleElement,
         SubstituteRoll: SubstituteRollRuleElement,
@@ -103,8 +101,9 @@ class RuleElements {
         return { ...this.builtin, ...this.custom };
     }
 
-    static fromOwnedItem(item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions): RuleElementPF2e[] {
+    static fromOwnedItem(options: RuleElementOptions): RuleElementPF2e[] {
         const rules: RuleElementPF2e[] = [];
+        const item = options.parent;
         for (const [sourceIndex, source] of item.system.rules.entries()) {
             if (typeof source.key !== "string") {
                 console.error(
@@ -116,7 +115,7 @@ class RuleElements {
             if (REConstructor) {
                 const rule = ((): RuleElementPF2e | null => {
                     try {
-                        return new REConstructor(source, item, { ...(options ?? {}), sourceIndex });
+                        return new REConstructor(source, { ...options, sourceIndex });
                     } catch (error) {
                         if (!options?.suppressWarnings) {
                             console.warn(
@@ -140,8 +139,7 @@ class RuleElements {
 
 type RuleElementConstructor = { schema: LaxSchemaField<RuleElementSchema> } & (new (
     data: RuleElementSource,
-    item: ItemPF2e<ActorPF2e>,
-    options?: RuleElementOptions
+    options: RuleElementOptions
 ) => RuleElementPF2e);
 
-export { RuleElements, RuleElementPF2e, RuleElementSource, RuleElementData, RuleElementOptions };
+export { RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleElements };

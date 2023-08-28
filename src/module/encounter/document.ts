@@ -1,4 +1,4 @@
-import { ActorPF2e, CharacterPF2e } from "@actor";
+import { CharacterPF2e } from "@actor";
 import { CharacterSheetPF2e } from "@actor/character/sheet.ts";
 import { RollInitiativeOptionsPF2e } from "@actor/data/index.ts";
 import { resetActors } from "@actor/helpers.ts";
@@ -81,15 +81,14 @@ class EncounterPF2e extends Combat {
         const rollMode = options.messageOptions?.rollMode ?? options.rollMode;
         if (options.secret) extraRollOptions.push("secret");
 
-        const combatants: { id: string; actor: ActorPF2e | null }[] = ids.flatMap(
-            (id) => this.combatants.get(id) ?? []
-        );
-        const fightyCombatants = combatants.filter((c): c is { id: string; actor: ActorPF2e } => !!c.actor?.initiative);
+        const combatants = ids.flatMap((id) => this.combatants.get(id) ?? []);
+        const fightyCombatants = combatants.filter((c) => !!c.actor?.initiative);
         const rollResults = await Promise.all(
             fightyCombatants.map(async (combatant): Promise<InitiativeRollResult | null> => {
                 return (
-                    combatant.actor.initiative?.roll({
+                    combatant.actor?.initiative?.roll({
                         ...options,
+                        combatant,
                         extraRollOptions,
                         updateTracker: false,
                         rollMode,
@@ -180,7 +179,7 @@ class EncounterPF2e extends Combat {
             (sheet): sheet is CharacterSheetPF2e<CharacterPF2e> => sheet instanceof CharacterSheetPF2e
         );
         for (const sheet of pcSheets) {
-            sheet.enableInitiativeButton();
+            sheet.toggleInitiativeLink();
         }
     }
 
@@ -233,12 +232,13 @@ class EncounterPF2e extends Combat {
 
             // Reset all participating actors' data to get updated encounter roll options
             this.resetActors();
+
             await game.pf2e.effectTracker.refresh();
             game.pf2e.effectPanel.refresh();
         });
     }
 
-    /** Disable the initiative button on PC sheets if this was the only encounter */
+    /** Disable the initiative link on PC sheets if this was the only encounter */
     protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void {
         super._onDelete(options, userId);
 
@@ -253,7 +253,7 @@ class EncounterPF2e extends Combat {
                 (sheet): sheet is CharacterSheetPF2e<CharacterPF2e> => sheet instanceof CharacterSheetPF2e
             );
             for (const sheet of pcSheets) {
-                sheet.disableInitiativeButton();
+                sheet.toggleInitiativeLink();
             }
         }
 
@@ -262,6 +262,16 @@ class EncounterPF2e extends Combat {
 
         // Clear encounter-related roll options and any scene behavior that depends on it
         this.resetActors();
+    }
+
+    /**
+     * Work around upstream issue present throughout V11
+     * https://github.com/foundryvtt/foundryvtt/issues/9718
+     */
+    protected override async _manageTurnEvents(adjustedTurn?: number): Promise<void> {
+        if (this.previous || game.release.generation > 11) {
+            return super._manageTurnEvents(adjustedTurn);
+        }
     }
 }
 

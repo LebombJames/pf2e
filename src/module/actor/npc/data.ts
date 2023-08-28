@@ -4,7 +4,6 @@ import {
     BaseCreatureSource,
     CreatureAttributes,
     CreatureDetails,
-    CreatureHitPoints,
     CreatureInitiativeSource,
     CreatureResources,
     CreatureResourcesSource,
@@ -17,15 +16,21 @@ import {
     LabeledSpeed,
     SaveData,
 } from "@actor/creature/data.ts";
-import { ActorAttributesSource, ActorFlagsPF2e, PerceptionData, StrikeData } from "@actor/data/base.ts";
+import {
+    ActorAttributesSource,
+    ActorFlagsPF2e,
+    HitPointsStatistic,
+    PerceptionData,
+    StrikeData,
+} from "@actor/data/base.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
+import { InitiativeTraceData } from "@actor/initiative.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import { AbilityString, ActorAlliance, SaveType } from "@actor/types.ts";
+import { ActorAlliance, AttributeString, SaveType } from "@actor/types.ts";
 import { MeleePF2e } from "@item";
 import { Rarity, Size } from "@module/data.ts";
 import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
 import { StatisticTraceData } from "@system/statistic/data.ts";
-import { InitiativeTraceData } from "@actor/initiative.ts";
 
 interface NPCSource extends BaseCreatureSource<"npc", NPCSystemSource> {
     flags: DeepPartial<NPCFlags>;
@@ -172,8 +177,14 @@ interface NPCAttributes
 
     /** A fake class DC (set to a level-based DC) for use with critical specialization effects that require it */
     classDC: { value: number };
+    /** The best spell DC */
+    spellDC: { value: number } | null;
     /** And a fake class-or-spell DC to go along with it */
     classOrSpellDC: { value: number };
+
+    /** Rarely needed for an NPC but always available! */
+    bonusEncumbranceBulk: number;
+    bonusLimitBulk: number;
 }
 
 interface NPCDetails extends NPCDetailsSource {
@@ -201,7 +212,7 @@ interface NPCStrike extends StrikeData {
 
 /** Save data with an additional "base" value */
 interface NPCSaveData extends SaveData {
-    ability: AbilityString;
+    ability: AttributeString;
     base?: number;
     saveDetail: string;
 }
@@ -212,7 +223,7 @@ interface NPCSaves {
     will: NPCSaveData;
 }
 
-interface NPCHitPoints extends CreatureHitPoints {
+interface NPCHitPoints extends HitPointsStatistic {
     base?: number;
 }
 
@@ -228,7 +239,7 @@ interface NPCSkillData extends StatisticTraceData {
     visible?: boolean;
     isLore?: boolean;
     itemID?: string;
-    ability: AbilityString;
+    ability: AttributeString;
     variants: { label: string; options: string }[];
 }
 

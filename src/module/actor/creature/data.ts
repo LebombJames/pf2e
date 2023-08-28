@@ -1,25 +1,25 @@
 import {
     AbilityBasedStatistic,
+    ActorAttributes,
+    ActorHitPoints,
     ActorSystemData,
     ActorSystemSource,
-    ActorAttributes,
-    BaseActorSourcePF2e,
     ActorTraitsData,
     ActorTraitsSource,
-    HitPointsData,
+    BaseActorSourcePF2e,
     StrikeData,
 } from "@actor/data/base.ts";
 import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import type {
-    AbilityString,
     ActorAlliance,
+    AttributeString,
     MovementType,
     SaveType,
     SkillAbbreviation,
     SkillLongForm,
 } from "@actor/types.ts";
 import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
-import { LabeledNumber, Size, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
+import { LabeledNumber, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
 import { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
 import { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense.ts";
 import { Alignment, CreatureTrait } from "./types.ts";
@@ -29,10 +29,8 @@ type BaseCreatureSource<TType extends CreatureType, TSystemSource extends Creatu
     TSystemSource
 >;
 
-/** Skill and Lore statistics for rolling. Both short and longform are supported, but eventually only long form will be */
-type CreatureSkills = Record<SkillAbbreviation, Statistic> &
-    Record<SkillLongForm, Statistic> &
-    Partial<Record<string, Statistic>>;
+/** Skill and Lore statistics for rolling. */
+type CreatureSkills = Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
 
 interface CreatureSystemSource extends ActorSystemSource {
     details?: {
@@ -49,7 +47,7 @@ interface CreatureSystemSource extends ActorSystemSource {
     customModifiers?: Record<string, RawModifier[]>;
 
     /** Saving throw data */
-    saves?: Record<SaveType, { value?: number; mod?: number }>;
+    saves?: Record<SaveType, object | undefined>;
 
     resources?: CreatureResourcesSource;
 }
@@ -67,7 +65,7 @@ interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {
     /** Languages which this actor knows and can speak. */
     languages: ValuesList<Language>;
 
-    size?: { value: Size };
+    senses?: { value: string } | SenseData[];
 }
 
 interface CreatureResourcesSource {
@@ -112,13 +110,11 @@ interface SenseData {
 
 /** Data describing the value & modifier for a base ability score. */
 interface AbilityData {
-    /** The ability score: computed from the mod for npcs automatically. */
-    value: number;
-    /** The modifier for this ability; computed from the value for characters automatically. */
+    /** The modifier for this ability */
     mod: number;
 }
 
-type Abilities = Record<AbilityString, AbilityData>;
+type Abilities = Record<AttributeString, AbilityData>;
 
 /** A type representing the possible ability strings. */
 type Language = keyof ConfigPF2e["PF2E"]["languages"];
@@ -139,7 +135,7 @@ type CreatureSaves = Record<SaveType, SaveData>;
 
 /** Miscallenous but mechanically relevant creature attributes.  */
 interface CreatureAttributes extends ActorAttributes {
-    hp: CreatureHitPoints;
+    hp: ActorHitPoints;
     ac: { value: number };
     hardness?: { value: number };
     perception: CreaturePerception;
@@ -152,8 +148,7 @@ interface CreatureAttributes extends ActorAttributes {
         manipulate: number;
     };
 
-    senses: { value: string } | CreatureSensePF2e[];
-
+    shield?: HeldShieldData;
     speed: CreatureSpeeds;
 
     /** The current dying level (and maximum) for this creature. */
@@ -179,14 +174,10 @@ interface CreatureSpeeds extends StatisticModifier {
 }
 
 interface LabeledSpeed extends Omit<LabeledNumber, "exceptions"> {
-    type: MovementType;
+    type: Exclude<MovementType, "land">;
     source?: string;
     total?: number;
     derivedFromLand?: boolean;
-}
-
-interface CreatureHitPoints extends HitPointsData {
-    negativeHealing: boolean;
 }
 
 /** Creature initiative statistic */
@@ -244,7 +235,6 @@ export {
     BaseCreatureSource,
     CreatureAttributes,
     CreatureDetails,
-    CreatureHitPoints,
     CreatureInitiativeSource,
     CreatureResources,
     CreatureResourcesSource,

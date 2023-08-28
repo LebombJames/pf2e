@@ -1,6 +1,6 @@
-import { ItemSourcePF2e, ItemType } from "@item/data/index.ts";
-import { CoinsPF2e } from "@item/physical/helpers.ts";
+import { ItemType } from "@item/data/index.ts";
 import { PhysicalItemPF2e } from "@item/physical/document.ts";
+import { CoinsPF2e } from "@item/physical/helpers.ts";
 import { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
 import { UserPF2e } from "@module/user/document.ts";
@@ -84,7 +84,7 @@ class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
 
     /** Hide this actor's token(s) when in loot (rather than merchant) mode, empty, and configured thus */
     async toggleTokenHiding(): Promise<void> {
-        if (!this.hiddenWhenEmpty) return;
+        if (!this.hiddenWhenEmpty || !this.isOwner) return;
         const hiddenStatus = this.items.size === 0;
         const scenesAndTokens: [ScenePF2e, TokenDocumentPF2e<ScenePF2e>[]][] = game.scenes.map((s) => [
             s,
@@ -114,7 +114,9 @@ class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
         options: DocumentModificationContext<TParent>,
         userId: string
     ): void {
-        this.toggleTokenHiding();
+        if (game.user.id === userId) {
+            this.toggleTokenHiding();
+        }
         super._onCreate(data, options, userId);
     }
 
@@ -123,38 +125,43 @@ class LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
         options: DocumentUpdateContext<TParent>,
         userId: string
     ): void {
-        if (changed.system?.hiddenWhenEmpty !== undefined) {
+        if (game.user.id === userId && changed.system?.hiddenWhenEmpty !== undefined) {
             this.toggleTokenHiding();
         }
         super._onUpdate(changed, options, userId);
     }
 
-    protected override _onCreateEmbeddedDocuments(
-        embeddedName: "ActiveEffect" | "Item",
+    protected override _onCreateDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
         documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[],
-        result: foundry.documents.ActiveEffectSource[] | ItemSourcePF2e[],
+        result: ActiveEffectPF2e<this>["_source"][] | ItemPF2e<this>["_source"][],
         options: DocumentModificationContext<this>,
         userId: string
     ): void {
-        this.toggleTokenHiding();
-        super._onCreateEmbeddedDocuments(embeddedName, documents, result, options, userId);
+        if (game.user.id === userId) {
+            this.toggleTokenHiding();
+        }
+        super._onCreateDescendantDocuments(parent, collection, documents, result, options, userId);
     }
 
-    protected override _onDeleteEmbeddedDocuments(
-        embeddedName: "ActiveEffect" | "Item",
+    protected override _onDeleteDescendantDocuments(
+        parent: this,
+        collection: "items" | "effects",
         documents: ActiveEffectPF2e<this>[] | ItemPF2e<this>[],
-        result: string[],
+        ids: string[],
         options: DocumentModificationContext<this>,
         userId: string
     ): void {
-        this.toggleTokenHiding();
-        super._onDeleteEmbeddedDocuments(embeddedName, documents, result, options, userId);
+        if (game.user.id === userId) {
+            this.toggleTokenHiding();
+        }
+        super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
     }
 }
 
 interface LootPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: LootSource;
-    readonly abilities?: never;
     system: LootSystemData;
 
     readonly saves?: never;

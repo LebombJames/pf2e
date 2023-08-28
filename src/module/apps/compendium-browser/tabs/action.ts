@@ -1,3 +1,4 @@
+import * as R from "remeda";
 import { getActionIcon, sluggify } from "@util";
 import { CompendiumBrowser } from "../index.ts";
 import { ContentTabName } from "../data.ts";
@@ -11,9 +12,7 @@ export class CompendiumBrowserActionTab extends CompendiumBrowserTab {
 
     /* MiniSearch */
     override searchFields = ["name"];
-    override storeFields = ["type", "name", "img", "uuid", "traits", "source"];
-
-    protected index = ["img", "system.actionType.value", "system.traits.value", "system.source.value"];
+    override storeFields = ["type", "name", "img", "uuid", "traits", "source", "actionType"];
 
     constructor(browser: CompendiumBrowser) {
         super(browser);
@@ -29,6 +28,7 @@ export class CompendiumBrowserActionTab extends CompendiumBrowserTab {
         const indexFields = [
             "img",
             "system.actionType.value",
+            "system.category",
             "system.traits.value",
             "system.actionType.value",
             "system.source.value",
@@ -65,6 +65,7 @@ export class CompendiumBrowserActionTab extends CompendiumBrowserTab {
                         uuid: `Compendium.${pack.collection}.${actionData._id}`,
                         traits: actionData.system.traits.value,
                         actionType: actionData.system.actionType.value,
+                        category: actionData.system.category,
                         source: sourceSlug,
                     });
                 }
@@ -77,6 +78,9 @@ export class CompendiumBrowserActionTab extends CompendiumBrowserTab {
         // Set Filters
         this.filterData.multiselects.traits.options = this.generateMultiselectOptions(CONFIG.PF2E.actionTraits);
         this.filterData.checkboxes.types.options = this.generateCheckboxOptions(CONFIG.PF2E.actionTypes);
+        this.filterData.checkboxes.category.options = this.generateCheckboxOptions(
+            R.pick(CONFIG.PF2E.actionCategories, ["familiar"])
+        );
         this.filterData.checkboxes.source.options = this.generateSourceCheckboxOptions(sources);
 
         console.debug("PF2e System | Compendium Browser | Finished loading actions");
@@ -88,6 +92,11 @@ export class CompendiumBrowserActionTab extends CompendiumBrowserTab {
         // Types
         if (checkboxes.types.selected.length) {
             if (!checkboxes.types.selected.includes(entry.actionType)) return false;
+        }
+        // Categories
+        if (checkboxes.category.selected.length) {
+            const selected = checkboxes.category.selected;
+            if (!selected.includes(entry.category)) return false;
         }
         // Traits
         if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction))
@@ -105,6 +114,12 @@ export class CompendiumBrowserActionTab extends CompendiumBrowserTab {
                 types: {
                     isExpanded: true,
                     label: "PF2E.ActionActionTypeLabel",
+                    options: {},
+                    selected: [],
+                },
+                category: {
+                    isExpanded: true,
+                    label: "PF2E.BrowserFilterCategory",
                     options: {},
                     selected: [],
                 },

@@ -1,8 +1,9 @@
-import { ActorPF2e } from "@actor/base.ts";
+/// <reference types="vite/client" />
+
 import { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
 import { FeatGroupOptions } from "@actor/character/feats.ts";
 import { CheckModifier, MODIFIER_TYPE, ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import { ItemPF2e } from "@item/base.ts";
+import { ConditionSource } from "@item/condition/data.ts";
 import { CoinsPF2e } from "@item/physical/helpers.ts";
 import { ActiveEffectPF2e } from "@module/active-effect.ts";
 import { CompendiumBrowser, CompendiumBrowserSettings } from "@module/apps/compendium-browser/index.ts";
@@ -20,6 +21,7 @@ import { CanvasPF2e, EffectsCanvasGroupPF2e } from "@module/canvas/index.ts";
 import { StatusEffects } from "@module/canvas/status-effects.ts";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { ActorsPF2e } from "@module/collection/actors.ts";
+import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
 import { MacroPF2e } from "@module/macro.ts";
 import { RuleElementPF2e, RuleElements } from "@module/rules/index.ts";
 import { UserPF2e } from "@module/user/index.ts";
@@ -62,7 +64,7 @@ declare global {
         TItem extends Item<null>,
         TMacro extends Macro,
         TScene extends Scene,
-        TUser extends User
+        TUser extends UserPF2e
     > {
         pf2e: {
             actions: Record<string, Function>;
@@ -89,17 +91,18 @@ declare global {
             variantRules: {
                 AutomaticBonusProgression: typeof AutomaticBonusProgression;
             };
-            Coins: typeof CoinsPF2e;
-            Dice: typeof DicePF2e;
-            StatusEffects: typeof StatusEffects;
-            ConditionManager: typeof ConditionManager;
-            ModifierType: typeof MODIFIER_TYPE;
-            Modifier: typeof ModifierPF2e;
-            StatisticModifier: typeof StatisticModifier;
-            CheckModifier: typeof CheckModifier;
             Check: typeof CheckPF2e;
-            RuleElements: typeof RuleElements;
+            CheckModifier: typeof CheckModifier;
+            Coins: typeof CoinsPF2e;
+            ConditionManager: typeof ConditionManager;
+            Dice: typeof DicePF2e;
+            ElementalBlast: typeof ElementalBlast;
+            Modifier: typeof ModifierPF2e;
+            ModifierType: typeof MODIFIER_TYPE;
             RuleElement: typeof RuleElementPF2e;
+            RuleElements: typeof RuleElements;
+            StatisticModifier: typeof StatisticModifier;
+            StatusEffects: typeof StatusEffects;
             TextEditor: typeof TextEditorPF2e;
         };
     }
@@ -139,6 +142,17 @@ declare global {
             CompendiumDirectoryPF2e,
             EncounterTrackerPF2e<EncounterPF2e | null>
         >;
+
+        // Add functions to the `Math` namespace for use in `Roll` formulas
+        interface Math {
+            eq: (a: number, b: number) => boolean;
+            gt: (a: number, b: number) => boolean;
+            gte: (a: number, b: number) => boolean;
+            lt: (a: number, b: number) => boolean;
+            lte: (a: number, b: number) => boolean;
+            ne: (a: number, b: number) => boolean;
+            ternary: (condition: boolean | number, ifTrue: number, ifFalse: number) => number;
+        }
     }
 
     interface Window {
@@ -148,6 +162,7 @@ declare global {
     interface ClientSettings {
         get(module: "pf2e", setting: "automation.actorsDeadAtZero"): "neither" | "npcsOnly" | "pcsOnly" | "both";
         get(module: "pf2e", setting: "automation.effectExpiration"): boolean;
+        get(module: "pf2e", setting: "automation.encumbrance"): boolean;
         get(module: "pf2e", setting: "automation.flankingDetection"): boolean;
         get(module: "pf2e", setting: "automation.iwr"): boolean;
         get(module: "pf2e", setting: "automation.lootableNPCs"): boolean;
@@ -173,6 +188,7 @@ declare global {
         get(module: "pf2e", setting: "metagame_secretDamage"): boolean;
         get(module: "pf2e", setting: "metagame_showDC"): boolean;
         get(module: "pf2e", setting: "metagame_showResults"): boolean;
+        get(module: "pf2e", setting: "metagame_showPartyStats"): boolean;
         get(module: "pf2e", setting: "metagame_tokenSetsNameVisibility"): boolean;
 
         get(module: "pf2e", setting: "tokens.autoscale"): boolean;
@@ -184,8 +200,11 @@ declare global {
         get(module: "pf2e", setting: "worldClock.timeConvention"): 24 | 12;
         get(module: "pf2e", setting: "worldClock.worldCreatedOn"): string;
 
+        get(module: "pf2e", setting: "activeParty"): string;
         get(module: "pf2e", setting: "campaignFeats"): boolean;
         get(module: "pf2e", setting: "campaignFeatSections"): FeatGroupOptions[];
+        get(module: "pf2e", setting: "campaignType"): string;
+        get(module: "pf2e", setting: "createdFirstParty"): boolean;
 
         get(module: "pf2e", setting: "homebrew.weaponCategories"): HomebrewTag<"weaponCategories">[];
         get(module: "pf2e", setting: HomebrewTraitSettingsKey): HomebrewTag[];
@@ -202,6 +221,7 @@ declare global {
         get(module: "pf2e", setting: "gmVision"): boolean;
         get(module: "pf2e", setting: "identifyMagicNotMatchingTraditionModifier"): 0 | 2 | 5 | 10;
         get(module: "pf2e", setting: "nathMode"): boolean;
+        get(module: "pf2e", setting: "seenRemasterJournalEntry"): boolean;
         get(module: "pf2e", setting: "statusEffectType"): StatusEffectIconTheme;
         get(module: "pf2e", setting: "totmToggles"): boolean;
         get(module: "pf2e", setting: "worldSchemaVersion"): number;
@@ -223,6 +243,7 @@ declare global {
     }
 
     const BUILD_MODE: "development" | "production";
+    const CONDITION_SOURCES: ConditionSource[];
     const ROLL_PARSER: Peggy.Parser;
 }
 
@@ -230,6 +251,7 @@ type ConfiguredConfig = Config<
     AmbientLightDocumentPF2e<ScenePF2e | null>,
     ActiveEffectPF2e<ActorPF2e | ItemPF2e | null>,
     ActorPF2e,
+    ActorDeltaPF2e,
     ChatLogPF2e,
     ChatMessagePF2e,
     EncounterPF2e,

@@ -13,55 +13,134 @@
         }
     }
 
-    .party-list {
-        flex: 0 1 auto;
-        margin: 0;
+    ol.party-list {
+        list-style-type: none;
+        margin: 0 0 0.25rem 0;
         padding: 0;
+        position: relative;
     }
 
-    .party {
-        .party-header {
-            background: rgba(255, 255, 255, 0.2);
-            border-top: 1px solid var(--color-border-dark);
+    li.folder-like {
+        border-top: none;
+        border-bottom: none;
+
+        & > header {
             border-bottom: 1px solid var(--color-border-dark);
+            border-top: 1px solid var(--color-border-dark);
+            display: flex;
             line-height: 1.5rem;
             padding: 6px;
 
-            display: flex;
-            align-items: center;
-
-            .fa-fw {
+            .icon {
                 cursor: pointer;
-                flex: 0 0 auto;
-                margin-right: 10px;
                 font-size: var(--font-size-16);
+            }
+
+            .left-control > i {
+                margin: 0 0.5em 0 0.25em;
+                text-align: center;
             }
 
             h3 {
+                display: block;
                 flex: 1;
-                margin: 0;
-                overflow: hidden;
-                white-space: nowrap;
                 font-size: var(--font-size-16);
+                margin: 0;
+                padding-left: 1px;
             }
 
-            .controls {
-                flex: 0;
-                display: flex;
-                font-size: var(--font-size-14);
+            a.create-button {
+                flex: 0 0 20px;
+                margin-left: 3px;
+                position: relative;
+                text-align: center;
+
+                &:hover i.fa-plus {
+                    color: var(--color-text-hyperlink);
+                }
+
+                i.fa-plus {
+                    position: absolute;
+                    top: -2px;
+                    right: -2px;
+                    font-size: 0.5rem;
+                    background: black;
+                    color: var(--color-text-light-highlight);
+                    padding: 1px;
+                    border-radius: 4px;
+                }
             }
         }
 
         &.collapsed {
-            .party-header {
-                background: rgba(0, 0, 0, 0.5);
+            i.folder {
+                margin-right: 2px;
+            }
+
+            .fa-folder-open::before {
+                content: "\f07b";
             }
 
             .subdirectory {
                 display: none;
             }
         }
+
+        &.droptarget > header h3 {
+            text-shadow: 1px 1px 3px var(--color-shadow-dark);
+            font-size: 1.2em;
+
+            i {
+                text-shadow: 0 0 4px var(--color-shadow-primary);
+                transform: scale(1.2);
+            }
+        }
+
+        &.other-parties {
+            > header {
+                background: var(--primary-dark);
+
+                h3 {
+                    i {
+                        margin-right: 6px;
+                    }
+                }
+            }
+
+            &.collapsed > header h3 i {
+                margin-right: 8px;
+            }
+        }
     }
 
+    .subdirectory .folder-like {
+        border-left: 1px solid var(--color-border-dark-1);
 
+        > header {
+            background: var(--primary-darker);
+        }
+    }
+
+    .party {
+        &:not(.activated) .party-header {
+            background: var(--primary-darker);
+            padding: 2px 6px;
+
+            & > *:not(nav) {
+                opacity: 0.85;
+            }
+        }
+
+        .activate-party:hover i {
+            font-weight: 900; // effectively fa-solid
+        }
+
+        &.activated .party-header {
+            background: var(--primary);
+        }
+
+        .blank {
+            padding: 0 0.5rem;
+        }
+    }
 }

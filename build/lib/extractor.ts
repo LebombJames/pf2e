@@ -1,18 +1,19 @@
 import type { ActorSourcePF2e } from "@actor/data/index.ts";
 import type { NPCAttributesSource, NPCSystemSource } from "@actor/npc/data.ts";
 import { isPhysicalData } from "@item/data/helpers.ts";
-import { ActionItemSource, ItemSourcePF2e, MeleeSource, SpellSource } from "@item/data/index.ts";
+import { ItemSourcePF2e, MeleeSource, SpellSource } from "@item/data/index.ts";
+import { itemIsOfType } from "@item/helpers.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import { isObject, sluggify } from "@util/index.ts";
 import fs from "fs";
 import { JSDOM } from "jsdom";
-import Datastore from "nedb-promises";
 import path from "path";
 import process from "process";
 import systemJSON from "../../static/system.json" assert { type: "json" };
 import templateJSON from "../../static/template.json" assert { type: "json" };
 import { CompendiumPack, isActorSource, isItemSource } from "./compendium-pack.ts";
-import { PackError } from "./helpers.ts";
+import { PackError, getFilesRecursively } from "./helpers.ts";
+import { DBFolder, LevelDatabase } from "./level-database.ts";
 import { PackEntry } from "./types.ts";
 
 declare global {
@@ -46,7 +47,21 @@ class PackExtractor {
     /** The last actor inspected in `pruneTree` */
     #lastActor: ActorSourcePF2e | null = null;
     readonly #newDocIdMap: Record<string, string> = {};
-    readonly #idsToNames = new Map<string, Map<string, string>>();
+
+    readonly #idsToNames: {
+        [K in Extract<CompendiumDocumentType, "Actor" | "Item" | "JournalEntry" | "Macro" | "RollTable">]: Map<
+            string,
+            Map<string, string>
+        >;
+    } & Record<string, Map<string, Map<string, string>> | undefined> = {
+        Actor: new Map(),
+        Item: new Map(),
+        JournalEntry: new Map(),
+        Macro: new Map(),
+        RollTable: new Map(),
+    };
+
+    #folderPathMap = new Map<string, string>();
 
     #npcSystemKeys = new Set([
         ...Object.keys(templateJSON.Actor.templates.common),
@@ -61,8 +76,8 @@ class PackExtractor {
         this.packDB = params.packDb;
         this.disablePresort = !!params.disablePresort;
 
-        this.tempDataPath = path.resolve(process.cwd(), "packs/temp-data");
-        this.dataPath = path.resolve(process.cwd(), "packs/data");
+        this.tempDataPath = path.resolve(process.cwd(), "packs-temp");
+        this.dataPath = path.resolve(process.cwd(), "packs");
         this.packsMetadata = systemJSON.packs as unknown as CompendiumMetadata[];
     }
 
@@ -91,79 +106,93 @@ class PackExtractor {
         return (
             await Promise.all(
                 foundryPacks.map(async (filePath) => {
-                    const dbFilename = path.basename(filePath);
+                    const dbDirectory = path.basename(filePath);
 
-                    if (!dbFilename.endsWith(".db")) {
-                        throw PackError(`Pack file is not a DB file: "${dbFilename}"`);
-                    }
                     if (!fs.existsSync(filePath)) {
-                        throw PackError(`File not found: "${dbFilename}"`);
+                        throw PackError(`Directory not found: "${dbDirectory}"`);
                     }
 
-                    const outDirPath = path.resolve(this.dataPath, dbFilename);
-                    const tempOutDirPath = path.resolve(this.tempDataPath, dbFilename);
+                    const outDirPath = path.resolve(this.dataPath, dbDirectory);
+                    const tempOutDirPath = path.resolve(this.tempDataPath, dbDirectory);
 
                     await fs.promises.mkdir(tempOutDirPath);
 
-                    const sourceCount = await this.#extractPack(filePath, dbFilename);
+                    const sourceCount = await this.extractPack(filePath, dbDirectory);
 
-                    // Move ./packs/temp-data/[packname].db/ to ./packs/data/[packname].db/
+                    // Move ./packs-temp/[packname]/ to ./packs/[packname]/
                     fs.rmSync(outDirPath, { recursive: true, force: true });
                     await fs.promises.rename(tempOutDirPath, outDirPath);
 
-                    console.log(`Finished extracting ${sourceCount} documents from pack ${dbFilename}`);
+                    console.log(`Finished extracting ${sourceCount} documents from pack ${dbDirectory}`);
                     return sourceCount;
                 })
             )
         ).reduce((runningTotal, count) => runningTotal + count, 0);
     }
 
-    async #extractPack(filePath: string, packFilename: string): Promise<number> {
-        console.log(`Extracting pack: ${packFilename} (Presorting: ${this.disablePresort ? "Disabled" : "Enabled"})`);
-        const outPath = path.resolve(this.tempDataPath, packFilename);
+    async extractPack(filePath: string, packDirectory: string): Promise<number> {
+        console.log(`Extracting pack: ${packDirectory} (Presorting: ${this.disablePresort ? "Disabled" : "Enabled"})`);
+        const outPath = path.resolve(this.tempDataPath, packDirectory);
 
-        const packSources = await (async () => {
-            const packDB = Datastore.create({ filename: filePath, corruptAlertThreshold: 10 });
-            await packDB.load();
-            return packDB.find({}) as Promise<PackEntry[]>;
-        })();
-        const idPattern = /^[a-z0-9]{20,}$/g;
+        const db = new LevelDatabase(filePath, { packName: packDirectory });
+        const { packSources, folders } = await db.getEntries();
+
+        // Prepare subfolder data
+        if (folders.length > 0) {
+            const getFolderPath = (folder: DBFolder, parts: string[] = []): string => {
+                if (parts.length > 3) {
+                    throw PackError(
+                        `Error: Maximum folder depth exceeded for "${folder.name}" in pack: ${packDirectory}`
+                    );
+                }
+                parts.unshift(sluggify(folder.name));
+                if (folder.folder) {
+                    // This folder is inside another folder
+                    const parent = folders.find((f) => f._id === folder.folder);
+                    if (!parent) {
+                        throw PackError(`Error: Unknown parent folder id [${folder.folder}] in pack: ${packDirectory}`);
+                    }
+                    return getFolderPath(parent, parts);
+                }
+                parts.unshift(packDirectory);
+                return path.join(...parts);
+            };
+            const sanitzeFolder = (folder: Partial<DBFolder>): void => {
+                delete folder._stats;
+            };
+
+            for (const folder of folders) {
+                this.#folderPathMap.set(folder._id, getFolderPath(folder));
+                sanitzeFolder(folder);
+            }
+            const folderFilePath = path.resolve(outPath, "_folders.json");
+            await fs.promises.writeFile(folderFilePath, this.#prettyPrintJSON(folders), "utf-8");
+        }
 
         for (const source of packSources) {
             // Remove or replace unwanted values from the document source
-            const preparedSource = this.#convertLinks(source, packFilename);
+            const preparedSource = this.#convertUUIDs(source, packDirectory);
             if ("items" in preparedSource && preparedSource.type === "npc" && !this.disablePresort) {
                 preparedSource.items = this.#sortDataItems(preparedSource);
+            } else if (!this.#folderPathMap.get(preparedSource.folder ?? "")) {
+                delete (preparedSource as { folder?: unknown }).folder;
             }
-
-            // Pretty print JSON data
-            const outData = (() => {
-                const allKeys: Set<string> = new Set();
-                const idKeys: string[] = [];
-
-                JSON.stringify(preparedSource, (key, value) => {
-                    if (idPattern.test(key)) {
-                        idKeys.push(key);
-                    } else {
-                        allKeys.add(key);
-                    }
-
-                    return value;
-                });
-
-                const sortedKeys = Array.from(allKeys).sort().concat(idKeys);
-
-                const newJson = JSON.stringify(preparedSource, sortedKeys, 4);
-                return `${newJson}\n`;
-            })();
+            const outData = this.#prettyPrintJSON(preparedSource);
 
             // Remove all non-alphanumeric characters from the name
-            const slug = sluggify(source.name);
+            const slug = sluggify(preparedSource.name);
             const outFileName = `${slug}.json`;
-            const outFilePath = path.resolve(outPath, outFileName);
+
+            // Handle subfolders
+            const subfolder = this.#folderPathMap.get(preparedSource.folder ?? "");
+            const outFolderPath = subfolder ? path.resolve(this.tempDataPath, subfolder) : outPath;
+            if (subfolder && !fs.existsSync(outFolderPath)) {
+                fs.mkdirSync(outFolderPath, { recursive: true });
+            }
+            const outFilePath = path.resolve(outFolderPath, outFileName);
 
             if (fs.existsSync(outFilePath)) {
-                throw PackError(`Error: Duplicate name "${source.name}" in pack: ${packFilename}`);
+                throw PackError(`Error: Duplicate name "${preparedSource.name}" in pack: ${packDirectory}`);
             }
 
             this.#assertDocIdSame(preparedSource, outFilePath);
@@ -173,6 +202,27 @@ class PackExtractor {
         }
 
         return packSources.length;
+    }
+
+    #prettyPrintJSON(object: object): string {
+        const idPattern = /^[a-z0-9]{20,}$/g;
+        const allKeys: Set<string> = new Set();
+        const idKeys: string[] = [];
+
+        JSON.stringify(object, (key, value) => {
+            if (idPattern.test(key)) {
+                idKeys.push(key);
+            } else {
+                allKeys.add(key);
+            }
+
+            return value;
+        });
+
+        const sortedKeys = Array.from(allKeys).sort().concat(idKeys);
+        const newJson = JSON.stringify(object, sortedKeys, 4);
+
+        return `${newJson}\n`;
     }
 
     #assertDocIdSame(newSource: PackEntry, jsonPath: string): void {
@@ -187,16 +237,19 @@ class PackExtractor {
         }
     }
 
-    #convertLinks(docSource: PackEntry, packName: string): PackEntry {
-        this.#newDocIdMap[docSource._id] = docSource.name;
+    #convertUUIDs(docSource: PackEntry, packName: string): PackEntry {
+        this.#newDocIdMap[docSource._id!] = docSource.name;
 
         const sanitized = this.#sanitizeDocument(docSource);
         if (isActorSource(sanitized)) {
-            sanitized.items = sanitized.items.map((itemData) => this.#sanitizeDocument(itemData, { isEmbedded: true }));
+            sanitized.items = sanitized.items.map((itemSource) => {
+                CompendiumPack.convertUUIDs(itemSource, { to: "names", map: this.#idsToNames.Item });
+                return this.#sanitizeDocument(itemSource, { isEmbedded: true });
+            });
         }
 
         if (isItemSource(sanitized)) {
-            CompendiumPack.convertRuleUUIDs(sanitized, { to: "names", map: this.#idsToNames });
+            CompendiumPack.convertUUIDs(sanitized, { to: "names", map: this.#idsToNames.Item });
         }
 
         const docJSON = JSON.stringify(sanitized).replace(/@Compendium\[/g, "@UUID[Compendium.");
@@ -206,7 +259,7 @@ class PackExtractor {
         const worldItemLinks = Array.from(docJSON.matchAll(LINK_PATTERNS.world));
         if (worldItemLinks.length > 0) {
             const linkString = worldItemLinks.map((match) => match[0]).join(", ");
-            console.warn(`${docSource.name} (${packName}) has links to world items: ${linkString}`);
+            throw PackError(`${docSource.name} (${packName}) has links to world items: ${linkString}`);
         }
 
         const compendiumLinks = Array.from(docJSON.matchAll(LINK_PATTERNS.uuid))
@@ -222,8 +275,8 @@ class PackExtractor {
                 throw PackError("Unexpected error parsing compendium link");
             }
 
-            const [packId, docId] = parts.slice(1, 3);
-            const packMap = this.#idsToNames.get(packId);
+            const [packId, docType, docId] = parts.slice(1, 4);
+            const packMap = this.#idsToNames[docType]?.get(packId);
             if (!packMap) {
                 throw PackError(`Pack ${packId} has no ID-to-name map.`);
             }
@@ -234,8 +287,13 @@ class PackExtractor {
                 return partiallyConverted;
             }
 
-            const replacePattern = new RegExp(`(?<!"_?id":")${docId}(?=\\])`, "g");
-            return partiallyConverted.replace(replacePattern, docName);
+            const idPattern = new RegExp(`(?<!"_?id":")${docId}(?=\\])`, "g");
+            // Remove link labels when the label is the same as the document name
+            const labeledLinkPattern = (() => {
+                const escapedDocName = docName.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+                return new RegExp(String.raw`(@UUID\[[^\]]+\])\{${escapedDocName}\}`);
+            })();
+            return partiallyConverted.replace(idPattern, docName).replace(labeledLinkPattern, "$1");
         }, docJSON);
 
         return JSON.parse(convertedJson) as PackEntry;
@@ -347,7 +405,9 @@ class PackExtractor {
         for (const key in docSource) {
             if (key === "_id") {
                 topLevel = docSource;
-                delete docSource.folder;
+                if (docSource.folder === null) {
+                    delete docSource.folder;
+                }
                 delete (docSource as { _stats?: unknown })._stats;
 
                 docSource.img &&= docSource.img.replace(
@@ -550,7 +610,7 @@ class PackExtractor {
                             items = this.#sortSpells(itemGroup);
                             break;
                         case "action":
-                            items = this.#sortActions(docSource.name, itemGroup);
+                            items = this.#sortAbilities(docSource.name, itemGroup);
                             break;
                         case "lore":
                             items = Array.from(itemGroup).sort((a, b) => a.name.localeCompare(b.name));
@@ -674,47 +734,45 @@ class PackExtractor {
     }
 
     /** Sorts actions by category, only called for NPCs */
-    #sortActions(docName: string, actions: Set<ItemSourcePF2e>): ItemSourcePF2e[] {
-        const notActions: [string, string][] = [
+    #sortAbilities(docName: string, items: Set<ItemSourcePF2e>): ItemSourcePF2e[] {
+        const notAbilities: [string, string][] = [
             ["Innate Spells", "spellcastingEntry"],
             ["Prepared Spells", "spellcastingEntry"],
             ["Ritual Spells", "spellcastingEntry"],
             ["Spontaneous Spells", "spellcastingEntry"],
         ];
-        const actionsMap: Map<string, ItemSourcePF2e[]> = new Map([
+        const abilitiesMap: Map<string, ItemSourcePF2e[]> = new Map([
             ["interaction", []],
             ["defensive", []],
             ["offensive", []],
             ["other", []],
         ]);
 
-        for (const action of Array.from(actions).sort((a, b) => a.name.localeCompare(b.name))) {
-            const actionData = action as ActionItemSource;
-            const notActionMatch = notActions.find((naName) => actionData.name.match(naName[0]));
-            if (notActionMatch) {
+        for (const ability of Array.from(items).sort((a, b) => a.name.localeCompare(b.name))) {
+            const notAbilityMatch = notAbilities.find((naName) => ability.name.match(naName[0]));
+            if (notAbilityMatch) {
                 console.log(
-                    `Error in ${docName}: ${notActionMatch[0]} has type action but should be type ${notActionMatch[1]}!`
+                    `Error in ${docName}: ${notAbilityMatch[0]} has type action but should be type ${notAbilityMatch[1]}!`
                 );
             }
-            if (!actionData.system.category) {
+            if (!itemIsOfType(ability, "action")) continue;
+
+            if (!ability.system.category) {
                 if (this.emitWarnings) {
-                    console.log(`Warning in ${docName}: Action item '${actionData.name}' has no category defined!`);
+                    console.log(`Warning in ${docName}: Ability item "${ability.name}" has no category defined!`);
                 }
-                actionsMap.get("other")!.push(actionData);
+                abilitiesMap.get("other")!.push(ability);
             } else {
-                let actionCategory: string = actionData.system.category;
-                if (!actionsMap.has(actionCategory)) {
-                    actionCategory = "other";
-                }
-                actionsMap.get(actionCategory)!.push(actionData);
+                const actionCategory = abilitiesMap.has(ability.system.category) ? ability.system.category : "other";
+                abilitiesMap.get(actionCategory)!.push(ability);
             }
         }
 
-        const sortedInteractions = this.#sortInteractions(docName, actionsMap.get("interaction")!);
-        const sortedDefensive = this.#sortDefensiveActions(docName, actionsMap.get("defensive")!);
-        const sortedOffensive = this.#sortOffensiveActions(docName, actionsMap.get("offensive")!);
+        const sortedInteractions = this.#sortInteractions(docName, abilitiesMap.get("interaction")!);
+        const sortedDefensive = this.#sortDefensiveActions(docName, abilitiesMap.get("defensive")!);
+        const sortedOffensive = this.#sortOffensiveActions(docName, abilitiesMap.get("offensive")!);
 
-        return sortedInteractions.concat(sortedDefensive, sortedOffensive, actionsMap.get("other")!);
+        return sortedInteractions.concat(sortedDefensive, sortedOffensive, abilitiesMap.get("other")!);
     }
 
     #sortSpells(spells: Set<ItemSourcePF2e>): SpellSource[] {
@@ -778,16 +836,14 @@ class PackExtractor {
 
         for (const packDir of packDirs) {
             const metadata = this.packsMetadata.find((p) => path.basename(p.path) === packDir);
-            if (metadata === undefined) {
-                throw PackError(`Compendium at ${packDir} has metadata in the local system.json file.`);
+            if (!metadata) {
+                throw PackError(`Compendium at ${packDir} has no metadata in the local system.json file.`);
             }
 
             const packMap: Map<string, string> = new Map();
-            this.#idsToNames.set(metadata.name, packMap);
+            this.#idsToNames[metadata.type]?.set(metadata.name, packMap);
 
-            const filenames = fs.readdirSync(path.resolve(this.dataPath, packDir));
-            const filePaths = filenames.map((n) => path.resolve(this.dataPath, packDir, n));
-
+            const filePaths = getFilesRecursively(path.resolve(this.dataPath, packDir));
             for (const filePath of filePaths) {
                 const jsonString = fs.readFileSync(filePath, "utf-8");
                 const source = (() => {

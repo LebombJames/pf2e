@@ -40,7 +40,7 @@ class TokenAura implements TokenAuraData {
         return 0.5 * tokenWidth + (this.radius / gridSize) * gridSizePixels;
     }
 
-    private get scene(): ScenePF2e {
+    get scene(): ScenePF2e {
         return this.token.scene!;
     }
 
@@ -72,7 +72,8 @@ class TokenAura implements TokenAuraData {
         if (token === this.token) return true;
 
         // 2. If this aura is out of range, return false early
-        if (this.token.object!.distanceTo(token.object!) > this.radius) return false;
+        if (!this.token.object || !token.object) return false;
+        if (this.token.object.distanceTo(token.object) > this.radius) return false;
 
         // 3. Check whether any aura square intersects the token's space
         return this.squares.some((s) => s.active && measureDistanceCuboid(s, token.bounds) === 0);

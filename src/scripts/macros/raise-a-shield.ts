@@ -2,10 +2,10 @@ import { ActorPF2e } from "@actor";
 import { EffectPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { ActionDefaultOptions } from "@system/action-macros/index.ts";
-import { ErrorPF2e, localizer } from "@util";
+import { ErrorPF2e, getActionGlyph, localizer } from "@util";
 
 /** Effect: Raise a Shield */
-const ITEM_UUID = "Compendium.pf2e.equipment-effects.2YgXoHvJfrDHucMr";
+const ITEM_UUID = "Compendium.pf2e.equipment-effects.Item.2YgXoHvJfrDHucMr";
 
 const TEMPLATES = {
     flavor: "./systems/pf2e/templates/chat/action/flavor.hbs",
@@ -34,7 +34,10 @@ export async function raiseAShield(options: ActionDefaultOptions): Promise<void>
             return false;
         }
 
-        if (shield?.isBroken === false) {
+        if (shield?.isDestroyed) {
+            ui.notifications.warn(localize("ShieldIsDestroyed", { actor: speaker.alias, shield: shield.name }));
+            return false;
+        } else if (shield?.isBroken === false) {
             const effect = await fromUuid(ITEM_UUID);
             if (!(effect instanceof EffectPF2e)) {
                 throw ErrorPF2e("Raise a Shield effect not found");
@@ -52,7 +55,7 @@ export async function raiseAShield(options: ActionDefaultOptions): Promise<void>
 
     if (isSuccess) {
         const combatActor = (game.combat?.started && game.combat.combatant?.actor) || null;
-        const [actionType, glyph] =
+        const [actionType, costSymbol] =
             combatActor && combatActor !== actor ? (["Reaction", "R"] as const) : (["SingleAction", "1"] as const);
 
         const content = await renderTemplate(TEMPLATES.content, {
@@ -60,7 +63,7 @@ export async function raiseAShield(options: ActionDefaultOptions): Promise<void>
             message: localize("Content", { actor: speaker.alias }),
         });
         const flavor = await renderTemplate(TEMPLATES.flavor, {
-            action: { title: localize(`${actionType}Title`), typeNumber: glyph },
+            action: { title: localize(`${actionType}Title`), glyph: getActionGlyph(costSymbol) },
         });
 
         await ChatMessagePF2e.create({

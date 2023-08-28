@@ -12,8 +12,8 @@ import { MockRollTable } from "tests/mocks/roll-table.ts";
 import { MockUser } from "tests/mocks/user.ts";
 import { MockScene } from "tests/mocks/scene.ts";
 import { MockChatMessage } from "tests/mocks/chat-message.ts";
-import characterJSON from "../../packs/data/iconics.db/amiri-level-1.json";
-import armorJSON from "../../packs/data/equipment.db/scale-mail.json";
+import characterJSON from "../../packs/iconics/amiri-level-1.json";
+import armorJSON from "../../packs/equipment/scale-mail.json";
 import { ArmorSource, ItemSourcePF2e } from "@item/data/index.ts";
 import { FoundryUtils } from "tests/utils.ts";
 import { MockActors, MockCollection, MockItems, MockWorldCollection } from "tests/mocks/collection.ts";
@@ -58,7 +58,10 @@ describe("test migration runner", () => {
             },
         },
         actors: new MockActors(),
-        i18n: { format: (stringId: string, data: object): string => {} },
+        i18n: {
+            localize: (stringId): string => stringId,
+            format: (stringId: string, data: object): string => stringId,
+        },
         items: new MockItems(),
         journal: new MockWorldCollection<MockJournalEntry>(),
         macros: new MockWorldCollection<MockMacro>(),
@@ -67,6 +70,11 @@ describe("test migration runner", () => {
         users: new MockWorldCollection<MockUser>(),
         packs: new MockCollection(),
         scenes: new MockWorldCollection<MockScene>(),
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (global as any).SceneNavigation = {
+        displayProgressBar(...args: unknown): void {},
     };
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -179,7 +187,7 @@ describe("test migration runner", () => {
         scene.addToken({
             _id: "token1",
             actorId: "actor1",
-            actorData: { name: "original" },
+            delta: { name: "original" },
             actorLink: false,
         });
         game.scenes.set(scene.id, scene);
@@ -293,8 +301,7 @@ describe("test migration runner", () => {
         static version = 14;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async updateActor(actor: { items: any[] }) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            actor.system.sampleItemId = actor.items.find((x: any) => x.name === "sample item")._id;
+            actor.system.sampleItemId = actor.items.find((i: { name: string }) => i.name === "sample item")._id;
         }
     }
 
@@ -316,7 +323,7 @@ describe("test migration runner", () => {
         scene.addToken({
             _id: "token1",
             actorId: "actor1",
-            actorData: { name: "original" },
+            delta: { name: "original" },
             actorLink: false,
         });
         game.scenes.contents.push(scene);

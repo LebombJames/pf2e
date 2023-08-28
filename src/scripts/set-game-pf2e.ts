@@ -1,5 +1,6 @@
 import { Action } from "@actor/actions/index.ts";
 import { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
+import { ElementalBlast } from "@actor/character/elemental-blast.ts";
 import { CheckModifier, ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import { CoinsPF2e } from "@item/physical/helpers.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
@@ -66,9 +67,9 @@ export const SetGamePF2e = {
 
         const initSafe: Partial<(typeof game)["pf2e"]> = {
             Check: CheckPF2e,
-            CheckModifier: CheckModifier,
+            CheckModifier,
             Coins: CoinsPF2e,
-            ConditionManager: ConditionManager,
+            ConditionManager,
             Dice: DicePF2e,
             Modifier: ModifierPF2e,
             ModifierType: MODIFIER_TYPE,
@@ -77,6 +78,7 @@ export const SetGamePF2e = {
             StatisticModifier: StatisticModifier,
             StatusEffects: StatusEffects,
             TextEditor: TextEditorPF2e,
+            ElementalBlast,
             actions,
             effectPanel: new EffectsPanel(),
             effectTracker: new EffectTracker(),
@@ -94,8 +96,8 @@ export const SetGamePF2e = {
             system: { moduleArt: new ModuleArt(), remigrate, sluggify },
             variantRules: { AutomaticBonusProgression },
         };
-
         game.pf2e = mergeObject(game.pf2e ?? {}, initSafe);
+        game.pf2e.ConditionManager.initialize();
     },
 
     onSetup: (): void => {},

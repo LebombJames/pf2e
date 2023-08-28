@@ -1,7 +1,7 @@
 import { ActorPF2e } from "@actor";
 import { StrikeData } from "@actor/data/base.ts";
 import { ItemPF2e, ItemProxyPF2e } from "@item";
-import { traditionSkills, TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
+import { TrickMagicItemEntry, traditionSkills } from "@item/spellcasting-entry/trick.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { ScenePF2e, TokenDocumentPF2e } from "@scene/index.ts";
 import { InlineRollLinks } from "@scripts/ui/inline-roll-links.ts";
@@ -9,7 +9,7 @@ import { UserVisibilityPF2e } from "@scripts/ui/user-visibility.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
 import { htmlQuery, htmlQueryAll, parseHTML } from "@util";
-import { ChatRollDetails } from "./chat-roll-details.ts";
+import { ChatInspectRoll } from "./chat-inspect-roll.ts";
 import { CriticalHitAndFumbleCards } from "./crit-fumble-cards.ts";
 import { ChatMessageFlagsPF2e, ChatMessageSourcePF2e, StrikeLookupData } from "./data.ts";
 import * as Listeners from "./listeners/index.ts";
@@ -17,15 +17,12 @@ import * as Listeners from "./listeners/index.ts";
 class ChatMessagePF2e extends ChatMessage {
     /** The chat log doesn't wait for data preparation before rendering, so set some data in the constructor */
     constructor(data: DeepPartial<ChatMessageSourcePF2e> = {}, context: DocumentConstructionContext<null> = {}) {
-        data.flags = mergeObject(expandObject(data.flags ?? {}), { core: {}, pf2e: {} });
+        const expandedFlags = expandObject<DeepPartial<ChatMessageFlagsPF2e>>(data.flags ?? {});
+        data.flags = mergeObject(expandedFlags, {
+            core: { canPopout: expandedFlags.core?.canPopout ?? true },
+            pf2e: {},
+        });
         super(data, context);
-
-        // Backward compatibility for roll messages prior to `rollerId` (user ID) being stored with the roll
-        for (const roll of this.rolls) {
-            if (roll instanceof CheckRoll) {
-                roll.roller ??= this.user ?? null;
-            }
-        }
     }
 
     /** Is this a damage (or a manually-inputed non-D20) roll? */
@@ -89,7 +86,7 @@ class ChatMessagePF2e extends ChatMessage {
         const roll = this.rolls[0];
         return !!(
             this.actor?.isOwner &&
-            this.canUserModify(game.user, "update") &&
+            (this.isAuthor || this.isOwner) &&
             roll instanceof CheckRoll &&
             roll.isRerollable
         );
@@ -97,7 +94,12 @@ class ChatMessagePF2e extends ChatMessage {
 
     /** Get the owned item associated with this chat message */
     get item(): ItemPF2e<ActorPF2e> | null {
-        // If this is a strike, we usually want the strike's item
+        if (this.flags.pf2e.context?.type === "self-effect") {
+            const item = this.actor?.items.get(this.flags.pf2e.context.item);
+            return item ?? null;
+        }
+
+        // If this is a strike, return the strike's weapon or unarmed attack
         const strike = this._strike;
         if (strike?.item) return strike.item;
 
@@ -120,9 +122,9 @@ class ChatMessagePF2e extends ChatMessage {
         }
 
         if (item?.isOfType("spell")) {
-            const spellVariant = this.flags.pf2e.spellVariant;
-            const castLevel = this.flags.pf2e.casting?.level ?? item.level;
-            const modifiedSpell = item.loadVariant({ overlayIds: spellVariant?.overlayIds, castLevel });
+            const overlayIds = this.flags.pf2e.origin?.variant?.overlays;
+            const castLevel = this.flags.pf2e.origin?.castLevel ?? item.rank;
+            const modifiedSpell = item.loadVariant({ overlayIds, castLevel });
             return modifiedSpell ?? item;
         }
 
@@ -156,8 +158,9 @@ class ChatMessagePF2e extends ChatMessage {
 
     /** Get stringified item source from the DOM-rendering of this chat message */
     getItemFromDOM(): ItemPF2e<ActorPF2e> | null {
-        const $domMessage = $("ol#chat-log").children(`li[data-message-id="${this.id}"]`);
-        const sourceString = $domMessage.find("div.pf2e.item-card").attr("data-embedded-item") ?? "null";
+        const html = ui.chat.element[0];
+        const messageElem = htmlQuery(html, `#chat-log > li[data-message-id="${this.id}"]`);
+        const sourceString = htmlQuery(messageElem, ".pf2e.item-card")?.dataset.embeddedItem ?? "null";
         try {
             const itemSource = JSON.parse(sourceString);
             const item = itemSource
@@ -174,12 +177,12 @@ class ChatMessagePF2e extends ChatMessage {
 
     async showDetails(): Promise<void> {
         if (!this.flags.pf2e.context) return;
-        new ChatRollDetails(this).render(true);
+        new ChatInspectRoll(this).render(true);
     }
 
     /** Get the token of the speaker if possible */
     get token(): TokenDocumentPF2e<ScenePF2e> | null {
-        if (!game.scenes) return null;
+        if (!game.scenes) return null; // In case we're in the middle of game setup
         const sceneId = this.speaker.scene ?? "";
         const tokenId = this.speaker.token ?? "";
         return game.scenes.get(sceneId)?.tokens.get(tokenId) ?? null;
@@ -189,6 +192,10 @@ class ChatMessagePF2e extends ChatMessage {
         const { actor, item } = this;
         return { ...actor?.getRollData(), ...item?.getRollData() };
     }
+
+    /* -------------------------------------------- */
+    /*  Event Listeners and Handlers                */
+    /* -------------------------------------------- */
 
     override async getHTML(): Promise<JQuery> {
         const { actor } = this;
@@ -210,11 +217,11 @@ class ChatMessagePF2e extends ChatMessage {
 
         await Listeners.DamageTaken.listen(this, html);
         CriticalHitAndFumbleCards.appendButtons(this, $html);
-        Listeners.ChatCards.listen($html);
+        Listeners.ChatCards.listen(this, html);
         InlineRollLinks.listen(html, this);
         Listeners.DegreeOfSuccessHighlights.listen(this, html);
-        Listeners.MessageTooltips.listen($html);
-        if (canvas.ready) Listeners.SetAsInitiative.listen($html);
+        Listeners.MessageTooltips.listen(html);
+        if (canvas.ready) Listeners.SetAsInitiative.listen(html);
 
         // Add persistent damage recovery button and listener (if evaluating persistent)
         const roll = this.rolls[0];
@@ -248,12 +255,16 @@ class ChatMessagePF2e extends ChatMessage {
             });
         }
 
-        html.addEventListener("mouseenter", () => this.onHoverIn());
-        html.addEventListener("mouseleave", () => this.onHoverOut());
+        // Remove revert damage button based on user permissions
+        const appliedDamageFlag = this.flags.pf2e.appliedDamage;
+        if (!appliedDamageFlag?.isReverted) {
+            if (!this.actor?.isOwner) {
+                htmlQuery(html, "button[data-action=revert-damage]")?.remove();
+            }
+        }
 
-        const sender = html.querySelector<HTMLElement>(".message-sender");
-        sender?.addEventListener("click", this.onClickSender.bind(this));
-        sender?.addEventListener("dblclick", this.onClickSender.bind(this));
+        html.addEventListener("mouseenter", (event) => this.#onHoverIn(event));
+        html.addEventListener("mouseleave", (event) => this.#onHoverOut(event));
 
         UserVisibilityPF2e.processMessageSender(this, html);
         if (!actor && this.content) UserVisibilityPF2e.process(html, { document: this });
@@ -261,29 +272,18 @@ class ChatMessagePF2e extends ChatMessage {
         return $html;
     }
 
-    private onHoverIn(): void {
+    /** Highlight the message's corresponding token on the canvas */
+    #onHoverIn(nativeEvent: MouseEvent | PointerEvent): void {
         if (!canvas.ready) return;
         const token = this.token?.object;
         if (token?.isVisible && !token.controlled) {
-            token.emitHoverIn();
+            token.emitHoverIn(nativeEvent);
         }
     }
 
-    private onHoverOut(): void {
-        if (canvas.ready) this.token?.object?.emitHoverOut();
-    }
-
-    private onClickSender(event: MouseEvent): void {
-        if (!canvas) return;
-        const token = this.token?.object;
-        if (token?.isVisible && token.isOwner) {
-            token.controlled ? token.release() : token.control({ releaseOthers: !event.shiftKey });
-            // If a double click, also pan to the token
-            if (event.type === "dblclick") {
-                const scale = Math.max(1, canvas.stage.scale.x);
-                canvas.animatePan({ ...token.center, scale, duration: 1000 });
-            }
-        }
+    /** Remove the token highlight */
+    #onHoverOut(nativeEvent: MouseEvent | PointerEvent): void {
+        if (canvas.ready) this.token?.object?.emitHoverOut(nativeEvent);
     }
 
     protected override _onCreate(

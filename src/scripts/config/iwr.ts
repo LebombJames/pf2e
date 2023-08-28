@@ -35,7 +35,6 @@ const immunityTypes = {
     fatigued: "PF2E.Damage.IWR.Type.fatigued",
     "fear-effects": "PF2E.Damage.IWR.Type.fear-effects",
     fire: "PF2E.Damage.RollFlavor.fire",
-    "flat-footed": "PF2E.Damage.IWR.Type.flat-footed",
     fleeing: "PF2E.Damage.IWR.Type.fleeing",
     force: "PF2E.Damage.RollFlavor.force",
     frightened: "PF2E.Damage.IWR.Type.frightened",
@@ -49,6 +48,7 @@ const immunityTypes = {
     light: "PF2E.Damage.IWR.Type.light",
     magic: "PF2E.Damage.IWR.Type.magic",
     mental: "PF2E.Damage.RollFlavor.mental",
+    metal: "PF2E.Damage.IWR.Type.metal",
     "misfortune-effects": "PF2E.Damage.IWR.Type.misfortune-effects",
     mithral: "PF2E.Damage.IWR.Type.mithral",
     necromancy: "PF2E.Damage.IWR.Type.necromancy",
@@ -56,18 +56,21 @@ const immunityTypes = {
     "non-magical": "PF2E.Damage.IWR.Type.non-magical",
     "nonlethal-attacks": "PF2E.Damage.IWR.Type.nonlethal-attacks",
     "object-immunities": "PF2E.Damage.IWR.Type.object-immunities",
+    "off-guard": "PF2E.Damage.IWR.Type.off-guard",
     olfactory: "PF2E.Damage.IWR.Type.olfactory",
     orichalcum: "PF2E.Damage.IWR.Type.orichalcum",
     paralyzed: "PF2E.Damage.IWR.Type.paralyzed",
     petrified: "PF2E.Damage.IWR.Type.petrified",
     physical: "PF2E.Damage.IWR.Type.physical",
     piercing: "PF2E.Damage.RollFlavor.piercing",
+    plant: "PF2E.Damage.IWR.Type.plant",
     poison: "PF2E.Damage.RollFlavor.poison",
     polymorph: "PF2E.Damage.IWR.Type.polymorph",
     positive: "PF2E.Damage.RollFlavor.positive",
     possession: "PF2E.Damage.IWR.Type.possession",
     precision: "PF2E.Damage.RollFlavor.precision",
     prone: "PF2E.Damage.IWR.Type.prone",
+    radiation: "PF2E.Damage.IWR.Type.radiation",
     restrained: "PF2E.Damage.IWR.Type.restrained",
     "salt-water": "PF2E.Damage.IWR.Type.salt-water",
     scrying: "PF2E.Damage.IWR.Type.scrying",
@@ -78,6 +81,7 @@ const immunityTypes = {
     slowed: "PF2E.Damage.IWR.Type.slowed",
     sonic: "PF2E.Damage.RollFlavor.sonic",
     "spell-deflection": "PF2E.Damage.IWR.Type.spell-deflection",
+    spirit: "PF2E.Damage.RollFlavor.spirit",
     stunned: "PF2E.Damage.IWR.Type.stunned",
     stupefied: "PF2E.Damage.IWR.Type.stupefied",
     "swarm-attacks": "PF2E.Damage.IWR.Type.swarm-attacks",
@@ -88,6 +92,7 @@ const immunityTypes = {
     unconscious: "PF2E.Damage.IWR.Type.unconscious",
     visual: "PF2E.Damage.IWR.Type.visual",
     water: "PF2E.Damage.IWR.Type.water",
+    wood: "PF2E.Damage.IWR.Type.wood",
 };
 
 const weaknessTypes = {
@@ -126,6 +131,7 @@ const weaknessTypes = {
     orichalcum: "PF2E.Damage.IWR.Type.orichalcum",
     physical: "PF2E.Damage.IWR.Type.physical",
     piercing: "PF2E.Damage.RollFlavor.piercing",
+    plant: "PF2E.Damage.IWR.Type.plant",
     poison: "PF2E.Damage.RollFlavor.poison",
     positive: "PF2E.Damage.RollFlavor.positive",
     precision: "PF2E.Damage.RollFlavor.precision",
@@ -135,6 +141,8 @@ const weaknessTypes = {
     silver: "PF2E.Damage.IWR.Type.silver",
     slashing: "PF2E.Damage.RollFlavor.slashing",
     sonic: "PF2E.Damage.RollFlavor.sonic",
+    spells: "PF2E.Damage.IWR.Type.spells",
+    spirit: "PF2E.Damage.RollFlavor.spirit",
     "splash-damage": "PF2E.Damage.IWR.Type.splash-damage",
     "unarmed-attacks": "PF2E.Damage.IWR.Type.unarmed-attacks",
     "vampire-weaknesses": "PF2E.Damage.IWR.Type.vampire-weaknesses",
@@ -145,6 +153,7 @@ const weaknessTypes = {
     water: "PF2E.Damage.IWR.Type.water",
     weapons: "PF2E.Damage.IWR.Type.weapons",
     "weapons-shedding-bright-light": "PF2E.Damage.IWR.Type.weapons-shedding-bright-light",
+    wood: "PF2E.Damage.IWR.Type.wood",
 };
 
 const resistanceTypes = {
@@ -193,6 +202,8 @@ const resistanceTypes = {
     silver: "PF2E.Damage.IWR.Type.silver",
     slashing: "PF2E.Damage.RollFlavor.slashing",
     sonic: "PF2E.Damage.RollFlavor.sonic",
+    spells: "PF2E.Damage.IWR.Type.spells",
+    spirit: "PF2E.Damage.RollFlavor.spirit",
     "unarmed-attacks": "PF2E.Damage.IWR.Type.unarmed-attacks",
     vorpal: "PF2E.Damage.IWR.Type.vorpal",
     "vorpal-adamantine": "PF2E.Damage.IWR.Type.vorpal-adamantine",
@@ -200,6 +211,7 @@ const resistanceTypes = {
     water: "PF2E.Damage.IWR.Type.water",
     weapons: "PF2E.Damage.IWR.Type.weapons",
     "weapons-shedding-bright-light": "PF2E.Damage.IWR.Type.weapons-shedding-bright-light",
+    wood: "PF2E.Damage.IWR.Type.wood",
 };
 
-export { immunityTypes, weaknessTypes, resistanceTypes };
+export { immunityTypes, resistanceTypes, weaknessTypes };

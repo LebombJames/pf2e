@@ -333,6 +333,9 @@ The following text is the property of Wizards of the Coast, Inc. and is Copyrigh
 	* Pathfinder Society Scenario #4-13: Within the Prairies © 2023, Paizo Inc.; Authors: Marlowe Miller
 	* Pathfinder Society Scenario #4-14: Shattering Golden Chains © 2023, Paizo Inc.; Authors: Matt Duval
 	* Pathfinder Society Scenario #4-15: In Glorious Battle © 2023, Paizo Inc.; Authors: Luis Loza
+    * Pathfinder Society Scenario #4-99: Blessings of the Forest © 2023, Paizo Inc.; Authors: Ivis K. Flanagan and Dennis Muldoon.
+
+    * Pathfinder Society Scenario #5-01: Intro: Year of Unfettered Exploration © 2023, Paizo Inc.; Author: Sen H.H.S.
 
     * Pathfinder Society Guide to Play (Second Edition) © 2020, The Organized Play Foundation
 
@@ -372,6 +375,7 @@ The following text is the property of Wizards of the Coast, Inc. and is Copyrigh
     *  Pathfinder Free RPG Day Adventure 2020: Little Trouble in Big Absalom © 2020, Paizo Inc.; Author: Eleanor Ferron
     *  Pathfinder Free RPG Day Adventure 2021: Threshold of Knowledge © 2021, Paizo Inc.; Author: Ron Lundeen, Jabari Weathers
     *  Pathfinder Free RPG Day Adventure 2022: A Fistful of Flowers © 2022, Paizo Inc.; Author: Eleanor Ferron, Linda Zayas-Palmer
+    *  Pathfinder Free RPG Day Adventure 2023: A Few Flowers More © 2023, Paizo Inc.; Author: Linda Zayas-Palmer.
 
 *  One Shots
     *  Pathfinder One-Shot #1: Sundered Waves © 2021, Paizo Inc.; Author: Jason Bulmahn
@@ -391,6 +395,8 @@ The following text is the property of Wizards of the Coast, Inc. and is Copyrigh
 	*  Pathfinder Harrow Deck © 2023, Paizo Inc.; Author: TBD
 
 *  Paizo Blog
+	*  Fine-tuning Ancestries © 2023, Paizo Inc.; Author: Jason Bulmahn.
+	*  Apex of Power © 2023, Paizo Inc.; Author: Jason Bulmahn.
     *  Kineticist Playtest Analysis © 2022, Paizo Inc.; Author: Logan Bonner; Illustrator: Wayne Reynolds.
 	*  No-Prep Character: Gristleburst © 2021, Paizo Inc.; Author: Ron Lundeen; Illustrator: Valeria Dryzhak.
     *  No-Prep Character: Duhgik © 2021, Paizo Inc.; Author: Vanessa Hoskins; Illustrator: Dominik Derow.

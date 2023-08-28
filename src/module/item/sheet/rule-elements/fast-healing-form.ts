@@ -1,4 +1,4 @@
-import { FastHealingData, FastHealingRuleElement, FastHealingSource } from "@module/rules/rule-element/fast-healing.ts";
+import { FastHealingType, FastHealingRuleElement, FastHealingSource } from "@module/rules/rule-element/fast-healing.ts";
 import { htmlQuery, tagify } from "@util";
 import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 
@@ -23,7 +23,7 @@ class FastHealingForm extends RuleElementForm<FastHealingSource, FastHealingRule
         };
     }
 
-    override _updateObject(formData: Partial<FastHealingSource>): void {
+    override updateObject(formData: Partial<FastHealingSource>): void {
         if (formData.type !== "regeneration") {
             delete formData.deactivatedBy;
         } else {
@@ -37,7 +37,7 @@ class FastHealingForm extends RuleElementForm<FastHealingSource, FastHealingRule
 }
 
 interface FastHealingSheetData extends RuleElementFormSheetData<FastHealingSource, FastHealingRuleElement> {
-    types: Record<FastHealingData["type"], string>;
+    types: Record<FastHealingType, string>;
 }
 
 export { FastHealingForm };

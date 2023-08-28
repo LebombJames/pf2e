@@ -1,10 +1,10 @@
 import { CreaturePF2e } from "@actor";
 import { Abilities, CreatureSkills } from "@actor/creature/data.ts";
 import { SIZE_TO_REACH } from "@actor/creature/values.ts";
-import { strikeFromMeleeItem } from "@actor/helpers.ts";
+import { setHitPointsRollOptions, strikeFromMeleeItem } from "@actor/helpers.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import { AbilityString, SaveType } from "@actor/types.ts";
+import { AttributeString, SaveType } from "@actor/types.ts";
 import { SAVE_TYPES, SKILL_DICTIONARY, SKILL_EXPANDED, SKILL_LONG_FORMS } from "@actor/values.ts";
 import { ItemPF2e, LorePF2e, MeleePF2e } from "@item";
 import { ItemType } from "@item/data/index.ts";
@@ -13,12 +13,11 @@ import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData, creatureIdentificationDCs } from "@module/recall-knowledge.ts";
 import { extractModifierAdjustments, extractModifiers } from "@module/rules/helpers.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
-import { PredicatePF2e } from "@system/predication.ts";
 import { ArmorStatistic } from "@system/statistic/armor-class.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { createHTMLElement, objectHasKey, sluggify } from "@util";
 import { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
-import { NPCSheetPF2e } from "./sheet.ts";
+import { AbstractNPCSheet } from "./sheet.ts";
 import { VariantCloneParams } from "./types.ts";
 
 class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
@@ -33,7 +32,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         return this._source.system.details.level.value;
     }
 
-    /** This NPC's ability scores */
+    /** This NPC's attribute modifiers */
     override get abilities(): Abilities {
         return deepClone(this.system.abilities);
     }
@@ -140,6 +139,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         level.value = this.isElite ? level.base + 1 : this.isWeak ? level.base - 1 : level.base;
         this.rollOptions.all[`self:level:${level.value}`] = true;
 
+        attributes.spellDC = null;
         attributes.classDC = ((): { value: number } => {
             const proficiencyWithoutLevel =
                 game.settings.get("pf2e", "proficiencyVariant") === "ProficiencyWithoutLevel";
@@ -147,6 +147,8 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
             const adjusted = this.isElite ? levelBasedDC + 2 : this.isWeak ? levelBasedDC - 2 : levelBasedDC;
             return { value: adjusted };
         })();
+        attributes.classOrSpellDC = { value: attributes.classDC.value };
+        attributes.bonusEncumbranceBulk = attributes.bonusLimitBulk = 0;
 
         // Set default ritual attack and DC values if none are stored */
         this.system.spellcasting = mergeObject({ rituals: { dc: 0 } }, this.system.spellcasting ?? {});
@@ -158,18 +160,17 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
 
         // Extract as separate variables for easier use in this method.
         const { synthetics } = this;
-        const { modifierAdjustments, statisticsModifiers, strikes } = synthetics;
-        const itemTypes = this.itemTypes;
+        const { modifierAdjustments, strikes } = synthetics;
         const baseLevel = this.system.details.level.base;
+        this.synthetics.modifiers.hp ??= [];
 
         if (this.isElite) {
             modifierAdjustments.all.push({
                 slug: "base",
                 getNewValue: (base: number) => base + 2,
-                predicate: new PredicatePF2e(),
+                test: () => true,
             });
-            statisticsModifiers.hp = statisticsModifiers.hp ?? [];
-            statisticsModifiers.hp.push(
+            this.synthetics.modifiers.hp.push(
                 () =>
                     new ModifierPF2e(
                         "PF2E.NPC.Adjustment.EliteLabel",
@@ -181,10 +182,9 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
             modifierAdjustments.all.push({
                 slug: "base",
                 getNewValue: (base: number) => base - 2,
-                predicate: new PredicatePF2e(),
+                test: () => true,
             });
-            statisticsModifiers.hp = statisticsModifiers.hp ?? [];
-            statisticsModifiers.hp.push(
+            this.synthetics.modifiers.hp.push(
                 () =>
                     new ModifierPF2e(
                         "PF2E.NPC.Adjustment.WeakLabel",
@@ -195,10 +195,8 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         }
         system.details.level.base = baseLevel;
 
-        // Compute 10+mod ability scores from ability modifiers
         for (const ability of Object.values(this.system.abilities)) {
-            ability.mod = Number(ability.mod) || 0;
-            ability.value = ability.mod * 2 + 10;
+            ability.mod = Math.trunc(Number(ability.mod)) || 0;
         }
 
         // Hit Points
@@ -226,18 +224,12 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
                     .filter((m) => m.enabled)
                     .map((m) => `${m.label} ${m.modifier < 0 ? "" : "+"}${m.modifier}`),
             ].join(", ");
-
             system.attributes.hp = stat;
-
-            // Set a roll option for HP percentage
-            const percentRemaining = Math.floor((stat.value / stat.max) * 100);
-            this.rollOptions.all[`hp-remaining:${stat.value}`] = true;
-            this.rollOptions.all[`hp-percent:${percentRemaining}`] = true;
+            setHitPointsRollOptions(this);
         }
 
         // Speeds
         const speeds = (system.attributes.speed = this.prepareSpeed("land"));
-        speeds.value = speeds.total;
         speeds.otherSpeeds = (["burrow", "climb", "fly", "swim"] as const).flatMap((m) => this.prepareSpeed(m) ?? []);
 
         // Armor Class
@@ -250,6 +242,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
                     adjustments: extractModifierAdjustments(modifierAdjustments, ["all", "ac", "dex-based"], "base"),
                 }),
             ],
+            details: system.attributes.ac.details,
         });
         this.armorClass = armorStatistic.dc;
         this.system.attributes.ac = armorStatistic.getTraceData();
@@ -276,7 +269,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
             });
             system.attributes.perception = mergeObject(
                 system.attributes.perception,
-                this.perception.getTraceData({ value: "mod", rollable: ["4.12", "5.0"] })
+                this.perception.getTraceData({ value: "mod" })
             );
         }
 
@@ -287,64 +280,6 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         for (const item of [...this.itemTypes.melee, ...generatedMelee]) {
             system.actions.push(strikeFromMeleeItem(item));
         }
-
-        // Spellcasting Entries
-        for (const entry of itemTypes.spellcastingEntry) {
-            const { ability, tradition } = entry;
-
-            // There are still some bestiary entries where these values are strings
-            entry.system.spelldc.dc = Number(entry.system.spelldc.dc);
-            entry.system.spelldc.value = Number(entry.system.spelldc.value);
-            // Modifier adjustments aren't implemented in `Statistic` yet
-            if (this.isElite) {
-                entry.system.spelldc.dc += 2;
-                entry.system.spelldc.value += 2;
-            } else if (this.isWeak) {
-                entry.system.spelldc.dc -= 2;
-                entry.system.spelldc.value -= 2;
-            }
-
-            const baseSelectors = ["all", `${ability}-based`, "spell-attack-dc"];
-            const attackSelectors = [
-                `${tradition}-spell-attack`,
-                "spell-attack",
-                "spell-attack-roll",
-                "attack",
-                "attack-roll",
-            ];
-            const saveSelectors = [`${tradition}-spell-dc`, "spell-dc"];
-
-            // Check Modifiers, calculate using the user configured value
-            const baseMod = Number(entry.system?.spelldc?.value ?? 0);
-            const attackModifiers = [new ModifierPF2e("PF2E.ModifierTitle", baseMod, "untyped")];
-
-            // Save Modifiers, reverse engineer using the user configured value - 10
-            const baseDC = Number(entry.system?.spelldc?.dc ?? 0);
-            const saveModifiers = [new ModifierPF2e("PF2E.ModifierTitle", baseDC - 10, "untyped")];
-
-            // Assign statistic data to the spellcasting entry
-            entry.statistic = new Statistic(this, {
-                slug: sluggify(`${entry.name}-spellcasting`),
-                label: CONFIG.PF2E.magicTraditions[tradition ?? "arcane"],
-                domains: baseSelectors,
-                rollOptions: entry.getRollOptions("spellcasting"),
-                check: {
-                    type: "spell-attack-roll",
-                    modifiers: attackModifiers,
-                    domains: attackSelectors,
-                },
-                dc: {
-                    modifiers: saveModifiers,
-                    domains: saveSelectors,
-                },
-            });
-        }
-
-        // A class-or-spell DC to go alongside the fake class DC
-        this.system.attributes.classOrSpellDC = ((): { value: number } => {
-            const spellDCs = this.itemTypes.spellcastingEntry.map((e) => e.system.spelldc.dc);
-            return { value: Math.max(...spellDCs, this.system.attributes.classDC.value) };
-        })();
 
         // Initiative
         this.initiative = new ActorInitiative(this);
@@ -396,11 +331,11 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         // Internal function to create trace data, since NPCs still use the lore item type
         system.skills = {};
         function createTrace(stat: Statistic, item?: LorePF2e<NPCPF2e>) {
-            const { ability, shortform } = objectHasKey(SKILL_EXPANDED, stat.slug)
+            const { ability, shortForm } = objectHasKey(SKILL_EXPANDED, stat.slug)
                 ? SKILL_EXPANDED[stat.slug]
-                : { ability: "int" as AbilityString, shortform: stat.slug };
-            system.skills[shortform] = {
-                ...stat.getTraceData({ rollable: ["4.12", "5.0"] }),
+                : { ability: "int" as AttributeString, shortForm: stat.slug };
+            system.skills[shortForm] = {
+                ...stat.getTraceData(),
                 base: item?.system.mod.value,
                 isLore: !!stat.lore,
                 itemID: item?.id,
@@ -413,9 +348,9 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         // Create default "untrained" skills for all basic types first
         const skills: Partial<CreatureSkills> = {};
         for (const skill of SKILL_LONG_FORMS) {
-            const { ability, shortform } = SKILL_EXPANDED[skill];
+            const { ability, shortForm } = SKILL_EXPANDED[skill];
             const domains = [skill, `${ability}-based`, "skill-check", `${ability}-skill-check`, "all"];
-            const name = game.i18n.localize(`PF2E.Skill${SKILL_DICTIONARY[shortform].capitalize()}`);
+            const name = game.i18n.localize(`PF2E.Skill${SKILL_DICTIONARY[shortForm].capitalize()}`);
 
             const statistic = new Statistic(this, {
                 slug: skill,
@@ -443,6 +378,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
             // override untrained skills if defined in the NPC data
             const skill = sluggify(item.name); // normalize skill name to lower-case and dash-separated words
             const ability = objectHasKey(SKILL_EXPANDED, skill) ? SKILL_EXPANDED[skill].ability : "int";
+            const label = objectHasKey(CONFIG.PF2E.skillList, skill) ? CONFIG.PF2E.skillList[skill] : item.name;
 
             const base = item.system.mod.value;
             const domains = [
@@ -456,7 +392,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
 
             const statistic = new Statistic(this, {
                 slug: skill,
-                label: item.name,
+                label,
                 ability,
                 lore: !objectHasKey(SKILL_EXPANDED, skill),
                 domains,
@@ -495,7 +431,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
                 button.style.width = "auto";
                 button.style.lineHeight = "14px";
                 button.innerHTML = game.i18n.localize("PF2E.ConsumableUseLabel");
-                return `${item.name} - ${game.i18n.localize("ITEM.TypeConsumable")} (${item.quantity}) ${
+                return `${item.name} - ${game.i18n.localize("TYPES.Item.consumable")} (${item.quantity}) ${
                     button.outerHTML
                 }`;
             }
@@ -523,7 +459,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
             } else {
                 // Get description from the bestiary glossary compendium.
                 const compendium = game.packs.get("pf2e.bestiary-ability-glossary-srd", { strict: true });
-                const packItem = (await compendium.getDocuments({ "system.slug": { $in: [attackEffect] } }))[0];
+                const packItem = (await compendium.getDocuments({ system: { slug: attackEffect } }))[0];
                 if (packItem instanceof ItemPF2e) {
                     const note = new RollNotePF2e({
                         selector: "all",
@@ -649,7 +585,7 @@ interface NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e |
     readonly _source: NPCSource;
     system: NPCSystemData;
 
-    get sheet(): NPCSheetPF2e<this>;
+    get sheet(): AbstractNPCSheet<this>;
 }
 
 export { NPCPF2e };

@@ -5,6 +5,7 @@ declare global {
         TAmbientLightDocument extends AmbientLightDocument<TScene | null>,
         TActiveEffect extends ActiveEffect<TActor | TItem | null>,
         TActor extends Actor<TTokenDocument | null>,
+        TActorDelta extends ActorDelta<TTokenDocument | null>,
         TChatLog extends ChatLog,
         TChatMessage extends ChatMessage,
         TCombat extends Combat,
@@ -19,7 +20,7 @@ declare global {
         TTokenDocument extends TokenDocument<TScene | null>,
         TWallDocument extends WallDocument<TScene | null>,
         TScene extends Scene,
-        TUser extends User,
+        TUser extends User<Actor<null>>,
         TEffectsCanvasGroup extends EffectsCanvasGroup
     > {
         /** Configure debugging flags to display additional information */
@@ -57,9 +58,13 @@ declare global {
                         id: string;
                         cls: typeof ActorSheet;
                         default: boolean;
+                        label: string;
+                        canConfigure: boolean;
+                        canBeDefault: boolean;
                     }
                 >
             >;
+            typeIcons: Record<string, string>;
             typeLabels: Record<string, string | undefined>;
         };
 
@@ -111,9 +116,13 @@ declare global {
                         id: string;
                         cls: typeof ItemSheet;
                         default: boolean;
+                        label: string;
+                        canConfigure: boolean;
+                        canBeDefault: boolean;
                     }
                 >
             >;
+            typeIcons: Record<string, string>;
             typeLabels: Record<string, string | undefined>;
         };
 
@@ -194,6 +203,11 @@ declare global {
                     context?: DocumentConstructionContext<TActiveEffect["parent"]>
                 ): TActiveEffect;
             };
+        };
+
+        /** Configuration for the ActorDelta embedded document type. */
+        ActorDelta: {
+            documentClass: ConstructorOf<TActorDelta>;
         };
 
         /** Configuration for the Combatant document */
@@ -338,7 +352,12 @@ declare global {
                 bright: number;
             };
 
-            losBackend: typeof ClockwiseSweepPolygon;
+            polygonBackends: {
+                sight: typeof ClockwiseSweepPolygon;
+                light: typeof ClockwiseSweepPolygon;
+                sound: typeof ClockwiseSweepPolygon;
+                move: typeof ClockwiseSweepPolygon;
+            };
 
             normalLightColor: number;
             maxZoom: number;
@@ -517,7 +536,7 @@ declare global {
         TextEditor: {
             enrichers: {
                 pattern: RegExp;
-                enricher: (match: RegExpMatchArray, options: EnrichHTMLOptions) => Promise<HTMLElement | null>;
+                enricher: (match: RegExpMatchArray, options: EnrichmentOptions) => Promise<HTMLElement | null>;
             }[];
         };
 

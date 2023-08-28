@@ -1,12 +1,13 @@
+import { ActorPF2e } from "@actor";
 import { StrikeData } from "@actor/data/base.ts";
 import { ItemPF2e } from "@item";
-import { ItemType } from "@item/data/index.ts";
 import { ChatMessagePF2e, DamageRollContextFlag } from "@module/chat-message/index.ts";
 import { ZeroToThree } from "@module/data.ts";
+import { extractNotes } from "@module/rules/helpers.ts";
 import { DEGREE_OF_SUCCESS_STRINGS } from "@system/degree-of-success.ts";
 import { DamageRoll, DamageRollDataPF2e } from "./roll.ts";
 import { DamageRollContext, DamageTemplate } from "./types.ts";
-import { ActorPF2e } from "@actor";
+import { localizer } from "@util";
 
 /** Create a chat message containing a damage roll */
 export class DamagePF2e {
@@ -25,14 +26,15 @@ export class DamagePF2e {
             context.secret = true;
         }
 
-        let flavor = `<strong>${data.name}</strong>`;
-        if (context.sourceType === "attack") {
-            const outcomeLabel = game.i18n.localize(`PF2E.Check.Result.Degree.Attack.${outcome}`);
-            flavor += ` (${outcomeLabel})`;
-        } else if (context.sourceType === "check") {
-            const outcomeLabel = game.i18n.localize(`PF2E.Check.Result.Degree.Check.${outcome}`);
-            flavor += ` (${outcomeLabel})`;
-        }
+        const subtitle = outcome
+            ? context.sourceType === "attack"
+                ? game.i18n.localize(`PF2E.Check.Result.Degree.Attack.${outcome}`)
+                : game.i18n.localize(`PF2E.Check.Result.Degree.Check.${outcome}`)
+            : null;
+        let flavor = await renderTemplate("systems/pf2e/templates/chat/action/header.hbs", {
+            title: data.name,
+            subtitle,
+        });
 
         if (data.traits) {
             interface ToTagsParams {
@@ -84,11 +86,16 @@ export class DamagePF2e {
                 : "";
 
             const properties = ((): string => {
-                if (item?.isOfType("weapon") && item.isRanged) {
-                    // Show the range increment for ranged weapons
-                    const { rangeIncrement } = item;
-                    const slug = `range-increment-${rangeIncrement}`;
-                    const label = game.i18n.format("PF2E.Item.Weapon.RangeIncrementN.Label", { range: rangeIncrement });
+                const localize = localizer("PF2E.Action.Range");
+                const { increment, max } =
+                    context.range ??
+                    (item?.isOfType("weapon") ? { increment: item.rangeIncrement, max: item.maxRange } : {});
+                if (increment || max) {
+                    // Show the range increment or max range as a tag
+                    const [slug, key, value] = increment
+                        ? [`range-increment-${increment}`, "IncrementN", increment]
+                        : [`range-max`, "MaxN", max];
+                    const label = localize(key, { n: value ?? null });
                     return toTags([slug], {
                         labels: { [slug]: label },
                         descriptions: { [slug]: "PF2E.Item.Weapon.RangeIncrementN.Hint" },
@@ -151,18 +158,27 @@ export class DamagePF2e {
 
         if (roll === null) return null;
 
-        const noteRollData = context.self?.item?.getRollData();
-        const damageNotes = await Promise.all(
-            data.notes
-                .filter((n) => n.outcome.length === 0 || (outcome && n.outcome.includes(outcome)))
-                .map(async (note) => await TextEditor.enrichHTML(note.text, { rollData: noteRollData, async: true }))
+        const syntheticNotes = context.self?.actor
+            ? extractNotes(context.self?.actor.synthetics.rollNotes, context.domains ?? [])
+            : [];
+        const allNotes = [...syntheticNotes, ...data.notes];
+        const filteredNotes = allNotes.filter(
+            (n) =>
+                (n.outcome.length === 0 || (outcome && n.outcome.includes(outcome))) &&
+                n.predicate.test(context.options)
         );
-        const notes = damageNotes.join("<br />");
-        flavor += `${notes}`;
+        const noteRollData = context.self?.item?.getRollData() ?? {};
+        const notesFlavor = (
+            await Promise.all(
+                filteredNotes.map(
+                    async (n) => await TextEditor.enrichHTML(n.text, { rollData: noteRollData, async: true })
+                )
+            )
+        ).join("\n");
+        flavor += notesFlavor;
 
         const { self, target } = context;
         const item = self?.item ?? null;
-        const origin = item ? { uuid: item.uuid, type: item.type as ItemType } : null;
         const targetFlag = target ? { actor: target.actor.uuid, token: target.token.uuid } : null;
 
         // Retrieve strike flags. Strikes need refactoring to use ids before we can do better
@@ -199,7 +215,7 @@ export class DamagePF2e {
             domains: context.domains ?? [],
             options: Array.from(context.options).sort(),
             mapIncreases: context.mapIncreases,
-            notes: context.notes ?? [],
+            notes: allNotes.map((n) => n.toObject()),
             secret: context.secret ?? false,
             rollMode,
             traits: context.traits ?? [],
@@ -213,12 +229,11 @@ export class DamagePF2e {
                 speaker: ChatMessagePF2e.getSpeaker({ actor: self?.actor, token: self?.token }),
                 flavor,
                 flags: {
-                    core: { canPopout: true },
                     pf2e: {
                         context: contextFlag,
                         target: targetFlag,
                         modifiers: data.modifiers?.map((m) => m.toObject()) ?? [],
-                        origin,
+                        origin: item?.getOriginData(),
                         strike,
                         preformatted: "both",
                     },

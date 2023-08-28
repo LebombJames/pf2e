@@ -54,12 +54,10 @@ function mapValues<K extends string | number | symbol, V, R>(
     }, {} as Record<K, R>);
 }
 
-type Optional<T> = T | null | undefined;
-
 /**
  * Returns true if the string is null, undefined or only consists of 1..n spaces
  */
-function isBlank(text: Optional<string>): text is null | undefined | "" {
+function isBlank(text: Maybe<string>): text is null | undefined | "" {
     return text === null || text === undefined || text.trim() === "";
 }
 
@@ -124,7 +122,7 @@ function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
 }
 
 /** Check if a value is present in the provided array. Especially useful for checking against literal tuples */
-function tupleHasValue<A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
+function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
     return array.includes(value);
 }
 
@@ -143,23 +141,13 @@ function pick<T extends object, K extends keyof T>(obj: T, keys: Iterable<K>): P
     }, {} as Pick<T, K>);
 }
 
-/** Returns a subset of an object with explicitly excluded keys */
-function omit<T extends object, K extends keyof T>(obj: T, keys: Iterable<K>): Omit<T, K> {
-    const clone = deepClone(obj);
-    for (const key of keys) {
-        delete clone[key];
-    }
-
-    return clone;
-}
-
 let intlNumberFormat: Intl.NumberFormat;
 /**
  * Return an integer string of a number, always with sign (+/-)
  * @param value The number to convert to a string
  * @param [emptyStringZero] If the value is zero, return an empty string
  */
-function signedInteger(value: number, { emptyStringZero = true } = {}): string {
+function signedInteger(value: number, { emptyStringZero = false } = {}): string {
     if (value === 0 && emptyStringZero) return "";
 
     const nf = (intlNumberFormat ??= new Intl.NumberFormat(game.i18n.lang, {
@@ -295,7 +283,7 @@ const actionGlyphMap: Record<string, string> = {
  * Returns a character that can be used with the Pathfinder action font
  * to display an icon. If null it returns empty string.
  */
-function getActionGlyph(action: string | number | null | { type: string; value: string | number | null }): string {
+function getActionGlyph(action: string | number | null | ActionCost): string {
     if (!action && action !== 0) return "";
 
     const value = typeof action !== "object" ? action : action.type === "action" ? action.value : action.type;
@@ -407,18 +395,14 @@ function sortedStringify(obj: object): string {
 /** Walk an object tree and replace any string values found according to a provided function */
 function recursiveReplaceString<T>(source: T, replace: (s: string) => string): T;
 function recursiveReplaceString(source: unknown, replace: (s: string) => string): unknown {
-    const clone = isObject(source) ? deepClone(source) : source;
+    const clone = Array.isArray(source) || isObject(source) ? deepClone(source) : source;
     if (typeof clone === "string") {
         return replace(clone);
+    } else if (Array.isArray(clone)) {
+        return clone.map((e) => recursiveReplaceString(e, replace));
     } else if (isObject<Record<string, unknown>>(clone)) {
-        for (const [key, value] of Object.entries(clone)) {
-            if (Array.isArray(value)) {
-                clone[key] = value.map((e: unknown) =>
-                    typeof e === "string" || isObject(e) ? recursiveReplaceString(e, replace) : e
-                );
-            } else if (typeof value === "string" || isObject(value)) {
-                clone[key] = recursiveReplaceString(value, replace);
-            }
+        for (const key of Object.keys(clone)) {
+            clone[key] = recursiveReplaceString(clone[key], replace);
         }
     }
 
@@ -460,13 +444,12 @@ function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePat
 }
 
 export {
-    configFromLocalization,
     ErrorPF2e,
     Fraction,
-    Optional,
     SlugCamel,
     addSign,
     applyNTimes,
+    configFromLocalization,
     fontAwesomeIcon,
     getActionGlyph,
     getActionIcon,
@@ -481,7 +464,6 @@ export {
     localizer,
     mapValues,
     objectHasKey,
-    omit,
     ordinal,
     padArray,
     parseHTML,

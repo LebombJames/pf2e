@@ -1,52 +1,28 @@
 .inventory-members {
-    display: flex;
-    color: var(--alt-dark);
-    flex-direction: column;
-    font-family: var(--sans-serif);
-    padding: 0;
-    margin: 0;
-    gap: 0.5rem;
-
     .box {
-        .summary-data {
-            & > div {
-                align-items: center;
-                display: flex;
-                margin: 0.5rem 0.25rem 0.5rem 0.5rem;
-                label {
-                    flex: 1;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .actor-link {
+        .content {
             align-items: center;
-            display: grid;
-            grid-template-areas:
-                "image name "
-                "image value";
-            grid-template-columns: auto 1fr;
+            display: flex;
             padding: 0.5rem;
             overflow: hidden;
 
             img {
-                border: none;
                 grid-area: image;
-                width: 2rem;
-                height: 2rem;
                 margin-right: 0.4rem;
-                object-fit: contain;
             }
-            .name {
-                grid-area: name;
-                font-weight: 700;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
+            .sub-data {
+                display: flex;
+                flex-direction: column;
+                gap: 0.125rem;
             }
-            .value {
-                grid-area: value;
+        }
+
+        footer {
+            align-items: center;
+            display: flex;
+            gap: 0.25rem;
+            i {
+                font-size: 0.8em;
             }
         }
 
@@ -60,9 +36,8 @@
 }
 
 .inventory {
-    @include scrollbar;
     flex: 1;
-    padding: 0 4px;
+    padding: 0.5rem 4px 0.5em 0.5em;
 
     display: flex;
     flex-direction: column;

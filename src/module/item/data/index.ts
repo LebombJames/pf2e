@@ -1,9 +1,10 @@
-import type { ActionItemSource } from "@item/action/data.ts";
+import type { AbilityItemSource } from "@item/ability/data.ts";
 import type { AfflictionSource } from "@item/affliction/data.ts";
 import type { AncestrySource } from "@item/ancestry/data.ts";
 import type { ArmorSource } from "@item/armor/data.ts";
 import type { BackgroundSource } from "@item/background/data.ts";
 import type { BookSource } from "@item/book/data.ts";
+import type { CampaignFeatureSource } from "@item/campaign-feature/data.ts";
 import type { ClassSource } from "@item/class/data.ts";
 import type { ConditionSource } from "@item/condition/data.ts";
 import type { ConsumableSource } from "@item/consumable/data.ts";
@@ -32,6 +33,7 @@ type NonPhysicalItemType =
     | "affliction"
     | "ancestry"
     | "background"
+    | "campaignFeature"
     | "class"
     | "condition"
     | "deity"
@@ -57,10 +59,11 @@ type PhysicalItemSource =
 
 type ItemSourcePF2e =
     | PhysicalItemSource
-    | ActionItemSource
+    | AbilityItemSource
     | AfflictionSource
     | AncestrySource
     | BackgroundSource
+    | CampaignFeatureSource
     | ClassSource
     | ConditionSource
     | DeitySource
@@ -93,7 +96,7 @@ interface TraitChatData {
 }
 
 export {
-    ActionItemSource,
+    AbilityItemSource,
     AncestrySource,
     ArmorSource,
     BackgroundSource,

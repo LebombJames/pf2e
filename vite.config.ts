@@ -1,13 +1,19 @@
+import { ConditionSource } from "@item/data/index.ts";
+import { execSync } from "child_process";
+import esbuild from "esbuild";
 import fs from "fs-extra";
-import * as Vite from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
-// eslint-disable-next-line import/default
-import checker from "vite-plugin-checker";
 import path from "path";
 import Peggy from "peggy";
-import packageJSON from "./package.json" assert { type: "json" };
+import * as Vite from "vite";
+import checker from "vite-plugin-checker";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import esbuild from "esbuild";
+import tsconfigPaths from "vite-tsconfig-paths";
+import packageJSON from "./package.json" assert { type: "json" };
+
+const CONDITION_SOURCES = ((): ConditionSource[] => {
+    const output = execSync("npm run build:conditions", { encoding: "utf-8" });
+    return JSON.parse(output.slice(output.indexOf("[")));
+})();
 
 const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
     const buildMode = mode === "production" ? "production" : "development";
@@ -42,7 +48,26 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                     { src: "README.md", dest: "." },
                     { src: "CONTRIBUTING.md", dest: "." },
                 ],
-            })
+            }),
+            {
+                name: "hide-compendiums",
+                apply: "build",
+                writeBundle: {
+                    async handler() {
+                        const file = fs.openSync(path.resolve(outDir, "system.json"), "r+");
+                        const data = JSON.parse(fs.readFileSync(file, { encoding: "utf8" }));
+                        const pack = data.packs.find(
+                            (p: { name: string; ownership: object }) => p.name === "kingmaker-features"
+                        );
+                        if (pack) {
+                            pack.ownership = { GAMEMASTER: "NONE" };
+                            fs.ftruncateSync(file);
+                            fs.writeSync(file, JSON.stringify(data, null, 4), 0);
+                        }
+                        fs.closeSync(file);
+                    },
+                },
+            }
         );
     } else {
         plugins.push(
@@ -92,12 +117,13 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         publicDir: "static",
         define: {
             BUILD_MODE: JSON.stringify(buildMode),
+            CONDITION_SOURCES: JSON.stringify(CONDITION_SOURCES),
             ROLL_PARSER: Peggy.generate(rollGrammar, { output: "source" }),
         },
         esbuild: { keepNames: true },
         build: {
             outDir,
-            emptyOutDir: true,
+            emptyOutDir: false, // fails if world is running due to compendium locks. We do it in "npm run clean" instead.
             minify: false,
             sourcemap: buildMode === "development",
             lib: {
@@ -136,5 +162,4 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
     };
 });
 
-// eslint-disable-next-line import/no-default-export
 export default config;

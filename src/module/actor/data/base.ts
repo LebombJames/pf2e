@@ -1,19 +1,19 @@
+import { ActorPF2e } from "@actor/base.ts";
 import { DexterityModifierCapData } from "@actor/character/types.ts";
 import { Abilities } from "@actor/creature/data.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
 import { StatisticModifier } from "@actor/modifiers.ts";
-import { AbilityString, ActorAlliance, SkillLongForm } from "@actor/types.ts";
+import { ActorAlliance, AttributeString, SkillLongForm } from "@actor/types.ts";
 import { ConsumablePF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/data/index.ts";
 import { DocumentSchemaRecord, Rarity, Size, ValueAndMaybeMax, ZeroToTwo } from "@module/data.ts";
 import { AutoChangeEntry } from "@module/rules/rule-element/ae-like.ts";
-import { RollParameters, AttackRollParams, DamageRollParams } from "@module/system/rolls.ts";
+import { AttackRollParams, DamageRollParams, RollParameters } from "@module/system/rolls.ts";
 import { CheckRoll } from "@system/check/roll.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
+import { StatisticTraceData } from "@system/statistic/data.ts";
 import { ActorType } from "./index.ts";
 import { ImmunityData, ImmunitySource, ResistanceData, ResistanceSource, WeaknessData, WeaknessSource } from "./iwr.ts";
-import { ActorPF2e } from "@actor/base.ts";
-import { StatisticTraceData } from "@system/statistic/data.ts";
 
 /** Base interface for all actor data */
 interface BaseActorSourcePF2e<TType extends ActorType, TSystemSource extends ActorSystemSource = ActorSystemSource>
@@ -64,8 +64,6 @@ interface ActorSystemData extends ActorSystemSource {
     actions?: StrikeData[];
     attributes: ActorAttributes;
     traits?: ActorTraitsData<string>;
-    /** Icons appearing in the Effects Tracker application */
-    tokenEffects: TemporaryEffect[];
     /** An audit log of automatic, non-modifier changes applied to various actor data nodes */
     autoChanges: Record<string, AutoChangeEntry[] | undefined>;
 }
@@ -88,12 +86,13 @@ interface ActorAttributes extends ActorAttributesSource {
         canGangUp: GangUpCircumstance[];
         /** Whether the actor can be flanked at all */
         flankable: boolean;
-        /** Given the actor is flankable, whether it is flat-footed when flanked */
-        flatFootable: FlatFootableCircumstance;
+        /** Given the actor is flankable, whether it is off-guard when flanked */
+        offGuardable: OffGuardableCircumstance;
     };
 }
 
 interface ActorHitPoints extends Required<BaseHitPointsSource> {
+    unrecoverable: number;
     negativeHealing: boolean;
 }
 
@@ -119,12 +118,12 @@ interface BaseHitPointsSource {
     details: string;
 }
 
-type FlatFootableCircumstance =
+type OffGuardableCircumstance =
     /** Flat-footable in all flanking situations */
     | true
     /** Flat-footable if the flanker's level is less than or equal to the actor's own */
     | number
-    /** Never flat-footable */
+    /** Never off-guardable */
     | false;
 
 type GangUpCircumstance =
@@ -135,14 +134,14 @@ type GangUpCircumstance =
 
 /** Data related to actor hitpoints. */
 // expose _modifiers field to allow initialization in data preparation
-type HitPointsData = StatisticModifier & Required<BaseHitPointsSource>;
+type HitPointsStatistic = StatisticModifier & ActorHitPoints;
 
 interface ActorTraitsSource<TTrait extends string> {
     /** Actual Pathfinder traits */
     value: TTrait[];
     /** The rarity of the actor (common, uncommon, etc.) */
     rarity?: Rarity;
-    /** The character size (such as 'med'). */
+    /** The actor size (such as 'med'). */
     size?: { value: Size };
 }
 
@@ -158,7 +157,7 @@ interface AbilityBasedStatistic {
     /** Describes how the value was computed. */
     breakdown: string;
     /** The ability which this save scales off of. */
-    ability?: AbilityString;
+    ability?: AttributeString;
 }
 
 /** A roll function which can be called to roll a given skill. */
@@ -244,8 +243,8 @@ interface StrikeData extends StatisticModifier {
 
     /** Ammunition choices and selected ammo if this is a ammo consuming weapon. */
     ammunition?: {
-        compatible: ConsumablePF2e[];
-        incompatible: ConsumablePF2e[];
+        compatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
+        incompatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
         selected: {
             id: string;
             compatible: boolean;
@@ -263,7 +262,7 @@ interface Rollable {
 }
 
 interface PrototypeTokenSourcePF2e extends foundry.data.PrototypeTokenSource {
-    flags: foundry.data.PrototypeToken["flags"] & {
+    flags: foundry.data.PrototypeToken<ActorPF2e>["flags"] & {
         pf2e?: {
             linkToActorSize?: boolean;
             autoscale?: boolean;
@@ -271,8 +270,8 @@ interface PrototypeTokenSourcePF2e extends foundry.data.PrototypeTokenSource {
     };
 }
 
-interface PrototypeTokenPF2e extends foundry.data.PrototypeToken {
-    flags: foundry.data.PrototypeToken["flags"] & {
+interface PrototypeTokenPF2e<TParent extends ActorPF2e | null> extends foundry.data.PrototypeToken<TParent> {
+    flags: foundry.data.PrototypeToken<NonNullable<TParent>>["flags"] & {
         pf2e: {
             linkToActorSize: boolean;
             autoscale: boolean;
@@ -297,7 +296,7 @@ export {
     BaseHitPointsSource,
     DamageRollFunction,
     GangUpCircumstance,
-    HitPointsData,
+    HitPointsStatistic,
     InitiativeData,
     PerceptionData,
     PrototypeTokenPF2e,

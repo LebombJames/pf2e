@@ -4,11 +4,15 @@ import { ItemPF2e } from "@item";
 import { ChatMessageSourcePF2e } from "@module/chat-message/data.ts";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { ActionDefaultOptions } from "@system/action-macros/index.ts";
-import { localizer } from "@util";
+import { localizer, tupleHasValue } from "@util";
 import { Duration } from "luxon";
 
+interface RestForTheNightOptions extends ActionDefaultOptions {
+    skipDialog?: boolean;
+}
+
 /** A macro for the Rest for the Night quasi-action */
-export async function restForTheNight(options: ActionDefaultOptions): Promise<ChatMessagePF2e[]> {
+export async function restForTheNight(options: RestForTheNightOptions): Promise<ChatMessagePF2e[]> {
     const actors = Array.isArray(options.actors) ? options.actors : [options.actors];
     const characters = actors.filter((a): a is CharacterPF2e => a?.type === "character");
     if (actors.length === 0) {
@@ -22,6 +26,7 @@ export async function restForTheNight(options: ActionDefaultOptions): Promise<Ch
         return element.outerHTML;
     })();
     if (
+        !options.skipDialog &&
         !(await Dialog.confirm({
             title: localize("Label"),
             content: promptMessage,
@@ -88,7 +93,7 @@ export async function restForTheNight(options: ActionDefaultOptions): Promise<Ch
         // Restore wand charges
         const items = actor.itemTypes;
         const wands = items.consumable.filter((i) => i.category === "wand" && i.uses.value < i.uses.max);
-        itemUpdates.push(...wands.map((wand) => ({ _id: wand.id, "system.charges.value": 1 })));
+        itemUpdates.push(...wands.map((wand) => ({ _id: wand.id, "system.charges.value": wand.uses.max })));
         const wandRecharged = itemUpdates.length > 0;
 
         // Restore reagents
@@ -113,7 +118,8 @@ export async function restForTheNight(options: ActionDefaultOptions): Promise<Ch
         const withFrequency = actionsAndFeats.filter(
             (a) =>
                 a.frequency &&
-                (a.frequency.per === "day" || Duration.fromISO(a.frequency.per) <= Duration.fromISO("PT8H")) &&
+                (tupleHasValue(["turn", "round", "day"], a.frequency.per) ||
+                    Duration.fromISO(a.frequency.per) <= Duration.fromISO("PT8H")) &&
                 a.frequency.value < a.frequency.max
         );
         if (withFrequency.length) {
@@ -139,7 +145,6 @@ export async function restForTheNight(options: ActionDefaultOptions): Promise<Ch
 
         // Collect temporary crafted items to remove
         const temporaryItems = actor.inventory.filter((i) => i.isTemporary).map((i) => i.id);
-
         const hasActorUpdates = Object.keys({ ...actorUpdates.attributes, ...actorUpdates.resources }).length > 0;
         const hasItemUpdates = itemUpdates.length > 0;
         const removeTempItems = temporaryItems.length > 0;

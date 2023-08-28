@@ -1,3 +1,4 @@
+import { ActorPF2e } from "@actor";
 import { CraftingEntryData } from "@actor/character/crafting/entry.ts";
 import { CraftingFormulaData } from "@actor/character/crafting/formula.ts";
 import {
@@ -5,41 +6,53 @@ import {
     BaseCreatureSource,
     CreatureAttributes,
     CreatureDetails,
-    CreatureHitPoints,
     CreatureResources,
     CreatureSystemData,
+    CreatureSystemSource,
     CreatureTraitsData,
     HeldShieldData,
     SaveData,
     SkillAbbreviation,
     SkillData,
 } from "@actor/creature/data.ts";
+import {
+    Alignment,
+    CreatureInitiativeSource,
+    CreatureSpeeds,
+    CreatureTraitsSource,
+    SenseData,
+} from "@actor/creature/index.ts";
 import { CreatureSensePF2e } from "@actor/creature/sense.ts";
 import {
     AbilityBasedStatistic,
+    ActorAttributesSource,
     ActorFlagsPF2e,
+    HitPointsStatistic,
     InitiativeData,
     PerceptionData,
     StrikeData,
     TraitViewData,
 } from "@actor/data/base.ts";
-import { AbilityString, SaveType } from "@actor/types.ts";
-import { FeatPF2e, WeaponPF2e } from "@item";
+import { AttributeString, MovementType, SaveType } from "@actor/types.ts";
+import { FeatPF2e, ItemPF2e, WeaponPF2e } from "@item";
 import { ArmorCategory } from "@item/armor/types.ts";
+import { ItemSystemData } from "@item/data/base.ts";
 import { ProficiencyRank } from "@item/data/index.ts";
 import { DeitySystemData } from "@item/deity/data.ts";
 import { DeityDomain } from "@item/deity/types.ts";
 import { MagicTradition } from "@item/spell/types.ts";
 import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
-import { ZeroToFour } from "@module/data.ts";
+import { ValueAndMax, ZeroToFour } from "@module/data.ts";
+import { DamageType } from "@system/damage/types.ts";
 import { PredicatePF2e } from "@system/predication.ts";
 import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
 import { StatisticTraceData } from "@system/statistic/data.ts";
 import { CharacterPF2e } from "./document.ts";
+import { FeatGroup } from "./feats.ts";
 import { WeaponAuxiliaryAction } from "./helpers.ts";
 import { CharacterSheetTabVisibility } from "./sheet.ts";
 
-interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemData> {
+interface CharacterSource extends BaseCreatureSource<"character", CharacterSystemSource> {
     flags: DeepPartial<CharacterFlags>;
 }
 
@@ -62,25 +75,143 @@ type CharacterFlags = ActorFlagsPF2e & {
     };
 };
 
-interface CharacterSkillData extends SkillData {
-    ability: AbilityString;
-    /** The proficiency rank ("TEML") */
-    rank: ZeroToFour;
-    /** Whether this skill is subject to an armor check penalty */
-    armor: boolean;
-    /** Is this skill a Lore skill? */
-    lore?: boolean;
+interface CharacterSystemSource extends CreatureSystemSource {
+    abilities?: Record<AttributeString, { mod: number }>;
+    attributes: CharacterAttributesSource;
+    details: CharacterDetailsSource;
+    traits: CharacterTraitsSource;
+    build?: CharacterBuildSource;
+    martial?: Record<string, { rank: number } | undefined>;
+    saves?: Record<SaveType, { rank: number } | undefined>;
+    resources: CharacterResourcesSource;
+    crafting?: { formulas: CraftingFormulaData[] };
+
+    /** Pathfinder Society Organized Play */
+    pfs: PathfinderSocietyData;
+}
+
+interface CharacterAttributesSource extends Omit<ActorAttributesSource, "perception"> {
+    hp: {
+        value: number;
+        temp: number;
+    };
+    speed: {
+        value: number;
+        otherSpeeds: {
+            type: Exclude<MovementType, "land">;
+            value: number;
+        }[];
+    };
+    initiative: CreatureInitiativeSource;
+
+    bonusLimitBulk: number;
+    bonusEncumbranceBulk: number;
+    sp: {
+        value: number;
+        max: number;
+        details: string;
+    };
+    resolve: {
+        value: number;
+        max: number;
+    };
+}
+
+interface CharacterTraitsSource extends Omit<CreatureTraitsSource, "rarity" | "size"> {
+    senses?: SenseData[];
+}
+
+interface CharacterDetailsSource {
+    alignment: { value: Alignment };
+    level: { value: number };
+    /** The key ability which class saves (and other class-related things) scale off of. */
+    keyability: { value: AttributeString };
+
+    /** How old the character is (user-provided field). */
+    age: { value: string };
+    /** Character height (user-provided field). */
+    height: { value: string };
+    /** Character weight (user-provided field). */
+    weight: { value: string };
+    /** Character gender/pronouns (user-provided field). */
+    gender: { value: string };
+    /** Character ethnicity (user-provided field). */
+    ethnicity: { value: string };
+    /** Character nationality (i.e, what nation they hail from; user-provided field). */
+    nationality: { value: string };
+    /** User-provided biography for their character; value is HTML. */
+    biography: {
+        /** Character appearance (user-provided field). value is HTML */
+        appearance: string;
+        /** Character Backstory (user-provided field). value is HTML */
+        backstory: string;
+        /** Character birthPlace (user-provided field). */
+        birthPlace: string;
+        /** Character attitude (user-provided field). */
+        attitude: string;
+        /** Character beliefs (user-provided field). */
+        beliefs: string;
+        /** Character likes (user-provided field). */
+        likes: string;
+        /** Character dislikes (user-provided field). */
+        dislikes: string;
+        /** Character catchphrases (user-provided field). */
+        catchphrases: string;
+        /** Campaign notes (user-provided field). value is HTML */
+        campaignNotes: string;
+        /** Character allies (user-provided field). value is HTML */
+        allies: string;
+        /** Character enemies (user-provided field). value is HTML */
+        enemies: string;
+        /** Character organaizations (user-provided field). value is HTML */
+        organaizations: string;
+    };
+
+    /** The amount of experience this character has. */
+    xp: {
+        /** The current experience value.  */
+        value: number;
+        /** The minimum amount of experience (almost always '0'). */
+        min: number;
+        /** The maximum amount of experience before level up (usually '1000', but may differ.) */
+        max: number;
+        /** COMPUTED: The percentage completion of the current level (value / max). */
+        pct: number;
+    };
+}
+
+interface CharacterBuildSource {
+    attributes?: AttributeBoostsSource;
+}
+
+interface AttributeBoostsSource {
+    /** Whether this PC's ability scores are being manually entered (aka custom) */
+    manual: boolean;
+
+    boosts: {
+        1?: AttributeString[];
+        5?: AttributeString[];
+        10?: AttributeString[];
+        15?: AttributeString[];
+        20?: AttributeString[];
+    };
+
+    /** Attribute Apex increase from Automatic Bonus Progression */
+    apex?: AttributeString | null;
+}
+
+interface CharacterResourcesSource {
+    heroPoints: ValueAndMax;
+    focus?: { value: number; max?: never };
 }
 
 /** The raw information contained within the actor data object for characters. */
-interface CharacterSystemData extends CreatureSystemData {
-    /** The six primary ability scores. */
+interface CharacterSystemData extends Omit<CharacterSystemSource, "customModifiers" | "resources">, CreatureSystemData {
+    /** The six primary attribute scores. */
     abilities: CharacterAbilities;
 
-    /** Character build data, currently containing ability boosts and flaws */
-    build: {
-        abilities: CharacterBuildingAbilitySystemData;
-    };
+    /** Character build data, currently containing attribute boosts and flaws */
+    build: CharacterBuildData;
 
     /** The three save types. */
     saves: CharacterSaves;
@@ -108,9 +239,6 @@ interface CharacterSystemData extends CreatureSystemData {
 
     traits: CharacterTraitsData;
 
-    /** Pathfinder Society Organized Play */
-    pfs: PathfinderSocietyData;
-
     /** Special strikes which the character can take. */
     actions: CharacterStrike[];
 
@@ -121,6 +249,20 @@ interface CharacterSystemData extends CreatureSystemData {
         formulas: CraftingFormulaData[];
         entries: Record<string, Partial<CraftingEntryData>>;
     };
+
+    exploration: string[];
+}
+
+interface CharacterSkillData extends SkillData {
+    ability: AttributeString;
+    /** The proficiency rank ("TEML") */
+    rank: ZeroToFour;
+    /** Whether this skill is subject to an armor check penalty */
+    armor: boolean;
+    /** Is this skill a Lore skill? */
+    lore?: boolean;
+    /** If this is a lore skill, what item it came from */
+    itemID?: string;
 }
 
 interface CharacterAbilityData extends AbilityData {
@@ -128,30 +270,21 @@ interface CharacterAbilityData extends AbilityData {
     base: number;
 }
 
-interface CharacterBuildingAbilitySourceData {
-    /** Whether this PC's ability scores are being manually entered (aka custom) */
-    manual: boolean;
-
-    boosts: {
-        1: AbilityString[];
-        5: AbilityString[];
-        10: AbilityString[];
-        15: AbilityString[];
-        20: AbilityString[];
-    };
+interface CharacterBuildData {
+    attributes: AttributeBoosts;
 }
 
 /**
  * Prepared system data for character ability scores. This is injected by ABC classes to complete it.
  */
-interface CharacterBuildingAbilitySystemData extends CharacterBuildingAbilitySourceData {
+interface AttributeBoosts extends AttributeBoostsSource {
     /** Key ability score options drawn from class and class features */
-    keyOptions: AbilityString[];
+    keyOptions: AttributeString[];
 
-    boosts: CharacterBuildingAbilitySourceData["boosts"] & {
-        ancestry: AbilityString[];
-        background: AbilityString[];
-        class: AbilityString | null;
+    boosts: Required<AttributeBoostsSource["boosts"]> & {
+        ancestry: AttributeString[];
+        background: AttributeString[];
+        class: AttributeString | null;
     };
 
     /** Number of remaining allowed boosts (UI and gradual ability boosts only) */
@@ -164,14 +297,16 @@ interface CharacterBuildingAbilitySystemData extends CharacterBuildingAbilitySou
     };
 
     flaws: {
-        ancestry: AbilityString[];
+        ancestry: AttributeString[];
     };
+
+    apex: AttributeString | null;
 }
 
-type CharacterAbilities = Record<AbilityString, CharacterAbilityData>;
+type CharacterAbilities = Record<AttributeString, CharacterAbilityData>;
 
 interface CharacterSaveData extends SaveData {
-    ability: AbilityString;
+    ability: AttributeString;
     /** The proficiency rank ("TEML") */
     rank: ZeroToFour;
 }
@@ -240,6 +375,14 @@ interface CharacterStrike extends StrikeData {
     altUsages: CharacterStrike[];
     auxiliaryActions: WeaponAuxiliaryAction[];
     weaponTraits: TraitViewData[];
+    versatileOptions: VersatileWeaponOption[];
+}
+
+interface VersatileWeaponOption {
+    value: DamageType;
+    selected: boolean;
+    label: string;
+    glyph: string | null;
 }
 
 /** A Pathfinder Society Faction */
@@ -271,80 +414,32 @@ interface PathfinderSocietyData {
 
 interface CharacterResources extends CreatureResources {
     /** The current and maximum number of hero points */
-    heroPoints: { value: number; max: number };
+    heroPoints: ValueAndMax;
     /** The current and maximum number of invested items */
-    investiture: { value: number; max: number };
-    crafting: {
-        infusedReagents: { value: number; max: number };
-    };
+    investiture: ValueAndMax;
+    crafting: { infusedReagents: ValueAndMax };
 }
 
 interface CharacterPerception extends PerceptionData {
     rank: ZeroToFour;
 }
 
-type CharacterDetails = Omit<CreatureDetails, "creature"> & {
-    /** The key ability which class saves (and other class-related things) scale off of. */
-    keyability: { value: AbilityString };
-
-    /** How old the character is (user-provided field). */
-    age: { value: string };
-    /** Character height (user-provided field). */
-    height: { value: string };
-    /** Character weight (user-provided field). */
-    weight: { value: string };
-    /** Character gender/pronouns (user-provided field). */
-    gender: { value: string };
-    /** Character ethnicity (user-provided field). */
-    ethnicity: { value: string };
-    /** Character nationality (i.e, what nation they hail from; user-provided field). */
-    nationality: { value: string };
-    /** User-provided biography for their character; value is HTML. */
-    biography: {
-        /** Character appearance (user-provided field). value is HTML */
-        appearance: string;
-        /** Character Backstory (user-provided field). value is HTML */
-        backstory: string;
-        /** Character birthPlace (user-provided field). */
-        birthPlace: string;
-        /** Character attitude (user-provided field). */
-        attitude: string;
-        /** Character beliefs (user-provided field). */
-        beliefs: string;
-        /** Character likes (user-provided field). */
-        likes: string;
-        /** Character dislikes (user-provided field). */
-        dislikes: string;
-        /** Character catchphrases (user-provided field). */
-        catchphrases: string;
-        /** Campaign notes (user-provided field). value is HTML */
-        campaignNotes: string;
-        /** Character allies (user-provided field). value is HTML */
-        allies: string;
-        /** Character enemies (user-provided field). value is HTML */
-        enemies: string;
-        /** Character organaizations (user-provided field). value is HTML */
-        organaizations: string;
-    };
-
-    /** The amount of experience this character has. */
-    xp: {
-        /** The current experience value.  */
-        value: number;
-        /** The minimum amount of experience (almost always '0'). */
-        min: number;
-        /** The maximum amount of experience before level up (usually '1000', but may differ.) */
-        max: number;
-        /** COMPUTED: The percentage completion of the current level (value / max). */
-        pct: number;
-    };
-
+interface CharacterDetails extends CreatureDetails, CharacterDetailsSource {
     /** Convenience information for easy access when the item class instance isn't available */
-    ancestry: { name: string; trait: string } | null;
+    ancestry: {
+        name: string;
+        trait: string;
+        /** An "adopted" ancestry (typically gained through the Adopted Ancestry feat) */
+        adopted: string | null;
+        /** A versatile ancestry trait (such as "orc" for being a half-orc) */
+        versatile: string | null;
+        /** All ancestries and versatile heritages the character "counts as" when selecting ancestry feats */
+        countsAs: string[];
+    } | null;
     heritage: { name: string; trait: string | null } | null;
     class: { name: string; trait: string } | null;
     deities: CharacterDeities;
-};
+}
 
 interface CharacterDeities {
     primary: DeityDetails | null;
@@ -356,7 +451,7 @@ type DeityDetails = Pick<DeitySystemData, "alignment" | "skill"> & {
     weapons: BaseWeaponType[];
 };
 
-interface CharacterAttributes extends CreatureAttributes {
+interface CharacterAttributes extends Omit<CharacterAttributesSource, AttributesSourceOmission>, CreatureAttributes {
     /** The perception statistic */
     perception: CharacterPerception;
     /** Used for saves related to class abilities */
@@ -375,10 +470,6 @@ interface CharacterAttributes extends CreatureAttributes {
     ancestryhp: number;
     /** The number of hands this character has free */
     handsFree: number;
-    /** A bonus to the maximum amount of bulk that this character can carry. */
-    bonusLimitBulk: number;
-    /** A bonus to the maximum amount of bulk that this character can carry without being encumbered. */
-    bonusEncumbranceBulk: number;
 
     /** The number of familiar abilities this character's familiar has access to. */
     familiarAbilities: { value: number };
@@ -386,17 +477,7 @@ interface CharacterAttributes extends CreatureAttributes {
     /** Data related to character hitpoints. */
     hp: CharacterHitPoints;
 
-    /** Data related to character stamina, when using the variant stamina rules. */
-    sp: {
-        /** The current number of stamina points. */
-        value: number;
-        /** The minimum number of stamina points (almost always '0'). */
-        min: number;
-        /** The maximum number of stamina points. */
-        max: number;
-        /** Any details about stamina points. */
-        details: string;
-    };
+    speed: CreatureSpeeds;
 
     /**
      * Data related to the currently equipped shield. This is copied from the shield data itself and exists to
@@ -413,32 +494,47 @@ interface CharacterAttributes extends CreatureAttributes {
     /** Whether this actor is under a battle form polymorph effect */
     battleForm: boolean;
 }
+type AttributesSourceOmission = "immunities" | "weaknesses" | "resistances";
 
-interface CharacterHitPoints extends CreatureHitPoints {
+interface CharacterHitPoints extends HitPointsStatistic {
     recoveryMultiplier: number;
     recoveryAddend: number;
 }
 
-interface CharacterTraitsData extends CreatureTraitsData {
+interface CharacterTraitsData extends CreatureTraitsData, Omit<CharacterTraitsSource, "size" | "value"> {
     senses: CreatureSensePF2e[];
 }
 
-interface SlottedFeat {
-    id: string;
-    level: number | string;
-    feat?: FeatPF2e;
+/** Any document that is similar enough to a feat/feature to be used as a feat for the purposes of feat groups */
+interface FeatLike<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
+    category: string;
+    group: FeatGroup<Exclude<TParent, null>, this> | null;
+    isFeat: boolean;
+    isFeature: boolean;
+    system: ItemSystemData & {
+        location: string | null;
+    };
 }
 
-interface BonusFeat {
-    feat: FeatPF2e;
+interface SlottedFeat<T extends FeatLike = FeatPF2e> {
+    id: string;
+    level: number | string;
+    feat?: T;
+}
+
+interface BonusFeat<T extends FeatLike = FeatPF2e> {
+    feat: T;
 }
 
 export {
     BaseWeaponProficiencyKey,
     BonusFeat,
     CategoryProficiencies,
+    CharacterAbilities,
     CharacterAttributes,
+    CharacterAttributesSource,
     CharacterDetails,
+    CharacterDetailsSource,
     CharacterFlags,
     CharacterProficiency,
     CharacterResources,
@@ -448,8 +544,11 @@ export {
     CharacterSource,
     CharacterStrike,
     CharacterSystemData,
+    CharacterSystemSource,
     CharacterTraitsData,
+    CharacterTraitsSource,
     ClassDCData,
+    FeatLike,
     LinkedProficiency,
     MagicTraditionProficiencies,
     MartialProficiencies,

@@ -6,6 +6,7 @@ import {
     ActorSystemSource,
     BaseActorSourcePF2e,
 } from "@actor/data/base.ts";
+import { PartyCampaign } from "./types.ts";
 
 type PartySource = BaseActorSourcePF2e<"party", PartySystemSource>;
 
@@ -13,6 +14,7 @@ interface PartySystemSource extends ActorSystemSource {
     attributes: PartyAttributesSource;
     details: PartyDetailsSource;
     traits?: never;
+    campaign?: PartyCampaignSource;
 }
 
 interface PartyAttributesSource extends ActorAttributesSource {
@@ -33,12 +35,13 @@ interface PartyDetailsSource {
 }
 
 interface MemberData {
-    uuid: ActorUUID | TokenDocumentUUID;
+    uuid: ActorUUID;
 }
 
-interface PartySystemData extends Omit<PartySystemSource, "attributes">, Omit<ActorSystemData, "traits"> {
+interface PartySystemData extends Omit<PartySystemSource, "attributes" | "campaign">, Omit<ActorSystemData, "traits"> {
     attributes: PartyAttributes;
     details: PartyDetails;
+    campaign: PartyCampaign;
 }
 
 interface PartyAttributes
@@ -47,8 +50,11 @@ interface PartyAttributes
     immunities: never[];
     weaknesses: never[];
     resistances: never[];
+    speed: { total: number };
 }
 
 interface PartyDetails extends PartyDetailsSource, ActorDetails {}
 
-export { MemberData, PartySource, PartySystemData };
+type PartyCampaignSource = { type: string } & Record<string, unknown>;
+
+export { MemberData, PartyCampaignSource, PartySource, PartySystemData };

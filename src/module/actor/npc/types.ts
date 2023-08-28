@@ -1,17 +1,17 @@
 import { CreatureSheetData } from "@actor/creature/types.ts";
-import { HitPointsData, PerceptionData } from "@actor/data/base.ts";
+import { HitPointsStatistic, PerceptionData } from "@actor/data/base.ts";
 import { MovementType, SaveType, SkillAbbreviation } from "@actor/types.ts";
-import { ActionItemPF2e, EffectPF2e, ItemPF2e } from "@item";
+import { AbilityItemPF2e, EffectPF2e, ItemPF2e } from "@item";
 import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { ZeroToFour } from "@module/data.ts";
 import { TraitTagifyEntry } from "@module/sheet/helpers.ts";
-import { NPCPF2e, NPCStrike } from "./index.ts";
-import { NPCAttributes, NPCSaveData, NPCSkillData, NPCSystemData } from "./data.ts";
 import { ArmorClassTraceData } from "@system/statistic/armor-class.ts";
+import { NPCAttributes, NPCSaveData, NPCSkillData, NPCSystemData } from "./data.ts";
+import { NPCPF2e, NPCStrike } from "./index.ts";
 
 interface ActionsDetails {
     label: string;
-    actions: NPCSheetItemData<ActionItemPF2e<NPCPF2e>>[];
+    actions: NPCSheetItemData<AbilityItemPF2e<NPCPF2e>>[];
 }
 
 interface NPCActionSheetData {
@@ -45,7 +45,7 @@ interface NPCSystemSheetData extends NPCSystemData {
     actions: NPCStrikeSheetData[];
     attributes: NPCAttributes & {
         ac: ArmorClassTraceData & WithAdjustments;
-        hp: HitPointsData & WithAdjustments;
+        hp: HitPointsStatistic & WithAdjustments;
         perception: PerceptionData & WithAdjustments & WithRank;
     };
     details: NPCSystemData["details"] & {
@@ -70,7 +70,7 @@ interface NPCSpellcastingSheetData extends SpellcastingSheetData {
 }
 
 /** Additional fields added in sheet data preparation */
-interface NPCSheetData<TActor extends NPCPF2e> extends CreatureSheetData<TActor> {
+interface NPCSheetData<TActor extends NPCPF2e = NPCPF2e> extends CreatureSheetData<TActor> {
     actions: NPCActionSheetData;
     data: NPCSystemSheetData;
     items: NPCSheetItemData<ItemPF2e<TActor>>[];

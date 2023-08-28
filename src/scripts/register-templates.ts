@@ -9,12 +9,12 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/dice/damage-tooltip.hbs",
 
         // PC Sheet Tooltips and Section Partials
-        "systems/pf2e/templates/actors/character/partials/abilities.hbs",
+        "systems/pf2e/templates/actors/character/partials/attributes.hbs",
         "systems/pf2e/templates/actors/character/partials/background.hbs",
+        "systems/pf2e/templates/actors/character/partials/elemental-blast.hbs",
         "systems/pf2e/templates/actors/character/partials/detail-item.hbs",
         "systems/pf2e/templates/actors/character/partials/feat-slot.hbs",
         "systems/pf2e/templates/actors/character/partials/header.hbs",
-        "systems/pf2e/templates/actors/character/partials/modifiers-tooltip.hbs",
         "systems/pf2e/templates/actors/character/partials/traits.hbs",
 
         // PC Sheet Sidebar
@@ -43,13 +43,21 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/actors/hazard/partials/header.hbs",
         "systems/pf2e/templates/actors/hazard/partials/sidebar.hbs",
 
+        // Kingdom Sheet Partials
+        "systems/pf2e/templates/actors/party/kingdom/main.hbs",
+        "systems/pf2e/templates/actors/party/kingdom/activities.hbs",
+        "systems/pf2e/templates/actors/party/kingdom/advancement.hbs",
+
         // Shared Actor Sheet Partials
+        "systems/pf2e/templates/actors/partials/action.hbs",
+        "systems/pf2e/templates/actors/partials/carry-type.hbs",
         "systems/pf2e/templates/actors/partials/coinage.hbs",
+        "systems/pf2e/templates/actors/partials/dying-pips.hbs",
+        "systems/pf2e/templates/actors/partials/effects.hbs",
         "systems/pf2e/templates/actors/partials/inventory.hbs",
         "systems/pf2e/templates/actors/partials/item-line.hbs",
-        "systems/pf2e/templates/actors/partials/carry-type.hbs",
-        "systems/pf2e/templates/actors/partials/conditions.hbs",
-        "systems/pf2e/templates/actors/partials/dying-pips.hbs",
+        "systems/pf2e/templates/actors/partials/modifiers-tooltip.hbs",
+        "systems/pf2e/templates/actors/partials/toggles.hbs",
         "systems/pf2e/templates/actors/crafting-entry-alchemical.hbs",
         "systems/pf2e/templates/actors/crafting-entry-list.hbs",
         "systems/pf2e/templates/actors/spellcasting-spell-list.hbs",
@@ -91,6 +99,8 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/items/book-details.hbs",
         "systems/pf2e/templates/items/book-sidebar.hbs",
         "systems/pf2e/templates/items/treasure-sidebar.hbs",
+        "systems/pf2e/templates/items/campaign-feature-details.hbs",
+        "systems/pf2e/templates/items/campaign-feature-sidebar.hbs",
         "systems/pf2e/templates/items/class-details.hbs",
         "systems/pf2e/templates/items/consumable-details.hbs",
         "systems/pf2e/templates/items/consumable-sidebar.hbs",
@@ -119,6 +129,7 @@ export function registerTemplates(): void {
         // Item Sheet Partials (sub-partials)
         "systems/pf2e/templates/items/partials/ability-activation.hbs",
         "systems/pf2e/templates/items/partials/duration.hbs",
+        "systems/pf2e/templates/items/partials/self-applied-effect.hbs",
 
         // Loot partials
         "systems/pf2e/templates/actors/loot/inventory.hbs",
@@ -137,7 +148,9 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/actors/vehicle/tabs/vehicle-effects.hbs",
 
         // Compendium Browser Partials
-        "systems/pf2e/templates/compendium-browser/browser-settings.hbs",
+        "systems/pf2e/templates/compendium-browser/settings/settings.hbs",
+        "systems/pf2e/templates/compendium-browser/settings/pack-settings.hbs",
+        "systems/pf2e/templates/compendium-browser/settings/source-settings.hbs",
         "systems/pf2e/templates/compendium-browser/filters.hbs",
 
         // Action Partial

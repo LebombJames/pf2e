@@ -1,10 +1,10 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
 import { ItemPF2e } from "@item";
+import { ItemSourcePF2e } from "@item/data/index.ts";
 import { RuleElements, RuleElementSource } from "@module/rules/index.ts";
 import {
     createSheetTags,
     createTagifyTraits,
-    maintainTagifyFocusInRender,
+    maintainFocusInRender,
     processTagifyInSubmitData,
 } from "@module/sheet/helpers.ts";
 import { InlineRollLinks } from "@scripts/ui/inline-roll-links.ts";
@@ -37,7 +37,7 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
         options.height = 460;
         options.classes = options.classes.concat(["pf2e", "item"]);
         options.template = "systems/pf2e/templates/items/sheet.hbs";
-        options.scrollY = [".tab.active"];
+        options.scrollY = [".tab.active", ".inventory-details"];
         options.tabs = [
             {
                 navSelector: ".tabs",
@@ -124,7 +124,7 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
             hasSidebar: this.item.isOfType("condition", "lore"),
             hasDetails: true,
             sidebarTitle: game.i18n.format("PF2E.Item.SidebarSummary", {
-                type: game.i18n.localize(`ITEM.Type${this.item.type.capitalize()}`),
+                type: game.i18n.localize(`TYPES.Item.${this.item.type}`),
             }),
             cssClass: this.isEditable ? "editable" : "locked",
             editable: this.isEditable,
@@ -172,8 +172,8 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
                     }))
                 ),
             },
-            sidebarTemplate: () => `systems/pf2e/templates/items/${item.type}-sidebar.hbs`,
-            detailsTemplate: () => `systems/pf2e/templates/items/${item.type}-details.hbs`,
+            sidebarTemplate: () => `systems/pf2e/templates/items/${sluggify(item.type)}-sidebar.hbs`,
+            detailsTemplate: () => `systems/pf2e/templates/items/${sluggify(item.type)}-details.hbs`,
             proficiencies: CONFIG.PF2E.proficiencyLevels, // lore only, will be removed later
         };
     }
@@ -210,15 +210,13 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
     /** Get NPC attack effect options */
     protected getAttackEffectOptions(): Record<string, string> {
         // Melee attack effects can be chosen from the NPC's actions and consumable items
-        const attackEffectOptions: Record<string, string> =
-            this.actor?.items
-                .filter((i) => i.type === "action" || i.type === "consumable")
-                .reduce((options, item) => {
-                    const key = item.slug ?? sluggify(item.name);
-                    return mergeObject(options, { [key]: item.name }, { inplace: false });
-                }, CONFIG.PF2E.attackEffects) ?? {};
-
-        return attackEffectOptions;
+        const items = this.actor?.items.contents ?? [];
+        return items
+            .filter((i) => i.isOfType("action", "consumable"))
+            .reduce((options, item) => {
+                const key = item.slug ?? sluggify(item.name);
+                return { ...options, [key]: item.name };
+            }, deepClone(CONFIG.PF2E.attackEffects));
     }
 
     override async activateEditor(
@@ -489,7 +487,8 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
     /** Hide the sheet-config button unless there is more than one sheet option. */
     protected override _getHeaderButtons(): ApplicationHeaderButton[] {
         const buttons = super._getHeaderButtons();
-        const hasMultipleSheets = Object.keys(CONFIG.Item.sheetClasses[this.item.type]).length > 1;
+        const hasMultipleSheets =
+            Object.values(CONFIG.Item.sheetClasses[this.item.type]).filter((c) => c.canConfigure).length > 1;
         const sheetButton = buttons.find((button) => button.class === "configure-sheet");
         if (!hasMultipleSheets && sheetButton) {
             buttons.splice(buttons.indexOf(sheetButton), 1);
@@ -559,22 +558,23 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
                 rules[idx] = mergeObject(rules[idx] ?? {}, value);
 
                 // Call any special handlers in the rule element forms
-                this.ruleElementForms[idx]?._updateObject(rules[idx]);
+                this.ruleElementForms[idx]?.updateObject(rules[idx]);
 
                 // predicate is special cased as always json. Later on extend such parsing to more things
-                const predicateValue = value.predicate as unknown;
-                if (typeof predicateValue === "string" && predicateValue.trim() === "") {
-                    delete rules[idx].predicate;
-                } else {
-                    try {
-                        rules[idx].predicate = JSON.parse(predicateValue as string);
-                    } catch (error) {
-                        if (error instanceof Error) {
-                            ui.notifications.error(
-                                game.i18n.format("PF2E.ErrorMessage.RuleElementSyntax", { message: error.message })
-                            );
-                            console.warn("Syntax error in rule element definition.", error.message, predicateValue);
-                            throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+                const predicateValue = value.predicate;
+                if (typeof predicateValue === "string") {
+                    if (predicateValue.trim() === "") {
+                        delete rules[idx].predicate;
+                    } else {
+                        try {
+                            rules[idx].predicate = JSON.parse(predicateValue);
+                        } catch (error) {
+                            if (error instanceof Error) {
+                                ui.notifications.error(
+                                    game.i18n.format("PF2E.ErrorMessage.RuleElementSyntax", { message: error.message })
+                                );
+                                throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+                            }
                         }
                     }
                 }
@@ -588,6 +588,6 @@ export class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem> {
 
     /** Overriden _render to maintain focus on tagify elements */
     protected override async _render(force?: boolean, options?: RenderOptions): Promise<void> {
-        await maintainTagifyFocusInRender(this, () => super._render(force, options));
+        await maintainFocusInRender(this, () => super._render(force, options));
     }
 }

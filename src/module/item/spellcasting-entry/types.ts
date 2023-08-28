@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { PhysicalItemPF2e } from "@item/physical/index.ts";
 import { SpellPF2e } from "@item/spell/document.ts";
 import { MagicTradition } from "@item/spell/types.ts";
@@ -14,7 +14,7 @@ interface BaseSpellcastingEntry<TActor extends ActorPF2e | null = ActorPF2e | nu
     actor: TActor;
     sort: number;
     category: SpellcastingCategory;
-    ability?: AbilityString;
+    attribute?: AttributeString;
     isFlexible: boolean;
     isFocusPool: boolean;
     isInnate: boolean;
@@ -27,6 +27,7 @@ interface BaseSpellcastingEntry<TActor extends ActorPF2e | null = ActorPF2e | nu
     system?: SpellcastingEntrySystemData;
 
     getSheetData(): Promise<SpellcastingSheetData>;
+    getRollOptions?(prefix: "spellcasting"): string[];
 
     canCast(spell: SpellPF2e, options?: { origin?: PhysicalItemPF2e }): boolean;
 
@@ -34,7 +35,7 @@ interface BaseSpellcastingEntry<TActor extends ActorPF2e | null = ActorPF2e | nu
 }
 
 interface SpellcastingEntry<TActor extends ActorPF2e | null> extends BaseSpellcastingEntry<TActor> {
-    ability: AbilityString;
+    attribute: AttributeString;
     statistic: Statistic;
 }
 
@@ -61,7 +62,7 @@ interface SpellcastingSheetData
     statistic: StatisticChatData | null;
     hasCollection: boolean;
     flexibleAvailable?: { value: number; max: number } | null;
-    levels: SpellcastingSlotLevel[];
+    levels: SpellcastingSlotRank[];
     spellPrepList: Record<number, SpellPrepEntry[]> | null;
     isFlexible?: boolean;
     isFocusPool?: boolean;
@@ -72,7 +73,7 @@ interface SpellcastingSheetData
     showSlotlessLevels?: boolean;
 }
 
-interface SpellcastingSlotLevel {
+interface SpellcastingSlotRank {
     label: string;
     level: ZeroToTen;
     isCantrip: boolean;
@@ -115,5 +116,5 @@ export {
     SpellcastingEntry,
     SpellcastingEntryPF2eCastOptions,
     SpellcastingSheetData,
-    SpellcastingSlotLevel,
+    SpellcastingSlotRank,
 };

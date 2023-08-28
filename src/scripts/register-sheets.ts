@@ -2,10 +2,10 @@ import { CharacterSheetPF2e } from "@actor/character/sheet.ts";
 import { FamiliarSheetPF2e } from "@actor/familiar/sheet.ts";
 import { HazardSheetPF2e } from "@actor/hazard/sheet.ts";
 import { LootSheetPF2e } from "@actor/loot/sheet.ts";
-import { NPCSheetPF2e } from "@actor/npc/sheet.ts";
+import { NPCSheetPF2e, SimpleNPCSheet } from "@actor/npc/sheet.ts";
 import { VehicleSheetPF2e } from "@actor/vehicle/sheet.ts";
 import { ItemSheetPF2e } from "@item/sheet/base.ts";
-import { ActionSheetPF2e } from "@item/action/sheet.ts";
+import { ActionSheetPF2e } from "@item/ability/sheet.ts";
 import { AfflictionSheetPF2e } from "@item/affliction/sheet.ts";
 import { AncestrySheetPF2e } from "@item/ancestry/sheet.ts";
 import { ArmorSheetPF2e } from "@item/armor/sheet.ts";
@@ -31,6 +31,7 @@ import { UserConfigPF2e } from "@module/user/sheet.ts";
 import { TokenConfigPF2e, TokenDocumentPF2e } from "@scene/index.ts";
 import { SceneConfigPF2e } from "@scene/sheet.ts";
 import { PartySheetPF2e } from "@actor/party/sheet.ts";
+import { CampaignFeatureSheetPF2e } from "@item/campaign-feature/sheet.ts";
 
 export function registerSheets(): void {
     const sheetLabel = game.i18n.localize("PF2E.SheetLabel");
@@ -42,9 +43,8 @@ export function registerSheets(): void {
     Actors.unregisterSheet("core", ActorSheet);
 
     const localizeType = (type: string) => {
-        const docType = type in CONFIG.PF2E.Actor.documentClasses ? "ACTOR" : "ITEM";
-        const camelized = type[0].toUpperCase() + type.slice(1).toLowerCase();
-        return game.i18n.localize(`${docType}.Type${camelized}`);
+        const docType = type in CONFIG.PF2E.Actor.documentClasses ? "Actor" : "Item";
+        return game.i18n.localize(`TYPES.${docType}.${type}`);
     };
 
     Actors.registerSheet("pf2e", CharacterSheetPF2e, {
@@ -59,6 +59,15 @@ export function registerSheets(): void {
         label: game.i18n.format(sheetLabel, { type: localizeType("npc") }),
         makeDefault: true,
     });
+
+    // Register simple NPC sheet
+    if (BUILD_MODE === "development") {
+        Actors.registerSheet("pf2e", SimpleNPCSheet, {
+            types: ["npc"],
+            label: "PF2E.Actor.NPC.SimpleSheet",
+            canBeDefault: false,
+        });
+    }
 
     // Register Hazard Sheet
     Actors.registerSheet("pf2e", HazardSheetPF2e, {
@@ -114,6 +123,7 @@ export function registerSheets(): void {
         ["background", BackgroundSheetPF2e],
         ["backpack", ContainerSheetPF2e],
         ["book", BookSheetPF2e],
+        ["campaignFeature", CampaignFeatureSheetPF2e],
         ["class", ClassSheetPF2e],
         ["consumable", ConsumableSheetPF2e],
         ["deity", DeitySheetPF2e],

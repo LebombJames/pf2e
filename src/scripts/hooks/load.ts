@@ -15,6 +15,7 @@ import {
     TokenConfigPF2e,
     TokenDocumentPF2e,
 } from "@scene/index.ts";
+import { ActorDeltaPF2e } from "@scene/token-document/actor-delta.ts";
 import { monkeyPatchFoundry } from "@scripts/🐵🩹.ts";
 import { CheckRoll, StrikeAttackRoll } from "@system/check/index.ts";
 import { DamageInstance, DamageRoll } from "@system/damage/roll.ts";
@@ -27,6 +28,7 @@ export const Load = {
         CONFIG.ActiveEffect.documentClass = ActiveEffectPF2e;
         CONFIG.Actor.collection = ActorsPF2e;
         CONFIG.Actor.documentClass = ActorProxyPF2e;
+        CONFIG.ActorDelta.documentClass = ActorDeltaPF2e;
         CONFIG.AmbientLight.documentClass = AmbientLightDocumentPF2e;
         CONFIG.ChatMessage.documentClass = ChatMessagePF2e;
         CONFIG.Combat.documentClass = EncounterPF2e;
@@ -48,18 +50,41 @@ export const Load = {
             CONFIG.Dice.termTypes[TermCls.name] = TermCls;
         }
 
+        // Add functions to the `Math` namespace for use in `Roll` formulas
+        Math.eq = (a: number, b: number): boolean => a === b;
+        Math.gt = (a: number, b: number): boolean => a > b;
+        Math.gte = (a: number, b: number): boolean => a >= b;
+        Math.lt = (a: number, b: number): boolean => a < b;
+        Math.lte = (a: number, b: number): boolean => a <= b;
+        Math.ne = (a: number, b: number): boolean => a !== b;
+        Math.ternary = (condition: boolean | number, ifTrue: number, ifFalse: number): number =>
+            condition ? ifTrue : ifFalse;
+
         // Mystery Man but with a drop shadow
         Actor.DEFAULT_ICON = "systems/pf2e/icons/default-icons/mystery-man.svg";
 
-        Roll.MATH_PROXY = mergeObject(Roll.MATH_PROXY, {
-            eq: (a: number, b: number) => a === b,
-            gt: (a: number, b: number) => a > b,
-            gte: (a: number, b: number) => a >= b,
-            lt: (a: number, b: number) => a < b,
-            lte: (a: number, b: number) => a <= b,
-            ne: (a: number, b: number) => a !== b,
-            ternary: (condition: boolean | number, ifTrue: number, ifFalse: number) => (condition ? ifTrue : ifFalse),
-        });
+        // Inline link icons
+        CONFIG.Actor.typeIcons = {
+            familiar: "fa-solid fa-cat",
+            hazard: "fa-solid fa-hill-rockslide",
+            loot: "fa-solid fa-treasure-chest",
+        };
+        CONFIG.Item.typeIcons = {
+            action: "fa-solid fa-person-running-fast",
+            affliction: "fa-solid fa-biohazard",
+            armor: "fa-solid fa-shirt-long-sleeve",
+            backpack: "fa-solid fa-sack",
+            book: "fa-solid fa-book",
+            condition: "fa-solid fa-face-zany",
+            consumable: "fa-solid fa-flask-round-potion",
+            deity: "fa-solid fa-hamsa",
+            effect: "fa-solid fa-person-rays",
+            equipment: "fa-solid fa-hat-cowboy",
+            feat: "fa-solid fa-medal",
+            spell: "fa-solid fa-sparkles",
+            treasure: "fa-solid fa-gem",
+            weapon: "fa-solid fa-sword",
+        };
 
         // Make available immediately on load for module subclassing
         window.AutomaticBonusProgression = AutomaticBonusProgression;
@@ -84,6 +109,7 @@ export const Load = {
                 for (const app of apps) {
                     app.render();
                 }
+                if (path.includes("effects-panel")) game.pf2e.effectPanel.render();
             });
         }
     },

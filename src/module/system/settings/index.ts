@@ -4,6 +4,7 @@ import { ItemPF2e, ItemSheetPF2e } from "@item";
 import { StatusEffects } from "@module/canvas/status-effects.ts";
 import { MigrationRunner } from "@module/migration/runner/index.ts";
 import { isImageOrVideoPath } from "@util";
+import * as R from "remeda";
 import { AutomationSettings } from "./automation.ts";
 import { HomebrewElements } from "./homebrew/menu.ts";
 import { MetagameSettings } from "./metagame.ts";
@@ -159,7 +160,11 @@ export function registerSettings(): void {
         default: "icons/svg/skull.svg",
         type: String,
         onChange: (choice?: string) => {
-            if (isImageOrVideoPath(choice)) CONFIG.controlIcons.defeated = choice;
+            if (isImageOrVideoPath(choice)) {
+                StatusEffects.reset();
+            } else if (!choice) {
+                game.settings.set("pf2e", "deathIcon", "icons/svg/skull.svg");
+            }
         },
     });
 
@@ -194,14 +199,6 @@ export function registerSettings(): void {
         config: true,
         default: true,
         type: Boolean,
-    });
-
-    game.settings.register("pf2e", "worldSystemVersion", {
-        name: "World System Version",
-        scope: "world",
-        config: false,
-        default: game.system.version,
-        type: String,
     });
 
     game.settings.registerMenu("pf2e", "automation", {
@@ -261,13 +258,28 @@ export function registerSettings(): void {
     });
     WorldClockSettings.registerSettings();
 
+    game.settings.register("pf2e", "campaignType", {
+        name: "PF2E.SETTINGS.CampaignType.Name",
+        hint: "PF2E.SETTINGS.CampaignType.Hint",
+        scope: "world",
+        config: false, // 🤫
+        default: "none",
+        choices: R.mapToObj(["none", "kingmaker"], (key) => [key, `PF2E.SETTINGS.CampaignType.Choices.${key}`]),
+        type: String,
+        onChange: async () => {
+            await resetActors(game.actors.filter((a) => a.isOfType("party")));
+            ui.sidebar.render();
+        },
+    });
+
     game.settings.register("pf2e", "campaignFeats", {
-        name: CONFIG.PF2E.SETTINGS.CampaignFeats.name,
-        hint: CONFIG.PF2E.SETTINGS.CampaignFeats.hint,
+        name: "PF2E.SETTINGS.CampaignFeats.Name",
+        hint: "PF2E.SETTINGS.CampaignFeats.Hint",
         scope: "world",
         config: true,
         default: false,
         type: Boolean,
+        onChange: () => resetActors(),
     });
 
     // Secret for now until the user side is complete and a UI is built
@@ -277,6 +289,7 @@ export function registerSettings(): void {
         config: false,
         default: [],
         type: Array,
+        onChange: () => resetActors(),
     });
 
     // This only exists to not break existing macros (yet). We'll keep it for a few versions
@@ -302,9 +315,48 @@ export function registerSettings(): void {
         },
     });
 
+    registerTrackingSettings();
+
     if (BUILD_MODE === "production") {
         registerWorldSchemaVersion();
     }
+}
+
+/** Registers temporary settings for tracking things like first time launches or active party */
+function registerTrackingSettings(): void {
+    // Whether the world's first party actor has been created
+    game.settings.register("pf2e", "createdFirstParty", {
+        name: "Created First Party", // Doesn't appear in any UI
+        scope: "world",
+        config: false,
+        default: false,
+        type: Boolean,
+    });
+
+    game.settings.register("pf2e", "activeParty", {
+        name: "Active Party",
+        config: false,
+        type: String,
+        default: "",
+        onChange: () => ui.actors.render(true),
+    });
+
+    game.settings.register("pf2e", "worldSystemVersion", {
+        name: "World System Version",
+        scope: "world",
+        config: false,
+        default: game.system.version,
+        type: String,
+    });
+
+    // Show the GM information about the remaster
+    game.settings.register("pf2e", "seenRemasterJournalEntry", {
+        name: "Seen Remaster journal entry?",
+        scope: "world",
+        config: false,
+        default: false,
+        type: Boolean,
+    });
 }
 
 function registerWorldSchemaVersion(): void {
@@ -315,5 +367,6 @@ function registerWorldSchemaVersion(): void {
         config: true,
         default: MigrationRunner.LATEST_SCHEMA_VERSION,
         type: Number,
+        requiresReload: true,
     });
 }

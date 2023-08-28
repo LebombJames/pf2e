@@ -1,3 +1,4 @@
+import { AttributeString } from "@actor/types.ts";
 import { ItemFlagsPF2e } from "@item/data/base.ts";
 import {
     BasePhysicalItemSource,
@@ -24,7 +25,6 @@ import {
     WeaponReloadTime,
     WeaponTrait,
 } from "./types.ts";
-import { AbilityString } from "@actor/types.ts";
 
 type WeaponSource = BasePhysicalItemSource<"weapon", WeaponSystemSource> & {
     flags: DeepPartial<WeaponFlags>;
@@ -35,6 +35,11 @@ type WeaponFlags = ItemFlagsPF2e & {
         /** Whether this attack is from a battle form */
         battleForm?: boolean;
         comboMeleeUsage: boolean;
+        /**
+         * Used for NPC attacks generated from strike rule elements: if numeric, it will be used as the NPC attack's
+         * modifier, and damage will also not be recalculated.
+         */
+        fixedAttack?: number | null;
     };
 };
 
@@ -112,13 +117,14 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
         value: WeaponReloadTime | null;
     };
     usage: {
+        canBeAmmo?: boolean;
         value: "worngloves" | "held-in-one-hand" | "held-in-one-plus-hands" | "held-in-two-hands";
     };
     MAP: {
         value: string;
     };
     /** An optional override of the default ability modifier used in attack rolls with this weapon  */
-    ability?: AbilityString | null;
+    ability?: AttributeString | null;
     /** A combination weapon's melee usage */
     meleeUsage?: ComboWeaponMeleeUsage;
     /** Whether the weapon is a "specific magic weapon" */
@@ -152,7 +158,7 @@ interface WeaponSystemSource extends Investable<PhysicalSystemSource> {
 }
 
 interface WeaponSystemData
-    extends Omit<WeaponSystemSource, "identification" | "price" | "temporary">,
+    extends Omit<WeaponSystemSource, "hp" | "identification" | "price" | "temporary">,
         Investable<PhysicalSystemData> {
     traits: WeaponTraits;
     baseItem: BaseWeaponType | null;
@@ -171,8 +177,11 @@ interface WeaponSystemData
         effects: [];
     };
     material: WeaponMaterialData;
-    usage: UsageDetails & WeaponSystemSource["usage"];
+    usage: WeaponUsageDetails;
+    meleeUsage?: Required<ComboWeaponMeleeUsage>;
 }
+
+type WeaponUsageDetails = UsageDetails & Required<WeaponSystemSource["usage"]>;
 
 interface WeaponTraits extends WeaponTraitsSource {
     otherTags: OtherWeaponTag[];
@@ -190,7 +199,8 @@ interface WeaponMaterialData {
 interface ComboWeaponMeleeUsage {
     damage: { type: DamageType; die: DamageDieSize };
     group: MeleeWeaponGroup;
-    traits: WeaponTrait[];
+    traits?: WeaponTrait[];
+    traitToggles?: { modular: DamageType | null; versatile: DamageType | null };
 }
 
 export {

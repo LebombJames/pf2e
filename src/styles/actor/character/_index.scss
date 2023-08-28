@@ -69,6 +69,7 @@ nav.sheet-navigation {
         .controls {
             display: flex;
         }
+
         button {
             background: transparent;
             border-radius: 2px 2px 0 0;
@@ -84,16 +85,21 @@ nav.sheet-navigation {
             outline: none;
             text-transform: uppercase;
             width: auto;
+
+            &.has-unallocated {
+                @include requires-user-attention;
+            }
         }
     }
 
     // general item-image properties
     .item-image {
-        display: flex;
         cursor: pointer;
-        position: relative;
+        display: flex;
         font-size: var(--font-size-16);
         height: 24px;
+        min-width: 24px;
+        position: relative;
         width: 24px;
 
         img {
@@ -147,6 +153,27 @@ nav.sheet-navigation {
             ol {
                 list-style: none;
             }
+        }
+    }
+
+    .blue-button {
+        align-items: center;
+        background: var(--secondary);
+        border: black;
+        border-radius: 2px;
+        box-shadow: inset 0 0 0 1px rgb(0 0 0 / 50%);
+        color: white;
+        display: flex;
+        font-family: var(--serif);
+        font-weight: 500;
+        gap: 0.25em;
+        line-height: 1.8em;
+        justify-content: center;
+        margin: 0;
+        padding: 0 0.5em;
+
+        &:hover {
+            text-shadow: 0 0 4px white;
         }
     }
 }

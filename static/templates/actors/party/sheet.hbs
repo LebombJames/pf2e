@@ -7,22 +7,35 @@
         </div>
         <div class="details">
             <div class="title">
-                <input name="name" class="name" type="text" value="{{actor.name}}" placeholder="{{localize "PF2E.CharacterNamePlaceholder"}}"/>
-                <label>{{localize "ACTOR.TypeParty"}}</label>
+                <input
+                    name="name"
+                    class="name"
+                    type="text"
+                    value="{{actor.name}}"
+                    placeholder="{{localize "PF2E.CharacterNamePlaceholder"}}"
+                    {{disabled (not @root.options.editable)}}/>
+                <label>{{localize "TYPES.Actor.party"}}</label>
             </div>
         </div>
     </header>
 
     <nav class="sub-nav">
-        <a data-tab="overview">{{localize "PF2E.Actor.Party.Tabs.Overview"}}</a>
-        <a data-tab="inventory">{{localize "PF2E.Actor.Party.Tabs.Inventory"}}</a>
+        {{#unless restricted}}
+            <a data-tab="overview">{{localize "PF2E.Actor.Party.Tabs.Overview"}}</a>
+        {{/unless}}
+        <a data-tab="exploration">{{localize "PF2E.Actor.Party.Tabs.Exploration"}}</a>
+        <a data-tab="inventory">{{localize "PF2E.Actor.Party.Tabs.Stash"}}</a>
         {{#if orphaned}}
             <a data-tab="orphaned">{{localize "PF2E.Actor.Party.Tabs.Orphaned"}}</a>
         {{/if}}
     </nav>
 
     <section class="container">
-        <div class="tab" data-tab="overview" data-region="overview">
+        {{#unless restricted}}
+            <div class="tab" data-tab="overview" data-region="overview"></div>
+        {{/unless}}
+
+        <div class="tab" data-tab="exploration" data-region="exploration">
         </div>
 
         <div class="tab" data-tab="inventory">

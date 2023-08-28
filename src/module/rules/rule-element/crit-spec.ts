@@ -3,17 +3,16 @@ import { ActorType } from "@actor/data/index.ts";
 import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { MeleePF2e, WeaponPF2e } from "@item";
 import { RollNotePF2e } from "@module/notes.ts";
-import type { BooleanField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { CritSpecEffect } from "../synthetics.ts";
 import { RuleElementPF2e, RuleElementSchema } from "./index.ts";
-
-const { fields } = foundry.data;
 
 /** Substitute a pre-determined result for a check's D20 roll */
 class CritSpecRuleElement extends RuleElementPF2e<CritSpecRuleSchema> {
     static override validActorTypes: ActorType[] = ["character", "npc"];
 
     static override defineSchema(): CritSpecRuleSchema {
+        const { fields } = foundry.data;
         return {
             ...super.defineSchema(),
             alternate: new fields.BooleanField(),

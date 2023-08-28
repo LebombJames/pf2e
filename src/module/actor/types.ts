@@ -7,13 +7,13 @@ import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/config/iwr.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import { CheckDC } from "@system/degree-of-success.ts";
+import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { PredicatePF2e } from "@system/predication.ts";
 import { StatisticCheck } from "@system/statistic/index.ts";
 import { StrikeData, TraitViewData } from "./data/base.ts";
 import { ModifierPF2e } from "./modifiers.ts";
 import {
-    ABILITY_ABBREVIATIONS,
+    ATTRIBUTE_ABBREVIATIONS,
     DC_SLUGS,
     MOVEMENT_TYPES,
     SAVE_TYPES,
@@ -37,7 +37,7 @@ interface ActorInstances<TParent extends TokenDocumentPF2e | null> {
 type EmbeddedItemInstances<TParent extends ActorPF2e> = {
     [K in keyof ItemInstances<TParent>]: ItemInstances<TParent>[K][];
 };
-type AbilityString = SetElement<typeof ABILITY_ABBREVIATIONS>;
+type AttributeString = SetElement<typeof ATTRIBUTE_ABBREVIATIONS>;
 
 interface ActorDimensions {
     length: number;
@@ -67,7 +67,6 @@ interface AuraData {
 
 interface AuraEffectData {
     uuid: string;
-    level: number | null;
     affects: "allies" | "enemies" | "all";
     events: ("enter" | "turn-start" | "turn-end")[];
     save: {
@@ -144,13 +143,23 @@ interface RollContextParams<
     options: Set<string>;
     /** Whether the request is for display in a sheet view. If so, targets are not considered */
     viewOnly?: boolean;
+    /** A direct way of informing a check is part of a melee action: it is otherwise inferred from the attack item */
+    melee?: boolean;
 }
 
 interface CheckContextParams<
     TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData,
     TItem extends AttackItem | null = AttackItem | null
 > extends RollContextParams<TStatistic, TItem> {
-    targetedDC: DCSlug;
+    defense: string;
+}
+
+interface DamageRollContextParams<
+    TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null,
+    TItem extends AttackItem | null = AttackItem | null
+> extends RollContextParams<TStatistic, TItem> {
+    /** An outcome of a preceding check roll */
+    outcome?: DegreeOfSuccessString | null;
 }
 
 interface CheckContext<
@@ -170,6 +179,8 @@ interface ApplyDamageParams {
     /** Predicate statements from the damage roll */
     rollOptions?: Set<string>;
     shieldBlockRequest?: boolean;
+    breakdown?: string[];
+    notes?: string[];
 }
 
 type ImmunityType = keyof typeof immunityTypes;
@@ -180,7 +191,7 @@ type UnaffectedType = SetElement<typeof UNAFFECTED_TYPES>;
 type IWRType = ImmunityType | WeaknessType | ResistanceType;
 
 export {
-    AbilityString,
+    AttributeString,
     ActorAlliance,
     ActorDimensions,
     ActorInstances,
@@ -192,6 +203,7 @@ export {
     CheckContext,
     CheckContextParams,
     DCSlug,
+    DamageRollContextParams,
     EmbeddedItemInstances,
     IWRType,
     ImmunityType,

@@ -1,8 +1,9 @@
 import { ActorPF2e } from "@actor";
-import { ClassDCData } from "@actor/character/data.ts";
+import { AttributeString } from "@actor/types.ts";
 import { SpellcastingEntryPF2e } from "@item";
 import { SpellcastingEntrySource, SpellcastingEntrySystemSource } from "@item/spellcasting-entry/data.ts";
-import { omit, pick } from "@util/misc.ts";
+import { pick } from "@util/misc.ts";
+import * as R from "remeda";
 
 function createEmptySpellcastingEntry(actor: ActorPF2e): SpellcastingEntryPF2e<ActorPF2e> {
     return new SpellcastingEntryPF2e(
@@ -47,19 +48,29 @@ class SpellcastingCreateAndEditDialog extends FormApplication<SpellcastingEntryP
     override async getData(): Promise<SpellcastingCreateAndEditDialogSheetData> {
         const { actor } = this;
 
+        const extraStatistics = actor.synthetics.statistics.values();
         const classDCs = actor.isOfType("character")
             ? Object.values(actor.system.proficiencies.classDCs).filter((cdc) => cdc.rank > 0)
             : [];
 
+        const selectedStatistic = actor.getStatistic(this.object.system.proficiency.slug);
+
         return {
             ...(await super.getData()),
             actor,
-            classDCs,
-            data: this.object.toObject().system,
+            system: this.object.toObject().system,
+            statistics: [
+                ...extraStatistics,
+                ...classDCs.map((c) => ({
+                    slug: c.slug,
+                    label: game.i18n.format("PF2E.Actor.Character.ClassDC.LabelSpecific", { class: c.label }),
+                })),
+            ],
             magicTraditions: CONFIG.PF2E.magicTraditions,
-            spellcastingTypes: omit(CONFIG.PF2E.preparationType, ["ritual"]),
-            abilities: CONFIG.PF2E.abilities,
-            hasAbility: this.#canSetAbility(),
+            spellcastingTypes: R.omit(CONFIG.PF2E.preparationType, ["ritual"]),
+            attributes: CONFIG.PF2E.abilities,
+            isAttributeConfigurable: this.#canSetAbility(),
+            selectedAttribute: selectedStatistic?.ability ?? this.object.attribute,
         };
     }
 
@@ -162,12 +173,13 @@ class SpellcastingCreateAndEditDialog extends FormApplication<SpellcastingEntryP
 
 interface SpellcastingCreateAndEditDialogSheetData extends FormApplicationData<SpellcastingEntryPF2e<ActorPF2e>> {
     actor: ActorPF2e;
-    data: SpellcastingEntrySystemSource;
-    classDCs: ClassDCData[];
+    system: SpellcastingEntrySystemSource;
     magicTraditions: ConfigPF2e["PF2E"]["magicTraditions"];
+    statistics: { slug: string; label: string }[];
     spellcastingTypes: Omit<ConfigPF2e["PF2E"]["preparationType"], "ritual">;
-    abilities: ConfigPF2e["PF2E"]["abilities"];
-    hasAbility: boolean;
+    attributes: ConfigPF2e["PF2E"]["abilities"];
+    isAttributeConfigurable: boolean;
+    selectedAttribute: AttributeString;
 }
 
 export async function createSpellcastingDialog(

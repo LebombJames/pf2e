@@ -1,40 +1,36 @@
-import { DamageDicePF2e, DeferredValueParams, ModifierAdjustment, ModifierPF2e } from "@actor/modifiers.ts";
+import {
+    DamageDicePF2e,
+    DeferredValueParams,
+    ModifierAdjustment,
+    ModifierPF2e,
+    StatisticModifier,
+    TestableDeferredValueParams,
+} from "@actor/modifiers.ts";
 import { ConditionSource, EffectSource, ItemSourcePF2e } from "@item/data/index.ts";
 import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import { DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
 import { RollTwiceOption } from "@system/rolls.ts";
 import { isObject, pick } from "@util";
+import * as R from "remeda";
 import { BracketedValue, RuleElementPF2e } from "./rule-element/index.ts";
 import { DamageDiceSynthetics, RollSubstitution, RollTwiceSynthetic, RuleElementSynthetics } from "./synthetics.ts";
 
 /** Extracts a list of all cloned modifiers across all given keys in a single list. */
 function extractModifiers(
-    synthetics: Pick<RuleElementSynthetics, "modifierAdjustments" | "statisticsModifiers">,
+    synthetics: Pick<RuleElementSynthetics, "modifierAdjustments" | "modifiers">,
     selectors: string[],
     options: DeferredValueParams = {}
 ): ModifierPF2e[] {
-    const { modifierAdjustments, statisticsModifiers } = synthetics;
+    const { modifierAdjustments, modifiers: syntheticModifiers } = synthetics;
     const modifiers = Array.from(new Set(selectors))
-        .flatMap((s) => statisticsModifiers[s] ?? [])
+        .flatMap((s) => syntheticModifiers[s] ?? [])
         .flatMap((d) => d(options) ?? []);
     for (const modifier of modifiers) {
         modifier.adjustments = extractModifierAdjustments(modifierAdjustments, selectors, modifier.slug);
     }
 
     return modifiers;
-}
-
-/** */
-function extractDamageModifiers(...args: Parameters<typeof extractModifiers>): {
-    persistent: ModifierPF2e[];
-    main: ModifierPF2e[];
-} {
-    const synthetics = extractModifiers(...args);
-    return {
-        main: synthetics.filter((m) => m.category !== "persistent"),
-        persistent: synthetics.filter((m) => m.category === "persistent"),
-    };
 }
 
 function extractModifierAdjustments(
@@ -54,9 +50,29 @@ function extractNotes(rollNotes: Record<string, RollNotePF2e[]>, selectors: stri
 function extractDamageDice(
     deferredDice: DamageDiceSynthetics,
     selectors: string[],
-    options: DeferredValueParams = {}
+    options: TestableDeferredValueParams
 ): DamageDicePF2e[] {
     return selectors.flatMap((s) => deferredDice[s] ?? []).flatMap((d) => d(options) ?? []);
+}
+
+function extractDamageSynthetics(
+    actor: ActorPF2e,
+    selectors: string[],
+    options: TestableDeferredValueParams & { extraModifiers?: ModifierPF2e[] }
+): { modifiers: ModifierPF2e[]; dice: DamageDicePF2e[] } {
+    const extractedModifiers = extractModifiers(actor.synthetics, selectors, options);
+    const dice = extractDamageDice(actor.synthetics.damageDice, selectors, options);
+
+    const groupedModifiers = R.groupBy([options.extraModifiers ?? [], extractedModifiers].flat(), (m) =>
+        m.category === "persistent" ? "persistent" : "main"
+    );
+
+    const modifiers = [
+        ...new StatisticModifier("damage", groupedModifiers.main ?? [], options.test).modifiers,
+        ...new StatisticModifier("persistent", groupedModifiers.persistent ?? [], options.test).modifiers,
+    ];
+
+    return { modifiers, dice };
 }
 
 async function extractEphemeralEffects({
@@ -163,12 +179,12 @@ async function processPreUpdateActorHooks(
 
 export {
     extractDamageDice,
-    extractDamageModifiers,
+    extractDamageSynthetics,
     extractDegreeOfSuccessAdjustments,
+    extractEphemeralEffects,
     extractModifierAdjustments,
     extractModifiers,
     extractNotes,
-    extractEphemeralEffects,
     extractRollSubstitutions,
     extractRollTwice,
     isBracketedValue,

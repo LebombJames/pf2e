@@ -1,6 +1,7 @@
 import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
 import { ActorType } from "@actor/data/index.ts";
-import { ItemPF2e, WeaponPF2e } from "@item";
+import { AttributeString } from "@actor/types.ts";
+import { WeaponPF2e } from "@item";
 import { NPCAttackTrait } from "@item/melee/data.ts";
 import { WeaponSource } from "@item/weapon/data.ts";
 import {
@@ -18,15 +19,12 @@ import type {
     ArrayField,
     BooleanField,
     FilePathField,
-    ModelPropsFromSchema,
     NumberField,
     SchemaField,
     StringField,
 } from "types/foundry/common/data/fields.d.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
-import { AbilityString } from "@actor/types.ts";
-
-const { fields } = foundry.data;
+import { ResolvableValueField } from "./data.ts";
 
 /**
  * Create an ephemeral strike on an actor
@@ -35,10 +33,10 @@ const { fields } = foundry.data;
 class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     protected static override validActorTypes: ActorType[] = ["character", "npc"];
 
-    constructor(source: StrikeSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions) {
-        source.img ??= item.img;
+    constructor(source: StrikeSource, options: RuleElementOptions) {
+        source.img ??= options.parent.img;
 
-        super(source, item, options);
+        super(source, options);
 
         // Force a label of "Fist" if the `fist` shorthand is being used
         if (this.fist) {
@@ -53,6 +51,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     }
 
     static override defineSchema(): StrikeSchema {
+        const { fields } = foundry.data;
         return {
             ...super.defineSchema(),
             category: new fields.StringField({
@@ -123,16 +122,9 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
             damage: new fields.SchemaField({
                 base: new fields.SchemaField({
                     damageType: new fields.StringField({ required: true, blank: false, initial: "bludgeoning" }),
-                    dice: new fields.NumberField({
-                        required: true,
-                        nullable: false,
-                        integer: true,
-                        min: 0,
-                        max: 8,
-                        initial: 1,
-                    }),
+                    dice: new ResolvableValueField({ required: true, nullable: false, initial: 1 }),
                     die: new fields.StringField({ required: true, choices: CONFIG.PF2E.damageDie, initial: "d4" }),
-                    modifier: new fields.NumberField({ nullable: false, min: 0, initial: 0 }),
+                    modifier: new fields.NumberField({ nullable: false, integer: true, initial: 0 }),
                 }),
             }),
             img: new fields.FilePathField({
@@ -140,6 +132,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                 nullable: false,
                 initial: () => "systems/pf2e/icons/default-icons/melee.svg",
             }),
+            attackModifier: new fields.NumberField({ integer: true, positive: true, nullable: true, initial: null }),
             replaceAll: new fields.BooleanField({ required: false, nullable: false, initial: undefined }),
             replaceBasicUnarmed: new fields.BooleanField({ required: false, nullable: false, initial: undefined }),
             battleForm: new fields.BooleanField({ required: false, nullable: false, initial: undefined }),
@@ -169,10 +162,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     }
 
     /** Keep shorthand `fist` source data to its minimum form */
-    protected override _initializeSource(
-        source: object,
-        options?: DataModelConstructionOptions<null>
-    ): this["_source"] {
+    protected override _initializeSource(source: object, options: RuleElementOptions): this["_source"] {
         return "fist" in source && source.fist === true
             ? (source as this["_source"])
             : super._initializeSource(source, options);
@@ -240,8 +230,16 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
             return this.failValidation("Unrecognized damage type");
         }
 
+        const dice = ((): number => {
+            const resolvedDice = Number(this.resolveValue(this.damage.base.dice));
+            return Math.clamped(Math.trunc(resolvedDice), 0, 8);
+        })();
+        if (Number.isNaN(dice)) {
+            return this.failValidation("dice does not resolve to a number");
+        }
+
         if (predicatePassed) {
-            const weapon = this.#constructWeapon(damageType);
+            const weapon = this.#constructWeapon(damageType, dice);
             const slug = weapon.slug ?? sluggify(weapon.name);
             this.actor.synthetics.strikes.set(slug, weapon);
         }
@@ -266,13 +264,19 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
      * Construct a `WeaponPF2e` instance for use as the synthetic strike
      * @param damageType The resolved damage type for the strike
      */
-    #constructWeapon(damageType: DamageType): WeaponPF2e<ActorPF2e> {
+    #constructWeapon(damageType: DamageType, dice: number): WeaponPF2e<ActorPF2e> {
+        const actorIsNPC = this.actor.isOfType("npc");
         const source: PreCreate<WeaponSource> = deepClone({
             _id: this.item.id,
             name: this.label,
             type: "weapon",
             img: this.img,
-            flags: { pf2e: { battleForm: this.battleForm } },
+            flags: {
+                pf2e: {
+                    battleForm: this.battleForm,
+                    fixedAttack: actorIsNPC ? this.attackModifier ?? null : null,
+                },
+            },
             system: {
                 slug: this.slug,
                 description: { value: "" },
@@ -280,7 +284,14 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                 group: this.group,
                 baseItem: this.baseType,
                 ability: this.ability,
-                damage: { ...this.damage.base, damageType },
+                bonus: {
+                    value: actorIsNPC ? this.attackModifier ?? 0 : 0,
+                },
+                damage: {
+                    ...this.damage.base,
+                    dice,
+                    damageType,
+                },
                 range: (this.range?.increment ?? null) as WeaponRangeIncrement | null,
                 maxRange: this.range?.max ?? null,
                 traits: {
@@ -351,6 +362,11 @@ type StrikeSchema = RuleElementSchema & {
         false,
         true
     >;
+    /**
+     * A fixed attack modifier: usable only if the strike is generated for an NPC
+     * Also causes the damage to not be recalculated when converting the resulting weapon to an NPC attack
+     */
+    attackModifier: NumberField<number, number, false, true, true>;
     range: SchemaField<
         {
             increment: NumberField<number, number, true, false, true>;
@@ -365,12 +381,12 @@ type StrikeSchema = RuleElementSchema & {
     damage: SchemaField<{
         base: SchemaField<{
             damageType: StringField<string, string, true, false, true>;
-            dice: NumberField<number, number, true, false, true>;
+            dice: ResolvableValueField<true, false, true>;
             die: StringField<DamageDieSize, DamageDieSize, true, false, true>;
             modifier: NumberField<number, number, false, false, true>;
         }>;
     }>;
-    ability: StringField<AbilityString, AbilityString, false, true, true>;
+    ability: StringField<AttributeString, AttributeString, false, true, true>;
     /** A representative icon for the strike */
     img: FilePathField<ImageFilePath, ImageFilePath, true, false, true>;
     /** Whether to replace all other strike actions */
@@ -403,7 +419,7 @@ interface StrikeSource extends RuleElementSource {
 
 interface UpdateToggleParams {
     trait: "modular" | "versatile";
-    selection: DamageType;
+    selection: DamageType | null;
 }
 
 export { StrikeRuleElement };

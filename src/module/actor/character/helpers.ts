@@ -2,15 +2,14 @@ import { StrikeAttackTraits } from "@actor/creature/helpers.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { ArmorPF2e, ConditionPF2e, WeaponPF2e } from "@item";
 import { ItemCarryType } from "@item/physical/index.ts";
+import { toggleWeaponTrait } from "@item/weapon/helpers.ts";
 import { ZeroToThree, ZeroToTwo } from "@module/data.ts";
-import { ChatMessagePF2e } from "@module/documents.ts";
+import { ActorPF2e, ChatMessagePF2e } from "@module/documents.ts";
 import { extractModifierAdjustments } from "@module/rules/helpers.ts";
-import { StrikeRuleElement } from "@module/rules/rule-element/strike.ts";
 import { SheetOptions, createSheetOptions } from "@module/sheet/helpers.ts";
 import { DAMAGE_DIE_FACES } from "@system/damage/values.ts";
 import { PredicatePF2e } from "@system/predication.ts";
-import { ErrorPF2e, getActionGlyph, objectHasKey, pick, setHasElement, tupleHasValue } from "@util";
-import clumsySource from "../../../../packs/data/conditions.db/clumsy.json";
+import { ErrorPF2e, getActionGlyph, objectHasKey, pick, setHasElement, traitSlugToObject, tupleHasValue } from "@util";
 import type { CharacterPF2e } from "./document.ts";
 
 /** Handle weapon traits that introduce modifiers or add other weapon traits */
@@ -54,6 +53,7 @@ class PCStrikeAttackTraits extends StrikeAttackTraits {
             const unannotatedTrait = this.getUnannotatedTrait(trait);
             switch (unannotatedTrait) {
                 case "kickback": {
+                    // (pre-remaster language)
                     // "Firing a kickback weapon gives a –2 circumstance penalty to the attack roll, but characters with
                     // 14 or more Strength ignore the penalty."
                     return new ModifierPF2e({
@@ -61,7 +61,7 @@ class PCStrikeAttackTraits extends StrikeAttackTraits {
                         label: CONFIG.PF2E.weaponTraits.kickback,
                         modifier: -2,
                         type: "circumstance",
-                        predicate: new PredicatePF2e({ lt: ["ability:str:score", 14] }),
+                        predicate: new PredicatePF2e({ lt: ["attribute:str:mod", 2] }),
                         adjustments: extractModifierAdjustments(synthetics, domains, unannotatedTrait),
                     });
                 }
@@ -168,21 +168,10 @@ class WeaponAuxiliaryAction {
     async execute({ selection = null }: { selection?: string | null } = {}): Promise<void> {
         const { actor, weapon } = this;
         if (typeof this.carryType === "string") {
-            await actor.adjustCarryType(this.weapon, this.carryType, this.hands ?? 0);
+            await actor.adjustCarryType(this.weapon, { carryType: this.carryType, handsHeld: this.hands ?? 0 });
         } else if (selection && tupleHasValue(weapon.system.traits.toggles.modular.options, selection)) {
-            // Interact with a modular weapon to change its damage type
-            const current = weapon.system.traits.toggles.modular.selection;
-            if (current === selection) return;
-
-            const item = actor.items.get(weapon.id);
-            if (item?.isOfType("weapon") && item === weapon) {
-                await item.update({ "system.traits.toggles.modular.selection": selection });
-            } else {
-                const rule = item?.rules.find(
-                    (r): r is StrikeRuleElement => r.key === "Strike" && !r.ignored && r.slug === weapon.slug
-                );
-                await rule?.toggleTrait({ trait: "modular", selection });
-            }
+            const updated = await toggleWeaponTrait({ weapon, trait: "modular", selection });
+            if (!updated) return;
         }
 
         if (!game.combat) return; // Only send out messages if in encounter mode
@@ -195,17 +184,12 @@ class WeaponAuxiliaryAction {
         const flavorAction = {
             title: `PF2E.Actions.${this.action}.Title`,
             subtitle: `PF2E.Actions.${this.action}.${this.fullPurpose}.Title`,
-            typeNumber: this.glyph,
+            glyph: this.glyph,
         };
 
         const flavor = await renderTemplate(templates.flavor, {
             action: flavorAction,
-            traits: [
-                {
-                    name: CONFIG.PF2E.featTraits.manipulate,
-                    description: CONFIG.PF2E.traitsDescriptions.manipulate,
-                },
-            ],
+            traits: [traitSlugToObject("manipulate", CONFIG.PF2E.actionTraits)],
         });
 
         const content = await renderTemplate(templates.content, {
@@ -234,17 +218,13 @@ function imposeOversizedWeaponCondition(actor: CharacterPF2e): void {
         (w) => w.isEquipped && w.isOversized && w.category !== "unarmed"
     );
 
+    const compendiumCondition = game.pf2e.ConditionManager.getCondition("clumsy");
     const conditionSource =
         wieldedOversizedWeapon && actor.conditions.bySlug("clumsy").length === 0
-            ? mergeObject(
-                  clumsySource,
-                  {
-                      _id: "xxxxOVERSIZExxxx",
-                      name: game.i18n.localize(CONFIG.PF2E.statusEffects.conditions.clumsy),
-                      system: { slug: "clumsy", references: { parent: { id: wieldedOversizedWeapon.id } } },
-                  },
-                  { inplace: false }
-              )
+            ? mergeObject(compendiumCondition.toObject(), {
+                  _id: "xxxxOVERSIZExxxx",
+                  system: { slug: "clumsy", references: { parent: { id: wieldedOversizedWeapon.id } } },
+              })
             : null;
     if (!conditionSource) return;
 
@@ -277,11 +257,11 @@ function createForceOpenPenalty(actor: CharacterPF2e, domains: string[]): Modifi
 }
 
 function createShoddyPenalty(
-    actor: CharacterPF2e,
-    item: WeaponPF2e | ArmorPF2e,
+    actor: ActorPF2e,
+    item: WeaponPF2e | ArmorPF2e | null,
     domains: string[]
 ): ModifierPF2e | null {
-    if (!item.isShoddy) return null;
+    if (!actor.isOfType("character") || !item?.isShoddy) return null;
 
     const slug = "shoddy";
 
@@ -323,7 +303,7 @@ function createPonderousPenalty(actor: CharacterPF2e): ModifierPF2e | null {
     const slug = "ponderous";
     if (!armor?.traits.has(slug)) return null;
 
-    const penaltyValue = actor.abilities.str.value >= (armor.strength ?? 0) ? -1 : armor.checkPenalty || -1;
+    const penaltyValue = actor.abilities.str.mod >= (armor.strength ?? -Infinity) ? -1 : armor.checkPenalty || -1;
 
     return new ModifierPF2e({
         label: "PF2E.TraitPonderous",
@@ -335,11 +315,11 @@ function createPonderousPenalty(actor: CharacterPF2e): ModifierPF2e | null {
 }
 
 export {
+    PCStrikeAttackTraits,
+    WeaponAuxiliaryAction,
     createForceOpenPenalty,
     createHinderingPenalty,
     createPonderousPenalty,
     createShoddyPenalty,
     imposeOversizedWeaponCondition,
-    PCStrikeAttackTraits,
-    WeaponAuxiliaryAction,
 };

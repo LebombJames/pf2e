@@ -13,6 +13,7 @@ import { shove } from "./athletics/shove.ts";
 import { swim } from "./athletics/swim.ts";
 import * as trip from "./athletics/trip.ts";
 import { whirlingThrow } from "./athletics/whirling-throw.ts";
+import { aid } from "./basic/aid.ts";
 import { crawl } from "./basic/crawl.ts";
 import { delay } from "./basic/delay.ts";
 import { dropProne } from "./basic/drop-prone.ts";
@@ -37,9 +38,9 @@ import { bonMot } from "./diplomacy/bon-mot.ts";
 import { gatherInformation } from "./diplomacy/gather-information.ts";
 import { makeAnImpression } from "./diplomacy/make-an-impression.ts";
 import { request } from "./diplomacy/request.ts";
-import { avoidNotice } from "./exploration/avoid-notice.ts";
-import { senseDirection } from "./exploration/sense-direction.ts";
-import { track } from "./exploration/track.ts";
+import * as avoidNotice from "./exploration/avoid-notice.ts";
+import * as senseDirection from "./exploration/sense-direction.ts";
+import * as track from "./exploration/track.ts";
 import * as decipherWriting from "./general/decipher-writing.ts";
 import * as subsist from "./general/subsist.ts";
 import * as coerce from "./intimidation/coerce.ts";
@@ -74,9 +75,9 @@ export const ActionMacros = {
     tamper,
 
     // Exploration
-    avoidNotice,
-    senseDirection,
-    track,
+    avoidNotice: avoidNotice.legacy,
+    senseDirection: senseDirection.legacy,
+    track: track.legacy,
 
     // Acrobatics
     balance: balance.legacy,
@@ -148,6 +149,8 @@ export const ActionMacros = {
 
 export const SystemActions: Action[] = [
     administerFirstAid.action,
+    aid,
+    avoidNotice.action,
     balance.action,
     coerce.action,
     commandAnAnimal.action,
@@ -169,6 +172,7 @@ export const SystemActions: Action[] = [
     ready,
     release,
     seek.action,
+    senseDirection.action,
     senseMotive.action,
     sneak.action,
     squeeze.action,
@@ -178,6 +182,7 @@ export const SystemActions: Action[] = [
     stride,
     subsist.action,
     takeCover,
+    track.action,
     treatDisease.action,
     treatPoison.action,
     trip.action,

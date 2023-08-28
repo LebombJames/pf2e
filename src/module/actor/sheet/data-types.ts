@@ -18,6 +18,7 @@ export interface InventoryItem<TItem extends PhysicalItemPF2e = PhysicalItemPF2e
     isSellable: boolean;
     hasCharges: boolean;
     heldItems?: InventoryItem[];
+    notifyInvestment?: boolean;
 }
 
 interface CoinDisplayData {
@@ -38,6 +39,7 @@ export interface SheetInventory {
     bulk: InventoryBulk;
     showValueAlways: boolean;
     showIndividualPricing: boolean;
+    hasStowingContainers: boolean;
     invested?: { value: number; max: number } | null;
 }
 
@@ -50,6 +52,12 @@ export interface ActorSheetDataPF2e<TActor extends ActorPF2e> extends ActorSheet
     totalCoinageGold: string;
     totalWealth: Coins;
     totalWealthGold: string;
+    canDistributeCoins?: boolean;
     inventory: SheetInventory;
     enrichedContent: Record<string, string>;
+}
+
+export interface ActorSheetRenderOptionsPF2e extends RenderOptions {
+    /** What tab to switch to when rendering the sheet */
+    tab?: string;
 }

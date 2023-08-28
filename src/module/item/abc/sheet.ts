@@ -1,10 +1,10 @@
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
 import { AncestryPF2e, BackgroundPF2e, ClassPF2e, FeatPF2e, ItemPF2e } from "@item";
 import { ABCFeatureEntryData } from "@item/abc/data.ts";
 import { FeatCategory } from "@item/feat/types.ts";
 import { FEAT_CATEGORIES } from "@item/feat/values.ts";
 import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/index.ts";
-import { htmlClosest, setHasElement } from "@util";
+import { htmlClosest, htmlQuery, htmlQueryAll, setHasElement } from "@util";
 
 abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> {
     static override get defaultOptions(): DocumentSheetOptions {
@@ -37,10 +37,10 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
         };
     }
 
-    protected getLocalizedAbilities(traits: { value: AbilityString[] }): { [key: string]: string } {
+    protected getLocalizedAbilities(traits: { value: AttributeString[] }): { [key: string]: string } {
         if (traits !== undefined && traits.value) {
             if (traits.value.length === 6) return { free: game.i18n.localize("PF2E.AbilityFree") };
-            return Object.fromEntries(traits.value.map((x: AbilityString) => [x, CONFIG.PF2E.abilities[x]]));
+            return Object.fromEntries(traits.value.map((x: AttributeString) => [x, CONFIG.PF2E.abilities[x]]));
         }
 
         return {};
@@ -100,23 +100,25 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
         });
     }
 
-    private removeItem(event: JQuery.ClickEvent): void {
-        event.preventDefault();
-        const target = $(event.target).parents("li");
-        const containerId = target.parents("[data-container-id]").data("containerId");
-        let path = `-=${target.data("index")}`;
-        if (containerId) {
-            path = `${containerId}.items.${path}`;
-        }
-
-        this.item.update({
-            [`system.items.${path}`]: null,
-        });
-    }
-
     override activateListeners($html: JQuery): void {
         super.activateListeners($html);
-        $html.on("click", "[data-action=remove]", (ev) => this.removeItem(ev));
+        const html = $html[0];
+
+        for (const li of htmlQueryAll(html, "li[data-index]")) {
+            const index = li.dataset.index;
+            const itemUUID = li.dataset.itemUuid;
+            if (!index) continue;
+
+            if (itemUUID) {
+                htmlQuery(li, "a.name")?.addEventListener("click", () =>
+                    fromUuid(itemUUID).then((i) => i?.sheet.render(true))
+                );
+            }
+
+            htmlQuery(li, "[data-action=remove]")?.addEventListener("click", () => {
+                this.item.update({ [`system.items.-=${index}`]: null });
+            });
+        }
     }
 }
 

@@ -1,32 +1,33 @@
-import fs from "fs-extra";
-import path from "path";
-import { populateFoundryUtilFunctions } from "../tests/fixtures/foundryshim.ts";
 import { ActorSourcePF2e } from "@actor/data/index.ts";
 import { ItemSourcePF2e } from "@item/data/index.ts";
-import { JSDOM } from "jsdom";
 import { sluggify } from "@util";
+import fs from "fs-extra";
+import { JSDOM } from "jsdom";
+import path from "path";
+import { populateFoundryUtilFunctions } from "../tests/fixtures/foundryshim.ts";
+import { getFilesRecursively } from "./lib/helpers.ts";
+
 import { MigrationBase } from "@module/migration/base.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
-import { Migration819SpinTaleAdventureSpecific } from "@module/migration/migrations/819-spin-tale-adventure-specific.ts";
-import { Migration820RemoveUnusedTraitsData } from "@module/migration/migrations/820-remove-unused-traits-data.ts";
-import { Migration821InlineDamageRolls } from "@module/migration/migrations/821-inline-damage-rolls.ts";
-import { Migration822BladeAllyConsolidation } from "@module/migration/migrations/822-blade-ally-consolidation.ts";
-import { Migration824SneakAttackDamageSource } from "@module/migration/migrations/824-sneak-attack-damage-source.ts";
-import { Migration825KhakkharaFengHuoLun } from "@module/migration/migrations/825-khakkhara-feng-huo-lun.ts";
-import { Migration826GutConditionData } from "@module/migration/migrations/826-gut-condition-data.ts";
-import { Migration827FixTVShieldTraits } from "@module/migration/migrations/827-fix-tv-shield-traits.ts";
-import { Migration828PruneInvalidTraits } from "@module/migration/migrations/828-prune-invalid-traits.ts";
-import { Migration829RMRitualEntries } from "@module/migration/migrations/829-rm-ritual-entries.ts";
-import { Migration830BarbarianRework } from "@module/migration/migrations/830-condense-instincts.ts";
-import { Migration831ClericDoctrines } from "@module/migration/migrations/831-cleric-doctrines.ts";
-import { Migration832ChoiceSetFlags } from "@module/migration/migrations/832-choice-set-flags.ts";
-import { Migration833AddRogueToysFixPrecision } from "@module/migration/migrations/833-add-rogue-toys-fix-precision.ts";
-import { Migration834FeatCategories } from "@module/migration/migrations/834-feat-categories.ts";
-import { Migration835InitiativeLongform } from "@module/migration/migrations/835-initiative-longform.ts";
+
 import { Migration836EnergizingConsolidation } from "@module/migration/migrations/836-energizing-consolidation.ts";
 import { Migration837MoveHazardBookSources } from "@module/migration/migrations/837-move-hazard-book-source.ts";
 import { Migration838StrikeAttackRollSelector } from "@module/migration/migrations/838-strike-attack-roll-selector.ts";
 import { Migration839ActionCategories } from "@module/migration/migrations/839-action-categories.ts";
+import { Migration841V11UUIDFormat } from "@module/migration/migrations/841-v11-uuid-format.ts";
+import { Migration844DeityDomainUUIDs } from "@module/migration/migrations/844-deity-domains-uuids.ts";
+import { Migration846SpellSchoolOptional } from "@module/migration/migrations/846-spell-school-optional.ts";
+import { Migration847TempHPRuleEvents } from "@module/migration/migrations/847-temp-hp-rule-events.ts";
+import { Migration848NumericArmorProperties } from "@module/migration/migrations/848-numeric-armor-properties.ts";
+import { Migration849DeleteBrokenThreshold } from "@module/migration/migrations/849-delete-broken-threshold.ts";
+import { Migration850FlatFootedToOffGuard } from "@module/migration/migrations/850-flat-footed-to-off-guard.ts";
+import { Migration851JustInnovationId } from "@module/migration/migrations/851-just-innovation-id.ts";
+import { Migration852AbilityScoresToModifiers } from "@module/migration/migrations/852-ability-scores-to-modifiers.ts";
+import { Migration853RemasterLanguages } from "@module/migration/migrations/853-remaster-languages.ts";
+import { Migration854BracketedAbilityScoresToModifiers } from "@module/migration/migrations/854-bracketed-ability-scores-to-modifiers.ts";
+import { Migration855ApexEquipmentSystemData } from "@module/migration/migrations/855-apex-equipment-system-data.ts";
+import { Migration856NoSystemDotCustom } from "@module/migration/migrations/856-no-system-dot-custom.ts";
+import { Migration857WeaponSpecializationRE } from "@module/migration/migrations/857-weapon-spec-re.ts";
 
 // ^^^ don't let your IDE use the index in these imports. you need to specify the full path ^^^
 
@@ -37,26 +38,24 @@ globalThis.HTMLParagraphElement = window.HTMLParagraphElement;
 globalThis.Text = window.Text;
 
 const migrations: MigrationBase[] = [
-    new Migration819SpinTaleAdventureSpecific(),
-    new Migration820RemoveUnusedTraitsData(),
-    new Migration821InlineDamageRolls(),
-    new Migration822BladeAllyConsolidation(),
-    new Migration824SneakAttackDamageSource(),
-    new Migration825KhakkharaFengHuoLun(),
-    new Migration826GutConditionData(),
-    new Migration827FixTVShieldTraits(),
-    new Migration828PruneInvalidTraits(),
-    new Migration829RMRitualEntries(),
-    new Migration830BarbarianRework(),
-    new Migration831ClericDoctrines(),
-    new Migration832ChoiceSetFlags(),
-    new Migration833AddRogueToysFixPrecision(),
-    new Migration834FeatCategories(),
-    new Migration835InitiativeLongform(),
     new Migration836EnergizingConsolidation(),
     new Migration837MoveHazardBookSources(),
     new Migration838StrikeAttackRollSelector(),
     new Migration839ActionCategories(),
+    new Migration841V11UUIDFormat(),
+    new Migration844DeityDomainUUIDs(),
+    new Migration846SpellSchoolOptional(),
+    new Migration847TempHPRuleEvents(),
+    new Migration848NumericArmorProperties(),
+    new Migration849DeleteBrokenThreshold(),
+    new Migration850FlatFootedToOffGuard(),
+    new Migration851JustInnovationId(),
+    new Migration852AbilityScoresToModifiers(),
+    new Migration853RemasterLanguages(),
+    new Migration854BracketedAbilityScoresToModifiers(),
+    new Migration855ApexEquipmentSystemData(),
+    new Migration856NoSystemDotCustom(),
+    new Migration857WeaponSpecializationRE(),
 ];
 
 global.deepClone = <T>(original: T): T => {
@@ -87,7 +86,7 @@ global.randomID = function randomID(length = 16): string {
     return id.substring(0, length);
 };
 
-const packsDataPath = path.resolve(process.cwd(), "packs/data");
+const packsDataPath = path.resolve(process.cwd(), "packs");
 
 type CompendiumSource = CompendiumDocument["_source"];
 
@@ -98,6 +97,7 @@ const itemTypes = [
     "armor",
     "background",
     "backpack",
+    "campaignFeature",
     "class",
     "condition",
     "consumable",
@@ -158,24 +158,11 @@ function JSONstringifyOrder(obj: object): string {
     return `${newJson}\n`;
 }
 
-async function getAllFiles(): Promise<string[]> {
-    const allEntries: string[] = [];
-    const packs = fs.readdirSync(packsDataPath);
+async function getAllFiles(directory: string = packsDataPath, allEntries: string[] = []): Promise<string[]> {
+    const packs = fs.readdirSync(directory);
     for (const pack of packs) {
         console.log(`Collecting data for "${pack}"`);
-
-        let packFiles: string[];
-        try {
-            // Create an array of files in the ./packs/data/[packname].db/ directory
-            packFiles = fs.readdirSync(path.resolve(packsDataPath, pack));
-        } catch (error) {
-            if (error instanceof Error) console.error(error.message);
-            return [];
-        }
-
-        for (const fileName of packFiles) {
-            allEntries.push(path.resolve(packsDataPath, pack, fileName));
-        }
+        allEntries.push(...getFilesRecursively(path.join(directory, pack)));
     }
 
     return allEntries;

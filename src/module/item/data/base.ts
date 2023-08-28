@@ -1,5 +1,6 @@
 import { CreatureTrait } from "@actor/creature/types.ts";
-import { ActionTrait } from "@item/action/data.ts";
+import { ActionTrait } from "@item/ability/types.ts";
+import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 import { NPCAttackTrait } from "@item/melee/data.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
 import { DocumentSchemaRecord, OneToThree, Rarity } from "@module/data.ts";
@@ -11,7 +12,7 @@ interface BaseItemSourcePF2e<TType extends ItemType, TSystemSource extends ItemS
     flags: ItemSourceFlagsPF2e;
 }
 
-type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait;
+type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait | KingmakerTrait;
 
 type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
 
@@ -27,7 +28,7 @@ interface ItemTraits<T extends ItemTrait = ItemTrait> {
 
 interface ItemFlagsPF2e extends foundry.documents.ItemFlags {
     pf2e: {
-        rulesSelections: Record<string, string | number | object>;
+        rulesSelections: Record<string, string | number | object | null>;
         itemGrants: Record<string, ItemGrantData>;
         grantedBy: ItemGrantData | null;
         [key: string]: unknown;
@@ -46,7 +47,9 @@ interface ItemSourceFlagsPF2e extends DeepPartial<foundry.documents.ItemFlags> {
 type ItemGrantData = Required<ItemGrantSource>;
 
 interface ItemGrantSource {
+    /** The ID of a granting or granted item */
     id: string;
+    /** The action taken when the user attempts to delete the item referenced by `id` */
     onDelete?: ItemGrantDeleteAction;
 }
 
@@ -72,11 +75,13 @@ interface ItemSystemSource {
 
 type ItemSystemData = ItemSystemSource;
 
+type FrequencyInterval = keyof ConfigPF2e["PF2E"]["frequencies"];
+
 interface FrequencySource {
     value?: number;
     max: number;
     /** Gap between recharges as an ISO8601 duration, or "day" for daily prep. */
-    per: keyof ConfigPF2e["PF2E"]["frequencies"];
+    per: FrequencyInterval;
 }
 
 interface Frequency extends FrequencySource {
@@ -88,6 +93,7 @@ export {
     ActionType,
     BaseItemSourcePF2e,
     Frequency,
+    FrequencyInterval,
     FrequencySource,
     ItemFlagsPF2e,
     ItemGrantData,

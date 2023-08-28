@@ -60,7 +60,7 @@ export function registerHandlebarsHelpers(): void {
     Handlebars.registerHelper("actionGlyph", (value, options: Handlebars.HelperOptions): string | null => {
         const glyph = getActionGlyph(value ?? "");
         if (glyph) {
-            return `<span class="activity-icon">${glyph}</span>`;
+            return `<span class="action-glyph">${glyph}</span>`;
         } else if (options?.hash.fallback) {
             return Handlebars.escapeExpression(value);
         }
@@ -101,7 +101,14 @@ export function registerHandlebarsHelpers(): void {
         return new CoinsPF2e(value);
     });
 
-    Handlebars.registerHelper("contains", (arr: unknown, element: unknown): boolean => {
+    Handlebars.registerHelper("includes", (arr: unknown, element: unknown): boolean => {
         return Array.isArray(arr) && arr.includes(element);
+    });
+
+    // Raw blocks are mentioned in handlebars docs but the helper needs to be implemented
+    // https://handlebarsjs.com/guide/expressions.html#escaping-handlebars-expressions
+    // https://stackoverflow.com/questions/33704495/how-to-use-raw-helper-in-a-handlebars-template
+    Handlebars.registerHelper("raw", function (this: unknown, options: Handlebars.HelperOptions): string {
+        return options.fn(this);
     });
 }

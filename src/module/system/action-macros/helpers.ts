@@ -1,6 +1,7 @@
 import { ActorPF2e, CreaturePF2e } from "@actor";
-import { DC_SLUGS, SKILL_EXPANDED, SKILL_LONG_FORMS } from "@actor/values.ts";
-import { CheckModifier, ensureProficiencyOption, ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
+import { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
+import { getRangeIncrement } from "@actor/helpers.ts";
+import { CheckModifier, ModifierPF2e, StatisticModifier, ensureProficiencyOption } from "@actor/modifiers.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
 import { WeaponTrait } from "@item/weapon/types.ts";
 import { RollNotePF2e } from "@module/notes.ts";
@@ -9,21 +10,22 @@ import {
     extractModifierAdjustments,
     extractRollSubstitutions,
 } from "@module/rules/helpers.ts";
-import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import { setHasElement, sluggify } from "@util";
-import { getSelectedOrOwnActors } from "@util/token-actor-utils.ts";
-import {
-    CheckContextOptions,
-    CheckContext,
-    SimpleRollActionCheckOptions,
-    CheckContextError,
-    CheckContextData,
-} from "./types.ts";
-import { getRangeIncrement } from "@actor/helpers.ts";
-import { CheckPF2e, CheckType } from "@system/check/index.ts";
-import { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
-import { Statistic } from "@system/statistic/index.ts";
+import { eventToRollParams } from "@scripts/sheet-util.ts";
+import { CheckPF2e, CheckType } from "@system/check/index.ts";
+import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import { CheckDCReference, Statistic } from "@system/statistic/index.ts";
+import { sluggify } from "@util";
+import { getSelectedOrOwnActors } from "@util/token-actor-utils.ts";
+import * as R from "remeda";
+import {
+    CheckContext,
+    CheckContextData,
+    CheckContextError,
+    CheckContextOptions,
+    SimpleRollActionCheckOptions,
+    UnresolvedCheckDC,
+} from "./types.ts";
 
 export class ActionMacroHelpers {
     static resolveStat(stat: string): {
@@ -36,7 +38,7 @@ export class ActionMacroHelpers {
             case "perception":
                 return {
                     checkType: "perception-check",
-                    property: "system.attributes.perception",
+                    property: "perception",
                     stat,
                     subtitle: "PF2E.ActionsCheck.perception",
                 };
@@ -49,8 +51,7 @@ export class ActionMacroHelpers {
                 };
             default: {
                 const slug = sluggify(stat);
-                const shortForm = setHasElement(SKILL_LONG_FORMS, slug) ? SKILL_EXPANDED[slug].shortform : slug;
-                const property = `system.skills.${shortForm}`;
+                const property = `skills.${slug}`;
                 return {
                     checkType: "skill-check",
                     property,
@@ -73,21 +74,14 @@ export class ActionMacroHelpers {
             const message = `Actor ${actor.name} (${actor.id}) does not have a statistic for ${slug}.`;
             throw new CheckContextError(message, actor, slug);
         }
-        const {
-            actor,
-            item,
-            rollOptions: contextualRollOptions,
-        } = options.buildContext({
+        const { item, rollOptions: contextualRollOptions } = options.buildContext({
             actor: options.actor,
             item: data.item,
-            rollOptions: {
-                contextual: [type, data.slug, ...data.rollOptions],
-                generic: [...data.rollOptions],
-            },
+            rollOptions: [...data.rollOptions],
             target: options.target,
         });
+
         return {
-            actor,
             item,
             modifiers: data.modifiers ?? [],
             rollOptions: contextualRollOptions,
@@ -140,14 +134,12 @@ export class ActionMacroHelpers {
             throw new Error(game.i18n.localize("PF2E.ActionsWarning.NoActor"));
         }
 
-        const { token: target, actor: targetActor } = options.target?.() ?? this.target();
-        const targetOptions = targetActor?.getSelfRollOptions("target") ?? [];
+        const targetData = options.target?.() ?? this.target();
 
         for (const actor of rollers) {
             try {
                 const selfToken = actor.getActiveTokens(false, true).shift();
                 const {
-                    actor: selfActor,
                     item: weapon,
                     modifiers = [],
                     rollOptions: combinedOptions,
@@ -157,49 +149,24 @@ export class ActionMacroHelpers {
                 } = await options.checkContext({
                     actor,
                     buildContext: (args) => {
-                        const action = "attack";
-                        const combinedOptions = [
-                            args.actor.getRollOptions(args.rollOptions.contextual),
-                            args.rollOptions.generic,
-                            options.traits,
-                            targetOptions,
-                            !!target?.object &&
-                            !!selfToken?.object?.isFlanking(target.object, { reach: actor.getReach({ action }) })
-                                ? "self:flanking"
-                                : [],
+                        const actionOptions = [
+                            args.rollOptions
+                                .filter((o) => /^action:[^:]+$/.test(o))
+                                .map((o) => `self:action:slug:${o.replace(/^action:/, "")}`),
+                            options.traits.map((t) => `self:action:trait:${t}`),
                         ].flat();
-                        const selfActor = args.actor.getContextualClone(
-                            combinedOptions.filter((o) => o.startsWith("self:"))
-                        );
+                        const combinedOptions = R.compact([args.rollOptions, options.traits, actionOptions].flat());
                         combinedOptions.push(...(args.item?.getRollOptions("item") ?? []));
-                        return { actor: selfActor, item: args.item, rollOptions: combinedOptions, target: args.target };
+                        return { item: args.item, rollOptions: combinedOptions.sort(), target: args.target };
                     },
-                    target: targetActor,
+                    target: targetData.actor,
                 })!;
 
-                const header = await renderTemplate("./systems/pf2e/templates/chat/action/header.hbs", {
+                const header = await renderTemplate("systems/pf2e/templates/chat/action/header.hbs", {
                     glyph: options.actionGlyph,
                     subtitle,
                     title: options.title,
                 });
-
-                const dc = ((): CheckDC | null => {
-                    if (options.difficultyClass) {
-                        return options.difficultyClass;
-                    } else if (targetActor instanceof CreaturePF2e) {
-                        // try to resolve target's defense stat and calculate DC
-                        const dcStat = options.difficultyClassStatistic?.(targetActor);
-                        if (dcStat) {
-                            const extraRollOptions = combinedOptions.concat(targetOptions);
-                            const { dc } = dcStat.withRollOptions({ extraRollOptions });
-                            const dcData: CheckDC = { label: dc.label, statistic: dc, value: dc.value };
-                            if (setHasElement(DC_SLUGS, dcStat.slug)) dcData.slug = dcStat.slug;
-
-                            return dcData;
-                        }
-                    }
-                    return null;
-                })();
 
                 const actionTraits: Record<string, string | undefined> = CONFIG.PF2E.actionTraits;
                 const traitDescriptions: Record<string, string | undefined> = CONFIG.PF2E.traitsDescriptions;
@@ -215,30 +182,38 @@ export class ActionMacroHelpers {
                 const title = `${game.i18n.localize(options.title)} - ${game.i18n.localize(subtitle)}`;
 
                 if (statistic instanceof Statistic) {
+                    const dc = this.#resolveCheckDC({ unresolvedDC: options.difficultyClass });
                     await statistic.roll({
+                        ...eventToRollParams(options.event),
                         token: selfToken,
                         label,
                         title,
                         dc,
                         extraRollNotes: notes,
                         extraRollOptions: combinedOptions,
-                        target: targetActor,
+                        modifiers,
+                        target: targetData.actor,
                         traits: traitObjects,
+                        createMessage: options.createMessage,
+                        callback: (roll, outcome, message) => {
+                            options.callback?.({ actor, message, outcome, roll });
+                        },
                     });
                 } else {
                     const check = new CheckModifier(label, statistic, modifiers);
-
+                    const dc = this.#resolveCheckDC({ unresolvedDC: options.difficultyClass, fully: true });
                     const finalOptions = new Set(combinedOptions);
                     ensureProficiencyOption(finalOptions, statistic.rank ?? -1);
                     check.calculateTotal(finalOptions);
+                    const selfActor = actor.getContextualClone(combinedOptions.filter((o) => o.startsWith("self:")));
 
                     const distance = ((): number | null => {
                         const reach =
                             selfActor instanceof CreaturePF2e && weapon?.isOfType("weapon")
                                 ? selfActor.getReach({ action: "attack", weapon }) ?? null
                                 : null;
-                        return selfToken?.object && target?.object
-                            ? selfToken.object.distanceTo(target.object, { reach })
+                        return selfToken?.object && targetData?.token?.object
+                            ? selfToken.object.distanceTo(targetData.token.object, { reach })
                             : null;
                     })();
                     const rangeIncrement =
@@ -247,8 +222,8 @@ export class ActionMacroHelpers {
                             : null;
                     const domains = ["all", type, statistic.slug];
                     const targetInfo =
-                        target && targetActor && typeof distance === "number"
-                            ? { token: target, actor: targetActor, distance, rangeIncrement }
+                        targetData.token && targetData.actor && typeof distance === "number"
+                            ? { token: targetData.token, actor: targetData.actor, distance, rangeIncrement }
                             : null;
                     const substitutions = extractRollSubstitutions(
                         actor.synthetics.rollSubstitutions,
@@ -322,7 +297,7 @@ export class ActionMacroHelpers {
             return new ModifierPF2e({
                 slug,
                 type: "item",
-                label: "PF2E.PotencyRuneLabel",
+                label: "PF2E.Item.Weapon.Rune.Potency",
                 modifier: item.system.runes.potency,
                 adjustments: extractModifierAdjustments(item.actor.synthetics.modifierAdjustments, [selector], slug),
             });
@@ -338,4 +313,26 @@ export class ActionMacroHelpers {
             return actor.itemTypes.weapon.filter((w) => w.isEquipped && w.traits.has(trait));
         }
     }
+
+    /** A DC can be fully resolved, retrieving the `Statistic` if provided a reference */
+    static #resolveCheckDC(params: ResolveCheckDCParams & { fully: true }): CheckDC | null;
+    static #resolveCheckDC(params: ResolveCheckDCParams): CheckDC | CheckDCReference | null;
+    static #resolveCheckDC({
+        unresolvedDC = null,
+        target = null,
+        fully = false,
+    }: ResolveCheckDCParams): CheckDC | CheckDCReference | null {
+        if (typeof unresolvedDC === "string") {
+            return fully ? target?.getStatistic(unresolvedDC)?.dc ?? null : { slug: unresolvedDC };
+        }
+        if (typeof unresolvedDC === "function") return unresolvedDC(target);
+
+        return unresolvedDC;
+    }
+}
+
+interface ResolveCheckDCParams {
+    unresolvedDC: UnresolvedCheckDC | undefined | null;
+    target?: ActorPF2e | null;
+    fully?: boolean;
 }

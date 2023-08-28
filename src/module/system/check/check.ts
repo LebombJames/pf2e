@@ -1,25 +1,27 @@
 import { ActorPF2e, CharacterPF2e } from "@actor";
 import { StrikeData, TraitViewData } from "@actor/data/base.ts";
-import { CheckModifier, StatisticModifier } from "@actor/modifiers.ts";
+import { CheckModifier } from "@actor/modifiers.ts";
 import { RollTarget } from "@actor/types.ts";
-import { WeaponPF2e } from "@item";
-import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { ChatMessageSourcePF2e, CheckRollContextFlag, TargetFlag } from "@module/chat-message/data.ts";
 import { isCheckContextFlag } from "@module/chat-message/helpers.ts";
+import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import { ScenePF2e, TokenDocumentPF2e } from "@scene";
 import { eventToRollParams } from "@scripts/sheet-util.ts";
 import { StatisticDifficultyClass } from "@system/statistic/index.ts";
 import {
     ErrorPF2e,
+    createHTMLElement,
     fontAwesomeIcon,
+    htmlQuery,
+    htmlQueryAll,
     objectHasKey,
-    omit,
     parseHTML,
     signedInteger,
     sluggify,
     traitSlugToObject,
 } from "@util";
+import * as R from "remeda";
 import {
     DEGREE_OF_SUCCESS_STRINGS,
     DegreeAdjustmentsRecord,
@@ -34,7 +36,7 @@ import { CheckRollContext } from "./types.ts";
 
 interface RerollOptions {
     heroPoint?: boolean;
-    keep?: "new" | "best" | "worst";
+    keep?: "new" | "higher" | "lower";
 }
 
 type CheckRollCallback = (
@@ -73,7 +75,8 @@ class CheckPF2e {
             check.calculateTotal(rollOptions);
         }
 
-        if (!context.skipDialog) {
+        // Show dialog for adding/editing modifiers, unless skipped or flat check
+        if (!context.skipDialog && context.type !== "flat-check") {
             const dialogClosed = new Promise((resolve: (value: boolean) => void) => {
                 new CheckModifiersDialog(check, resolve, context).render(true);
             });
@@ -152,15 +155,21 @@ class CheckPF2e {
             return null;
         })();
 
+        const actionSlug = context.action ? sluggify(context.action) || null : null;
+
         const options: CheckRollDataPF2e = {
+            type: context.type,
+            identifier: context.identifier,
+            action: actionSlug,
             rollerId: game.userId,
             isReroll,
             totalModifier: check.totalModifier,
+            damaging: strike?.damaging ?? context.damaging ?? false,
             domains: context.domains,
         };
         if (strike) options.strike = strike;
 
-        const totalModifierPart = signedInteger(check.totalModifier);
+        const totalModifierPart = signedInteger(check.totalModifier, { emptyStringZero: true });
         const roll = await new RollCls(`${dice}${totalModifierPart}`, {}, options).evaluate({ async: true });
 
         // Combine all degree of success adjustments into a single record. Some may be overridden, but that should be
@@ -188,7 +197,9 @@ class CheckPF2e {
         const notesText =
             notes
                 .filter((note) => {
-                    if (!note.predicate.test(rollOptions)) return false;
+                    if (!note.predicate.test([...rollOptions, ...(note.rule?.item.getRollOptions("parent") ?? [])])) {
+                        return false;
+                    }
                     if (!context.dc || note.outcome.length === 0) {
                         // Always show the note if the check has no DC or no outcome is specified.
                         return true;
@@ -202,12 +213,17 @@ class CheckPF2e {
         const item = context.item ?? null;
 
         const flavor = await (async (): Promise<string> => {
-            const result = await this.createResultFlavor({ degree, target: context.target ?? null });
-            const tags = this.createTagFlavor({ check, context, extraTags });
+            const result = await this.#createResultFlavor({ degree, target: context.target ?? null });
+            const tags = this.#createTagFlavor({ check, context, extraTags });
+            const title = (context.title ?? check.slug).trim();
+            const header = title.startsWith("<h4")
+                ? title
+                : ((): HTMLElement => {
+                      const strong = document.createElement("strong");
+                      strong.innerHTML = title;
+                      return createHTMLElement("h4", { classes: ["action"], children: [strong] });
+                  })();
 
-            const header = document.createElement("h4");
-            header.classList.add("action");
-            header.innerHTML = check.slug;
             return [header, result ?? [], tags, notesText]
                 .flat()
                 .map((e) => (typeof e === "string" ? e : e.outerHTML))
@@ -216,6 +232,9 @@ class CheckPF2e {
 
         const contextFlag: CheckRollContextFlag = {
             ...context,
+            type: context.type ?? "check",
+            identifier: context.identifier ?? null,
+            action: actionSlug,
             item: undefined,
             dosAdjustments,
             actor: context.actor?.id ?? null,
@@ -227,10 +246,9 @@ class CheckPF2e {
             rollMode: context.rollMode,
             rollTwice: context.rollTwice ?? false,
             title: context.title ?? "PF2E.Check.Label",
-            type: context.type ?? "check",
             traits: context.traits ?? [],
             substitutions,
-            dc: context.dc ? omit(context.dc, ["statistic"]) : null,
+            dc: context.dc ? R.omit(context.dc, ["statistic"]) : null,
             skipDialog: context.skipDialog ?? !game.user.settings.showRollDialogs,
             isReroll: context.isReroll ?? false,
             outcome: context.outcome ?? null,
@@ -240,17 +258,14 @@ class CheckPF2e {
 
         type MessagePromise = Promise<ChatMessagePF2e | ChatMessageSourcePF2e>;
         const message = await ((): MessagePromise => {
-            const origin = item && { uuid: item.uuid, type: item.type };
-            const coreFlags: Record<string, unknown> = { canPopout: true };
-            if (context.type === "initiative") coreFlags.initiativeRoll = true;
             const flags = {
-                core: coreFlags,
+                core: context.type === "initiative" ? { initiativeRoll: true } : {},
                 pf2e: {
                     context: contextFlag,
                     unsafe: flavor,
                     modifierName: check.slug,
                     modifiers: check.modifiers.map((m) => m.toObject()),
-                    origin,
+                    origin: item?.getOriginData(),
                     strike,
                 },
             };
@@ -269,7 +284,7 @@ class CheckPF2e {
         }
 
         // Consume one unit of the weapon if it has the consumable trait
-        const isConsumableWeapon = item instanceof WeaponPF2e && item.traits.has("consumable");
+        const isConsumableWeapon = item?.isOfType("weapon") && item.traits.has("consumable");
         if (isConsumableWeapon && item.actor.items.has(item.id) && item.quantity > 0) {
             await item.update({ system: { quantity: item.quantity - 1 } });
         }
@@ -277,7 +292,7 @@ class CheckPF2e {
         return roll;
     }
 
-    private static createTagFlavor({ check, context, extraTags }: CreateTagFlavorParams): HTMLElement[] {
+    static #createTagFlavor({ check, context, extraTags }: CreateTagFlavorParams): HTMLElement[] {
         interface TagObject {
             label: string;
             name?: string;
@@ -298,11 +313,13 @@ class CheckPF2e {
         };
 
         const traits =
-            context.traits
-                ?.map((trait) => {
+            R.uniqBy(
+                context.traits?.map((trait) => {
                     trait.label = game.i18n.localize(trait.label);
                     return trait;
-                })
+                }) ?? [],
+                (t) => t.name
+            )
                 .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
                 .map((t) => toTagElement(t)) ?? [];
 
@@ -319,31 +336,35 @@ class CheckPF2e {
             : [];
 
         const properties = ((): HTMLElement[] => {
-            if (item?.isOfType("weapon") && item.isRanged) {
-                // Show the range increment for ranged weapons
-                const rangeIncrement = item.rangeIncrement ?? 10;
-                const locKey =
-                    item.maxRange === rangeIncrement
-                        ? `PF2E.TraitRange${rangeIncrement}`
-                        : "PF2E.Item.Weapon.RangeIncrementN.Label";
-                const label = game.i18n.format(locKey, { range: rangeIncrement });
-                return [
-                    toTagElement(
-                        {
-                            name: `range-${rangeIncrement}`,
-                            label,
-                            description: "PF2E.Item.Weapon.RangeIncrementN.Hint",
-                        },
-                        "secondary"
-                    ),
-                ];
-            } else {
-                return [];
-            }
+            const [maxRange, rangeIncrement] = ((): [number | null, number | null] => {
+                if (context.range) {
+                    return [context.range.max ?? null, context.range.increment ?? null];
+                }
+                if (item?.isOfType("weapon") && item.isRanged) {
+                    return [item.maxRange, item.rangeIncrement];
+                }
+                return [null, null];
+            })();
+            if (maxRange === null && rangeIncrement === null) return [];
+
+            const [key, value] =
+                maxRange === rangeIncrement || rangeIncrement === null
+                    ? ["PF2E.Action.Range.MaxN", maxRange]
+                    : ["PF2E.Action.Range.IncrementN", rangeIncrement];
+            const label = game.i18n.format(key, { n: value });
+            return [
+                toTagElement(
+                    {
+                        name: `range-${rangeIncrement}`,
+                        label,
+                        description: "PF2E.Item.Weapon.RangeIncrementN.Hint",
+                    },
+                    "secondary"
+                ),
+            ];
         })();
 
-        const traitsAndProperties = document.createElement("div");
-        traitsAndProperties.className = "tags";
+        const traitsAndProperties = createHTMLElement("div", { classes: ["tags", "traits"] });
         if (itemTraits.length === 0 && properties.length === 0) {
             traitsAndProperties.append(...traits);
         } else {
@@ -360,9 +381,10 @@ class CheckPF2e {
                 return toTagElement({ name: modifier.slug, label }, "transparent");
             });
         const tagsFromOptions = extraTags.map((t) => toTagElement({ label: game.i18n.localize(t) }, "transparent"));
-        const modifiersAndExtras = document.createElement("div");
-        modifiersAndExtras.className = "tags";
-        modifiersAndExtras.append(...modifiers, ...tagsFromOptions);
+        const modifiersAndExtras = createHTMLElement("div", {
+            classes: ["tags", "modifiers"],
+            children: [...modifiers, ...tagsFromOptions],
+        });
 
         return [traitsAndProperties, document.createElement("hr"), modifiersAndExtras];
     }
@@ -385,7 +407,7 @@ class CheckPF2e {
                 const heroPointCount = actor.heroPoints.value;
                 if (heroPointCount) {
                     await actor.update({
-                        "system.resources.heroPoints.value": Math.clamped(heroPointCount - 1, 0, 3),
+                        "system.resources.heroPoints.value": Math.clamped(heroPointCount - 1, 0, actor.heroPoints.max),
                     });
                     rerollFlavor = game.i18n.format("PF2E.RerollMenu.MessageHeroPoint", { name: actor.name });
                 } else {
@@ -393,7 +415,7 @@ class CheckPF2e {
                     return;
                 }
             } else {
-                ui.notifications.error(game.i18n.localize("PF2E.RerollMenu.ErrorNoActor"));
+                ui.notifications.error("PF2E.RerollMenu.ErrorNoActor", { localize: true });
                 return;
             }
         }
@@ -408,17 +430,31 @@ class CheckPF2e {
         const oldRoll = message.rolls.at(0);
         if (!(oldRoll instanceof CheckRoll)) throw ErrorPF2e("Unexpected error retrieving prior roll");
 
-        const RollCls = oldRoll.constructor as typeof CheckRoll;
-        const newData = deepClone(oldRoll.data);
-        const newOptions = { ...oldRoll.options, isReroll: true };
-        const newRoll = await new RollCls(oldRoll.formula, newData, newOptions).evaluate({ async: true });
+        // Clone the old roll and call a hook allowing the clone to be altered.
+        // Tampering with the old roll is disallowed.
+        const unevaluatedNewRoll = oldRoll.clone();
+        unevaluatedNewRoll.options.isReroll = true;
+        Hooks.callAll(
+            "pf2e.preReroll",
+            Roll.fromJSON(JSON.stringify(oldRoll.toJSON())),
+            unevaluatedNewRoll,
+            heroPoint,
+            keep
+        );
+
+        // Evaluate the new roll and call a second hook allowing the roll to be altered
+        const newRoll = await unevaluatedNewRoll.evaluate({ async: true });
+        Hooks.callAll("pf2e.reroll", Roll.fromJSON(JSON.stringify(oldRoll.toJSON())), newRoll, heroPoint, keep);
 
         // Keep the new roll by default; Old roll is discarded
         let keptRoll = newRoll;
         let [oldRollClass, newRollClass] = ["pf2e-reroll-discard", ""];
 
         // Check if we should keep the old roll instead.
-        if ((keep === "best" && oldRoll.total > newRoll.total) || (keep === "worst" && oldRoll.total < newRoll.total)) {
+        if (
+            (keep === "higher" && oldRoll.total > newRoll.total) ||
+            (keep === "lower" && oldRoll.total < newRoll.total)
+        ) {
             // If so, switch the css classes and keep the old roll.
             [oldRollClass, newRollClass] = [newRollClass, oldRollClass];
             keptRoll = oldRoll;
@@ -441,11 +477,31 @@ class CheckPF2e {
 
         const newFlavor = useNewRoll
             ? await (async (): Promise<string> => {
-                  const $parsedFlavor = $("<div>").append(oldFlavor);
+                  const parsedFlavor = document.createElement("div");
+                  parsedFlavor.innerHTML = oldFlavor;
                   const target = context.target ?? null;
-                  const flavor = await this.createResultFlavor({ degree, target });
-                  if (flavor) $parsedFlavor.find(".target-dc-result").replaceWith(flavor);
-                  return $parsedFlavor.html();
+                  const targetFlavor = await this.#createResultFlavor({ degree, target });
+                  if (targetFlavor) {
+                      htmlQuery(parsedFlavor, ".target-dc-result")?.replaceWith(targetFlavor);
+                  }
+                  for (const element of htmlQueryAll(parsedFlavor, ".roll-note")) {
+                      element.remove();
+                  }
+                  const notes = context.notes?.map((n) => new RollNotePF2e(n)) ?? [];
+                  const notesText =
+                      notes
+                          .filter((note) => {
+                              if (!context.dc || note.outcome.length === 0) {
+                                  // Always show the note if the check has no DC or no outcome is specified.
+                                  return true;
+                              }
+                              const outcome = context.outcome ?? context.unadjustedOutcome;
+                              return !!(outcome && note.outcome.includes(outcome));
+                          })
+                          .map((n) => n.text)
+                          .join("\n") ?? "";
+
+                  return parsedFlavor.innerHTML + notesText;
               })()
             : oldFlavor;
 
@@ -493,12 +549,13 @@ class CheckPF2e {
         return element.innerHTML;
     }
 
-    private static async createResultFlavor({ degree, target }: CreateResultFlavorParams): Promise<HTMLElement | null> {
+    static async #createResultFlavor({ degree, target }: CreateResultFlavorParams): Promise<HTMLElement | null> {
         if (!degree) return null;
 
         const { dc } = degree;
         const needsDCParam = !!dc.label && Number.isInteger(dc.value) && !dc.label.includes("{dc}");
-        const customLabel = needsDCParam ? `<dc>${dc.label}: {dc}</dc>` : dc.label ?? null;
+        const customLabel =
+            needsDCParam && dc.label ? `<dc>${game.i18n.localize(dc.label)}: {dc}</dc>` : dc.label ?? null;
 
         const targetActor = await (async (): Promise<ActorPF2e | null> => {
             if (!target?.actor) return null;
@@ -540,16 +597,18 @@ class CheckPF2e {
 
         // DC, circumstance adjustments, and the target's name
         const dcData = ((): ResultFlavorTemplateData["dc"] => {
+            const dcSlug =
+                dc.slug ?? (dc.statistic instanceof StatisticDifficultyClass ? dc.statistic.parent.slug : null);
             const dcType = game.i18n.localize(
                 dc.label?.trim() ||
                     game.i18n.localize(
-                        objectHasKey(checkDCs.Specific, dc.slug) ? checkDCs.Specific[dc.slug] : checkDCs.Unspecific
+                        objectHasKey(checkDCs.Specific, dcSlug) ? checkDCs.Specific[dcSlug] : checkDCs.Unspecific
                     )
             );
 
             // Get any circumstance penalties or bonuses to the target's DC
             const circumstances =
-                dc.statistic instanceof StatisticModifier || dc.statistic instanceof StatisticDifficultyClass
+                dc.statistic instanceof StatisticDifficultyClass
                     ? dc.statistic.modifiers.filter((m) => m.enabled && m.type === "circumstance")
                     : [];
             const preadjustedDC =

@@ -1,3 +1,5 @@
+import { AttributeString } from "@actor/types.ts";
+import { SelfEffectReference, SelfEffectReferenceSource } from "@item/ability/index.ts";
 import { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemSource } from "@item/data/base.ts";
 import { OneToThree, TraitsWithRarity } from "@module/data.ts";
 import { FeatCategory, FeatTrait } from "./types.ts";
@@ -28,12 +30,22 @@ interface FeatSystemSource extends ItemSystemSource {
     };
     location: string | null;
     frequency?: FrequencySource;
+    subfeatures?: Partial<FeatSubfeatures>;
+    /** A self-applied effect for simple actions */
+    selfEffect?: SelfEffectReferenceSource | null;
 }
 
 interface FeatSystemData extends Omit<FeatSystemSource, "maxTaken"> {
     /** `null` is set to `Infinity` during data preparation */
     maxTakable: number;
     frequency?: Frequency;
+    subfeatures: FeatSubfeatures;
+    /** A self-applied effect for simple actions */
+    selfEffect: SelfEffectReference | null;
+}
+
+interface FeatSubfeatures {
+    keyOptions: AttributeString[];
 }
 
 type FeatTraits = TraitsWithRarity<FeatTrait>;

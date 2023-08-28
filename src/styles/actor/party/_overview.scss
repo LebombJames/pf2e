@@ -1,24 +1,75 @@
+.content {
+    padding-top: 0.5rem;
+    padding-bottom: 0.25rem;
+}
+
 .summary {
     @include frame-elegant;
-    padding: 0.5rem;
-    margin: 16px 16px 8px 16px;
-    label {
+    display: flex;
+    flex-direction: column;
+    padding: 0.375rem 0.5rem;
+    margin: 0.25rem 1rem 0.25rem 12px;
+
+    nav {
         color: var(--alt-dark);
-        font-family: var(--serif);
-        font-weight: 500;
-        line-height: 1em;
+        display: flex;
+        gap: 0.25rem;
+        line-height: 1.25em;
+        margin-bottom: 0.375rem;
+
+        button {
+            border: none;
+            font-size: var(--font-size-14);
+            font-weight: 500;
+            padding: 0 0.5rem;
+            white-space: nowrap;
+            width: auto;
+            &.active {
+                background: var(--secondary);
+                color: white;
+            }
+        }
     }
 
-    .tags {
+    .tags, .skills {
         margin: 0;
+    }
+
+    [hidden] {
+        display: none;
     }
 }
 
-.member-breakdown {
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    .tag-light {
+        &[data-rank="1"] {
+            --tag-color: #{$rank-trained};
+        }
+        &[data-rank="2"] {
+            --tag-color: #{$rank-expert};
+        }
+        &[data-rank="3"] {
+            --tag-color: #{$rank-master};
+        }
+        &[data-rank="4"] {
+            --tag-color: #{$rank-legendary};
+        }
+    }
+
+    .perception {
+        color: white;
+        background-color: var(--tag-color);
+    }
+}
+
+.member {
     display: flex;
     flex-direction: row;
     font-family: var(--sans-serif);
-    padding: 0.5rem 16px;
+    padding: 0.5rem 1rem;
     position: relative;
 
     &:not(:last-child):after {
@@ -30,10 +81,10 @@
         bottom: 0;
     }
 
-    .member-image {
+    > .portrait {
         position: relative;
-        min-width: 5.75rem;
-        height: 5.75rem;
+        min-width: 5.5rem;
+        height: 5.5rem;
         margin-right: 8px;
 
         img {
@@ -44,68 +95,40 @@
             object-fit: contain;
         }
 
-        .ac {
+        .health-bar {
+            background-color: var(--sub);
+            bottom: 0;
+            color: white;
+            font-size: var(--font-size-12);
+            font-weight: 500;
+            height: 1.25rem;
+            line-height: 1.25rem;
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -0.5rem;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
 
-            font-weight: 600;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: end;
-
-            width: 2.5rem;
-            height: 2.8rem;
-            padding-bottom: 0.55rem;
-
-            filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.4)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-
-            &::before, &::after {
-                content: "";
-                background: url("/assets/sheet/accent-decoration.webp");
+            .bar {
                 position: absolute;
-                right: 50%;
-                bottom: 0.15rem;
-                width: 2.85rem;
-                height: 1.254rem;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                background-color: var(--primary);
+                box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
             }
 
-            &:after {
-                transform: scaleX(-1);
-                transform-origin: right center;
+            .temp {
+                background-color: var(--secondary);
+                top: -0.25rem;
+                height: 0.25rem;
             }
 
-            .shield, label, .value {
-                z-index: 1;
-            }
-
-            .shield {
-                position: absolute;
-                inset: 0;
-                background: url("/assets/sheet/shield-blue.webp") no-repeat center bottom;
-                background-size: contain;
-            }
-
-            label {
-                color: var(--tertiary-dark);
-                font-size: var(--font-size-12);
-                font-variant: all-small-caps;
-                line-height: 1em;
-            }
-            .value {
-                color: white;
-                font-size: var(--font-size-18);
-                line-height: 1em;
+            span {
+                padding-left: 0.25rem;
+                position: relative; // lets it render over the bar
             }
         }
     }
 
-    .member-data {
+    > .data {
         display: flex;
         border-left: 1px solid #C9BFA9;
         flex-direction: column;
@@ -122,23 +145,42 @@
         font-weight: 600;
         line-height: 1em; // make it line up better
 
+        i {
+            font-size: 0.8em;
+            margin-left: 0.125rem;
+        }
+
+        .abc {
+            color: var(--alt-dark);
+            border-left: 1px solid var(--color-border);
+            font-family: var(--sans-serif);
+            font-size: var(--font-size-14);
+            font-weight: 500;
+            font-variant: all-small-caps;
+            margin-left: 0.5rem;
+            padding-left: 0.5rem;
+            line-height: 0.5rem;
+        }
+
         .hero-points {
-            display: flex;
-            flex: 1;
             align-items: center;
-            justify-content: flex-end;
+            display: flex;
             gap: 2px;
+            justify-content: end;
+            margin-left: auto;
+
+            > * {
+                width: 1.2rem;
+                height: 1.2rem;
+            }
 
             .empty {
                 border: 2px dashed rgba(0, 0, 0, 0.5);
                 border-radius: 50%;
-                width: 1.2rem;
-                height: 1.2rem;
             }
+
             img {
                 border: none;
-                width: 1.2rem;
-                height: 1.2rem;
             }
         }
     }
@@ -146,12 +188,12 @@
     .main-stats {
         display: flex;
         gap: 0.5rem;
-        margin-bottom: 0.25rem;
+        margin: 0.125rem 0 0.25rem 0;
 
-        & > div {
-            border: 1px solid rgba(0, 0, 0, 0.28);
+        & > section {
+            border: 1px solid var(--color-border);
             border-radius: 2px;
-            height: 2.6rem;
+            height: 2.625rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -171,32 +213,27 @@
             }
         }
 
-        .health-section {
-            flex: 1;
-            min-width: 9rem;
-        }
+        .ac {
+            border: none;
+            position: relative;
+            flex: 0 0 2.25rem;
 
-        .health {
-            padding-right: 0.5rem;
-            margin-right: 0.125rem;
-            justify-content: center;
-            gap: 0.5rem;
+            &::before {
+                content: " ";
+                position: absolute;
+                inset: 0;
+                background: url("/assets/sheet/shield-clear.svg") no-repeat center center;
+                background-size: contain;
+            }
 
-            .max {
-                font-weight: 500;
-            }
-            .value, .max {
-                display: inline-block;
-                font-variant-numeric: tabular-nums;
-            }
             .value {
-                text-align: end;
+                color: #{$rank-trained};
+                font-weight: 700;
             }
         }
 
         .saving-throws {
-            flex: 0.85;
-            min-width: 5.5rem;
+            flex: 0 0 9.5rem;
             .score {
                 flex: 1;
                 font-weight: 500;
@@ -204,72 +241,28 @@
         }
 
         .senses {
+            align-items: center;
             flex: 1.4;
+            overflow: hidden;
+
             .value {
+                align-items: center;
                 display: flex;
                 font-size: var(--font-size-12);
                 gap: 0.125rem;
-                align-items: center;
-                overflow: hidden;
-            }
-            [data-acuity="imprecise"], [data-acuity="vague"] {
-                border-style: dashed;
-            }
-            .blank {
-                font-size: var(--font-size-14);
-            }
-        }
+                overflow-x: auto;
+                max-width: 100%;
 
-        // not currently in use, but here in case we change our mind
-        .ability-scores {
-            flex: 1.2;
-            .ability-score-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2px 8px;
-                padding: 8px;
-                width: 100%;
-                .score {
-                    flex-direction: row;
-                    font-size: var(--font-size-12);
-                    justify-content: space-between;
-                    align-items: center;
-                    label {
-                        font-size: var(--font-size-12);
-                        font-weight: 600;
-                    }
+                padding: 0 0.5rem;
+
+                // if a scrollbar spawns, give it some space
+                padding-bottom: 7px;
+                margin-bottom: -7px;
+
+                [data-acuity="imprecise"], [data-acuity="vague"] {
+                    border-style: dashed;
                 }
             }
-        }
-
-        .master {
-            flex: 1.15;
-            font-size: var(--font-size-16);
-        }
-    }
-
-    .skills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.25rem;
-        .tag-light {
-            &[data-rank="1"] {
-                --tag-color: #{$rank-trained};
-            }
-            &[data-rank="2"] {
-                --tag-color: #{$rank-expert};
-            }
-            &[data-rank="3"] {
-                --tag-color: #{$rank-master};
-            }
-            &[data-rank="4"] {
-                --tag-color: #{$rank-legendary};
-            }
-        }
-
-        .perception {
-            color: white;
-            background-color: var(--tag-color);
         }
     }
 }

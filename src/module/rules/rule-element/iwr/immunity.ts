@@ -1,9 +1,7 @@
 import { ImmunityData } from "@actor/data/iwr.ts";
 import { ImmunityType } from "@actor/types.ts";
-import type { ArrayField, ModelPropsFromSchema, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { IWRRuleElement, IWRRuleSchema } from "./base.ts";
-
-const { fields } = foundry.data;
 
 /** @category RuleElement */
 class ImmunityRuleElement extends IWRRuleElement<ImmunityRuleSchema> {
@@ -11,6 +9,7 @@ class ImmunityRuleElement extends IWRRuleElement<ImmunityRuleSchema> {
     readonly value = null;
 
     static override defineSchema(): ImmunityRuleSchema {
+        const { fields } = foundry.data;
         return {
             ...super.defineSchema(),
             exceptions: new fields.ArrayField(

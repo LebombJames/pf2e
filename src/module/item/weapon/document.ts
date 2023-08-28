@@ -1,7 +1,8 @@
 import { ActorPF2e } from "@actor";
 import { AutomaticBonusProgression as ABP } from "@actor/character/automatic-bonus-progression.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
-import { AbilityString } from "@actor/types.ts";
+import { AttributeString } from "@actor/types.ts";
+import { ATTRIBUTE_ABBREVIATIONS } from "@actor/values.ts";
 import { ConsumablePF2e, MeleePF2e, PhysicalItemPF2e } from "@item";
 import { ItemSummaryData, MeleeSource } from "@item/data/index.ts";
 import { NPCAttackDamage, NPCAttackTrait } from "@item/melee/data.ts";
@@ -22,7 +23,7 @@ import { MAGIC_SCHOOLS, MAGIC_TRADITIONS } from "@item/spell/values.ts";
 import { OneToThree } from "@module/data.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { DamageCategorization } from "@system/damage/helpers.ts";
-import { ErrorPF2e, objectHasKey, setHasElement, sluggify } from "@util";
+import { ErrorPF2e, objectHasKey, setHasElement, sluggify, tupleHasValue } from "@util";
 import type { WeaponDamage, WeaponFlags, WeaponMaterialData, WeaponSource, WeaponSystemData } from "./data.ts";
 import { WeaponTraitToggles, prunePropertyRunes } from "./helpers.ts";
 import type {
@@ -76,7 +77,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
     }
 
     /** The default ability used in attack rolls */
-    get defaultAbility(): AbilityString {
+    get defaultAbility(): AttributeString {
         return this.system.ability ?? (this.isRanged ? "dex" : "str");
     }
 
@@ -117,8 +118,18 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         return this.rangeIncrement !== null;
     }
 
+    /** Whether the weapon in its current usage is thrown: a thrown-only weapon or a thrown usage of a melee weapon */
     get isThrown(): boolean {
-        return this.isRanged && this.reload === "-";
+        return this.isRanged && (this.baseType === "alchemical-bomb" || this.system.traits.value.includes("thrown"));
+    }
+
+    /** Whether the weapon is _can be_ thrown: a thrown-only weapon or one that has a throwable usage */
+    get isThrowable(): boolean {
+        return (
+            this.isThrown ||
+            this.system.traits.value.some((t) => t.startsWith("thrown")) ||
+            !!this.system.meleeUsage?.traits.some((t) => t.startsWith("thrown"))
+        );
     }
 
     get isOversized(): boolean {
@@ -144,7 +155,12 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
     /** Does this weapon deal damage? */
     get dealsDamage(): boolean {
         const { baseDamage } = this;
-        return baseDamage.dice > 0 || baseDamage.modifier > 0;
+        return (
+            baseDamage.dice > 0 ||
+            baseDamage.modifier > 0 ||
+            this.system.splashDamage.value > 0 ||
+            !!baseDamage.persistent?.number
+        );
     }
 
     override get material(): WeaponMaterialData {
@@ -153,26 +169,32 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     /** Does this weapon require ammunition in order to make a strike? */
     get requiresAmmo(): boolean {
-        return this.isRanged && ![null, "-"].includes(this.reload);
+        return this.isRanged && !this.isThrown && ![null, "-"].includes(this.reload);
     }
 
-    get ammo(): ConsumablePF2e<NonNullable<TParent>> | null {
+    get ammo(): ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | null {
         const ammo = this.actor?.items.get(this.system.selectedAmmoId ?? "");
-        return ammo instanceof ConsumablePF2e && ammo.quantity > 0 ? ammo : null;
+        return ammo?.isOfType("consumable", "weapon") && ammo.quantity > 0 ? ammo : null;
     }
 
     get otherTags(): Set<OtherWeaponTag> {
         return new Set(this.system.traits.otherTags);
     }
 
+    /** Whether this weapon can serve as ammunition for another weapon */
+    isAmmoFor(weapon: WeaponPF2e): boolean {
+        return this.system.usage.canBeAmmo && !weapon.system.traits.value.includes("repeating");
+    }
+
     /** Generate a list of strings for use in predication */
     override getRollOptions(prefix = this.type): string[] {
+        const { baseDamage } = this;
         const damage = {
-            category: DamageCategorization.fromDamageType(this.system.damage.damageType),
-            type: this.system.damage.damageType,
+            category: DamageCategorization.fromDamageType(baseDamage.damageType),
+            type: baseDamage.damageType,
             dice: {
-                number: this.system.damage.die ? this.system.damage.dice : 0,
-                faces: Number(this.system.damage.die?.replace(/^d/, "")),
+                number: baseDamage.die ? baseDamage.dice : 0,
+                faces: Number(baseDamage.die?.replace(/^d/, "")),
             },
         };
         const { actor } = this;
@@ -194,7 +216,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             .reduce((statements, s) => ({ ...statements, [s]: true }), {} as Record<string, boolean>);
 
         // Ammunition
-        const ammunitionRollOptions = ((ammunition: ConsumablePF2e | null) => {
+        const ammunitionRollOptions = ((ammunition: ConsumablePF2e | WeaponPF2e | null) => {
             const rollOptions: Record<string, boolean> = {};
             if (ammunition) {
                 rollOptions[`ammo:id:${ammunition.id}`] = true;
@@ -266,6 +288,9 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         systemData.propertyRune2.value ||= null;
         systemData.propertyRune3.value ||= null;
         systemData.propertyRune4.value ||= null;
+        if (!setHasElement(ATTRIBUTE_ABBREVIATIONS, systemData.ability)) {
+            systemData.ability = null;
+        }
 
         const reloadValue = (systemData.reload.value ||= null);
         systemData.reload.label = reloadValue
@@ -285,9 +310,8 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
         ABP.cleanupRunes(this);
 
-        const traitsArray = systemData.traits.value;
-        // Thrown weapons always have a reload of "-"
-        if (systemData.baseItem === "alchemical-bomb" || traitsArray.some((t) => /^thrown(?:-\d+)?$/.test(t))) {
+        // Thrown weapons always have a reload of "-" or 0
+        if (this.isThrown && !tupleHasValue(["-", "0"], this.system.reload.value)) {
             this.system.reload.value = "-";
         }
 
@@ -309,10 +333,17 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             }
         }
 
+        // Ensure presence of traits array on melee usage if not have been added yet
+        if (this.system.meleeUsage) {
+            this.system.meleeUsage.traits ??= [];
+            this.system.meleeUsage.traitToggles ??= { modular: null, versatile: null };
+        }
+
         // Lazy-load toggleable traits
         systemData.traits.toggles = new WeaponTraitToggles(this);
 
         // Ensure unarmed attacks always have the unarmed trait
+        const traitsArray = systemData.traits.value;
         if (systemData.category === "unarmed" && !traitsArray.includes("unarmed")) {
             systemData.traits.value.push("unarmed");
         }
@@ -321,13 +352,15 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         const mandatoryMelee = !mandatoryRanged && traitsArray.some((t) => /^thrown-\d+$/.test(t));
         if (mandatoryMelee) this.system.range = null;
 
-        // Set whether the ammunition or weapon itself should be consumed
+        // Whether the ammunition or weapon itself should be consumed
         systemData.reload.consume = this.isMelee ? null : this.reload !== null;
+
+        // Whether the weapon is also usable as ammunition: set from source since parent prepares initial (clean) usage
+        // object
+        systemData.usage.canBeAmmo = this._source.system.usage.canBeAmmo ?? false;
 
         // If the `comboMeleeUsage` flag is true, then this is a combination weapon in its melee form
         this.flags.pf2e.comboMeleeUsage ??= false;
-        // Ensure presence of traits array on melee usage if not have been added yet
-        if (this.system.meleeUsage) this.system.meleeUsage.traits ??= [];
 
         this.prepareMaterialAndRunes();
         this.prepareLevelAndRarity();
@@ -422,6 +455,13 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             .reduce((highest, rarity) => (rarityOrder[rarity] > rarityOrder[highest] ? rarity : highest), baseRarity);
     }
 
+    override prepareDerivedData(): void {
+        super.prepareDerivedData();
+        if (this.system.usage.canBeAmmo && !this.isThrowable) {
+            this.system.usage.canBeAmmo = false;
+        }
+    }
+
     /** Add the rule elements of this weapon's linked ammunition to its own list */
     override prepareSiblingData(): void {
         super.prepareSiblingData();
@@ -465,7 +505,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     override async getChatData(
         this: WeaponPF2e<ActorPF2e>,
-        htmlOptions: EnrichHTMLOptions = {}
+        htmlOptions: EnrichmentOptions = {}
     ): Promise<ItemSummaryData> {
         const traits = this.traitChatData(CONFIG.PF2E.weaponTraits);
         const chatData = await super.getChatData();
@@ -549,12 +589,9 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
     override generateUnidentifiedName({ typeOnly = false }: { typeOnly?: boolean } = { typeOnly: false }): string {
         const base = this.baseType ? CONFIG.PF2E.baseWeaponTypes[this.baseType] : null;
         const group = this.group ? CONFIG.PF2E.weaponGroups[this.group] : null;
-        const fallback = "ITEM.TypeWeapon";
-        const itemType = game.i18n.localize(base ?? group ?? fallback);
+        const itemType = game.i18n.localize(base ?? group ?? "TYPES.Item.weapon");
 
-        if (typeOnly) return itemType;
-
-        return game.i18n.format("PF2E.identification.UnidentifiedItem", { item: itemType });
+        return typeOnly ? itemType : game.i18n.format("PF2E.identification.UnidentifiedItem", { item: itemType });
     }
 
     /**
@@ -616,13 +653,18 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         const { meleeUsage } = this.system;
         if (!meleeUsage || this.flags.pf2e.comboMeleeUsage) return null;
 
+        const traitToggles = {
+            module: { selection: meleeUsage.traitToggles.modular },
+            versatile: { selection: meleeUsage.traitToggles.versatile },
+        };
+
         const overlay: DeepPartial<WeaponSource> = {
             system: {
                 damage: { damageType: meleeUsage.damage.type, dice: 1, die: meleeUsage.damage.die },
                 group: meleeUsage.group,
                 range: null,
                 reload: { value: null },
-                traits: { value: meleeUsage.traits.concat("combination") },
+                traits: { value: meleeUsage.traits.concat("combination"), toggles: traitToggles },
                 selectedAmmoId: null,
             },
             flags: {
@@ -643,16 +685,23 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             const weaponDamage = this.baseDamage;
             const ability = this.rangeIncrement && !this.isThrown ? "dex" : "str";
             const actorLevel = actor.system.details.level.base;
-            const dice = [1, 2, 3, 4].reduce((closest, dice) =>
-                Math.abs(dice - Math.round((actorLevel + 2) / 4)) < Math.abs(closest - Math.round((actorLevel + 2) / 4))
-                    ? dice
-                    : closest
-            );
+            // Use the base dice if damage is fixed
+            const dice = this.flags.pf2e.fixedAttack
+                ? weaponDamage.dice
+                : [1, 2, 3, 4].reduce((closest, dice) =>
+                      Math.abs(dice - Math.round((actorLevel + 2) / 4)) <
+                      Math.abs(closest - Math.round((actorLevel + 2) / 4))
+                          ? dice
+                          : closest
+                  );
 
             // Approximate weapon specialization
             const constant = ((): string => {
                 const fromAbility = actor.abilities[ability].mod;
-                const totalModifier = fromAbility + (actor.level > 1 ? dice : 0);
+                // Use the base modifier if damage is fixed
+                const totalModifier = this.flags.pf2e.fixedAttack
+                    ? weaponDamage.modifier
+                    : fromAbility + (actor.level > 1 ? dice : 0);
                 const sign = totalModifier < 0 ? "-" : "+";
                 return totalModifier === 0 ? "" : [sign, Math.abs(totalModifier)].join("");
             })();
@@ -713,12 +762,13 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
                         !["artifact", "cursed"].includes(t)
                 );
 
-            if (this.isRanged && !this.isThrown) {
-                newTraits.push(`range-increment-${this.rangeIncrement!}`);
+            if (this.rangeIncrement && !this.isThrown) {
+                const prefix = this.maxRange === this.rangeIncrement * 6 ? "range-increment" : "range";
+                newTraits.push(`${prefix}-${this.rangeIncrement}`);
             }
 
             const actorSize = new ActorSizePF2e({ value: actor.size });
-            if (actorSize.isLargerThan("med") && !newTraits.some((t) => t.startsWith("reach"))) {
+            if (this.isMelee && actorSize.isLargerThan("med") && !newTraits.some((t) => t.startsWith("reach"))) {
                 actorSize.decrement();
                 newTraits.push(...[npcReach[actorSize.value] ?? []].flat());
             }
@@ -758,8 +808,8 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             system: {
                 weaponType: { value: this.isMelee ? "melee" : "ranged" },
                 bonus: {
-                    // Give an attack bonus approximating a high-threat NPC
-                    value: Math.round(1.5 * this.actor.level + 7),
+                    // Unless there is a fixed attack modifier, give an attack bonus approximating a high-threat NPC
+                    value: this.flags.pf2e.fixedAttack || Math.round(1.5 * this.actor.level + 7),
                 },
                 damageRolls: [baseDamage, splashDamage, fromPropertyRunes, persistentDamage]
                     .flat()
@@ -785,6 +835,19 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         return [attack, ...this.getAltUsages({ recurse: false }).flatMap((u) => u.toNPCAttacks())];
     }
 
+    /** Consume a unit of ammunition used by this weapon */
+    async consumeAmmo(): Promise<void> {
+        const { ammo } = this;
+        if (ammo?.isOfType("consumable")) {
+            return ammo.consume();
+        } else if (ammo?.isOfType("weapon")) {
+            if (!ammo.system.usage.canBeAmmo) {
+                throw ErrorPF2e("attempted to consume weapon not usable as ammunition");
+            }
+            await ammo.update({ "system.quantity": Math.max(ammo.quantity - 1, 0) });
+        }
+    }
+
     /* -------------------------------------------- */
     /*  Event Listeners and Handlers                */
     /* -------------------------------------------- */
@@ -793,7 +856,7 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
         changed: DeepPartial<this["_source"]>,
         options: DocumentUpdateContext<TParent>,
         user: UserPF2e
-    ): Promise<void> {
+    ): Promise<boolean | void> {
         const traits = changed.system?.traits ?? {};
         if ("value" in traits && Array.isArray(traits.value)) {
             traits.value = traits.value.filter((t) => t in CONFIG.PF2E.weaponTraits);

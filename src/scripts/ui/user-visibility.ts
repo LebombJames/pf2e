@@ -1,4 +1,5 @@
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
+import { TokenDocumentPF2e } from "@scene";
 import { htmlQueryAll, objectHasKey } from "@util";
 
 class UserVisibilityPF2e {
@@ -18,8 +19,15 @@ class UserVisibilityPF2e {
         const { message } = options;
         const document = options.document ?? message?.actor ?? message?.journalEntry ?? message ?? null;
         if (document) {
-            const elements = visibilityElements.filter((e) => e.dataset.visibility === "owner");
-            for (const element of elements) {
+            const ownerElements = visibilityElements.filter((e) => e.dataset.visibility === "owner");
+            for (const element of ownerElements) {
+                // "owner" is generally applicable only to `data-action` buttons and anchors in chat messages
+                if (element.dataset.action) {
+                    if (!document.isOwner) element.remove();
+                    delete element.dataset.visibility;
+                    continue;
+                }
+
                 const whoseData = element.dataset.whose ?? "self";
                 if (whoseData === "self") {
                     element.dataset.visibility = document.hasPlayerOwner ? "all" : "gm";
@@ -35,30 +43,30 @@ class UserVisibilityPF2e {
         const hasOwnership = document?.isOwner ?? game.user.isGM;
         // Hide DC for explicit save buttons (such as in spell cards)
         const dcSetting = game.settings.get("pf2e", "metagame_showDC");
-        const $saveButtons = $html.find("button[data-action=save]");
+        const saveButtons = htmlQueryAll(html, "button[data-action=save]");
         const hideDC = !document?.hasPlayerOwner && !hasOwnership && !dcSetting;
         if (hideDC) {
-            $saveButtons.each((_idx, elem) => {
-                const saveType = elem.dataset.save;
+            for (const button of saveButtons) {
+                const saveType = button.dataset.save;
                 if (objectHasKey(CONFIG.PF2E.saves, saveType)) {
                     const saveName = game.i18n.localize(CONFIG.PF2E.saves[saveType]);
-                    elem.innerText = game.i18n.format("PF2E.SavingThrowWithName", { saveName });
+                    button.innerText = game.i18n.format("PF2E.SavingThrowWithName", { saveName });
                 }
-            });
+            }
         } else if (!document?.hasPlayerOwner && !dcSetting) {
-            $saveButtons.each((_idx, elem) => {
-                $(elem).addClass("hidden-to-others");
-            });
+            for (const button of saveButtons) {
+                button.classList.add("hidden-to-others");
+            }
         }
 
-        $html.find("[data-owner-title]").each((_idx, element) => {
+        for (const element of htmlQueryAll(html, "[data-owner-title]")) {
             if (hasOwnership) {
-                const value = element.dataset.ownerTitle!;
-                element.setAttribute("title", value);
+                const value = element.dataset.ownerTitle ?? "";
+                element.title = value;
             } else {
                 element.removeAttribute("data-owner-title");
             }
-        });
+        }
 
         // Remove visibility=gm elements if the user is not a GM
         if (!game.user.isGM) {
@@ -70,9 +78,10 @@ class UserVisibilityPF2e {
 
     static processMessageSender(message: ChatMessagePF2e, html: HTMLElement): void {
         // Hide the sender name from the card if it can't be seen from the canvas
-        const tokenSetsNameVisibility = game.settings.get("pf2e", "metagame_tokenSetsNameVisibility");
-        const token = message?.token;
-        if (token && tokenSetsNameVisibility) {
+        if (!game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")) return;
+        const token =
+            message.token ?? (message.actor ? new TokenDocumentPF2e(message.actor.prototypeToken.toObject()) : null);
+        if (token) {
             const sender = html.querySelector<HTMLElement>("h4.message-sender");
             const nameToHide = token.name.trim();
             const shouldHideName = !token.playersCanSeeName && sender?.innerText.trim() === nameToHide;
@@ -94,4 +103,4 @@ interface ProcessOptions {
     message?: ChatMessagePF2e;
 }
 
-export { UserVisibilityPF2e, UserVisibility };
+export { UserVisibility, UserVisibilityPF2e };

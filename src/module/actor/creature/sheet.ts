@@ -1,14 +1,14 @@
 import { ActorPF2e, CreaturePF2e } from "@actor";
 import { createSpellcastingDialog } from "@actor/sheet/spellcasting-dialog.ts";
-import { ABILITY_ABBREVIATIONS, SKILL_DICTIONARY } from "@actor/values.ts";
+import { ATTRIBUTE_ABBREVIATIONS, SKILL_DICTIONARY } from "@actor/values.ts";
 import { ItemPF2e, SpellPF2e, SpellcastingEntryPF2e } from "@item";
-import { ActionTrait } from "@item/action/index.ts";
-import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ActionCategory, ActionTrait } from "@item/ability/index.ts";
 import { ActionType } from "@item/data/base.ts";
+import { ItemSourcePF2e } from "@item/data/index.ts";
 import { ITEM_CARRY_TYPES } from "@item/data/values.ts";
+import { SpellcastingSheetData } from "@item/spellcasting-entry/index.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
-import { goesToEleven, ZeroToFour } from "@module/data.ts";
+import { ZeroToFour, goesToEleven } from "@module/data.ts";
 import { createSheetTags } from "@module/sheet/helpers.ts";
 import { eventToRollParams } from "@scripts/sheet-util.ts";
 import { ErrorPF2e, fontAwesomeIcon, htmlClosest, htmlQueryAll, objectHasKey, setHasElement } from "@util";
@@ -51,7 +51,7 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
 
         // Ability Scores
         if (sheetData.data.abilities) {
-            for (const key of ABILITY_ABBREVIATIONS) {
+            for (const key of ATTRIBUTE_ABBREVIATIONS) {
                 sheetData.data.abilities[key].label = CONFIG.PF2E.abilities[key];
             }
         }
@@ -71,56 +71,16 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
             }
         }
 
-        // Enrich condition data
-        const enrich = async (content: string, rollData: Record<string, unknown>): Promise<string> => {
-            return TextEditor.enrichHTML(content, { rollData, async: true });
-        };
-        const actorRollData = this.actor.getRollData();
-        const conditions = game.pf2e.ConditionManager.getFlattenedConditions(actor);
-        for (const condition of conditions) {
-            const item = this.actor.items.get(condition.id);
-            if (item) {
-                const rollData = { ...item.getRollData(), ...actorRollData };
-                condition.enrichedDescription = await enrich(condition.description, rollData);
-
-                if (condition.parents.length) {
-                    for (const parent of condition.parents) {
-                        parent.enrichedText = await enrich(parent.text, rollData);
-                    }
-                }
-
-                if (condition.children.length) {
-                    for (const child of condition.children) {
-                        child.enrichedText = await enrich(child.text, rollData);
-                    }
-                }
-
-                if (condition.overrides.length) {
-                    for (const override of condition.overrides) {
-                        override.enrichedText = await enrich(override.text, rollData);
-                    }
-                }
-
-                if (condition.overriddenBy.length) {
-                    for (const overridenBy of condition.overriddenBy) {
-                        overridenBy.enrichedText = await enrich(overridenBy.text, rollData);
-                    }
-                }
-            }
-        }
-
         return {
             ...sheetData,
             languages: createSheetTags(CONFIG.PF2E.languages, actor.system.traits.languages),
             abilities: CONFIG.PF2E.abilities,
-            skills: CONFIG.PF2E.skills,
             actorSizes: CONFIG.PF2E.actorSizes,
             alignments: deepClone(CONFIG.PF2E.alignments),
             rarity: CONFIG.PF2E.rarityTraits,
             frequencies: CONFIG.PF2E.frequencies,
             attitude: CONFIG.PF2E.attitude,
             pfsFactions: CONFIG.PF2E.pfsFactions,
-            conditions,
             dying: {
                 maxed: actor.attributes.dying.value >= actor.attributes.dying.max,
                 remainingDying: Math.max(actor.attributes.dying.max - actor.attributes.dying.value),
@@ -150,21 +110,6 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
         return [...Array(level)].map(() => fontAwesomeIcon("check-circle").outerHTML).join("");
     }
 
-    /** Preserve browser focus on unnamed input elements when updating */
-    protected override async _render(force?: boolean, options?: RenderOptions): Promise<void> {
-        const focused = document.activeElement;
-        const contained = this.element.get(0)?.contains(focused);
-
-        await super._render(force, options);
-
-        if (focused instanceof HTMLInputElement && focused.name && contained) {
-            const selector = `input[data-property="${focused.name}"]:not([name])`;
-            const sameInput = this.element.get(0)?.querySelector<HTMLInputElement>(selector);
-            sameInput?.focus();
-            sameInput?.select();
-        }
-    }
-
     override activateListeners($html: JQuery): void {
         super.activateListeners($html);
         const html = $html[0]!;
@@ -180,13 +125,22 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
                 $(toggle).tooltipster("close");
             }
 
+            const carryType = menu.dataset.carryType;
+            if (!setHasElement(ITEM_CARRY_TYPES, carryType)) {
+                throw ErrorPF2e("Unexpected error retrieving requested carry type");
+            }
+
             const itemId = htmlClosest(menu, "[data-item-id]")?.dataset.itemId;
             const item = this.actor.inventory.get(itemId, { strict: true });
-            const carryType = menu.dataset.carryType;
             const handsHeld = Number(menu.dataset.handsHeld) || 0;
             const inSlot = menu.dataset.inSlot === "true";
-            if (carryType && setHasElement(ITEM_CARRY_TYPES, carryType)) {
-                this.actor.adjustCarryType(item, carryType, handsHeld, inSlot);
+            const current = item.system.equipped;
+            if (
+                carryType !== current.carryType ||
+                inSlot !== current.inSlot ||
+                (carryType === "held" && handsHeld !== current.handsHeld)
+            ) {
+                this.actor.adjustCarryType(item, { carryType, handsHeld, inSlot });
             }
         };
         for (const carryTypeMenu of htmlQueryAll(html, ".tab.inventory a[data-carry-type]")) {
@@ -262,6 +216,14 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
             const rollParams = eventToRollParams(event);
             this.actor.skills[key]?.check.roll(rollParams);
         });
+
+        // Roll perception checks
+        for (const element of htmlQueryAll(html, "a[data-action=perception-check]")) {
+            element.addEventListener("click", (event) => {
+                const extraRollOptions = element.dataset.secret ? ["secret"] : [];
+                this.actor.perception.roll({ ...eventToRollParams(event), extraRollOptions });
+            });
+        }
 
         // Add, edit, and remove spellcasting entries
         for (const section of htmlQueryAll(html, ".tab.spellcasting, .tab.spells") ?? []) {
@@ -408,10 +370,10 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
                 return [spell ?? []].flat();
             } else if (dropItemEl.dataset.slotId) {
                 const dropId = Number(dropItemEl.dataset.slotId);
-                const slotLevel = Number(dropItemEl.dataset.slotLevel);
+                const slotRank = Number(dropItemEl.dataset.slotLevel);
 
-                if (Number.isInteger(dropId) && Number.isInteger(slotLevel)) {
-                    const allocated = await collection.prepareSpell(item, slotLevel, dropId);
+                if (Number.isInteger(dropId) && Number.isInteger(slotRank)) {
+                    const allocated = await collection.prepareSpell(item, slotRank, dropId);
                     if (allocated instanceof SpellcastingEntryPF2e) return [allocated];
                 }
             } else if (dropSlotType === "spell") {
@@ -425,7 +387,7 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
                         if (item.isCantrip !== test.isCantrip) return false;
                         if (item.isCantrip && test.isCantrip) return true;
                         if (item.isFocusSpell && test.isFocusSpell) return true;
-                        if (item.level === test.level) return true;
+                        if (item.rank === test.rank) return true;
                         return false;
                     };
 
@@ -434,7 +396,7 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
                         await item.sortRelative({ target, siblings });
                         return [target];
                     } else {
-                        const spell = await collection.addSpell(item, { slotLevel: target.level });
+                        const spell = await collection.addSpell(item, { slotLevel: target.rank });
                         this.openSpellPreparationSheet(collection.id);
                         return [spell ?? []].flat();
                     }
@@ -482,7 +444,7 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
             const collection = this.actor.spellcasting.collections.get(entryId, { strict: true });
             const slotLevel = Number(htmlClosest(event.target, "[data-slot-level]")?.dataset.slotLevel ?? 0);
             this.openSpellPreparationSheet(collection.id);
-            return [(await collection.addSpell(item, { slotLevel: Math.max(slotLevel, item.baseLevel) })) ?? []].flat();
+            return [(await collection.addSpell(item, { slotLevel: Math.max(slotLevel, item.baseRank) })) ?? []].flat();
         }
 
         return super._handleDroppedItem(event, item, data);
@@ -498,7 +460,7 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
             buttons.splice(index, 0, {
                 label: "Configure", // Top-level foundry localization key
                 class: "configure-creature",
-                icon: "fas fa-cog",
+                icon: "fa-solid fa-user-gear",
                 onclick: () => this.#onConfigureActor(),
             });
         }
@@ -523,10 +485,10 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
     }
 
     #onClickBrowseActions(button: HTMLElement) {
-        const actionTypes = (button.dataset.actionType || "").split(",") as ActionType[];
-        const actionTraits = (button.dataset.actionTrait || "").split(",") as ActionTrait[];
-
-        game.pf2e.compendiumBrowser.openActionTab(actionTypes, actionTraits);
+        const types = (button.dataset.actionType || "").split(",") as ActionType[];
+        const traits = (button.dataset.actionTrait || "").split(",") as ActionTrait[];
+        const categories = (button.dataset.actionCategory || "").split(",") as ActionCategory[];
+        game.pf2e.compendiumBrowser.openActionTab({ types, traits, categories });
     }
 
     #onClickBrowseSpellCompendia(button: HTMLElement) {
@@ -537,25 +499,6 @@ export abstract class CreatureSheetPF2e<TActor extends CreaturePF2e> extends Act
         if (entry) {
             game.pf2e.compendiumBrowser.openSpellTab(entry, level);
         }
-    }
-
-    // Ensure a minimum of zero hit points and a maximum of the current max
-    protected override async _onSubmit(
-        event: Event,
-        options: OnSubmitFormOptions = {}
-    ): Promise<Record<string, unknown>> {
-        // Limit HP value to data.attributes.hp.max value
-        if (!(event.currentTarget instanceof HTMLInputElement)) {
-            return super._onSubmit(event, options);
-        }
-
-        const target = event.currentTarget;
-        if (target.name === "system.attributes.hp.value") {
-            const inputted = Number(target.value) || 0;
-            target.value = Math.floor(Math.clamped(inputted, 0, this.actor.hitPoints.max)).toString();
-        }
-
-        return super._onSubmit(event, options);
     }
 
     /** Redirect an update to shield HP to the actual item */

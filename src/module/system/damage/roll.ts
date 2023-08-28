@@ -5,7 +5,7 @@ import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import { RollDataPF2e } from "@system/rolls.ts";
 import { ErrorPF2e, fontAwesomeIcon, isObject, objectHasKey, tupleHasValue } from "@util";
 import type Peggy from "peggy";
-import { DamageCategorization, deepFindTerms, renderComponentDamage } from "./helpers.ts";
+import { DamageCategorization, deepFindTerms, renderComponentDamage, simplifyTerm } from "./helpers.ts";
 import { ArithmeticExpression, Grouping, GroupingData, InstancePool, IntermediateDie } from "./terms.ts";
 import { DamageCategory, DamageTemplate, DamageType, MaterialDamageEffect } from "./types.ts";
 import { DAMAGE_TYPE_ICONS } from "./values.ts";
@@ -107,7 +107,7 @@ class DamageRoll extends AbstractDamageRoll {
         formula = formula.trim();
         const wrapped = this.replaceFormulaData(formula.startsWith("{") ? formula : `{${formula}}`, {});
         try {
-            const result = this.parser.parse(wrapped);
+            const result = this.parser.parse(wrapped.replace(/@([a-z.0-9_-]+)/gi, "1"));
             return isObject(result) && "class" in result && ["PoolTerm", "InstancePool"].includes(String(result.class));
         } catch {
             return false;
@@ -353,13 +353,23 @@ class DamageInstance extends AbstractDamageRoll {
         for (const term of data.terms) {
             DamageRoll.classifyDice(term);
         }
+        const roll = super.fromData(data);
+        roll.terms = roll.terms.map((t) => simplifyTerm(t));
 
-        return super.fromData(data);
+        return roll;
     }
 
     /** Get the expected, minimum, or maximum value of a term */
     static getValue(term: RollTerm, type: "minimum" | "maximum" | "expected" = "expected"): number {
         if (term instanceof NumericTerm) return term.number;
+
+        if (term instanceof MathTerm) {
+            try {
+                return Roll.safeEval(term.formula);
+            } catch {
+                return 0;
+            }
+        }
 
         switch (type) {
             case "minimum":
@@ -453,7 +463,7 @@ class DamageInstance extends AbstractDamageRoll {
 
     override async render(): Promise<string> {
         const span = document.createElement("span");
-        span.classList.add("instance", this.type);
+        span.classList.add(this.type, "damage", "instance", "color");
         span.title = this.typeLabel;
         span.append(this.#renderFormula());
 

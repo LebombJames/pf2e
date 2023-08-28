@@ -1,17 +1,10 @@
-import { ActorPF2e } from "@actor";
 import { DeferredValueParams, MODIFIER_TYPES, ModifierPF2e, ModifierType } from "@actor/modifiers.ts";
-import { AbilityString } from "@actor/types.ts";
-import { ItemPF2e } from "@item";
+import { AttributeString } from "@actor/types.ts";
 import { damageCategoriesUnique } from "@scripts/config/damage.ts";
 import { DamageCategoryUnique } from "@system/damage/types.ts";
+import { DataUnionField, PredicateField, StrictBooleanField, StrictStringField } from "@system/schema-data-fields.ts";
 import { objectHasKey, sluggify } from "@util";
-import type {
-    ArrayField,
-    BooleanField,
-    ModelPropsFromSchema,
-    NumberField,
-    StringField,
-} from "types/foundry/common/data/fields.d.ts";
+import type { ArrayField, BooleanField, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { ResolvableValueField, RuleValue } from "./data.ts";
 import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 
@@ -20,10 +13,10 @@ import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSour
  * @category RuleElement
  */
 class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
-    constructor(source: FlatModifierSource, item: ItemPF2e<ActorPF2e>, options?: RuleElementOptions) {
-        super(source, item, options);
+    constructor(source: FlatModifierSource, options: RuleElementOptions) {
+        super(source, options);
 
-        if (!item.isOfType("physical") && this.type !== "item") {
+        if (!this.item.isOfType("physical") && this.type !== "item") {
             this.fromEquipment = false;
         }
 
@@ -48,10 +41,14 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
         if (this.force && this.type === "untyped") {
             this.failValidation("A forced bonus or penalty must have a type");
         }
+
+        if (this.removeAfterRoll && !this.item.isOfType("effect")) {
+            this.failValidation("  removeAfterRoll: may only be used with effects");
+        }
     }
 
-    protected override _validateModel(data: SourceFromSchema<FlatModifierSchema>): void {
-        super._validateModel(data);
+    static override validateJoint(data: SourceFromSchema<FlatModifierSchema>): void {
+        super.validateJoint(data);
         if (data.type !== "ability" && data.value === undefined) {
             throw Error('must have defined value if type is not "ability"');
         }
@@ -85,6 +82,23 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
             }),
             critical: new fields.BooleanField({ required: false, nullable: true, initial: undefined }),
             value: new ResolvableValueField({ required: false, nullable: false, initial: undefined }),
+            removeAfterRoll: new DataUnionField(
+                [
+                    new StrictStringField<"if-enabled", "if-enabled">({
+                        required: false,
+                        nullable: false,
+                        choices: ["if-enabled"],
+                        initial: undefined,
+                    }),
+                    new StrictBooleanField<boolean, boolean>({
+                        required: false,
+                        nullable: false,
+                        initial: undefined,
+                    }),
+                    new PredicateField({ required: false, nullable: false, initial: undefined }),
+                ],
+                { required: false, nullable: false, initial: undefined }
+            ),
         };
     }
 
@@ -115,9 +129,15 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
                 }
 
                 // Allow a `damageType` resolved to an empty string be treated as `null`
-                const damageType = this.damageType ? this.resolveInjectedProperties(this.damageType) || null : null;
+                const damageType = this.damageType
+                    ? this.resolveInjectedProperties(this.damageType, { warn: false }) || null
+                    : null;
                 if (damageType !== null && !objectHasKey(CONFIG.PF2E.damageTypes, damageType)) {
-                    this.failValidation(`Unrecognized damage type: ${damageType}`);
+                    // If this rule element's predicate would have passed without there being a resolvable damage type,
+                    // send out a warning.
+                    if (this.test(options.test ?? [])) {
+                        this.failValidation(`Unrecognized damage type: ${damageType}`);
+                    }
                     return null;
                 }
 
@@ -128,7 +148,7 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
                     type: this.type,
                     ability: this.type === "ability" ? this.ability : null,
                     predicate: this.resolveInjectedProperties(this.predicate),
-                    item: this.item,
+                    rule: this,
                     force: this.force,
                     damageType,
                     damageCategory: this.damageCategory,
@@ -141,9 +161,22 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
                 return modifier;
             };
 
-            const modifiers = (this.actor.synthetics.statisticsModifiers[selector] ??= []);
+            const modifiers = (this.actor.synthetics.modifiers[selector] ??= []);
             modifiers.push(construct);
         }
+    }
+
+    /** Remove this rule element's parent item after a roll */
+    override async afterRoll({ check, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void> {
+        if (this.ignored || !this.removeAfterRoll || !this.item.isOfType("effect")) {
+            return;
+        }
+
+        const deleteItem =
+            this.removeAfterRoll === true ||
+            (this.removeAfterRoll === "if-enabled" && check.modifiers.some((m) => m.rule === this && m.enabled)) ||
+            (Array.isArray(this.removeAfterRoll) && this.removeAfterRoll.test(rollOptions));
+        if (deleteItem) await this.item.delete();
     }
 }
 
@@ -159,7 +192,7 @@ type FlatModifierSchema = RuleElementSchema & {
     /** The modifier (or bonus/penalty) type */
     type: StringField<ModifierType, ModifierType, true, false, true>;
     /** If this is an ability modifier, the ability score it modifies */
-    ability: StringField<AbilityString, AbilityString, false, false, false>;
+    ability: StringField<AttributeString, AttributeString, false, false, false>;
     /** Hide this modifier from breakdown tooltips if it is disabled */
     min: NumberField<number, number, false, false, false>;
     max: NumberField<number, number, false, false, false>;
@@ -174,7 +207,18 @@ type FlatModifierSchema = RuleElementSchema & {
     damageCategory: StringField<DamageCategoryUnique, DamageCategoryUnique, false, false, false>;
     /** If a damage modifier, whether it applies given the presence or absence of a critically successful attack roll */
     critical: BooleanField<boolean, boolean, false, true, false>;
+    /** The numeric value of the modifier */
     value: ResolvableValueField<false, false, false>;
+    /**
+     * Remove the parent item (must be an effect) after a roll:
+     * The value may be a boolean, "if-enabled", or a predicate to be tested against the roll options from the roll.
+     */
+    removeAfterRoll: DataUnionField<
+        StrictStringField<"if-enabled"> | StrictBooleanField | PredicateField<false, false, false>,
+        false,
+        false,
+        false
+    >;
 };
 
 interface FlatModifierSource extends RuleElementSource {
@@ -188,7 +232,6 @@ interface FlatModifierSource extends RuleElementSource {
     damageCategory?: unknown;
     critical?: unknown;
     hideIfDisabled?: unknown;
-    fromEquipment?: unknown;
 }
 
 export { FlatModifierRuleElement, FlatModifierSource };

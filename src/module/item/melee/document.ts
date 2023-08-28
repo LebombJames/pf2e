@@ -1,7 +1,7 @@
-import { SIZE_TO_REACH } from "@actor/creature/values.ts";
 import { ActorPF2e } from "@actor";
-import { ItemSummaryData } from "@item/data/index.ts";
+import { SIZE_TO_REACH } from "@actor/creature/values.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
+import { ItemSummaryData } from "@item/data/index.ts";
 import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types.ts";
 import { simplifyFormula } from "@scripts/dice.ts";
 import { DamageCategorization } from "@system/damage/helpers.ts";
@@ -88,12 +88,23 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
     get dealsDamage(): boolean {
         const { baseDamage } = this;
-        return baseDamage.dice > 0 || baseDamage.modifier > 0;
+        return (
+            baseDamage.dice > 0 ||
+            baseDamage.modifier > 0 ||
+            !!baseDamage.persistent?.number ||
+            Object.values(this.system.damageRolls).some((d) => d.category === "splash")
+        );
     }
 
     /** Additional effects that are part of this attack */
     get attackEffects(): string[] {
         return this.system.attackEffects.value;
+    }
+
+    get isMagical(): boolean {
+        const { traits } = this;
+        const magicTraits = ["magical", "arcane", "primal", "divine", "occult"] as const;
+        return magicTraits.some((t) => traits.has(t));
     }
 
     /** The linked inventory weapon, if this melee item was spawned from one */
@@ -102,9 +113,9 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         return item?.isOfType("weapon") ? item : null;
     }
 
-    protected override _initialize(): void {
+    protected override _initialize(options?: Record<string, unknown>): void {
         this.category = this.group = this.baseType = null;
-        super._initialize();
+        super._initialize(options);
     }
 
     override prepareBaseData(): void {
@@ -127,7 +138,9 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         const isUnarmed = this.traits.has("unarmed");
         this.category = isUnarmed ? "unarmed" : linkedWeapon?.category ?? null;
         this.group = isUnarmed ? "brawling" : this.linkedWeapon?.group ?? null;
-        this.baseType = tupleHasValue(["claw", "fist", "jaws"] as const, this.slug) ? this.slug : null;
+        this.baseType = tupleHasValue(["claw", "fist", "jaws"] as const, this.slug)
+            ? this.slug
+            : this.linkedWeapon?.baseType ?? null;
     }
 
     override prepareActorData(): void {
@@ -168,6 +181,7 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
             [`category:${this.category}`]: !!this.category,
             [`group:${this.group}`]: !!this.group,
             [`base:${this.baseType}`]: !!this.baseType,
+            magical: this.isMagical,
             [`range-increment:${this.rangeIncrement}`]: !!this.rangeIncrement,
             [`damage:type:${damageType}`]: true,
             [`damage:category:${damageCategory}`]: !!damageCategory,
@@ -180,7 +194,7 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
     override async getChatData(
         this: MeleePF2e<ActorPF2e>,
-        htmlOptions: EnrichHTMLOptions = {}
+        htmlOptions: EnrichmentOptions = {}
     ): Promise<ItemSummaryData & { map2: string; map3: string } & Omit<MeleeSystemData, "traits">> {
         const systemData = this.system;
         const traits = this.traitChatData(CONFIG.PF2E.weaponTraits);

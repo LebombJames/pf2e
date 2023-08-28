@@ -1,8 +1,9 @@
 import { SkillAbbreviation } from "@actor/creature/data.ts";
 import { StrikeData } from "@actor/data/base.ts";
 import { SKILL_DICTIONARY } from "@actor/values.ts";
-import { ItemPF2e, EffectPF2e } from "@item";
+import type { ConditionPF2e, EffectPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
+import { createSelfEffectMessage } from "@module/chat-message/helpers.ts";
 import { MacroPF2e } from "@module/macro.ts";
 
 /**
@@ -10,11 +11,15 @@ import { MacroPF2e } from "@module/macro.ts";
  * Get an existing item macro if one exists, otherwise create a new one.
  * @param itemId
  */
-export function rollItemMacro(itemId: string): ReturnType<ItemPF2e["toChat"]> | void {
+export async function rollItemMacro(itemId: string): Promise<ChatMessagePF2e | undefined | void> {
     const speaker = ChatMessage.getSpeaker();
     const actor = canvas.tokens.get(speaker.token ?? "")?.actor ?? game.actors.get(speaker.actor ?? "");
     const item = actor?.items?.get(itemId);
     if (!item) return ui.notifications.warn(`Your controlled Actor does not have an item with ID ${itemId}`);
+
+    if (item.isOfType("action", "feat") && item.system.selfEffect) {
+        return createSelfEffectMessage(item);
+    }
 
     // Trigger the item roll
     return item.toChat();
@@ -72,9 +77,6 @@ export async function rollActionMacro(itemId: string, _actionIndex: number, acti
         speaker: ChatMessagePF2e.getSpeaker({ actor, token }),
         content,
         type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-        flags: {
-            core: { canPopout: true },
-        },
     };
 
     const rollMode = game.settings.get("core", "rollMode");
@@ -116,7 +118,7 @@ if (a) {
     game.user.assignHotbarMacro(skillMacro ?? null, slot);
 }
 
-export async function createToggleEffectMacro(effect: EffectPF2e, slot: number): Promise<void> {
+export async function createToggleEffectMacro(effect: ConditionPF2e | EffectPF2e, slot: number): Promise<void> {
     const uuid = effect.uuid.startsWith("Actor") ? effect.sourceId : effect.uuid;
     if (!uuid) {
         ui.notifications.error("PF2E.ErrorMessage.CantCreateEffectMacro", { localize: true });
@@ -124,23 +126,32 @@ export async function createToggleEffectMacro(effect: EffectPF2e, slot: number):
     }
 
     const command = `
-const actors = canvas.tokens.controlled.flatMap((token) => token.actor ?? []);
+const actors = Array.from(new Set(canvas.tokens.controlled.flatMap((token) => token.actor ?? [])));
 if (actors.length === 0 && game.user.character) actors.push(game.user.character);
 if (actors.length === 0) {
     return ui.notifications.error("PF2E.ErrorMessage.NoTokenSelected", { localize: true });
 }
 
 const ITEM_UUID = "${uuid}"; // ${effect.name}
-const source = (await fromUuid(ITEM_UUID)).toObject();
-source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
-
-for (const actor of actors) {
-    const existing = actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === ITEM_UUID);
-    if (existing) {
-        await existing.delete();
-    } else {
-        await actor.createEmbeddedDocuments("Item", [source]);
+const item = await fromUuid(ITEM_UUID);
+if (item?.type === "condition") {
+    for (const actor of actors) {
+        actor.toggleCondition(item.slug);
     }
+} else if (item?.type === "effect") {
+    const source = item.toObject();
+    source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
+
+    for (const actor of actors) {
+        const existing = actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === ITEM_UUID);
+        if (existing) {
+            await existing.delete();
+        } else {
+            await actor.createEmbeddedDocuments("Item", [source]);
+        }
+    }
+} else {
+    ui.notifications.error(game.i18n.format("PF2E.ErrorMessage.ItemNotFoundByUUID", { uuid: ITEM_UUID }));
 }
 `;
     const toggleMacro =
