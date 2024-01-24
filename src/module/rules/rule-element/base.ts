@@ -1,17 +1,16 @@
-import { ActorPF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
-import { CheckModifier, DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
-import { ItemPF2e, PhysicalItemPF2e, WeaponPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import type { ActorPF2e, ActorType } from "@actor";
+import type { CheckModifier, DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
+import { ItemPF2e, PhysicalItemPF2e, type WeaponPF2e } from "@item";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { reduceItemName } from "@item/helpers.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { CheckRoll } from "@system/check/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import { CheckRoll, CheckRollContext } from "@system/check/index.ts";
 import { LaxSchemaField, PredicateField, SlugField } from "@system/schema-data-fields.ts";
 import { isObject, tupleHasValue } from "@util";
+import * as R from "remeda";
 import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
+import { isBracketedValue } from "../helpers.ts";
 import { BracketedValue, RuleElementSchema, RuleElementSource, RuleValue } from "./data.ts";
-
-const { DataModel } = foundry.abstract;
 
 /**
  * Rule Elements allow you to modify actorData and tokenData values when present on items. They can be configured
@@ -19,26 +18,33 @@ const { DataModel } = foundry.abstract;
  *
  * @category RuleElement
  */
-abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends DataModel<
-    ItemPF2e<ActorPF2e>,
-    TSchema
-> {
+abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSchema> extends foundry.abstract
+    .DataModel<ItemPF2e<ActorPF2e>, TSchema> {
     protected declare static _schema: LaxSchemaField<RuleElementSchema> | undefined;
+
+    declare label: string;
 
     sourceIndex: number | null;
 
     protected suppressWarnings: boolean;
 
     /** A list of actor types on which this rule element can operate (all unless overridden) */
-    protected static validActorTypes: ActorType[] = ["character", "familiar", "hazard", "npc", "party", "vehicle"];
+    protected static validActorTypes: ActorType[] = [
+        "army",
+        "character",
+        "familiar",
+        "hazard",
+        "npc",
+        "party",
+        "vehicle",
+    ];
 
     /**
      * @param source unserialized JSON data from the actual rule input
      * @param item where the rule is persisted on
      */
     constructor(source: RuleElementSource, options: RuleElementOptions) {
-        source.label ??= options.parent.name;
-        super(source, { parent: options.parent, strict: true, fallback: false });
+        super(source, { parent: options.parent, strict: options.strict ?? true, fallback: false });
         const { item } = this;
 
         // Always suppress warnings if the actor has no ID (and is therefore a temporary clone)
@@ -54,7 +60,11 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
 
         this.label =
             typeof source.label === "string"
-                ? game.i18n.localize(this.resolveInjectedProperties(source.label))
+                ? game.i18n.format(this.resolveInjectedProperties(source.label), {
+                      actor: item.actor.name,
+                      item: item.name,
+                      origin: item.isOfType("effect") ? item.origin?.name ?? null : null,
+                  })
                 : item.name;
 
         if (this.invalid) {
@@ -81,9 +91,15 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
         const { fields } = foundry.data;
         return {
             key: new fields.StringField({ required: true, nullable: false, blank: false, initial: undefined }),
-            slug: new SlugField({ required: true, nullable: true }),
-            label: new fields.StringField({ required: true, nullable: false, blank: false, initial: undefined }),
-            priority: new fields.NumberField({ required: false, nullable: false, integer: true, initial: 100 }),
+            slug: new SlugField({ required: true, nullable: true, label: "PF2E.RuleEditor.General.Slug" }),
+            label: new fields.StringField({
+                required: false,
+                nullable: false,
+                blank: false,
+                initial: undefined,
+                label: "PF2E.RuleEditor.General.Label",
+            }),
+            priority: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 100 }),
             ignored: new fields.BooleanField({ required: false, nullable: false, initial: false }),
             predicate: new PredicateField(),
             requiresEquipped: new fields.BooleanField({ required: false, nullable: true, initial: undefined }),
@@ -133,7 +149,7 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
             if (error instanceof foundry.data.validation.DataModelValidationError) {
                 const message = error.message.replace(
                     /validation errors|Joint Validation Error/,
-                    `validation errors on item ${this.item.name} (${this.item.uuid})`
+                    `validation errors on item ${this.item.name} (${this.item.uuid})`,
                 );
                 console.warn(message);
                 return false;
@@ -164,8 +180,13 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
         if (!this.suppressWarnings) {
             const ruleName = game.i18n.localize(`PF2E.RuleElement.${this.key}`);
             this.actor.synthetics.preparationWarnings.add(
-                `PF2e System | ${ruleName} rules element on item ${name} (${uuid}) failed to validate: ${fullMessage}`
+                `PF2e System | ${ruleName} rules element on item ${name} (${uuid}) failed to validate: ${fullMessage}`,
             );
+            const { DataModelValidationFailure } = foundry.data.validation;
+            this.validationFailures.joint ??= new DataModelValidationFailure({
+                message: fullMessage,
+                unresolved: true,
+            });
         }
         this.ignored = true;
     }
@@ -192,11 +213,11 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
      */
     resolveInjectedProperties<T extends string | number | object | null | undefined>(
         source: T,
-        options?: { warn?: boolean }
+        options?: { warn?: boolean },
     ): T;
     resolveInjectedProperties(
         source: string | number | object | null | undefined,
-        { warn = true } = {}
+        { warn = true } = {},
     ): string | number | object | null | undefined {
         if (source === null || typeof source === "number" || (typeof source === "string" && !source.includes("{"))) {
             return source;
@@ -207,7 +228,7 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
             for (let i = 0; i < source.length; i++) {
                 source[i] = this.resolveInjectedProperties(source[i], { warn });
             }
-        } else if (isObject<Record<string, unknown>>(source)) {
+        } else if (R.isObject(source)) {
             for (const [key, value] of Object.entries(source)) {
                 if (typeof value === "string" || isObject(value)) {
                     source[key] = this.resolveInjectedProperties(value, { warn });
@@ -218,7 +239,7 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
         } else if (typeof source === "string") {
             return source.replace(/{(actor|item|rule)\|(.*?)}/g, (_match, key: string, prop: string) => {
                 const data = key === "rule" ? this : key === "actor" || key === "item" ? this[key] : this.item;
-                const value = getProperty(data, prop);
+                const value = fu.getProperty(data, prop);
                 if (value === undefined) {
                     this.ignored = true;
                     if (warn) this.failValidation(`Failed to resolve injected property "${source}"`);
@@ -248,7 +269,7 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
     resolveValue(
         value: unknown,
         defaultValue: Exclude<RuleValue, BracketedValue> = 0,
-        { evaluate = true, resolvables = {}, warn = true }: ResolveValueParams = {}
+        { evaluate = true, resolvables = {}, warn = true }: ResolveValueParams = {},
     ): number | string | boolean | object | null {
         value ??= defaultValue ?? null;
         if (typeof value === "number" || typeof value === "boolean" || value === null) {
@@ -263,7 +284,7 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
 
         if (resolvedFromBracket instanceof Object) {
             return defaultValue instanceof Object
-                ? mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
+                ? fu.mergeObject(defaultValue, resolvedFromBracket, { inplace: false })
                 : resolvedFromBracket;
         }
 
@@ -271,7 +292,7 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
             const saferEval = (formula: string): number => {
                 try {
                     // If any resolvables were not provided for this formula, return the default value
-                    const unresolveds = formula.match(/@[a-z.]+/gi) ?? [];
+                    const unresolveds = formula.match(/@[a-z0-9.]+/gi) ?? [];
                     // Allow failure of "@target" and "@actor.conditions" with no warning
                     if (unresolveds.length > 0) {
                         const shouldWarn =
@@ -279,13 +300,13 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
                             !unresolveds.every((u) => u.startsWith("@target.") || u.startsWith("@actor.conditions."));
                         this.ignored = true;
                         if (shouldWarn) {
-                            this.failValidation(`Failed to resolve all components of formula, "${formula}"`);
+                            this.failValidation(`unable to resolve formula, "${formula}"`);
                         }
                         return Number(defaultValue);
                     }
                     return Roll.safeEval(formula);
                 } catch {
-                    this.failValidation(`Error thrown while attempting to evaluate formula, "${formula}"`);
+                    this.failValidation(`unable to evaluate formula, "${formula}"`);
                     return 0;
                 }
             };
@@ -296,8 +317,14 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
             }
 
             const trimmed = resolvedFromBracket.trim();
-            return (trimmed.includes("@") || /^\d+$/.test(trimmed)) && evaluate
-                ? saferEval(Roll.replaceFormulaData(trimmed, { actor: this.actor, item: this.item, ...resolvables }))
+            return (trimmed.includes("@") || /^-?\d+$/.test(trimmed)) && evaluate
+                ? saferEval(
+                      Roll.replaceFormulaData(trimmed, {
+                          ...this.actor.getRollData(),
+                          item: this.item,
+                          ...resolvables,
+                      }),
+                  )
                 : trimmed;
         }
 
@@ -305,16 +332,12 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
     }
 
     protected isBracketedValue(value: unknown): value is BracketedValue {
-        return (
-            isObject<BracketedValue>(value) &&
-            Array.isArray(value.brackets) &&
-            (typeof value.field === "string" || !("fields" in value))
-        );
+        return isBracketedValue(value);
     }
 
     #resolveBracketedValue(
         value: BracketedValue,
-        defaultValue: Exclude<RuleValue, BracketedValue>
+        defaultValue: Exclude<RuleValue, BracketedValue>,
     ): Exclude<RuleValue, BracketedValue> {
         const bracketNumber = ((): number => {
             if (!value.field) return this.actor.level;
@@ -325,13 +348,13 @@ abstract class RuleElementPF2e<TSchema extends RuleElementSchema = RuleElementSc
 
             switch (source) {
                 case "actor":
-                    return Number(getProperty(actor, field.substring(separator + 1))) || 0;
+                    return Number(fu.getProperty(actor, field.substring(separator + 1))) || 0;
                 case "item":
-                    return Number(getProperty(item, field.substring(separator + 1))) || 0;
+                    return Number(fu.getProperty(item, field.substring(separator + 1))) || 0;
                 case "rule":
-                    return Number(getProperty(this, field.substring(separator + 1))) || 0;
+                    return Number(fu.getProperty(this, field.substring(separator + 1))) || 0;
                 default:
-                    return Number(getProperty(actor, field.substring(0))) || 0;
+                    return Number(fu.getProperty(actor, field.substring(0))) || 0;
             }
         })();
         const brackets = value.brackets ?? [];
@@ -362,6 +385,8 @@ interface RuleElementPF2e<TSchema extends RuleElementSchema>
     extends foundry.abstract.DataModel<ItemPF2e<ActorPF2e>, TSchema>,
         ModelPropsFromSchema<RuleElementSchema> {
     constructor: typeof RuleElementPF2e<TSchema>;
+
+    get schema(): LaxSchemaField<TSchema>;
 
     /**
      * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
@@ -459,7 +484,9 @@ namespace RuleElementPF2e {
         /** The source of the rule in `itemSource`'s `system.rules` array */
         ruleSource: T;
         /** All items pending creation in a `ItemPF2e.createDocuments` call */
-        pendingItems: PreCreate<ItemSourcePF2e>[];
+        pendingItems: ItemSourcePF2e[];
+        /** Items temporarily constructed from pending item source */
+        tempItems: ItemPF2e<ActorPF2e>[];
         /** The context object from the `ItemPF2e.createDocuments` call */
         context: DocumentModificationContext<ActorPF2e | null>;
         /** Whether this preCreate run is from a pre-update reevaluation */
@@ -474,9 +501,9 @@ namespace RuleElementPF2e {
     }
 
     export interface AfterRollParams {
-        roll: Rolled<CheckRoll> | null;
-        selectors: string[];
+        roll: Rolled<CheckRoll>;
         check: CheckModifier;
+        context: CheckRollContext;
         domains: string[];
         rollOptions: Set<string>;
     }
@@ -490,10 +517,11 @@ interface ResolveValueParams {
 
 type RuleElementOptions = {
     parent: ItemPF2e<ActorPF2e>;
+    strict?: boolean;
     /** If created from an item, the index in the source data */
     sourceIndex?: number;
     /** If data validation fails for any reason, do not emit console warnings */
     suppressWarnings?: boolean;
 };
 
-export { RuleElementOptions, RuleElementPF2e };
+export { RuleElementPF2e, type RuleElementOptions };

@@ -1,10 +1,9 @@
 import { resetActors } from "@actor/helpers.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
-import { ItemPF2e, ItemSheetPF2e } from "@item";
+import { ItemSheetPF2e, type ItemPF2e } from "@item";
 import { StatusEffects } from "@module/canvas/status-effects.ts";
 import { MigrationRunner } from "@module/migration/runner/index.ts";
 import { isImageOrVideoPath } from "@util";
-import * as R from "remeda";
 import { AutomationSettings } from "./automation.ts";
 import { HomebrewElements } from "./homebrew/menu.ts";
 import { MetagameSettings } from "./metagame.ts";
@@ -23,6 +22,9 @@ export function registerSettings(): void {
         config: true,
         default: true,
         type: Boolean,
+        onChange: (value) => {
+            game.pf2e.settings.tokens.autoscale = !!value;
+        },
     });
 
     game.settings.register("pf2e", "identifyMagicNotMatchingTraditionModifier", {
@@ -95,7 +97,7 @@ export function registerSettings(): void {
         type: Boolean,
         onChange: () => {
             const itemSheets = Object.values(ui.windows).filter(
-                (w): w is ItemSheetPF2e<ItemPF2e> => w instanceof ItemSheetPF2e
+                (w): w is ItemSheetPF2e<ItemPF2e> => w instanceof ItemSheetPF2e,
             );
             for (const sheet of itemSheets) {
                 sheet.render();
@@ -120,7 +122,9 @@ export function registerSettings(): void {
         config: true,
         default: false,
         type: Boolean,
-        requiresReload: true,
+        onChange: (value) => {
+            game.pf2e.settings.critFumble.cards = !!value;
+        },
     });
 
     const iconChoices = {
@@ -147,7 +151,8 @@ export function registerSettings(): void {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => {
+        onChange: (value) => {
+            game.pf2e.settings.totm = !!value;
             resetActors();
         },
     });
@@ -159,25 +164,11 @@ export function registerSettings(): void {
         config: false,
         default: "icons/svg/skull.svg",
         type: String,
-        onChange: (choice?: string) => {
+        onChange: (choice) => {
             if (isImageOrVideoPath(choice)) {
                 StatusEffects.reset();
             } else if (!choice) {
                 game.settings.set("pf2e", "deathIcon", "icons/svg/skull.svg");
-            }
-        },
-    });
-
-    game.settings.register("pf2e", "dataTools", {
-        name: "PF2E.SETTINGS.DataTools.Name",
-        hint: "PF2E.SETTINGS.DataTools.Hint",
-        scope: "world",
-        config: false,
-        default: BUILD_MODE === "development",
-        type: Boolean,
-        onChange: () => {
-            for (const app of Object.values(ui.windows).filter((a) => a instanceof DocumentSheet)) {
-                app.render();
             }
         },
     });
@@ -205,7 +196,7 @@ export function registerSettings(): void {
         name: "PF2E.SETTINGS.Automation.Name",
         label: "PF2E.SETTINGS.Automation.Label",
         hint: "PF2E.SETTINGS.Automation.Hint",
-        icon: "fas fa-robot",
+        icon: "fa-solid fa-robot",
         type: AutomationSettings,
         restricted: true,
     });
@@ -213,7 +204,12 @@ export function registerSettings(): void {
         name: CONFIG.PF2E.SETTINGS.automation.actorsDeadAtZero.name,
         scope: "world",
         config: false,
-        default: "npcsOnly",
+        choices: {
+            neither: "PF2E.SETTINGS.Automation.ActorsDeadAtZero.Neither",
+            npcsOnly: "PF2E.SETTINGS.Automation.ActorsDeadAtZero.NPCsOnly",
+            both: "PF2E.SETTINGS.Automation.ActorsDeadAtZero.Both",
+        },
+        default: "both",
         type: String,
     });
     AutomationSettings.registerSettings();
@@ -222,7 +218,7 @@ export function registerSettings(): void {
         name: "PF2E.SETTINGS.Metagame.Name",
         label: "PF2E.SETTINGS.Metagame.Label",
         hint: "PF2E.SETTINGS.Metagame.Hint",
-        icon: "fas fa-brain",
+        icon: "fa-solid fa-brain",
         type: MetagameSettings,
         restricted: true,
     });
@@ -232,7 +228,7 @@ export function registerSettings(): void {
         name: "PF2E.SETTINGS.Variant.Name",
         label: "PF2E.SETTINGS.Variant.Label",
         hint: "PF2E.SETTINGS.Variant.Hint",
-        icon: "fas fa-book",
+        icon: "fa-solid fa-book",
         type: VariantRulesSettings,
         restricted: true,
     });
@@ -242,7 +238,7 @@ export function registerSettings(): void {
         name: "PF2E.SETTINGS.Homebrew.Name",
         label: "PF2E.SETTINGS.Homebrew.Label",
         hint: "PF2E.SETTINGS.Homebrew.Hint",
-        icon: "fas fa-beer",
+        icon: "fa-solid fa-beer",
         type: HomebrewElements,
         restricted: true,
     });
@@ -252,35 +248,11 @@ export function registerSettings(): void {
         name: game.i18n.localize(CONFIG.PF2E.SETTINGS.worldClock.name),
         label: game.i18n.localize(CONFIG.PF2E.SETTINGS.worldClock.label),
         hint: game.i18n.localize(CONFIG.PF2E.SETTINGS.worldClock.hint),
-        icon: "far fa-clock",
+        icon: "fa-regular fa-clock",
         type: WorldClockSettings,
         restricted: true,
     });
     WorldClockSettings.registerSettings();
-
-    game.settings.register("pf2e", "campaignType", {
-        name: "PF2E.SETTINGS.CampaignType.Name",
-        hint: "PF2E.SETTINGS.CampaignType.Hint",
-        scope: "world",
-        config: false, // 🤫
-        default: "none",
-        choices: R.mapToObj(["none", "kingmaker"], (key) => [key, `PF2E.SETTINGS.CampaignType.Choices.${key}`]),
-        type: String,
-        onChange: async () => {
-            await resetActors(game.actors.filter((a) => a.isOfType("party")));
-            ui.sidebar.render();
-        },
-    });
-
-    game.settings.register("pf2e", "campaignFeats", {
-        name: "PF2E.SETTINGS.CampaignFeats.Name",
-        hint: "PF2E.SETTINGS.CampaignFeats.Hint",
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
-        onChange: () => resetActors(),
-    });
 
     // Secret for now until the user side is complete and a UI is built
     game.settings.register("pf2e", "campaignFeatSections", {
@@ -289,7 +261,10 @@ export function registerSettings(): void {
         config: false,
         default: [],
         type: Array,
-        onChange: () => resetActors(),
+        onChange: (value) => {
+            game.pf2e.settings.campaign.sections = Array.isArray(value) ? value : game.pf2e.settings.campaign.sections;
+            resetActors(game.actors.filter((a) => a.isOfType("character")));
+        },
     });
 
     // This only exists to not break existing macros (yet). We'll keep it for a few versions
@@ -309,10 +284,23 @@ export function registerSettings(): void {
         default: false,
         type: Boolean,
         onChange: (value) => {
+            game.pf2e.settings.gmVision = !!value;
             const color = value ? CONFIG.PF2E.Canvas.darkness.gmVision : CONFIG.PF2E.Canvas.darkness.default;
             CONFIG.Canvas.darknessColor = color;
+            if (ui.controls && canvas.activeLayer) {
+                ui.controls.initialize({ layer: canvas.activeLayer.constructor.layerOptions.name });
+            }
             canvas.colorManager.initialize();
+            canvas.perception.update({ initializeVision: true }, true);
         },
+    });
+
+    game.settings.register("pf2e", "seenLastStopMessage", {
+        name: "Seen Last Stop Before Remaster Message",
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: false,
     });
 
     registerTrackingSettings();
@@ -335,10 +323,22 @@ function registerTrackingSettings(): void {
 
     game.settings.register("pf2e", "activeParty", {
         name: "Active Party",
+        scope: "world",
         config: false,
         type: String,
         default: "",
-        onChange: () => ui.actors.render(true),
+        onChange: () => {
+            ui.actors.render(true);
+        },
+    });
+
+    // Tracks the last party folder state for next launch. Defaults to true so that "No Members" shows on initial creation.
+    game.settings.register("pf2e", "activePartyFolderState", {
+        name: "Active Party Opened or closed",
+        scope: "client",
+        config: false,
+        type: Boolean,
+        default: true,
     });
 
     game.settings.register("pf2e", "worldSystemVersion", {

@@ -1,6 +1,6 @@
 {
     "_id": "QUnN2wUfvOD6Tz69",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Defy Fey",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "key": "Note",
@@ -38,9 +43,6 @@
                 "title": "{item|name}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "qUowHpn79Dpt1hVn",
-    "img": "systems/pf2e/icons/features/feats/dragon-stance.webp",
+    "img": "icons/creatures/reptiles/dragon-horned-blue.webp",
     "name": "Stance: Dragon Stance",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 0
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "category": "unarmed",
@@ -26,7 +31,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/features/feats/dragon-stance.webp",
+                "img": "icons/creatures/reptiles/dragon-horned-blue.webp",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Stance.Attack.DragonTail",
                 "range": null,
@@ -37,9 +42,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

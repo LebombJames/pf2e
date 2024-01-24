@@ -1,7 +1,7 @@
 import { ZeroToThree } from "@module/data.ts";
-import { CheckRoll } from "./check/roll.ts";
-import { PredicatePF2e } from "./predication.ts";
-import { StatisticDifficultyClass } from "./statistic/index.ts";
+import type { CheckRoll } from "./check/roll.ts";
+import type { PredicatePF2e } from "./predication.ts";
+import type { StatisticDifficultyClass } from "./statistic/index.ts";
 
 /** Get the degree of success from a roll and a difficulty class */
 class DegreeOfSuccess {
@@ -26,7 +26,7 @@ class DegreeOfSuccess {
     constructor(
         roll: Rolled<CheckRoll> | RollBrief,
         dc: CheckDC | number,
-        dosAdjustments: DegreeAdjustmentsRecord | null = null
+        dosAdjustments: DegreeAdjustmentsRecord | null = null,
     ) {
         if (roll instanceof Roll) {
             this.dieResult =
@@ -56,7 +56,7 @@ class DegreeOfSuccess {
 
     #getDegreeAdjustment(
         degree: DegreeOfSuccessIndex,
-        adjustments: DegreeAdjustmentsRecord | null
+        adjustments: DegreeAdjustmentsRecord | null,
     ): { label: string; amount: DegreeAdjustmentAmount } | null {
         if (!adjustments) return null;
 
@@ -78,7 +78,7 @@ class DegreeOfSuccess {
 
     #adjustDegreeOfSuccess(
         amount: DegreeAdjustmentAmount,
-        degreeOfSuccess: DegreeOfSuccessIndex
+        degreeOfSuccess: DegreeOfSuccessIndex,
     ): DegreeOfSuccessIndex {
         switch (amount) {
             case "criticalFailure":
@@ -168,14 +168,11 @@ type DegreeOfSuccessIndex = ZeroToThree;
 const DEGREE_OF_SUCCESS_STRINGS = ["criticalFailure", "failure", "success", "criticalSuccess"] as const;
 type DegreeOfSuccessString = (typeof DEGREE_OF_SUCCESS_STRINGS)[number];
 
-export {
+export { DEGREE_ADJUSTMENT_AMOUNTS, DEGREE_OF_SUCCESS, DEGREE_OF_SUCCESS_STRINGS, DegreeOfSuccess };
+export type {
     CheckDC,
-    DEGREE_ADJUSTMENT_AMOUNTS,
-    DEGREE_OF_SUCCESS,
-    DEGREE_OF_SUCCESS_STRINGS,
     DegreeAdjustmentAmount,
     DegreeAdjustmentsRecord,
-    DegreeOfSuccess,
     DegreeOfSuccessAdjustment,
     DegreeOfSuccessIndex,
     DegreeOfSuccessString,

@@ -1,6 +1,7 @@
-import { ResolvableValueField } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
-import type { ColorField, NumberField } from "types/foundry/common/data/fields.d.ts";
+import type { AlphaField, ColorField, NumberField } from "types/foundry/common/data/fields.d.ts";
+import { isBracketedValue } from "../helpers.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
 
 /**
  * Change the image representing an actor's token
@@ -11,19 +12,28 @@ class TokenImageRuleElement extends RuleElementPF2e<TokenImageRuleSchema> {
         const { fields } = foundry.data;
         return {
             ...super.defineSchema(),
-            value: new ResolvableValueField({ required: true, nullable: false, initial: undefined }),
-            scale: new fields.NumberField({ required: false, nullable: false, positive: true, initial: undefined }),
-            tint: new fields.ColorField({ required: false, nullable: false, initial: undefined }),
-            alpha: new fields.NumberField({ required: false, nullable: false, initial: undefined }),
+            value: new ResolvableValueField({
+                required: true,
+                nullable: false,
+                initial: undefined,
+                label: "TOKEN.ImagePath",
+                validate: (v) => typeof v === "string" || isBracketedValue(v),
+            }),
+            scale: new fields.NumberField({
+                required: false,
+                nullable: true,
+                positive: true,
+                initial: null,
+                label: "Scale",
+            }),
+            tint: new fields.ColorField({ label: "TOKEN.TintColor" }),
+            alpha: new fields.AlphaField({
+                label: "PF2E.RuleEditor.General.Opacity",
+                required: false,
+                nullable: true,
+                initial: null,
+            }),
         };
-    }
-
-    constructor(data: RuleElementSource, options: RuleElementOptions) {
-        super(data, options);
-
-        if (!(typeof this.value === "string" || this.isBracketedValue(this.value))) {
-            this.failValidation("value must be a string or a bracketed value");
-        }
     }
 
     override afterPrepareData(): void {
@@ -58,17 +68,17 @@ class TokenImageRuleElement extends RuleElementPF2e<TokenImageRuleSchema> {
 
 interface TokenImageRuleElement
     extends RuleElementPF2e<TokenImageRuleSchema>,
-        ModelPropsFromSchema<TokenImageRuleSchema> {}
+        ModelPropsFromRESchema<TokenImageRuleSchema> {}
 
 type TokenImageRuleSchema = RuleElementSchema & {
     /** An image or video path */
     value: ResolvableValueField<true, false, false>;
     /** An optional scale adjustment */
-    scale: NumberField<number, number, false, false, false>;
+    scale: NumberField<number, number, false, true, true>;
     /** An optional tint adjustment */
-    tint: ColorField<false, false, false>;
+    tint: ColorField;
     /** An optional alpha adjustment */
-    alpha: NumberField<number, number, false, false, false>;
+    alpha: AlphaField<false, true, true>;
 };
 
 export { TokenImageRuleElement };

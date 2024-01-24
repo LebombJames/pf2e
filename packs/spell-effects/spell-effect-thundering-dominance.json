@@ -1,10 +1,10 @@
 {
     "_id": "81TfqzTfIqkQA4Dy",
-    "img": "systems/pf2e/icons/spells/thundering-dominance.webp",
+    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp",
     "name": "Spell Effect: Thundering Dominance",
     "system": {
         "description": {
-            "value": "<p>You shroud the target in a powerful predatory aura and amplify its vocalizations. It gains a +1 status bonus to Intimidation checks. Once during this spell's duration, it can take the Thundering Roar action.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The status bonus to Intimidation checks increases by 1 (to a maximum of a +4 status bonus for an 8th-level spell), and the damage from the roar increases by 2d8.</p>"
+            "value": "<p>You shroud the target in a powerful predatory aura and amplify its vocalizations. It gains a +1 status bonus to Intimidation checks. Once during this spell's duration, it can take the Thundering Roar action.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The status bonus to Intimidation checks increases by 1 (to a maximum of a +4 status bonus for an 8th-rank spell), and the damage from the roar increases by 2d8.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -46,9 +51,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

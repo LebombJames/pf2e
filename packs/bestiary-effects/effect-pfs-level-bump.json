@@ -1,6 +1,6 @@
 {
     "_id": "yDut6pczQVRJqt2L",
-    "img": "systems/pf2e/icons/spells/athletic-rush.webp",
+    "img": "icons/magic/control/buff-strength-muscle-damage.webp",
     "name": "Effect: PFS Level Bump",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 0
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": ""
         },
         "rules": [
             {
@@ -34,9 +39,6 @@
                 "value": "max(10,floor(@actor.system.attributes.hp.max/10))"
             }
         ],
-        "source": {
-            "value": ""
-        },
         "start": {
             "initiative": null,
             "value": 0

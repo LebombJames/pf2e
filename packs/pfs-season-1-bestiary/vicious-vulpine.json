@@ -30,11 +30,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -71,11 +73,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -110,23 +114,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -152,23 +149,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "scent",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -189,23 +179,16 @@
                 "description": {
                     "value": "<p>The vicious vulpine Strides and makes a Strike at the end of that movement. If the fox begins this action hidden, it remains hidden until after this ability's Strike.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -231,8 +214,10 @@
                 "description": {
                     "value": "<p>A vicious vulpine deals 1d4 extra precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -254,18 +239,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -285,11 +261,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -308,11 +286,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -331,11 +311,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -354,11 +336,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -399,12 +383,6 @@
                 "temp": 0,
                 "value": 55
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 8
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -416,19 +394,42 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "senzar",
+                    "tien"
+                ]
+            },
             "level": {
                 "value": 3
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-06: Lost on the Spirit Road"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-06: Lost on the Spirit Road"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 8,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 30,
+                    "type": "scent"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -446,24 +447,13 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "senzar",
-                    "tien"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "low-light vision, scent (imprecise) 30 feet"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
-                "beast"
+                "beast",
+                "evil"
             ]
         }
     },

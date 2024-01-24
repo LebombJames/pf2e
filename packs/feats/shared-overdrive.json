@@ -1,6 +1,6 @@
 {
     "_id": "U0XX0Mm2MbZcuNK2",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Shared Overdrive",
     "system": {
         "actionType": {
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

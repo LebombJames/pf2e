@@ -9,6 +9,9 @@
             "sort": 100000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": ""
@@ -18,9 +21,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -29,35 +29,28 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -69,11 +62,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.plplsXJsqrdqNQVI"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/religious-symbol-wooden.webp",
+            "img": "icons/commodities/treasure/broach-jeweled-green.webp",
             "name": "Religious Symbol of Desna",
             "sort": 200000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This piece of wood or silver is emblazoned with an image representing a deity. Some divine spellcasters, such as clerics, can use a religious symbol of their deity as a divine focus to use certain abilities and cast some spells. A religious symbol must be held in one hand to use it.</p>"
@@ -83,9 +79,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -94,37 +87,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "religious-symbol-wooden",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -136,11 +122,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.ilbLQNy6TbBPW7sQ"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/clothes-ordinary.webp",
+            "img": "icons/equipment/chest/shirt-collared-brown.webp",
             "name": "Scholar's Robes",
             "sort": 300000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Ordinary clothing is functional with basic tailoring, such as peasant garb, monk's robes, or work clothes.</p>"
@@ -150,9 +139,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -161,37 +147,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "clothing-ordinary",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "worn"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -220,11 +199,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -264,11 +245,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -303,11 +286,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -341,23 +326,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -378,23 +356,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A goblin ally ends a move action adjacent to Warbal.</p>\n<hr />\n<p><strong>Effect</strong> Warbal @UUID[Compendium.pf2e.actionspf2e.Item.Step]{Steps}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": "",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -414,11 +385,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -437,11 +410,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -460,11 +435,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -483,11 +460,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -506,11 +485,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -529,11 +510,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -574,31 +557,42 @@
                 "temp": 0,
                 "value": 20
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 3
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "NG"
-            },
             "blurb": "",
-            "creatureType": "Humanoid",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "goblin"
+                ]
+            },
             "level": {
                 "value": 1
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #145: Hellknight Hill"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #145: Hellknight Hill"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 3,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -616,26 +610,13 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "goblin"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
                 "goblin",
+                "good",
                 "humanoid"
             ]
         }

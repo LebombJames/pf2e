@@ -1,7 +1,7 @@
-import { RuleElementSchema, RuleElementSource } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e } from "./index.ts";
-import type { ObjectField } from "types/foundry/common/data/fields.d.ts";
 import type { LightDataSchema } from "types/foundry/common/data/data.d.ts";
+import type { SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema } from "./data.ts";
 
 /**
  * Add or change the light emitted by a token
@@ -12,48 +12,66 @@ class TokenLightRuleElement extends RuleElementPF2e<TokenLightRuleSchema> {
         const { fields } = foundry.data;
         return {
             ...super.defineSchema(),
-            value: new fields.ObjectField({ required: true, nullable: false }),
+            value: new fields.SchemaField({
+                ...foundry.data.LightData.defineSchema(),
+                bright: new ResolvableValueField({ required: false, nullable: false, initial: undefined }),
+                color: new fields.StringField({ required: false, nullable: true, blank: false, initial: null }),
+                dim: new ResolvableValueField({ required: false, nullable: false, initial: undefined }),
+            }),
         };
     }
 
-    constructor(data: RuleElementSource, options: RuleElementOptions) {
-        super(data, options);
-        this.validateData();
-    }
-
-    validateData(): void {
+    getLightData(): SourceFromSchema<LightDataSchema> | null {
         const light = this.value;
 
-        for (const key of ["dim", "bright"] as const) {
+        light.color &&= this.resolveInjectedProperties(light.color);
+
+        for (const key of ["bright", "dim"] as const) {
             if (light[key] !== undefined) {
                 const resolvedValue = this.resolveValue(light[key]);
                 if (typeof resolvedValue === "number") {
                     light[key] = resolvedValue;
                 } else {
-                    return this.failValidation(`${key} must resolve to a number`);
+                    this.failValidation(`${key}: must resolve to a number`);
+                    return null;
                 }
             }
         }
 
         try {
-            new foundry.data.LightData(light);
+            return new foundry.data.LightData(light).toObject();
         } catch (error) {
             if (error instanceof Error) this.failValidation(error.message);
+            return null;
         }
     }
 
     override afterPrepareData(): void {
         if (!this.test()) return;
-        this.actor.synthetics.tokenOverrides.light = deepClone(this.value);
+
+        const data = this.getLightData();
+        if (data) {
+            this.actor.synthetics.tokenOverrides.light = data;
+        }
     }
 }
 
 interface TokenLightRuleElement
     extends RuleElementPF2e<TokenLightRuleSchema>,
-        ModelPropsFromSchema<TokenLightRuleSchema> {}
+        ModelPropsFromRESchema<TokenLightRuleSchema> {}
 
-type TokenLightRuleSchema = RuleElementSchema & {
-    value: ObjectField<DeepPartial<SourceFromSchema<LightDataSchema>>>;
+type TokenLightValueSchema = Omit<LightDataSchema, "bright" | "color" | "dim"> & {
+    bright: ResolvableValueField<false, false, false>;
+    /** `LightData#color` as an injectable property */
+    color: StringField<string, string, false, true, true>;
+    dim: ResolvableValueField<false, false, false>;
 };
 
+type TokenLightRuleSchema = RuleElementSchema & {
+    value: SchemaField<TokenLightValueSchema>;
+};
+
+type TokenLightRuleSource = SourceFromSchema<TokenLightRuleSchema>;
+
 export { TokenLightRuleElement };
+export type { TokenLightRuleSource };

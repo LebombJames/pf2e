@@ -1,24 +1,24 @@
-import { AttributeString, SaveType } from "@actor/types.ts";
-import { ABCSystemSource } from "@item/abc/data.ts";
-import { BaseItemSourcePF2e, ItemTraits } from "@item/data/base.ts";
+import { AttributeString, SaveType, SkillAbbreviation } from "@actor/types.ts";
+import { ABCSystemData, ABCSystemSource } from "@item/abc/data.ts";
+import { BaseItemSourcePF2e, RarityTraitAndOtherTags } from "@item/base/data/system.ts";
 import { ZeroToFour } from "@module/data.ts";
-import { CLASS_TRAITS } from "./values.ts";
 
 type ClassSource = BaseItemSourcePF2e<"class", ClassSystemSource>;
 
 interface ClassSystemSource extends ABCSystemSource {
-    traits: ItemTraits;
+    traits: RarityTraitAndOtherTags;
     keyAbility: { value: AttributeString[]; selected: AttributeString | null };
     hp: number;
     perception: ZeroToFour;
     savingThrows: Record<SaveType, ZeroToFour>;
     attacks: ClassAttackProficiencies;
     defenses: ClassDefenseProficiencies;
+    /** Starting proficiency in "spell attack rolls and DCs" */
+    spellcasting: ZeroToFour;
     trainedSkills: {
-        value: string[];
+        value: SkillAbbreviation[];
         additional: number;
     };
-    classDC: ZeroToFour;
     ancestryFeatLevels: { value: number[] };
     classFeatLevels: { value: number[] };
     generalFeatLevels: { value: number[] };
@@ -27,7 +27,7 @@ interface ClassSystemSource extends ABCSystemSource {
     level?: never;
 }
 
-type ClassSystemData = ClassSystemSource;
+interface ClassSystemData extends Omit<ClassSystemSource, "description">, Omit<ABCSystemData, "level" | "traits"> {}
 
 interface ClassAttackProficiencies {
     simple: ZeroToFour;
@@ -44,6 +44,4 @@ interface ClassDefenseProficiencies {
     heavy: ZeroToFour;
 }
 
-type ClassTrait = SetElement<typeof CLASS_TRAITS>;
-
-export { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData, ClassTrait };
+export type { ClassAttackProficiencies, ClassDefenseProficiencies, ClassSource, ClassSystemData, ClassSystemSource };

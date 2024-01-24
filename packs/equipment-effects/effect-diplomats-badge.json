@@ -1,6 +1,6 @@
 {
     "_id": "pAMyEbJzWBoYoGhs",
-    "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/diplomats-badge.webp",
+    "img": "icons/commodities/treasure/token-gold-cross.webp",
     "name": "Effect: Diplomat's Badge",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 5
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder GM Core"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

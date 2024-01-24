@@ -1,6 +1,6 @@
 {
     "_id": "sPtl05wwTpqFI0lL",
-    "img": "systems/pf2e/icons/features/classes/quick-alchemy.webp",
+    "img": "icons/tools/laboratory/vials-blue-pink.webp",
     "name": "Quick Alchemy",
     "system": {
         "actionType": {
@@ -19,15 +19,17 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Quick Alchemy"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
             "rarity": "common",
             "value": [

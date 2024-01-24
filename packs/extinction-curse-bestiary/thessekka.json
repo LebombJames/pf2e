@@ -22,6 +22,11 @@
                 "proficiency": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": false
@@ -92,9 +97,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 34,
                     "mod": 0,
@@ -117,33 +119,24 @@
             "name": "Shape Stone",
             "sort": 200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "reflex"
+                    }
                 },
                 "description": {
                     "value": "<p>You shape the stone into a rough shape of your choice. The shaping process is too crude to produce intricate parts, fine details, moving pieces, or the like. Any creatures standing atop the stone when you reshape it must each attempt a Reflex save or Acrobatics check.</p>\n<hr />\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> The creature falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] atop the stone.</p>\n<p><strong>Critical Failure</strong> The creature falls off the stone (if applicable) and lands Prone.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 4
@@ -151,57 +144,33 @@
                 "location": {
                     "value": "D2bX7v0RmrFFnVye"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "touch"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "reflex"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "shape-stone",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "cube of stone 10 feet across or smaller"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "primal"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "primal"
+                    ],
                     "value": [
+                        "concentrate",
                         "earth",
-                        "primal",
-                        "transmutation"
+                        "manipulate"
                     ]
                 }
             },
@@ -218,9 +187,6 @@
             "name": "Acid Flask (Greater) (Infused)",
             "sort": 300000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 2
@@ -228,23 +194,28 @@
                 "bonusDamage": {
                     "value": 0
                 },
+                "bulk": {
+                    "value": 0.1
+                },
                 "category": "martial",
                 "containerId": null,
                 "damage": {
                     "damageType": "acid",
                     "dice": 1,
-                    "die": ""
+                    "die": "",
+                    "persistent": {
+                        "faces": 6,
+                        "number": 3,
+                        "type": "acid"
+                    }
                 },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Strike</p>\n<p>This flask filled with corrosive acid deals 1 acid damage, 3d6 persistent acid damage, and 3 acid splash damage. You gain a +2 item bonus to attack rolls.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Strike</p>\n<p>This flask filled with corrosive acid deals 1 acid damage, 3d6 persistent acid damage, and 3 acid splash damage. You gain a +2 item bonus to attack rolls.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -255,69 +226,35 @@
                 "level": {
                     "value": 11
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 250
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": 20,
                 "reload": {
                     "value": "-"
                 },
-                "rules": [
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "success"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AcidFlask.Greater.success"
-                    },
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "criticalSuccess"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AcidFlask.Greater.criticalSuccess"
-                    }
-                ],
+                "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "acid-flask-greater",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 3
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": null
                 },
                 "traits": {
                     "rarity": "common",
@@ -332,9 +269,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -350,9 +284,6 @@
             "name": "Alchemist's Fire (Greater) (Infused)",
             "sort": 400000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 2
@@ -360,23 +291,28 @@
                 "bonusDamage": {
                     "value": 0
                 },
+                "bulk": {
+                    "value": 0.1
+                },
                 "category": "martial",
                 "containerId": null,
                 "damage": {
                     "damageType": "fire",
                     "dice": 3,
-                    "die": "d8"
+                    "die": "d8",
+                    "persistent": {
+                        "faces": null,
+                        "number": 3,
+                        "type": "fire"
+                    }
                 },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Strike</p>\n<p>Alchemist's fire is a combination of volatile liquids that ignite when exposed to air. Alchemist's fire deals 3d8 fire damage, 3 persistent fire damage, and 3 fire splash damage. You gain a +2 item bonus to attack rolls.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Strike</p>\n<p>Alchemist's fire is a combination of volatile liquids that ignite when exposed to air. Alchemist's fire deals 3d8 fire damage, 3 persistent fire damage, and 3 fire splash damage. You gain a +2 item bonus to attack rolls.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -387,69 +323,35 @@
                 "level": {
                     "value": 11
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 250
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 2,
                 "range": 20,
                 "reload": {
                     "value": "-"
                 },
-                "rules": [
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "success"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AlchemistsFire.Greater.success"
-                    },
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "criticalSuccess"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AlchemistsFire.Greater.criticalSuccess"
-                    }
-                ],
+                "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "alchemists-fire-greater",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 3
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": null
                 },
                 "traits": {
                     "rarity": "common",
@@ -464,9 +366,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -482,15 +381,15 @@
             "name": "Frost Vial (Greater) (Infused)",
             "sort": 500000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 2
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -500,15 +399,12 @@
                     "die": "d6"
                 },
                 "description": {
-                    "value": "<p>The liquid reagents in this vial rapidly absorb heat when exposed to air. A frost vial deals the listed cold damage and cold splash damage. On a hit, the target takes a status penalty to its Speeds until the end of its next turn. Many types of frost vial also grant an item bonus to attack rolls.</p>\n<p>You gain a +2 item bonus to attack rolls, the bomb deals 3d6 cold damage and 3 cold splash damage, and the target takes a -10-foot penalty.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Frost Vial (Greater)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Strike</p>\n<hr />\n<p>The liquid reagents in this vial rapidly absorb heat when exposed to air. A frost vial deals the listed cold damage and cold splash damage. On a hit, the target takes a status penalty to its Speeds until the end of its next turn. Many types of frost vial also grant an item bonus to attack rolls.</p>\n<p>You gain a +2 item bonus to attack rolls, the bomb deals 3d6 cold damage and 3 cold splash damage, and the target takes a -10-foot penalty.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Frost Vial (Greater)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -519,34 +415,19 @@
                 "level": {
                     "value": 11
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 250
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 2,
                 "range": 20,
@@ -560,17 +441,15 @@
                         "text": "PF2E.BombNotes.FrostVial.Greater.success"
                     }
                 ],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "frost-vial-greater",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 3
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": null
                 },
                 "traits": {
                     "rarity": "common",
@@ -585,9 +464,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -599,19 +475,19 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.5Qkz4RVJr2Kx3RL6"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/tanglefoot-bag.webp",
+            "img": "icons/containers/bags/sack-simple-leather-tan.webp",
             "name": "Tanglefoot Bag (Greater) (Infused)",
             "sort": 600000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 2
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -621,15 +497,12 @@
                     "die": ""
                 },
                 "description": {
-                    "value": "<p>A tanglefoot bag is filled with sticky substances. When you hit a creature with a tanglefoot bag, that creature takes a -15-foot status penalty to its Speeds for 1 minute. You gain a +2 item bonus to attack rolls, and the Escape DC is 28.</p>\n<p>On a critical hit, a creature in contact with a solid surface becomes stuck to the surface and @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] for 1 round, and a creature flying via wings has its wings tangled, causing it to fall safely to the ground and become unable to Fly again for 1 round. Tanglefoot bags are not effective when used on a creature that is in water.</p>\n<p>The target can end any effects by Escaping or spending a total of 3 actions to carefully remove the sticky substances. These Interact actions don't have to be consecutive, and other creatures can provide the actions as well.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Strike</p>\n<hr />\n<p>A tanglefoot bag is filled with sticky substances. When you hit a creature with a tanglefoot bag, that creature takes a -15-foot status penalty to its Speeds for 1 minute. You gain a +2 item bonus to attack rolls, and the Escape DC is 28.</p>\n<p>On a critical hit, a creature in contact with a solid surface becomes stuck to the surface and @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] for 1 round, and a creature flying via wings has its wings tangled, causing it to fall safely to the ground and become unable to Fly again for 1 round. Tanglefoot bags are not effective when used on a creature that is in water.</p>\n<p>The target can end any effects by Escaping or spending a total of 3 actions to carefully remove the sticky substances. These Interact actions don't have to be consecutive, and other creatures can provide the actions as well.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -640,34 +513,19 @@
                 "level": {
                     "value": 11
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 250
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": 20,
@@ -682,7 +540,7 @@
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.BombNotes.TanglefootBag.Greater.success",
-                        "title": "ITEM.TypeEffect"
+                        "title": "TYPES.Item.effect"
                     },
                     {
                         "key": "Note",
@@ -691,19 +549,17 @@
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.BombNotes.TanglefootBag.Greater.criticalSuccess",
-                        "title": "ITEM.TypeEffect"
+                        "title": "TYPES.Item.effect"
                     }
                 ],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "tanglefoot-bag-greater",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
-                    "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
                     "value": null
                 },
                 "traits": {
@@ -717,9 +573,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -736,6 +589,9 @@
             "sort": 700000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>These brass goggles are engraved with flame patterns and have thick, heavy lenses.</p>\n<p>While worn, they give you a +2 item bonus to Crafting checks to Craft alchemical items and a +2 item bonus to attack rolls with alchemical bombs.</p>\n<p>You can also ignore lesser cover when making Strikes with alchemical bombs.</p>"
@@ -745,9 +601,6 @@
                     "inSlot": false,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -756,19 +609,19 @@
                 "level": {
                     "value": 11
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1400
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "rules": [
@@ -797,23 +650,15 @@
                 ],
                 "size": "med",
                 "slug": "alchemist-goggles-greater",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "invested",
-                        "magical",
-                        "transmutation"
+                        "magical"
                     ]
                 },
                 "usage": {
                     "value": "worneyepiece"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -825,11 +670,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4ftXXUCBHcf4b0MH"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/alchemists-tools.webp",
+            "img": "icons/tools/laboratory/vials-blue-pink.webp",
             "name": "Expert Alchemist's Tools",
             "sort": 800000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This mobile collection of vials and chemicals can be used for simple alchemical tasks.</p>"
@@ -839,9 +687,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -850,37 +695,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "alchemists-tools",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "equipment"
@@ -892,22 +730,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/formula-book.webp",
+            "img": "icons/sundries/books/book-tooled-brass-brown.webp",
             "name": "Formula Book",
             "sort": 900000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
-                    "value": "<p>A formula book holds the formulas necessary to make items other than the common equipment from this chapter; alchemists typically get one for free. Each formula book can hold the formulas for up to 100 different items. Formulas can also appear on parchment sheets, tablets, and almost any other medium; there's no need for you to copy them into a specific book as long as you can keep them on hand to reference them.</p>\n<hr />\n<p>@UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Alchemist's Fire (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Antidote (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Bravo's Brew (Moderate)], @UUID[Compendium.pf2e.equipment-srd.Item.Comprehension Elixir (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Frost Vial (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Quicksilver Mutagen (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Stone Fist Elixir], @UUID[Compendium.pf2e.equipment-srd.Item.Tanglefoot Bag (Greater)]</p>"
+                    "value": "<p>A formula book holds the formulas necessary to make items other than the common equipment from this chapter; alchemists typically get one for free. Each formula book can hold the formulas for up to 100 different items. Formulas can also appear on parchment sheets, tablets, and almost any other medium; there's no need for you to copy them into a specific book as long as you can keep them on hand to reference them.</p>\n<hr />\n<p>@UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Alchemist's Fire (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Antidote (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Bravo's Brew (Moderate)], @UUID[Compendium.pf2e.equipment-srd.Item.Comprehension Elixir (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Frost Vial (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Quicksilver Mutagen (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Stone Fist Elixir], @UUID[Compendium.pf2e.equipment-srd.Item.Glue Bomb (Greater)]{Tanglefoot Bag (Greater)}</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -917,37 +755,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "formula-book-blank",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -964,6 +795,9 @@
             "sort": 1000000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This simple iron ring is faceted with a bulbous geode lined with bright purple crystals. A <em>ring of stoneshifting</em> grants you the ability to ignore difficult terrain caused by rubble or uneven ground made of stone and earth.</p>\n<p><strong>Activate</strong> 1 minute</p>\n<p><strong>Frequency</strong> three times per day</p>\n<p><strong>Requirements</strong> You are standing on at least 5 feet of earthen material (such as stone, soil, clay, or sand)</p>\n<hr />\n<p><strong>Effect</strong> You sink into the ground and emerge at another location within 100 miles. This location must have an earthen surface at least 5 feet deep and you must be able to identify the location precisely by both its position relative to your starting position and its appearance or other identifying features. You can't carry extradimensional spaces with you to the destination, and if you attempt to do so, the activation fails.</p>"
@@ -971,9 +805,6 @@
                 "equipped": {
                     "carryType": "worn",
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -983,32 +814,27 @@
                 "level": {
                     "value": 12
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1800
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder #153: Life's Long Shadows"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "ring-of-stoneshifting",
-                "source": {
-                    "value": "Pathfinder #153: Life's Long Shadows"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "uncommon",
                     "value": [
-                        "conjuration",
                         "earth",
                         "invested",
                         "magical",
@@ -1017,43 +843,29 @@
                 },
                 "usage": {
                     "value": "worn"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
         },
         {
             "_id": "RDYHiUOFIIaDKt8y",
-            "img": "systems/pf2e/icons/features/classes/infused-reagents.webp",
+            "img": "icons/commodities/treasure/broach-pink-orbs.webp",
             "name": "Infused Reagents",
             "sort": 1100000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
+                "bulk": {
                     "value": 0
                 },
-                "consumableType": {
-                    "value": "other"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "other",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": ""
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -1063,26 +875,22 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 8,
                 "rules": [],
                 "size": "med",
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -1090,8 +898,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -1107,30 +917,19 @@
             "name": "Bravo's Brew (Moderate) (Infused)",
             "sort": 1200000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "elixir"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "elixir",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p>This flask of foaming beer grants courage. For the next hour after drinking this elixir, you gain a +2 item bonus to Will saves, or +3 when attempting Will saves against fear.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Bravo's Brew (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p>This flask of foaming beer grants courage. For the next hour after drinking this elixir, you gain a +2 item bonus to Will saves, or +3 when attempting Will saves against fear.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Bravo's Brew (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -1140,26 +939,22 @@
                 "level": {
                     "value": 10
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "bravos-brew-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1173,8 +968,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -1190,30 +987,19 @@
             "name": "Quicksilver Mutagen (Greater) (Infused)",
             "sort": 1300000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "mutagen"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "mutagen",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span></p><hr />\n<p>Your features become thin and angular. You become swifter and nimbler, but your body also becomes fragile.</p>\n<p><strong>Benefit</strong> You gain a +3 item bonus to Acrobatics checks, Stealth checks, Thievery checks, Reflex saves, and Dexterity-based attack rolls, and you gain a +15 foot status bonus to your Speed.</p>\n<p><strong>Drawback</strong> You take damage equal to twice your level; you can't recover Hit Points lost this way by any means while the mutagen lasts. You take a -2 penalty to Fortitude saves.</p>\n<p><strong>Duration</strong> 1 hour.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Quicksilver Mutagen (Greater)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span></p><hr />\n<p>Your features become thin and angular. You become swifter and nimbler, but your body also becomes fragile.</p>\n<p><strong>Benefit</strong> You gain a +3 item bonus to Acrobatics checks, Stealth checks, Thievery checks, Reflex saves, and Dexterity-based attack rolls, and you gain a +15 foot status bonus to your Speed.</p>\n<p><strong>Drawback</strong> You take damage equal to twice your level; you can't recover Hit Points lost this way by any means while the mutagen lasts. You take a -2 penalty to Fortitude saves.</p>\n<p><strong>Duration</strong> 1 hour.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Quicksilver Mutagen (Greater)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -1223,26 +1009,22 @@
                 "level": {
                     "value": 11
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "quicksilver-mutagen-greater",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1257,8 +1039,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -1287,11 +1071,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -1329,11 +1115,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1367,36 +1155,31 @@
                     "value": 27
                 },
                 "damageRolls": {
-                    "pBIeBoL52efIGwSL": {
-                        "damage": "4",
+                    "0": {
+                        "damage": "1",
+                        "damageType": "acid"
+                    },
+                    "1": {
+                        "category": "persistent",
+                        "damage": "3d6",
+                        "damageType": "acid"
+                    },
+                    "2": {
+                        "category": "splash",
+                        "damage": "3",
                         "damageType": "acid"
                     }
                 },
                 "description": {
                     "value": ""
                 },
-                "rules": [
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "success"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AcidFlask.Greater.success"
-                    },
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "criticalSuccess"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AcidFlask.Greater.criticalSuccess"
-                    }
-                ],
-                "slug": null,
-                "source": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
+                "rules": [],
+                "slug": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1431,36 +1214,31 @@
                     "value": 27
                 },
                 "damageRolls": {
-                    "x4kQLhzCSfYuFS9b": {
-                        "damage": "3d8+3",
+                    "0": {
+                        "damage": "3d8",
+                        "damageType": "fire"
+                    },
+                    "1": {
+                        "category": "persistent",
+                        "damage": "3",
+                        "damageType": "fire"
+                    },
+                    "2": {
+                        "category": "splash",
+                        "damage": "3",
                         "damageType": "fire"
                     }
                 },
                 "description": {
                     "value": ""
                 },
-                "rules": [
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "success"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AlchemistsFire.Greater.success"
-                    },
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "criticalSuccess"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AlchemistsFire.Greater.criticalSuccess"
-                    }
-                ],
-                "slug": null,
-                "source": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
+                "rules": [],
+                "slug": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1495,13 +1273,23 @@
                     "value": 27
                 },
                 "damageRolls": {
-                    "TmARds5UmPmiGjD1": {
-                        "damage": "3d6+3",
+                    "0": {
+                        "damage": "3d6",
+                        "damageType": "cold"
+                    },
+                    "1": {
+                        "category": "splash",
+                        "damage": "3",
                         "damageType": "cold"
                     }
                 },
                 "description": {
                     "value": ""
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -1511,9 +1299,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1556,6 +1341,11 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "Note",
@@ -1564,7 +1354,7 @@
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.BombNotes.TanglefootBag.Greater.success",
-                        "title": "ITEM.TypeEffect"
+                        "title": "TYPES.Item.effect"
                     },
                     {
                         "key": "Note",
@@ -1573,13 +1363,10 @@
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.BombNotes.TanglefootBag.Greater.criticalSuccess",
-                        "title": "ITEM.TypeEffect"
+                        "title": "TYPES.Item.effect"
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1613,23 +1400,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1655,23 +1435,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "tremorsense",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1690,26 +1463,19 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>Thessekka carries the following infused items: 1 @UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Greater)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Alchemist's Fire (Greater)], 1 @UUID[Compendium.pf2e.equipment-srd.Item.Bravo's Brew (Moderate)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Frost Vial (Greater)], 1 @UUID[Compendium.pf2e.equipment-srd.Item.Quicksilver Mutagen (Greater)], 1 @UUID[Compendium.pf2e.equipment-srd.Item.Tanglefoot Bag (Greater)]. These items last for 24 hours, or until the next time Thessekka makes her daily preparations.</p>"
+                    "value": "<p>Thessekka carries the following infused items: 1 @UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Greater)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Alchemist's Fire (Greater)], 1 @UUID[Compendium.pf2e.equipment-srd.Item.Bravo's Brew (Moderate)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Frost Vial (Greater)], 1 @UUID[Compendium.pf2e.equipment-srd.Item.Quicksilver Mutagen (Greater)], 1 @UUID[Compendium.pf2e.equipment-srd.Item.Glue Bomb (Greater)]{Tanglefoot Bag (Greater)}. These items last for 24 hours, or until the next time Thessekka makes her daily preparations.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "selected": {},
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1728,10 +1494,12 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>@Template[type:emanation|distance:30]{30 feet} @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Aura]</p>\n<hr />\n<p>A creature that enters the area must attempt a @Check[type:fortitude|dc:34] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2}, and on a critical failure, the creature is also @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} for as long as it is sickened. While within range of Thessekka's stench, the creature takes a -2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is temporarily immune to all xulgaths' stenches for 1 minute.</p>"
+                    "value": "<p>30 feet. A creature that enters the area must attempt a @Check[type:fortitude|dc:34] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2}, and on a critical failure, the creature is also @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} for as long as it is sickened. While within range of Thessekka's stench, the creature takes a -2 circumstance penalty to saves to recover from the sickened condition. A creature that succeeds at its save is temporarily immune to all xulgaths' stenches for 1 minute.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -1739,27 +1507,17 @@
                         "radius": 30,
                         "slug": "powerful-stench",
                         "traits": [
-                            "aura",
                             "olfactory"
                         ]
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "aura",
                         "olfactory"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1778,26 +1536,19 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>@UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Alchemist's Fire (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Antidote (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Bravo's Brew (Moderate)], @UUID[Compendium.pf2e.equipment-srd.Item.Comprehension Elixir (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Frost Vial (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Quicksilver Mutagen (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Stone Fist Elixir], @UUID[Compendium.pf2e.equipment-srd.Item.Tanglefoot Bag (Greater)]</p>"
+                    "value": "<p>@UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Alchemist's Fire (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Antidote (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Bravo's Brew (Moderate)], @UUID[Compendium.pf2e.equipment-srd.Item.Comprehension Elixir (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Frost Vial (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Quicksilver Mutagen (Greater)], @UUID[Compendium.pf2e.equipment-srd.Item.Stone Fist Elixir], @UUID[Compendium.pf2e.equipment-srd.Item.Glue Bomb (Greater)]{Tanglefoot Bag (Greater)}</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "selected": {},
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1823,26 +1574,18 @@
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "earth",
-                        "transmutation"
+                        "earth"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1867,26 +1610,18 @@
                     "max": 1,
                     "per": "PT1M"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "earth",
-                        "transmutation"
+                        "earth"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1905,36 +1640,39 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Thessekka's bombs with the splash trait deal [[/r 4 #additional splash]]{4 additional splash damage} and deal splash damage to all creatures within 10 feet.</p>"
+                    "value": "<p>Thessekka's bombs with the splash trait deal 4 additional splash damage and deal splash damage to all creatures within 10 feet.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
+                    {
+                        "damageCategory": "splash",
+                        "key": "FlatModifier",
+                        "predicate": [
+                            "item:trait:splash"
+                        ],
+                        "selector": "alchemical-bomb-damage",
+                        "value": 4
+                    },
                     {
                         "key": "Note",
                         "predicate": [
                             "item:trait:splash"
                         ],
-                        "selector": "strike-damage",
+                        "selector": "alchemical-bomb-damage",
                         "text": "{item|system.description.value}",
-                        "title": "{item|name}"
+                        "title": "{item|name}",
+                        "visibility": "owner"
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "selected": {},
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1955,24 +1693,17 @@
                 "description": {
                     "value": "<p><strong>Cost</strong> 1 batch of infused reagents</p>\n<hr />\n<p><strong>Effect</strong> Thessekka creates a single alchemical item from her formula book (see Alchemical Formulas). This item has the infused trait, but it remains potent only until the end of her next turn.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "selected": {},
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1993,24 +1724,17 @@
                 "description": {
                     "value": "<p>Thessekka @UUID[Compendium.pf2e.actionspf2e.Item.Interact] to draw a bomb, then @UUID[Compendium.pf2e.actionspf2e.Item.Strike]{Strikes} with it.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "selected": {},
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -2031,26 +1755,18 @@
                 "description": {
                     "value": "<p>Thessekka turns her own body into solid stone like a statue and immediately becomes @UUID[Compendium.pf2e.conditionitems.Item.Petrified]. Any creature grappled or restrained by her becomes @UUID[Compendium.pf2e.conditionitems.Item.Immobilized]; to get free, the creature must damage the statue enough to break it or succeed at a @Check[type:acrobatics|dc:36|name:Escape Stone Throes|traits:action:escape] check to @UUID[Compendium.pf2e.actionspf2e.Item.Escape]. The only action Thessekka can take while petrified is to use Stone Throes again to end the effect.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "earth",
-                        "transmutation"
+                        "earth"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -2076,23 +1792,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "grab",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -2112,11 +1821,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -2135,11 +1846,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -2158,6 +1871,11 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "FlatModifier",
@@ -2170,9 +1888,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+30 to Craft alchemical items",
@@ -2197,11 +1912,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -2220,11 +1937,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -2243,11 +1962,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -2266,11 +1987,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -2311,12 +2034,6 @@
                 "temp": 0,
                 "value": 255
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 26
-            },
             "resistances": [
                 {
                     "type": "physical",
@@ -2334,19 +2051,43 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "CE"
-            },
             "blurb": "Female xulgath commander",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "aklo",
+                    "common",
+                    "draconic",
+                    "sakvroth"
+                ]
+            },
             "level": {
                 "value": 14
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #153: Life's Long Shadows"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #153: Life's Long Shadows"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 26,
+            "senses": [
+                {
+                    "type": "darkvision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 30,
+                    "type": "tremorsense"
+                }
+            ]
         },
         "resources": {
             "focus": {
@@ -2369,24 +2110,13 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "aklo",
-                    "common",
-                    "draconic",
-                    "undercommon"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "darkvision, tremorsense (imprecise) 30 feet"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "chaotic",
+                "evil",
                 "humanoid",
                 "xulgath"
             ]

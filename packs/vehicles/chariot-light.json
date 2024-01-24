@@ -2,7 +2,7 @@
     "_id": "WBMeO6BPqEzc6Yv8",
     "img": "systems/pf2e/icons/default-icons/vehicle.svg",
     "items": [],
-    "name": "Chariot, Light",
+    "name": "Chariot (Light)",
     "prototypeToken": {
         "name": "Light Chariot"
     },
@@ -28,13 +28,7 @@
             },
             "immunities": [
                 {
-                    "type": "critical-hits"
-                },
-                {
                     "type": "object-immunities"
-                },
-                {
-                    "type": "precision"
                 }
             ]
         },
@@ -45,15 +39,20 @@
             "level": {
                 "value": 0
             },
-            "passengers": "0",
+            "passengers": "",
             "pilotingCheck": "Driving Lore (DC 14) or Nature (DC 16 to DC 24, depending on pulling creature)",
-            "price": "10",
+            "price": 10,
+            "publication": {
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder GM Core"
+            },
             "space": {
                 "high": 4,
                 "long": 5,
                 "wide": 5
             },
-            "speed": "the Speed of the slowest pulling creature (pulled by 1 Large creature)"
+            "speed": "the Speed of the pulling creature (pulled by 1 Large creature)"
         },
         "saves": {
             "fortitude": {
@@ -62,9 +61,6 @@
                 "saveDetail": "",
                 "value": 6
             }
-        },
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
         },
         "traits": {
             "rarity": "common",

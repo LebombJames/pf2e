@@ -1,19 +1,20 @@
-import { ActorPF2e, CreaturePF2e } from "@actor";
-import { ItemType } from "@item/data/index.ts";
-import { UserPF2e } from "@module/documents.ts";
+import { ActorPF2e, type CreaturePF2e } from "@actor";
+import { resetActors } from "@actor/helpers.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { Statistic } from "@system/statistic/index.ts";
-import { sortBy, tupleHasValue } from "@util";
-import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
+import { RuleElementPF2e } from "@module/rules/index.ts";
+import { RuleElementSchema } from "@module/rules/rule-element/data.ts";
+import type { UserPF2e } from "@module/user/document.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { Statistic } from "@system/statistic/index.ts";
+import { tupleHasValue } from "@util";
+import * as R from "remeda";
+import type { DataModelValidationOptions } from "types/foundry/common/abstract/data.d.ts";
 import { MemberData, PartySource, PartySystemData } from "./data.ts";
 import { InvalidCampaign } from "./invalid-campaign.ts";
 import { Kingdom } from "./kingdom/index.ts";
 import { PartySheetRenderOptions } from "./sheet.ts";
 import { PartyCampaign, PartyUpdateContext } from "./types.ts";
-import { resetActors } from "@actor/helpers.ts";
-import { RuleElementPF2e } from "@module/rules/index.ts";
-import { RuleElementSchema } from "@module/rules/rule-element/data.ts";
 
 class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     override armorClass = null;
@@ -64,6 +65,21 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return true;
     }
 
+    override updateSource(
+        data?: Record<string, unknown>,
+        options?: DocumentSourceUpdateContext,
+    ): DeepPartial<this["_source"]> {
+        if (!this.campaign) return super.updateSource(data, options);
+
+        // Note: inner data must be handled *before* outer data, otherwise it'll fail
+        const expanded: DeepPartial<PartySource> = fu.expandObject(data ?? {});
+        const campaignDiff = expanded?.system?.campaign
+            ? this.campaign.updateSource(expanded.system.campaign, options)
+            : {};
+        const diff = super.updateSource(data, options);
+        return R.isEmpty(campaignDiff) ? diff : fu.mergeObject(diff, campaignDiff);
+    }
+
     /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
     protected override prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[] {
         return this.items.contents
@@ -73,16 +89,33 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
             .sort((elementA, elementB) => elementA.priority - elementB.priority);
     }
 
+    /** Make `system.campaign` non-enumerable to prevent `TokenDocument.getTrackedAttributes` from recursing into it. */
+    protected override _initialize(options?: Record<string, unknown> | undefined): void {
+        super._initialize(options);
+        Object.defineProperty(this.system, "campaign", { writable: true, enumerable: false });
+    }
+
     override prepareBaseData(): void {
+        // Provide base structure for parent method
+        this.system.details.level = { value: 0 };
+
         super.prepareBaseData();
+
         this.members = this.system.details.members
             .map((m) => fromUuidSync(m.uuid))
             .filter((a): a is CreaturePF2e => a instanceof ActorPF2e && a.isOfType("creature"))
-            .sort(sortBy((a) => a.name));
+            .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
 
         for (const member of this.members) {
             member?.parties.add(this);
         }
+
+        // Determine alliance based on the contained members
+        this.system.details.alliance = this.members.some((m) => m.alliance === "party")
+            ? "party"
+            : this.members.some((m) => m.alliance === "opposition")
+              ? "opposition"
+              : null;
 
         // Bind campaign data, though only kingmaker is supported (and hardcoded).
         // This will need to be expanded to allow modules to add to the list
@@ -94,12 +127,16 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
             } else {
                 // Wrap in a try catch in case data preparation fails
                 try {
-                    if (this.campaign?.type === campaignType) {
-                        this.campaign.updateSource(this.system.campaign);
+                    if (this.campaign?.type !== campaignType) {
+                        this.campaign = new Kingdom(fu.deepClone(this._source.system.campaign), { parent: this });
                     } else {
-                        this.campaign = new Kingdom(deepClone(this._source.system.campaign), { parent: this });
+                        // System data models are normally cleaned with partial: false, allowing certain defaults to be set
+                        // We fake such an update here so that elements like settlements can function
+                        Kingdom.cleanData(this.campaign._source);
+                        this.campaign.reset();
                     }
 
+                    this.campaign.prepareBaseData?.();
                     this.system.campaign = this.campaign;
                 } catch (err) {
                     console.error(err);
@@ -109,6 +146,15 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         } else {
             this.campaign = null;
         }
+
+        // Filler until put into use for encounter metrics
+        const partyLevel = Math.round(
+            R.meanBy(
+                this.members.filter((m) => m.isOfType("character")),
+                (m) => m.level,
+            ),
+        );
+        this.system.details.level.value = partyLevel;
     }
 
     /** Run rule elements (which may occur if it contains a kingdom) */
@@ -132,13 +178,14 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     async addMembers(...membersToAdd: CreaturePF2e[]): Promise<void> {
         const existing = this.system.details.members.filter((d) => this.members.some((m) => m.uuid === d.uuid));
         const existingUUIDs = new Set(existing.map((data) => data.uuid));
-        const newMembers = membersToAdd.filter((a) => !existingUUIDs.has(a.uuid));
+        const newMembers = membersToAdd.filter((a) => a.uuid.startsWith("Actor.") && !existingUUIDs.has(a.uuid));
 
-        // Remove all members from their original folder first
+        // Remove all members from their original folder and set their alliance to "party" if it's `null`
         for (const member of newMembers) {
-            if (member.folder) {
-                await member.update({ folder: null });
-            }
+            const allianceUpdate = member.isOfType("character", "npc")
+                ? { "system.details.alliance": member._source.system.details.alliance ?? "party" }
+                : {};
+            await member.update({ folder: null, ...allianceUpdate });
         }
 
         const members: MemberData[] = [...existing, ...newMembers.map((m) => ({ uuid: m.uuid }))];
@@ -161,8 +208,13 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return combatants;
     }
 
+    override getRollOptions(domains?: string[]): string[] {
+        const options = super.getRollOptions(domains);
+        return options.concat(this.campaign?.getRollOptions?.() ?? []);
+    }
+
     override getRollData(): Record<string, unknown> {
-        return mergeObject(super.getRollData(), this.campaign?.getRollData?.() ?? {});
+        return fu.mergeObject(super.getRollData(), this.campaign?.getRollData?.() ?? {});
     }
 
     /** Re-render the sheet if data preparation is called from the familiar's master */
@@ -184,15 +236,19 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return campaignStat ?? null;
     }
 
-    private _resetAndRerenderDebounced = foundry.utils.debounce(() => {
+    private _resetAndRerenderDebounced = fu.debounce(() => {
         super.reset();
         this.sheet.render(false, { actor: true } as PartySheetRenderOptions);
     }, 50);
 
+    /* -------------------------------------------- */
+    /*  Event Handlers                              */
+    /* -------------------------------------------- */
+
     protected override async _preUpdate(
         changed: DeepPartial<PartySource>,
         options: PartyUpdateContext<TParent>,
-        user: UserPF2e
+        user: UserPF2e,
     ): Promise<boolean | void> {
         const members = this.members;
         const newMemberUUIDs = changed?.system?.details?.members?.map((m) => m?.uuid);
@@ -204,6 +260,7 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         // Ensure the party campaign type is properly set if any data gets updated
         if (changed.system?.campaign && this.campaign && this.campaign.type !== "invalid") {
             changed.system.campaign.type = this.campaign.type;
+            this.campaign._preUpdate?.(changed.system.campaign);
         }
 
         return super._preUpdate(changed, options, user);
@@ -213,7 +270,7 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     protected override _onUpdate(
         changed: DeepPartial<PartySource>,
         options: PartyUpdateContext<TParent>,
-        userId: string
+        userId: string,
     ): void {
         super._onUpdate(changed, options, userId);
 
@@ -225,6 +282,14 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         }
 
         resetActors(removedCreatures);
+
+        // If members were added or removed, rerender the encounter tracker to show new XP calculation
+        if (changed.system?.details?.members && game.combat) {
+            for (const encounter of game.combats) {
+                encounter.reset();
+                ui.combat.render();
+            }
+        }
 
         // Update the actor directory if this included campaign changes
         if (game.ready && !!changed.system?.campaign && game.actors.get(this.id) === (this as ActorPF2e)) {
@@ -240,6 +305,7 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         }
 
         resetActors(this.members);
+        ui.actors.saveActivePartyFolderState();
     }
 }
 

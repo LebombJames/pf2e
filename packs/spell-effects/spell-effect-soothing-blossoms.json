@@ -1,6 +1,6 @@
 {
     "_id": "nIryhRgeiacQw1Em",
-    "img": "systems/pf2e/icons/spells/soothing-blossom.webp",
+    "img": "icons/magic/nature/lotus-glow-pink.webp",
     "name": "Spell Effect: Soothing Blossoms",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -33,9 +38,6 @@
                 "type": "save"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

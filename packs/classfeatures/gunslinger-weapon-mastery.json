@@ -19,41 +19,28 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
+                "path": "system.proficiencies.attacks.advanced-firearms-crossbows.rank",
                 "value": 2
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.advanced-firearms-crossbows.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple-firearms-crossbows.rank",
+                "path": "system.proficiencies.attacks.simple-firearms-crossbows.rank",
                 "value": 3
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.martial-firearms-crossbows.rank",
+                "path": "system.proficiencies.attacks.martial-firearms-crossbows.rank",
                 "value": 3
             },
             {
@@ -62,14 +49,24 @@
                     {
                         "or": [
                             "item:group:firearm",
-                            "item:tag:crossbow"
+                            "item:group:crossbow"
                         ]
                     }
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 2
+                },
+                "simple": {
+                    "rank": 2
+                },
+                "unarmed": {
+                    "rank": 2
+                }
+            }
         },
         "traits": {
             "rarity": "common",

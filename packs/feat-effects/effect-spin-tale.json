@@ -1,6 +1,6 @@
 {
     "_id": "UzIamWcEJTOjwfoA",
-    "img": "systems/pf2e/icons/features/feats/spin-tale.webp",
+    "img": "icons/sundries/documents/document-official-capital.webp",
     "name": "Effect: Spin Tale",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #170: Spoken on the Song Wind"
         },
         "rules": [
             {
@@ -41,9 +46,6 @@
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder #170: Spoken on the Song Wind"
-        },
         "start": {
             "initiative": null,
             "value": 0

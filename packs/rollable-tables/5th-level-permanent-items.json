@@ -57,7 +57,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "KrmSuQIyu6OEi5ew",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/held-items/holy-prayer-beads.webp",
+            "img": "icons/equipment/neck/necklace-runed-white-red.webp",
             "range": [
                 19,
                 21
@@ -127,7 +127,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "BNelZMBHKlPAWl9Z",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/structures/pocket-stage.webp",
+            "img": "icons/environment/settlement/palast.webp",
             "range": [
                 46,
                 51
@@ -211,7 +211,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "T00Xa9aDwHxd60Zh",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/boots-of-elvenkind.webp",
+            "img": "icons/equipment/feet/boots-leather-green.webp",
             "range": [
                 82,
                 87
@@ -225,7 +225,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "JJZgRx6naNJmDa81",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/diplomats-badge.webp",
+            "img": "icons/commodities/treasure/token-gold-cross.webp",
             "range": [
                 88,
                 93
@@ -244,7 +244,7 @@
                 94,
                 99
             ],
-            "text": "Goggles of Night",
+            "text": "Obsidian Goggles",
             "type": 2,
             "weight": 6
         },
@@ -253,7 +253,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "6cV9Kpwc7aiuhqbH",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/cursed-items/necklace-of-strangulation.webp",
+            "img": "icons/equipment/neck/collar-rounded-carved-wood-spiral.webp",
             "range": [
                 100,
                 105

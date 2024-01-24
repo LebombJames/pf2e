@@ -1,6 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data/index.ts";
 import { ABCFeatureEntryData } from "@item/abc/data.ts";
-import { AncestrySource, ItemSourcePF2e } from "@item/data/index.ts";
+import { AncestrySource, ItemSourcePF2e } from "@item/base/data/index.ts";
 import { sluggify } from "@util";
 import { MigrationBase } from "../base.ts";
 
@@ -19,7 +19,7 @@ export class Migration670AncestryVision extends MigrationBase {
             this.#setAncestryVision(ancestry);
             for (const vision of ["darkvision", "low-light-vision"]) {
                 const index = source.items.findIndex(
-                    (item) => item.type === "feat" && (item.system.slug ?? sluggify(item.name)) === vision
+                    (item) => item.type === "feat" && (item.system.slug ?? sluggify(item.name)) === vision,
                 );
                 if (index !== -1) source.items.splice(index, 1);
             }
@@ -37,11 +37,12 @@ export class Migration670AncestryVision extends MigrationBase {
         const features: Record<string, MaybeOldABCFeatureEntryData | null> = ancestry.system.items;
         for (const [key, value] of Object.entries(features)) {
             if (value?.id === this.LOWLIGHTVISION_ID) {
-                "game" in globalThis ? (features[`-=${key}`] = null) : delete features[key];
+                features[`-=${key}`] = null;
                 // Prefer darkvision if the ancestry item somehow has both features
-                ancestry.system.vision = ancestry.system.vision === "darkvision" ? "darkvision" : "lowLightVision";
+                const system: { vision: string } = ancestry.system;
+                system.vision = system.vision === "darkvision" ? "darkvision" : "lowLightVision";
             } else if (value?.id === this.DARKVISION_ID) {
-                "game" in globalThis ? (features[`-=${key}`] = null) : delete features[key];
+                features[`-=${key}`] = null;
                 ancestry.system.vision = "darkvision";
             }
         }

@@ -1,4 +1,4 @@
-import { AttributeString } from "@actor/types.ts";
+import { PhysicalItemSource } from "@item/base/data/index.ts";
 import {
     BasePhysicalItemSource,
     Investable,
@@ -12,28 +12,30 @@ type EquipmentSource = BasePhysicalItemSource<"equipment", EquipmentSystemSource
 
 interface EquipmentSystemSource extends Investable<PhysicalSystemSource> {
     traits: EquipmentTraits;
-
-    /**
-     * Data for apex items: the attribute upgraded and, in case of multiple apex items, whether the upgrade has been
-     * selected
-     */
-    apex?: {
-        attribute: AttributeString;
-        selected?: boolean;
-    };
+    usage: { value: string };
+    /** Doubly-embedded adjustments, attachments, talismans etc. */
+    subitems: PhysicalItemSource[];
 }
 
 interface EquipmentSystemData
-    extends Omit<EquipmentSystemSource, "hp" | "identification" | "price" | "temporary" | "usage">,
-        Omit<Investable<PhysicalSystemData>, "traits"> {
-    apex?: {
-        attribute: AttributeString;
-        selected: boolean;
-    };
+    extends Omit<EquipmentSystemSource, SourceOmission>,
+        Omit<Investable<PhysicalSystemData>, "subitems" | "traits"> {
+    stackGroup: null;
 }
+
+type SourceOmission =
+    | "apex"
+    | "bulk"
+    | "description"
+    | "hp"
+    | "identification"
+    | "material"
+    | "price"
+    | "temporary"
+    | "usage";
 
 interface EquipmentTraits extends PhysicalItemTraits<EquipmentTrait> {
     otherTags: OtherEquipmentTag[];
 }
 
-export { EquipmentSource, EquipmentSystemData, EquipmentSystemSource, EquipmentTrait };
+export type { EquipmentSource, EquipmentSystemData, EquipmentSystemSource, EquipmentTrait };

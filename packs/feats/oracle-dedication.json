@@ -1,6 +1,6 @@
 {
     "_id": "OUNj8nXTHwGcEdlh",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Oracle Dedication",
     "system": {
         "actionType": {
@@ -19,21 +19,20 @@
         "prerequisites": {
             "value": [
                 {
-                    "value": "Charisma 14"
+                    "value": "Charisma +2"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
                 "path": "system.skills.rel.rank",
-                "value": 1
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.traditions.divine.rank",
                 "value": 1
             },
             {
@@ -49,8 +48,12 @@
                 "uuid": "Compendium.pf2e.conditionitems.Item.Off-Guard"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
+        "subfeatures": {
+            "proficiencies": {
+                "spellcasting": {
+                    "rank": 1
+                }
+            }
         },
         "traits": {
             "rarity": "common",

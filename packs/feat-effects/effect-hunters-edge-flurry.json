@@ -1,6 +1,6 @@
 {
     "_id": "uXCU8GgriUjuj5FV",
-    "img": "systems/pf2e/icons/features/classes/flurry.webp",
+    "img": "icons/skills/melee/strike-polearm-light-orange.webp",
     "name": "Effect: Hunter's Edge, Flurry",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -66,9 +71,6 @@
                 "value": -3
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 3648

@@ -28,11 +28,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -66,23 +68,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -103,25 +98,18 @@
                 "description": {
                     "value": "<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:16]</p>\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d10[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d12[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1}, and @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] (1 round)</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "poison"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -141,11 +129,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -164,11 +154,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -187,11 +179,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -232,12 +226,6 @@
                 "temp": 0,
                 "value": 15
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 6
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -249,19 +237,33 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": []
+            },
             "level": {
                 "value": 1
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-11: Flames of Rebellion"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-11: Flames of Rebellion"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 6,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -279,15 +281,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": []
-            },
             "rarity": "common",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "med"
             },

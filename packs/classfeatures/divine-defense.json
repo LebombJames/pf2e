@@ -1,6 +1,6 @@
 {
     "_id": "0mJTp4LdEHBLInoe",
-    "img": "systems/pf2e/icons/features/classes/divine-defense.webp",
+    "img": "icons/creatures/abilities/wings-birdlike-blue.webp",
     "name": "Divine Defense",
     "system": {
         "actionType": {
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmored.rank",
-                "value": 2
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "unarmored": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

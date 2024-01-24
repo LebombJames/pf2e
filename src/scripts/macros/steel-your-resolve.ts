@@ -1,4 +1,4 @@
-import { CharacterPF2e } from "@actor/character/document.ts";
+import { CharacterPF2e } from "@actor";
 import { ActionDefaultOptions } from "@system/action-macros/index.ts";
 import { localizer } from "@util";
 
@@ -8,7 +8,8 @@ export function steelYourResolve(options: ActionDefaultOptions): void {
     const actors = Array.isArray(options.actors) ? options.actors : [options.actors];
     const actor = actors[0];
     if (actors.length > 1 || !(actor instanceof CharacterPF2e)) {
-        return ui.notifications.error(localize("BadArgs"));
+        ui.notifications.error(localize("BadArgs"));
+        return;
     }
 
     const toChat = (alias: string, content: string) => {
@@ -19,15 +20,17 @@ export function steelYourResolve(options: ActionDefaultOptions): void {
         });
     };
 
-    if (!game.settings.get("pf2e", "staminaVariant")) {
-        return ui.notifications.error(localize("StaminaNotEnabled"));
+    if (!game.pf2e.settings.variants.stamina) {
+        ui.notifications.error(localize("StaminaNotEnabled"));
+        return;
     }
 
     Dialog.confirm({
         title: localize("Title"),
         content: localize("Content"),
         yes: () => {
-            const { resolve, sp } = actor.system.attributes;
+            const sp = actor.system.attributes.hp.sp ?? { value: 0, max: 0 };
+            const resolve = actor.system.resources.resolve ?? { value: 0, max: 0 };
             const spRatio = `${sp.value}/${sp.max}`;
             const recoverStamina = localize("RecoverStamina", { name: actor.name, ratio: spRatio });
             const noStamina = localize("NoStamina", { name: actor.name });
@@ -35,8 +38,8 @@ export function steelYourResolve(options: ActionDefaultOptions): void {
                 toChat(actor.name, recoverStamina);
                 const newSP = sp.value + Math.floor(sp.max / 2);
                 actor.update({
-                    "system.attributes.sp.value": Math.min(newSP, sp.max),
-                    "system.attributes.resolve.value": resolve.value - 1,
+                    "system.attributes.hp.sp.value": Math.min(newSP, sp.max),
+                    "system.resources.resolve.value": resolve.value - 1,
                 });
             } else {
                 toChat(actor.name, noStamina);

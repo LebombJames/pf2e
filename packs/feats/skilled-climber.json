@@ -1,6 +1,6 @@
 {
     "_id": "exJmNR2XH1i6PGw3",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Skilled Climber",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -30,9 +35,6 @@
                 "value": 10
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "qDfTqetM9UEpp8ty",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Greater Lesson",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p>Your patron grants you greater knowledge.</p>\n<p>Choose a greater or basic lesson from the list of witch lessons. You gain its associated hex, and your familiar learns the associated spell. Increase the number of Focus Points in your focus pool by 1.</p>"
+            "value": "<p>Your patron grants you greater knowledge. Choose a greater or basic lesson. You gain its associated hex, and your familiar learns the associated spell.</p>"
         },
         "level": {
             "value": 6
@@ -19,13 +19,12 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "add",
-                "path": "system.resources.focus.max",
-                "value": 1
-            },
             {
                 "adjustName": false,
                 "allowedDrops": {
@@ -40,38 +39,17 @@
                         }
                     ]
                 },
-                "choices": [
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Mischief"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Shadow"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Snow"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Calamity"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Dreams"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Life"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Protection"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Elements"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Vengeance"
-                    },
-                    {
-                        "value": "Compendium.pf2e.classfeatures.Item.Lesson of Favors"
-                    }
-                ],
+                "choices": {
+                    "filter": [
+                        "item:tag:witch-lesson",
+                        {
+                            "lte": [
+                                "item:level",
+                                6
+                            ]
+                        }
+                    ]
+                },
                 "flag": "lesson",
                 "key": "ChoiceSet",
                 "prompt": "PF2E.SpecificRule.Prompt.Lesson"
@@ -81,9 +59,6 @@
                 "uuid": "{item|flags.pf2e.rulesSelections.lesson}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

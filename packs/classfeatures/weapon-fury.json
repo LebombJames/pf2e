@@ -19,28 +19,24 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 3
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 3
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
-                "value": 3
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 3
+                },
+                "simple": {
+                    "rank": 3
+                },
+                "unarmed": {
+                    "rank": 3
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

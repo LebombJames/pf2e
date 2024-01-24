@@ -15,19 +15,21 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
                 "key": "Sense",
-                "selector": "lowLightVision"
+                "selector": "low-light-vision"
             },
             {
                 "key": "Sense",
                 "selector": "darkvision"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

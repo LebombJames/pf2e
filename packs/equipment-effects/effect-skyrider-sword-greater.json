@@ -1,6 +1,6 @@
 {
     "_id": "vOgD9wfStLX1utte",
-    "img": "systems/pf2e/icons/equipment/weapons/greatsword.webp",
+    "img": "icons/weapons/swords/greatsword-crossguard-silver.webp",
     "name": "Effect: Skyrider Sword (Greater)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Grand Bazaar"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -22,9 +27,6 @@
                 "value": "min(25, @actor.attributes.speed.total)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Grand Bazaar"
-        },
         "start": {
             "initiative": null,
             "value": 0

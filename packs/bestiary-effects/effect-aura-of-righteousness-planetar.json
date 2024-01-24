@@ -1,6 +1,6 @@
 {
     "_id": "I5Fd4TkIKRJT6WXf",
-    "img": "systems/pf2e/icons/spells/litany-of-righteousness.webp",
+    "img": "icons/magic/holy/saint-glass-portrait-halo.webp",
     "name": "Effect: Aura of Righteousness (Planetar)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 2"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 2"
-        },
         "start": {
             "initiative": null,
             "value": 0

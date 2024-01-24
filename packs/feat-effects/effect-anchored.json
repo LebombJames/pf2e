@@ -1,6 +1,6 @@
 {
     "_id": "R6mx6EfLxSrQlrRa",
-    "img": "systems/pf2e/icons/spells/battlefield-persistence.webp",
+    "img": "icons/equipment/shield/heater-wooden-steel-boss.webp",
     "name": "Effect: Anchored",
     "system": {
         "description": {
@@ -15,21 +15,22 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Highhelm"
+        },
         "rules": [
             {
-                "hideIfDisabled": true,
                 "key": "FlatModifier",
                 "predicate": [
                     "action:tumble-through"
                 ],
-                "selector": "reflex",
+                "selector": "reflex-dc",
                 "type": "circumstance",
                 "value": 4
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Highhelm"
-        },
         "start": {
             "initiative": null,
             "value": 0

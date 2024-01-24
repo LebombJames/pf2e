@@ -1,6 +1,6 @@
 {
     "_id": "g4E9l4uA62LcRBJS",
-    "img": "systems/pf2e/icons/spells/clawsong.webp",
+    "img": "icons/creatures/claws/claw-hooked-purple.webp",
     "name": "Spell Effect: Clawsong (Versatile Piercing)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #171: Hurricane's Howl"
+        },
         "rules": [
             {
                 "definition": [
@@ -26,9 +31,6 @@
                 "value": "versatile-p"
             }
         ],
-        "source": {
-            "value": "Pathfinder #171: Hurricane's Howl"
-        },
         "start": {
             "initiative": null,
             "value": 0

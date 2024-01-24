@@ -1,6 +1,6 @@
 {
     "_id": "mnHUemd21MtmV9FV",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Empathic Envoy",
     "system": {
         "actionType": {
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #189: Dreamers of the Nameless Spires"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #189: Dreamers of the Nameless Spires"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

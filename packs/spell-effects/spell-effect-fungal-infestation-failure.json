@@ -1,6 +1,6 @@
 {
     "_id": "AnCRD7kDcG0DDGKn",
-    "img": "systems/pf2e/icons/spells/fungal-infestation.webp",
+    "img": "icons/consumables/mushrooms/umbontae-bumpy-purple.webp",
     "name": "Spell Effect: Fungal Infestation (Failure)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "key": "Weakness",
@@ -25,9 +30,6 @@
                 "value": "floor((@item.level)/2)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

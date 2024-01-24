@@ -1,6 +1,6 @@
 {
     "_id": "vt67b8uoNEbskcBv",
-    "img": "systems/pf2e/icons/spells/aqueous-orb.webp",
+    "img": "icons/commodities/materials/slime-thick-blue.webp",
     "name": "Hydration",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

@@ -9,11 +9,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.MPv5Yx4w7scZGj2Y"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/musical-instrument-handheld-virtuoso-handheld.webp",
+            "img": "icons/tools/instruments/lute-gold-brown.webp",
             "name": "Fiddle",
             "sort": 100000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Handheld instruments include bagpipes, a small set of chimes, small drums, fiddles and viols, flutes and recorders, small harps, lutes, trumpets, and similarly sized instruments. The GM might rule that an especially large handheld instrument (like a tuba) has greater Bulk. Heavy instruments such as large drums, a full set of chimes, and keyboard instruments are less portable and generally need to be stationary while played.</p>"
@@ -23,9 +26,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -34,37 +34,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 8
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "musical-instrument-handheld",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "equipment"
@@ -76,11 +69,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.MPv5Yx4w7scZGj2Y"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/musical-instrument-handheld.webp",
+            "img": "icons/tools/instruments/pipe-flue-tan.webp",
             "name": "Flute",
             "sort": 200000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Handheld instruments include bagpipes, a small set of chimes, small drums, fiddles and viols, flutes and recorders, small harps, lutes, trumpets, and similarly sized instruments. The GM might rule that an especially large handheld instrument (like a tuba) has greater Bulk. Heavy instruments such as large drums, a full set of chimes, and keyboard instruments are less portable and generally need to be stationary while played.</p>"
@@ -90,9 +86,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -101,37 +94,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 8
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "musical-instrument-handheld",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "equipment"
@@ -161,11 +147,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -203,11 +191,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -246,11 +236,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -286,23 +278,49 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
+                }
+            },
+            "type": "action"
+        },
+        {
+            "_id": "l525qc20u09lsupe",
+            "img": "systems/pf2e/icons/actions/Reaction.webp",
+            "name": "Rhapsodic Flourish",
+            "sort": 700000,
+            "system": {
+                "actionType": {
+                    "value": "reaction"
                 },
-                "trigger": {
-                    "value": ""
+                "actions": {
+                    "value": null
                 },
-                "weapon": {
-                    "value": ""
+                "category": "defensive",
+                "description": {
+                    "value": "<p><strong>Trigger</strong> The fiddling bones would roll a saving throw against an auditory or sonic effect</p>\n<hr />\n<p><strong>Effect</strong> The fiddling bones performs a refrain that deflects sonic vibrations. They roll a @Check[type:performance] check in place of the triggering saving throw. Sonic feedback rebounds from the effect, dealing @Damage[1d6[sonic]] damage to the source of the triggering effect if the Performance check succeeded or @Damage[2d6[sonic]] damage to the fiddling bones on a failure.</p>"
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
+                "rules": [],
+                "slug": null,
+                "traits": {
+                    "rarity": "common",
+                    "value": [
+                        "occult",
+                        "sonic"
+                    ]
                 }
             },
             "type": "action"
@@ -315,8 +333,8 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Negative Healing",
-            "sort": 700000,
+            "name": "Void Healing",
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -328,8 +346,10 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 2"
                 },
                 "rules": [
                     {
@@ -340,56 +360,9 @@
                     }
                 ],
                 "slug": "negative-healing",
-                "source": {
-                    "value": "Pathfinder Bestiary 2"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
-                }
-            },
-            "type": "action"
-        },
-        {
-            "_id": "l525qc20u09lsupe",
-            "img": "systems/pf2e/icons/actions/Reaction.webp",
-            "name": "Rhapsodic Flourish",
-            "sort": 800000,
-            "system": {
-                "actionType": {
-                    "value": "reaction"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "defensive",
-                "description": {
-                    "value": "<p><strong>Trigger</strong> The fiddling bones would roll a saving throw against an auditory or sonic effect</p>\n<hr />\n<p><strong>Effect</strong> The fiddling bones performs a refrain that deflects sonic vibrations. They roll a @Check[type:performance] check in place of the triggering saving throw. Sonic feedback rebounds from the effect, dealing @Damage[1d6[sonic]] damage to the source of the triggering effect if the Performance check succeeded or @Damage[2d6[sonic]] damage to the fiddling bones on a failure.</p>"
-                },
-                "requirements": {
-                    "value": ""
-                },
-                "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                },
-                "traits": {
-                    "rarity": "common",
-                    "value": [
-                        "abjuration",
-                        "occult",
-                        "sonic"
-                    ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -410,26 +383,21 @@
                 "description": {
                     "value": "<p>The fiddling bones plays a catchy song that compels others to dance. Each creature in a @Template[type:emanation|distance:30] must attempt a @Check[type:will|dc:19] save. Fiddling bones are immune. The effect lasts until the end of the fiddling bones's next turn, but the fiddling bones can Sustain the effect on all affected creatures that remain within the emanation.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected and is temporarily immune for 1 hour.</p>\n<p><strong>Success</strong> The creature can't use actions with the move trait except to dance, which uses the Stride action to move up to half the creature's Speed. If the creature has other Speeds, it can also dance using those modes of travel.</p>\n<p><strong>Failure</strong> As success, and the creature must spend at least 1 action each turn dancing.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "auditory",
                         "emotion",
-                        "enchantment",
                         "mental",
                         "occult"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -448,26 +416,21 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Requirements</strong> Dance with Death is in effect</p>\n<hr />\n<p><strong>Effect</strong> The fiddling bones performs a boisterous finale. They choose a @Template[type:cone|distance:30] or @Template[type:emanation|distance:15], and they deal @Damage[4d6[sonic]] damage to all creatures in that area (@Check[type:reflex|dc:21|basic:true]).</p>\n<p>Dance with Death immediately ends, and the fiddling bones can't use Dance with Death or Destructive Finale for [[/r 1d4 #Recharge]]{1d4 rounds}</p>"
+                    "value": "<p><strong>Requirements</strong> Dance with Death is in effect</p>\n<hr />\n<p><strong>Effect</strong> The fiddling bones performs a boisterous finale. They choose a @Template[type:cone|distance:30] or @Template[type:emanation|distance:15], and they deal @Damage[4d6[sonic]] damage to all creatures in that area (@Check[type:reflex|dc:21|basic:true]).</p>\n<p>Dance with Death immediately ends, and the fiddling bones can't use Dance with Death or Destructive Finale for [[/br 1d4 #Recharge]]{1d4 rounds}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "evocation",
                         "occult",
                         "sonic"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -487,11 +450,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -510,11 +475,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -533,11 +500,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -556,11 +525,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -579,11 +550,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -619,7 +592,7 @@
                 "value": ""
             },
             "hp": {
-                "details": "negative healing",
+                "details": "void healing",
                 "max": 30,
                 "temp": 0,
                 "value": 30
@@ -641,12 +614,6 @@
                     "type": "unconscious"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 9
-            },
             "resistances": [
                 {
                     "type": "cold",
@@ -680,19 +647,36 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "necril"
+                ]
+            },
             "level": {
                 "value": 3
             },
             "privateNotes": "",
             "publicNotes": "<p>To some, music is more than a hobby-it's an obsession. Every musician who lived and died for their craft runs the risk of returning as a fiddling bones, as do musicians who died before completing their magnum opus or receiving the accolades they believe they deserved. Driven to prove themselves even in undeath, fiddling bones often challenge famous performers to music duels.</p>",
-            "source": {
-                "value": "Pathfinder Book of the Dead"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Book of the Dead"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 9,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -710,23 +694,14 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "necril"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
-                "undead"
+                "evil",
+                "undead",
+                "unholy"
             ]
         }
     },

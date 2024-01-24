@@ -3,8 +3,8 @@ import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { DEGREE_OF_SUCCESS_STRINGS, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 import { DataUnionField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { ArrayField, StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField } from "./data.ts";
-import { RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 
 class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
     static override defineSchema(): RollNoteSchema {
@@ -13,9 +13,9 @@ class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
             ...super.defineSchema(),
             selector: new fields.ArrayField(
                 new fields.StringField({ required: true, blank: false, initial: undefined }),
-                { required: true, nullable: false }
+                { required: true, nullable: false },
             ),
-            title: new fields.StringField({ required: true, nullable: true, initial: null }),
+            title: new fields.StringField({ required: false, nullable: true, blank: false, initial: null }),
             visibility: new fields.StringField({
                 required: true,
                 nullable: true,
@@ -24,14 +24,14 @@ class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
             }),
             outcome: new fields.ArrayField(
                 new fields.StringField({ required: true, blank: false, choices: DEGREE_OF_SUCCESS_STRINGS }),
-                { required: false, nullable: false, initial: undefined }
+                { required: false, nullable: false, initial: undefined },
             ),
             text: new DataUnionField(
                 [
                     new StrictStringField<string, string, true, false, false>({ required: true, blank: false }),
                     new ResolvableValueField(),
                 ],
-                { required: true, nullable: false }
+                { required: true, nullable: false },
             ),
         };
     }
@@ -40,9 +40,11 @@ class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
         if (this.ignored) return;
 
         for (const selector of this.resolveInjectedProperties(this.selector)) {
+            if (selector === "null") continue;
+
             const title = this.resolveInjectedProperties(this.title)?.trim() ?? null;
             const text = this.resolveInjectedProperties(
-                String(this.resolveValue(this.text, "", { evaluate: false }))
+                String(this.resolveValue(this.text, "", { evaluate: false })),
             ).trim();
 
             if (!text) return this.failValidation("text field resolved empty");
@@ -51,7 +53,7 @@ class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
                 selector,
                 title: title ? this.getReducedLabel(title) : null,
                 text,
-                predicate: this.predicate,
+                predicate: this.resolveInjectedProperties(this.predicate),
                 outcome: this.outcome,
                 visibility: this.visibility,
                 rule: this,
@@ -62,13 +64,13 @@ class RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema> {
     }
 }
 
-interface RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema>, ModelPropsFromSchema<RollNoteSchema> {}
+interface RollNoteRuleElement extends RuleElementPF2e<RollNoteSchema>, ModelPropsFromRESchema<RollNoteSchema> {}
 
 type RollNoteSchema = RuleElementSchema & {
     /** The statistic(s) slugs of the rolls for which this note will be appended */
     selector: ArrayField<StringField<string, string, true, false, false>, string[], string[], true, false, true>;
     /** An optional title prepended to the note */
-    title: StringField<string, string, true, true, true>;
+    title: StringField<string, string, false, true, true>;
     /** An optional limitation of the notes visibility to GMs */
     visibility: StringField<UserVisibility, UserVisibility, true, true, true>;
     /** Applicable degree-of-success outcomes for the note */
@@ -87,4 +89,4 @@ interface RollNoteSource extends RuleElementSource {
     visibility?: unknown;
 }
 
-export { RollNoteRuleElement, RollNoteSource };
+export { RollNoteRuleElement, type RollNoteSource };

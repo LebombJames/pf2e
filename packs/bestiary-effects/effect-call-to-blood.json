@@ -1,6 +1,6 @@
 {
     "_id": "v54mj5jknAynlCM9",
-    "img": "systems/pf2e/icons/spells/bloodspray-curse.webp",
+    "img": "icons/skills/melee/strike-sword-blood-red.webp",
     "name": "Effect: Call to Blood",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 3
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 2"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 2"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -4,10 +4,7 @@ import { htmlQueryAll, objectHasKey } from "@util";
 
 class UserVisibilityPF2e {
     /** Edits HTML live based on permission settings. Used to hide certain blocks and values */
-    static process($html: HTMLElement | JQuery, options: ProcessOptions = {}): void {
-        const html = $html instanceof HTMLElement ? $html : $html[0]!;
-        if ($html instanceof HTMLElement) $html = $($html);
-
+    static process(html: HTMLElement, options: ProcessOptions = {}): void {
         const visibilityElements = htmlQueryAll(html, "[data-visibility]");
 
         // Remove all visibility=none elements
@@ -42,7 +39,7 @@ class UserVisibilityPF2e {
 
         const hasOwnership = document?.isOwner ?? game.user.isGM;
         // Hide DC for explicit save buttons (such as in spell cards)
-        const dcSetting = game.settings.get("pf2e", "metagame_showDC");
+        const dcSetting = game.pf2e.settings.metagame.dcs;
         const saveButtons = htmlQueryAll(html, "button[data-action=save]");
         const hideDC = !document?.hasPlayerOwner && !hasOwnership && !dcSetting;
         if (hideDC) {
@@ -78,13 +75,13 @@ class UserVisibilityPF2e {
 
     static processMessageSender(message: ChatMessagePF2e, html: HTMLElement): void {
         // Hide the sender name from the card if it can't be seen from the canvas
-        if (!game.settings.get("pf2e", "metagame_tokenSetsNameVisibility")) return;
+        if (!game.pf2e.settings.tokens.nameVisibility) return;
         const token =
             message.token ?? (message.actor ? new TokenDocumentPF2e(message.actor.prototypeToken.toObject()) : null);
         if (token) {
             const sender = html.querySelector<HTMLElement>("h4.message-sender");
             const nameToHide = token.name.trim();
-            const shouldHideName = !token.playersCanSeeName && sender?.innerText.trim() === nameToHide;
+            const shouldHideName = !token.playersCanSeeName && sender?.innerText.includes(nameToHide);
             if (sender && shouldHideName) {
                 if (game.user.isGM) {
                     sender.dataset.visibility = "gm";
@@ -96,11 +93,12 @@ class UserVisibilityPF2e {
     }
 }
 
-type UserVisibility = "all" | "owner" | "gm" | "none";
+const USER_VISIBILITIES = new Set(["all", "owner", "gm", "none"] as const);
+type UserVisibility = SetElement<typeof USER_VISIBILITIES>;
 
 interface ProcessOptions {
     document?: ClientDocument | null;
-    message?: ChatMessagePF2e;
+    message?: ChatMessagePF2e | null;
 }
 
-export { UserVisibility, UserVisibilityPF2e };
+export { USER_VISIBILITIES, UserVisibilityPF2e, type UserVisibility };

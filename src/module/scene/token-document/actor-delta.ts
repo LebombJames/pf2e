@@ -1,9 +1,7 @@
 import { ActorSystemSource } from "@actor/data/base.ts";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
-import type { TombstoneSource } from "types/foundry/common/data/data.d.ts";
 import type { ActorDeltaSource } from "types/foundry/common/documents/actor-delta.d.ts";
-import { TokenDocumentPF2e } from "./document.ts";
+import type { TokenDocumentPF2e } from "./document.ts";
 
 class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelta<TParent> {
     // Upstream calls _initialize: reset after to ensure clean data
@@ -14,16 +12,11 @@ class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelt
         }
     }
 
-    /** The delta has no business preparing its items */
-    override prepareEmbeddedDocuments(): void {
-        return;
-    }
-
     /** Following synthetic actor  updates, send the `Token` a fake update notification to trigger redraws */
     protected override _onUpdate(
         changed: DeepPartial<this["_source"]>,
         options: DocumentModificationContext<TParent>,
-        userId: string
+        userId: string,
     ): void {
         super._onUpdate(changed, options, userId);
 
@@ -31,7 +24,7 @@ class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelt
             this.parent.object?._onUpdate(
                 { width: this.parent.width },
                 { ...options, parent: this.parent.scene },
-                userId
+                userId,
             );
         }
     }
@@ -41,7 +34,7 @@ class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelt
         event: string,
         collection: string,
         args: [object[], ...unknown[]],
-        parent: ClientDocument | undefined
+        parent: ClientDocument | undefined,
     ): void {
         super._dispatchDescendantDocumentEvents(event, collection, args, parent);
 
@@ -64,8 +57,8 @@ class ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends ActorDelt
             const fakeUpdates: Partial<foundry.documents.TokenSource> = {};
             if (nameChanged) fakeUpdates.name = this.parent.name;
             if (sizeChanged) fakeUpdates.width = this.parent.width;
-            if (textureChanged) fakeUpdates.texture = deepClone(this.parent._source.texture);
-            if (lightChanged) fakeUpdates.light = deepClone(this.parent._source.light);
+            if (textureChanged) fakeUpdates.texture = fu.deepClone(this.parent._source.texture);
+            if (lightChanged) fakeUpdates.light = this.parent.light.toObject();
             this.parent.object?._onUpdate(fakeUpdates, { parent: this.parent.scene }, game.user.id);
         }
     }
@@ -75,9 +68,8 @@ interface ActorDeltaPF2e<TParent extends TokenDocumentPF2e | null> extends Actor
     readonly _source: ActorDeltaSourcePF2e;
 }
 
-interface ActorDeltaSourcePF2e extends ActorDeltaSource {
+type ActorDeltaSourcePF2e = ActorDeltaSource & {
     system: ActorSystemSource | null;
-    items: (ItemSourcePF2e | TombstoneSource)[];
-}
+};
 
 export { ActorDeltaPF2e };

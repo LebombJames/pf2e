@@ -3,7 +3,8 @@ import { EquippedData } from "./data.ts";
 interface HeldUsage {
     value: string;
     type: "held";
-    hands: number;
+    where?: never;
+    hands: 1 | 2;
 }
 
 interface WornUsage {
@@ -13,13 +14,21 @@ interface WornUsage {
     hands?: 0;
 }
 
-interface CarriedUsage {
-    value: "carried";
-    type: "carried";
+interface AttachedUsage {
+    value: string;
+    type: "attached";
+    where: string;
     hands?: 0;
 }
 
-type UsageDetails = HeldUsage | WornUsage | CarriedUsage;
+interface CarriedUsage {
+    value: "carried";
+    type: "carried";
+    where?: never;
+    hands?: 0;
+}
+
+type UsageDetails = HeldUsage | WornUsage | AttachedUsage | CarriedUsage;
 
 type UsageType = UsageDetails["type"];
 
@@ -45,6 +54,7 @@ function getUsageDetails(usage: string): UsageDetails {
 
         case "held-in-one-hand":
         case "held-in-one-plus-hands":
+        case "held-in-one-or-two-hands":
             return { value: usage, type: "held", hands: 1 };
         case "held-in-two-hands":
             return { value: usage, type: "held", hands: 2 };
@@ -52,43 +62,27 @@ function getUsageDetails(usage: string): UsageDetails {
         case "worn":
             return { value: usage, type: "worn" };
 
-        case "wornarmor":
-        case "wornamulet":
-        case "wornanklets":
-        case "wornarmbands":
-        case "wornbackpack":
-        case "wornbarding":
-        case "wornbelt":
-        case "wornbeltpouch":
-        case "wornbracers":
-        case "wornbracelet":
-        case "worncloak":
-        case "worncirclet":
-        case "wornclothing":
-        case "worncollar":
-        case "worncrown":
-        case "wornepaulet":
-        case "worneyepiece":
-        case "wornfootwear":
-        case "worngarment":
-        case "worngloves":
-        case "wornheadwear":
-        case "wornmask":
-        case "wornnecklace":
-        case "wornonbelt":
-        case "wornring":
-        case "wornshoes":
-        case "wornhorseshoes":
-        case "wornsaddle":
-        case "wornwrist":
-            return { value: usage, type: "worn", where: usage.substring(4) };
-    }
+        case "attached-to-a-thrown-weapon":
+        case "attached-to-crossbow-or-firearm":
+        case "attached-to-crossbow-or-firearm-firing-mechanism":
+        case "attached-to-crossbow-or-firearm-scope":
+        case "attached-to-firearm":
+        case "attached-to-firearm-scope":
+        case "attached-to-ships-bow":
+            return { value: usage, type: "attached", where: usage.replace(/^attached-to-/, "") };
 
-    if (BUILD_MODE === "development" && !(usage in CONFIG.PF2E.usages)) {
-        console.warn(`PF2E System | Unknown usage: [${usage}]`);
-    }
+        default:
+            if (usage.startsWith("worn") && usage.length > 4) {
+                return { value: usage, type: "worn", where: usage.substring(4) };
+            }
 
-    return { value: usage, type: "worn" };
+            if (BUILD_MODE === "development" && !(usage in CONFIG.PF2E.usages)) {
+                console.warn(`PF2E System | Unknown usage: [${usage}]`);
+            }
+
+            return { value: usage, type: "worn" };
+    }
 }
 
-export { UsageDetails, UsageType, getUsageDetails, isEquipped };
+export { getUsageDetails, isEquipped };
+export type { CarriedUsage, HeldUsage, UsageDetails, UsageType, WornUsage };

@@ -1,22 +1,25 @@
-import { ActorPF2e } from "@actor";
-import { FeatGroup } from "@actor/character/feats.ts";
-import { HeritagePF2e, ItemPF2e } from "@item";
-import { normalizeActionChangeData } from "@item/ability/helpers.ts";
-import { ActionCost, Frequency } from "@item/data/base.ts";
-import { ItemSummaryData } from "@item/data/index.ts";
+import type { ActorPF2e } from "@actor";
+import { ClassDCData } from "@actor/character/data.ts";
+import type { FeatGroup } from "@actor/character/feats.ts";
+import type { SenseData } from "@actor/creature/index.ts";
+import { ItemPF2e, type HeritagePF2e } from "@item";
+import { normalizeActionChangeData, processSanctification } from "@item/ability/helpers.ts";
+import { ActionCost, Frequency, ItemSummaryData } from "@item/base/data/index.ts";
 import { Rarity } from "@module/data.ts";
-import { UserPF2e } from "@module/user/index.ts";
-import { getActionTypeLabel, sluggify } from "@util";
+import { RuleElementSource } from "@module/rules/index.ts";
+import type { UserPF2e } from "@module/user/index.ts";
+import { ErrorPF2e, objectHasKey, setHasElement, sluggify } from "@util";
 import * as R from "remeda";
-import { FeatSource, FeatSystemData } from "./data.ts";
+import { FeatSource, FeatSubfeatures, FeatSystemData } from "./data.ts";
 import { featCanHaveKeyOptions } from "./helpers.ts";
-import { FeatCategory, FeatTrait } from "./types.ts";
+import { FeatOrFeatureCategory, FeatTrait } from "./types.ts";
+import { FEATURE_CATEGORIES, FEAT_CATEGORIES } from "./values.ts";
 
 class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     declare group: FeatGroup | null;
-    declare grants: (FeatPF2e | HeritagePF2e)[];
+    declare grants: (FeatPF2e<ActorPF2e> | HeritagePF2e<ActorPF2e>)[];
 
-    get category(): FeatCategory {
+    get category(): FeatOrFeatureCategory {
         return this.system.category;
     }
 
@@ -47,11 +50,11 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     }
 
     get isFeature(): boolean {
-        return ["classfeature", "ancestryfeature"].includes(this.category);
+        return setHasElement(FEATURE_CATEGORIES, this.category);
     }
 
     get isFeat(): boolean {
-        return !this.isFeature;
+        return setHasElement(FEAT_CATEGORIES, this.category);
     }
 
     /** Whether this feat must be taken at character level 1 */
@@ -60,7 +63,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     }
 
     /** The maximum number of times this feat can be taken */
-    get maxTakeable(): number {
+    get maxTakable(): number {
         return this.system.maxTakable;
     }
 
@@ -68,6 +71,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
         super.prepareBaseData();
 
         this.group = null;
+        this.system.level.taken ??= null;
 
         // Handle legacy data with empty-string locations
         this.system.location ||= null;
@@ -100,7 +104,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
             this.system.onlyLevel1 = true;
         }
 
-        // `Infinity` stored as `null` in JSON, so change back
+        // `Infinity` is stored as `null` in JSON, so change back
         this.system.maxTakable ??= Infinity;
 
         // Feats takable only at level 1 can never be taken multiple times
@@ -113,7 +117,15 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
             this.system.frequency.value ??= this.system.frequency.max;
         }
 
-        this.system.subfeatures = mergeObject({ keyOptions: [] }, this.system.subfeatures ?? {});
+        this.system.subfeatures = fu.mergeObject(
+            {
+                keyOptions: [],
+                languages: { granted: [], slots: 0 },
+                proficiencies: {},
+                senses: {},
+            } satisfies FeatSubfeatures,
+            this.system.subfeatures ?? {},
+        );
 
         this.system.selfEffect ??= null;
         // Self effects are only usable with actions
@@ -122,43 +134,178 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
         }
     }
 
-    /** Set a self roll option for this feat(ure) */
-    override prepareActorData(this: FeatPF2e<ActorPF2e>): void {
-        const { actor } = this;
+    override prepareActorData(): void {
+        const actor = this.actor;
+        if (!actor?.isOfType("character")) {
+            throw ErrorPF2e("Feats much be embedded in PC-type actors");
+        }
+
+        // Set a self roll option for this feat(ure)
         const prefix = this.isFeature ? "feature" : "feat";
         const slug = this.slug ?? sluggify(this.name);
         actor.rollOptions.all[`${prefix}:${slug}`] = true;
 
-        const { subfeatures } = this.system;
+        // Process subfeatures
+        const subfeatures = this.system.subfeatures;
         if (!featCanHaveKeyOptions(this)) subfeatures.keyOptions = [];
 
-        // Add key ability options to parent's list
-        if (actor.isOfType("character") && subfeatures.keyOptions.length > 0) {
+        // Key attribute options
+        if (subfeatures.keyOptions.length > 0) {
             actor.system.build.attributes.keyOptions = R.uniq([
                 ...actor.system.build.attributes.keyOptions,
                 ...subfeatures.keyOptions,
             ]);
         }
+
+        const { build, proficiencies, saves } = actor.system;
+
+        // Languages
+        build.languages.max += subfeatures.languages.slots;
+        build.languages.granted.push(...subfeatures.languages.granted.map((slug) => ({ slug, source: this.name })));
+
+        // Proficiency-rank increases
+        for (const [slug, increase] of Object.entries(subfeatures.proficiencies)) {
+            const proficiency = ((): { rank: number } | null => {
+                if (slug === "perception") return actor.system.perception;
+                if (slug === "spellcasting") return proficiencies.spellcasting;
+                if (objectHasKey(CONFIG.PF2E.saves, slug)) return saves[slug];
+                if (objectHasKey(CONFIG.PF2E.weaponCategories, slug)) return proficiencies.attacks[slug];
+                if (objectHasKey(CONFIG.PF2E.armorCategories, slug)) return proficiencies.defenses[slug];
+                if (objectHasKey(CONFIG.PF2E.classTraits, slug)) {
+                    type PartialClassDCData = Pick<ClassDCData, "attribute" | "label" | "rank">;
+                    const classDCs: Record<string, PartialClassDCData> = proficiencies.classDCs;
+                    const attribute = increase.attribute ?? "str";
+                    return (classDCs[slug] ??= { attribute, label: CONFIG.PF2E.classTraits[slug], rank: 0 });
+                }
+                return null;
+            })();
+            if (proficiency && increase?.rank) {
+                proficiency.rank = Math.max(proficiency.rank, increase.rank);
+            }
+        }
+
+        // Senses
+        const senseData: SenseData[] = actor.system.perception.senses;
+        const acuityValues = { precise: 2, imprecise: 1, vague: 0 };
+
+        for (const [type, data] of R.toPairs.strict(subfeatures.senses)) {
+            if (senseData.some((s) => s.type === type)) continue;
+
+            if (type === "darkvision" && data.special && Object.values(data.special).includes(true)) {
+                const ancestry = actor.ancestry;
+                if (ancestry?.system.vision === "darkvision") continue;
+
+                // This feat grants darkvision but requires that the character's ancestry has low-light vision, the
+                // character to have low-light vision from any prior source, or that this feat has been taken twice.
+                const special = data.special;
+                const llvFeats = actor.itemTypes.feat.filter(
+                    (f: FeatPF2e) => f !== this && f.system.subfeatures.senses["low-light-vision"],
+                );
+                const ancestryFeatures = (): FeatPF2e[] => {
+                    return ancestry
+                        ? llvFeats.filter(
+                              (f) =>
+                                  f.category === "ancestryfeature" &&
+                                  f.system.subfeatures.senses["low-light-vision"] &&
+                                  f.flags.pf2e.grantedBy?.id === ancestry.id,
+                          )
+                        : [];
+                };
+                const ancestryHasLLV = ancestry?.system.vision === "low-light-vision" || ancestryFeatures().length > 0;
+                const hasLLVRule = (rules: RuleElementSource[]) =>
+                    rules.some(
+                        (r) => r.key === "Sense" && !r.ignored && "selector" in r && r.selector === "low-light-vision",
+                    );
+                const heritageHasLLV = () => hasLLVRule(actor.heritage?.system.rules ?? []);
+                const backgroundHasLLV = () => hasLLVRule(actor.background?.system.rules ?? []);
+
+                const levelTaken = this.system.level.taken ?? 1;
+                const ancestryLLVSatisfied = ancestryHasLLV;
+                const takenTwiceSatisfied = () =>
+                    actor.itemTypes.feat.some(
+                        (f: FeatPF2e) =>
+                            f.sourceId === this.sourceId && f !== this && (f.system.level.taken ?? 1) <= levelTaken,
+                    );
+                const llvAnywhereSatisfied = () =>
+                    ancestryHasLLV ||
+                    heritageHasLLV() ||
+                    backgroundHasLLV() ||
+                    llvFeats.some(
+                        (f: FeatPF2e) =>
+                            (f.system.level.taken ?? 1) <= levelTaken &&
+                            (f.system.subfeatures.senses["low-light-vision"] || hasLLVRule(f.system.rules)),
+                    );
+
+                const specialClauseSatisfied =
+                    (special.ancestry && ancestryLLVSatisfied) ||
+                    (special.second && takenTwiceSatisfied()) ||
+                    (special.llv && llvAnywhereSatisfied());
+                if (!specialClauseSatisfied) continue;
+            }
+
+            const newSense: SenseData = {
+                type,
+                acuity: data.acuity ?? "precise",
+                range: data.range ?? Infinity,
+                source: this.name,
+            };
+            const existing = senseData.find((s) => s.type === type);
+            if (!existing) {
+                senseData.push(newSense);
+            } else if ((data.range ?? Infinity) > (existing.range ?? Infinity)) {
+                senseData.splice(senseData.indexOf(existing), 1, newSense);
+            } else if (acuityValues[data.acuity ?? "vague"] > acuityValues[existing.acuity ?? "precise"]) {
+                senseData.splice(senseData.indexOf(existing), 1, newSense);
+            }
+        }
     }
 
     override prepareSiblingData(): void {
-        const itemGrants = this.flags.pf2e.itemGrants;
-        this.grants = Object.values(itemGrants).flatMap((grant) => {
+        this.grants = Object.values(this.flags.pf2e.itemGrants).flatMap((grant) => {
             const item = this.actor?.items.get(grant.id);
             return (item?.isOfType("feat") && !item.system.location) || item?.isOfType("heritage") ? [item] : [];
         });
+        for (const grant of this.grants.filter((g): g is FeatPF2e<NonNullable<TParent>> => g.isOfType("feat"))) {
+            grant.system.level.taken = this.system.level.taken;
+        }
+    }
+
+    override onPrepareSynthetics(this: FeatPF2e<ActorPF2e>): void {
+        processSanctification(this);
     }
 
     override async getChatData(
         this: FeatPF2e<ActorPF2e>,
-        htmlOptions: EnrichmentOptions = {}
+        htmlOptions: EnrichmentOptions = {},
     ): Promise<ItemSummaryData> {
-        const levelLabel = game.i18n.format("PF2E.LevelN", { level: this.level });
-        const actionTypeLabel = getActionTypeLabel(this.actionCost?.type, this.actionCost?.value);
-        const properties = actionTypeLabel ? [levelLabel, actionTypeLabel] : [levelLabel];
-        const traits = this.traitChatData(CONFIG.PF2E.featTraits);
+        const actor = this.actor;
+        const classSlug = actor.isOfType("character") && actor.class?.slug;
+        // Exclude non-matching class traits
+        const traitSlugs =
+            ["class", "classfeature"].includes(this.category) &&
+            actor.isOfType("character") &&
+            classSlug &&
+            this.system.traits.value.includes(classSlug)
+                ? this.system.traits.value.filter((t) => t === classSlug || !(t in CONFIG.PF2E.classTraits))
+                : this.system.traits.value;
+        const traits = this.traitChatData(CONFIG.PF2E.featTraits, traitSlugs);
+        const levelLabel =
+            this.isFeat && this.level > 0 ? game.i18n.format("PF2E.Item.Feat.LevelN", { level: this.level }) : null;
+        const rarity =
+            this.rarity === "common"
+                ? null
+                : {
+                      slug: this.rarity,
+                      label: CONFIG.PF2E.rarityTraits[this.rarity],
+                      description: CONFIG.PF2E.traitsDescriptions[this.rarity],
+                  };
 
-        return this.processChatData(htmlOptions, { ...this.system, properties, traits });
+        return this.processChatData(htmlOptions, {
+            ...this.system,
+            levelLabel,
+            traits,
+            rarity,
+        });
     }
 
     /** Generate a list of strings for use in predication */
@@ -177,15 +324,16 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     /* -------------------------------------------- */
 
     protected override async _preCreate(
-        data: PreDocumentId<FeatSource>,
+        data: this["_source"],
         options: DocumentModificationContext<TParent>,
-        user: UserPF2e
+        user: UserPF2e,
     ): Promise<boolean | void> {
         // In case this was copied from an actor, clear the location if there's no parent.
         if (!this.parent) {
-            this.updateSource({ "system.location": null });
+            this._source.system.location = null;
+            delete this._source.system.level.taken;
             if (this._source.system.frequency) {
-                this.updateSource({ "system.frequency.-=value": null });
+                delete this._source.system.frequency.value;
             }
         }
 
@@ -195,20 +343,25 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
         options: DocumentModificationContext<TParent>,
-        user: UserPF2e
+        user: UserPF2e,
     ): Promise<boolean | void> {
+        if (!changed.system) return super._preUpdate(changed, options, user);
+
         // Ensure an empty-string `location` property is null
-        if (typeof changed.system?.location === "string") {
+        if ("location" in changed.system) {
             changed.system.location ||= null;
+        }
+
+        if (typeof changed.system.level?.value === "number" && changed.system.level.value !== 1) {
+            changed.system.onlyLevel1 = false;
         }
 
         // Normalize action data
         normalizeActionChangeData(this, changed);
 
         // Ensure onlyLevel1 and takeMultiple are consistent
-        const traits = changed.system?.traits?.value;
-
-        if (this.isFeature && changed.system) {
+        const traits = changed.system.traits?.value;
+        if (setHasElement(FEATURE_CATEGORIES, changed.system.category ?? this.category)) {
             changed.system.onlyLevel1 = false;
             changed.system.maxTakable = 1;
 
@@ -216,7 +369,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
                 traits.findSplice((t) => t === "lineage");
             }
         } else if ((Array.isArray(traits) && traits.includes("lineage")) || changed.system?.onlyLevel1) {
-            mergeObject(changed, { system: { maxTakable: 1 } });
+            fu.mergeObject(changed, { system: { maxTakable: 1 } });
         }
 
         return super._preUpdate(changed, options, user);
@@ -226,7 +379,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     protected override _onCreate(
         data: FeatSource,
         options: DocumentModificationContext<TParent>,
-        userId: string
+        userId: string,
     ): void {
         super._onCreate(data, options, userId);
 
@@ -245,11 +398,11 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
 
         const slug = this.slug ?? sluggify(this.name);
         const timesTaken = this.actor.itemTypes.feat.filter((f) => f.slug === slug).length;
-        const { maxTakeable } = this;
-        if (maxTakeable === 1 && timesTaken > 1) {
+        const { maxTakable } = this;
+        if (maxTakable === 1 && timesTaken > 1) {
             ui.notifications.warn(game.i18n.format("PF2E.Item.Feat.Warning.TakenMoreThanOnce", actorItemNames));
-        } else if (timesTaken > maxTakeable) {
-            const formatParams = { ...actorItemNames, maxTakeable, timesTaken };
+        } else if (timesTaken > maxTakable) {
+            const formatParams = { ...actorItemNames, maxTakable, timesTaken };
             ui.notifications.warn(game.i18n.format("PF2E.Item.Feat.Warning.TakenMoreThanMax", formatParams));
         }
     }
@@ -258,6 +411,9 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
 interface FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     readonly _source: FeatSource;
     system: FeatSystemData;
+
+    /** Interface alignment with other "attack items" */
+    readonly range?: never;
 }
 
 export { FeatPF2e };

@@ -1,5 +1,13 @@
-import { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemSource } from "@item/data/base.ts";
-import { OneToThree, TraitsWithRarity } from "@module/data.ts";
+import {
+    ActionType,
+    BaseItemSourcePF2e,
+    Frequency,
+    FrequencySource,
+    ItemSystemData,
+    ItemSystemSource,
+    ItemTraits,
+} from "@item/base/data/system.ts";
+import { OneToThree } from "@module/data.ts";
 import { KingmakerCategory, KingmakerTrait } from "./types.ts";
 
 type CampaignFeatureSource = BaseItemSourcePF2e<"campaignFeature", CampaignFeatureSystemSource>;
@@ -28,13 +36,15 @@ interface CampaignFeatureSystemSource extends ItemSystemSource {
     frequency?: FrequencySource;
 }
 
-interface CampaignFeatureSystemData extends CampaignFeatureSystemSource {
+interface CampaignFeatureSystemData
+    extends Omit<CampaignFeatureSystemSource, "description">,
+        Omit<ItemSystemData, "traits"> {
     frequency?: Frequency;
 }
 
-type KingmakerTraits = TraitsWithRarity<KingmakerTrait>;
+type KingmakerTraits = ItemTraits<KingmakerTrait>;
 
-export {
+export type {
     CampaignFeatureSource,
     CampaignFeatureSystemData,
     CampaignFeatureSystemSource,

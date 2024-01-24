@@ -1,6 +1,6 @@
 {
     "_id": "HWLD3zGFBIjCDATo",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Planar Sidestep",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "domain": "all",
@@ -39,19 +44,17 @@
                 "value": 25
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [
                 "arcane",
+                "ardande",
                 "concentrate",
-                "conjuration",
-                "ifrit",
+                "naari",
                 "oread",
                 "suli",
                 "sylph",
+                "talos",
                 "undine"
             ]
         }

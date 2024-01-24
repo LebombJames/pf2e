@@ -1,6 +1,6 @@
 {
     "_id": "513Y2ZSzvm8rijkp",
-    "img": "systems/pf2e/icons/spells/animal-form.webp",
+    "img": "icons/creatures/mammals/wolf-howl-moon-gray.webp",
     "name": "Effect: Fold Form",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -335,9 +340,6 @@
                 "value": 20
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "start": {
             "initiative": null,
             "value": 0

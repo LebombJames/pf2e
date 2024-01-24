@@ -3,12 +3,16 @@ import { FeatPF2e, ItemPF2e } from "@item";
 import type { AncestrySource, AncestrySystemData } from "@item/ancestry/data.ts";
 import type { BackgroundSource, BackgroundSystemData } from "@item/background/data.ts";
 import type { ClassSource, ClassSystemData } from "@item/class/data.ts";
-import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
-import { objectHasKey } from "@util";
+import { Rarity } from "@module/data.ts";
+import { ErrorPF2e, objectHasKey } from "@util";
 import { UUIDUtils } from "@util/uuid.ts";
 
 /** Abstract base class representing a Pathfinder (A)ncestry, (B)ackground, or (C)lass */
 abstract class ABCItemPF2e<TParent extends ActorPF2e | null> extends ItemPF2e<TParent> {
+    get rarity(): Rarity {
+        return this.system.traits.rarity;
+    }
+
     /** Returns all items that should also be deleted should this item be deleted */
     override getLinkedItems(): FeatPF2e<ActorPF2e>[] {
         if (!this.actor || !objectHasKey(this.actor.itemTypes, this.type)) return [];
@@ -23,12 +27,6 @@ abstract class ABCItemPF2e<TParent extends ActorPF2e | null> extends ItemPF2e<TP
         if (!packEntries.length) return [];
 
         const items = (await UUIDUtils.fromUUIDs(entries.map((e) => e.uuid))).map((i) => i.clone());
-        for (const item of items) {
-            if (item instanceof ItemPF2e) {
-                await MigrationRunner.ensureSchemaVersion(item, MigrationList.constructFromVersion(item.schemaVersion));
-            }
-        }
-
         const level = options.level ?? this.parent?.level;
 
         return items.flatMap((item): FeatPF2e<null> | never[] => {
@@ -38,14 +36,14 @@ abstract class ABCItemPF2e<TParent extends ActorPF2e | null> extends ItemPF2e<TP
                     item.updateSource({ "system.level.value": level });
                 }
 
-                if (level !== undefined && level < item.level) {
+                if (typeof level === "number" && level < item.level) {
                     return [];
                 }
 
                 item.updateSource({ system: { location: this.id } });
                 return item;
             } else {
-                console.error("PF2e System | Missing or invalid ABC item");
+                console.error(ErrorPF2e("Missing or invalid ABC item"));
                 return [];
             }
         });

@@ -1,22 +1,27 @@
 import { ActorPF2e, CreaturePF2e } from "@actor";
+import { HitPointsSummary } from "@actor/base.ts";
 import { Language } from "@actor/creature/index.ts";
+import { isReallyPC } from "@actor/helpers.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { ActorSheetDataPF2e, ActorSheetRenderOptionsPF2e } from "@actor/sheet/data-types.ts";
+import { condenseSenses } from "@actor/sheet/helpers.ts";
 import { DistributeCoinsPopup } from "@actor/sheet/popups/distribute-coins-popup.ts";
 import { SKILL_LONG_FORMS } from "@actor/values.ts";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { Bulk } from "@item/physical/index.ts";
 import { PHYSICAL_ITEM_TYPES } from "@item/physical/values.ts";
+import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ValueAndMax, ZeroToFour } from "@module/data.ts";
 import { SheetOptions, createSheetTags } from "@module/sheet/helpers.ts";
 import { eventToRollParams } from "@scripts/sheet-util.ts";
 import { SocketMessage } from "@scripts/socket.ts";
-import { Statistic } from "@system/statistic/index.ts";
-import { addSign, createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, sortBy, sum } from "@util";
+import { InlineRollLinks } from "@scripts/ui/inline-roll-links.ts";
+import { SettingsMenuOptions } from "@system/settings/menu.ts";
+import type { Statistic } from "@system/statistic/index.ts";
+import { createHTMLElement, htmlClosest, htmlQuery, htmlQueryAll, signedInteger } from "@util";
 import * as R from "remeda";
 import { PartyPF2e } from "./document.ts";
-import { InlineRollLinks } from "@scripts/ui/inline-roll-links.ts";
 
 interface PartySheetRenderOptions extends ActorSheetRenderOptionsPF2e {
     actors?: boolean;
@@ -32,7 +37,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
             ...options,
             classes: [...options.classes, "party"],
             width: 720,
-            height: 660,
+            height: 720,
             template: "systems/pf2e/templates/actors/party/sheet.hbs",
             scrollY: [...options.scrollY, ".tab.active", ".tab.active .content", ".sidebar"],
             tabs: [
@@ -52,17 +57,13 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
         explorationSidebar: "exploration-sidebar.hbs",
     };
 
-    override get isLootSheet(): boolean {
-        return this.actor.canUserModify(game.user, "update");
-    }
-
     protected override _getHeaderButtons(): ApplicationHeaderButton[] {
         const buttons = super._getHeaderButtons();
         if (game.user.isGM) {
             buttons.unshift({
                 label: "JOURNAL.ActionShow",
                 class: "show-sheet",
-                icon: "fas fa-eye",
+                icon: "fa-solid fa-eye",
                 onclick: () => {
                     const users = game.users.filter((u) => !u.isSelf);
                     game.socket.emit("system.pf2e", {
@@ -84,27 +85,22 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
         const base = await super.getData(options);
         const members = this.actor.members;
         const canDistributeCoins =
-            game.user.isGM &&
-            this.isEditable &&
-            this.actor.inventory.coins.copperValue > 0 &&
-            members.some(
-                (m) =>
-                    m.hasPlayerOwner &&
-                    m.isOfType("character") &&
-                    !m.system.traits.value.some((t) => ["minion", "eidolon"].includes(t))
-            );
+            game.user.isGM && this.isEditable
+                ? { enabled: this.actor.inventory.coins.copperValue > 0 && members.some(isReallyPC) }
+                : null;
 
         return {
             ...base,
-            restricted: !(game.user.isGM || game.settings.get("pf2e", "metagame_showPartyStats")),
+            playerRestricted: !game.pf2e.settings.metagame.partyStats,
+            restricted: !(game.user.isGM || game.pf2e.settings.metagame.partyStats),
             members: this.#prepareMembers(),
             overviewSummary: this.#prepareOverviewSummary(),
             inventorySummary: {
                 totalCoins:
-                    sum(members.map((actor) => actor.inventory.coins.goldValue ?? 0)) +
+                    R.sumBy(members, (actor) => actor.inventory.coins.goldValue ?? 0) +
                     this.actor.inventory.coins.goldValue,
                 totalWealth:
-                    sum(members.map((actor) => actor.inventory.totalWealth.goldValue ?? 0)) +
+                    R.sumBy(members, (actor) => actor.inventory.totalWealth.goldValue ?? 0) +
                     this.actor.inventory.totalWealth.goldValue,
                 totalBulk: members
                     .map((actor) => actor.inventory.bulk.value)
@@ -115,7 +111,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
                 speed: this.actor.system.attributes.speed.total,
                 activities:
                     Object.entries(CONFIG.PF2E.hexplorationActivities).find(
-                        ([max]) => Number(max) >= this.actor.system.attributes.speed.total
+                        ([max]) => Number(max) >= this.actor.system.attributes.speed.total,
                     )?.[1] ?? 0,
             },
             orphaned: this.actor.items.filter((i) => !i.isOfType(...this.actor.allowedItemTypes)),
@@ -123,18 +119,26 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     }
 
     #prepareMembers(): MemberBreakdown[] {
-        /** sanitize common cases for npc sense types (by removing acuity and range). This should be removed once npcs are refactored */
-        function sanitizeSense(label: string): string {
-            return label
-                .replace(/\((imprecise|precise)\)/gi, "")
-                .replace(/\d+/g, "")
-                .replaceAll("feet", "")
-                .trim();
-        }
-
         return this.actor.members.map((actor): MemberBreakdown => {
             const observer = actor.testUserPermission(game.user, "OBSERVER");
-            const restricted = !(game.settings.get("pf2e", "metagame_showPartyStats") || observer);
+            const restricted = !(game.pf2e.settings.metagame.partyStats || observer);
+            const genderPronouns = actor.isOfType("character")
+                ? actor.system.details.gender.value.trim() || null
+                : null;
+            const blurb =
+                actor.isOfType("character") && actor.ancestry && actor.class
+                    ? game.i18n.format("PF2E.Actor.Character.Blurb", {
+                          level: actor.level,
+                          ancestry: actor.ancestry.name,
+                          class: actor.class.name,
+                      })
+                    : actor.isOfType("familiar") && actor.master
+                      ? game.i18n.format("PF2E.Actor.Familiar.Blurb", { master: actor.master.name })
+                      : actor.isOfType("npc")
+                        ? actor.system.details.blurb.trim() || null
+                        : null;
+            const heroPoints =
+                actor.isOfType("character") && isReallyPC(actor) ? actor.system.resources.heroPoints : null;
             const activities = actor.isOfType("character")
                 ? R.compact(actor.system.exploration.map((id) => actor.items.get(id)))
                 : [];
@@ -144,47 +148,27 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
                 hasBulk: actor.inventory.bulk.encumberedAfter !== Infinity,
                 bestSkills: Object.values(actor.skills ?? {})
                     .filter((s): s is Statistic => !!s?.proficient && !s.lore)
-                    .sort(sortBy((s) => s.mod ?? 0))
-                    .reverse()
+                    .sort((a, b) => (b.mod ?? 0) - (a.mod ?? 0))
                     .slice(0, 4)
                     .map((s) => ({ slug: s.slug, mod: s.mod, label: s.label, rank: s.rank })),
-                heroPoints: actor.isOfType("character") ? actor.system.resources.heroPoints : null,
+                genderPronouns,
+                blurb,
+                heroPoints,
                 owner: actor.isOwner,
                 observer,
                 limited: observer || actor.limited,
                 speeds: [
-                    { label: "PF2E.Speed", value: actor.attributes.speed.value },
-                    ...actor.attributes.speed.otherSpeeds.map((s) => ({
-                        label: s.label,
-                        value: s.value,
-                    })),
+                    { label: "PF2E.Actor.Speed.Label", value: actor.attributes.speed.value },
+                    ...actor.attributes.speed.otherSpeeds.map((s) => R.pick(s, ["label", "value"])),
                 ],
                 senses: (() => {
-                    const rawSenses = actor.system.traits.senses ?? [];
-                    if (!Array.isArray(rawSenses)) {
-                        return rawSenses.value.split(",").map((l) => ({
-                            labelFull: l.trim(),
-                            label: sanitizeSense(l),
-                        }));
-                    }
-
-                    // An actor sometimes has darkvision *and* low-light vision (elf aasimar) instead of just darkvision (fetchling).
-                    // This is inconsistent, but normal for pf2e. However, its redundant for this sheet.
-                    // We remove low-light vision from the result if the actor has darkvision.
-                    const hasDarkvision = rawSenses.some((s) => s.type === "darkvision");
-                    const adjustedSenses = hasDarkvision
-                        ? rawSenses.filter((r) => r.type !== "lowLightVision")
-                        : rawSenses;
-                    return adjustedSenses.map((r) => ({
+                    return condenseSenses(actor.perception.senses.contents).map((r) => ({
                         acuity: r.acuity,
                         labelFull: r.label ?? "",
                         label: CONFIG.PF2E.senses[r.type] ?? r.type,
                     }));
                 })(),
-                hp: {
-                    showValue: observer || !restricted,
-                    ...actor.hitPoints,
-                },
+                hp: actor.hitPoints,
                 activities: activities.map((action) => ({
                     uuid: action.uuid,
                     name: action.name,
@@ -200,7 +184,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
         const members = this.actor.members;
         if (!members.length) return null;
 
-        const allLanguages = new Set(members.flatMap((m) => m.system.traits.languages?.value ?? []));
+        const allLanguages = new Set(members.flatMap((m) => m.system.details.languages?.value ?? []));
         const baseKnowledgeSkills = [
             "arcana",
             "nature",
@@ -215,7 +199,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
             members
                 .flatMap((m) => Object.values(m.skills))
                 .filter((s): s is Statistic => !!s?.lore)
-                .map((s) => s.slug)
+                .map((s) => s.slug),
         );
 
         function getBestSkill(slug: string): SkillData | null {
@@ -231,9 +215,9 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
                         slug,
                         label: game.i18n.localize(CONFIG.PF2E.languages[slug]),
                         actors: this.#getActorsThatUnderstand(slug),
-                    })
+                    }),
                 ),
-                (l) => l.label
+                (l) => l.label,
             ),
             skills: R.sortBy(
                 Array.from(SKILL_LONG_FORMS).map((slug): SkillData => {
@@ -241,7 +225,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
                     const label = game.i18n.localize(CONFIG.PF2E.skillList[slug]);
                     return best ?? { mod: 0, label, slug, rank: 0 };
                 }),
-                (s) => s.label
+                (s) => s.label,
             ),
             knowledge: {
                 regular: R.compact(baseKnowledgeSkills.map(getBestSkill)),
@@ -251,7 +235,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     }
 
     #getActorsThatUnderstand(slug: Language) {
-        return this.actor.members.filter((m): m is CreaturePF2e => !!m?.system.traits.languages?.value.includes(slug));
+        return this.actor.members.filter((m): m is CreaturePF2e => !!m?.system.details.languages?.value.includes(slug));
     }
 
     protected setSummaryView(view: string): void {
@@ -279,6 +263,16 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
         super.activateListeners($html);
         const html = $html[0];
 
+        // Show metagame option if clicked
+        htmlQuery(html, "a[data-action=open-meta-setting]")?.addEventListener("click", () => {
+            const menu = game.settings.menus.get("pf2e.metagame");
+            if (menu) {
+                const options: Partial<SettingsMenuOptions> = { highlightSetting: "showPartyStats" };
+                const app = new menu.type(undefined, options);
+                app.render(true);
+            }
+        });
+
         // Enable all roll actions
         for (const rollLink of htmlQueryAll(html, "[data-action=roll]")) {
             const actorUUID = htmlClosest(rollLink, "[data-actor-uuid]")?.dataset.actorUuid;
@@ -288,7 +282,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
             rollLink.addEventListener("click", (event) => {
                 const rollMode = rollLink.dataset.secret ? (game.user.isGM ? "gmroll" : "blindroll") : undefined;
                 const statistic = actor.getStatistic(rollLink.dataset.statistic ?? "");
-                statistic?.roll({ ...eventToRollParams(event), rollMode });
+                statistic?.roll({ ...eventToRollParams(event, { type: "check" }), rollMode });
             });
         }
 
@@ -360,7 +354,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
             const labels = R.sortBy(statistics, (s) => s.mod).map((statistic) => {
                 const rank = statistic.rank ?? (statistic.proficient ? 1 : 0);
                 const prof = game.i18n.localize(CONFIG.PF2E.proficiencyLevels[rank]);
-                const label = `${statistic.actor.name} (${prof}) ${addSign(statistic.mod)}`;
+                const label = `${statistic.actor.name} (${prof}) ${signedInteger(statistic.mod)}`;
                 const row = createHTMLElement("div", { children: [label] });
                 row.style.textAlign = "right";
                 return row;
@@ -377,8 +371,10 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
 
             const rollData = document.getRollData();
             (async () => {
-                const content = createHTMLElement("div", { classes: ["item-summary"] });
-                content.innerHTML = await TextEditor.enrichHTML(document.description, { async: true, rollData });
+                const content = createHTMLElement("div", {
+                    classes: ["item-summary"],
+                    innerHTML: await TextEditor.enrichHTML(document.description, { async: true, rollData }),
+                });
                 InlineRollLinks.listen(content, document);
                 $(activityElem).tooltipster({
                     contentAsHTML: true,
@@ -403,11 +399,15 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
         htmlQuery(html, "[data-action=rest]")?.addEventListener("click", (event) => {
             game.pf2e.actions.restForTheNight({ event, actors: this.actor.members });
         });
+
+        htmlQuery(html, "[data-action=prompt]")?.addEventListener("click", () => {
+            game.pf2e.gm.checkPrompt({ actors: this.actor.members });
+        });
     }
 
     /** Overriden to prevent inclusion of campaign-only item types. Those should get added to their own sheet */
     protected override async _onDropItemCreate(
-        itemData: ItemSourcePF2e | ItemSourcePF2e[]
+        itemData: ItemSourcePF2e | ItemSourcePF2e[],
     ): Promise<Item<PartyPF2e>[]> {
         const toTest = Array.isArray(itemData) ? itemData : [itemData];
         const supported = [...PHYSICAL_ITEM_TYPES, ...this.actor.baseAllowedItemTypes];
@@ -421,6 +421,32 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
         }
 
         return super._onDropItemCreate(itemData);
+    }
+
+    /** Override to allow divvying/outward transfer of items via party member blocks in inventory members sidebar. */
+    protected override async _onDropItem(
+        event: DragEvent,
+        data: DropCanvasItemDataPF2e & { fromInventory?: boolean },
+    ): Promise<ItemPF2e[]> {
+        const droppedRegion = htmlClosest(event.target, "[data-region]")?.dataset.region;
+        const targetActor = htmlClosest(event.target, "[data-actor-uuid]")?.dataset.actorUuid;
+        if (droppedRegion === "inventoryMembers" && targetActor) {
+            const item = await ItemPF2e.fromDropData(data);
+            if (!item) return [];
+            const actorUuid = fu.parseUuid(targetActor).documentId;
+            if (actorUuid && item.actor && item.isOfType("physical")) {
+                await this.moveItemBetweenActors(
+                    event,
+                    item.actor.id,
+                    item.actor.token?.id ?? null,
+                    actorUuid,
+                    null,
+                    item.id,
+                );
+                return [item];
+            }
+        }
+        return super._onDropItem(event, data);
     }
 
     /** Override to not auto-disable fields on a thing meant to be used by players */
@@ -460,7 +486,7 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
 
     protected override async _renderInner(
         data: Record<string, unknown>,
-        options: RenderOptions
+        options: RenderOptions,
     ): Promise<JQuery<HTMLElement>> {
         const result = await super._renderInner(data, options);
         await this.#renderRegions(result[0], data);
@@ -469,8 +495,8 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
     }
 
     protected override async _onDropActor(
-        event: ElementDragEvent,
-        data: DropCanvasData<"Actor", PartyPF2e>
+        event: DragEvent,
+        data: DropCanvasData<"Actor", PartyPF2e>,
     ): Promise<false | void> {
         await super._onDropActor(event, data);
 
@@ -482,6 +508,9 @@ class PartySheetPF2e extends ActorSheetPF2e<PartyPF2e> {
 }
 
 interface PartySheetData extends ActorSheetDataPF2e<PartyPF2e> {
+    /** Is the sheet restricted to players? */
+    playerRestricted: boolean;
+    /** Is the sheet restricted to the current user? */
     restricted: boolean;
     members: MemberBreakdown[];
     overviewSummary: {
@@ -514,6 +543,8 @@ interface SkillData {
 
 interface MemberBreakdown {
     actor: ActorPF2e;
+    genderPronouns: string | null;
+    blurb: string | null;
     heroPoints: ValueAndMax | null;
     hasBulk: boolean;
     bestSkills: SkillData[];
@@ -527,7 +558,7 @@ interface MemberBreakdown {
 
     speeds: { label: string; value: number }[];
     senses: { label: string | null; labelFull: string; acuity?: string }[];
-    hp: { showValue: boolean; temp: number; value: number; max: number };
+    hp: HitPointsSummary;
 
     activities: {
         uuid: string;
@@ -546,4 +577,4 @@ interface LanguageSheetData {
     actors: ActorPF2e[];
 }
 
-export { PartySheetPF2e, PartySheetRenderOptions };
+export { PartySheetPF2e, type PartySheetRenderOptions };

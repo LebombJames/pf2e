@@ -1,6 +1,6 @@
 {
     "_id": "W3BCLbX6j1IqL0uB",
-    "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/slippers-of-spider-climbing.webp",
+    "img": "icons/equipment/feet/boots-collared-leather-white.webp",
     "name": "Effect: Slippers of Spider Climbing",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 7
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -22,9 +27,6 @@
                 "value": 20
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

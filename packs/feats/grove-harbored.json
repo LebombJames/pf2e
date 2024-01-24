@@ -1,6 +1,6 @@
 {
     "_id": "CWt2iIVRra0K3vT7",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Grove-Harbored",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -51,9 +56,6 @@
                 "type": "save"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "GstmxSP75eKmHtCQ",
-    "img": "systems/pf2e/icons/spells/cloudkill.webp",
+    "img": "icons/creatures/slimes/slime-movement-splash-green.webp",
     "name": "Effect: Hallucinogenic Pollen (Failure)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #151: The Show Must Go On"
         },
         "rules": [
             {
@@ -32,9 +37,6 @@
                 "value": -2
             }
         ],
-        "source": {
-            "value": "Pathfinder #151: The Show Must Go On"
-        },
         "start": {
             "initiative": null,
             "value": 0

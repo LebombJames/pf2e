@@ -1,20 +1,19 @@
 import { ActorPF2e } from "@actor";
 import { InitiativeData } from "@actor/data/base.ts";
-import { ImmunityData } from "@actor/data/iwr.ts";
+import { Immunity } from "@actor/data/iwr.ts";
 import { setHitPointsRollOptions, strikeFromMeleeItem } from "@actor/helpers.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { SaveType } from "@actor/types.ts";
 import { SAVE_TYPES } from "@actor/values.ts";
 import { ConditionPF2e } from "@item";
-import { ItemType } from "@item/data/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
 import { Rarity } from "@module/data.ts";
-import { extractModifiers } from "@module/rules/helpers.ts";
 import { TokenDocumentPF2e } from "@scene/index.ts";
 import { DamageType } from "@system/damage/index.ts";
-import { ArmorStatistic } from "@system/statistic/armor-class.ts";
-import { Statistic } from "@system/statistic/index.ts";
+import { ArmorStatistic, Statistic } from "@system/statistic/index.ts";
 import { isObject, objectHasKey } from "@util";
+import * as R from "remeda";
 import { HazardSource, HazardSystemData } from "./data.ts";
 
 class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
@@ -52,16 +51,23 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
             : !!game.combats.active?.started && game.combats.active.combatants.some((c) => c.actor === this);
     }
 
-    /** Hazards without hit points are unaffected by damage */
     override isAffectedBy(effect: DamageType | ConditionPF2e): boolean {
+        // Hazards without hit points are unaffected by damage
         const damageType = objectHasKey(CONFIG.PF2E.damageTypes, effect)
             ? effect
             : isObject(effect)
-            ? effect.system.persistent?.damageType ?? null
-            : null;
+              ? effect.system.persistent?.damageType ?? null
+              : null;
 
         if (!this.system.attributes.hasHealth && damageType) {
             return false;
+        }
+
+        // Some hazard are implicitly subject to vitality or void damage despite being neither living nor undead:
+        // use a weakness or resistance as an indication
+        const { weaknesses, resistances } = this.system.attributes;
+        if (damageType && ["vitality", "void"].includes(damageType)) {
+            return weaknesses.some((w) => w.type === damageType) || resistances.some((r) => r.type === damageType);
         }
 
         return super.isAffectedBy(effect);
@@ -76,17 +82,14 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
         attributes.hasHealth = attributes.hp.max > 0;
         // Hazards have object immunities (CRB p. 273): can be overridden by Immunity rule element
         if (!attributes.immunities.some((i) => i.type === "object-immunities")) {
-            attributes.immunities.unshift(
-                new ImmunityData({ type: "object-immunities", source: "TYPES.Actor.hazard" })
-            );
+            attributes.immunities.unshift(new Immunity({ type: "object-immunities", source: "TYPES.Actor.hazard" }));
         }
 
         if (this.isComplex) {
             // Ensure stealth value is numeric and set baseline initiative data
             attributes.stealth.value ??= 0;
-            const partialAttributes: { initiative?: Pick<InitiativeData, "statistic" | "tiebreakPriority"> } =
-                this.system.attributes;
-            partialAttributes.initiative = {
+            const withPartialInitiative: { initiative?: Partial<InitiativeData> } = this.system;
+            withPartialInitiative.initiative = {
                 statistic: "stealth",
                 tiebreakPriority: this.hasPlayerOwner ? 2 : 1,
             };
@@ -98,13 +101,11 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
     override prepareDerivedData(): void {
         super.prepareDerivedData();
 
-        const { system } = this;
-
         this.prepareSynthetics();
-
         setHitPointsRollOptions(this);
 
         // Stealth, which is the only skill hazards have
+        const system = this.system;
         this.skills = {
             stealth: new Statistic(this, {
                 slug: "stealth",
@@ -121,11 +122,19 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
                 check: { type: "skill-check" },
             }),
         };
+        const stealthSource = this._source.system.attributes.stealth;
+        this.system.attributes.stealth = fu.mergeObject(this.skills.stealth.getTraceData(), {
+            details: stealthSource.details.trim(),
+        });
+        if (stealthSource.value === null) {
+            const traceData = this.system.attributes.stealth;
+            traceData.value = traceData.dc = traceData.totalModifier = null;
+        }
 
         // Initiative
-        if (system.attributes.initiative) {
-            this.initiative = new ActorInitiative(this);
-            system.attributes.initiative = this.initiative.getTraceData();
+        if (system.initiative) {
+            this.initiative = new ActorInitiative(this, R.pick(system.initiative, ["statistic", "tiebreakPriority"]));
+            system.initiative = this.initiative.getTraceData();
         }
 
         // Armor Class
@@ -144,37 +153,58 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
         this.system.actions = this.itemTypes.melee.map((m) => strikeFromMeleeItem(m));
     }
 
-    protected prepareSaves(): { [K in SaveType]?: Statistic } {
+    /**
+     * Some hazards have an implicit immunity exception to certain damage types despite having object immunities: use a
+     * weakness or resistance as indication.
+     */
+    override prepareData(): void {
+        super.prepareData();
+
+        const weaknessesAndResistances = new Set(
+            [
+                this.system.attributes.weaknesses.map((w) => w.type),
+                this.system.attributes.resistances.map((r) => r.type),
+            ].flat(),
+        );
+        const objectImmunities = this.system.attributes.immunities.find((i) => i.type === "object-immunities");
+        for (const wrType of ["bleed", "mental", "poison", "spirit"] as const) {
+            if (weaknessesAndResistances.has(wrType)) {
+                objectImmunities?.exceptions.push(wrType);
+            }
+        }
+    }
+
+    private prepareSaves(): { [K in SaveType]?: Statistic } {
         const { system } = this;
 
         // Saving Throws
         return SAVE_TYPES.reduce((saves: { [K in SaveType]?: Statistic }, saveType) => {
             const save = system.saves[saveType];
-            const saveName = game.i18n.localize(CONFIG.PF2E.saves[saveType]);
+            const label = game.i18n.localize(CONFIG.PF2E.saves[saveType]);
             const base = save.value;
-            const ability = CONFIG.PF2E.savingThrowDefaultAbilities[saveType];
 
             // Saving Throws with a value of 0 are not usable by the hazard
             // Later on we'll need to explicitly check for null, since 0 is supposed to be valid
             if (!base) return saves;
 
-            const selectors = [saveType, `${ability}-based`, "saving-throw", "all"];
-            const stat = new Statistic(this, {
+            const statistic = new Statistic(this, {
                 slug: saveType,
-                label: saveName,
-                domains: selectors,
+                label,
+                attribute: CONFIG.PF2E.savingThrowDefaultAttributes[saveType],
+                domains: [saveType, "saving-throw"],
                 modifiers: [
-                    new ModifierPF2e("PF2E.BaseModifier", base, "untyped"),
-                    ...extractModifiers(this.synthetics, selectors),
+                    new ModifierPF2e({
+                        slug: "base",
+                        label: "PF2E.ModifierTitle",
+                        modifier: base,
+                    }),
                 ],
-                check: {
-                    type: "saving-throw",
-                },
+                check: { type: "saving-throw" },
             });
 
-            mergeObject(this.system.saves[saveType], stat.getTraceData());
+            this.system.saves[saveType] = fu.mergeObject(save, statistic.getTraceData());
+            saves[saveType] = statistic;
 
-            saves[saveType] = stat;
             return saves;
         }, {});
     }

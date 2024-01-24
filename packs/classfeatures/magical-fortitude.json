@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.fortitude.rank",
-                "value": 2
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "fortitude": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

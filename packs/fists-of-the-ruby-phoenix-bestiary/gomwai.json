@@ -9,18 +9,18 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.FNDq4NFSN0g2HKWO"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/handwraps-of-mighty-blows.webp",
+            "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
             "name": "+1 Striking Handwraps of Mighty Blows",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": null,
                 "bonus": {
                     "value": 1
                 },
                 "bonusDamage": {
+                    "value": 0
+                },
+                "bulk": {
                     "value": 0
                 },
                 "category": "unarmed",
@@ -39,9 +39,6 @@
                     "inSlot": false,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "brawling",
                 "hardness": 0,
                 "hp": {
@@ -51,34 +48,19 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -86,17 +68,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "handwraps-of-mighty-blows",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": null
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -106,15 +86,11 @@
                         "invested",
                         "magical",
                         "nonlethal",
-                        "transmutation",
                         "unarmed"
                     ]
                 },
                 "usage": {
                     "value": "worngloves"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "weapon"
@@ -131,6 +107,9 @@
             "sort": 200000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>These stiff leather armguards grant you a +1 item bonus to AC and saving throws, and a maximum Dexterity modifier of +5. You can affix talismans to <em>bracers of armor</em> as though they were light armor.</p>"
@@ -140,9 +119,6 @@
                     "inSlot": false,
                     "invested": false
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -151,19 +127,19 @@
                 "level": {
                     "value": 8
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 450
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [
@@ -186,23 +162,15 @@
                 ],
                 "size": "med",
                 "slug": "bracers-of-armor-i",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "abjuration",
                         "invested",
                         "magical"
                     ]
                 },
                 "usage": {
                     "value": "wornbracers"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -231,11 +199,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -275,23 +245,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -312,25 +275,18 @@
                 "description": {
                     "value": "<p>Gomwai makes two Strikes with his fist. If both hit the same creature, combine their damage for the purpose of resistances and weaknesses.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "flourish"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -351,23 +307,16 @@
                 "description": {
                     "value": "<p>Gomwai can replace one or both of his attacks during a Flurry of Blows with @UUID[Compendium.pf2e.actionspf2e.Item.Grapple]{Grapples}, @UUID[Compendium.pf2e.actionspf2e.Item.Shove]{Shoves}, or @UUID[Compendium.pf2e.actionspf2e.Item.Trip]{Trips}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -388,23 +337,16 @@
                 "description": {
                     "value": "<p>Gomwai's fist Strikes are treated as cold iron and silver and don't take penalties when making lethal attacks.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -425,25 +367,18 @@
                 "description": {
                     "value": "<p>When Gomwai targets the same creature with two Strikes from his Flurry of Blows, he can try to stun the creature. If either Strike hits and deals damage, the target must succeed at a @Check[type:fortitude|dc:30] save or be @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1} (or @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 3} on a critical failure).</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "incapacitation"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -463,11 +398,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -486,11 +423,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -509,11 +448,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -532,11 +473,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -555,11 +498,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -600,31 +545,43 @@
                 "temp": 0,
                 "value": 235
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 21
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "LN"
-            },
             "blurb": "Male hobgoblin tournament enforcer",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "goblin",
+                    "taldane",
+                    "tien"
+                ]
+            },
             "level": {
                 "value": 12
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #166: Despair on Danger Island"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #166: Despair on Danger Island"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 21,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -642,28 +599,14 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "goblin",
-                    "taldane",
-                    "tien"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
                 "goblin",
-                "humanoid"
+                "humanoid",
+                "lawful"
             ]
         }
     },

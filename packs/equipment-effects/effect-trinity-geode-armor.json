@@ -1,6 +1,6 @@
 {
     "_id": "oqwrw6XztVlS9tEG",
-    "img": "systems/pf2e/icons/equipment/other/spellhearts/trinity-geode.webp",
+    "img": "icons/commodities/gems/gem-rough-pendeloque-blue.webp",
     "name": "Effect: Trinity Geode - Armor",
     "system": {
         "description": {
@@ -15,15 +15,20 @@
         "level": {
             "value": 3
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
                 "choices": [
                     {
-                        "label": "PF2E.SpellCantripLabel",
+                        "label": "PF2E.TraitCantrip",
                         "value": 1
                     },
                     {
-                        "label": "PF2E.SpellNonCantripLabel",
+                        "label": "PF2E.SpecificRule.Label.NonCantrip",
                         "value": 2
                     }
                 ],
@@ -41,9 +46,6 @@
                 "value": "{item|flags.pf2e.rulesSelections.spellCategory}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

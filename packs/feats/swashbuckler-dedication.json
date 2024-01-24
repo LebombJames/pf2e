@@ -1,6 +1,6 @@
 {
     "_id": "eAlrvPVb8qt8Lruw",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Swashbuckler Dedication",
     "system": {
         "actionType": {
@@ -19,12 +19,17 @@
         "prerequisites": {
             "value": [
                 {
-                    "value": "Charisma 14"
+                    "value": "Charisma +2"
                 },
                 {
-                    "value": "Dexterity 14"
+                    "value": "Dexterity +2"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -80,21 +85,15 @@
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.classfeatures.Item.Panache"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "system.proficiencies.classDCs.swashbuckler",
-                "priority": 39,
-                "value": {
-                    "ability": "dex",
-                    "label": "PF2E.TraitSwashbuckler",
+            }
+        ],
+        "subfeatures": {
+            "proficiencies": {
+                "swashbuckler": {
+                    "attribute": "dex",
                     "rank": 1
                 }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
         },
         "traits": {
             "rarity": "common",

@@ -1,6 +1,6 @@
 {
     "_id": "5KXJkEs39y1gaPEm",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Stargazer's Eyes",
     "system": {
         "actionType": {
@@ -24,32 +24,26 @@
                 }
             ]
         },
-        "rules": [
-            {
-                "key": "Sense",
-                "selector": "lowLightVision"
-            },
-            {
-                "key": "Sense",
-                "predicate": [
-                    "feat:stargazers-eyes:2"
-                ],
-                "selector": "darkvision"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "add",
-                "path": "flags.pf2e.feats.stargazersEyes.count",
-                "value": 1
-            },
-            {
-                "domain": "all",
-                "key": "RollOption",
-                "option": "feat:stargazers-eyes:{actor|flags.pf2e.feats.stargazersEyes.count}"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #187: The Seventh Arch"
+        },
+        "rules": [],
+        "subfeatures": {
+            "senses": {
+                "darkvision": {
+                    "special": {
+                        "ancestry": false,
+                        "llv": true,
+                        "second": true
+                    }
+                },
+                "low-light-vision": {
+                    "acuity": "imprecise",
+                    "range": 30
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder #187: The Seventh Arch"
         },
         "traits": {
             "rarity": "common",

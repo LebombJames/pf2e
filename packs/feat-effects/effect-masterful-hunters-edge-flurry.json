@@ -1,6 +1,6 @@
 {
     "_id": "4UNQfMrwfWirdwoV",
-    "img": "systems/pf2e/icons/features/classes/flurry.webp",
+    "img": "icons/skills/melee/strike-polearm-light-orange.webp",
     "name": "Effect: Masterful Hunter's Edge, Flurry",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 17
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -70,7 +75,7 @@
                             "value": 2
                         }
                     ],
-                    "field": "actor|system.attributes.perception.rank"
+                    "field": "actor|system.perception.rank"
                 }
             },
             {
@@ -106,9 +111,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 3648

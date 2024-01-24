@@ -1,15 +1,27 @@
 import { KitPF2e, PhysicalItemPF2e } from "@item";
 import { ActionCategory, ActionTrait } from "@item/ability/index.ts";
-import { ActionType } from "@item/data/base.ts";
+import { ActionType, ItemType } from "@item/base/data/index.ts";
+import { PHYSICAL_ITEM_TYPES } from "@item/physical/values.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/index.ts";
-import { UserPF2e } from "@module/user/document.ts";
-import { ErrorPF2e, htmlQuery, htmlQueryAll, isBlank, isObject, localizer, objectHasKey, sluggify } from "@util";
-import { getSelectedOrOwnActors } from "@util/token-actor-utils.ts";
+import type { UserPF2e } from "@module/user/document.ts";
+import {
+    ErrorPF2e,
+    createHTMLElement,
+    fontAwesomeIcon,
+    htmlClosest,
+    htmlQuery,
+    htmlQueryAll,
+    isObject,
+    localizer,
+    objectHasKey,
+    setHasElement,
+} from "@util";
+import { getSelectedActors } from "@util/token-actor-utils.ts";
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
 import * as R from "remeda";
-import { Progress } from "../../system/progress.ts";
-import { BrowserTabs, PackInfo, SortDirection, SourceInfo, TabData, TabName } from "./data.ts";
+import { BrowserTabs, PackInfo, SourceInfo, TabData, TabName } from "./data.ts";
+import { PackLoader } from "./loader.ts";
 import {
     ActionFilters,
     BestiaryFilters,
@@ -18,203 +30,16 @@ import {
     EquipmentFilters,
     FeatFilters,
     HazardFilters,
-    RangesData,
+    RangesInputData,
     RenderResultListOptions,
     SliderData,
     SpellFilters,
 } from "./tabs/data.ts";
 import * as browserTabs from "./tabs/index.ts";
 
-class PackLoader {
-    loadedPacks: {
-        Actor: Record<string, { pack: CompendiumCollection; index: CompendiumIndex } | undefined>;
-        Item: Record<string, { pack: CompendiumCollection; index: CompendiumIndex } | undefined>;
-    } = { Actor: {}, Item: {} };
-
-    loadedSources: string[] = [];
-    sourcesSettings: CompendiumBrowserSources;
-
-    constructor() {
-        this.sourcesSettings = game.settings.get("pf2e", "compendiumBrowserSources");
-    }
-
-    async *loadPacks(
-        documentType: "Actor" | "Item",
-        packs: string[],
-        indexFields: string[]
-    ): AsyncGenerator<{ pack: CompendiumCollection<CompendiumDocument>; index: CompendiumIndex }, void, unknown> {
-        this.loadedPacks[documentType] ??= {};
-        const localize = localizer("PF2E.ProgressBar");
-        const sources = this.#getSources();
-
-        const progress = new Progress({ max: packs.length });
-        for (const packId of packs) {
-            let data = this.loadedPacks[documentType][packId];
-            if (data) {
-                const { pack } = data;
-                progress.advance({ label: localize("LoadingPack", { pack: pack?.metadata.label ?? "" }) });
-            } else {
-                const pack = game.packs.get(packId);
-                if (!pack) {
-                    progress.advance();
-                    continue;
-                }
-                progress.advance({ label: localize("LoadingPack", { pack: pack.metadata.label }) });
-                if (pack.documentName === documentType) {
-                    const index = await pack.getIndex({ fields: indexFields });
-                    const firstResult: Partial<CompendiumIndexData> = index.contents.at(0) ?? {};
-                    // Every result should have the "system" property otherwise the indexFields were wrong for that pack
-                    if (firstResult.system) {
-                        const filteredIndex = this.#createFilteredIndex(index, sources);
-                        this.#setModuleArt(packId, filteredIndex);
-                        data = { pack, index: filteredIndex };
-                        this.loadedPacks[documentType][packId] = data;
-                    } else {
-                        ui.notifications.warn(
-                            game.i18n.format("PF2E.BrowserWarnPackNotLoaded", { pack: pack.collection })
-                        );
-                        continue;
-                    }
-                } else {
-                    continue;
-                }
-            }
-
-            yield data;
-        }
-        progress.close({ label: localize("LoadingComplete") });
-    }
-
-    /** Set art provided by a module if any is available */
-    #setModuleArt(packName: string, index: CompendiumIndex): void {
-        if (!packName.startsWith("pf2e.")) return;
-        for (const record of index) {
-            const uuid: CompendiumUUID = `Compendium.${packName}.${record._id}`;
-            const actorArt = game.pf2e.system.moduleArt.map.get(uuid)?.img;
-            record.img = actorArt ?? record.img;
-        }
-    }
-
-    #getSources(): Set<string> {
-        const sources = new Set<string>();
-        for (const source of Object.values(this.sourcesSettings.sources)) {
-            if (source?.load) {
-                sources.add(source.name);
-            }
-        }
-        return sources;
-    }
-
-    #createFilteredIndex(index: CompendiumIndex, sources: Set<string>): CompendiumIndex {
-        if (sources.size === 0) {
-            // Make sure everything works as before as long as the settings are not yet defined
-            return index;
-        }
-
-        if (game.user.isGM && this.sourcesSettings.ignoreAsGM) {
-            return index;
-        }
-
-        const filteredIndex: CompendiumIndex = new Collection<CompendiumIndexData>();
-        const knownSources = Object.values(this.sourcesSettings.sources).map((value) => value?.name);
-
-        for (const document of index) {
-            const source = this.#getSourceFromDocument(document);
-            const blank = isBlank(source);
-
-            if (
-                (blank && this.sourcesSettings.showEmptySources) ||
-                sources.has(source) ||
-                (this.sourcesSettings.showUnknownSources && !blank && !knownSources.includes(source))
-            ) {
-                filteredIndex.set(document._id, document);
-            }
-        }
-        return filteredIndex;
-    }
-
-    async updateSources(packs: string[]): Promise<void> {
-        await this.#loadSources(packs);
-
-        for (const source of this.loadedSources) {
-            const slug = sluggify(source);
-            if (this.sourcesSettings.sources[slug] === undefined) {
-                this.sourcesSettings.sources[slug] = {
-                    load: this.sourcesSettings.showUnknownSources,
-                    name: source,
-                };
-            }
-        }
-
-        // Make sure it can be easily displayed sorted
-        this.sourcesSettings.sources = Object.fromEntries(
-            Object.entries(this.sourcesSettings.sources).sort((a, b) => a[0].localeCompare(b[0], game.i18n.lang))
-        );
-    }
-
-    async #loadSources(packs: string[]): Promise<void> {
-        const localize = localizer("PF2E.ProgressBar");
-        const progress = new Progress({ max: packs.length });
-
-        const loadedSources = new Set<string>();
-        const indexFields = ["system.details.source.value", "system.source.value"];
-        const knownDocumentTypes = ["Actor", "Item"];
-
-        for (const packId of packs) {
-            const pack = game.packs.get(packId);
-            if (!pack || !knownDocumentTypes.includes(pack.documentName)) {
-                progress.advance();
-                continue;
-            }
-            progress.advance({ label: localize("LoadingPack", { pack: pack?.metadata.label ?? "" }) });
-            const index = await pack.getIndex({ fields: indexFields });
-
-            for (const element of index) {
-                const source = this.#getSourceFromDocument(element);
-                if (source && source !== "") {
-                    loadedSources.add(source);
-                }
-            }
-        }
-
-        progress.close({ label: localize("LoadingComplete") });
-        const loadedSourcesArray = Array.from(loadedSources).sort();
-        this.loadedSources = loadedSourcesArray;
-    }
-
-    #getSourceFromDocument(document: CompendiumIndexData): string {
-        // There are two possible fields where the source can be, check them in order
-        if (document.system?.details?.source?.value) {
-            return document.system.details.source.value;
-        }
-
-        if (document.system?.source?.value) {
-            return document.system.source.value;
-        }
-
-        return "";
-    }
-
-    reset(): void {
-        this.loadedPacks = { Actor: {}, Item: {} };
-        this.loadedSources = [];
-    }
-
-    async hardReset(packs: string[]): Promise<void> {
-        this.reset();
-        this.sourcesSettings = {
-            ignoreAsGM: true,
-            showEmptySources: true,
-            showUnknownSources: true,
-            sources: {},
-        };
-        await this.updateSources(packs);
-    }
-}
-
 class CompendiumBrowser extends Application {
     settings: CompendiumBrowserSettings;
-    dataTabsList = ["action", "bestiary", "equipment", "feat", "hazard", "spell"] as const;
+    dataTabsList = ["action", "bestiary", "campaignFeature", "equipment", "feat", "hazard", "spell"] as const;
     navigationTab: Tabs;
     tabs: BrowserTabs;
 
@@ -229,6 +54,7 @@ class CompendiumBrowser extends Application {
         this.tabs = {
             action: new browserTabs.Actions(this),
             bestiary: new browserTabs.Bestiary(this),
+            campaignFeature: new browserTabs.CampaignFeatures(this),
             equipment: new browserTabs.Equipment(this),
             feat: new browserTabs.Feats(this),
             hazard: new browserTabs.Hazards(this),
@@ -290,14 +116,17 @@ class CompendiumBrowser extends Application {
         const settings: Omit<TabData<Record<string, PackInfo | undefined>>, "settings"> = {
             action: {},
             bestiary: {},
+            campaignFeature: {},
             hazard: {},
             equipment: {},
             feat: {},
             spell: {},
         };
 
-        // NPCs and Hazards are all loaded by default other packs can be set here.
+        // NPCs and Hazards are all loaded by default, other packs can be set here.
         const loadDefault: Record<string, boolean | undefined> = {
+            bestiary: true,
+            hazard: true,
             "pf2e.actionspf2e": true,
             "pf2e.familiar-abilities": true,
             "pf2e.equipment-srd": true,
@@ -305,57 +134,44 @@ class CompendiumBrowser extends Application {
             "pf2e.classfeatures": true,
             "pf2e.feats-srd": true,
             "pf2e.spells-srd": true,
+            "pf2e.kingmaker-features": true,
         };
 
+        const browsableTypes = new Set([
+            "action",
+            "campaignFeature",
+            "feat",
+            "kit",
+            "hazard",
+            "npc",
+            "spell",
+            ...PHYSICAL_ITEM_TYPES,
+        ] as const);
+        type BrowsableType = SetElement<typeof browsableTypes>;
+        const typeToTab = new Map<ItemType | "hazard" | "npc", Exclude<TabName, "settings">>([
+            ["action", "action"],
+            ["campaignFeature", "campaignFeature"],
+            ["feat", "feat"],
+            ["kit", "equipment"],
+            ["hazard", "hazard"],
+            ["npc", "bestiary"],
+            ["spell", "spell"],
+            ...Array.from(PHYSICAL_ITEM_TYPES).map((t): [ItemType, "equipment"] => [t, "equipment"]),
+        ]);
+
         for (const pack of game.packs) {
-            const types = new Set(pack.index.map((entry) => entry.type));
-            if (types.size === 0) continue;
+            const tabNames = R.uniq(
+                R.uniq(pack.index.map((entry) => entry.type))
+                    .filter((t): t is BrowsableType => setHasElement(browsableTypes, t))
+                    .flatMap((t) => typeToTab.get(t) ?? []),
+            );
 
-            if (types.has("npc")) {
-                const load = this.settings.bestiary?.[pack.collection]?.load ?? true;
-                settings.bestiary![pack.collection] = {
-                    load,
-                    name: pack.metadata.label,
-                    package: pack.metadata.packageName,
-                };
-            }
-            if (types.has("hazard")) {
-                const load = this.settings.hazard?.[pack.collection]?.load ?? true;
-                settings.hazard![pack.collection] = {
-                    load,
-                    name: pack.metadata.label,
-                    package: pack.metadata.packageName,
-                };
-            }
-
-            if (types.has("action")) {
-                const load = this.settings.action?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
-                settings.action![pack.collection] = {
-                    load,
-                    name: pack.metadata.label,
-                    package: pack.metadata.packageName,
-                };
-            } else if (
-                ["weapon", "armor", "equipment", "consumable", "treasure", "backpack", "kit"].some((type) =>
-                    types.has(type)
-                )
-            ) {
-                const load = this.settings.equipment?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
-                settings.equipment![pack.collection] = {
-                    load,
-                    name: pack.metadata.label,
-                    package: pack.metadata.packageName,
-                };
-            } else if (types.has("feat")) {
-                const load = this.settings.feat?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
-                settings.feat![pack.collection] = {
-                    load,
-                    name: pack.metadata.label,
-                    package: pack.metadata.packageName,
-                };
-            } else if (types.has("spell")) {
-                const load = this.settings.spell?.[pack.collection]?.load ?? !!loadDefault[pack.collection];
-                settings.spell![pack.collection] = {
+            for (const tabName of tabNames) {
+                const load =
+                    this.settings[tabName]?.[pack.collection]?.load ??
+                    loadDefault[tabName] ??
+                    !!loadDefault[pack.collection];
+                settings[tabName]![pack.collection] = {
                     load,
                     name: pack.metadata.label,
                     package: pack.metadata.packageName,
@@ -367,7 +183,7 @@ class CompendiumBrowser extends Application {
             settings[tab] = Object.fromEntries(
                 Object.entries(settings[tab]!).sort(([_collectionA, dataA], [_collectionB, dataB]) => {
                     return (dataA?.name ?? "") > (dataB?.name ?? "") ? 1 : -1;
-                })
+                }),
             );
         }
 
@@ -421,25 +237,30 @@ class CompendiumBrowser extends Application {
         actionTab.open(filter);
     }
 
-    async openSpellTab(entry: BaseSpellcastingEntry, maxLevel = 10): Promise<void> {
+    async openSpellTab(entry: BaseSpellcastingEntry, maxRank = 10, category: string | null = null): Promise<void> {
         const spellTab = this.tabs.spell;
         const filter = await spellTab.getFilterData();
-        const { category, level, traditions } = filter.checkboxes;
+        const { traditions } = filter.checkboxes;
 
-        if (entry.isRitual || entry.isFocusPool) {
-            category.options[entry.category].selected = true;
-            category.selected.push(entry.category);
+        if (category && filter.checkboxes.category.options[category]) {
+            filter.checkboxes.category.options[category].selected = true;
+            filter.checkboxes.category.selected.push(category);
         }
 
-        if (maxLevel) {
-            const levels = Array.from(Array(maxLevel).keys()).map((l) => String(l + 1));
-            for (const l of levels) {
-                level.options[l].selected = true;
-                level.selected.push(l);
+        if (entry.isRitual || entry.isFocusPool) {
+            filter.checkboxes.category.options[entry.category].selected = true;
+            filter.checkboxes.category.selected.push(entry.category);
+        }
+
+        if (maxRank) {
+            const ranks = Array.from(Array(maxRank).keys()).map((l) => String(l + 1));
+            for (const rank of ranks) {
+                filter.checkboxes.rank.options[rank].selected = true;
+                filter.checkboxes.rank.selected.push(rank);
             }
-            if (entry.isPrepared || entry.isSpontaneous || entry.isInnate) {
-                category.options["spell"].selected = true;
-                category.selected.push("spell");
+            if ((entry.isPrepared || entry.isSpontaneous || entry.isInnate) && !category) {
+                filter.checkboxes.category.options["spell"].selected = true;
+                filter.checkboxes.category.selected.push("spell");
             }
         }
 
@@ -482,11 +303,7 @@ class CompendiumBrowser extends Application {
     }
 
     loadedPacksAll(): string[] {
-        const loadedPacks = new Set<string>();
-        for (const tabName of this.dataTabsList) {
-            this.loadedPacks(tabName).forEach((item) => loadedPacks.add(item));
-        }
-        return Array.from(loadedPacks).sort();
+        return R.uniq(this.dataTabsList.flatMap((t) => this.loadedPacks(t))).sort();
     }
 
     override activateListeners($html: JQuery): void {
@@ -516,7 +333,7 @@ class CompendiumBrowser extends Application {
                 await game.settings.set("pf2e", "compendiumBrowserPacks", this.settings);
 
                 for (const [key, source] of Object.entries(this.packLoader.sourcesSettings.sources)) {
-                    if (!source || isBlank(source.name)) {
+                    if (!source?.name) {
                         delete this.packLoader.sourcesSettings.sources[key]; // just to make sure we clean up
                         continue;
                     }
@@ -542,7 +359,7 @@ class CompendiumBrowser extends Application {
 
                 for (const element of sourceSettings) {
                     const name = element.dataset.name?.toLocaleLowerCase(game.i18n.lang);
-                    const shouldBeHidden = !isBlank(value) && !isBlank(name) && !name.includes(value);
+                    const shouldBeHidden = !!value && !!name && !name.includes(value);
 
                     element.classList.toggle("hidden", shouldBeHidden);
                 }
@@ -607,15 +424,14 @@ class CompendiumBrowser extends Application {
             const order = sortContainer.querySelector<HTMLSelectElement>("select.order");
             if (order) {
                 order.addEventListener("change", () => {
-                    const orderBy = order.value ?? "name";
-                    currentTab.filterData.order.by = orderBy;
+                    currentTab.filterData.order.by = order.value ?? "name";
                     this.#clearScrollLimit(true);
                 });
             }
             const directionAnchor = sortContainer.querySelector<HTMLAnchorElement>("a.direction");
             if (directionAnchor) {
                 directionAnchor.addEventListener("click", () => {
-                    const direction = (directionAnchor.dataset.direction as SortDirection) ?? "asc";
+                    const direction = directionAnchor.dataset.direction ?? "asc";
                     currentTab.filterData.order.direction = direction === "asc" ? "desc" : "asc";
                     this.#clearScrollLimit(true);
                 });
@@ -643,7 +459,7 @@ class CompendiumBrowser extends Application {
 
         // Create Roll Table button
         htmlQuery(html, "[data-action=create-roll-table]")?.addEventListener("click", () =>
-            currentTab.createRollTable()
+            currentTab.createRollTable(),
         );
 
         // Add to Roll Table button
@@ -689,13 +505,11 @@ class CompendiumBrowser extends Application {
             // Toggle visibility of filter container
             const title = container.querySelector<HTMLDivElement>("div.title");
             title?.addEventListener("click", () => {
-                const toggleFilter = (filter: CheckboxData | RangesData | SliderData) => {
+                const toggleFilter = (filter: CheckboxData | RangesInputData | SliderData) => {
                     filter.isExpanded = !filter.isExpanded;
                     const contentElement = title.nextElementSibling;
                     if (contentElement instanceof HTMLElement) {
-                        filter.isExpanded
-                            ? (contentElement.style.display = "")
-                            : (contentElement.style.display = "none");
+                        contentElement.style.display = filter.isExpanded ? "" : "none";
                     }
                 };
                 switch (filterType) {
@@ -713,7 +527,7 @@ class CompendiumBrowser extends Application {
                         break;
                     }
                     case "sliders": {
-                        if (!currentTab.isOfType("bestiary", "equipment", "feat", "hazard")) return;
+                        if (!currentTab.isOfType("bestiary", "equipment", "feat", "campaignFeature", "hazard")) return;
                         if (objectHasKey(currentTab.filterData.sliders, filterName)) {
                             toggleFilter(currentTab.filterData.sliders[filterName]);
                         }
@@ -730,9 +544,11 @@ class CompendiumBrowser extends Application {
                             const checkbox = currentTab.filterData.checkboxes[filterName];
                             const option = checkbox.options[optionName];
                             option.selected = !option.selected;
-                            option.selected
-                                ? checkbox.selected.push(optionName)
-                                : (checkbox.selected = checkbox.selected.filter((name) => name !== optionName));
+                            if (option.selected) {
+                                checkbox.selected.push(optionName);
+                            } else {
+                                checkbox.selected = checkbox.selected.filter((name) => name !== optionName);
+                            }
                             this.#clearScrollLimit(true);
                         }
                     });
@@ -766,7 +582,7 @@ class CompendiumBrowser extends Application {
                 if (!multiselects) continue;
                 if (objectHasKey(multiselects, filterName)) {
                     const multiselect = container.querySelector<HTMLInputElement>(
-                        `input[name=${filterName}][data-tagify-select]`
+                        `input[name=${filterName}][data-tagify-select]`,
                     );
                     if (!multiselect) continue;
                     const data = multiselects[filterName];
@@ -795,13 +611,14 @@ class CompendiumBrowser extends Application {
                     tagify.on("click", (event) => {
                         const target = event.detail.event.target as HTMLElement;
                         if (!target) return;
-
-                        const value = event.detail.data.value;
-                        const selected = data.selected.find((s) => s.value === value);
-                        if (selected) {
-                            const current = !!selected.not;
-                            selected.not = !current;
-                            this.render();
+                        const action = htmlClosest(target, "[data-action]")?.dataset?.action;
+                        if (action === "toggle-not") {
+                            const value = event.detail.data.value;
+                            const selected = data.selected.find((s) => s.value === value);
+                            if (selected) {
+                                selected.not = !selected.not;
+                                this.render();
+                            }
                         }
                     });
                     tagify.on("change", (event) => {
@@ -810,7 +627,7 @@ class CompendiumBrowser extends Application {
                             Array.isArray(selections) &&
                             selections.every(
                                 (s: unknown): s is { value: string; label: string } =>
-                                    isObject<{ value: unknown }>(s) && typeof s["value"] === "string"
+                                    isObject<{ value: unknown }>(s) && typeof s["value"] === "string",
                             );
 
                         if (isValid) {
@@ -821,7 +638,7 @@ class CompendiumBrowser extends Application {
 
                     for (const element of htmlQueryAll<HTMLInputElement>(
                         container,
-                        `input[name=${filterName}-filter-conjunction]`
+                        `input[name=${filterName}-filter-conjunction]`,
                     )) {
                         element.addEventListener("change", () => {
                             const value = element.value;
@@ -831,12 +648,23 @@ class CompendiumBrowser extends Application {
                             }
                         });
                     }
+
+                    for (const tag of htmlQueryAll(container, "tag")) {
+                        const icon = fontAwesomeIcon("ban", { style: "solid" });
+                        icon.classList.add("fa-2xs");
+                        const notButton = createHTMLElement("a", {
+                            classes: ["conjunction-not-button"],
+                            children: [icon],
+                            dataset: { action: "toggle-not" },
+                        });
+                        tag.appendChild(notButton);
+                    }
                 }
             }
 
             if (filterType === "sliders") {
                 // Slider filters
-                if (!currentTab.isOfType("bestiary", "equipment", "feat", "hazard")) return;
+                if (!currentTab.isOfType("bestiary", "campaignFeature", "equipment", "feat", "hazard")) continue;
                 const sliders = currentTab.filterData.sliders;
                 if (!sliders) continue;
 
@@ -980,7 +808,7 @@ class CompendiumBrowser extends Application {
     }
 
     async #takePhysicalItem(uuid: string): Promise<void> {
-        const actors = getSelectedOrOwnActors(["character", "npc"]);
+        const actors = getSelectedActors({ include: ["character", "loot", "npc", "party"], assignedFallback: true });
         const item = await this.#getPhysicalItem(uuid);
 
         if (actors.length === 0) {
@@ -997,7 +825,7 @@ class CompendiumBrowser extends Application {
                 game.i18n.format("PF2E.CompendiumBrowser.AddedItemToCharacter", {
                     item: item.name,
                     character: game.user.character.name,
-                })
+                }),
             );
         } else {
             ui.notifications.info(game.i18n.format("PF2E.CompendiumBrowser.AddedItem", { item: item.name }));
@@ -1005,51 +833,55 @@ class CompendiumBrowser extends Application {
     }
 
     async #buyPhysicalItem(uuid: string): Promise<void> {
-        const actors = getSelectedOrOwnActors(["character", "npc"]);
+        const actors = getSelectedActors({ include: ["character", "loot", "npc"], assignedFallback: true });
         const item = await this.#getPhysicalItem(uuid);
 
         if (actors.length === 0) {
-            ui.notifications.error(game.i18n.format("PF2E.ErrorMessage.NoTokenSelected"));
-            return;
+            if (game.user.character?.isOfType("character")) {
+                actors.push(game.user.character);
+            } else {
+                ui.notifications.error(game.i18n.format("PF2E.ErrorMessage.NoTokenSelected"));
+                return;
+            }
         }
 
-        let purchasesSucceeded = 0;
+        let purchaseSuccesses = 0;
 
         for (const actor of actors) {
             if (await actor.inventory.removeCoins(item.price.value)) {
-                purchasesSucceeded = purchasesSucceeded + 1;
+                purchaseSuccesses = purchaseSuccesses + 1;
                 await actor.inventory.add(item, { stack: true });
             }
         }
 
         if (actors.length === 1) {
-            if (purchasesSucceeded === 1) {
+            if (purchaseSuccesses === 1) {
                 ui.notifications.info(
                     game.i18n.format("PF2E.CompendiumBrowser.BoughtItemWithCharacter", {
                         item: item.name,
                         character: actors[0].name,
-                    })
+                    }),
                 );
             } else {
                 ui.notifications.warn(
                     game.i18n.format("PF2E.CompendiumBrowser.FailedToBuyItemWithCharacter", {
                         item: item.name,
                         character: actors[0].name,
-                    })
+                    }),
                 );
             }
         } else {
-            if (purchasesSucceeded === actors.length) {
+            if (purchaseSuccesses === actors.length) {
                 ui.notifications.info(
                     game.i18n.format("PF2E.CompendiumBrowser.BoughtItemWithAllCharacters", {
                         item: item.name,
-                    })
+                    }),
                 );
             } else {
                 ui.notifications.warn(
                     game.i18n.format("PF2E.CompendiumBrowser.FailedToBuyItemWithSomeCharacters", {
                         item: item.name,
-                    })
+                    }),
                 );
             }
         }
@@ -1073,16 +905,19 @@ class CompendiumBrowser extends Application {
     }
 
     /** Set drag data and lower opacity of the application window to reveal any tokens */
-    protected override _onDragStart(event: ElementDragEvent): void {
-        this.element.animate({ opacity: 0.125 }, 250);
+    protected override _onDragStart(event: DragEvent): void {
+        if (!(event.currentTarget instanceof HTMLElement && event.dataTransfer)) {
+            return super._onDragStart(event);
+        }
 
-        const item = $(event.currentTarget)[0];
+        this.element.animate({ opacity: 0.125 }, 250);
+        const item = event.currentTarget;
         event.dataTransfer.setData(
             "text/plain",
             JSON.stringify({
                 type: item.dataset.type,
                 uuid: item.dataset.entryUuid,
-            })
+            }),
         );
         // awful hack (dataTransfer.types will include "from-browser")
         event.dataTransfer.setData("from-browser", "true");
@@ -1096,49 +931,31 @@ class CompendiumBrowser extends Application {
                     });
                 }, 500);
             },
-            { once: true }
+            { once: true },
         );
     }
 
-    protected override _onDragOver(event: ElementDragEvent): void {
+    protected override _onDragOver(event: DragEvent): void {
         super._onDragOver(event);
-        if (event.dataTransfer.types.includes("from-browser")) {
+        if (event.dataTransfer?.types.includes("from-browser")) {
             this.element.css({ pointerEvents: "none" });
         }
     }
 
-    override getData(): {
-        user: Active<UserPF2e>;
-        settings?: { settings: CompendiumBrowserSettings; sources: CompendiumBrowserSources };
-        scrollLimit?: number;
-    } {
+    override getData(): CompendiumBrowserSheetData {
         const activeTab = this.activeTab;
-        // Settings
-        if (activeTab === "settings") {
-            const settings = {
-                settings: this.settings,
-                sources: this.packLoader.sourcesSettings,
-            };
+        const tab = objectHasKey(this.tabs, activeTab) ? this.tabs[activeTab] : null;
 
-            return {
-                user: game.user,
-                settings: settings,
-            };
-        }
-        // Active tab
-        const tab = this.tabs[activeTab];
-        if (tab) {
-            return {
-                user: game.user,
-                [activeTab]: {
-                    filterData: tab.filterData,
-                },
-                scrollLimit: tab.scrollLimit,
-            };
-        }
-        // No active tab
+        const settings = {
+            settings: this.settings,
+            sources: this.packLoader.sourcesSettings,
+        };
+
         return {
             user: game.user,
+            [activeTab]: activeTab === "settings" ? settings : { filterData: tab?.filterData },
+            scrollLimit: tab?.scrollLimit,
+            showCampaign: game.settings.get("pf2e", "campaignType") !== "none",
         };
     }
 
@@ -1153,7 +970,7 @@ class CompendiumBrowser extends Application {
         const tab = this.activeTab;
         if (tab === "settings") return;
 
-        const list = this.element[0].querySelector<HTMLUListElement>(".tab.active ul.item-list");
+        const list = htmlQuery(this.element[0], ".tab.active ul.item-list");
         if (!list) return;
         list.scrollTop = 0;
         this.tabs[tab].scrollLimit = 100;
@@ -1174,4 +991,12 @@ interface CompendiumBrowserSources {
     sources: CompendiumBrowserSourcesList;
 }
 
-export { CompendiumBrowser, CompendiumBrowserSettings, CompendiumBrowserSources };
+interface CompendiumBrowserSheetData {
+    user: Active<UserPF2e>;
+    settings?: { settings: CompendiumBrowserSettings; sources: CompendiumBrowserSources };
+    scrollLimit?: number;
+    showCampaign: boolean;
+}
+
+export { CompendiumBrowser };
+export type { CompendiumBrowserSettings, CompendiumBrowserSources };

@@ -21,6 +21,11 @@
                 "proficiency": {
                     "value": 1
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": false
@@ -91,9 +96,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 25,
                     "value": 17
@@ -115,33 +117,24 @@
             "name": "Confusion",
             "sort": 200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>You befuddle your target with strange impulses, causing it to act randomly. The effects are determined by the target's Will save. You can Dismiss the spell.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target babbles incoherently and is @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1}.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Confused] for 1 minute. It can attempt a new save at the end of each of its turns to end the confusion.</p>\n<p><strong>Critical Failure</strong> The target is Confused for 1 minute, with no save to end early.</p>\n<hr />\n<p><strong>Heightened (8th)</strong> You can target up to 10 creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "levels": {
@@ -160,57 +153,34 @@
                     "heightenedLevel": 4,
                     "value": "QPsSfTaTFvOGNw5G"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "confusion",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
+                        "concentrate",
                         "emotion",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -227,36 +197,27 @@
             "name": "Hypnotic Pattern",
             "sort": 300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "burst",
                     "value": 10
                 },
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": true,
-                    "somatic": true,
-                    "verbal": false
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>You create a pattern of shifting colors that hovers in the air in a geometric cloud. Creatures are @UUID[Compendium.pf2e.conditionitems.Item.Dazzled] while inside the pattern. In addition, a creature must attempt a Will saving throw if it is inside the pattern when you cast it, when it enters the pattern, when it ends its turn within the pattern, or if it uses a Seek or Interact action on the pattern. A creature currently @UUID[Compendium.pf2e.conditionitems.Item.Fascinated] by the pattern doesn't attempt new saves.</p>\n<hr />\n<p><strong>Success</strong> The target is unaffected.</p>\n<p><strong>Failure</strong> The target is Fascinated by the pattern.</p>\n<p><strong>Critical Failure</strong> The target is Fascinated by the pattern. While it remains Fascinated, it can't use reactions.</p>"
                 },
                 "duration": {
-                    "value": "sustained up to 1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
+                    "sustained": true,
+                    "value": "1 minute"
                 },
                 "level": {
                     "value": 3
@@ -265,56 +226,33 @@
                     "heightenedLevel": 3,
                     "value": "QPsSfTaTFvOGNw5G"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "120 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "hypnotic-pattern",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
-                        "visual",
-                        "illusion"
+                        "illusion",
+                        "manipulate",
+                        "visual"
                     ]
                 }
             },
@@ -331,42 +269,35 @@
             "name": "Daze",
             "sort": 400000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": true,
-                            "type": {
-                                "categories": [],
-                                "value": "mental"
-                            },
-                            "value": "0"
-                        }
+                    "0": {
+                        "applyMod": true,
+                        "category": null,
+                        "formula": "0",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "mental"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": true,
+                        "statistic": "will"
                     }
                 },
                 "description": {
                     "value": "<p>You cloud the target's mind and daze it with a mental jolt. The jolt deals mental damage equal to your spellcasting ability modifier; the target must attempt a basic Will save. If the target critically fails the save, it is also @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1}.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The damage increases by 1d6.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 round"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -381,59 +312,36 @@
                 "location": {
                     "value": "QPsSfTaTFvOGNw5G"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "60 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "basic",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "daze",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
                         "cantrip",
+                        "concentrate",
+                        "manipulate",
                         "mental",
-                        "nonlethal",
-                        "enchantment"
+                        "nonlethal"
                     ]
                 }
             },
@@ -450,33 +358,24 @@
             "name": "Fear",
             "sort": 500000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>You plant fear in the target; it must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}.</p>\n<p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 3} and @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] for 1 round.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to five creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "varies"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "levels": {
@@ -495,60 +394,37 @@
                     "heightenedLevel": 3,
                     "value": "QPsSfTaTFvOGNw5G"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "fear",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
+                        "concentrate",
                         "emotion",
                         "fear",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -561,47 +437,39 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.R8bqnYiThB6MYTxD"
                 }
             },
-            "img": "systems/pf2e/icons/spells/phantom-pain.webp",
+            "img": "icons/magic/unholy/strike-beam-blood-small-red-purple.webp",
             "name": "Phantom Pain",
             "sort": 600000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": false,
-                            "type": {
-                                "categories": [],
-                                "subtype": "",
-                                "value": "mental"
-                            },
-                            "value": "2d4"
-                        }
+                    "0": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "2d4",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "mental"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
                     }
                 },
                 "description": {
                     "value": "<p>Illusory pain wracks the target, dealing 2d4 mental damage and 1d4 persistent mental damage. The target must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes full initial damage but no persistent damage, and the spell ends immediately.</p>\n<p><strong>Failure</strong> The target takes full initial and persistent damage, and the target is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1}. If the target recovers from being Sickened, the persistent damage ends and the spell ends.</p>\n<p><strong>Critical Failure</strong> As failure, but the target is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2}.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d4 and the persistent damage by 1d4.</p>\n<p>[[/r (@item.level)d4[persistent,mental]]]{Leveled Persistent Mental Damage}</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -617,54 +485,32 @@
                     "heightenedLevel": 4,
                     "value": "QPsSfTaTFvOGNw5G"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "phantom-pain",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "occult"
+                    ],
                     "value": [
+                        "concentrate",
                         "illusion",
+                        "manipulate",
                         "mental",
                         "nonlethal"
                     ]
@@ -691,23 +537,25 @@
                     "value": 18
                 },
                 "damageRolls": {
-                    "ivaVNKsndYm4rpWo": {
-                        "damage": "1d6",
-                        "damageType": "acid"
-                    },
-                    "ljFcIMEbuWxOsmZ3": {
+                    "0": {
                         "damage": "2d4+8",
                         "damageType": "bludgeoning"
+                    },
+                    "1": {
+                        "damage": "1d6",
+                        "damageType": "acid"
                     }
                 },
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -739,29 +587,21 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p><span style=\"font-family: var(--font-primary); font-size: var(--font-size-14);\">@Localize[PF2E.NPC.Abilities.Glossary.Telepathy]</span></p>"
+                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Telepathy]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "telepathy",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "aura",
-                        "divination",
                         "magical"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -782,20 +622,16 @@
                 "description": {
                     "value": "<p>An id ooze's acid damages only metal and organic materials, not stone.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -821,23 +657,18 @@
                     "per": "turn",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "enchantment",
                         "occult"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -858,20 +689,16 @@
                 "description": {
                     "value": "<p>An id ooze can sense nearby creatures through vibration and air or water movement.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -879,7 +706,7 @@
         {
             "_id": "2j5XlUWtOHYZQV9Z",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
-            "name": "Puddled Ampush",
+            "name": "Puddled Ambush",
             "sort": 1200000,
             "system": {
                 "actionType": {
@@ -892,20 +719,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature enters or interacts with a space occupied by an id ooze</p>\n<p><strong>Requirements</strong> Initiative hasn't yet been rolled</p>\n<p><strong>Effect</strong> The id ooze automatically notices the creature, then makes a pseudopod Strike against one creature adjacent to itself before rolling initiative.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -929,25 +752,53 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>@Damage[(1d4+8)[bludgeoning]] plus @Damage[1d6[acid]], <span class=\"pl-s\">@Check[type:fortitude|dc:25|basic:true|traits:acid,constrict,bludgeoning]</span></p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                    "value": "<p>@Damage[(1d4+8)[bludgeoning],1d6[acid]]{1d4+8 bludgeoning plus 1d6 acid}, @Check[type:fortitude|dc:25|basic:true]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "constrict",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
+                }
+            },
+            "type": "action"
+        },
+        {
+            "_id": "FRb0ZF950WAOeWup",
+            "flags": {
+                "core": {
+                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
+                }
+            },
+            "img": "systems/pf2e/icons/actions/OneAction.webp",
+            "name": "Grab",
+            "sort": 1400000,
+            "system": {
+                "actionType": {
+                    "value": "action"
                 },
-                "trigger": {
-                    "value": ""
+                "actions": {
+                    "value": 1
                 },
-                "weapon": {
-                    "value": ""
+                "category": "offensive",
+                "description": {
+                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
+                },
+                "rules": [],
+                "slug": "grab",
+                "traits": {
+                    "rarity": "common",
+                    "value": []
                 }
             },
             "type": "action"
@@ -956,7 +807,7 @@
             "_id": "DYmlKlHV5cSVRjFw",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Athletics",
-            "sort": 1400000,
+            "sort": 1500000,
             "system": {
                 "description": {
                     "value": ""
@@ -967,11 +818,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -979,29 +832,6 @@
             "_id": "QO9tMJVETHo27pRf",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Deception",
-            "sort": 1500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 15
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "9PFC76M4aMuOS1tZ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Occultism",
             "sort": 1600000,
             "system": {
                 "description": {
@@ -1013,18 +843,20 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
         {
-            "_id": "wt5vr73PeGL6LBCc",
+            "_id": "9PFC76M4aMuOS1tZ",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
+            "name": "Occultism",
             "sort": 1700000,
             "system": {
                 "description": {
@@ -1035,6 +867,36 @@
                 },
                 "proficient": {
                     "value": 0
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
+                "rules": [],
+                "slug": null
+            },
+            "type": "lore"
+        },
+        {
+            "_id": "wt5vr73PeGL6LBCc",
+            "img": "systems/pf2e/icons/default-icons/lore.svg",
+            "name": "Stealth",
+            "sort": 1800000,
+            "system": {
+                "description": {
+                    "value": ""
+                },
+                "mod": {
+                    "value": 15
+                },
+                "proficient": {
+                    "value": 0
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -1048,9 +910,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+17 in moist areas",
@@ -1114,12 +973,6 @@
                     "type": "visual"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 15
-            },
             "resistances": [
                 {
                     "type": "piercing",
@@ -1145,19 +998,39 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "(can't speak any language); telepathy 60 ft",
+                "value": [
+                    "common",
+                    "sakvroth"
+                ]
+            },
             "level": {
                 "value": 7
             },
             "privateNotes": "",
             "publicNotes": "<p>Not all oozes are mindless predators capable of little more than ambushing and consuming prey. The id ooze is a thinking, calculating creature with the capacity to carry out complex plots and plans-not always to secure a meal. Left to its own devices, an id ooze is just as content to spend decades or even centuries in introspective philosophical pursuits as it is to crawl through the underground rivers and moist caverns it prefers to call home.</p>\n<p>An id ooze can derive sustenance from the consumption of organic material, but without easy access to plants or animals to eat, they can subsist in a state of semi-hibernation for centuries while slowly absorbing residual psychic energies in locations that have been host to powerful emotions, such as long-standing temples that once hosted generations of worshippers, settlements that endured horrific wars or devastating disasters, or even just the home of a powerful occult spellcaster whose thoughts left marks upon the walls long after they moved on.</p>\n<p>An id ooze prefers water but is equally at home on land. The slimy creature appears as a patch of water until it attacks, when its gelatinous body piles up on itself to form a single pseudopod that strikes like an angry snake.</p>",
-            "source": {
-                "value": "Pathfinder Adventure: Crown of the Kobold King"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Adventure: Crown of the Kobold King"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 15,
+            "senses": [
+                {
+                    "acuity": "precise",
+                    "range": 60,
+                    "type": "motion-sense"
+                }
+            ],
+            "vision": false
         },
         "resources": {},
         "saves": {
@@ -1175,18 +1048,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "(Can't Speak Any Language); Telepathy 60 ft",
-                "selected": [],
-                "value": [
-                    "common",
-                    "undercommon"
-                ]
-            },
             "rarity": "rare",
-            "senses": {
-                "value": "motion sense 60 ft, no vision"
-            },
             "size": {
                 "value": "med"
             },

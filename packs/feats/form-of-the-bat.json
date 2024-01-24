@@ -1,6 +1,6 @@
 {
     "_id": "H965m1koFvY4FQkF",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Form Of The Bat",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p>You can transform into a harmless bat. You gain the effects of a 4th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Pest Form]</em>, except you always transform into a bat.</p>"
+            "value": "<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p>You can transform into a harmless bat. You gain the effects of a 4th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Pest Form]</em>, except you always transform into a bat.</p>"
         },
         "frequency": {
             "max": 1,
@@ -23,18 +23,19 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [
                 "concentrate",
                 "dhampir",
                 "divine",
-                "polymorph",
-                "transmutation"
+                "polymorph"
             ]
         }
     },

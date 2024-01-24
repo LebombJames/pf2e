@@ -1,6 +1,6 @@
 {
     "_id": "VIScVb6Hl7KwoWfH",
-    "img": "systems/pf2e/icons/features/feats/boleras-interrogation.webp",
+    "img": "icons/sundries/gaming/chess-pawn-white-pink.webp",
     "name": "Effect: Bolera's Interrogation (Critical Failure)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #157: Devil at the Dreaming Palace"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -22,9 +27,6 @@
                 "value": -4
             }
         ],
-        "source": {
-            "value": "Pathfinder #157: Devil at the Dreaming Palace"
-        },
         "start": {
             "initiative": null,
             "value": 0

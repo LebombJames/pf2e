@@ -1,6 +1,6 @@
 {
     "_id": "qkXRucQCLLS3VoMa",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Friendform",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -31,9 +36,6 @@
                 "value": 4
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": [

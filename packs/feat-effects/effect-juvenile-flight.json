@@ -1,6 +1,6 @@
 {
     "_id": "0JrHvdUgJBl631En",
-    "img": "systems/pf2e/icons/spells/stormwind-flight.webp",
+    "img": "icons/commodities/materials/feather-blue-glowing.webp",
     "name": "Effect: Juvenile Flight",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 9
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "value": 10
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

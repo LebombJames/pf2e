@@ -1,6 +1,6 @@
 {
     "_id": "3GPh6O3PJxORytAC",
-    "img": "systems/pf2e/icons/spells/foresight.webp",
+    "img": "icons/magic/perception/orb-eye-scrying.webp",
     "name": "Effect: Shadow Sight",
     "system": {
         "description": {
@@ -15,15 +15,17 @@
         "level": {
             "value": 9
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "key": "Sense",
-                "selector": "greaterDarkvision"
+                "selector": "greater-darkvision"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

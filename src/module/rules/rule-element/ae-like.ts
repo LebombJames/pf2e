@@ -1,44 +1,41 @@
 import { SKILL_EXPANDED, SKILL_LONG_FORMS } from "@actor/values.ts";
-import { FeatPF2e } from "@item";
-import { objectHasKey } from "@util";
-import type { StringField } from "types/foundry/common/data/fields.d.ts";
+import { isObject, objectHasKey } from "@util";
+import * as R from "remeda";
+import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
-import { ResolvableValueField } from "./data.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
+import { RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 
 /**
  * Make a numeric modification to an arbitrary property in a similar way as `ActiveEffect`s
  * @category RuleElement
  */
 class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TSchema> {
-    constructor(source: AELikeSource, options: RuleElementOptions) {
-        if (objectHasKey(AELikeRuleElement.CHANGE_MODE_DEFAULT_PRIORITIES, source.mode)) {
-            source.priority ??= AELikeRuleElement.CHANGE_MODE_DEFAULT_PRIORITIES[source.mode];
-        }
-        super(source, options);
-    }
-
     static override defineSchema(): AELikeSchema {
         const { fields } = foundry.data;
+
+        const baseSchema = super.defineSchema();
+        const PRIORITIES: Record<string, number | undefined> = this.CHANGE_MODE_DEFAULT_PRIORITIES;
+        baseSchema.priority.initial = (d) => PRIORITIES[String(d.mode)] ?? 50;
+
         return {
-            ...super.defineSchema(),
+            ...baseSchema,
             mode: new fields.StringField({
                 required: true,
-                choices: this.CHANGE_MODES,
+                choices: R.keys.strict(this.CHANGE_MODE_DEFAULT_PRIORITIES),
                 initial: undefined,
             }),
             path: new fields.StringField({ required: true, nullable: false, blank: false, initial: undefined }),
             phase: new fields.StringField({
                 required: false,
                 nullable: false,
-                choices: deepClone(this.PHASES),
+                choices: fu.deepClone(this.PHASES),
                 initial: "applyAEs",
             }),
             value: new ResolvableValueField({ required: true, nullable: true, initial: undefined }),
+            merge: new fields.BooleanField({ required: false, nullable: false, initial: undefined }),
         };
     }
-
-    static CHANGE_MODES = ["multiply", "add", "subtract", "remove", "downgrade", "upgrade", "override"] as const;
 
     static CHANGE_MODE_DEFAULT_PRIORITIES = {
         multiply: 10,
@@ -61,9 +58,22 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
         return new RegExp(String.raw`^system\.skills\.(${skillLongForms})\b`);
     })();
 
+    static override validateJoint(data: SourceFromSchema<AELikeSchema>): void {
+        super.validateJoint(data);
+
+        if (data.merge) {
+            if (data.mode !== "override") {
+                throw new foundry.data.validation.DataModelValidationError('  merge: `mode` must be "override"');
+            }
+            if (!isObject(data.value)) {
+                throw new foundry.data.validation.DataModelValidationError("  merge: `value` must an object");
+            }
+        }
+    }
+
     #rewriteSkillLongFormPath(path: string): string {
         return path.replace(AELikeRuleElement.#SKILL_LONG_FORM_PATH, (match, group) =>
-            objectHasKey(SKILL_EXPANDED, group) ? `system.skills.${SKILL_EXPANDED[group].shortForm}` : match
+            objectHasKey(SKILL_EXPANDED, group) ? `system.skills.${SKILL_EXPANDED[group].shortForm}` : match,
         );
     }
 
@@ -71,34 +81,41 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
         const actor = this.item.actor;
         return (
             path.length > 0 &&
+            !/\bnull\b/.test(path) &&
             (path.startsWith("flags.") ||
                 [path, path.replace(/\.[-\w]+$/, ""), path.replace(/\.?[-\w]+\.[-\w]+$/, "")].some(
-                    (path) => getProperty(actor, path) !== undefined
+                    (path) => fu.getProperty(actor, path) !== undefined,
                 ))
         );
     }
 
+    /** Process this rule element during item pre-creation to inform subsequent choice sets. */
+    override async preCreate(): Promise<void> {
+        if (this.phase === "applyAEs") this.#applyAELike();
+    }
+
     /** Apply the modifications immediately after proper ActiveEffects are applied */
     override onApplyActiveEffects(): void {
-        if (!this.ignored && this.phase === "applyAEs") this.applyAELike();
+        if (this.phase === "applyAEs") this.#applyAELike();
     }
 
     /** Apply the modifications near the beginning of the actor's derived-data preparation */
     override beforePrepareData(): void {
-        if (!this.ignored && this.phase === "beforeDerived") this.applyAELike();
+        if (this.phase === "beforeDerived") this.#applyAELike();
     }
 
     /** Apply the modifications at the conclusion of the actor's derived-data preparation */
     override afterPrepareData(): void {
-        if (!this.ignored && this.phase === "afterDerived") this.applyAELike();
+        if (this.phase === "afterDerived") this.#applyAELike();
     }
 
     /** Apply the modifications prior to a Check (roll) */
     override beforeRoll(_domains: string[], rollOptions: Set<string>): void {
-        if (!this.ignored && this.phase === "beforeRoll") this.applyAELike(rollOptions);
+        if (this.phase === "beforeRoll") this.#applyAELike(rollOptions);
     }
 
-    protected applyAELike(rollOptions?: Set<string>): void {
+    #applyAELike(rollOptions?: Set<string>): void {
+        if (this.ignored) return;
         // Convert long-form skill slugs in paths to short forms
         const path = this.#rewriteSkillLongFormPath(this.resolveInjectedProperties(this.path));
         if (this.ignored) return;
@@ -110,9 +127,9 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
         if (!this.test(rollOptions)) return;
 
         const { actor } = this;
-        const current = getProperty(actor, path);
+        const current = fu.getProperty(actor, path);
         const change = this.resolveValue(this.value);
-        const newValue = AELikeRuleElement.getNewValue(this.mode, current, change);
+        const newValue = AELikeRuleElement.getNewValue(this.mode, current, change, this.merge);
         if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
             return this.failValidation(newValue.asError().message);
         }
@@ -125,7 +142,7 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
             current.splice(current.indexOf(newValue), 1);
         } else {
             try {
-                setProperty(actor, path, newValue);
+                fu.setProperty(actor, path, newValue);
                 this.#logChange(change);
             } catch (error) {
                 if (error instanceof Error) {
@@ -137,12 +154,14 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
         }
     }
 
+    static getNewValue(mode: AELikeChangeMode, current: number, change: number, merge?: boolean): number;
     static getNewValue<TCurrent>(
         mode: AELikeChangeMode,
         current: TCurrent,
-        change: TCurrent extends (infer TValue)[] ? TValue : TCurrent
-    ): TCurrent | DataModelValidationFailure;
-    static getNewValue(mode: AELikeChangeMode, current: unknown, change: unknown): unknown {
+        change: TCurrent extends (infer TValue)[] ? TValue : TCurrent,
+        merge?: boolean,
+    ): (TCurrent extends (infer TValue)[] ? TValue : TCurrent) | DataModelValidationFailure;
+    static getNewValue(mode: AELikeChangeMode, current: unknown, change: unknown, merge = false): unknown {
         const { DataModelValidationFailure } = foundry.data.validation;
 
         const addOrSubtract = (value: unknown): unknown => {
@@ -202,6 +221,9 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
                 return Math.max(current ?? 0, change);
             }
             case "override": {
+                if (merge && isObject(current) && isObject(change)) {
+                    return fu.mergeObject(current, change);
+                }
                 return change;
             }
             default:
@@ -213,18 +235,14 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
     #logChange(value: unknown): void {
         const { item, mode } = this;
         const isLoggable =
-            !(typeof value === "number" || typeof value === "string") &&
-            typeof value === "string" &&
-            mode !== "override";
+            typeof value === "boolean" || typeof value === "number" || typeof value === "string" || value === null;
         if (!isLoggable) return;
 
-        value;
-        const level =
-            item instanceof FeatPF2e
-                ? Number(/-(\d+)$/.exec(item.system.location ?? "")?.[1]) || item.level
-                : "level" in item && typeof item["level"] === "number"
-                ? item["level"]
-                : null;
+        const level = item.isOfType("feat")
+            ? Number(/-(\d+)$/.exec(item.system.location ?? "")?.[1]) || item.level
+            : "level" in item && typeof item["level"] === "number"
+              ? item["level"]
+              : null;
         const { autoChanges } = this.actor.system;
         const entries = (autoChanges[this.path] ??= []);
         entries.push({ mode, level, value, source: this.item.name });
@@ -233,29 +251,36 @@ class AELikeRuleElement<TSchema extends AELikeSchema> extends RuleElementPF2e<TS
 
 interface AELikeRuleElement<TSchema extends AELikeSchema>
     extends RuleElementPF2e<TSchema>,
-        ModelPropsFromSchema<AELikeSchema> {}
+        ModelPropsFromRESchema<AELikeSchema> {}
 
 interface AutoChangeEntry {
     source: string;
     level: number | null;
-    value: number | string;
+    value: boolean | number | string | null;
     mode: AELikeChangeMode;
 }
 
 type AELikeSchema = RuleElementSchema & {
+    /** How to apply the `value` at the `path` */
     mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
+    /** The data property path to modify on the parent item's actor */
     path: StringField<string, string, true, false, false>;
+    /** Which phase of data preparation to run in */
     phase: StringField<AELikeDataPrepPhase, AELikeDataPrepPhase, false, false, true>;
+    /** The value to applied at the `path` */
     value: ResolvableValueField<true, boolean, boolean>;
+    /** Whether to merge two objects given a `mode` of "override" */
+    merge: BooleanField<boolean, boolean, false, false, false>;
 };
 
-type AELikeChangeMode = (typeof AELikeRuleElement.CHANGE_MODES)[number];
+type AELikeChangeMode = keyof typeof AELikeRuleElement.CHANGE_MODE_DEFAULT_PRIORITIES;
 type AELikeDataPrepPhase = (typeof AELikeRuleElement.PHASES)[number];
 
 interface AELikeSource extends RuleElementSource {
-    mode?: unknown;
-    path?: unknown;
-    phase?: unknown;
+    mode?: JSONValue;
+    path?: JSONValue;
+    phase?: JSONValue;
 }
 
-export { AELikeChangeMode, AELikeDataPrepPhase, AELikeRuleElement, AELikeSchema, AELikeSource, AutoChangeEntry };
+export { AELikeRuleElement };
+export type { AELikeChangeMode, AELikeDataPrepPhase, AELikeSchema, AELikeSource, AutoChangeEntry };

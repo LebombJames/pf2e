@@ -1,6 +1,6 @@
 {
     "_id": "RlKGaxQWWLa7xJSc",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Pirouette",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "domain": "ac",
@@ -43,9 +48,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

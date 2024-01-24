@@ -1,6 +1,6 @@
 {
     "_id": "ZslXrvYRxHBXc1Ds",
-    "img": "systems/pf2e/icons/features/classes/inexorable-iron.webp",
+    "img": "icons/commodities/leather/scales-white.webp",
     "name": "Inexorable Iron",
     "system": {
         "actionType": {
@@ -19,11 +19,16 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
+        "rules": [],
         "traits": {
+            "otherTags": [
+                "magus-hybrid-study"
+            ],
             "rarity": "common",
             "value": [
                 "magus"

@@ -1,6 +1,6 @@
 {
     "_id": "GBsC2cARoFiqMi9V",
-    "img": "systems/pf2e/icons/features/classes/wizard-weapon-expertise.webp",
+    "img": "icons/skills/melee/hand-grip-staff-blue.webp",
     "name": "Wizard Weapon Expertise",
     "system": {
         "actionType": {
@@ -19,46 +19,49 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-club.rank",
+                "path": "system.proficiencies.attacks.weapon-base-club.rank",
                 "value": 2
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-crossbow.rank",
+                "path": "system.proficiencies.attacks.weapon-base-crossbow.rank",
                 "value": 2
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-dagger.rank",
+                "path": "system.proficiencies.attacks.weapon-base-dagger.rank",
                 "value": 2
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-heavy-crossbow.rank",
+                "path": "system.proficiencies.attacks.weapon-base-heavy-crossbow.rank",
                 "value": 2
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-staff.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
+                "path": "system.proficiencies.attacks.weapon-base-staff.rank",
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "unarmed": {
+                    "rank": 2
+                }
+            }
         },
         "traits": {
             "rarity": "common",

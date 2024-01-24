@@ -1,6 +1,6 @@
-import { ActionMacroHelpers, SkillActionOptions } from "../index.ts";
 import { SingleCheckAction } from "@actor/actions/index.ts";
-import { ModifierPF2e } from "@actor/modifiers.js";
+import { ModifierPF2e } from "@actor/modifiers.ts";
+import { ActionMacroHelpers, SkillActionOptions } from "../index.ts";
 
 function demoralize(options: SkillActionOptions): void {
     const slug = options?.skill ?? "intimidation";
@@ -33,6 +33,7 @@ function demoralize(options: SkillActionOptions): void {
 }
 
 const action = new SingleCheckAction({
+    cost: 1,
     description: "PF2E.Actions.Demoralize.Description",
     difficultyClass: "will",
     modifiers: [
@@ -49,9 +50,10 @@ const action = new SingleCheckAction({
         { outcome: ["success"], text: "PF2E.Actions.Demoralize.Notes.success" },
     ],
     rollOptions: ["action:demoralize"],
+    section: "skill",
     slug: "demoralize",
     statistic: "intimidation",
     traits: ["auditory", "concentrate", "emotion", "fear", "mental"],
 });
 
-export { demoralize as legacy, action };
+export { action, demoralize as legacy };

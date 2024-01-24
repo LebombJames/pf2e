@@ -1,6 +1,6 @@
 {
     "_id": "JwDCoBIwyhOFnDGZ",
-    "img": "systems/pf2e/icons/spells/animal-feature.webp",
+    "img": "icons/commodities/biological/eye-lizard-orange.webp",
     "name": "Effect: Augment Senses",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 13
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -23,9 +28,6 @@
                 "value": false
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

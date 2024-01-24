@@ -1,6 +1,6 @@
 {
     "_id": "e3oaaoMZPzyP26QV",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Noble Resolve",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -30,16 +35,15 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [
-                "ifrit",
+                "ardande",
+                "naari",
                 "oread",
                 "suli",
                 "sylph",
+                "talos",
                 "undine"
             ]
         }

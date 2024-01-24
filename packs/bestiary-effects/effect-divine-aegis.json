@@ -1,6 +1,6 @@
 {
     "_id": "e4HoYakV7SvwvcrH",
-    "img": "systems/pf2e/icons/spells/energy-aegis.webp",
+    "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
     "name": "Effect: Divine Aegis",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 6
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -43,9 +48,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

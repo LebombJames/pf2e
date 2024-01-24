@@ -1,6 +1,6 @@
 {
     "_id": "Qvjw5RYhglGcVRhF",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/magic/water/orb-ice-opaque.webp",
     "name": "Effect: Rime Crystal - Weapon (Major)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 13
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -36,9 +41,6 @@
                 "selector": "{item|flags.pf2e.rulesSelections.rimeCrystalWeapon}-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

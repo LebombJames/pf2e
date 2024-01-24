@@ -1,6 +1,6 @@
 {
     "_id": "vWZaLE2fEKMBw3D5",
-    "img": "systems/pf2e/icons/features/classes/outwit.webp",
+    "img": "icons/creatures/invertebrates/spider-web-black.webp",
     "name": "Masterful Hunter (Outwit)",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
                     "value": "Hunter's Edge: Outwit"
                 }
             ]
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "rules": [
             {
@@ -45,7 +50,7 @@
                             "value": 1
                         }
                     ],
-                    "field": "actor|system.martial.unarmored.rank"
+                    "field": "actor|system.proficiencies.defenses.unarmored.rank"
                 }
             },
             {
@@ -271,9 +276,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
             "rarity": "common",
             "value": [

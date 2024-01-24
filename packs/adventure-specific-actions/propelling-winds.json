@@ -11,14 +11,16 @@
         },
         "category": "offensive",
         "description": {
-            "value": "<p><strong>Aspect</strong> air</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">2</span> command, Interact</p>\n<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p><strong>Effect</strong> The relic casts <em>@UUID[Compendium.pf2e.spells-srd.Item.Fly]</em> targeting you.</p>"
+            "value": "<p><strong>Aspect</strong> air</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> command, Interact</p>\n<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p><strong>Effect</strong> The relic casts <em>@UUID[Compendium.pf2e.spells-srd.Item.Fly]</em> targeting you.</p>"
         },
         "frequency": {
             "max": 1,
             "per": "PT1H"
         },
-        "requirements": {
-            "value": ""
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Gamemastery Guide"
         },
         "rules": [
             {
@@ -62,17 +64,10 @@
                 "title": "{item|name}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
-        },
         "traits": {
             "value": [
-                "air",
-                "transmutation"
+                "air"
             ]
-        },
-        "trigger": {
-            "value": ""
         }
     },
     "type": "action"

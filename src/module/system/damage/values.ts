@@ -1,7 +1,7 @@
 import { DamageCategory, DamageType } from "./types.ts";
 
 const PHYSICAL_DAMAGE_TYPES = ["bludgeoning", "piercing", "slashing", "bleed"] as const;
-const LIFE_ENERGY_DAMAGE_TYPES = ["positive", "negative"] as const;
+const LIFE_ENERGY_DAMAGE_TYPES = ["vitality", "void"] as const;
 const ENERGY_DAMAGE_TYPES = [
     "acid",
     "cold",
@@ -11,7 +11,6 @@ const ENERGY_DAMAGE_TYPES = [
     "force",
     ...LIFE_ENERGY_DAMAGE_TYPES,
 ] as const;
-const ALIGNMENT_DAMAGE_TYPES = ["chaotic", "lawful", "good", "evil"] as const;
 
 /** A set of mutually exclusive damage categories */
 const DAMAGE_CATEGORIES_UNIQUE = new Set(["persistent", "precision", "splash"] as const);
@@ -20,8 +19,8 @@ const DAMAGE_CATEGORIES_UNIQUE = new Set(["persistent", "precision", "splash"] a
 const MATERIAL_DAMAGE_EFFECTS = new Set([
     "adamantine",
     "cold-iron",
-    "darkwood",
-    "mithral",
+    "dawnsilver",
+    "duskwood",
     "orichalcum",
     "silver",
     "sisterstone-dusk",
@@ -32,7 +31,6 @@ const MATERIAL_DAMAGE_EFFECTS = new Set([
 const DAMAGE_CATEGORIES = new Set([
     ...DAMAGE_CATEGORIES_UNIQUE,
     ...MATERIAL_DAMAGE_EFFECTS,
-    "alignment",
     "energy",
     "physical",
 ] as const);
@@ -44,7 +42,6 @@ const DAMAGE_DIE_FACES = new Set(DAMAGE_DIE_FACES_TUPLE);
 const DAMAGE_TYPES = new Set([
     ...PHYSICAL_DAMAGE_TYPES,
     ...ENERGY_DAMAGE_TYPES,
-    ...ALIGNMENT_DAMAGE_TYPES,
     "mental",
     "poison",
     "spirit",
@@ -63,14 +60,9 @@ const BASE_DAMAGE_TYPES_TO_CATEGORIES: Record<DamageType, DamageCategory | null>
     electricity: "energy",
     fire: "energy",
     sonic: "energy",
-    positive: "energy",
-    negative: "energy",
+    vitality: "energy",
+    void: "energy",
     force: "energy",
-
-    chaotic: "alignment",
-    evil: "alignment",
-    good: "alignment",
-    lawful: "alignment",
 
     mental: null,
     poison: null,
@@ -82,22 +74,18 @@ const DAMAGE_TYPE_ICONS: Record<DamageType, string | null> = {
     bleed: "droplet",
     acid: "vial",
     bludgeoning: "hammer",
-    chaotic: "face-zany",
     cold: "snowflake",
     electricity: "bolt",
-    evil: "face-angry-horns",
     fire: "fire",
     force: "sparkles",
-    good: "face-smile-halo",
-    lawful: "scale-balanced",
     mental: "brain",
-    negative: "skull",
     piercing: "bow-arrow",
     poison: "spider",
-    positive: "sun",
     slashing: "axe",
     sonic: "waveform-lines",
     spirit: "ghost",
+    vitality: "sun",
+    void: "skull",
     untyped: null,
 };
 
@@ -105,22 +93,18 @@ const DAMAGE_TYPE_ICONS: Record<DamageType, string | null> = {
 const PERSISTENT_DAMAGE_IMAGES: Partial<Record<DamageType, ImageFilePath>> = {
     acid: "icons/magic/acid/dissolve-arm-flesh.webp",
     bludgeoning: "systems/pf2e/icons/equipment/weapons/bola.webp",
-    chaotic: "systems/pf2e/icons/spells/dinosaur-form.webp",
     cold: "icons/magic/water/ice-snowman.webp",
     electricity: "systems/pf2e/icons/spells/chain-lightning.webp",
-    evil: "icons/magic/unholy/strike-body-explode-disintegrate.webp",
     fire: "icons/magic/fire/flame-burning-creature-skeleton.webp",
     force: "systems/pf2e/icons/spells/magic-missile.webp",
-    good: "systems/pf2e/icons/damage/persistent/good.webp",
-    lawful: "systems/pf2e/icons/equipment/adventuring-gear/merchant-scale.webp",
     mental: "systems/pf2e/icons/spells/modify-memory.webp",
-    negative: "systems/pf2e/icons/spells/grim-tendrils.webp",
     piercing: "systems/pf2e/icons/equipment/weapons/throwing-knife.webp",
     poison: "systems/pf2e/icons/spells/acidic-burst.webp",
-    positive: "systems/pf2e/icons/spells/moment-of-renewal.webp",
     slashing: "systems/pf2e/icons/equipment/weapons/scimitar.webp",
     sonic: "systems/pf2e/icons/spells/cry-of-destruction.webp",
     spirit: "icons/magic/unholy/hand-claw-fire-blue.webp",
+    vitality: "systems/pf2e/icons/spells/moment-of-renewal.webp",
+    void: "systems/pf2e/icons/spells/grim-tendrils.webp",
 };
 
 /** Whether and how damage should be included on a critical hit */
@@ -131,7 +115,6 @@ const CRITICAL_INCLUSION = {
 };
 
 export {
-    ALIGNMENT_DAMAGE_TYPES,
     BASE_DAMAGE_TYPES_TO_CATEGORIES,
     CRITICAL_INCLUSION,
     DAMAGE_CATEGORIES,

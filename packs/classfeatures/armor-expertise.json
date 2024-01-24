@@ -19,32 +19,13 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmored.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.light.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.medium.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.heavy.rank",
-                "value": 2
-            },
-            {
                 "key": "Resistance",
                 "predicate": [
                     "armor:category:medium",
@@ -97,10 +78,41 @@
                 ],
                 "type": "slashing",
                 "value": "2 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:medium",
+                    "armor:group:skeletal"
+                ],
+                "type": "precision",
+                "value": "3 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:heavy",
+                    "armor:group:skeletal"
+                ],
+                "type": "precision",
+                "value": "5 + @armor.system.runes.potency"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "heavy": {
+                    "rank": 2
+                },
+                "light": {
+                    "rank": 2
+                },
+                "medium": {
+                    "rank": 2
+                },
+                "unarmored": {
+                    "rank": 2
+                }
+            }
         },
         "traits": {
             "rarity": "common",

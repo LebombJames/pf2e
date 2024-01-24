@@ -1,10 +1,10 @@
 {
     "_id": "HpX3bGlOkSp1PeWg",
-    "img": "systems/pf2e/icons/spells/disrupting-weapons.webp",
+    "img": "icons/weapons/swords/sword-flanged-lightning.webp",
     "name": "Effect: Vent Energy",
     "system": {
         "description": {
-            "value": "<p>The creatures weapon arm strikes deal an extra 2d6 energy damage according to the damage type in the energy gland.</p>"
+            "value": "<p>The hadrinnex's weapon arm strikes deal an extra 2d6 energy damage according to the damage type in the energy gland.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -13,7 +13,12 @@
             "value": 1
         },
         "level": {
-            "value": 4
+            "value": 8
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -39,8 +44,8 @@
                         "value": "force"
                     },
                     {
-                        "label": "PF2E.TraitNegative",
-                        "value": "negative"
+                        "label": "PF2E.TraitVoid",
+                        "value": "void"
                     },
                     {
                         "label": "PF2E.TraitSonic",
@@ -58,9 +63,6 @@
                 "selector": "weapon-arm-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

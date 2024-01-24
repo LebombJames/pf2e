@@ -19,39 +19,6 @@
                     flex-direction: column;
                 }
             }
-
-            .actions-options {
-                @include frame-elegant;
-                display: flex;
-                flex-wrap: wrap;
-                margin-bottom: 0.5rem;
-                padding: 0.5rem 1rem;
-
-                .actions-option {
-                    align-items: center;
-                    display: flex;
-                    width: 100%;
-                    margin: 1px 0;
-
-                    label {
-                        * {
-                            vertical-align: middle;
-                        }
-
-                        input {
-                            @include p-reset;
-                        }
-
-                        .unchecked-disabled {
-                            color: var(--color-text-dark-inactive);
-                        }
-
-                        select {
-                            margin-left: 0.25em;
-                        }
-                    }
-                }
-            }
         }
     }
 }
@@ -79,14 +46,13 @@ ol.actions-list {
             }
 
             .item-name {
-                grid-area: icon-name;
                 align-items: center;
                 display: flex;
-                flex: 1;
+                gap: 0.5rem;
+                grid-area: icon-name;
                 margin: 0;
 
                 h4 {
-                    cursor: pointer;
                     margin: 0;
                     max-width: fit-content;
                 }
@@ -95,34 +61,26 @@ ol.actions-list {
                     @include flex-center;
                     background-repeat: no-repeat;
                     background-size: contain;
-                    color: transparent;
                     cursor: pointer;
                     font-size: var(--font-size-18);
-                    height: 32px;
-                    margin-right: 8px;
-                    width: 32px;
-
-                    &:hover {
-                        background: none;
-                        color: var(--primary);
-                    }
                 }
 
                 .actions-title {
                     flex: 1;
 
                     .action-name {
+                        align-items: baseline;
                         display: flex;
                         flex-direction: row;
+                        gap: 0.5em;
 
                         > h4 {
-                            cursor: pointer;
-                            &:hover {
-                                color: var(--primary);
+                            a:hover {
+                                color: var(--color-pf-primary);
+                            }
 
-                                .action-glyph {
-                                    color: var(--body);
-                                }
+                            .action-glyph {
+                                color: var(--text-dark);
                             }
                         }
                     }
@@ -133,18 +91,19 @@ ol.actions-list {
                 align-items: center;
                 border-radius: 2px;
                 border: none;
-                box-shadow: inset 0 0 0 1px rgba(white, 0.3), inset 0 0 0 2px rgba(0, 0, 0, 0.2);
+                box-shadow:
+                    inset 0 0 0 1px rgba(white, 0.3),
+                    inset 0 0 0 2px rgba(0, 0, 0, 0.2);
                 display: flex;
                 flex: 0;
                 font: 500 var(--font-size-10) var(--sans-serif);
                 gap: 0.25em;
-                height: 1.25rem;
+                height: 2em;
                 justify-content: space-evenly;
-                justify-self: end;
                 letter-spacing: 0.05em;
                 margin: 0;
                 max-width: fit-content;
-                padding: 0.25em 0.5em;
+                padding: 0.5em;
                 text-rendering: optimizeLegibility;
                 text-transform: uppercase;
                 white-space: nowrap;
@@ -154,11 +113,13 @@ ol.actions-list {
                     cursor: pointer;
 
                     &:hover {
-                        box-shadow: inset 0 0 0 1px rgba(white, 0.15), inset 0 0 0 2px rgba(black, 0.4);
+                        box-shadow:
+                            inset 0 0 0 1px rgba(white, 0.15),
+                            inset 0 0 0 2px rgba(black, 0.4);
                     }
 
                     &:active {
-                        color: $rank-legendary;
+                        color: var(--primary);
                     }
                 }
             }
@@ -199,7 +160,7 @@ ol.actions-list {
                     &.actionlight {
                         background: var(--alt);
                         vertical-align: middle;
-                        border: 1px solid var(--body);
+                        border: 1px solid var(--text-dark);
                     }
                 }
 
@@ -218,7 +179,7 @@ ol.actions-list {
 
                         &.toggled-on {
                             background-color: rgba(23, 31, 105, 0.5);
-                            color: black;
+                            color: var(--text-dark);
                             text-shadow: 0 0 2px white;
                         }
                     }
@@ -252,7 +213,7 @@ ol.actions-list {
                 "icon    name    tracking controls" 1fr
                 "icon    buttons tracking controls" auto
                 "summary summary summary   summary" auto
-                / min-content auto 20% 10%;
+                / min-content 1fr min-content 2rem;
 
             > .icon {
                 grid-area: icon;
@@ -266,10 +227,17 @@ ol.actions-list {
                 display: flex;
                 margin-bottom: 0;
                 text-align: left;
+
+                > a:hover {
+                    color: var(--color-pf-primary);
+                }
             }
 
             .button-group {
                 grid-area: buttons;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1px;
             }
 
             .tracking {

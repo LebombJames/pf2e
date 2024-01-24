@@ -1,6 +1,6 @@
 {
     "_id": "fILVhS5NuCtGXfri",
-    "img": "systems/pf2e/icons/features/feats/wyrmblesed-blood-magic-bonus.webp",
+    "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
     "name": "Effect: Wyrmblessed Blood Magic (Status Bonus - Self)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "start": {
             "initiative": null,
             "value": 0

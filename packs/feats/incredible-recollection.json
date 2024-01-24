@@ -1,6 +1,6 @@
 {
     "_id": "2l15VfVHMw3ttgJ3",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Incredible Recollection",
     "system": {
         "actionType": {
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #164: Hands of the Devil"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #164: Hands of the Devil"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

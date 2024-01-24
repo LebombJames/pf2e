@@ -1,6 +1,6 @@
 {
     "_id": "BJYSUbFUGcTLaPDn",
-    "img": "systems/pf2e/icons/features/classes/precision.webp",
+    "img": "icons/skills/ranged/target-bullseye-archer-orange.webp",
     "name": "Masterful Hunter (Precision)",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
                     "value": "Hunter's Edge: Precision"
                 }
             ]
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "rules": [
             {
@@ -83,9 +88,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
             "rarity": "common",
             "value": [

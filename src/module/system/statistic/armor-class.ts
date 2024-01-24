@@ -1,7 +1,7 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { createShoddyPenalty } from "@actor/character/helpers.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
-import { ArmorPF2e } from "@item";
+import type { ArmorPF2e } from "@item";
 import { ZeroToFour } from "@module/data.ts";
 import { extractModifierAdjustments } from "@module/rules/helpers.ts";
 import { sluggify } from "@util";
@@ -17,13 +17,13 @@ class ArmorStatistic extends Statistic {
 
     constructor(actor: ActorPF2e, data: Omit<ArmorStatisticData, "domains" | "label" | "slug"> = {}) {
         data.rank ??= 1;
-        const ability = actor.isOfType("creature") ? data.ability ?? "dex" : null;
-        const domains = ability ? ["all", `${ability}-based`] : ["all"];
+        const attribute = actor.isOfType("creature") ? data.attribute ?? "dex" : null;
+        const domains = attribute ? ["all", `${attribute}-based`] : ["all"];
         const fullData: ArmorStatisticData = {
             ...data,
             label: "TYPES.Item.armor",
             slug: "armor",
-            ability,
+            attribute,
             domains,
             proficient: data.rank > 0,
             dc: { label: "PF2E.ArmorClassLabel", domains: ["ac"], modifiers: [] },
@@ -51,7 +51,7 @@ class ArmorStatistic extends Statistic {
                   adjustments: extractModifierAdjustments(
                       actor.synthetics.modifierAdjustments,
                       ["all", "ac"],
-                      armorSlug
+                      armorSlug,
                   ),
               })
             : null;
@@ -73,7 +73,7 @@ class ArmorStatistic extends Statistic {
                   adjustments: extractModifierAdjustments(
                       actor.synthetics.modifierAdjustments,
                       ["all", "dex-based", "ac"],
-                      slug
+                      slug,
                   ),
                   type: "circumstance",
                   modifier: shieldData.ac,
@@ -84,8 +84,9 @@ class ArmorStatistic extends Statistic {
     override getTraceData(): ArmorClassTraceData {
         return {
             ...super.getTraceData({ value: "dc" }),
-            details: this.details,
             breakdown: this.dc.breakdown,
+            details: this.details,
+            slug: "ac",
         };
     }
 }
@@ -97,6 +98,7 @@ interface ArmorStatisticData extends StatisticData {
 
 interface ArmorClassTraceData extends StatisticTraceData {
     details: string;
+    slug: "ac";
 }
 
-export { ArmorClassTraceData, ArmorStatistic };
+export { ArmorStatistic, type ArmorClassTraceData };

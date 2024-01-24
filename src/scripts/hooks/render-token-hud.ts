@@ -1,31 +1,39 @@
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { ScenePF2e, TokenDocumentPF2e } from "@scene";
+import { PartyClownCar } from "@scene/token-document/clown-car.ts";
 import { createHTMLElement, htmlQuery } from "@util";
-import * as R from "remeda";
 
-export const RenderTokenHUD = {
-    listen: (): void => {
+export class RenderTokenHUD {
+    static listen(): void {
         Hooks.on("renderTokenHUD", (_app, $html, data) => {
             const html = $html[0];
             game.pf2e.StatusEffects.onRenderTokenHUD(html, data);
 
             const token = canvas.scene?.tokens.get(data._id ?? "")?.object;
-            RenderTokenHUD.addClownCarButton(html, token);
+            this.addClownCarButton(html, token);
+
+            // Remove conditions hud from army. Once Foundry supports replacing these by actor type we'll add them back in
+            if (token?.actor?.isOfType("army")) {
+                htmlQuery(html, ".control-icon[data-action=effects]")?.remove();
+            }
         });
-    },
+    }
 
     /** Replace the token HUD's status effects button with one for depositing/retrieving party-member tokens.  */
-    addClownCarButton: (html: HTMLElement, token: TokenPF2e<TokenDocumentPF2e<ScenePF2e>> | null | undefined): void => {
+    static addClownCarButton(
+        html: HTMLElement,
+        token: TokenPF2e<TokenDocumentPF2e<ScenePF2e>> | null | undefined,
+    ): void {
         if (!token?.actor?.isOfType("party")) return;
 
-        const { actor, scene } = token;
+        const { actor } = token;
         const actionIcon = ((): HTMLImageElement => {
             const imgElement = document.createElement("img");
             imgElement.src = "systems/pf2e/icons/other/enter-exit.svg";
             const willRetrieve = actor.members.some((m) => m.getActiveTokens(true, true).length > 0);
             imgElement.className = willRetrieve ? "retrieve" : "deposit";
             imgElement.title = game.i18n.localize(
-                willRetrieve ? "PF2E.Actor.Party.ClownCar.Retrieve" : "PF2E.Actor.Party.ClownCar.Deposit"
+                willRetrieve ? "PF2E.Actor.Party.ClownCar.Retrieve" : "PF2E.Actor.Party.ClownCar.Deposit",
             );
 
             return imgElement;
@@ -38,29 +46,20 @@ export const RenderTokenHUD = {
         });
 
         controlButton.addEventListener("click", async () => {
-            const memberTokensIds = R.uniq(
-                actor.members.flatMap((m) => m.getActiveTokens(true, true)).map((t) => t.id)
-            );
-
-            if (memberTokensIds.length > 0) {
-                await scene.deleteEmbeddedDocuments("Token", memberTokensIds);
-            } else {
-                const distance = canvas.dimensions?.size ?? 100;
-                const newTokens = (
-                    await Promise.all(
-                        actor.members.map((m, index) =>
-                            m.getTokenDocument({
-                                x: token.document.x + (index + 1) * distance,
-                                y: token.document.y,
-                            })
-                        )
-                    )
-                ).map((t) => t.toObject());
-                await scene.createEmbeddedDocuments("Token", newTokens);
+            if (controlButton.dataset.disabled) return;
+            controlButton.dataset.disabled = "true";
+            try {
+                await new PartyClownCar(token.document).toggleState();
+                const switchToDeposit = actionIcon.className === "retrieve";
+                actionIcon.className = switchToDeposit ? "deposit" : "retrieve";
+                actionIcon.title = game.i18n.localize(
+                    switchToDeposit ? "PF2E.Actor.Party.ClownCar.Deposit" : "PF2E.Actor.Party.ClownCar.Retrieve",
+                );
+            } finally {
+                delete controlButton.dataset.disabled;
             }
-            canvas.tokens.hud.render();
         });
 
         htmlQuery(html, "[data-action=effects]")?.replaceWith(controlButton);
-    },
-};
+    }
+}

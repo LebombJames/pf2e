@@ -1,6 +1,6 @@
 {
     "_id": "5q8a36QyYAslgnsk",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Eldritch Calm",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
         },
         "rules": [
             {
@@ -42,9 +47,6 @@
                 "value": 20
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "rare",
             "value": []

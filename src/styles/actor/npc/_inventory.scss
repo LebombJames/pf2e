@@ -1,103 +1,16 @@
-.expandable {
-    display: none;
-}
+.tab.inventory.active {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    overflow-y: hidden;
+    padding-bottom: 1.25rem;
 
-.section-container.inventory-toggles {
-    padding: 4px 6px 6px 6px;
-}
+    .inventory-section {
+        max-height: calc(100% - 1rem);
 
-.inventory-section {
-    --border-color: #{$secondary-accent};
-    flex: 1 0 auto;
-    padding: 0px;
-    margin: 0px;
-
-    .coinage {
-        margin-bottom: 8px;
-    }
-
-    .inventory-list {
-        & > :first-child {
-            border-radius: 3px 3px 0px 0px;
+        .coinage .wealth,
+        header {
+            background: var(--primary-background);
         }
-
-        .inventory-header {
-            background-color: var(--primary-background);
-            display: flex;
-            flex: 1;
-            flex-flow: row nowrap;
-            color: white;
-            align-items: baseline;
-
-            h4 {
-                margin: 0px;
-            }
-
-            div {
-                border: none;
-            }
-        }
-
-        .item {
-            .item-image {
-                border: 2px solid $faded-color;
-                border-radius: 3px;
-                margin: 2px 4px 2px 6px;
-            }
-
-            &[data-item-rarity="common"] {
-                .item-name {
-                    h4 {
-                        border-color: var(--color-rarity-common);
-                        color: var(--color-rarity-common);
-                    }
-                }
-            }
-
-            &[data-item-rarity="uncommon"] {
-                .item-name {
-                    h4 {
-                        border-color: var(--color-rarity-uncommon);
-                        color: var(--color-rarity-uncommon);
-                    }
-                }
-            }
-
-            &[data-item-rarity="rare"] {
-                .item-name {
-                    h4 {
-                        border-color: var(--color-rarity-rare);
-                        color: var(--color-rarity-rare);
-                    }
-                }
-            }
-
-            &[data-item-rarity="unique"] {
-                .item-name {
-                    h4 {
-                        border-color: var(--color-rarity-unique);
-                        color: var(--color-rarity-unique);
-                    }
-                }
-            }
-
-            .controls .item-toggle-equip {
-                color: rgba(black, 0.4);
-                &.active {
-                    color: rgba(black, 0.75);
-                }
-            }
-        }
-    }
-
-    .footer {
-        display: flex;
-        flex: 1 0 auto;
-        width: 100%;
-        justify-content: center;
-        align-items: baseline;
-        background-color: $primary-accent;
-        color: $light-text;
-        border-radius: 0px 0px 3px 3px;
     }
 }

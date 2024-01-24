@@ -1,12 +1,14 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { SIZE_TO_REACH } from "@actor/creature/values.ts";
 import { ItemPF2e, WeaponPF2e } from "@item";
-import { ItemSummaryData } from "@item/data/index.ts";
-import { BaseWeaponType, WeaponCategory, WeaponGroup, WeaponRangeIncrement } from "@item/weapon/types.ts";
+import { RangeData } from "@item/types.ts";
+import { BaseWeaponType, WeaponCategory, WeaponGroup } from "@item/weapon/types.ts";
+import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { simplifyFormula } from "@scripts/dice.ts";
 import { DamageCategorization } from "@system/damage/helpers.ts";
 import { ConvertedNPCDamage, WeaponDamagePF2e } from "@system/damage/weapon.ts";
-import { tupleHasValue } from "@util";
+import { sluggify, tupleHasValue } from "@util";
+import * as R from "remeda";
 import { MeleeFlags, MeleeSource, MeleeSystemData, NPCAttackTrait } from "./data.ts";
 
 class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
@@ -31,8 +33,8 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         return this.isRanged && this.system.traits.value.some((t) => t.startsWith("thrown"));
     }
 
-    /** The ability score this attack is based on: determines which of the Clumsy and Enfeebled conditions apply */
-    get ability(): "str" | "dex" {
+    /** The attribute this attack is based on: determines which of the Clumsy and Enfeebled conditions apply */
+    get defaultAttribute(): "str" | "dex" {
         const { traits } = this;
         return this.isMelee ? (traits.has("finesse") ? "dex" : "str") : traits.has("brutal") ? "str" : "dex";
     }
@@ -47,31 +49,33 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         return reachTrait ? Number(reachTrait.replace("reach-", "")) : SIZE_TO_REACH[this.actor?.size ?? "med"];
     }
 
-    /** The range increment of this attack, or null if a melee attack */
-    get rangeIncrement(): WeaponRangeIncrement | null {
+    /** The range maximum and possibly also increment if a ranged attack; otherwise null */
+    get range(): RangeData | null {
         if (this.isMelee) return null;
 
-        const incrementTrait = this.system.traits.value.find((t) => /^(?:range(?:-increment)?|thrown)-\d+$/.test(t));
-        const increment = Number(incrementTrait?.replace(/\D/g, "")) || 10;
-        return Number.isInteger(increment) ? (increment as WeaponRangeIncrement) : null;
-    }
+        const specifiedMaxRange = ((): number | null => {
+            const rangeTrait = this.system.traits.value.find((t) => /^range-\d+$/.test(t));
+            const range = Number(rangeTrait?.replace(/\D/g, "") || "NaN");
+            return Number.isInteger(range) ? range : null;
+        })();
 
-    /** Get the maximum range of the attack */
-    get maxRange(): number | null {
-        if (this.isMelee) return null;
+        const rangeIncrement = ((): number | null => {
+            if (specifiedMaxRange) return null;
+            const incrementTrait = this.system.traits.value.find((t) => /^(?:range-increment|thrown)-\d+$/.test(t));
+            return Number(incrementTrait?.replace(/\D/g, "")) || 10;
+        })();
 
-        const rangeTrait = this.system.traits.value.find((t) => /^range-\d+$/.test(t));
-        const range = Number(rangeTrait?.replace(/\D/g, ""));
-        if (Number.isInteger(range)) return range;
-
-        // No explicit maximum range: multiply range increment by six or return null
-        const rangeIncrement = this.rangeIncrement;
-        return typeof rangeIncrement === "number" ? rangeIncrement * 6 : null;
+        return specifiedMaxRange
+            ? { increment: null, max: specifiedMaxRange }
+            : rangeIncrement
+              ? { increment: rangeIncrement, max: rangeIncrement * 6 }
+              : null;
     }
 
     /** The first of this attack's damage instances */
     get baseDamage(): ConvertedNPCDamage {
-        const instance = Object.values(this.system.damageRolls).shift();
+        const partials = Object.values(this.system.damageRolls);
+        const instance = partials.find((p) => !p.category) ?? partials.at(0);
         if (!instance) {
             return {
                 dice: 0,
@@ -121,8 +125,13 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
     override prepareBaseData(): void {
         super.prepareBaseData();
 
+        this.system.traits.value = this.system.traits.value.filter((t) => t in CONFIG.PF2E.npcAttackTraits);
+
         // Set precious material (currently unused)
-        this.system.material = { precious: null };
+        this.system.material = { type: null, grade: null, effects: [] };
+
+        // Set empty property runes array for use by rule elements
+        this.system.runes = { property: [] };
 
         for (const attackDamage of Object.values(this.system.damageRolls)) {
             attackDamage.category ||= null;
@@ -144,7 +153,8 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
     }
 
     override prepareActorData(): void {
-        if (!this.actor?.isOfType("npc")) return;
+        const actor = this.actor;
+        if (!actor?.isOfType("npc")) return;
 
         // Normalize damage instance formulas and add elite/weak adjustments
         const damageInstances = Object.values(this.system.damageRolls);
@@ -157,13 +167,22 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
                 instance.damage = "1d4";
             }
 
-            const { isElite, isWeak } = this.actor;
+            const { isElite, isWeak } = actor;
             if ((isElite || isWeak) && damageInstances.indexOf(instance) === 0) {
                 const adjustment = isElite ? 2 : -2;
                 instance.damage = simplifyFormula(`${instance.damage} + ${adjustment}`);
             } else {
                 instance.damage = new Roll(instance.damage)._formula;
             }
+        }
+
+        // Adjust the NPC's reach if this attack has a reach treat
+        const reachTrait = this.system.traits.value.find((t) => /^reach-\d+$/.test(t));
+        const attackReach = Number(reachTrait?.replace(/^reach-/, "") ?? NaN);
+        if (Number.isInteger(attackReach)) {
+            const reach = actor.system.attributes.reach;
+            reach.base = attackReach > 0 ? Math.max(attackReach, reach.base) : 0;
+            reach.manipulate = reach.base;
         }
     }
 
@@ -172,6 +191,8 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
         const { damageType } = this.baseDamage;
         const damageCategory = DamageCategorization.fromDamageType(damageType);
+        const rangeIncrement = this.range?.increment;
+        const propertyRunes = R.mapToObj(this.system.runes.property, (p) => [`rune:property:${sluggify(p)}`, true]);
 
         const otherOptions = Object.entries({
             equipped: true,
@@ -181,10 +202,10 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
             [`category:${this.category}`]: !!this.category,
             [`group:${this.group}`]: !!this.group,
             [`base:${this.baseType}`]: !!this.baseType,
-            magical: this.isMagical,
-            [`range-increment:${this.rangeIncrement}`]: !!this.rangeIncrement,
+            [`range-increment:${rangeIncrement}`]: !!rangeIncrement,
             [`damage:type:${damageType}`]: true,
             [`damage:category:${damageCategory}`]: !!damageCategory,
+            ...propertyRunes,
         })
             .filter(([, isTrue]) => isTrue)
             .map(([key]) => `${prefix}:${key}`);
@@ -192,18 +213,14 @@ class MeleePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         return [baseOptions, otherOptions].flat().sort();
     }
 
-    override async getChatData(
-        this: MeleePF2e<ActorPF2e>,
-        htmlOptions: EnrichmentOptions = {}
-    ): Promise<ItemSummaryData & { map2: string; map3: string } & Omit<MeleeSystemData, "traits">> {
-        const systemData = this.system;
-        const traits = this.traitChatData(CONFIG.PF2E.weaponTraits);
-
-        const isAgile = this.traits.has("agile");
-        const map2 = isAgile ? "-4" : "-5";
-        const map3 = isAgile ? "-8" : "-10";
-
-        return this.processChatData(htmlOptions, { ...systemData, traits, map2, map3 });
+    /** Treat this item like a strike in this context and post it as one */
+    override async toMessage(
+        _event?: MouseEvent | JQuery.TriggeredEvent,
+        { create = true }: { create?: boolean } = {},
+    ): Promise<ChatMessagePF2e | undefined> {
+        if (!create) return undefined; // Nothing useful to do
+        const strike = this.actor?.system.actions?.find((s) => s.item === this);
+        return strike ? game.pf2e.rollActionMacro({ itemId: this.id, slug: strike.slug }) : undefined;
     }
 }
 

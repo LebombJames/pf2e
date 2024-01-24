@@ -13,15 +13,15 @@
             "name": "Bottled Lightning (Moderate) [Infused]",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 1
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -31,15 +31,12 @@
                     "die": "d6"
                 },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Strike</p>\n<p>Bottled lightning is packed with volatile reagents that create a blast of electricity when they are exposed to air. Bottled lightning deals 2d6 electricity damage and 2 electricity splash damage. On a hit, the target becomes off-guard until the start of your next turn. You gain a +1 item bonus to attack rolls.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Strike</p>\n<p>Bottled lightning is packed with volatile reagents that create a blast of electricity when they are exposed to air. Bottled lightning deals 2d6 electricity damage and 2 electricity splash damage. On a hit, the target becomes @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the start of your next turn. You gain a +1 item bonus to attack rolls.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 10
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 2,
                 "range": 20,
@@ -91,17 +73,15 @@
                         "text": "PF2E.BombNotes.BottledLightning.Moderate.success"
                     }
                 ],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "bottled-lightning-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 2
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -110,14 +90,12 @@
                         "bomb",
                         "consumable",
                         "electricity",
+                        "infused",
                         "splash"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -129,19 +107,19 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.T6Appwwl6nUl56Xj"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/tanglefoot-bag.webp",
+            "img": "icons/containers/bags/sack-simple-leather-tan.webp",
             "name": "Tanglefoot Bag (Lesser) [Infused]",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -151,15 +129,12 @@
                     "die": ""
                 },
                 "description": {
-                    "value": "<p>A tanglefoot bag is filled with sticky substances. When you hit a creature with a tanglefoot bag, that creature takes a -10-foot status penalty to its Speeds for 1 minute. The Escape DC is 17.</p>\n<p>On a critical hit, a creature in contact with a solid surface becomes stuck to the surface and @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] for 1 round, and a creature flying via wings has its wings tangled, causing it to fall safely to the ground and become unable to Fly again for 1 round. Tanglefoot bags are not effective when used on a creature that is in water.</p>\n<p>The target can end any effects by Escaping or spending a total of 3 actions to carefully remove the sticky substances. These Interact actions don't have to be consecutive, and other creatures can provide the actions as well.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Strike</p>\n<hr />\n<p>A tanglefoot bag is filled with sticky substances. When you hit a creature with a tanglefoot bag, that creature takes a -10-foot status penalty to its Speeds for 1 minute. The Escape DC is 17.</p>\n<p>On a critical hit, a creature in contact with a solid surface becomes stuck to the surface and @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] for 1 round, and a creature flying via wings has its wings tangled, causing it to fall safely to the ground and become unable to Fly again for 1 round. Tanglefoot bags are not effective when used on a creature that is in water.</p>\n<p>The target can end any effects by Escaping or spending a total of 3 actions to carefully remove the sticky substances. These Interact actions don't have to be consecutive, and other creatures can provide the actions as well.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -170,34 +145,19 @@
                 "level": {
                     "value": 1
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 2,
                 "range": 20,
@@ -212,7 +172,7 @@
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.BombNotes.TanglefootBag.Lesser.success",
-                        "title": "ITEM.TypeEffect"
+                        "title": "TYPES.Item.effect"
                     },
                     {
                         "key": "Note",
@@ -221,34 +181,30 @@
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.BombNotes.TanglefootBag.Lesser.criticalSuccess",
-                        "title": "ITEM.TypeEffect"
+                        "title": "TYPES.Item.effect"
                     }
                 ],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "tanglefoot-bag-lesser",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "alchemical",
                         "bomb",
-                        "consumable"
+                        "consumable",
+                        "infused"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -261,12 +217,9 @@
                 }
             },
             "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/acid-flask.webp",
-            "name": "Acid Flask (Moderate)",
+            "name": "Acid Flask (Moderate) [Infused]",
             "sort": 300000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 1
@@ -274,23 +227,28 @@
                 "bonusDamage": {
                     "value": 0
                 },
+                "bulk": {
+                    "value": 0.1
+                },
                 "category": "martial",
                 "containerId": null,
                 "damage": {
                     "damageType": "acid",
                     "dice": 1,
-                    "die": ""
+                    "die": "",
+                    "persistent": {
+                        "faces": 6,
+                        "number": 2,
+                        "type": "acid"
+                    }
                 },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Strike</p>\n<p>This flask filled with corrosive acid deals 1 acid damage, 2d6 persistent acid damage, and 2 acid splash damage. You gain a +1 item bonus to attack rolls.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Strike</p>\n<p>This flask filled with corrosive acid deals 1 acid damage, 2d6 persistent acid damage, and 2 acid splash damage. You gain a +1 item bonus to attack rolls.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -301,69 +259,35 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 10
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 2,
                 "range": 20,
                 "reload": {
                     "value": "-"
                 },
-                "rules": [
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "success"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AcidFlask.Moderate.success"
-                    },
-                    {
-                        "key": "Note",
-                        "outcome": [
-                            "criticalSuccess"
-                        ],
-                        "selector": "{item|_id}-damage",
-                        "text": "PF2E.BombNotes.AcidFlask.Moderate.criticalSuccess"
-                    }
-                ],
+                "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "acid-flask-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 2
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -372,14 +296,12 @@
                         "alchemical",
                         "bomb",
                         "consumable",
+                        "infused",
                         "splash"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -392,17 +314,17 @@
                 }
             },
             "img": "icons/consumables/potions/potion-tube-corked-green.webp",
-            "name": "Lyzerium (Moderate)",
+            "name": "Lyzerium (Moderate) [Infused]",
             "sort": 400000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "alchemical-bomb",
                 "bonus": {
                     "value": 1
                 },
                 "bonusDamage": {
+                    "value": 0
+                },
+                "bulk": {
                     "value": 0
                 },
                 "category": "martial",
@@ -418,15 +340,12 @@
                     }
                 },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">1</span> Strike</p>\n<p>A bottle of lyzerium is alchemist’s fire, except it has negligible bulk, explodes in a green flame, and is worth twice as much.</p>\n<p>Alchemist's fire is a combination of volatile liquids that ignite when exposed to air. Alchemist's fire deals 2d8 fire damage, 2 persistent fire damage, and 2 fire splash damage. You gain a +1 item bonus to attack rolls.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Strike</p>\n<p>A bottle of lyzerium is alchemist’s fire, except it has negligible bulk, explodes in a green flame, and is worth twice as much.</p>\n<p>Alchemist's fire is a combination of volatile liquids that ignite when exposed to air. Alchemist's fire deals 2d8 fire damage, 2 persistent fire damage, and 2 fire splash damage. You gain a +1 item bonus to attack rolls.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "bomb",
                 "hardness": 0,
@@ -437,34 +356,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 20
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 6,
                 "range": 20,
@@ -472,17 +376,15 @@
                     "value": "-"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "alchemists-fire-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 2
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": null
                 },
                 "traits": {
                     "rarity": "common",
@@ -491,14 +393,12 @@
                         "bomb",
                         "consumable",
                         "fire",
+                        "infused",
                         "splash"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "weapon"
@@ -515,6 +415,9 @@
             "sort": 500000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This rugged metal eyepiece etched with square patterns is designed to be worn over a single eye. Twisting the lens reveals a faint three-dimensional outline of an item you plan to build or repair, with helpful labels on the component parts.</p>\n<p>While worn, this eyepiece gives you a +1 item bonus to Crafting checks. When you Repair an item, increase the Hit Points restored by 15 per proficiency rank instead of 10.</p>"
@@ -522,9 +425,6 @@
                 "equipped": {
                     "carryType": "worn",
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -534,19 +434,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 60
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "rules": [
@@ -559,23 +459,15 @@
                 ],
                 "size": "med",
                 "slug": "crafters-eyepiece",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "invested",
-                        "magical",
-                        "transmutation"
+                        "magical"
                     ]
                 },
                 "usage": {
                     "value": "worneyepiece"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -592,16 +484,16 @@
             "sort": 600000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
-                    "value": "<p>Fine clothing, suitable for a noble or royal, is made with expensive fabrics, precious metals, and intricate patterns. You gain a +1 item bonus to checks to Make an Impression on nobility or other upper‑class folk while wearing high‑fashion fine clothing.</p>"
+                    "value": "<p>Fine clothing, suitable for a noble or royal, is made with expensive fabrics, precious metals, and intricate patterns. You gain a +1 item bonus to checks to Make an Impression on nobility or other upper-class folk while wearing high-fashion fine clothing.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -611,19 +503,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 55
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "rules": [
@@ -640,19 +532,12 @@
                 ],
                 "size": "med",
                 "slug": "clothing-high-fashion-fine",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "worn"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -664,11 +549,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.qCEOZ6109Yo34tRx"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/formula-book.webp",
+            "img": "icons/sundries/books/book-tooled-brass-brown.webp",
             "name": "Formula Book",
             "sort": 700000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>A formula book holds the formulas necessary to make items other than the common equipment from this chapter; alchemists typically get one for free. Each formula book can hold the formulas for up to 100 different items. Formulas can also appear on parchment sheets, tablets, and almost any other medium; there's no need for you to copy them into a specific book as long as you can keep them on hand to reference them.</p>"
@@ -678,9 +566,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -689,37 +574,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "formula-book-blank",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -731,33 +609,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.qpzL9UnTi4cDhy6J"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-elixirs/cognitive-mutagen.webp",
+            "img": "icons/consumables/potions/potion-vial-corked-purple.webp",
             "name": "Cognitive Mutagen (Moderate)",
             "sort": 800000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "mutagen"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "mutagen",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<hr />\n<p>Your mind becomes clear and cognition flows freely, but physical matters seem ephemeral.</p>\n<p><strong>Benefit</strong> You gain a +2 item bonus to Arcana, Crafting, Lore, Occultism, and Society checks and all checks to @UUID[Compendium.pf2e.actionspf2e.Item.Recall Knowledge]. Your critical failures on @UUID[Compendium.pf2e.actionspf2e.Item.Recall Knowledge] checks become failures instead.</p>\n<p><strong>Drawback</strong> You take a -2 penalty to weapon and unarmed attack rolls, Athletics checks, and acrobatics checks. You can carry 2 less Bulk than normal before becoming encumbered, and the maximum Bulk you can carry is reduced by 4.</p>\n<p><strong>Duration</strong> 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Cognitive Mutagen (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<hr />\n<p>Your mind becomes clear and cognition flows freely, but physical matters seem ephemeral.</p>\n<p><strong>Benefit</strong> You gain a +2 item bonus to Arcana, Crafting, Lore, Occultism, and Society checks and all checks to @UUID[Compendium.pf2e.actionspf2e.Item.Recall Knowledge]. Your critical failures on @UUID[Compendium.pf2e.actionspf2e.Item.Recall Knowledge] checks become failures instead.</p>\n<p><strong>Drawback</strong> You take a -2 penalty to weapon and unarmed attack rolls, Athletics checks, and acrobatics checks. You can carry 2 less Bulk than normal before becoming encumbered, and the maximum Bulk you can carry is reduced by 4.</p>\n<p><strong>Duration</strong> 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Cognitive Mutagen (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn"
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -767,28 +634,24 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 12
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "cognitive-mutagen-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -802,8 +665,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -819,29 +684,18 @@
             "name": "Quicksilver Mutagen (Moderate)",
             "sort": 900000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "mutagen"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "mutagen",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<hr />\n<p>Your features become thin and angular. You become swifter and nimbler, but your body also becomes fragile.</p>\n<p><strong>Benefit</strong> You gain a +2 item bonus to Acrobatics checks, Stealth checks, Thievery checks, Reflex saves, and Dexterity-based attack rolls, and you gain a +10 foot status bonus to your Speed.</p>\n<p><strong>Drawback</strong> You take damage equal to twice your level; you can't recover Hit Points lost this way by any means while the mutagen lasts. You take a -2 penalty to Fortitude saves.</p>\n<p><strong>Duration</strong> 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Quicksilver Mutagen (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<hr />\n<p>Your features become thin and angular. You become swifter and nimbler, but your body also becomes fragile.</p>\n<p><strong>Benefit</strong> You gain a +2 item bonus to Acrobatics checks, Stealth checks, Thievery checks, Reflex saves, and Dexterity-based attack rolls, and you gain a +10 foot status bonus to your Speed.</p>\n<p><strong>Drawback</strong> You take damage equal to twice your level; you can't recover Hit Points lost this way by any means while the mutagen lasts. You take a -2 penalty to Fortitude saves.</p>\n<p><strong>Duration</strong> 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Quicksilver Mutagen (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn"
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -851,28 +705,24 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 12
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "quicksilver-mutagen-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -886,8 +736,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -903,30 +755,23 @@
             "name": "Elixir of Life (Lesser) [Infused]",
             "sort": 1000000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "elixir"
-                },
-                "consume": {
-                    "value": "3d6+6"
-                },
+                "category": "elixir",
                 "containerId": null,
+                "damage": {
+                    "formula": "3d6+6",
+                    "kind": "healing",
+                    "type": "untyped"
+                },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p>Elixirs of life accelerate a living creatures natural healing processes and immune system. Upon drinking this elixir, you regain [[/r (3d6+6)[healing]]]{3d6+6 Hit Points} and gain +1 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Elixir of Life (Lesser)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p>Elixirs of life accelerate a living creatures natural healing processes and immune system. Upon drinking this elixir, you regain [[/r (3d6+6)[healing]]]{3d6+6 Hit Points} and gain +1 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Elixir of Life (Lesser)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -936,42 +781,41 @@
                 "level": {
                     "value": 5
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 30
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 2,
                 "rules": [],
                 "size": "med",
                 "slug": "elixir-of-life-lesser",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "alchemical",
                         "consumable",
                         "elixir",
-                        "healing"
+                        "healing",
+                        "infused"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -995,20 +839,18 @@
                     "4vgg120i79gkh3x1jcd6": {
                         "damage": "1d4+1",
                         "damageType": "bludgeoning"
-                    },
-                    "nimdcqxj879w6dmabf2d": {
-                        "damage": "1d6",
-                        "damageType": "fire"
                     }
                 },
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1058,6 +900,11 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "Note",
@@ -1066,9 +913,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1110,6 +954,11 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "Note",
@@ -1129,9 +978,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1186,11 +1032,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1229,16 +1077,16 @@
                     "value": 10
                 },
                 "damageRolls": {
-                    "YrUIZj8lnlmUdwVp": {
+                    "0": {
+                        "damage": "2d8",
+                        "damageType": "fire"
+                    },
+                    "1": {
                         "category": "persistent",
                         "damage": "2",
                         "damageType": "fire"
                     },
-                    "bTPCJgFzZr5w77bF": {
-                        "damage": "2d8",
-                        "damageType": "fire"
-                    },
-                    "uIVPTC5FjaReUgbZ": {
+                    "2": {
                         "category": "splash",
                         "damage": "2",
                         "damageType": "fire"
@@ -1247,11 +1095,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "alchemical",
@@ -1282,22 +1132,18 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>Shoma Lyzerius carries 2 @UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Moderate)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Bottled Lightning (Moderate)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Elixir of Life (Lesser)], 6 moderate lyzerium vials, and 2 @UUID[Compendium.pf2e.equipment-srd.Item.Tanglefoot Bag (Lesser)]. These items last for 24 hours, or until the next time he makes his daily preparations. He can spend an action to create an additional dose of any one of these items, or any of the items listed as formulas in his book.</p>"
+                    "value": "<p>Shoma Lyzerius carries 2 @UUID[Compendium.pf2e.equipment-srd.Item.Acid Flask (Moderate)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Bottled Lightning (Moderate)], 2 @UUID[Compendium.pf2e.equipment-srd.Item.Elixir of Life (Lesser)], 6 moderate lyzerium vials, and 2 @UUID[Compendium.pf2e.equipment-srd.Item.Glue Bomb (Lesser)]{Tanglefoot Bag (Lesser)}. These items last for 24 hours, or until the next time he makes his daily preparations. He can spend an action to create an additional dose of any one of these items, or any of the items listed as formulas in his book.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1323,23 +1169,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1360,20 +1199,16 @@
                 "description": {
                     "value": "<p>Lyzerius's bombs have a range increment of 30 feet (instead of 20 feet).</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1394,8 +1229,10 @@
                 "description": {
                     "value": "<p>Lyzerius's alchemical items deal an additional @Damage[1[fire]] damage on a successful Strike.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -1409,15 +1246,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1436,22 +1267,29 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Any melee weapon Lyzerius uses deals an additional @Damage[1d6[fire]] fire damage.</p>"
+                    "value": "<p>Any melee weapon Lyzerius uses deals an additional 1d6 fire damage.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "damageType": "fire",
+                        "diceNumber": 1,
+                        "dieSize": "d6",
+                        "key": "DamageDice",
+                        "predicate": [
+                            "melee"
+                        ],
+                        "selector": "strike-damage"
+                    }
+                ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1472,20 +1310,16 @@
                 "description": {
                     "value": "<p>Lyzerius can Interact to draw a bomb and then make a Strike with it.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1505,11 +1339,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1528,11 +1364,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1551,11 +1389,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1574,11 +1414,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1597,11 +1439,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1620,11 +1464,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1643,11 +1489,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1666,11 +1514,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1689,11 +1539,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -1734,12 +1586,6 @@
                 "temp": 0,
                 "value": 44
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 9
-            },
             "resistances": [
                 {
                     "type": "fire",
@@ -1752,19 +1598,42 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "CN"
-            },
             "blurb": "Male ifrit alchemist",
-            "creatureType": "Ifrit",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "dwarven",
+                    "elven",
+                    "gnomish",
+                    "kelish",
+                    "kholo",
+                    "osiriani",
+                    "pyric"
+                ]
+            },
             "level": {
                 "value": 3
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #178: Punks in a Powder Keg"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #178: Punks in a Powder Keg"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 9,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -1782,31 +1651,15 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "dwarven",
-                    "elven",
-                    "gnoll",
-                    "gnomish",
-                    "kelish",
-                    "osiriani",
-                    "pyric"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "chaotic",
                 "human",
                 "humanoid",
-                "ifrit"
+                "naari"
             ]
         }
     },

@@ -1,6 +1,6 @@
 {
     "_id": "Kz4MLcrfXFrdKhyS",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Aquatic Eyes",
     "system": {
         "actionType": {
@@ -16,24 +16,30 @@
         "level": {
             "value": 1
         },
+        "maxTakable": 2,
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "Sense",
-                "selector": "lowLightVision"
-            },
-            {
-                "key": "Sense",
-                "predicate": [
-                    "self:low-light-vision:from-ancestry"
-                ],
-                "selector": "darkvision"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
+        "rules": [],
+        "subfeatures": {
+            "senses": {
+                "darkvision": {
+                    "special": {
+                        "ancestry": true,
+                        "llv": false,
+                        "second": true
+                    }
+                },
+                "low-light-vision": {
+                    "acuity": "imprecise",
+                    "range": 30
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
         },
         "traits": {
             "rarity": "common",

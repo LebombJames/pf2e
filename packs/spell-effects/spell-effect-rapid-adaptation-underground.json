@@ -1,6 +1,6 @@
 {
     "_id": "0q2716S34XL1y9Hh",
-    "img": "systems/pf2e/icons/spells/rapid-adaptation.webp",
+    "img": "icons/magic/nature/leaf-oak-wreath-glow-green.webp",
     "name": "Spell Effect: Rapid Adaptation (Underground)",
     "system": {
         "description": {
@@ -15,15 +15,17 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
                 "key": "Sense",
                 "selector": "darkvision"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

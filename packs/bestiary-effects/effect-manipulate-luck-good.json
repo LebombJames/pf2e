@@ -1,6 +1,6 @@
 {
     "_id": "2DlOfFoYLGSlfugH",
-    "img": "systems/pf2e/icons/spells/tempt-fate.webp",
+    "img": "icons/commodities/currency/coin-inset-lightning-green.webp",
     "name": "Effect: Manipulate Luck (Good)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "selector": "all"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

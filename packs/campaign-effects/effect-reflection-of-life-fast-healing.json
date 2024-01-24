@@ -1,6 +1,6 @@
 {
     "_id": "DOxl0FDd21VMDOMP",
-    "img": "systems/pf2e/icons/spells/heal-companion.webp",
+    "img": "icons/magic/life/cross-area-circle-green-white.webp",
     "name": "Effect: Reflection of Life (Fast Healing)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #151: The Show Must Go On"
+        },
         "rules": [
             {
                 "key": "FastHealing",
@@ -22,9 +27,6 @@
                 "value": "max(3,ceil(@actor.level/2))"
             }
         ],
-        "source": {
-            "value": "Pathfinder #151: The Show Must Go On"
-        },
         "start": {
             "initiative": null,
             "value": 0

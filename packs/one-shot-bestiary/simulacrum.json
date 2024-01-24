@@ -13,15 +13,15 @@
             "name": "Warhammer",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "warhammer",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -31,15 +31,12 @@
                     "die": "d8"
                 },
                 "description": {
-                    "value": "<p>This weapon has a wooden shaft ending in a large, heavy metal head. The head of the hammer might be single‑sided or double‑sided, but it's always capable of delivering powerful bludgeoning blows.</p>"
+                    "value": "<p>This weapon has a wooden shaft ending in a large, heavy metal head. The head of the hammer might be single-sided or double-sided, but it's always capable of delivering powerful bludgeoning blows.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "hammer",
                 "hardness": 0,
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "warhammer",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -105,9 +85,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -119,12 +96,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.YMQr577asquZIP65"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/scale-mail.webp",
+            "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
             "name": "Scale Mail",
             "sort": 200000,
             "system": {
                 "acBonus": 3,
                 "baseItem": "scale-mail",
+                "bulk": {
+                    "value": 2
+                },
                 "category": "medium",
                 "checkPenalty": -2,
                 "containerId": null,
@@ -137,9 +117,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "2"
-                },
                 "group": "composite",
                 "hardness": 0,
                 "hp": {
@@ -149,58 +126,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 4
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "med",
                 "slug": "scale-mail",
-                "source": {
-                    "value": ""
-                },
                 "speedPenalty": -5,
-                "stackGroup": null,
                 "strength": 2,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "3"
                 }
             },
             "type": "armor"
@@ -212,7 +165,10 @@
             "sort": 300000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
                     "value": "<p>Carried by Auldegrund in the dining hall.</p>"
                 },
@@ -220,9 +176,6 @@
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -232,35 +185,28 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "tiny",
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -294,11 +240,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -326,11 +274,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -349,6 +299,11 @@
                 "proficient": {
                     "value": 1
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "FlatModifier",
@@ -362,9 +317,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+12 to Impersonate",
@@ -411,31 +363,37 @@
                 "temp": 0,
                 "value": 60
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 12
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": 4
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder One-Shot #2: Dinner at Lionlodge"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder One-Shot #2: Dinner at Lionlodge"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 12,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -453,17 +411,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "rare",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },

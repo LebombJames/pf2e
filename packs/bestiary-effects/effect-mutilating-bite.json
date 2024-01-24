@@ -1,6 +1,6 @@
 {
     "_id": "LgZx5xotO08JzhVc",
-    "img": "systems/pf2e/icons/spells/biting-words.webp",
+    "img": "icons/magic/death/mouth-bite-fangs-vampire.webp",
     "name": "Effect: Mutilating Bite",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -41,9 +46,6 @@
                 "value": "@item.flags.pf2e.rulesSelections.penaltyValue"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,6 +1,6 @@
 {
     "_id": "5xCheSMgtQhQZm00",
-    "img": "systems/pf2e/icons/spells/garden-of-death.webp",
+    "img": "icons/magic/nature/plant-vines-skull-green.webp",
     "name": "Spell Effect: Garden of Death (Critical Success)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 4
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -29,9 +34,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

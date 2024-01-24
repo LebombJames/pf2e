@@ -1,6 +1,6 @@
 {
     "_id": "2SWUzp4JuNK5EX0J",
-    "img": "systems/pf2e/icons/spells/adapt-self.webp",
+    "img": "icons/creatures/magical/spirit-undead-ghost-purple.webp",
     "name": "Spell Effect: Adapt Self (Swim)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Gods & Magic"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -22,9 +27,6 @@
                 "value": "round(@actor.attributes.speed.total/2)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Gods & Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

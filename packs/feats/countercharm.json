@@ -1,6 +1,6 @@
 {
     "_id": "r7srDh7Iz94vfwwN",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Countercharm",
     "system": {
         "actionType": {
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Grand Bazaar"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Grand Bazaar"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

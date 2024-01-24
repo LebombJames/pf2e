@@ -1,6 +1,6 @@
 {
     "_id": "an8sq0RaJ8PW81EW",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Puncturing Horn",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
         },
         "rules": [
             {
@@ -50,9 +55,6 @@
                 "selector": "horn-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [

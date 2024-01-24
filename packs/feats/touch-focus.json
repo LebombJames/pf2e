@@ -1,6 +1,6 @@
 {
     "_id": "w1GFspPIQ9f5MbFL",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Touch Focus",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Fists of the Ruby Phoenix Hardcover Compilation"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -40,15 +45,12 @@
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Fists of the Ruby Phoenix Hardcover Compilation"
-        },
         "traits": {
             "rarity": "common",
             "value": [
                 "archetype",
                 "manipulate",
-                "metamagic"
+                "spellshape"
             ]
         }
     },

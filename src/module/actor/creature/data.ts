@@ -1,44 +1,36 @@
-import {
-    AbilityBasedStatistic,
+import type {
     ActorAttributes,
+    ActorAttributesSource,
+    ActorDetailsSource,
     ActorHitPoints,
+    ActorHitPointsSource,
     ActorSystemData,
     ActorSystemSource,
-    ActorTraitsData,
     ActorTraitsSource,
+    AttributeBasedTraceData,
     BaseActorSourcePF2e,
     StrikeData,
 } from "@actor/data/base.ts";
-import { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
-import type {
-    ActorAlliance,
-    AttributeString,
-    MovementType,
-    SaveType,
-    SkillAbbreviation,
-    SkillLongForm,
-} from "@actor/types.ts";
-import type { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
-import { LabeledNumber, ValueAndMax, ValuesList, ZeroToThree } from "@module/data.ts";
-import { Statistic, StatisticTraceData } from "@system/statistic/index.ts";
-import { CreatureSensePF2e, SenseAcuity, SenseType } from "./sense.ts";
-import { Alignment, CreatureTrait } from "./types.ts";
+import type { ActorSizePF2e } from "@actor/data/size.ts";
+import type { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
+import type { AttributeString, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
+import type { LabeledNumber, ValueAndMax, ZeroToThree } from "@module/data.ts";
+import type { ArmorClassTraceData, Statistic } from "@system/statistic/index.ts";
+import type { PerceptionTraceData } from "@system/statistic/perception.ts";
+import type { CreatureActorType, CreatureTrait, Language, SenseAcuity, SenseType, SpecialVisionType } from "./types.ts";
 
-type BaseCreatureSource<TType extends CreatureType, TSystemSource extends CreatureSystemSource> = BaseActorSourcePF2e<
-    TType,
-    TSystemSource
->;
+type BaseCreatureSource<
+    TType extends CreatureActorType,
+    TSystemSource extends CreatureSystemSource,
+> = BaseActorSourcePF2e<TType, TSystemSource>;
 
 /** Skill and Lore statistics for rolling. */
 type CreatureSkills = Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
 
 interface CreatureSystemSource extends ActorSystemSource {
-    details?: {
-        level?: { value: number };
-        alliance?: ActorAlliance;
-        /** Present on familiars */
-        creature?: unknown;
-    };
+    attributes: CreatureAttributesSource;
+
+    details?: CreatureDetailsSource;
 
     /** Traits, languages, and other information. */
     traits?: CreatureTraitsSource;
@@ -52,21 +44,25 @@ interface CreatureSystemSource extends ActorSystemSource {
     resources?: CreatureResourcesSource;
 }
 
-type CreatureDetails = {
-    /** The alignment this creature has */
-    alignment: { value: Alignment };
-    /** The alliance this NPC belongs to: relevant to mechanics like flanking */
-    alliance: ActorAlliance;
-    /** The creature level for this actor */
-    level: { value: number };
-};
-
-interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {
-    /** Languages which this actor knows and can speak. */
-    languages: ValuesList<Language>;
-
-    senses?: { value: string } | SenseData[];
+interface CreatureAttributesSource extends ActorAttributesSource {
+    hp: CreatureHitPointsSource;
 }
+
+interface CreatureHitPointsSource extends ActorHitPointsSource {
+    temp: number;
+}
+
+interface CreatureDetailsSource extends ActorDetailsSource {
+    /** Languages this creature knows and (probably) can speak */
+    languages?: CreatureLanguagesData;
+}
+
+interface CreatureLanguagesData {
+    value: Language[];
+    details: string;
+}
+
+interface CreatureTraitsSource extends ActorTraitsSource<CreatureTrait> {}
 
 interface CreatureResourcesSource {
     focus?: {
@@ -85,6 +81,9 @@ interface CreatureSystemData extends Omit<CreatureSystemSource, "attributes">, A
 
     attributes: CreatureAttributes;
 
+    /** The perception statistic */
+    perception: CreaturePerceptionData;
+
     /** Maps roll types -> a list of modifiers which should affect that roll type. */
     customModifiers: Record<string, ModifierPF2e[]>;
     /** Maps damage roll types -> a list of damage dice which should be added to that damage roll type. */
@@ -93,52 +92,51 @@ interface CreatureSystemData extends Omit<CreatureSystemSource, "attributes">, A
     /** Saving throw data */
     saves: CreatureSaves;
 
-    skills: Record<SkillAbbreviation, SkillData>;
+    skills: Record<string, SkillData>;
 
     actions?: StrikeData[];
     resources?: CreatureResources;
 }
 
-type CreatureType = (typeof CREATURE_ACTOR_TYPES)[number];
+type SenseData =
+    | { type: SpecialVisionType; acuity?: "precise"; range?: number; source?: Maybe<string> }
+    | { type: SenseType; acuity: SenseAcuity; range: number; source?: Maybe<string> };
 
-interface SenseData {
-    type: SenseType;
-    acuity?: SenseAcuity;
-    value?: string;
-    source?: string;
+interface CreaturePerceptionData extends PerceptionTraceData {
+    attribute: AttributeString;
 }
 
 /** Data describing the value & modifier for a base ability score. */
 interface AbilityData {
     /** The modifier for this ability */
     mod: number;
+    /** A label like "Strength", "Dexterity", etc. */
+    label: string;
+    /** A label like "Str", "Dex", etc. */
+    shortLabel: string;
 }
 
 type Abilities = Record<AttributeString, AbilityData>;
 
-/** A type representing the possible ability strings. */
-type Language = keyof ConfigPF2e["PF2E"]["languages"];
-type Attitude = keyof ConfigPF2e["PF2E"]["attitude"];
-
-interface CreatureTraitsData extends ActorTraitsData<CreatureTrait>, Omit<CreatureTraitsSource, "rarity" | "size"> {
-    senses?: { value: string } | CreatureSensePF2e[];
-    /** Languages which this actor knows and can speak. */
-    languages: ValuesList<Language>;
+interface CreatureTraitsData extends Required<CreatureTraitsSource> {
+    size: ActorSizePF2e;
 }
+interface CreatureDetails extends Required<CreatureDetailsSource> {}
 
-type SkillData = StatisticTraceData & AbilityBasedStatistic;
+type SkillData = AttributeBasedTraceData;
 
 /** The full save data for a character; including its modifiers and other details */
-type SaveData = StatisticTraceData & AbilityBasedStatistic & { saveDetail?: string };
+interface SaveData extends AttributeBasedTraceData {
+    saveDetail?: string;
+}
 
 type CreatureSaves = Record<SaveType, SaveData>;
 
 /** Miscallenous but mechanically relevant creature attributes.  */
 interface CreatureAttributes extends ActorAttributes {
     hp: ActorHitPoints;
-    ac: { value: number };
-    hardness?: { value: number };
-    perception: CreaturePerception;
+    ac: CreatureACData;
+    hardness: { value: number };
 
     /** The creature's natural reach */
     reach: {
@@ -162,7 +160,9 @@ interface CreatureAttributes extends ActorAttributes {
     emitsSound: boolean;
 }
 
-type CreaturePerception = StatisticTraceData;
+interface CreatureACData extends ArmorClassTraceData {
+    attribute: AttributeString;
+}
 
 interface CreatureSpeeds extends StatisticModifier {
     /** The actor's primary speed (usually walking/stride speed). */
@@ -228,14 +228,19 @@ interface HeldShieldData {
     icon: ImageFilePath;
 }
 
-export {
+export { VisionLevels };
+export type {
     Abilities,
     AbilityData,
-    Attitude,
     BaseCreatureSource,
+    CreatureActorType,
     CreatureAttributes,
     CreatureDetails,
+    CreatureDetailsSource,
+    CreatureHitPointsSource,
     CreatureInitiativeSource,
+    CreatureLanguagesData,
+    CreaturePerceptionData,
     CreatureResources,
     CreatureResourcesSource,
     CreatureSaves,
@@ -245,14 +250,11 @@ export {
     CreatureSystemSource,
     CreatureTraitsData,
     CreatureTraitsSource,
-    CreatureType,
     HeldShieldData,
     LabeledSpeed,
-    Language,
     SaveData,
     SenseData,
     SkillAbbreviation,
     SkillData,
     VisionLevel,
-    VisionLevels,
 };

@@ -1,15 +1,15 @@
 {
     "_id": "KqzTdCwrfoqfSR5b",
-    "img": "systems/pf2e/icons/default-icons/equipment.svg",
+    "img": "icons/sundries/books/book-embossed-spiral-purple-white.webp",
     "name": "Tome of Restorative Cleansing (Lesser)",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
-            "value": "<p>This book is dark blue on the night of the new moon, gradually shifting to bright red as the moon waxes.</p>\n<p><strong>Activate</strong><span class=\"pf2-icon\">F</span> envision (healing, necromancy, positive)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Requirements</strong> Your last action was to cast a spell prepared from this grimoire, and the spell removed a harmful condition or affliction from yourself or an ally</p>\n<hr />\n<p><strong>Effect</strong> Choose one creature whose condition was removed by the required spell. That creature gains [[/r 1d8]] temporary Hit Points that last for 1 hour.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>This book is dark blue on the night of the new moon, gradually shifting to bright red as the moon waxes.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> envision (healing, necromancy, vitality)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Requirements</strong> Your last action was to cast a spell prepared from this grimoire, and the spell removed a harmful condition or affliction from yourself or an ally</p>\n<p><strong>Effect</strong> Choose one creature whose condition was removed by the required spell. That creature gains 1d8 temporary Hit Points that last for 1 hour.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Tome of Restorative Cleansing (Lesser)]</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,40 +19,32 @@
         "level": {
             "value": 5
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 130
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
                 "grimoire",
-                "magical",
-                "necromancy"
+                "magical"
             ]
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

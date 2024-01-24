@@ -1,28 +1,17 @@
 {
     "_id": "Ti4gWILk69LPxKuU",
-    "img": "systems/pf2e/icons/equipment/adventuring-gear/candle.webp",
+    "img": "icons/sundries/lights/candle-unlit-grey.webp",
     "name": "Candle",
     "system": {
-        "autoDestroy": {
-            "value": true
-        },
         "baseItem": null,
-        "charges": {
-            "max": 1,
-            "value": 1
+        "bulk": {
+            "value": 0
         },
-        "consumableType": {
-            "value": "other"
-        },
-        "consume": {
-            "value": ""
-        },
+        "category": "other",
         "containerId": null,
+        "damage": null,
         "description": {
             "value": "<p>A lit candle sheds dim light in a 10‐foot radius for 8 hours.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -32,20 +21,20 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "per": 10,
             "value": {
                 "cp": 1
             }
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "quantity": 1,
         "rules": [
@@ -77,14 +66,10 @@
                 "predicate": [
                     "lit-candle"
                 ],
-                "value": "systems/pf2e/icons/equipment/adventuring-gear/candle.webp"
+                "value": "icons/sundries/lights/candle-unlit-grey.webp"
             }
         ],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
@@ -92,8 +77,10 @@
         "usage": {
             "value": "held-in-one-hand"
         },
-        "weight": {
-            "value": "-"
+        "uses": {
+            "autoDestroy": true,
+            "max": 1,
+            "value": 1
         }
     },
     "type": "consumable"

@@ -9,12 +9,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4tIVTg9wj56RrveA"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
+            "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
             "name": "Leather Armor",
             "sort": 100000,
             "system": {
                 "acBonus": 1,
                 "baseItem": "leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -26,9 +29,6 @@
                     "carryType": "worn",
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "1"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -38,58 +38,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "med",
                 "slug": "leather-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "speedPenalty": 0,
                 "strength": 0,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -106,6 +82,9 @@
             "sort": 200000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": ""
@@ -115,9 +94,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -126,35 +102,28 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 3,
                 "rules": [],
                 "size": "med",
                 "slug": "vial",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -170,30 +139,19 @@
             "name": "Whiskey",
             "sort": 300000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "drug"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "drug",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p>Alcohol is a common substance available in stunning variety. The Price of a dose of alcohol depends on the specific beverage. You can't recover from the sickened condition from alcohol while affected.</p>\n<p>If you fail a saving throw against alcohol other than initial saves, the affliction's stage doesn't increase; the only way to increase the stage of alcohol's affliction is to consume more alcohol.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact (Ingested)</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:12]</p>\n<p><strong>Onset</strong> 10 minutes</p>\n<p><strong>Stage 1</strong> +1 item bonus to saving throws against fear (10 minutes)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard], +1 item bonus to saving throws against fear effects (10 minutes)</p>\n<p><strong>Stage 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1}, off-guard, @UUID[Compendium.pf2e.conditionitems.Item.Stupefied]{Stupefied 2} (10 minutes)</p>\n<p><strong>Stage 4</strong> clumsy 2 and @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} (10 minutes)</p>\n<p><strong>Stage 5</strong> clumsy 2, sickened 2, and stupefied 2 (10 minutes)</p>\n<p><strong>Stage 6</strong> @UUID[Compendium.pf2e.conditionitems.Item.Unconscious] (8 hours)</p>\n<p><strong>Stage 7</strong> death</p>"
+                    "value": "<p>Alcohol is a common substance available in stunning variety. The Price of a dose of alcohol depends on the specific beverage. You can't recover from the sickened condition from alcohol while affected.</p>\n<p>If you fail a saving throw against alcohol other than initial saves, the affliction's stage doesn't increase; the only way to increase the stage of alcohol's affliction is to consume more alcohol.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact (Ingested)</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:12]</p>\n<p><strong>Onset</strong> 10 minutes</p>\n<p><strong>Stage 1</strong> +1 item bonus to saving throws against fear (10 minutes)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard], +1 item bonus to saving throws against fear effects (10 minutes)</p>\n<p><strong>Stage 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1}, off-guard, @UUID[Compendium.pf2e.conditionitems.Item.Stupefied]{Stupefied 2} (10 minutes)</p>\n<p><strong>Stage 4</strong> clumsy 2 and @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} (10 minutes)</p>\n<p><strong>Stage 5</strong> clumsy 2, sickened 2, and stupefied 2 (10 minutes)</p>\n<p><strong>Stage 6</strong> @UUID[Compendium.pf2e.conditionitems.Item.Unconscious] (8 hours)</p>\n<p><strong>Stage 7</strong> death</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -203,28 +161,24 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "cp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Gamemastery Guide"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "alcohol",
-                "source": {
-                    "value": "Pathfinder Gamemastery Guide"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -238,8 +192,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -268,11 +224,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -310,11 +268,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -344,25 +304,18 @@
                 "description": {
                     "value": "<p><strong>Requirements</strong> The dockhand is adjacent to a crate</p>\n<hr />\n<p><strong>Effect</strong> The dockhand picks up a crate and heaves it up to 15 feet. Upon landing, the crate breaks open in a @Template[type:burst|distance:5]. Each creature within the area takes @Damage[2d6[bludgeoning]] damage (@Check[type:reflex|dc:13|basic:true] save), and the area becomes difficult terrain until cleared.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "manipulate"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -383,8 +336,10 @@
                 "description": {
                     "value": "<p>The dockhand Interacts to either draw a bottle of alcohol or pick up a nearby unattended bottle of alcohol and drink the whole thing. For 1 minute, the dockhand gains a +2 item bonus to melee damage rolls and saving throws against fear, but they become @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -409,20 +364,11 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "manipulate"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -442,11 +388,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -465,11 +413,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -488,11 +438,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -511,11 +463,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -556,31 +510,37 @@
                 "temp": 0,
                 "value": 20
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 3
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "CE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": 0
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-22: Doom of Cassomir"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-22: Doom of Cassomir"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 3,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -598,21 +558,13 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "chaotic",
+                "evil",
                 "human",
                 "humanoid"
             ]

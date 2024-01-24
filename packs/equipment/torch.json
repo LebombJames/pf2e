@@ -1,15 +1,15 @@
 {
     "_id": "8Jdw4yAzWYylGePS",
-    "img": "systems/pf2e/icons/equipment/adventuring-gear/torch.webp",
+    "img": "icons/sundries/lights/torch-brown.webp",
     "name": "Torch",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
             "value": "<p>A torch sheds bright light in a 20-foot radius (and dim light to the next 20 feet) for 1 hour. It can be used as an improvised weapon that deals 1d4 bludgeoning damage plus 1 fire damage.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,19 +19,19 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "cp": 1
             }
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "quantity": 1,
         "rules": [
@@ -41,13 +41,15 @@
                     "lit-torch"
                 ],
                 "value": {
+                    "alpha": 0.45,
                     "animation": {
-                        "intensity": 4,
-                        "speed": 1,
-                        "type": "torch"
+                        "intensity": 1,
+                        "speed": 2,
+                        "type": "flame"
                     },
+                    "attenuation": 0.4,
                     "bright": 20,
-                    "color": "#9b7337",
+                    "color": "#ffae3d",
                     "dim": 40,
                     "shadows": 0.2
                 }
@@ -64,6 +66,29 @@
                 "key": "Strike",
                 "otherTags": [
                     "improvised"
+                ],
+                "predicate": [
+                    {
+                        "not": "lit-torch"
+                    }
+                ]
+            },
+            {
+                "category": "simple",
+                "damage": {
+                    "base": {
+                        "damageType": "bludgeoning",
+                        "dice": 1,
+                        "die": "d4"
+                    }
+                },
+                "img": "icons/sundries/lights/torch-brown-lit.webp",
+                "key": "Strike",
+                "otherTags": [
+                    "improvised"
+                ],
+                "predicate": [
+                    "lit-torch"
                 ]
             },
             {
@@ -87,23 +112,16 @@
                 "predicate": [
                     "lit-torch"
                 ],
-                "value": "systems/pf2e/icons/equipment/held-items/everburning-torch.webp"
+                "value": "icons/sundries/lights/torch-brown-lit.webp"
             }
         ],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

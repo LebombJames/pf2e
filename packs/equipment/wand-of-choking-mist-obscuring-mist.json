@@ -1,15 +1,15 @@
 {
     "_id": "Rhr6rkOwjFwCJV0T",
-    "img": "systems/pf2e/icons/default-icons/equipment.svg",
+    "img": "icons/weapons/wands/wand-carved-fire.webp",
     "name": "Wand of Choking Mist (Obscuring Mist)",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
-            "value": "<p>This blackened wood wand has a smoldering tip, emitting a slight trail of steam.</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day, plus overcharge</p>\n<hr />\n<p><strong>Effect</strong> You cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Obscuring Mist]</em>, but the mist prevents creatures from being able to breathe in its area. They must hold their breath or start suffocating.</p>\n<hr />\n<p><strong>Craft Requirements</strong> Supply a casting of <em>@UUID[Compendium.pf2e.spells-srd.Item.Obscuring Mist]</em>.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>This blackened wood wand has a smoldering tip, emitting a slight trail of steam.</p>\n<p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day, plus overcharge</p>\n<hr />\n<p><strong>Effect</strong> You cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</em>, but the mist prevents creatures from being able to breathe in its area. They must hold their breath or start suffocating.</p>\n<hr />\n<p><strong>Craft Requirements</strong> Supply a casting of <em>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</em>.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,31 +19,26 @@
         "level": {
             "value": 6
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 250
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
-                "conjuration",
                 "magical",
                 "wand",
                 "water"
@@ -51,9 +46,6 @@
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

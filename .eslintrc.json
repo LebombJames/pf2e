@@ -18,16 +18,19 @@
         "dist/"
     ],
     "rules": {
-        "eqeqeq": [
-            "error",
-            "always"
-        ],
+        "eqeqeq": "error",
         "prettier/prettier": "error",
         "no-console": "off",
         "no-plusplus": [
             "error",
             {
                 "allowForLoopAfterthoughts": true
+            }
+        ],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowShortCircuit": true
             }
         ],
         "spaced-comment": [

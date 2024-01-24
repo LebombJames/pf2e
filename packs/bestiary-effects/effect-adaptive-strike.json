@@ -1,6 +1,6 @@
 {
     "_id": "361dIAAhiZE0wg8v",
-    "img": "systems/pf2e/icons/unarmed-attacks/bone-shard.webp",
+    "img": "icons/commodities/claws/claws-plain-brown-orange.webp",
     "name": "Effect: Adaptive Strike",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 7
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
         },
         "rules": [
             {
@@ -45,9 +50,6 @@
                 "value": "{item|flags.pf2e.rulesSelections.material}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

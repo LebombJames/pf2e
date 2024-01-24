@@ -15,7 +15,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "RUEAV5LMUGFHcXcW",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/armor/specific-magic-armor/breastplate-of-command.webp",
+            "img": "icons/equipment/chest/breastplate-gorget-steel-purple.webp",
             "range": [
                 1,
                 6
@@ -43,7 +43,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "eoI3M6FXtcPWeg7i",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/companion-items/barding-of-the-zephyr.webp",
+            "img": "icons/environment/creatures/horse-tan.webp",
             "range": [
                 13,
                 18
@@ -155,7 +155,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "HRNQ1j2OM54Qakhp",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/staves/staff-of-abjuration.webp",
+            "img": "icons/weapons/staves/staff-simple-spiral.webp",
             "range": [
                 58,
                 63
@@ -239,7 +239,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "Ab5EjJyoRSec5YrW",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/staves/staff-of-necromancy.webp",
+            "img": "icons/weapons/staves/staff-skull-feathers-brown.webp",
             "range": [
                 94,
                 99
@@ -421,7 +421,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "shKPtYN0YUOe07K2",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "range": [
                 166,
                 171

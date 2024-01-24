@@ -1,6 +1,6 @@
 {
     "_id": "vw6BbXYsEgCR3dPt",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/magic/water/orb-ice-opaque.webp",
     "name": "Effect: Rime Crystal - Armor (Greater)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 8
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
+        },
         "rules": [
             {
                 "key": "Resistance",
@@ -22,9 +27,6 @@
                 "value": 5
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

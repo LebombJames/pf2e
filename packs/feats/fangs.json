@@ -1,6 +1,6 @@
 {
     "_id": "Y8sKn8NH1wC7Mrui",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Fangs",
     "system": {
         "actionType": {
@@ -11,13 +11,18 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>Your incisors have grown into true fangs: long, sharp, and well-suited to drawing blood.</p>\n<p>You gain a fangs unarmed attack that deals @Damage[1d6[piercing]] damage. Your fangs are in the brawling group and have the grapple and unarmed traits.</p>"
+            "value": "<p>Your incisors have grown into true fangs: long, sharp, and well-suited to drawing blood.</p>\n<p>You gain a fangs unarmed attack that deals 1d6 piercing damage. Your fangs are in the brawling group and have the grapple and unarmed traits.</p>"
         },
         "level": {
             "value": 1
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -30,6 +35,7 @@
                     }
                 },
                 "group": "brawling",
+                "img": "systems/pf2e/icons/unarmed-attacks/fangs.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Fangs",
                 "range": null,
@@ -39,9 +45,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "Ra32tlqBxHzT6fzN",
-    "img": "systems/pf2e/icons/features/classes/druid-weapon-expertise.webp",
+    "img": "icons/skills/melee/hand-grip-staff-teal.webp",
     "name": "Druid Weapon Expertise",
     "system": {
         "actionType": {
@@ -19,22 +19,21 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
-                "value": 2
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "simple": {
+                    "rank": 2
+                },
+                "unarmed": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

@@ -19,22 +19,21 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.classDCs.champion.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.traditions.divine.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "champion": {
+                    "rank": 2
+                },
+                "spellcasting": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

@@ -1,6 +1,6 @@
 {
     "_id": "UojXcKf98oAFJUE0",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Skeletal Resistance",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
         },
         "rules": [
             {
@@ -48,9 +53,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,28 +1,17 @@
 {
     "_id": "JqKNiEJxSZX1sD06",
-    "img": "systems/pf2e/icons/default-icons/consumable.svg",
+    "img": "icons/commodities/tech/bearing-steel-green.webp",
     "name": "Magnetic Shot (Greater)",
     "system": {
-        "autoDestroy": {
-            "value": true
-        },
         "baseItem": null,
-        "charges": {
-            "max": 0,
+        "bulk": {
             "value": 0
         },
-        "consumableType": {
-            "value": "ammo"
-        },
-        "consume": {
-            "value": ""
-        },
+        "category": "ammo",
         "containerId": null,
+        "damage": null,
         "description": {
-            "value": "<p><strong>Ammunition</strong> any</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">1</span> command</p>\n<p>Shiny gray metal that slightly thrums when touched makes up the metal parts of a magnetic shot. When activated, the shot is more effective against a target wearing metal armor or made of metal. The activated ammunition grants a +2 circumstance bonus to attack rolls against such targets. Due to magnetic acceleration, the ammunition deals four additional weapon damage dice and is deadly d12.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p><strong>Ammunition</strong> any</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> command</p>\n<p>Shiny gray metal that slightly thrums when touched makes up the metal parts of a magnetic shot. When activated, the shot is more effective against a target wearing metal armor or made of metal. The activated ammunition grants a +2 circumstance bonus to attack rolls against such targets. Due to magnetic acceleration, the ammunition deals four additional weapon damage dice and is deadly d12.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -32,40 +21,58 @@
         "level": {
             "value": 17
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 2200
             }
         },
-        "quantity": 1,
-        "rules": [],
-        "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
-        "stackGroup": null,
+        "quantity": 1,
+        "rules": [
+            {
+                "definition": [
+                    "item:id:{item|_id}"
+                ],
+                "key": "AdjustStrike",
+                "mode": "add",
+                "property": "weapon-traits",
+                "value": "deadly-d12"
+            },
+            {
+                "diceNumber": 4,
+                "key": "DamageDice",
+                "selector": "{item|_id}-damage"
+            },
+            {
+                "key": "FlatModifier",
+                "selector": "{item|_id}-attack",
+                "type": "circumstance",
+                "value": 2
+            }
+        ],
+        "size": "med",
         "traits": {
             "rarity": "common",
             "value": [
                 "consumable",
-                "magical",
-                "evocation"
+                "magical"
             ]
         },
         "usage": {
             "value": "other"
         },
-        "weight": {
-            "value": "-"
+        "uses": {
+            "autoDestroy": true,
+            "max": 1,
+            "value": 1
         }
     },
     "type": "consumable"

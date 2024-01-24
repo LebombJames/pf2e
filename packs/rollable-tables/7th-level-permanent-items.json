@@ -15,7 +15,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "vHZSx5f093Wrivzn",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/armor/specific-magic-armor/moonlit-chain.webp",
+            "img": "icons/equipment/chest/breastplate-banded-blue.webp",
             "range": [
                 1,
                 6
@@ -29,7 +29,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "peoheZMxdPHUNo93",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/companion-items/horseshoes-of-speed.webp",
+            "img": "icons/sundries/misc/horseshoe-iron.webp",
             "range": [
                 7,
                 12
@@ -169,7 +169,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "WDh4fb9N86mNLfDV",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/shields/specific-shields/spined-shield.webp",
+            "img": "icons/equipment/shield/kite-decorative-steel-claws.webp",
             "range": [
                 67,
                 72
@@ -253,7 +253,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "ecqz1iUGtyQEkZwy",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/boots-of-bounding.webp",
+            "img": "icons/equipment/feet/boots-leather-engraved-brown.webp",
             "range": [
                 97,
                 102
@@ -267,7 +267,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "MNBnZn0b80Q7yHJM",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/cloak-of-elvenkind.webp",
+            "img": "icons/equipment/back/cloak-collared-feathers-green.webp",
             "range": [
                 103,
                 108
@@ -295,7 +295,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "WPSp5MLb0VOfmUqH",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/hat-of-disguise.webp",
+            "img": "icons/equipment/head/hat-belted-grey.webp",
             "range": [
                 112,
                 117
@@ -309,7 +309,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "Zun8aKbODnBFeut6",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/cursed-items/necklace-of-strangulation.webp",
+            "img": "icons/equipment/neck/collar-rounded-carved-wood-spiral.webp",
             "range": [
                 118,
                 123
@@ -351,7 +351,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "skBa6D1uxb0b2USn",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/slippers-of-spider-climbing.webp",
+            "img": "icons/equipment/feet/boots-collared-leather-white.webp",
             "range": [
                 130,
                 135

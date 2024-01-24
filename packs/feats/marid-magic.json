@@ -1,6 +1,6 @@
 {
     "_id": "hgfRHSS5BsoyQ9Fj",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Marid Magic",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>You channel the magic of marids. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Hydraulic Push]</em> and <em>@UUID[Compendium.pf2e.spells-srd.Item.Obscuring Mist]</em> each once per day as 2nd-level arcane innate spells.</p>"
+            "value": "<p>You channel the magic of marids. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Hydraulic Push]</em> and <em>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</em> each once per day as 2nd-rank arcane innate spells.</p>"
         },
         "level": {
             "value": 9
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

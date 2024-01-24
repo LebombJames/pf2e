@@ -47,7 +47,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>Your companion is a big cat, such as a leopard or tiger.</p>\n<p><strong>Size</strong> Small</p>\n<p><strong>Melee</strong> <span class=\"pf2-icon\">1</span> jaws (finesse), <strong>Damage</strong> 1d6 piercing</p>\n<p><strong>Melee</strong> <span class=\"pf2-icon\">1</span> claw (agile, finesse), <strong>Damage</strong> 1d4 slashing</p>\n<p><strong>Str</strong> +2, <strong>Dex</strong> +3, <strong>Con</strong> +1, <strong>Int</strong> -4, <strong>Wis</strong> +2, <strong>Cha</strong> +0</p>\n<p><strong>Hit Points</strong> 4</p>\n<p><strong>Skill</strong> Stealth</p>\n<p><strong>Senses</strong> low-light vision, scent (imprecise, 30 feet)</p>\n<p><strong>Speed</strong> 35 feet</p>\n<p><strong>Special</strong> Your cat deals 1d4 extra precision damage against off-guard targets.</p>\n<p><strong>Support Benefit</strong> Your cat throws your enemies off-balance when you create an opening. Until the start of your next turn, your Strikes that deal damage to a creature that your cat threatens make the target @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the end of your next turn.</p>\n<p><strong>Advanced Maneuver</strong> @UUID[Compendium.pf2e-animal-companions.AC-Advanced-Maneuvers.Item.U0J8J5ukmqnOskE8]{Cat Pounce}</p>"
+                    "value": "<p>Your companion is a big cat, such as a leopard or tiger.</p>\n<p><strong>Size</strong> Small</p>\n<p><strong>Melee</strong> <span class=\"action-glyph\">1</span> jaws (finesse), <strong>Damage</strong> 1d6 piercing</p>\n<p><strong>Melee</strong> <span class=\"action-glyph\">1</span> claw (agile, finesse), <strong>Damage</strong> 1d4 slashing</p>\n<p><strong>Str</strong> +2, <strong>Dex</strong> +3, <strong>Con</strong> +1, <strong>Int</strong> -4, <strong>Wis</strong> +2, <strong>Cha</strong> +0</p>\n<p><strong>Hit Points</strong> 4</p>\n<p><strong>Skill</strong> Stealth</p>\n<p><strong>Senses</strong> low-light vision, scent (imprecise, 30 feet)</p>\n<p><strong>Speed</strong> 35 feet</p>\n<p><strong>Special</strong> Your cat deals 1d4 extra precision damage against off-guard targets.</p>\n<p><strong>Support Benefit</strong> Your cat throws your enemies off-balance when you create an opening. Until the start of your next turn, your Strikes that deal damage to a creature that your cat threatens make the target @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the end of your next turn.</p>\n<p><strong>Advanced Maneuver</strong> @UUID[Compendium.pf2e-animal-companions.AC-Advanced-Maneuvers.Item.U0J8J5ukmqnOskE8]{Cat Pounce}</p>"
                 },
                 "flaws": {
                     "0": {
@@ -59,6 +59,11 @@
                 "languages": {
                     "custom": "",
                     "value": []
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "rarity": {
                     "value": "common"
@@ -109,7 +114,7 @@
                             }
                         },
                         "group": "brawling",
-                        "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                        "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                         "key": "Strike",
                         "label": "PF2E.Weapon.Base.jaws",
                         "range": null,
@@ -129,7 +134,7 @@
                             }
                         },
                         "group": "brawling",
-                        "img": "systems/pf2e/icons/unarmed-attacks/claw.webp",
+                        "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
                         "key": "Strike",
                         "label": "PF2E.Weapon.Base.claw",
                         "range": null,
@@ -168,9 +173,6 @@
                 ],
                 "size": "sm",
                 "slug": null,
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "speed": 35,
                 "traits": {
                     "rarity": "common",
@@ -178,7 +180,7 @@
                         "animal"
                     ]
                 },
-                "vision": "lowLightVision"
+                "vision": "low-light-vision"
             },
             "type": "ancestry"
         },
@@ -211,7 +213,6 @@
                     "simple": 0,
                     "unarmed": 1
                 },
-                "classDC": 0,
                 "classFeatLevels": {
                     "value": []
                 },
@@ -233,6 +234,11 @@
                     "value": []
                 },
                 "perception": 1,
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rarity": {
                     "value": "common"
                 },
@@ -240,13 +246,13 @@
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.attributes.perception.rank",
+                        "path": "system.perception.rank",
                         "value": 1
                     },
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.martial.unarmed.rank",
+                        "path": "system.proficiencies.attacks.unarmed.rank",
                         "value": 1
                     },
                     {
@@ -299,9 +305,7 @@
                     "value": []
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
+                "spellcasting": 0,
                 "trainedSkills": {
                     "additional": 0,
                     "value": [
@@ -342,25 +346,18 @@
                 "description": {
                     "value": "<p>Your cat throws your enemies off-balance when you create an opening. Until the start of your next turn, your Strikes that deal damage to a creature within your cat's reach make the target @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the end of your next turn.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": {
                         "value": "common"
                     },
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -392,6 +389,11 @@
                 "location": "",
                 "prerequisites": {
                     "value": []
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rarity": {
                     "value": "common"
@@ -440,30 +442,6 @@
                         "value": 1
                     },
                     {
-                        "key": "ActiveEffectLike",
-                        "mode": "upgrade",
-                        "path": "system.attributes.perception.rank",
-                        "value": 2
-                    },
-                    {
-                        "key": "ActiveEffectLike",
-                        "mode": "upgrade",
-                        "path": "system.saves.fortitude.rank",
-                        "value": 2
-                    },
-                    {
-                        "key": "ActiveEffectLike",
-                        "mode": "upgrade",
-                        "path": "system.saves.will.rank",
-                        "value": 2
-                    },
-                    {
-                        "key": "ActiveEffectLike",
-                        "mode": "upgrade",
-                        "path": "system.saves.reflex.rank",
-                        "value": 2
-                    },
-                    {
                         "key": "Striking",
                         "predicate": [
                             "unarmed"
@@ -484,8 +462,21 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
+                "subfeatures": {
+                    "proficiencies": {
+                        "fortitude": {
+                            "rank": 2
+                        },
+                        "perception": {
+                            "rank": 2
+                        },
+                        "reflex": {
+                            "rank": 2
+                        },
+                        "will": {
+                            "rank": 2
+                        }
+                    }
                 },
                 "traits": {
                     "rarity": "common",
@@ -524,23 +515,9 @@
             }
         },
         "attributes": {
-            "bonusEncumbranceBulk": 0,
-            "bonusLimitBulk": 0,
             "hp": {
                 "temp": 0,
                 "value": 44
-            },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "resolve": {
-                "max": 0,
-                "value": 0
-            },
-            "sp": {
-                "details": "",
-                "max": 0,
-                "value": 0
             },
             "speed": {
                 "otherSpeeds": [],
@@ -554,12 +531,10 @@
             "age": {
                 "value": ""
             },
-            "alignment": {
-                "value": "N"
-            },
             "alliance": "party",
             "biography": {
                 "allies": "",
+                "anathema": [],
                 "appearance": "",
                 "attitude": "",
                 "backstory": "",
@@ -568,9 +543,10 @@
                 "campaignNotes": "",
                 "catchphrases": "",
                 "dislikes": "",
+                "edicts": [],
                 "enemies": "",
                 "likes": "",
-                "organaizations": ""
+                "organizations": ""
             },
             "deity": {
                 "image": "systems/pf2e/icons/default-icons/deity.svg",
@@ -588,6 +564,10 @@
             "keyability": {
                 "value": "str"
             },
+            "languages": {
+                "details": "",
+                "value": []
+            },
             "level": {
                 "value": 5
             },
@@ -604,7 +584,9 @@
                 "value": 0
             }
         },
-        "martial": {},
+        "initiative": {
+            "statistic": "perception"
+        },
         "pfs": {
             "characterNumber": null,
             "currentFaction": "EA",
@@ -677,15 +659,6 @@
             "thi": {
                 "rank": 0
             }
-        },
-        "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": []
-            },
-            "senses": [],
-            "value": []
         }
     },
     "type": "character"

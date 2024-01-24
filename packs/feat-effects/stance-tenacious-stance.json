@@ -1,10 +1,10 @@
 {
     "_id": "Ms6WPXRWfXb2KpG2",
-    "img": "systems/pf2e/icons/spells/meld-into-stone.webp",
+    "img": "icons/magic/earth/strike-fist-stone-light.webp",
     "name": "Stance: Tenacious Stance",
     "system": {
         "description": {
-            "value": "<p>Granted by @UUID[Compendium.pf2e.actionspf2e.Item.Tenacious Stance]</p>\n<p>You gain a number of temporary Hit Points equal to half your level (minimum 1) and a +2 circumstance bonus to DCs against being Shoved and Tripped.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.actionspf2e.Item.Tenacious Stance]</p>\n<p>You gain a number of temporary Hit Points equal to half your level (minimum 1) and a +2 circumstance bonus to DCs against being Shoved and Tripped. However, you no longer negate your armor check penalty or Speed penalty for having a high Strength while in this stance.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -15,9 +15,13 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Highhelm"
+        },
         "rules": [
             {
-                "hideIfDisabled": true,
                 "key": "FlatModifier",
                 "predicate": [
                     {
@@ -28,8 +32,8 @@
                     }
                 ],
                 "selector": [
-                    "fortitude",
-                    "reflex"
+                    "fortitude-dc",
+                    "reflex-dc"
                 ],
                 "type": "circumstance",
                 "value": 2
@@ -37,11 +41,22 @@
             {
                 "key": "TempHP",
                 "value": "max(1,floor(@actor.level/2))"
+            },
+            {
+                "domain": "dex-skill-check",
+                "key": "RollOption",
+                "option": "armor:strength-requirement-met",
+                "phase": "beforeDerived",
+                "value": false
+            },
+            {
+                "domain": "str-skill-check",
+                "key": "RollOption",
+                "option": "armor:strength-requirement-met",
+                "phase": "beforeDerived",
+                "value": false
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Highhelm"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -5,11 +5,13 @@ declare global {
     class TextEditor {
         /**
          * Create a Rich Text Editor. The current implementation uses TinyMCE
-         * @param options   Configuration options provided to the Editor init
-         * @param content   Initial HTML or text content to populate the editor with
-         * @return          The editor instance.
+         * @param options Configuration options provided to the Editor init
+         * @param [options.engine=tinymce] Which rich text editor engine to use, "tinymce" or "prosemirror". TinyMCE
+         *                                 is deprecated and will be removed in a later version.
+         * @param content Initial HTML or text content to populate the editor with
+         * @returns The editor instance.
          */
-        static create(options?: Partial<TinyMCE.EditorOptions>, content?: string): Promise<TinyMCE.Editor>;
+        static create(options?: EditorCreateOptions, content?: string): Promise<TinyMCE.Editor | ProseMirrorEditor>;
 
         /** A list of elements that are retained when truncating HTML. */
         protected static _PARAGRAPH_ELEMENTS: Set<string>;
@@ -75,7 +77,7 @@ declare global {
          */
         static truncateText(
             text: string,
-            { maxLength, splitWords, suffix }: { maxLength?: number; splitWords?: boolean; suffix?: string | null }
+            { maxLength, splitWords, suffix }: { maxLength?: number; splitWords?: boolean; suffix?: string | null },
         ): string;
 
         /* -------------------------------------------- */
@@ -113,7 +115,7 @@ declare global {
          */
         protected static _createContentLink(
             match: RegExpMatchArray,
-            options?: { async?: boolean; relativeTo?: ClientDocument }
+            options?: { async?: boolean; relativeTo?: ClientDocument },
         ): HTMLAnchorElement | Promise<HTMLAnchorElement>;
 
         /**
@@ -134,7 +136,7 @@ declare global {
         static _createInlineRoll(
             match: RegExpMatchArray,
             rollData: Record<string, unknown>,
-            options?: EvaluateRollParams
+            options?: EvaluateRollParams,
         ): HTMLAnchorElement | null | Promise<HTMLAnchorElement | null>;
 
         /* -------------------------------------------- */
@@ -165,24 +167,24 @@ declare global {
          * Begin a Drag+Drop workflow for a dynamic content link
          * @param event The originating drag event
          */
-        protected static _onDragContentLink(event: ElementDragEvent): void;
+        protected static _onDragContentLink(event: DragEvent): void;
 
         /**
          * Handle dropping of transferred data onto the active rich text editor
          * @param event  The originating drop event which triggered the data transfer
          * @param editor The TinyMCE editor instance being dropped on
          */
-        protected static _onDropEditorData(event: ElementDragEvent, editor: TinyMCE.Editor): Promise<void>;
+        protected static _onDropEditorData(event: DragEvent, editor: TinyMCE.Editor): Promise<void>;
 
         /**
          * Extract JSON data from a drag/drop event.
          * @param event The drag event which contains JSON data.
          * @returns The extracted JSON data. The object will be empty if the DragEvent did not contain JSON-parseable data.
          */
-        static getDragEventData(event: ElementDragEvent): object;
+        static getDragEventData(event: DragEvent): object;
 
         /** Given a Drop event, returns a Content link if possible such as @Actor[ABC123], else null */
-        static getContentLink(event: ElementDragEvent): Promise<string | null>;
+        static getContentLink(event: DragEvent): Promise<string | null>;
     }
 
     interface EnrichmentOptions {
@@ -193,4 +195,8 @@ declare global {
         rolls?: boolean;
         rollData?: Record<string, unknown>;
     }
+
+    type EditorCreateOptions = Partial<TinyMCE.EditorOptions | ProseMirrorEditorOptions> & {
+        engine?: "tinymce" | "prosemirror";
+    };
 }

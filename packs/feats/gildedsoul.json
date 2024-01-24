@@ -1,6 +1,6 @@
 {
     "_id": "VeTrBvxupaS4uo1B",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Gildedsoul",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -58,9 +63,6 @@
                 "uuid": "Compendium.pf2e.feats-srd.Item.Courtly Graces"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "traits": {
             "rarity": "common",
             "value": [

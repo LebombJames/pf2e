@@ -1,6 +1,6 @@
 {
     "_id": "5UQagWB13Z8xR5Z6",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Sorcerer Dedication",
     "system": {
         "actionType": {
@@ -19,24 +19,27 @@
         "prerequisites": {
             "value": [
                 {
-                    "value": "Charisma 14"
+                    "value": "Charisma +2"
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.traditions.{actor|system.proficiencies.aliases.sorcerer}.rank",
-                "value": 1
-            },
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.classfeatures.Item.Bloodline"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "spellcasting": {
+                    "rank": 1
+                }
+            }
         },
         "traits": {
             "rarity": "common",

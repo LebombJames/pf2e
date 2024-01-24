@@ -1,6 +1,6 @@
 {
     "_id": "zpQEOqMDoujexNfA",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Replenishing Hydration",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "KdV8UtN8Af5oCerj",
-    "img": "systems/pf2e/icons/spells/abyssal-pact.webp",
+    "img": "icons/sundries/scrolls/scroll-writing-tan-grey.webp",
     "name": "Effect: Cite Precedent",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": -1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Gamemastery Guide"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -2
             }
         ],
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

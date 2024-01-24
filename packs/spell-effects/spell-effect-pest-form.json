@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "BattleForm",
@@ -25,7 +30,7 @@
                         "modifier": "15 + @actor.level"
                     },
                     "senses": {
-                        "lowLightVision": {},
+                        "low-light-vision": {},
                         "scent": {
                             "acuity": "imprecise",
                             "range": 30
@@ -72,9 +77,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

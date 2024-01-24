@@ -9,11 +9,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.SGkOHFyBbzWdBk8D"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/healers-kit.webp",
+            "img": "icons/containers/bags/pouch-gold-green.webp",
             "name": "Healer's Tools (Expanded)",
             "sort": 100000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This kit of bandages, herbs, and suturing tools is necessary for Medicine checks to Administer First Aid, Treat Disease, Treat Poison, or Treat Wounds. Expanded healer's tools provide a +1 item bonus to such checks. When you carry the tools from place to place, you keep many of the components handy on your person, in pockets or bandoliers.</p>"
@@ -23,9 +26,6 @@
                     "handsHeld": 2,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -34,19 +34,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 50
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [
@@ -70,19 +70,12 @@
                 ],
                 "size": "med",
                 "slug": "healers-tools-expanded",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "equipment"
@@ -99,6 +92,9 @@
             "sort": 200000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This piece of wood or silver is emblazoned with an image representing a deity. Some divine spellcasters, such as clerics, can use a religious symbol of their deity as a divine focus to use certain abilities and cast some spells. A religious symbol must be held in one hand to use it.</p>"
@@ -108,9 +104,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -119,37 +112,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "religious-symbol-silver",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -165,30 +151,19 @@
             "name": "Antidote (Moderate)",
             "sort": 300000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p>An antidote protects you against toxins. Upon drinking an antidote, you gain a +3 item bonus to Fortitude saving throws against poisons for 6 hours.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Antidote (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p>An antidote protects you against toxins. Upon drinking an antidote, you gain a +3 item bonus to Fortitude saving throws against poisons for 6 hours.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Antidote (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -198,28 +173,24 @@
                 "level": {
                     "value": 6
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 2,
                 "rules": [],
                 "size": "med",
                 "slug": "antidote-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -232,8 +203,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -249,30 +222,19 @@
             "name": "Antiplague (Moderate)",
             "sort": 400000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p>Antiplague can fortify the body's defenses against diseases. Upon drinking an antiplague, you gain a +3 item bonus to Fortitude saving throws against diseases for 24 hours; this applies to your daily save against a disease's progression.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Antiplague (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p>Antiplague can fortify the body's defenses against diseases. Upon drinking an antiplague, you gain a +3 item bonus to Fortitude saving throws against diseases for 24 hours; this applies to your daily save against a disease's progression.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Antiplague (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -282,28 +244,24 @@
                 "level": {
                     "value": 6
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 2,
                 "rules": [],
                 "size": "med",
                 "slug": "antiplague-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -316,8 +274,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -333,30 +293,23 @@
             "name": "Elixir of Life (Moderate)",
             "sort": 500000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": "5d6+12"
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": {
+                    "formula": "5d6+12",
+                    "kind": "healing",
+                    "type": "untyped"
+                },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p>Elixirs of life accelerate a living creature's natural healing processes and immune system. Upon drinking this elixir, you regain [[/r (5d6+12)[healing]]]{5d6+12 Hit Points} and gain +2 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Elixir of Life (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p>Elixirs of life accelerate a living creature's natural healing processes and immune system. Upon drinking this elixir, you regain [[/r (5d6+12)[healing]]]{5d6+12 Hit Points} and gain +2 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Elixir of Life (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -366,28 +319,24 @@
                 "level": {
                     "value": 9
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 150
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 3,
                 "rules": [],
                 "size": "med",
                 "slug": "elixir-of-life-moderate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -400,8 +349,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -431,11 +382,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -474,9 +427,14 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
-                        "domain": "damage-roll",
+                        "domain": "damage",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TwoHanded.Staff",
                         "option": "two-handed",
@@ -495,9 +453,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -532,23 +487,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -569,20 +517,16 @@
                 "description": {
                     "value": "<p>Keznin is subject to the conqueror worm's Mental Invader effect , but she doesn't realize it. (Note: This is only effective in Chapter 3)</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -603,20 +547,16 @@
                 "description": {
                     "value": "<p>Keznin can use Nature instead of Medicine to Treat Disease, Treat Poison, and Treat Wounds, and he can use Nature instead of Crafting to craft alchemical items with the healing trait, antidotes, and antiplagues.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -637,14 +577,13 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> Keznin rolls a critical failure on a check to Treat Disease, Treat Poison, or Treat Wounds</p>\n<hr />\n<p><strong>Effect</strong> Keznin gives an emergency application of dangerous herbs to avert further harm. The creature Keznin is treating takes @Damage[2d6[poison]] damage, and Keznin rerolls the check.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -652,9 +591,6 @@
                         "fortune",
                         "manipulate"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -674,11 +610,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -697,11 +635,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -720,11 +660,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -743,11 +685,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -766,11 +710,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -789,11 +735,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -840,31 +788,43 @@
                 "temp": 0,
                 "value": 150
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 18
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "elven",
+                    "tengu"
+                ]
+            },
             "level": {
                 "value": 9
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Adventure: Night of the Gray Death"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Adventure: Night of the Gray Death"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 18,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -882,23 +842,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "elven",
-                    "tengu"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "humanoid",
                 "tengu"
             ]

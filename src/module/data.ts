@@ -1,4 +1,5 @@
-import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
 
 /** The size property of creatures and equipment */
 const SIZES = ["tiny", "sm", "med", "lg", "huge", "grg"] as const;
@@ -12,7 +13,6 @@ type Rarity = (typeof RARITIES)[number];
 
 interface ValuesList<T extends string = string> {
     value: T[];
-    custom: string;
 }
 
 /** Generic { value, label, type } type used in various places in actor/items types. */
@@ -47,7 +47,9 @@ type TwoToThree = Exclude<OneToThree, 1>;
 type ZeroToFour = ZeroToThree | 4;
 type OneToFour = Exclude<ZeroToFour, 0>;
 type ZeroToFive = ZeroToFour | 5;
-type OneToFive = OneToThree | Extract<ZeroToFive, 4 | 5>;
+type OneToFive = OneToFour | Extract<ZeroToFive, 5>;
+type ZeroToSix = ZeroToFive | 6;
+type OneToSix = Exclude<ZeroToSix, 0>;
 type ZeroToTen = ZeroToFive | 6 | 7 | 8 | 9 | 10;
 type OneToTen = Exclude<ZeroToTen, 0>;
 type ZeroToEleven = ZeroToTen | 11;
@@ -58,30 +60,35 @@ interface ValueAndMaybeMax {
     max?: number;
 }
 
-type ValueAndMax = Required<ValueAndMaybeMax>;
+interface ValueAndMax extends Required<ValueAndMaybeMax> {}
 
 function goesToEleven(value: number): value is ZeroToEleven {
     return value >= 0 && value <= 11;
 }
 
 /** The tracked schema data of actors and items */
-interface NewDocumentSchemaRecord {
+interface NewDocumentMigrationRecord {
     version: null;
-    lastMigration: null;
+    previous: null;
 }
 
-interface MigratedDocumentSchemaRecord {
+interface MigratedDocumentMigrationRecord {
     version: number;
-    lastMigration: {
-        version: {
-            schema: number | null;
-            system?: string;
-            foundry?: string;
-        };
+    previous: {
+        schema: number | null;
+        system?: string;
+        foundry?: string;
     } | null;
 }
 
-type DocumentSchemaRecord = NewDocumentSchemaRecord | MigratedDocumentSchemaRecord;
+type MigrationRecord = NewDocumentMigrationRecord | MigratedDocumentMigrationRecord;
+
+interface PublicationData {
+    title: string;
+    authors: string;
+    license: "ORC" | "OGL";
+    remaster: boolean;
+}
 
 export const PROFICIENCY_RANKS = ["untrained", "trained", "expert", "master", "legendary"] as const;
 
@@ -135,20 +142,20 @@ type EnfolderableDocumentPF2e =
     | ItemPF2e<null>
     | Exclude<EnfolderableDocument, Actor<null> | Item<null>>;
 
-export {
-    DocumentSchemaRecord,
+export { RARITIES, SIZES, SIZE_SLUGS, goesToEleven };
+export type {
     EnfolderableDocumentPF2e,
     LabeledNumber,
     LabeledString,
     LabeledValue,
+    MigrationRecord,
     OneToFive,
     OneToFour,
+    OneToSix,
     OneToTen,
     OneToThree,
-    RARITIES,
+    PublicationData,
     Rarity,
-    SIZES,
-    SIZE_SLUGS,
     Size,
     TraitsWithRarity,
     TwoToThree,
@@ -159,8 +166,8 @@ export {
     ZeroToEleven,
     ZeroToFive,
     ZeroToFour,
+    ZeroToSix,
     ZeroToTen,
     ZeroToThree,
     ZeroToTwo,
-    goesToEleven,
 };

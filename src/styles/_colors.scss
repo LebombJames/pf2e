@@ -5,26 +5,19 @@
 /* ----------------------------------------- */
 
 /* Colors */
-$gray-color: #808080;
 $light-gray-color: #ababab;
 $dark-gray-color: #545454;
 
 /* Global */
-$primary-color: #5e0000 !default;
-$secondary-color: #171f69 !default; /* used for mini headers, alternate primary color */
-$tertiary-color: #e9d7a1 !default; /* compliments the primary color, usually used in combination */
+$primary-color: #5e0000;
+$secondary-color: #171f69; /* used for mini headers, alternate primary color */
+$tertiary-color: #e9d7a1; /* compliments the primary color, usually used in combination */
 
 $alt-color: #786452 !default; /* for all other uses */
-$alt-dark: #443730 !default;
-$background-color: #f8f4f1 !default;
-$background-dark: darken($background-color, 10);
-$sub-color: #605856 !default;
-
-/* Lighter / Darker */
-$light-color: lighten($primary-color, 10) !default;
-$dark-color: darken($primary-color, 10) !default;
-$tertiary-dark-color: darken($tertiary-color, 10) !default;
-$tertiary-light-color: lighten($tertiary-color, 10) !default;
+$alt-dark: #443730;
+$light-background-color: #f8f4f1;
+$less-light-background-color: darken($light-background-color, 10);
+$sub-color: #605856;
 
 /* Text */
 $text-dark-color: #1c1c1c !default;
@@ -33,22 +26,15 @@ $text-dark-color: #1c1c1c !default;
 /* Color schemes                             */
 /* ----------------------------------------- */
 
-/* Proficiency ranks */
-$rank-untrained: #424242 !default;
-$rank-trained: #171f69 !default;
-$rank-expert: #3c005e !default;
-$rank-master: #664400 !default;
-$rank-legendary: #5e0000 !default;
-
 /* Degrees of success */
-$degree-success-critical: rgb(0, 128, 0) !default;
-$degree-success: rgb(0, 0, 255) !default;
-$degree-failure: rgb(255, 69, 0) !default;
-$degree-failure-critical: rgb(255, 0, 0) !default;
+$degree-success-critical: rgb(0, 128, 0);
+$degree-success: rgb(0, 0, 255);
+$degree-failure: rgb(255, 69, 0);
+$degree-failure-critical: rgb(255, 0, 0);
 
 /* Value adjustments (e.g. weak/elite) */
-$adjusted-higher: #009988 !default;
-$adjusted-lower: #cc3311 !default;
+$adjusted-higher: #009988;
+$adjusted-lower: #cc3311;
 
 /* ----------------------------------------- */
 /* CSS Custom Properties                     */
@@ -56,16 +42,33 @@ $adjusted-lower: #cc3311 !default;
 
 :root {
     /* Global */
-    --primary: #{$primary-color};
-    --secondary: #{$secondary-color};
-    --tertiary: #{$tertiary-color};
+    --color-pf-primary: #{$primary-color};
+    --color-pf-primary-dark: #{darken($primary-color, 5)};
+    --color-pf-primary-darker: #{darken($primary-color, 10)};
+    --color-pf-primary-light: #{lighten($primary-color, 5)};
+    --color-pf-primary-lighter: #{lighten($primary-color, 10)};
+    --color-pf-alternate: #{$alt-color};
+    --color-pf-alternate-dark: #{$alt-dark};
+    --color-pf-alternate-darker: #{darken($alt-dark, 10)};
+    --color-pf-alternate-light: #{lighten($alt-color, 10)};
+    --color-pf-secondary: #{$secondary-color};
+    --color-pf-secondary-dark: #{darken($secondary-color, 10)};
+    --color-pf-secondary-light: #{lighten($secondary-color, 10)};
+    --color-pf-secondary-lighter: #{lighten($secondary-color, 20)};
+    --color-pf-tertiary: #{$tertiary-color};
+    --color-pf-tertiary-dark: #{darken($tertiary-color, 10)};
+    --color-pf-tertiary-darker: #{darken($tertiary-color, 20)};
+    --color-pf-tertiary-light: #{lighten($tertiary-color, 10)};
+    --primary: var(--color-pf-primary);
+    --secondary: var(--color-pf-secondary);
+    --tertiary: var(--color-pf-tertiary);
 
-    --alt: #{$alt-color};
-    --alt-dark: #{$alt-dark};
-    --bg: #{$background-color};
-    --bg-dark: #{$background-dark};
+    --alt: var(--color-pf-alternate);
+    --alt-dark: var(--color-pf-alternate-dark);
+    --bg: #{$light-background-color};
+    --bg-dark: #{$less-light-background-color};
     --sub: #{$sub-color};
-    --color-disabled: #{$light-gray-color};
+    --color-disabled: var(--color-text-dark-4);
 
     // Inline links and user visibility
     --inline-link-bg: #ddd;
@@ -75,21 +78,22 @@ $adjusted-lower: #cc3311 !default;
     --blind-roll: #f5eaf5;
 
     /* Lighter / Darker */
-    --light: #{$light-color};
-    --primary-dark: #{$dark-color};
-    --primary-darker: #{darken($dark-color, 5)};
-    --tertiary-dark: #{$tertiary-dark-color};
-    --tertiary-light: #{$tertiary-light-color};
+    --primary-dark: var(--color-pf-primary-dark);
+    --primary-darker: var(--color-pf-primary-darker);
+    --tertiary-dark: var(--color-pf-tertiary-dark);
+    --tertiary-light: var(--color-pf-tertiary-light);
 
     /* Text */
-    --body: var(--text-dark);
-    --color-text-trait: #f5efe0;
     --text-dark: var(--color-text-dark-primary);
-    --text-light: var(--color-text-light-1);
+    --text-light: #f5efe0;
+    --text-light-disabled: #a6a092;
+    --color-text-dark-input: #333;
+    --color-text-dark-improved: #006644;
 
     /* Borders */
-    --color-border-trait: #d8c384;
     --color-border-divider: #baa991;
+    --color-border-dark-input: #d3ccbc;
+    --color-border-medium: gray;
 
     /* Headers w/ boxes */
     --header-color: var(--text-light);
@@ -99,18 +103,30 @@ $adjusted-lower: #cc3311 !default;
     --sidebar-label: var(--tertiary-dark);
     --sidebar-title: var(--tertiary);
 
+    /** Traits */
+    --color-bg-size: #3a7b59;
+    --color-bg-trait: #{$primary-color};
+    --color-border-trait: #d8c384;
+    --color-text-trait: white;
+
     /* Rarity */
     --color-rarity-common: #323232;
     --color-rarity-uncommon: #98513d;
     --color-rarity-rare: #002664;
     --color-rarity-unique: #54166e;
 
+    /** Proficiency ranks */
+    --color-proficiency-untrained: #424242;
+    --color-proficiency-trained: #171f69;
+    --color-proficiency-expert: #3c005e;
+    --color-proficiency-master: #664400;
+    --color-proficiency-legendary: #{$primary-color};
+
     /* Damage colors */
     .damage {
         $damage-physical: #3c3c3c;
         $damage-acid: #007300;
         $damage-bleed: #99001a;
-        $damage-bludgeoning: $damage-physical;
         $damage-chaotic: #a600a6;
         $damage-cold: #2f2fa6;
         $damage-electricity: darkgoldenrod;
@@ -120,9 +136,7 @@ $adjusted-lower: #cc3311 !default;
         $damage-good: #9d730a;
         $damage-lawful: #402600;
         $damage-mental: midnightblue;
-        $damage-piercing: $damage-physical;
         $damage-poison: #5b7332;
-        $damage-slashing: $damage-physical;
         $damage-sonic: darkcyan;
         $damage-spirit: #5a5585;
         $damage-vitality: #ffffe0;
@@ -130,10 +144,8 @@ $adjusted-lower: #cc3311 !default;
         $darker: -12.5%;
         $transparenter: 0.875;
 
-        --color-bg-physical: #{transparentize($damage-physical, $transparenter)};
         --color-bg-acid: #{transparentize($damage-acid, $transparenter)};
         --color-bg-bleed: #{transparentize($damage-bleed, $transparenter)};
-        --color-bg-bludgeoning: #{transparentize($damage-bludgeoning, $transparenter)};
         --color-bg-chaotic: #{transparentize($damage-chaotic, $transparenter)};
         --color-bg-cold: #{transparentize($damage-cold, $transparenter)};
         --color-bg-electricity: #{transparentize($damage-electricity, $transparenter)};
@@ -143,18 +155,15 @@ $adjusted-lower: #cc3311 !default;
         --color-bg-good: #{transparentize($damage-good, $transparenter)};
         --color-bg-lawful: #{transparentize($damage-lawful, $transparenter)};
         --color-bg-mental: #{transparentize($damage-mental, $transparenter)};
-        --color-bg-negative: #{transparentize($damage-void, $transparenter)};
-        --color-bg-piercing: #{transparentize($damage-piercing, $transparenter)};
+        --color-bg-physical: #{transparentize($damage-physical, $transparenter)};
         --color-bg-poison: #{transparentize($damage-poison, $transparenter)};
-        --color-bg-positive: #{transparentize($damage-vitality, $transparenter)};
-        --color-bg-slashing: #{transparentize($damage-slashing, $transparenter)};
         --color-bg-sonic: #{transparentize($damage-sonic, $transparenter)};
         --color-bg-spirit: #{transparentize($damage-spirit, $transparenter)};
+        --color-bg-vitality: #{transparentize($damage-vitality, $transparenter)};
+        --color-bg-void: #{transparentize($damage-void, $transparenter)};
 
-        --color-border-physical: #{$damage-physical};
         --color-border-acid: #{$damage-acid};
         --color-border-bleed: #{$damage-bleed};
-        --color-border-bludgeoning: #{$damage-bludgeoning};
         --color-border-chaotic: #{$damage-chaotic};
         --color-border-cold: #{$damage-cold};
         --color-border-electricity: #{$damage-electricity};
@@ -164,18 +173,15 @@ $adjusted-lower: #cc3311 !default;
         --color-border-good: #{$damage-good};
         --color-border-lawful: #{$damage-lawful};
         --color-border-mental: #{$damage-mental};
-        --color-border-negative: #{$damage-void};
-        --color-border-piercing: #{$damage-piercing};
+        --color-border-physical: #{$damage-physical};
         --color-border-poison: #{$damage-poison};
-        --color-border-positive: #{$damage-vitality};
-        --color-border-slashing: #{$damage-slashing};
         --color-border-sonic: #{$damage-sonic};
         --color-border-spirit: #{$damage-spirit};
+        --color-border-vitality: #{$damage-vitality};
+        --color-border-void: #{$damage-void};
 
-        --color-text-physical: #{color.adjust($damage-physical, $lightness: $darker)};
         --color-text-acid: #{color.adjust($damage-acid, $lightness: $darker)};
         --color-text-bleed: #{color.adjust($damage-bleed, $lightness: $darker)};
-        --color-text-bludgeoning: #{$damage-bludgeoning};
         --color-text-chaotic: #{color.adjust($damage-chaotic, $lightness: $darker)};
         --color-text-cold: #{color.adjust($damage-cold, $lightness: $darker)};
         --color-text-electricity: #{color.adjust($damage-electricity, $lightness: $darker)};
@@ -185,13 +191,12 @@ $adjusted-lower: #cc3311 !default;
         --color-text-good: #{color.adjust($damage-good, $lightness: $darker)};
         --color-text-lawful: #{color.adjust($damage-lawful, $lightness: $darker)};
         --color-text-mental: #{color.adjust($damage-mental, $lightness: $darker)};
-        --color-text-negative: #{color.adjust($damage-void, $lightness: $darker)};
-        --color-text-piercing: #{$damage-piercing};
+        --color-text-physical: #{color.adjust($damage-physical, $lightness: $darker)};
         --color-text-poison: #{color.adjust($damage-poison, $lightness: $darker)};
-        --color-text-vitality: #{color.adjust($damage-vitality, $lightness: $darker)};
-        --color-text-slashing: #{$damage-slashing};
         --color-text-sonic: #{color.adjust($damage-sonic, $lightness: $darker)};
         --color-text-spirit: #{color.adjust($damage-spirit, $lightness: $darker)};
+        --color-text-vitality: #{color.adjust($damage-vitality, $lightness: $darker)};
+        --color-text-void: #{color.adjust($damage-void, $lightness: $darker)};
 
         &.color {
             &.acid {
@@ -199,7 +204,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-acid);
                 color: var(--color-text-acid);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-acid);
                 }
             }
@@ -209,18 +214,20 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-bleed);
                 color: var(--color-text-bleed);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-bleed);
                 }
             }
 
-            &.bludgeoning {
-                background-color: var(--color-bg-bludgeoning);
-                border-color: var(--color-border-bludgeoning);
-                color: var(--color-text-bludgeoning);
+            &.bludgeoning,
+            &.piercing,
+            &.slashing {
+                background-color: var(--color-bg-physical);
+                border-color: var(--color-border-physical);
+                color: var(--color-text-physical);
 
-                .icon {
-                    color: var(--color-border-bludgeoning);
+                i[class^="fa-"] {
+                    color: var(--color-border-physical);
                 }
             }
 
@@ -229,7 +236,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-chaotic);
                 color: var(--color-text-chaotic);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-chaotic);
                 }
             }
@@ -237,10 +244,9 @@ $adjusted-lower: #cc3311 !default;
             &.cold {
                 background-color: var(--color-bg-cold);
                 border-color: var(--color-border-cold);
-                box-shadow: var(--color-border-cold);
                 color: var(--color-text-cold);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-cold);
                 }
             }
@@ -250,7 +256,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-electricity);
                 color: var(--color-text-electricity);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-electricity);
                 }
             }
@@ -260,7 +266,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-evil);
                 color: var(--color-text-evil);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-evil);
                 }
             }
@@ -268,10 +274,9 @@ $adjusted-lower: #cc3311 !default;
             &.fire {
                 background-color: var(--color-bg-fire);
                 border-color: var(--color-border-fire);
-                box-shadow: var(--color-border-fire);
                 color: var(--color-text-fire);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-fire);
                 }
             }
@@ -281,7 +286,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-force);
                 color: var(--color-text-force);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-force);
                 }
             }
@@ -291,7 +296,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-good);
                 color: var(--color-text-good);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-good);
                 }
             }
@@ -301,7 +306,7 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-lawful);
                 color: var(--color-text-lawful);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-lawful);
                 }
             }
@@ -311,29 +316,8 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-mental);
                 color: var(--color-text-mental);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-mental);
-                }
-            }
-
-            &.negative,
-            &.void {
-                background-color: var(--color-bg-negative);
-                border-color: var(--color-border-negative);
-                color: var(--color-border-negative);
-
-                .icon {
-                    color: var(--color-border-negative);
-                }
-            }
-
-            &.piercing {
-                background-color: var(--color-bg-piercing);
-                border-color: var(--color-border-piercing);
-                color: var(--color-text-piercing);
-
-                .icon {
-                    color: var(--color-border-piercing);
                 }
             }
 
@@ -342,30 +326,8 @@ $adjusted-lower: #cc3311 !default;
                 border-color: var(--color-border-poison);
                 color: var(--color-text-poison);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-poison);
-                }
-            }
-
-            &.positive,
-            &.vitality {
-                background-color: var(--color-bg-physical); // Improve contrast with bright color
-                border-color: var(--color-border-positive);
-                color: var(--color-text-vitality);
-                text-shadow: 1px 1px var(--color-text-dark-1);
-
-                .icon {
-                    color: var(--color-border-positive);
-                }
-            }
-
-            &.slashing {
-                border-color: var(--color-border-slashing);
-                background-color: var(--color-bg-slashing);
-                color: var(--color-text-slashing);
-
-                .icon {
-                    color: var(--color-border-slashing);
                 }
             }
 
@@ -374,7 +336,7 @@ $adjusted-lower: #cc3311 !default;
                 background-color: var(--color-bg-sonic);
                 color: var(--color-text-sonic);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-sonic);
                 }
             }
@@ -384,8 +346,29 @@ $adjusted-lower: #cc3311 !default;
                 background-color: var(--color-bg-spirit);
                 color: var(--color-text-spirit);
 
-                .icon {
+                i[class^="fa-"] {
                     color: var(--color-border-spirit);
+                }
+            }
+
+            &.vitality {
+                background-color: var(--color-bg-physical); // Improve contrast with bright color
+                border-color: var(--color-border-vitality);
+                color: var(--color-text-vitality);
+                text-shadow: 1px 1px var(--color-text-dark-1);
+
+                i[class^="fa-"] {
+                    color: var(--color-border-vitality);
+                }
+            }
+
+            &.void {
+                background-color: var(--color-bg-void);
+                border-color: var(--color-border-void);
+                color: var(--color-text-void);
+
+                i[class^="fa-"] {
+                    color: var(--color-border-void);
                 }
             }
         }

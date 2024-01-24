@@ -1,27 +1,16 @@
 {
     "_id": "nb83vPkRwm47cu3z",
-    "img": "systems/pf2e/icons/equipment/consumables/other-consumables/apple.webp",
+    "img": "icons/consumables/fruit/apple-ripe-red.webp",
     "name": "Feed (Unique)",
     "system": {
-        "autoDestroy": {
-            "value": true
-        },
         "baseItem": null,
-        "charges": {
-            "max": 7,
-            "value": 7
+        "bulk": {
+            "value": 0
         },
-        "consumableType": {
-            "value": "other"
-        },
-        "consume": {
-            "value": ""
-        },
+        "category": "other",
         "containerId": null,
+        "damage": null,
         "description": {
-            "value": ""
-        },
-        "equippedBulk": {
             "value": ""
         },
         "hardness": 0,
@@ -32,27 +21,23 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "sp": 1
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Travel Guide"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Lost Omens: Travel Guide"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
@@ -62,8 +47,10 @@
         "usage": {
             "value": "other"
         },
-        "weight": {
-            "value": "-"
+        "uses": {
+            "autoDestroy": true,
+            "max": 7,
+            "value": 7
         }
     },
     "type": "consumable"

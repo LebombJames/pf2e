@@ -1,6 +1,6 @@
 {
     "_id": "S38CM3hyr7DnsmRR",
-    "img": "systems/pf2e/icons/spells/eject-soul.webp",
+    "img": "icons/creatures/fish/jellyfish-swarm-eyed-teal.webp",
     "name": "Effect: Devour Soul (Victim Level 15 or Higher)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 16
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
         },
         "rules": [
             {
@@ -30,9 +35,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,6 +1,6 @@
 {
     "_id": "PNEGSVYhMKf6kQZ6",
-    "img": "systems/pf2e/icons/spells/call-to-arms.webp",
+    "img": "icons/sundries/flags/banner-flag-red-white.webp",
     "name": "Spell Effect: Call to Arms",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -99,9 +104,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

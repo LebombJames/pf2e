@@ -1,6 +1,6 @@
 {
     "_id": "rECRfbkVwHuG06vO",
-    "img": "systems/pf2e/icons/spells/personal-blizzard.webp",
+    "img": "icons/magic/water/snowflake-ice-blue-white.webp",
     "name": "Lesson of Snow",
     "system": {
         "actionType": {
@@ -19,11 +19,16 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
+        "rules": [],
         "traits": {
+            "otherTags": [
+                "witch-lesson"
+            ],
             "rarity": "common",
             "value": [
                 "witch"

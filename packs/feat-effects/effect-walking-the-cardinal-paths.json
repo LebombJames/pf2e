@@ -1,6 +1,6 @@
 {
     "_id": "kui8yKIVsxfJnrYe",
-    "img": "systems/pf2e/icons/spells/elemental-zone.webp",
+    "img": "icons/magic/symbols/elements-air-earth-fire-water.webp",
     "name": "Effect: Walking the Cardinal Paths",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Fists of the Ruby Phoenix Hardcover Compilation"
         },
         "rules": [
             {
@@ -64,9 +69,6 @@
                 "value": "{item|flags.pf2e.rulesSelections.damage}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Fists of the Ruby Phoenix Hardcover Compilation"
-        },
         "start": {
             "initiative": null,
             "value": 0

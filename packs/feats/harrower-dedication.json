@@ -1,6 +1,6 @@
 {
     "_id": "0i4zOM1p0rFxnc5m",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Harrower Dedication",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder: Stolen Fate Player's Guide"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -29,11 +34,12 @@
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.spells-srd.Item.Harrowing"
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.actionspf2e.Item.Avoid Dire Fate"
             }
         ],
-        "source": {
-            "value": "Pathfinder: Stolen Fate Player's Guide"
-        },
         "traits": {
             "rarity": "uncommon",
             "value": [

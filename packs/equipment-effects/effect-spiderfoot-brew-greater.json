@@ -1,6 +1,6 @@
 {
     "_id": "4JULykNCgQoypsu8",
-    "img": "systems/pf2e/icons/spells/spider-climb.webp",
+    "img": "icons/creatures/invertebrates/spider-striped-web-red.webp",
     "name": "Effect: Spiderfoot Brew (Greater)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "value": 25
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

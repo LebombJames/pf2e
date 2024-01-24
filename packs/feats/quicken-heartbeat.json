@@ -1,6 +1,6 @@
 {
     "_id": "i8MnyasCDo3j65Xd",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Quicken Heartbeat",
     "system": {
         "actionType": {
@@ -15,8 +15,7 @@
         },
         "frequency": {
             "max": 1,
-            "per": "turn",
-            "value": 1
+            "per": "turn"
         },
         "level": {
             "value": 10
@@ -28,10 +27,19 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #153: Life's Long Shadows"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #153: Life's Long Shadows"
         },
+        "rules": [
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "flags.pf2e.golemGrafter.featCount",
+                "value": 1
+            }
+        ],
         "traits": {
             "rarity": "common",
             "value": [

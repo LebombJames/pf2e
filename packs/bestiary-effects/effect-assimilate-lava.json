@@ -1,6 +1,6 @@
 {
     "_id": "t8Yxrx3XgjS78Hxt",
-    "img": "systems/pf2e/icons/spells/wildfire.webp",
+    "img": "icons/magic/earth/explosion-lava-stone-orange.webp",
     "name": "Effect: Assimilate Lava",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 16
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #155: Lord of the Black Sands"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 "value": 15
             }
         ],
-        "source": {
-            "value": "Pathfinder #155: Lord of the Black Sands"
-        },
         "start": {
             "initiative": null,
             "value": 0

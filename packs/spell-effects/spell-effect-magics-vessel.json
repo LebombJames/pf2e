@@ -1,10 +1,10 @@
 {
     "_id": "zpxIwEjnLUSO1B4z",
-    "img": "systems/pf2e/icons/spells/magics-vessel.webp",
+    "img": "icons/skills/melee/maneuver-sword-katana-yellow.webp",
     "name": "Spell Effect: Magic's Vessel",
     "system": {
         "description": {
-            "value": "<p>Granted by <em>@UUID[Compendium.pf2e.spells-srd.Item.Magic's Vessel]</em>.</p>\n<p>The target gains a +1 status bonus to saving throws.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Magic's Vessel]</p>\n<p>The target gains a +1 status bonus to saving throws.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

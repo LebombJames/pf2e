@@ -22,12 +22,15 @@
     <div class="effect-info">
         <h1>
             {{effect.name}}
-            <a data-action="send-to-chat" title="{{localize "PF2E.NPC.SendToChat"}}"><i class="fa-solid fa-comment-alt" ></i></a>
+            <a data-action="send-to-chat" data-tooltip="{{localize "PF2E.NPC.SendToChat"}}"><i class="fa-solid fa-fw fa-comment-alt" ></i></a>
+            {{#if (or (ne effect.type "condition") (eq effect.slug "persistent-damage"))}}
+                <a data-action="edit" data-tooltip="{{localize "PF2E.EditItemTitle"}}"><i class="fa-solid fa-fw fa-pencil" ></i></a>
+            {{/if}}
         </h1>
         {{#if (or (eq effect.type "effect") effect.breakdown)}}
             <div class="tags">
                 {{#if (and effect.system.duration.sustained (not effect.system.expired))}}
-                    <div class="tag tag_secondary">{{localize "PF2E.EffectPanel.Sustained"}}</div>
+                    <div class="tag tag_secondary">{{localize "PF2E.Item.Spell.Sustained.Label"}}</div>
                 {{/if}}
                 {{#unless effect.isIdentified}}
                     <div class="tag tag_secondary">{{localize "PF2E.EffectPanel.Unidentified"}}</div>
@@ -75,7 +78,6 @@
             <div class="value-wrapper">
                 <div class="value"><strong>{{coalesce effect.badge.label effect.badge.value}}</strong></div>
             </div>
-
         {{/if}}
     </div>
 </div>

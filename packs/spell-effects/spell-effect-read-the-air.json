@@ -1,6 +1,6 @@
 {
     "_id": "a3uZckqOY9zQWzZ2",
-    "img": "systems/pf2e/icons/spells/read-the-air.webp",
+    "img": "icons/creatures/eyes/human-single-blue.webp",
     "name": "Spell Effect: Read the Air",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,6 +1,6 @@
 {
     "_id": "Ziky4XVV7syXVbUg",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Powder Punch Stance",
     "system": {
         "actionType": {
@@ -23,13 +23,15 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #178: Punks in a Powder Keg"
+        },
         "rules": [],
         "selfEffect": {
             "name": "Stance: Powder Punch Stance",
             "uuid": "Compendium.pf2e.feat-effects.Item.Stance: Powder Punch Stance"
-        },
-        "source": {
-            "value": "Pathfinder #178: Punks in a Powder Keg"
         },
         "traits": {
             "rarity": "uncommon",

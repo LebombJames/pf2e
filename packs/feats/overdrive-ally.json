@@ -1,13 +1,13 @@
 {
     "_id": "NBvhmNqneeok7ZOr",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Overdrive Ally",
     "system": {
         "actionType": {
-            "value": "passive"
+            "value": "action"
         },
         "actions": {
-            "value": null
+            "value": 1
         },
         "category": "class",
         "description": {
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

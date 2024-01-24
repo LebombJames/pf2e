@@ -1,6 +1,6 @@
 {
     "_id": "z5G0o04uV65zyxDB",
-    "img": "systems/pf2e/icons/features/classes/champion-mastery.webp",
+    "img": "icons/magic/nature/symbol-sun-yellow.webp",
     "name": "Champion Mastery",
     "system": {
         "actionType": {
@@ -19,22 +19,21 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.classDCs.champion.rank",
-                "value": 3
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.traditions.divine.rank",
-                "value": 3
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "champion": {
+                    "rank": 3
+                },
+                "spellcasting": {
+                    "rank": 3
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

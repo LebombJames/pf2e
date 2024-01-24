@@ -1,6 +1,6 @@
 {
     "_id": "ZR5Buon23cDQ1ryB",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Zombie Dedication",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
                     "value": "You died and were animated as a husk zombie."
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
         },
         "rules": [
             {
@@ -45,6 +50,7 @@
                 "value": "nonlethal"
             },
             {
+                "baseType": "jaws",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -54,7 +60,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.Weapon.Base.jaws",
                 "range": null,
@@ -74,9 +80,6 @@
                 "uuid": "Compendium.pf2e.ancestryfeatures.Item.Basic Undead Benefits"
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

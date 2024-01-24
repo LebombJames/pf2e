@@ -34,7 +34,7 @@ class SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESchema> {
             }),
             extends: new fields.StringField({ required: true, nullable: true, initial: null }),
             attribute: new fields.StringField({
-                required: true,
+                required: false,
                 choices: Array.from(ATTRIBUTE_ABBREVIATIONS),
                 nullable: true,
                 initial: null,
@@ -46,19 +46,17 @@ class SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESchema> {
         if (this.type === "simple") return;
 
         const checkDomains = this.type === "check" ? [`${this.slug}-check`] : [`${this.slug}-attack-roll`];
+        const extendedFrom = this.extends ? this.actor.getStatistic(this.extends) : null;
         const data: StatisticData = {
             slug: this.slug,
             label: this.label,
+            attribute: this.attribute ?? extendedFrom?.attribute ?? null,
             domains: [this.slug],
             check: { type: this.type === "check" ? "check" : "attack-roll", domains: checkDomains },
             dc: { domains: [`${this.slug}-dc`] },
         };
-        if (this.attribute) data.ability = this.attribute;
 
-        const statistic = this.extends
-            ? this.actor.getStatistic(this.extends)?.extend(data)
-            : new Statistic(this.actor, data);
-
+        const statistic = extendedFrom?.extend(data) ?? new Statistic(this.actor, data);
         if (statistic) {
             this.actor.synthetics.statistics.set(this.slug, statistic);
         } else {
@@ -69,14 +67,14 @@ class SpecialStatisticRuleElement extends RuleElementPF2e<StatisticRESchema> {
 
 interface SpecialStatisticRuleElement
     extends RuleElementPF2e<StatisticRESchema>,
-        ModelPropsFromSchema<StatisticRESchema> {
+        Omit<ModelPropsFromSchema<StatisticRESchema>, "label"> {
     slug: string;
 }
 
 type StatisticRESchema = RuleElementSchema & {
     type: StringField<StatisticType, StatisticType, true, false, true>;
     extends: StringField<string, string, true, true, true>;
-    attribute: StringField<AttributeString, AttributeString, true, true, true>;
+    attribute: StringField<AttributeString, AttributeString, false, true, true>;
 };
 
 type StatisticType = "simple" | "check" | "attack-roll";

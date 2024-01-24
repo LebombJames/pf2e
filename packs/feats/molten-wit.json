@@ -1,6 +1,6 @@
 {
     "_id": "OqGNcUTqaZTp2YND",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Molten Wit",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
         },
         "rules": [
             {
@@ -90,13 +95,10 @@
                 "uuid": "{item|flags.pf2e.rulesSelections.feat}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [
-                "ifrit"
+                "naari"
             ]
         }
     },

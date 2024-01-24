@@ -1,17 +1,17 @@
 {
     "_id": "iSceAVMkVv1uKK7t",
-    "img": "systems/pf2e/icons/equipment/weapons/aldori-dueling-sword.webp",
+    "img": "icons/weapons/swords/sword-guard-gold-red.webp",
     "name": "Aldori Dueling Sword",
     "system": {
-        "MAP": {
-            "value": ""
-        },
         "baseItem": "aldori-dueling-sword",
         "bonus": {
             "value": 0
         },
         "bonusDamage": {
             "value": 0
+        },
+        "bulk": {
+            "value": 1
         },
         "category": "advanced",
         "containerId": null,
@@ -23,9 +23,6 @@
         "description": {
             "value": "<p>An Aldori dueling sword is a slim, single-bladed dueling sword with a slight curve and a sharp, reinforced point.</p>"
         },
-        "equippedBulk": {
-            "value": ""
-        },
         "group": "sword",
         "hardness": 0,
         "hp": {
@@ -35,34 +32,19 @@
         "level": {
             "value": 1
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "potencyRune": {
-            "value": null
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 2
             }
         },
-        "propertyRune1": {
-            "value": null
-        },
-        "propertyRune2": {
-            "value": null
-        },
-        "propertyRune3": {
-            "value": null
-        },
-        "propertyRune4": {
-            "value": null
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: World Guide"
         },
         "quantity": 1,
         "range": null,
@@ -70,16 +52,14 @@
             "value": ""
         },
         "rules": [],
+        "runes": {
+            "potency": 0,
+            "property": [],
+            "striking": 0
+        },
         "size": "med",
-        "source": {
-            "value": "Pathfinder Lost Omens: World Guide"
-        },
         "splashDamage": {
-            "value": null
-        },
-        "stackGroup": null,
-        "strikingRune": {
-            "value": ""
+            "value": 0
         },
         "traits": {
             "rarity": "uncommon",
@@ -90,9 +70,6 @@
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "1"
         }
     },
     "type": "weapon"

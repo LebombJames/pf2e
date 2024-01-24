@@ -1,6 +1,6 @@
 {
     "_id": "zRKw95WMezr6TgiT",
-    "img": "systems/pf2e/icons/spells/moon-frenzy.webp",
+    "img": "icons/creatures/mammals/humanoid-cat-skulking-teal.webp",
     "name": "Spell Effect: Moon Frenzy",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 5
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "rules": [
             {
@@ -49,6 +54,7 @@
                 ]
             },
             {
+                "baseType": "claw",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -57,7 +63,7 @@
                         "die": "d6"
                     }
                 },
-                "img": "systems/pf2e/icons/unarmed-attacks/claw.webp",
+                "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Claw",
                 "slug": "moon-frenzy-claws",
@@ -102,9 +108,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

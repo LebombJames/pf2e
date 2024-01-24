@@ -15,18 +15,21 @@
         "level": {
             "value": 5
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
+        },
         "rules": [
             {
                 "events": {
+                    "onCreate": true,
                     "onTurnStart": true
                 },
                 "key": "TempHP",
                 "value": 5
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

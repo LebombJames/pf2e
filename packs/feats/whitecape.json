@@ -1,6 +1,6 @@
 {
     "_id": "lLO0WSxE3tO3Ovsq",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Whitecape",
     "system": {
         "actionType": {
@@ -19,15 +19,17 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.feats-srd.Item.Steady Balance"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [

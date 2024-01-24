@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.classDCs.alchemist.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "alchemist": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

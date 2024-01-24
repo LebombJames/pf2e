@@ -1,6 +1,6 @@
 {
     "_id": "ewfHVi6NWBGM8B6f",
-    "img": "systems/pf2e/icons/spells/disrupting-weapons.webp",
+    "img": "icons/weapons/swords/sword-flanged-lightning.webp",
     "name": "Effect: Disrupting Strikes",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 6
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #166: Despair on Danger Island"
         },
         "rules": [
             {
@@ -37,9 +42,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder #166: Despair on Danger Island"
-        },
         "start": {
             "initiative": null,
             "value": 0

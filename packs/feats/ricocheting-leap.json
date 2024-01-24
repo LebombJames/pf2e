@@ -1,6 +1,6 @@
 {
     "_id": "5S1nPoxHTgu9MGGV",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Ricocheting Leap",
     "system": {
         "actionType": {
@@ -26,10 +26,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

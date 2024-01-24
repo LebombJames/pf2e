@@ -23,23 +23,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -65,23 +58,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FormUp]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "form-up",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -103,19 +89,15 @@
                 "description": {
                     "value": "<p>Sootsoldiers who serve the other Lord of Fire, the Lambent King Atreia, are covered in glowing embers instead of black char.</p>\n<p>When the sootsoldiers are reduced by an HP Threshold or are reduced to 0 HP, the destroyed soldiers crumble to a cloud of ash-laden smoke in @Template[type:burst|distance:20] centered on the sootsoldiers. Any creature in the area must attempt a @Check[type:reflex|dc:29] save. On a failure, for 1 minute that creature is @UUID[Compendium.pf2e.conditionitems.Item.Dazzled] and its invisibility is negated.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -141,23 +123,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "troop-defenses",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -176,26 +151,22 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The sootsoldiers reach to constrain each enemy within 5 feet in their fiery clutches (@Check[type:reflex|dc:26|basic:true] save). The damage and additional effects depend on the number of actions.</p>\n<p><span class=\"pf2-icon\">1</span> @Damage[2d8[fire]] damage</p>\n<p><span class=\"pf2-icon\">2</span> @Damage[(3d8+7)[fire]] damage plus @UUID[Compendium.pf2e.conditionitems.Item.Grabbed]</p>\n<p><span class=\"pf2-icon\">3</span> @Damage[(4d8+7)[fire]] damage plus grabbed</p>"
+                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The sootsoldiers reach to constrain each enemy within 5 feet in their fiery clutches (@Check[type:reflex|dc:26|basic:true] save). The damage and additional effects depend on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[2d8[fire]] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d8+7)[fire]] damage plus @UUID[Compendium.pf2e.conditionitems.Item.Grabbed]</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+7)[fire]] damage plus grabbed</p>"
                 },
                 "frequency": {
                     "max": 1,
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -216,22 +187,18 @@
                 "description": {
                     "value": "<p>The sootsoldiers reignite and rush across the battlefield, Forming Up and Striding twice. At the end of this movement, a wave of flame and heat pours off the sootsoldiers, dealing @Damage[4d8[fire]] damage to other creatures in a @Template[type:emanation|distance:10], with a @Check[type:reflex|dc:29|basic:true] save. A creature that critically fails its save is also knocked @UUID[Compendium.pf2e.conditionitems.Item.Prone].</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "fire",
                         "primal"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -252,19 +219,15 @@
                 "description": {
                     "value": "<p>Sootsoldiers ignore the @UUID[Compendium.pf2e.conditionitems.Item.Concealed] condition from smoke.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -285,19 +248,15 @@
                 "description": {
                     "value": "<p>Whenever the sootsoldiers Stride, they first Form Up as a free action to condense into a 20-foot-by-20- foot area (minus any missing squares), then move up to their Speed. This works just like a Gargantuan creature moving; for instance, if any of the sootsoldiers' squares enters difficult terrain, the extra movement cost applies to the whole troop.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -317,11 +276,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -340,11 +301,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -363,11 +326,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -386,11 +351,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -409,11 +376,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -476,12 +445,6 @@
                     "type": "poison"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 20
-            },
             "speed": {
                 "details": "troop movement",
                 "otherSpeeds": [],
@@ -506,19 +469,35 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "pyric"
+                ]
+            },
             "level": {
                 "value": 10
             },
             "privateNotes": "",
             "publicNotes": "<p>Powerful deities and warlords strive for dominance over the Plane of Fire and the rest of the Inner Sphere in order to prove fire's supremacy. Armies of flaming soldiers go to war against each other on battlefields of smoke and smoldering char, all unable to bring their full power to bear. Ymeri, the vicious and victorious Queen of the Inferno, commands legions of sootsoldiers: elementals capable of battling the armies of her foes and, even when destroyed, rising from the ashes of the Eternal Furnace, scorched and triumphant.</p>",
-            "source": {
-                "value": "Pathfinder Rage of Elements"
+            "publication": {
+                "license": "OGL",
+                "remaster": true,
+                "title": "Pathfinder Rage of Elements"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "smoke vision",
+            "mod": 20,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -536,17 +515,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "pyric"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "darkvision, smoke vision"
-            },
             "size": {
                 "value": "med"
             },

@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.will.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "will": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
         },
         "traits": {
             "rarity": "common",

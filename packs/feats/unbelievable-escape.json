@@ -1,6 +1,6 @@
 {
     "_id": "nZK5oGakaSZcSOs1",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Unbelievable Escape",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "itemType": "feat",
@@ -35,9 +40,6 @@
                 "value": "PT1H"
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

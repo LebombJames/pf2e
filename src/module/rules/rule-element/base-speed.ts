@@ -1,12 +1,11 @@
-import { CreaturePF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorType, CreaturePF2e } from "@actor";
 import { MovementType } from "@actor/types.ts";
 import { MOVEMENT_TYPES } from "@actor/values.ts";
 import { tupleHasValue } from "@util";
-import { BaseSpeedSynthetic, DeferredMovementType } from "../synthetics.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
 import type { StringField } from "types/foundry/common/data/fields.d.ts";
-import { ResolvableValueField } from "./data.ts";
+import { BaseSpeedSynthetic, DeferredMovementType } from "../synthetics.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 
 /**
  * @category RuleElement
@@ -18,15 +17,15 @@ class BaseSpeedRuleElement extends RuleElementPF2e<BaseSpeedRuleSchema> {
         const { fields } = foundry.data;
         return {
             ...super.defineSchema(),
-            selector: new fields.StringField({ required: true, nullable: false, blank: false }),
-            value: new ResolvableValueField({ required: true, nullable: false }),
+            selector: new fields.StringField({ required: true, blank: false, initial: undefined }),
+            value: new ResolvableValueField({ required: true, nullable: false, initial: undefined }),
         };
     }
 
     constructor(data: RuleElementSource, options: RuleElementOptions) {
         super(data, options);
 
-        this.selector = this.selector.trim().replace(/-speed$/, "");
+        this.selector = this.selector?.trim().replace(/-speed$/, "");
 
         if (!(typeof this.value === "string" || typeof this.value === "number" || this.isBracketedValue(this.value))) {
             this.failValidation("A value must be a number, string, or bracketed value");
@@ -65,7 +64,9 @@ class BaseSpeedRuleElement extends RuleElementPF2e<BaseSpeedRuleSchema> {
     }
 }
 
-interface BaseSpeedRuleElement extends RuleElementPF2e<BaseSpeedRuleSchema>, ModelPropsFromSchema<BaseSpeedRuleSchema> {
+interface BaseSpeedRuleElement
+    extends RuleElementPF2e<BaseSpeedRuleSchema>,
+        ModelPropsFromRESchema<BaseSpeedRuleSchema> {
     get actor(): CreaturePF2e;
 }
 

@@ -15,10 +15,12 @@
         "level": {
             "value": 1
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
+        "rules": [],
         "start": {
             "initiative": null,
             "value": 0

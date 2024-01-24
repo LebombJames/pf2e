@@ -23,23 +23,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -65,23 +58,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FormUp]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "form-up",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -107,23 +93,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.TroopDefenses]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "troop-defenses",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -144,19 +123,15 @@
                 "description": {
                     "value": "<p>Whenever a troop Strides, it first Forms Up as a free action to condense into a 20-foot-by–20-foot area (minus any missing squares), then moves up to its Speed. See <em>Bestiary 3</em> for further details.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -175,25 +150,21 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The cultists chaotically swing their weapons—from pixies' tiny rapiers to redcaps' scythes—at each enemy adjacent to the troop (@Check[type:reflex|dc:22|basic:true] save), dealing a small amount of damage to the troop at the same time. The damage depends on the number of actions.</p>\n<p><span class=\"pf2-icon\">1</span> @Damage[(1d12+1)[slashing]] damage to enemies and @Damage[1d4[slashing]] damage to the troop</p>\n<p><span class=\"pf2-icon\">2</span> @Damage[(2d12+1)[slashing]] damage and @Damage[(1d4+2)[slashing]] damage to the troop</p>\n<p><span class=\"pf2-icon\">3</span> @Damage[(2d12+5)[slashing]] damage and @Damage[2d4[slashing]] damage to the troop</p>"
+                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The cultists chaotically swing their weapons—from pixies' tiny rapiers to redcaps' scythes—at each enemy adjacent to the troop (@Check[type:reflex|dc:22|basic:true] save), dealing a small amount of damage to the troop at the same time. The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(1d12+1)[slashing]] damage to enemies and @Damage[1d4[slashing]] damage to the troop</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d12+1)[slashing]] damage and @Damage[(1d4+2)[slashing]] damage to the troop</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(2d12+5)[slashing]] damage and @Damage[2d4[slashing]] damage to the troop</p>"
                 },
                 "frequency": {
                     "max": 1,
                     "per": "round"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -213,11 +184,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -258,12 +231,6 @@
                 "temp": 0,
                 "value": 90
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 15
-            },
             "speed": {
                 "details": "troop movement",
                 "otherSpeeds": [],
@@ -288,19 +255,33 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": []
+            },
             "level": {
                 "value": 5
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #194: Cult of the Cave Worm"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #194: Cult of the Cave Worm"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 15,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -318,18 +299,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "value": []
-            },
             "rarity": "common",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "grg"
             },
             "value": [
+                "evil",
                 "fey",
                 "troop"
             ]

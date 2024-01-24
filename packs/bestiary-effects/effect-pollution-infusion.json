@@ -1,6 +1,6 @@
 {
     "_id": "gORyINQLvplfthlm",
-    "img": "systems/pf2e/icons/spells/horrific-visage.webp",
+    "img": "icons/magic/unholy/strike-body-explode-disintegrate.webp",
     "name": "Effect: Pollution Infusion",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #162: Ruins of the Radiant Siege"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder #162: Ruins of the Radiant Siege"
-        },
         "start": {
             "initiative": null,
             "value": 0

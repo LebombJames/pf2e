@@ -1,6 +1,6 @@
 {
     "_id": "0gv9D5RlrF5cKA3I",
-    "img": "systems/pf2e/icons/spells/adapt-self.webp",
+    "img": "icons/creatures/magical/spirit-undead-ghost-purple.webp",
     "name": "Spell Effect: Adapt Self (Darkvision)",
     "system": {
         "description": {
@@ -15,15 +15,17 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Gods & Magic"
+        },
         "rules": [
             {
                 "key": "Sense",
                 "selector": "darkvision"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Gods & Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

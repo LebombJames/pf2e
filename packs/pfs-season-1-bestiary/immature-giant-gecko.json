@@ -27,11 +27,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -63,23 +65,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -96,24 +91,31 @@
                 "actions": {
                     "value": null
                 },
-                "category": "defensive",
+                "category": "interaction",
                 "description": {
-                    "value": "<p>A giant gecko's feet allow it to climb virtually any surface, no matter how slick or sheer. If a giant gecko attempts an Athletics check to climb and critically fails, it gets a failure instead.</p>"
+                    "value": "<p>A giant gecko's feet allow it to climb virtually any surface, no matter how slick or sheer. If a giant gecko attempts an Athletics check to @UUID[Compendium.pf2e.actionspf2e.Item.Climb] and critically fails, it gets a failure instead.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "adjustment": {
+                            "criticalFailure": "one-degree-better"
+                        },
+                        "key": "AdjustDegreeOfSuccess",
+                        "predicate": [
+                            "action:climb"
+                        ],
+                        "selector": "athletics"
+                    }
+                ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -133,11 +135,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -156,6 +160,11 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "FlatModifier",
@@ -169,9 +178,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+7 to climb",
@@ -196,11 +202,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -241,12 +249,6 @@
                 "temp": 0,
                 "value": 10
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 5
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -259,19 +261,33 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": []
+            },
             "level": {
                 "value": 0
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-18: Lodge of the Living God"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-18: Lodge of the Living God"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 5,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -289,15 +305,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": []
-            },
             "rarity": "common",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "med"
             },

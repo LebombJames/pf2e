@@ -1,6 +1,6 @@
 {
     "_id": "0fTHqIqXCwGKiykR",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Sprite's Spark",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "category": "unarmed",
@@ -32,11 +37,12 @@
                 "group": "sling",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Sprite.SpritesSpark.Draxie",
-                "maxRange": 20,
                 "predicate": [
                     "self:heritage:draxie"
                 ],
-                "range": 20,
+                "range": {
+                    "max": 20
+                },
                 "traits": [
                     "unarmed"
                 ]
@@ -53,11 +59,12 @@
                 "group": "sling",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Sprite.SpritesSpark.LuminousSprite",
-                "maxRange": 20,
                 "predicate": [
                     "self:heritage:luminous-sprite"
                 ],
-                "range": 20,
+                "range": {
+                    "max": 20
+                },
                 "traits": [
                     "unarmed"
                 ]
@@ -74,11 +81,12 @@
                 "group": "sling",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Sprite.SpritesSpark.Grig",
-                "maxRange": 20,
                 "predicate": [
                     "self:heritage:grig"
                 ],
-                "range": 20,
+                "range": {
+                    "max": 20
+                },
                 "traits": [
                     "unarmed"
                 ]
@@ -95,11 +103,12 @@
                 "group": "sling",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Sprite.SpritesSpark.Melixie",
-                "maxRange": 20,
                 "predicate": [
                     "self:heritage:melixie"
                 ],
-                "range": 20,
+                "range": {
+                    "max": 20
+                },
                 "traits": [
                     "unarmed"
                 ]
@@ -116,11 +125,12 @@
                 "group": "sling",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Sprite.SpritesSpark.Nyktera",
-                "maxRange": 20,
                 "predicate": [
                     "self:heritage:nyktera"
                 ],
-                "range": 20,
+                "range": {
+                    "max": 20
+                },
                 "traits": [
                     "unarmed"
                 ]
@@ -137,19 +147,17 @@
                 "group": "sling",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Sprite.SpritesSpark.Pixie",
-                "maxRange": 20,
                 "predicate": [
                     "self:heritage:pixie"
                 ],
-                "range": 20,
+                "range": {
+                    "max": 20
+                },
                 "traits": [
                     "unarmed"
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

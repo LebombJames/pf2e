@@ -1,6 +1,6 @@
 {
     "_id": "gtXy5gMNU0NDvkBL",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Fiendish Form",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -30,12 +35,16 @@
                 "value": "@actor.attributes.speed.total"
             },
             {
-                "key": "Sense",
-                "selector": "darkvision"
+                "add": [
+                    "fiend"
+                ],
+                "key": "ActorTraits"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
+        "subfeatures": {
+            "senses": {
+                "darkvision": {}
+            }
         },
         "traits": {
             "rarity": "uncommon",

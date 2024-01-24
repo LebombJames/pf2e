@@ -16,7 +16,7 @@
             "collisionDamage": {
                 "value": "1d10"
             },
-            "hardness": 4,
+            "hardness": 5,
             "hp": {
                 "details": "",
                 "max": 14,
@@ -25,13 +25,7 @@
             },
             "immunities": [
                 {
-                    "type": "critical-hits"
-                },
-                {
                     "type": "object-immunities"
-                },
-                {
-                    "type": "precision"
                 }
             ]
         },
@@ -44,7 +38,12 @@
             },
             "passengers": "1",
             "pilotingCheck": "Driving Lore (DC 14) or Nature (DC 16 to DC 24, depending on pulling creature)",
-            "price": "3",
+            "price": 3,
+            "publication": {
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder GM Core"
+            },
             "space": {
                 "high": 4,
                 "long": 10,
@@ -59,9 +58,6 @@
                 "saveDetail": "",
                 "value": 6
             }
-        },
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
         },
         "traits": {
             "rarity": "common",

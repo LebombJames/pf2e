@@ -1,6 +1,6 @@
 {
     "_id": "FHBYfq3w7ddLvzrK",
-    "img": "systems/pf2e/icons/spells/shape-wood.webp",
+    "img": "icons/magic/nature/barrier-shield-wood-vines.webp",
     "name": "Effect: Orchard's Endurance",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "selector": "pd-recovery-check"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "start": {
             "initiative": null,
             "value": 0

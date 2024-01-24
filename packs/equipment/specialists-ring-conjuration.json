@@ -4,12 +4,12 @@
     "name": "Specialist's Ring (Conjuration)",
     "system": {
         "baseItem": null,
-        "containerId": "null",
-        "description": {
-            "value": "<p>This <em>specialist's ring</em> is dedicated to the conjuration school of magic, and the ring is covered in symbols and glyphs related to the conjuration school according to the creator's arcane studies. You gain a +2 item bonus to Arcana checks, and a +1 circumstance bonus to recognize magical effects and items of the conjuration school of magic.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"pf2-icon\">f</span> envision</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> You gain 1 Focus Point, which you can use only to cast a wizard school spell of the conjuration school. If not used by the end of your turn, this Focus Point is lost.</p>"
+        "bulk": {
+            "value": 0
         },
-        "equippedBulk": {
-            "value": ""
+        "containerId": null,
+        "description": {
+            "value": "<p>This <em>specialist's ring</em> is dedicated to the conjuration school of magic, and the ring is covered in symbols and glyphs related to the conjuration school according to the creator's arcane studies. You gain a +2 item bonus to Arcana checks, and a +1 circumstance bonus to recognize magical effects and items of the conjuration school of magic.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">f</span> envision</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> You gain 1 Focus Point, which you can use only to cast a wizard school spell of the conjuration school. If not used by the end of your turn, this Focus Point is lost.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,19 +19,19 @@
         "level": {
             "value": 10
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 1000
             }
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "quantity": 1,
         "rules": [
@@ -44,7 +44,6 @@
             {
                 "key": "FlatModifier",
                 "predicate": [
-                    "conjuration",
                     "action:identify-magic"
                 ],
                 "selector": [
@@ -58,14 +57,9 @@
             }
         ],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
-                "conjuration",
                 "focused",
                 "invested",
                 "magical"
@@ -73,9 +67,6 @@
         },
         "usage": {
             "value": "worn"
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "equipment"

@@ -1,6 +1,6 @@
 {
     "_id": "inLBsuLRE5xmVHdn",
-    "img": "systems/pf2e/icons/spells/horrifying-blood-loss.webp",
+    "img": "icons/skills/wounds/blood-drip-droplet-red.webp",
     "name": "Effect: Infernal Wound",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
+        },
         "rules": [
             {
                 "itemType": "condition",
@@ -27,9 +32,6 @@
                 "value": 20
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -4,12 +4,12 @@
     "name": "Clockwork Heels",
     "system": {
         "baseItem": null,
-        "containerId": "null",
+        "bulk": {
+            "value": 0.1
+        },
+        "containerId": null,
         "description": {
             "value": "<p>This clockwork footwear features a marvelous mechanical heel built into the base to increase your speed. When you lean your weight onto your heel, a springboard triggers and pops out small metal wheels that propel you forward. You gain a +5-foot item bonus to your Speed.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,19 +19,19 @@
         "level": {
             "value": 7
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 300
             }
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Grand Bazaar"
         },
         "quantity": 1,
         "rules": [
@@ -43,10 +43,6 @@
             }
         ],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Lost Omens: The Grand Bazaar"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "rare",
             "value": [
@@ -55,9 +51,6 @@
         },
         "usage": {
             "value": "wornshoes"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

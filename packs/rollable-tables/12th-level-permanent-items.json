@@ -34,21 +34,7 @@
                 4,
                 6
             ],
-            "text": "Darkwood Armor, Standard-Grade",
-            "type": 0,
-            "weight": 3
-        },
-        {
-            "_id": "k455WZW8SCQLXbsv",
-            "documentCollection": "",
-            "documentId": "NEbr7nKuiluJgBHT",
-            "drawn": false,
-            "img": "systems/pf2e/icons/equipment/held-items/lich-phylactery.webp",
-            "range": [
-                7,
-                9
-            ],
-            "text": "Dragonhide Armor, Standard-Grade",
+            "text": "Duskwood Armor, Standard-Grade",
             "type": 0,
             "weight": 3
         },
@@ -62,7 +48,7 @@
                 10,
                 12
             ],
-            "text": "Mithral Armor, Standard-Grade",
+            "text": "Dawnsilver Armor, Standard-Grade",
             "type": 0,
             "weight": 3
         },
@@ -141,7 +127,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "Oo7IpJQDSTmzUyzG",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/staves/animal-staff.webp",
+            "img": "icons/weapons/staves/staff-ornate-bird.webp",
             "range": [
                 43,
                 48
@@ -183,7 +169,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "FTVap8IjoKgCexH7",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/staves/staff-of-healing.webp",
+            "img": "icons/weapons/staves/staff-ornate-gold-jeweled.webp",
             "range": [
                 61,
                 66
@@ -281,7 +267,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "DwLaGtbBdCh2NFbT",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/berserkers-cloak.webp",
+            "img": "icons/equipment/back/cloak-brown-accent-brown-layered-collared-fur.webp",
             "range": [
                 100,
                 105
@@ -295,7 +281,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "ZelCRLDI6M5IfjAI",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/cloak-of-elvenkind.webp",
+            "img": "icons/equipment/back/cloak-collared-feathers-green.webp",
             "range": [
                 106,
                 111

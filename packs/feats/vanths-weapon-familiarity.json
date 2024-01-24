@@ -1,6 +1,6 @@
 {
     "_id": "8rKlptZ7ArtJ6cI8",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Vanth's Weapon Familiarity",
     "system": {
         "actionType": {
@@ -19,41 +19,43 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-bo-staff.rank",
+                "path": "system.proficiencies.attacks.weapon-base-bo-staff.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-longbow.rank",
+                "path": "system.proficiencies.attacks.weapon-base-longbow.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-composite-longbow.rank",
+                "path": "system.proficiencies.attacks.weapon-base-composite-longbow.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-scythe.rank",
+                "path": "system.proficiencies.attacks.weapon-base-scythe.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-staff.rank",
+                "path": "system.proficiencies.attacks.weapon-base-staff.rank",
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

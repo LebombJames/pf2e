@@ -1,6 +1,6 @@
 {
     "_id": "mU8vTzrWX9fIlG0d",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Grandmother's Wisdom",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>You carry the bones of your ancestors with you, and you can ask them for counsel. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Augury]</em> twice per day as a 2nd-level occult innate spell.</p>"
+            "value": "<p>You carry the bones of your ancestors with you, and you can ask them for counsel. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Augury]</em> twice per day as a 2nd-rank occult innate spell.</p>"
         },
         "level": {
             "value": 9
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

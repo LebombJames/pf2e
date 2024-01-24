@@ -13,15 +13,15 @@
             "name": "Sling",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "sling",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 1,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "sling",
                 "hardness": 0,
                 "hp": {
@@ -50,32 +47,17 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": 50,
@@ -83,17 +65,15 @@
                     "value": "1"
                 },
                 "rules": [],
-                "size": "sm",
-                "slug": "sling",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
                 },
+                "size": "med",
+                "slug": "sling",
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -103,9 +83,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -121,15 +98,15 @@
             "name": "Spear",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "spear",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -139,15 +116,12 @@
                     "die": "d6"
                 },
                 "description": {
-                    "value": "<p>A long metal shaft ending with a metal spike, a spear can be used one‑handed as a melee weapon and can be thrown.</p>"
+                    "value": "<p>A long metal shaft ending with a metal spike, a spear can be used one-handed as a melee weapon and can be thrown.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "spear",
                 "hardness": 0,
@@ -158,34 +132,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 1
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -193,17 +152,15 @@
                     "value": "-"
                 },
                 "rules": [],
-                "size": "sm",
-                "slug": "spear",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
                 },
+                "size": "med",
+                "slug": "spear",
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -213,9 +170,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -227,12 +181,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4tIVTg9wj56RrveA"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
+            "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
             "name": "Leather Armor",
             "sort": 300000,
             "system": {
                 "acBonus": 1,
                 "baseItem": "leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -245,9 +202,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "1"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -257,58 +211,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
-                "size": "sm",
-                "slug": "leather-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
                 },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "size": "med",
+                "slug": "leather-armor",
+                "speedPenalty": 0,
                 "strength": 0,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -324,30 +254,19 @@
             "name": "Sling Bullets",
             "sort": 400000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
-                    "value": 0
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "ammo",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>These are small metal balls, typically either iron or lead, designed to be used as ammunition in slings.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -357,14 +276,9 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "per": 10,
@@ -372,13 +286,15 @@
                         "cp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 20,
                 "rules": [],
                 "size": "med",
                 "slug": "sling-bullets",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "stackGroup": "slingBullets",
                 "traits": {
                     "rarity": "common",
@@ -387,8 +303,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -423,11 +341,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -468,11 +388,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -517,11 +439,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -555,23 +479,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -592,8 +509,10 @@
                 "description": {
                     "value": "<p><strong>Requirements</strong> The kobold warrior is adjacent to at least one enemy.</p>\n<hr />\n<p><strong>Effect</strong> The kobold warrior Strides up to its Speed plus 5 feet and gains a +2 circumstance bonus to AC against reactions triggered by this movement. It must end this movement in a space that's not adjacent to any enemy.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -613,18 +532,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -648,10 +558,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The kobold warrior deals an extra 1d4 precision damage to off-guard creatures.</p>"
+                    "value": "<p>The kobold warrior deals an extra 1d4 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -673,18 +585,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -704,11 +607,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -727,6 +632,11 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "FlatModifier",
@@ -739,9 +649,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+4 traps",
@@ -766,11 +673,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -814,31 +723,41 @@
                 "temp": 0,
                 "value": 8
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 3
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "Humanoid",
+            "languages": {
+                "details": "",
+                "value": [
+                    "draconic"
+                ]
+            },
             "level": {
                 "value": -1
             },
             "privateNotes": "",
             "publicNotes": "<p>The typical kobold trains with agile weaponry, favoring the light pick for its use in crafting new tunnels to expand their domains through underground reaches. Kobolds are capable of landing sneaky strikes against unsuspecting foes but are just as quick to scamper off to safety when they don't, as a group, outnumber their enemies at least two to one.</p>\n<hr />\n<p>Kobolds are small, reptilian humanoids who carry physical similarities to true dragons. They lurk in dark spaces, usually tunnels and mines beneath the earth, in either warrens of their own design or complexes discovered and colonized after the original builders have moved on. Though kobolds are far more pragmatic than they are courageous, they use every inch of their cunning to even the playing field between themselves and other, stronger creatures. They attack from the darkness and at range, and kobold artificers and engineers master the art of simple but effective traps, which they use to protect their lairs. Kobolds are skilled at working together by necessity, and they often set up ambushes or hit-and-run assaults that allow them to do the most damage possible without being harmed in return.</p>\n<p>Kobolds are diligent and hardworking creatures, though they often turn these virtues toward selfish ends. While some kobolds live in communal collectives that maintain neutral relations with the creatures around them, they can be easily swayed into serving malevolent powers or megalomaniac leaders. This is in part due to kobolds' innate pragmatism, as they would rather concede to servitude than risk being killed, but it is also in part due to a reverence for the power that kobolds generally lack. Dragons in particular are viewed with a deferential awe, and kobolds eagerly offer their services to such mighty and glorious creatures when they can. While kobolds may scheme against other leaders, especially those that control them via subjugation, dragons are usually viewed with adoration, no matter how brutal they might be to their kobold minions.</p>",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-11: Flames of Rebellion"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-11: Flames of Rebellion"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 3,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -856,24 +775,12 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "draconic"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
+                "evil",
                 "humanoid",
                 "kobold"
             ]

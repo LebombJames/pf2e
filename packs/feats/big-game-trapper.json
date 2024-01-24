@@ -1,6 +1,6 @@
 {
     "_id": "1j9QCzHHxi5MbIY3",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Big Game Trapper",
     "system": {
         "actionType": {
@@ -26,10 +26,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #175: Broken Tusk Moon"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #175: Broken Tusk Moon"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

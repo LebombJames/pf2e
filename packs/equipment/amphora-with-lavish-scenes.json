@@ -1,14 +1,14 @@
 {
     "_id": "JYxnuXg9MV6y1gpQ",
-    "img": "systems/pf2e/icons/equipment/treasure/art-objects/lesser-art-object/amphora-with-lavish-scenes.webp",
+    "img": "icons/containers/kitchenware/vase-clay-pot-decorated-red.webp",
     "name": "Amphora with lavish scenes",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0
+        },
         "containerId": null,
         "description": {
-            "value": ""
-        },
-        "equippedBulk": {
             "value": ""
         },
         "hardness": 0,
@@ -19,36 +19,26 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 10
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Gamemastery Guide"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
-        },
-        "usage": {
-            "value": ""
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "treasure"

@@ -15,6 +15,11 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "Resistance",
@@ -22,9 +27,6 @@
                 "value": "2 + 2*@item.level"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

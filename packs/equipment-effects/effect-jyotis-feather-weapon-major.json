@@ -1,6 +1,6 @@
 {
     "_id": "wcjEjFKLcPisk4jK",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/commodities/materials/feather-red.webp",
     "name": "Effect: Jyoti's Feather - Weapon (Major)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 16
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -43,9 +48,6 @@
                 "value": "greater-disrupting"
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

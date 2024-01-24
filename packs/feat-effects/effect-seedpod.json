@@ -1,6 +1,6 @@
 {
     "_id": "wQDHpOKY3GZqvS2v",
-    "img": "systems/pf2e/icons/spells/speak-with-plants.webp",
+    "img": "icons/magic/nature/plant-poison-spit-green.webp",
     "name": "Effect: Seedpod",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Character Guide"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -10
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Character Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

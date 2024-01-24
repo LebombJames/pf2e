@@ -1,6 +1,6 @@
 {
     "_id": "3xiWBDSR8miAotpa",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Viking Vindicator",
     "system": {
         "actionType": {
@@ -23,11 +23,16 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Knights of Lastwall"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-bastard-sword.rank",
+                "path": "system.proficiencies.attacks.weapon-base-bastard-sword.rank",
                 "predicate": [
                     "feat:viking-weapon-familiarity"
                 ],
@@ -36,7 +41,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-rapier.rank",
+                "path": "system.proficiencies.attacks.weapon-base-rapier.rank",
                 "predicate": [
                     "feat:viking-weapon-familiarity"
                 ],
@@ -47,9 +52,6 @@
                 "uuid": "Compendium.pf2e.feats-srd.Item.Sudden Charge"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Knights of Lastwall"
-        },
         "traits": {
             "rarity": "uncommon",
             "value": [

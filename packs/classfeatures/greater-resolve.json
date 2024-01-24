@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "key": "Note",
@@ -33,21 +38,18 @@
                 "key": "AdjustDegreeOfSuccess",
                 "selector": "will",
                 "type": "save"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.will.rank",
-                "value": 4
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "will": {
+                    "rank": 4
+                }
+            }
         },
         "traits": {
             "rarity": "common",
             "value": [
-                "bard",
                 "investigator",
                 "oracle"
             ]

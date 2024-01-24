@@ -1,6 +1,6 @@
 {
     "_id": "o6ZI01zZBQDASuaw",
-    "img": "systems/pf2e/icons/spells/beastmaster-trance.webp",
+    "img": "icons/creatures/mammals/wolf-howl-moon-forest-blue.webp",
     "name": "Effect: Wolf Shape",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "title": "<span class=\"pf2-icon\">1</span> @Localize[PF2E.AttackEffectKnockdown] ({item|name})"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

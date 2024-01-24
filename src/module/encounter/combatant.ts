@@ -1,13 +1,16 @@
-import { SkillLongForm } from "@actor/types.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
+import type { ActorPF2e } from "@actor";
+import type { SkillLongForm } from "@actor/types.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { ErrorPF2e } from "@util";
-import { EncounterPF2e } from "./index.ts";
-import { ActorPF2e } from "@actor";
+import type { EncounterPF2e } from "./index.ts";
 
 class CombatantPF2e<
     TParent extends EncounterPF2e | null = EncounterPF2e | null,
-    TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null
+    TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null,
 > extends Combatant<TParent, TTokenDocument> {
+    /** Has this document completed `DataModel` initialization? */
+    declare initialized: boolean;
+
     get encounter(): TParent {
         return this.parent;
     }
@@ -28,7 +31,7 @@ class CombatantPF2e<
 
     hasHigherInitiative(
         this: RolledCombatant<NonNullable<TParent>>,
-        { than }: { than: RolledCombatant<NonNullable<TParent>> }
+        { than }: { than: RolledCombatant<NonNullable<TParent>> },
     ): boolean {
         if (this.parent.id !== than.parent.id) {
             throw ErrorPF2e("The initiative of Combatants from different combats cannot be compared");
@@ -41,7 +44,7 @@ class CombatantPF2e<
     static async fromActor(
         actor: ActorPF2e,
         render = true,
-        options: { combat?: EncounterPF2e } = {}
+        options: { combat?: EncounterPF2e } = {},
     ): Promise<CombatantPF2e<EncounterPF2e> | null> {
         if (!game.combat) {
             ui.notifications.error(game.i18n.localize("PF2E.Encounter.NoActiveEncounter"));
@@ -63,7 +66,7 @@ class CombatantPF2e<
                         hidden: token.document.hidden,
                     },
                 ],
-                { render }
+                { render },
             );
             return combatants.at(0) ?? null;
         }
@@ -74,11 +77,11 @@ class CombatantPF2e<
     static override async createDocuments<TDocument extends foundry.abstract.Document>(
         this: ConstructorOf<TDocument>,
         data?: (TDocument | PreCreate<TDocument["_source"]>)[],
-        context?: DocumentModificationContext<TDocument["parent"]>
+        context?: DocumentModificationContext<TDocument["parent"]>,
     ): Promise<TDocument[]>;
     static override async createDocuments(
         data: (CombatantPF2e | PreCreate<foundry.documents.CombatantSource>)[] = [],
-        context: DocumentModificationContext<EncounterPF2e> = {}
+        context: DocumentModificationContext<EncounterPF2e> = {},
     ): Promise<Combatant<EncounterPF2e, TokenDocument<Scene | null> | null>[]> {
         type DataType = (typeof data)[number];
         const entries: { token: TokenDocumentPF2e | null; data: DataType }[] = data.map((d) => {
@@ -155,20 +158,39 @@ class CombatantPF2e<
         Hooks.callAll("pf2e.endTurn", this, encounter, game.user.id);
     }
 
+    protected override _initialize(options?: Record<string, unknown>): void {
+        this.initialized = false;
+        super._initialize(options);
+    }
+
+    /** If embedded, don't prepare data if the parent's data model hasn't initialized all its properties */
+    override prepareData(): void {
+        if (this.initialized) return;
+        if (!this.parent || this.parent.initialized) {
+            this.initialized = true;
+            super.prepareData();
+        }
+    }
+
     override prepareBaseData(): void {
         super.prepareBaseData();
 
-        this.flags.pf2e = mergeObject(this.flags.pf2e ?? {}, { overridePriority: {} });
+        this.flags.pf2e = fu.mergeObject(this.flags.pf2e ?? {}, { overridePriority: {} });
         this.flags.pf2e.roundOfLastTurn ??= null;
         this.flags.pf2e.initiativeStatistic ??= null;
     }
 
     /** Toggle the defeated status of this combatant, applying or removing the overlay icon on its token */
-    async toggleDefeated({ to = !this.isDefeated } = {}): Promise<void> {
+    async toggleDefeated({ to = !this.isDefeated, overlayIcon = true } = {}): Promise<void> {
         if (to === this.isDefeated) return;
 
         await this.update({ defeated: to });
-        await this.token?.object?.toggleEffect(game.settings.get("pf2e", "deathIcon"), { active: to, overlay: true });
+        if (overlayIcon) {
+            await this.token?.object?.toggleEffect(game.settings.get("pf2e", "deathIcon"), {
+                active: to,
+                overlay: true,
+            });
+        }
 
         /** Remove this combatant's token as a target if it died */
         if (this.isDefeated && this.token?.object?.isTargeted) {
@@ -186,19 +208,9 @@ class CombatantPF2e<
     }
 
     override _getInitiativeFormula(): string {
-        const { actor } = this;
-        if (!actor) return "1d20";
-        let bonus = 0;
-
-        if (typeof actor.attributes.initiative?.totalModifier === "number") {
-            bonus = actor.attributes.initiative.totalModifier;
-        } else if (actor.attributes.perception) {
-            bonus = actor.attributes.perception.value;
-        }
-
-        const parts = ["1d20", bonus || 0];
-
-        return parts.join("+");
+        const actor = this.actor;
+        const modifier = actor?.initiative?.mod ?? actor?.perception?.mod ?? 0;
+        return modifier < 0 ? `1d20${modifier}` : `1d20+${modifier}`;
     }
 
     /** Toggle the visibility of names to players */
@@ -226,7 +238,7 @@ class CombatantPF2e<
     protected override _onUpdate(
         changed: DeepPartial<this["_source"]>,
         options: DocumentUpdateContext<TParent>,
-        userId: string
+        userId: string,
     ): void {
         super._onUpdate(changed, options, userId);
 
@@ -247,6 +259,7 @@ class CombatantPF2e<
 
     protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
         super._onDelete(options, userId);
+
         // Reset actor data in case initiative order changed
         if (this.encounter?.started) {
             this.encounter.resetActors();
@@ -256,7 +269,7 @@ class CombatantPF2e<
 
 interface CombatantPF2e<
     TParent extends EncounterPF2e | null = EncounterPF2e | null,
-    TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null
+    TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null,
 > extends Combatant<TParent, TTokenDocument> {
     flags: CombatantFlags;
 }
@@ -274,4 +287,5 @@ type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounte
     initiative: number;
 };
 
-export { CombatantPF2e, CombatantFlags, RolledCombatant };
+export { CombatantPF2e };
+export type { CombatantFlags, RolledCombatant };

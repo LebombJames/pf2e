@@ -1,6 +1,6 @@
 {
     "_id": "00uTUJPgJ6kuGR8O",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Crown of the Saumen Kar",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
                     "value": "Pactbound Dedication"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Monsters of Myth"
         },
         "rules": [
             {
@@ -63,16 +68,15 @@
                 ],
                 "selector": "stealth",
                 "value": 1
-            },
-            {
-                "acuity": "imprecise",
-                "key": "Sense",
-                "range": 30,
-                "selector": "scent"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Monsters of Myth"
+        "subfeatures": {
+            "senses": {
+                "scent": {
+                    "acuity": "imprecise",
+                    "range": 30
+                }
+            }
         },
         "traits": {
             "rarity": "common",

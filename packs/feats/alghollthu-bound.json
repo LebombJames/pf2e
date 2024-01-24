@@ -1,6 +1,6 @@
 {
     "_id": "ch3BWG3Z4kDEmuZW",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Alghollthu Bound",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
         },
         "rules": [
             {
@@ -72,9 +77,6 @@
                 "selector": "will"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "OMJnZspk5YHai8yn",
-    "img": "systems/pf2e/icons/spells/reflective-scales.webp",
+    "img": "icons/commodities/leather/scales-white.webp",
     "name": "Effect: Fed by Metal",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

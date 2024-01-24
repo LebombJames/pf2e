@@ -1,6 +1,6 @@
 {
     "_id": "XMBoKRRyooKnGkHk",
-    "img": "systems/pf2e/icons/spells/practice-makes-perfect.webp",
+    "img": "icons/magic/symbols/clover-luck-white-green.webp",
     "name": "Spell Effect: Practice Makes Perfect",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #148: Fires of the Haunted City"
         },
         "rules": [
             {
@@ -45,9 +50,6 @@
                 "value": 3
             }
         ],
-        "source": {
-            "value": "Pathfinder #148: Fires of the Haunted City"
-        },
         "start": {
             "initiative": null,
             "value": 0

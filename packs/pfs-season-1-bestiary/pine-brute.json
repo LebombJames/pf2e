@@ -28,11 +28,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -64,23 +66,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -101,23 +96,16 @@
                 "description": {
                     "value": "<p>A pine brute takes 5 additional damage from axes.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -136,25 +124,18 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>A pine brute's bark secretes sticky sap. Any creature that hits the pine brute with a melee attack, is hit by the pine brute, or otherwise touches the pine brute must succeed at a @Check[type:reflex|dc:17] save or suffer the effects of a lesser tanglefoot bag, also becoming @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1} until the sticky substance is removed. A creature striking the pine brute with a weapon or object can automatically succeed at this Reflex save by leaving the object stuck to the pine brute. The object can then be removed with a successful @Check[type:athletics|dc:17|name:Unstick Object] check (made as a single action).</p>\n<p>A pine brute can have any number of objects stuck to it at a time. The pine brute can release a stuck object by using a single action, and the sap dissolves 1 minute after the pine brute dies, releasing all stuck objects.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Tanglefoot Bag (Lesser)]</p>"
+                    "value": "<p>A pine brute's bark secretes sticky sap. Any creature that hits the pine brute with a melee attack, is hit by the pine brute, or otherwise touches the pine brute must succeed at a @Check[type:reflex|dc:17] save or suffer the effects of a lesser tanglefoot bag, also becoming @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1} until the sticky substance is removed. A creature striking the pine brute with a weapon or object can automatically succeed at this Reflex save by leaving the object stuck to the pine brute. The object can then be removed with a successful @Check[type:athletics|dc:17|name:Unstick Object] check (made as a single action).</p>\n<p>A pine brute can have any number of objects stuck to it at a time. The pine brute can release a stuck object by using a single action, and the sap dissolves 1 minute after the pine brute dies, releasing all stuck objects.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Glue Bomb (Lesser)]{Effect: Tanglefoot Bag (Lesser)}</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -174,11 +155,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -197,6 +180,11 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "FlatModifier",
@@ -209,9 +197,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+8 in forests",
@@ -258,12 +243,6 @@
                 "temp": 0,
                 "value": 25
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 7
-            },
             "resistances": [
                 {
                     "type": "bludgeoning",
@@ -290,19 +269,38 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "arboreal",
+                    "fey",
+                    "senzar",
+                    "tien"
+                ]
+            },
             "level": {
                 "value": 1
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-06: Lost on the Spirit Road"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-06: Lost on the Spirit Road"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 7,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -320,24 +318,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "arboreal",
-                    "fey",
-                    "senzar",
-                    "tien"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "plant"
             ]
         }

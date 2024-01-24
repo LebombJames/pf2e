@@ -1,10 +1,10 @@
 {
     "_id": "6fb15XuSV4TNuVAT",
-    "img": "systems/pf2e/icons/features/classes/hag.webp",
+    "img": "icons/commodities/biological/hand-gnarled-green.webp",
     "name": "Effect: Hag Blood Magic",
     "system": {
         "description": {
-            "value": "<p>Spiteful curses punish your foes. The first creature that deals damage to you before the end of your next turn takes 2 mental damage per spell level and must attempt a basic Will save.</p>"
+            "value": "<p>Spiteful curses punish your foes. The first creature that deals damage to you before the end of your next turn takes 2 mental damage per spell rank and must attempt a basic Will save.</p>"
         },
         "duration": {
             "expiry": "turn-end",
@@ -15,10 +15,12 @@
         "level": {
             "value": 1
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
+        "rules": [],
         "start": {
             "initiative": null,
             "value": 0

@@ -22,6 +22,11 @@
                 "proficiency": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": false
@@ -92,9 +97,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 37,
                     "mod": 0,
@@ -117,41 +119,29 @@
             "name": "Chilling Darkness",
             "sort": 200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": true,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "type": {
-                                "categories": [],
-                                "value": "cold"
-                            },
-                            "value": "7d6"
-                        }
+                    "0": {
+                        "category": null,
+                        "formula": "7d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "cold"
                     }
                 },
+                "defense": null,
                 "description": {
-                    "value": "<p>You shoot an utterly cold ray of darkness tinged with unholy energy. Make a ranged spell attack against the target. You deal 5d6 cold damage, plus 5d6 evil damage if the target is a celestial.</p>\n<p>If the ray passes through an area of magical light or targets a creature affected by magical light, chilling darkness attempts to counteract the light. If you need to determine whether the ray passes through an area of light, draw a line between yourself and the spell's target.</p>\n<hr />\n<p><strong>Critical Success</strong> The target takes double damage.</p>\n<p><strong>Success</strong> The target takes full damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The cold damage increases by 2d6, and the evil damage against celestials increases by 2d6.</p>"
+                    "value": "<p>You shoot an utterly cold ray of darkness tinged with unholy energy. Make a ranged spell attack against the target. You deal 5d6 cold damage, plus 5d6 spirit damage if the target is a celestial.</p>\n<p>If the ray passes through an area of magical light or targets a creature affected by magical light, chilling darkness attempts to counteract the light. If you need to determine whether the ray passes through an area of light, draw a line between yourself and the spell's target.</p>\n<hr />\n<p><strong>Critical Success</strong> The target takes double damage.</p>\n<p><strong>Success</strong> The target takes full damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The cold damage increases by 2d6, and the spirit damage against celestials increases by 2d6.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": true
                 },
                 "heightening": {
                     "damage": {
@@ -167,58 +157,35 @@
                     "heightenedLevel": 8,
                     "value": "qBIJw1s6aIrNQQaJ"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "120 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "chilling-darkness",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "attack"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "divine"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "divine"
+                    ],
                     "value": [
                         "attack",
                         "cold",
+                        "concentrate",
                         "darkness",
                         "evil",
-                        "evocation"
+                        "manipulate"
                     ]
                 }
             },
@@ -235,33 +202,24 @@
             "name": "Fear",
             "sort": 300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>You plant fear in the target; it must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}.</p>\n<p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 3} and @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] for 1 round.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to five creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "varies"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 3
@@ -269,60 +227,37 @@
                 "location": {
                     "value": "qBIJw1s6aIrNQQaJ"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "fear",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
+                        "concentrate",
                         "emotion",
                         "fear",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -335,22 +270,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.ogE04B74e90cyCUz"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/cursed-items/euryale-curse-card.webp",
+            "img": "icons/sundries/gaming/playing-cards-grey.webp",
             "name": "The Forge",
             "sort": 400000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
-                    "gm": "<p><strong>Epitome</strong> One of Harrowheart's workshops transforms into a forge. The quality of the tools now found here increase that workshop's item bonus to Crafting checks made within to a +2. When <em>The Forge</em> is first epitomized, 10,000 gp of raw materials suitable for use in crafting metal items manifests in the workshop. These raw materials can be used to create items or even simply harvested and sold for a profit, as they do not vanish if taken out of the Harrow Court. Once these raw materials are used or sold, they do not replenish.</p>\n<p>However, additional materials do manifest periodically within the workshop. Their appearances are linked to the party's level, manifesting as soon as The Forge is epitomized or (if The Forge is already epitomized) as soon as the PCs attain the respective level.</p>\n<p><strong>17th-level:</strong> 13,500 gp of cold iron</p>\n<p><strong>18th-level:</strong> 18,000 gp of mithral</p>\n<p><strong>19th-level:</strong> 18,000 gp of adamantine</p>\n<p><strong>20th-level:</strong> 30,000 gp of orichalcum</p>",
-                    "value": "<p><strong>Suit</strong> Hammers (Str)</p>\n<p><strong>Alignment</strong> lawful neutral</p>\n<hr />\n<p><em>The Forge</em> denotes strength through diversity. As long as you have <em>The Forge</em> invested, you can carry more than normal— increase your maximum and encumbered Bulk limits by 2.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">2</span> envision, Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> You pass the card over an adjacent @UUID[Compendium.pf2e.conditionitems.Item.Broken] (but not destroyed) object (magical or otherwise) of up to 4 Bulk, and restore the object to its full Hit Point total, removing the broken condition in the process.</p>"
+                    "gm": "<p><strong>Epitome</strong> One of Harrowheart's workshops transforms into a forge. The quality of the tools now found here increase that workshop's item bonus to Crafting checks made within to a +2. When <em>The Forge</em> is first epitomized, 10,000 gp of raw materials suitable for use in crafting metal items manifests in the workshop. These raw materials can be used to create items or even simply harvested and sold for a profit, as they do not vanish if taken out of the Harrow Court. Once these raw materials are used or sold, they do not replenish.</p>\n<p>However, additional materials do manifest periodically within the workshop. Their appearances are linked to the party's level, manifesting as soon as The Forge is epitomized or (if The Forge is already epitomized) as soon as the PCs attain the respective level.</p>\n<p><strong>17th-level:</strong> 13,500 gp of cold iron</p>\n<p><strong>18th-level:</strong> 18,000 gp of dawnsilver</p>\n<p><strong>19th-level:</strong> 18,000 gp of adamantine</p>\n<p><strong>20th-level:</strong> 30,000 gp of orichalcum</p>",
+                    "value": "<p><strong>Suit</strong> Hammers (Str)</p>\n<p><strong>Alignment</strong> lawful neutral</p>\n<hr />\n<p><em>The Forge</em> denotes strength through diversity. As long as you have <em>The Forge</em> invested, you can carry more than normal—increase your maximum and encumbered Bulk limits by 2.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> envision, Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> You pass the card over an adjacent @UUID[Compendium.pf2e.conditionitems.Item.Broken] (but not destroyed) object (magical or otherwise) of up to 4 Bulk, and restore the object to its full Hit Point total, removing the broken condition in the process.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -360,41 +295,33 @@
                 "level": {
                     "value": 20
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder #191: The Destiny War"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": null,
-                "source": {
-                    "value": "Pathfinder #191: The Destiny War"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
                         "artifact",
                         "harrow-court",
                         "invested",
-                        "magical",
-                        "transmutation"
+                        "magical"
                     ]
                 },
                 "usage": {
                     "value": "carried"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -426,22 +353,25 @@
                     },
                     "oaMDGiGNwZV2Ftq1": {
                         "damage": "1d6",
-                        "damageType": "evil"
+                        "damageType": "spirit"
                     }
                 },
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "agile",
                         "evil",
                         "magical",
+                        "unholy",
                         "versatile-s"
                     ]
                 },
@@ -467,19 +397,15 @@
                 "description": {
                     "value": "<p>Ticktock can use his hearing as a precise sense at the listed range.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -500,26 +426,18 @@
                 "description": {
                     "value": "<p>Ticktock automatically knows whether a creature he hears has any of the @UUID[Compendium.pf2e.conditionitems.Item.Doomed], @UUID[Compendium.pf2e.conditionitems.Item.Dying], or @UUID[Compendium.pf2e.conditionitems.Item.Wounded] conditions, as well as the value of those conditions.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "divination",
                         "divine"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -540,8 +458,10 @@
                 "description": {
                     "value": ""
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -563,18 +483,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -587,7 +498,7 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Regeneration 15 (Deactivated by Good or Silver)",
+            "name": "Regeneration 15 (Deactivated by Holy or Silver)",
             "sort": 900000,
             "system": {
                 "actionType": {
@@ -601,13 +512,15 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Regeneration]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
                         "deactivatedBy": [
-                            "good",
+                            "holy",
                             "silver"
                         ],
                         "key": "FastHealing",
@@ -616,18 +529,9 @@
                     }
                 ],
                 "slug": "regeneration",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -653,23 +557,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "attack-of-opportunity",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -688,10 +585,12 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>@Template[type:emanation|distance:30] @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Aura]</p>\n<p>When a creature ends its turn in the aura, the constant clicking and ticking sounds coming from Ticktock worm into its thoughts and fill the listener with the sense that time is speeding up for everyone but itself. The creature must succeed at a @Check[type:will|dc:34] save or become @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} (or @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 2} on a critical failure) until the end of its next turn.</p>"
+                    "value": "<p>30 feet. When a creature ends its turn in the aura, the constant clicking and ticking sounds coming from Ticktock worm into its thoughts and fill the listener with the sense that time is speeding up for everyone but itself. The creature must succeed at a @Check[type:will|dc:34] save or become @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} (or @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 2} on a critical failure) until the end of its next turn.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -701,28 +600,20 @@
                         "traits": [
                             "auditory",
                             "divine",
-                            "enchantment",
                             "mental",
                             "sonic"
                         ]
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "auditory",
                         "aura",
                         "divine",
-                        "enchantment",
                         "mental",
                         "sonic"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -747,14 +638,13 @@
                     "max": 1,
                     "per": "PT1H"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -762,16 +652,9 @@
                         "concentrate",
                         "darkness",
                         "divine",
-                        "evocation",
                         "mental",
                         "sonic"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -791,11 +674,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -814,11 +699,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -837,11 +724,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -860,11 +749,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -883,11 +774,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -923,7 +816,7 @@
                 "value": "+1 status to all saves vs. magic"
             },
             "hp": {
-                "details": "regeneration 15 (deactivated by good or silver)",
+                "details": "regeneration 15 (deactivated by holy or silver)",
                 "max": 275,
                 "temp": 0,
                 "value": 275
@@ -938,12 +831,6 @@
                     "type": "blinded"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 27
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -956,7 +843,7 @@
             "weaknesses": [
                 {
                     "exceptions": [],
-                    "type": "good",
+                    "type": "holy",
                     "value": 15
                 },
                 {
@@ -967,19 +854,40 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "Male storykin variant sacristan velstrac",
-            "creatureType": "Fiend",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "diabolic",
+                    "shadowtongue"
+                ]
+            },
             "level": {
                 "value": 16
             },
             "privateNotes": "",
             "publicNotes": "<p>Sacristans are failures among the velstracs, creatures whose bodies and minds have been utterly broken by the velstracs' torments. These unfortunates are assembled from scrap metal, nerveless flesh, and bits of darkness into loyal agents who take ecstatic pleasure in serving other velstracs. Sacristans are empowered by a miniature gateway to the Shadow Plane deep in their mouths. By distending their jaws, they can howl with the shrieks and windstorms of that plane. Sacristans vary in appearance but are the size of maimed humans. Their features are redundant or absent and they are wrapped in barbed and rusted chains.</p>",
-            "source": {
-                "value": "Pathfinder #191: The Destiny War"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #191: The Destiny War"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "painsense",
+            "mod": 27,
+            "senses": [
+                {
+                    "acuity": "precise",
+                    "range": 120,
+                    "type": "echolocation"
+                }
+            ],
+            "vision": false
         },
         "resources": {
             "focus": {
@@ -1002,27 +910,15 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "infernal",
-                    "shadowtongue"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "echolocation 120 feet, no vision, painsense"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "fiend",
+                "lawful",
+                "unholy",
                 "velstrac"
             ]
         }

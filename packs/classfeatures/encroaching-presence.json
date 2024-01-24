@@ -1,6 +1,6 @@
 {
     "_id": "6RAHnACKReBW68Sa",
-    "img": "systems/pf2e/icons/spells/boost-eidolon.webp",
+    "img": "icons/creatures/magical/humanoid-silhouette-glowing-pink.webp",
     "name": "Encroaching Presence",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Dark Archive"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": []

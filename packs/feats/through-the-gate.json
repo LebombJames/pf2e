@@ -1,6 +1,6 @@
 {
     "_id": "6tDIVv2gafdO6GV4",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Through the Gate",
     "system": {
         "actionType": {
@@ -23,19 +23,24 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
         "rules": [
             {
                 "adjustName": false,
                 "choices": {
                     "filter": [
+                        "item:category:class",
+                        "item:trait:kineticist",
                         {
                             "lte": [
                                 "item:level",
                                 2
                             ]
                         },
-                        "item:category:class",
-                        "item:trait:kineticist",
                         {
                             "or": [
                                 {
@@ -92,9 +97,6 @@
                 "uuid": "{item|flags.pf2e.rulesSelections.throughTheGate}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "traits": {
             "rarity": "common",
             "value": [

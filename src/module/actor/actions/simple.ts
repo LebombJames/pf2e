@@ -1,8 +1,8 @@
-import { ActionCost, ActionUseOptions } from "./types.ts";
-import { ActorPF2e } from "@actor";
-import { getSelectedOrOwnActors } from "@util/token-actor-utils.ts";
+import type { ActorPF2e } from "@actor";
+import type { EffectPF2e } from "@item";
+import { getSelectedActors } from "@util/token-actor-utils.ts";
 import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base.ts";
-import { EffectPF2e } from "@item";
+import { ActionCost, ActionUseOptions } from "./types.ts";
 
 interface SimpleActionVariantData extends BaseActionVariantData {
     effect?: string | EffectPF2e;
@@ -48,7 +48,7 @@ class SimpleActionVariant extends BaseActionVariant {
         } else if (options.actors) {
             actors.push(options.actors);
         } else {
-            actors.push(...getSelectedOrOwnActors());
+            actors.push(...getSelectedActors({ exclude: ["loot", "party"], assignedFallback: true }));
         }
         if (actors.length === 0) {
             throw new Error(game.i18n.localize("PF2E.ActionsWarning.NoActor"));
@@ -100,4 +100,5 @@ class SimpleAction extends BaseAction<SimpleActionVariantData, SimpleActionVaria
     }
 }
 
-export { SimpleAction, SimpleActionResult, SimpleActionVariant, SimpleActionVariantData, SimpleActionUseOptions };
+export { SimpleAction, SimpleActionVariant };
+export type { SimpleActionResult, SimpleActionUseOptions, SimpleActionVariantData };

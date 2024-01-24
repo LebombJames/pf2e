@@ -13,15 +13,15 @@
             "name": "Broom",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "staff",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 1,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -50,32 +47,17 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -83,17 +65,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "staff",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -103,9 +83,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -117,12 +94,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4tIVTg9wj56RrveA"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
+            "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
             "name": "Innkeeper's Apron",
             "sort": 200000,
             "system": {
                 "acBonus": 1,
                 "baseItem": "leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -135,9 +115,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "1"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -147,58 +124,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "med",
                 "slug": "leather-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "speedPenalty": 0,
                 "strength": 0,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -210,11 +163,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.w4Hd6nunVVqw3GWj"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/basic-crafters-book.webp",
+            "img": "icons/sundries/books/book-worn-blue.webp",
             "name": "Ledger",
             "sort": 300000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": ""
@@ -224,9 +180,6 @@
                     "handsHeld": 1,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -235,37 +188,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "basic-crafters-book",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -299,9 +245,14 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
-                        "domain": "damage-roll",
+                        "domain": "damage",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TwoHanded.Broom",
                         "option": "two-handed",
@@ -320,9 +271,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -359,11 +307,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -401,11 +351,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -435,23 +387,16 @@
                 "description": {
                     "value": "<p>The inkeeper's business gives them insight into the neighborhood's happenings. When @UUID[Compendium.pf2e.actionspf2e.Item.Gather Information]{Gathering Information}, a person can gain as much information chatting with the innkeeper for 30 minutes to an hour as they would gain from 2 hours spent canvassing the neighborhood. Each person can learn gossip from an innkeeper only once per day, and only if the innkeeper is friendly or helpful to that individual.</p>\n<p>Whatever information the innkeeper knows about a given topic doesn't change if someone else asks the innkeeper about that topic, unless the innkeeper has since learned more.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -472,8 +417,10 @@
                 "description": {
                     "value": "<p>An innkeeper gains a +2 circumstance bonus to attack rolls, damage rolls, and AC within their inn.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -512,18 +459,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -543,11 +481,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -566,11 +506,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -589,11 +531,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -612,11 +556,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -635,11 +581,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -680,31 +628,37 @@
                 "temp": 0,
                 "value": 20
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 7
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": 1
             },
             "privateNotes": "",
             "publicNotes": "<p>The sight of an inn is a welcome one to any weary traveler. Innkeepers can often be found cleaning the common room, overseeing the evening meal, or settling in new lodgers. Innkeepers keep an eye on their neighbors' doings and are often excellent sources of information.</p>\n<hr />\n<p>Countless adventures begin in a tavern or a pub. Maybe it's because such places attract the risk-prone, or maybe it's because everyone needs a little liquid courage before they decide to take on a group of rampaging ogres.</p>",
-            "source": {
-                "value": "Pathfinder Gamemastery Guide"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Gamemastery Guide"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 7,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -722,17 +676,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },

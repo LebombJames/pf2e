@@ -1,6 +1,6 @@
 {
     "_id": "jatezR4bENwhC6GL",
-    "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+    "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
     "name": "Bite",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "baseType": "jaws",
@@ -31,7 +36,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.Weapon.Base.jaws",
                 "range": null,
@@ -41,9 +46,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": [

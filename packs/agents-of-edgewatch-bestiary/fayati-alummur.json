@@ -13,15 +13,15 @@
             "name": "+1 Dagger",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "dagger",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 3,
                 "range": null,
@@ -85,17 +67,15 @@
                     "value": "-"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "dagger",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -108,9 +88,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -126,15 +103,15 @@
             "name": "+1 Striking Main-Gauche",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "main-gauche",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -151,9 +128,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -163,34 +137,19 @@
                 "level": {
                     "value": 4
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 100
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": null,
@@ -198,17 +157,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "main-gauche",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -222,9 +179,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -240,15 +194,15 @@
             "name": "+1 Striking Rapier",
             "sort": 300000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "rapier",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -265,9 +219,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -277,34 +228,19 @@
                 "level": {
                     "value": 4
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 100
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": null,
@@ -312,17 +248,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "rapier",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -334,9 +268,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -348,12 +279,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4tIVTg9wj56RrveA"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
+            "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
             "name": "Leather Armor",
             "sort": 400000,
             "system": {
                 "acBonus": 1,
                 "baseItem": "leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -366,9 +300,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "1"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -378,58 +309,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "med",
                 "slug": "leather-armor",
-                "source": {
-                    "value": ""
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "speedPenalty": 0,
                 "strength": 0,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -445,30 +352,19 @@
             "name": "Darkvision Elixir (Moderate)",
             "sort": 500000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong><span class=\"pf2-icon\">1</span> Interact</p>\n<p>After you drink this elixir, your sight becomes sharper in darkness. You gain darkvision for 1 hour.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Darkvision Elixir (Moderate)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">1</span> Interact</p>\n<p>After you drink this elixir, your sight becomes sharper in darkness. You gain darkvision for 1 hour.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Darkvision Elixir (Moderate)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -478,28 +374,24 @@
                 "level": {
                     "value": 4
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 11
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "darkvision-elixir-moderate",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -511,8 +403,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -528,29 +422,18 @@
             "name": "Jade Bauble (affixed to Main-Gauche)",
             "sort": 600000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "talisman"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "talisman",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Command</p>\n<p><strong>Requirements</strong> You are a master with the affixed weapon</p>\n<p>This bit of jade is usually carved in the shape of a duelist, or sometimes a multi-armed creature. When you activate the bauble, it magically draws the attention of foes. Until the start of your next turn, enemies within the reach of the weapon the talisman is affixed to are off-guard.</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Command</p>\n<p><strong>Requirements</strong> You are a master with the affixed weapon</p>\n<p>This bit of jade is usually carved in the shape of a duelist, or sometimes a multi-armed creature. When you activate the bauble, it magically draws the attention of foes. Until the start of your next turn, enemies within the reach of the weapon the talisman is affixed to are off-guard.</p>"
                 },
                 "equipped": {
                     "carryType": "worn"
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -560,33 +443,28 @@
                 "level": {
                     "value": 8
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 100
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "jade-bauble",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "consumable",
-                        "enchantment",
                         "magical",
                         "mental",
                         "talisman"
@@ -595,8 +473,10 @@
                 "usage": {
                     "value": "affixed-to-weapon"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -631,11 +511,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -680,11 +562,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -732,11 +616,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -782,11 +668,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -818,23 +706,32 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature targets Fayati with an attack and she can see the attacker</p>\n<hr />\n<p><strong>Effect</strong> Fayati dodges out of the way, gaining a +2 circumstance bonus to AC against the triggering attack.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "domain": "ac",
+                        "key": "RollOption",
+                        "option": "nimble-dodge",
+                        "toggleable": true
+                    },
+                    {
+                        "key": "FlatModifier",
+                        "predicate": [
+                            "nimble-dodge"
+                        ],
+                        "selector": "ac",
+                        "type": "circumstance",
+                        "value": 2
+                    }
+                ],
                 "slug": "nimble-dodge",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -855,23 +752,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature within Fayati's reach is hit by a melee Strike from one of her allies</p>\n<hr />\n<p><strong>Effect</strong> Fayati makes a Strike against the triggering creature.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -892,8 +782,10 @@
                 "description": {
                     "value": "<p><strong>Requirements</strong> Fayati's last attack was a successful melee Strike with her rapier</p>\n<hr />\n<p><strong>Effect</strong> Fayati makes a main-gauche Strike against the same creature that she just hit. This Strike deals an additional 4d6 precision damage.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -914,18 +806,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -946,23 +829,16 @@
                 "description": {
                     "value": "<p>Whenever Fayati critically succeeds at a Strike against a creature, until the start of her next turn, the first time that another member of the Copper Hand deals damage to that creature during their turn, they deal an additional 1d6 precision damage to it.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Effect: Guildmaster's Lead]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -986,10 +862,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Fayati deals 2d6 extra precision damage to off-guard creatures.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
+                    "value": "<p>Fayati deals 2d6 extra precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -998,21 +876,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -1025,18 +889,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1056,11 +911,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1079,11 +936,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1102,11 +961,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1125,11 +986,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1148,11 +1011,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -1193,31 +1058,38 @@
                 "temp": 0,
                 "value": 150
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 19
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "vudrani"
+                ]
+            },
             "level": {
                 "value": 8
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #158: Sixty Feet Under"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #158: Sixty Feet Under"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 19,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -1235,27 +1107,15 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "vudrani"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "human",
-                "humanoid"
+                "humanoid",
+                "lawful"
             ]
         }
     },

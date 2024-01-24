@@ -13,15 +13,15 @@
             "name": "Crossbow",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "crossbow",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,10 +38,7 @@
                     "handsHeld": 2,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
-                "group": "bow",
+                "group": "crossbow",
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": 120,
@@ -85,17 +67,15 @@
                     "value": "1"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "striking": 2
+                },
                 "size": "med",
                 "slug": "crossbow",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "greaterStriking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -103,9 +83,6 @@
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -117,18 +94,18 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.FNDq4NFSN0g2HKWO"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/handwraps-of-mighty-blows.webp",
+            "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
             "name": "+2 Striking Handwraps of Mighty Blows",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": null,
                 "bonus": {
                     "value": 1
                 },
                 "bonusDamage": {
+                    "value": 0
+                },
+                "bulk": {
                     "value": 0
                 },
                 "category": "unarmed",
@@ -147,9 +124,6 @@
                     "inSlot": true,
                     "invested": false
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "brawling",
                 "hardness": 0,
                 "hp": {
@@ -159,34 +133,19 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -194,17 +153,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "handwraps-of-mighty-blows",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": null
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -214,15 +171,11 @@
                         "invested",
                         "magical",
                         "nonlethal",
-                        "transmutation",
                         "unarmed"
                     ]
                 },
                 "usage": {
                     "value": "worngloves"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "weapon"
@@ -234,12 +187,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4tIVTg9wj56RrveA"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
-            "name": "+2 Resilient Leather Armor",
+            "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
+            "name": "Leather Armor",
             "sort": 300000,
             "system": {
                 "acBonus": 1,
                 "baseItem": "leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -249,11 +205,9 @@
                 "dexCap": 4,
                 "equipped": {
                     "carryType": "worn",
+                    "handsHeld": 0,
                     "inSlot": true,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": "1"
                 },
                 "group": "leather",
                 "hardness": 0,
@@ -264,58 +218,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": "resilient"
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "resilient": 1
+                },
                 "size": "med",
                 "slug": "leather-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "speedPenalty": 0,
                 "strength": 0,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -331,30 +261,19 @@
             "name": "Disintegration Bolt",
             "sort": 400000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
+                "bulk": {
                     "value": 0
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "ammo",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p>The shaft of this bolt is scorched and blackened, and handling it coats your fingers with a fine black powder. When an activated <em>disintegration bolt</em> hits a target, it is subject to a <em>@UUID[Compendium.pf2e.spells-srd.Item.Disintegrate]</em> spell requiring a @Check[type:fortitude|dc:34] save. As with the spell, a critical hit on the attack roll causes the target's saving throw outcome to be one degree worse.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p><strong>Craft Requirements</strong> Supply one casting of <em>disintegrate</em>.</p>"
+                    "value": "<p>The shaft of this bolt is scorched and blackened, and handling it coats your fingers with a fine black powder. When an activated <em>disintegration bolt</em> hits a target, it is subject to a <em>@UUID[Compendium.pf2e.spells-srd.Item.Disintegrate]</em> spell requiring a @Check[type:fortitude|dc:34] save. As with the spell, a critical hit on the attack roll causes the target's saving throw outcome to be one degree worse.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p><strong>Craft Requirements</strong> Supply one casting of <em>disintegrate</em>.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -364,41 +283,39 @@
                 "level": {
                     "value": 15
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1300
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 3,
                 "rules": [],
                 "size": "med",
                 "slug": "disintegration-bolt",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "stackGroup": "bolts",
                 "traits": {
                     "rarity": "uncommon",
                     "value": [
                         "consumable",
-                        "evocation",
                         "magical"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -414,30 +331,19 @@
             "name": "Bolts",
             "sort": 500000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
-                    "value": 0
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "ammo",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>Shorter than traditional arrows but similar in construction, bolts are the ammunition used by crossbows.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -447,14 +353,9 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "per": 10,
@@ -462,13 +363,15 @@
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 10,
                 "rules": [],
                 "size": "med",
                 "slug": "bolts",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "stackGroup": "bolts",
                 "traits": {
                     "rarity": "common",
@@ -477,8 +380,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -508,11 +413,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -558,11 +465,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -598,23 +507,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -635,14 +537,15 @@
                 "description": {
                     "value": "<p><strong>Requirements</strong> Skartitch can't use this reaction while encumbered</p>\n<p><strong>Trigger</strong> Skartitch is hit or critically hit by an attack made by a creature she can see</p>\n<hr />\n<p><strong>Effect</strong> Skartitch gains a +2 circumstance bonus to her Armor Class against the triggering attack.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
-                        "domain": "all",
+                        "domain": "ac",
                         "key": "RollOption",
-                        "label": "Use Nimble Dodge",
                         "option": "nimble-dodge",
                         "toggleable": true
                     },
@@ -657,15 +560,9 @@
                     }
                 ],
                 "slug": "nimble-dodge",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -686,20 +583,16 @@
                 "description": {
                     "value": "<p>Skartitch attempts a Recall Knowledge check against an opponent using the standard DC for a creature of that level. On a success, that opponent is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] against Skartitch's attacks until the start of her next turn; on a critical success, the opponent is off-guard against Skartitch's attacks for 1 minute.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -720,20 +613,16 @@
                 "description": {
                     "value": "<p>Skartitch attempts a Deception check to @UUID[Compendium.pf2e.actionspf2e.Item.Feint] against an opponent she can see. On a success, Skartitch can immediately Strike with one unarmed attack and one ranged weapon attack against the target. The ranged attack does not trigger reactions from the target of the Feint.</p>\n<p>Both of these attacks count toward her multiple attack penalty, but do not apply the penalty until both attacks are completed.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -757,10 +646,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Skartitch deals an extra 4d6 precision damage to off-guard creatures.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
+                    "value": "<p>Skartitch deals an extra 4d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -769,21 +660,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -796,18 +673,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -827,11 +695,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -850,11 +720,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -873,11 +745,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -896,11 +770,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -919,11 +795,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -942,11 +820,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -965,11 +845,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -988,11 +870,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1011,11 +895,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1034,11 +920,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1057,11 +945,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -1108,12 +998,6 @@
                 "temp": 0,
                 "value": 290
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 28
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -1125,19 +1009,36 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "Female ratfolk crime lord",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "akitonian",
+                    "shobhad"
+                ]
+            },
             "level": {
                 "value": 16
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #173: Doorway to the Red Star"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #173: Doorway to the Red Star"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 28,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -1155,23 +1056,14 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "akitonian",
-                    "shobhad"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "low‑light vision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
+                "evil",
                 "humanoid",
+                "lawful",
                 "ratfolk"
             ]
         }

@@ -25,6 +25,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -143,11 +148,10 @@
                 "uuid": "Compendium.pf2e.conditionitems.Item.Slowed"
             },
             {
-                "itemType": "effect",
+                "itemId": "{item|id}",
                 "key": "ItemAlteration",
                 "mode": "downgrade",
                 "predicate": [
-                    "item:id:{item|id}",
                     {
                         "not": "feature:major-curse"
                     }
@@ -156,11 +160,10 @@
                 "value": 2
             },
             {
-                "itemType": "effect",
+                "itemId": "{item|id}",
                 "key": "ItemAlteration",
                 "mode": "downgrade",
                 "predicate": [
-                    "item:id:{item|id}",
                     {
                         "not": "feature:extreme-curse"
                     }
@@ -174,9 +177,6 @@
                 "option": "oracular-curse:stage:{item|badge.value}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
-        },
         "start": {
             "initiative": null,
             "value": 0

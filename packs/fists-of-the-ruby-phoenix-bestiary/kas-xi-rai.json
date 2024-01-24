@@ -21,6 +21,11 @@
                 "proficiency": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": true
@@ -91,9 +96,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 38,
                     "mod": 0,
@@ -116,33 +118,19 @@
             "name": "Wind Jump",
             "sort": 200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "focus"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>You gain a fly Speed equal to your Speed. You must end your turn on solid ground, or you fall.</p>\n<hr />\n<p><strong>Heightened (6th)</strong> At the end of your turn, you can attempt a @Check[type:acrobatics|dc:30] check to find purchase in midair. If you succeed, you don't fall.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Wind Jump]</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 5
@@ -150,54 +138,31 @@
                 "location": {
                     "value": "0h3Hzq30mCIzXcop"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "wind-jump",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "value": []
-                },
                 "traits": {
                     "rarity": "uncommon",
+                    "traditions": [],
                     "value": [
                         "air",
-                        "monk",
-                        "transmutation"
+                        "concentrate",
+                        "focus",
+                        "monk"
                     ]
                 }
             },
@@ -214,33 +179,19 @@
             "name": "Ki Rush",
             "sort": 300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "focus"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>Accelerated by your ki, you move with such speed you become a blur. Move two times: two Strides, two Steps, or one Stride and one Step (in either order).</p>\n<p>You gain the @UUID[Compendium.pf2e.conditionitems.Item.Concealed] condition during this movement and until the start of your next turn.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -248,53 +199,30 @@
                 "location": {
                     "value": "0h3Hzq30mCIzXcop"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "ki-rush",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "value": []
-                },
                 "traits": {
                     "rarity": "uncommon",
+                    "traditions": [],
                     "value": [
-                        "monk",
-                        "transmutation"
+                        "concentrate",
+                        "focus",
+                        "monk"
                     ]
                 }
             },
@@ -311,43 +239,30 @@
             "name": "Ki Strike",
             "sort": 400000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "focus"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": false,
-                            "type": {
-                                "categories": [],
-                                "subtype": "",
-                                "value": "untyped"
-                            },
-                            "value": "1d6"
-                        }
+                    "0": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "1d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "untyped"
                     }
                 },
+                "defense": null,
                 "description": {
                     "value": "<p>You focus your ki into magical attacks. Make an unarmed Strike or Flurry of Blows (this doesn't change the limit on using only one flourish per turn).</p>\n<p>You gain a +1 status bonus to your attack rolls with the Strikes, and the Strikes deal 1d6 extra damage. This damage can be any of the following types of your choice, chosen each time you Strike: force, lawful (only if you're lawful), negative, or positive.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Ki Strike]</p>\n<hr />\n<p><strong>Heightened (+4)</strong> The extra damage increases by 1d6.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -362,53 +277,30 @@
                 "location": {
                     "value": "0h3Hzq30mCIzXcop"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "ki-strike",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "value": []
-                },
                 "traits": {
                     "rarity": "uncommon",
+                    "traditions": [],
                     "value": [
-                        "monk",
-                        "transmutation"
+                        "concentrate",
+                        "focus",
+                        "monk"
                     ]
                 }
             },
@@ -421,18 +313,18 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.FNDq4NFSN0g2HKWO"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/handwraps-of-mighty-blows.webp",
+            "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
             "name": "+2 Gerater Striking Greater Corrosive Handwraps of Mighty Blows",
             "sort": 500000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": null,
                 "bonus": {
                     "value": 1
                 },
                 "bonusDamage": {
+                    "value": 0
+                },
+                "bulk": {
                     "value": 0
                 },
                 "category": "unarmed",
@@ -451,9 +343,6 @@
                     "inSlot": false,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "brawling",
                 "hardness": 0,
                 "hp": {
@@ -463,34 +352,19 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
-                "propertyRune1": {
-                    "value": "greaterCorrosive"
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -498,17 +372,17 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [
+                        "greaterCorrosive"
+                    ],
+                    "striking": 2
+                },
                 "size": "med",
                 "slug": "handwraps-of-mighty-blows",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": null
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "greaterStriking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -518,15 +392,11 @@
                         "invested",
                         "magical",
                         "nonlethal",
-                        "transmutation",
                         "unarmed"
                     ]
                 },
                 "usage": {
                     "value": "worngloves"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "weapon"
@@ -543,6 +413,9 @@
             "sort": 600000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>These stiff leather armguards grant you a +2 item bonus to AC and saving throws, and a maximum Dexterity modifier of +5. You can affix talismans to <em>bracers of armor</em> as though they were light armor.</p>"
@@ -552,9 +425,6 @@
                     "inSlot": false,
                     "invested": false
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -563,19 +433,19 @@
                 "level": {
                     "value": 14
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 4000
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [
@@ -598,23 +468,15 @@
                 ],
                 "size": "med",
                 "slug": "bracers-of-armor-ii",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "abjuration",
                         "invested",
                         "magical"
                     ]
                 },
                 "usage": {
                     "value": "wornbracers"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -630,30 +492,19 @@
             "name": "Potion of Undetectability",
             "sort": 700000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p>Drinking this dull-black liquid makes you undetectable to divinations.</p>\n<p>This grants the same effects as <em>@UUID[Compendium.pf2e.spells-srd.Item.Mind Blank]</em>, but without the bonus against mental effects. You also gain the effects of a 4th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Invisibility]</em> spell, which protects against <em>@UUID[Compendium.pf2e.spells-srd.Item.See the Unseen]</em> spells of 8th level and lower and has a DC of 36 against <em>@UUID[Compendium.pf2e.spells-srd.Item.True Seeing]</em>.</p>\n<p>The potion's effects last for 10 minutes.</p>"
+                    "value": "<p>Drinking this dull-black liquid makes you undetectable to divinations.</p>\n<p>This grants the same effects as <em>@UUID[Compendium.pf2e.spells-srd.Item.Hidden Mind]</em>, but without the bonus against mental effects. You also gain the effects of a 4th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Invisibility]</em> spell, which protects against <em>@UUID[Compendium.pf2e.spells-srd.Item.See the Unseen]</em> spells of 8th level and lower and has a DC of 36 against <em>@UUID[Compendium.pf2e.spells-srd.Item.Truesight]</em>.</p>\n<p>The potion's effects last for 10 minutes.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -663,28 +514,24 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 4400
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "potion-of-undetectability",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -697,8 +544,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -731,11 +580,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -780,11 +631,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -817,8 +670,10 @@
                 "description": {
                     "value": ""
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -838,18 +693,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -870,23 +716,16 @@
                 "description": {
                     "value": "<p><strong>Requirements</strong> Kas Xi Rai is in tangled forest stance</p>\n<p><strong>Trigger</strong> A creature leaves a space within Kas Xi Rai's reach</p>\n<hr />\n<p><strong>Effect</strong> The triggering creature must attempt a @Check[type:reflex|dc:37] save, @Check[type:acrobatics|dc:37] check, or @Check[type:athletics|dc:37] check. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] for that action.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -907,23 +746,16 @@
                 "description": {
                     "value": "<p>When Kas Xi Rai targets the same creature with two Strikes from her Flurry of Blows and at least one hits and deals damage, the target must succeed at a @Check[type:fortitude|dc:39] save or be @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} and take a -5-foot status penalty to land Speed while enfeebled. On a critical failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 2} and takes a -10-foot status penalty to land Speed while enfeebled.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -944,25 +776,18 @@
                 "description": {
                     "value": "<p>Kas Xi Rai makes two Strikes with her fist. If both hit the same creature, combine their damage for the purpose of resistances and weaknesses.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "flourish"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -983,23 +808,16 @@
                 "description": {
                     "value": "<p>Kas Xi Rai makes a lashing branch Strike. If she hits and deals damage, she forces the target to move 5 feet into a space within her reach.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1020,25 +838,18 @@
                 "description": {
                     "value": "<p>Kas Xi Rai extends her arms and enters a deadly tree-like combat stance. As long as she is in this stance, Kas Xi Rai can use Tangled Forest Trip and Tangled Forest Rake and make lashing branch Strikes with her fists.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "stance"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1058,11 +869,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1081,11 +894,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1104,11 +919,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1127,11 +944,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1150,11 +969,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1173,11 +994,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1196,11 +1019,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -1241,12 +1066,6 @@
                 "temp": 0,
                 "value": 300
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 26
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -1258,19 +1077,33 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "Female Tian-Shu high-ranking criminal",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "goblin",
+                    "taldane",
+                    "tien"
+                ]
+            },
             "level": {
                 "value": 17
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #167: Ready? Fight!"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #167: Ready? Fight!"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 26,
+            "senses": []
         },
         "resources": {
             "focus": {
@@ -1293,25 +1126,15 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "goblin",
-                    "taldane",
-                    "tien"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "human",
-                "humanoid"
+                "humanoid",
+                "lawful"
             ]
         }
     },

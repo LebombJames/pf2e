@@ -1,6 +1,6 @@
 {
     "_id": "EEUTd0jAyfwTLzjk",
-    "img": "systems/pf2e/icons/features/classes/brutality.webp",
+    "img": "icons/skills/melee/strike-axe-blood-red.webp",
     "name": "Brutality",
     "system": {
         "actionType": {
@@ -19,25 +19,12 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
-                "value": 2
-            },
             {
                 "key": "CriticalSpecialization",
                 "predicate": [
@@ -46,8 +33,18 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 2
+                },
+                "simple": {
+                    "rank": 2
+                },
+                "unarmed": {
+                    "rank": 2
+                }
+            }
         },
         "traits": {
             "rarity": "common",

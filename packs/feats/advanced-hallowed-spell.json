@@ -1,6 +1,6 @@
 {
     "_id": "4nFsGmPdWvFrwjgF",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Advanced Hallowed Spell",
     "system": {
         "actionType": {
@@ -16,6 +16,7 @@
         "level": {
             "value": 8
         },
+        "maxTakable": 2,
         "prerequisites": {
             "value": [
                 {
@@ -26,17 +27,12 @@
                 }
             ]
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "add",
-                "path": "system.resources.focus.max",
-                "value": 1
-            }
-        ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

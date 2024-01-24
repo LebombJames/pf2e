@@ -11,6 +11,11 @@
         "description": {
             "value": "<p>Inhuman skeletons are often created for both their deadly physical attacks and their terrifying appearances. Beasts and monstrous humanoids with the strangest skeletons tend to be the centerpiece of the collection of a necromancer skilled enough to raise one. You gain a claw, horn, tail, or wing unarmed attack that deals 1d6 damage. A claw deals slashing damage, a horn deals piercing damage, and a tail or wing deals bludgeoning damage. This unarmed attack is in the brawling group and has the finesse and unarmed traits.</p>"
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
+        },
         "rules": [
             {
                 "adjustName": false,
@@ -48,7 +53,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/claw.webp",
+                "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Claw",
                 "predicate": [
@@ -94,7 +99,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/tail.webp",
+                "img": "icons/creatures/abilities/tail-swipe-green.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Tail",
                 "predicate": [
@@ -131,9 +136,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "common",
             "value": []

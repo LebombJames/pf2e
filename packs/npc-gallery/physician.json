@@ -9,11 +9,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.s1vB3HdXjMigYAnY"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/healers-kit.webp",
+            "img": "icons/containers/bags/pouch-gold-green.webp",
             "name": "Healer's Tools",
             "sort": 100000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This kit of bandages, herbs, and suturing tools is necessary for Medicine checks to Administer First Aid, Treat Disease, Treat Poison, or Treat Wounds.</p>"
@@ -23,9 +26,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -34,37 +34,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 5
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "healers-tools",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "equipment"
@@ -80,30 +73,23 @@
             "name": "Elixir of Life (Minor)",
             "sort": 200000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": "1d6"
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": {
+                    "formula": "1d6",
+                    "kind": "healing",
+                    "type": "untyped"
+                },
                 "description": {
-                    "value": "<p><strong>Activate</strong> <span class=\"pf2-icon\">A</span> Interact</p>\n<p>Elixirs of life accelerate a living creature's natural healing processes and immune system. Upon drinking this elixir, you regain [[/r 1d6[healing]]] Hit Points and gain +1 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Elixir of Life (Minor)]</p>"
+                    "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> Interact</p>\n<p>Elixirs of life accelerate a living creature's natural healing processes and immune system. Upon drinking this elixir, you regain [[/r 1d6[healing]]] Hit Points and gain +1 item bonus to saving throws against diseases and poisons for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Elixir of Life (Minor)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -113,28 +99,24 @@
                 "level": {
                     "value": 1
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 2,
                 "rules": [],
                 "size": "med",
                 "slug": "elixir-of-life-minor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -147,8 +129,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -165,15 +149,15 @@
             "sort": 300000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": ""
                 },
                 "equipped": {
                     "carryType": "worn"
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -183,37 +167,27 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 4
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Gamemastery Guide"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "illustrated-book",
-                "source": {
-                    "value": "Pathfinder Gamemastery Guide"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": ""
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "treasure"
@@ -242,11 +216,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -284,11 +260,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -318,8 +296,10 @@
                 "description": {
                     "value": "<p>A physician has a +2 circumstance bonus to Diplomacy checks to @UUID[Compendium.pf2e.actionspf2e.Item.Make an Impression] on or make a @UUID[Compendium.pf2e.actionspf2e.Item.Request] of a diseased, poisoned, or @UUID[Compendium.pf2e.conditionitems.Item.Wounded] creature.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -340,18 +320,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -372,8 +343,10 @@
                 "description": {
                     "value": "<p>When the physician rolls a critical failure on a check to @UUID[Compendium.pf2e.actionspf2e.Item.Treat Disease], @UUID[Compendium.pf2e.actionspf2e.Item.Treat Poison], or @UUID[Compendium.pf2e.actionspf2e.Item.Treat Wounds], they get a failure instead.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -395,18 +368,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -426,11 +390,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -449,11 +415,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -472,11 +440,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -517,31 +487,37 @@
                 "temp": 0,
                 "value": 9
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 6
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": -1
             },
             "privateNotes": "",
             "publicNotes": "<p>The art of medicine is a blend of the intellectual and the practical, concerned with how diseases work and how to prevent them. The physician can be found consulting well-thumbed tomes while meticulously examining patients to better understand their condition, before determining the most effective treatment. For medical matters, the physician is a 4th-level challenge.</p>\n<hr />\n<p>The world is a dangerous place. Thankfully, there are those who devote their lives to easing the pain and suffering of others.</p>",
-            "source": {
-                "value": "Pathfinder Gamemastery Guide"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Gamemastery Guide"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "(+8 to notice ailments)",
+            "mod": 6,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -559,17 +535,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "(+8 to notice ailments)"
-            },
             "size": {
                 "value": "med"
             },

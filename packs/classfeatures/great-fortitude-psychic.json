@@ -1,6 +1,6 @@
 {
     "_id": "zAe95Uk5IPIT23K1",
-    "img": "systems/pf2e/icons/features/classes/great-fortitude.webp",
+    "img": "icons/magic/life/cross-explosion-burst-green.webp",
     "name": "Great Fortitude (Psychic)",
     "system": {
         "actionType": {
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.fortitude.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "fortitude": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
         },
         "traits": {
             "rarity": "common",

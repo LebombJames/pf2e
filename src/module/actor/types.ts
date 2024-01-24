@@ -1,18 +1,22 @@
-import * as ActorInstance from "@actor";
-import * as ItemInstance from "@item";
-import { EffectTrait } from "@item/abstract-effect/index.ts";
-import { ItemInstances } from "@item/types.ts";
-import { TokenPF2e } from "@module/canvas/index.ts";
-import { ActorPF2e, ItemPF2e } from "@module/documents.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
-import { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/config/iwr.ts";
-import { DamageRoll } from "@system/damage/roll.ts";
-import { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import { PredicatePF2e } from "@system/predication.ts";
-import { StatisticCheck } from "@system/statistic/index.ts";
-import { StrikeData, TraitViewData } from "./data/base.ts";
-import { ModifierPF2e } from "./modifiers.ts";
-import {
+import type * as ActorInstance from "@actor";
+import type { ActorPF2e } from "@actor";
+import type { ItemPF2e } from "@item";
+import type { ActionTrait } from "@item/ability/types.ts";
+import type { EffectTrait } from "@item/abstract-effect/index.ts";
+import type { ItemInstances } from "@item/types.ts";
+import type { TokenPF2e } from "@module/canvas/index.ts";
+import type { CheckRollContextFlag } from "@module/chat-message/index.ts";
+import type { ItemAlteration } from "@module/rules/rule-element/item-alteration/alteration.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
+import type { immunityTypes, resistanceTypes, weaknessTypes } from "@scripts/config/iwr.ts";
+import type { DamageRoll } from "@system/damage/roll.ts";
+import type { CheckDC, DegreeOfSuccessString } from "@system/degree-of-success.ts";
+import type { PredicatePF2e } from "@system/predication.ts";
+import type { StatisticCheck } from "@system/statistic/index.ts";
+import type { StrikeData } from "./data/base.ts";
+import type { ModifierPF2e } from "./modifiers.ts";
+import type {
+    ACTOR_TYPES,
     ATTRIBUTE_ABBREVIATIONS,
     DC_SLUGS,
     MOVEMENT_TYPES,
@@ -22,8 +26,11 @@ import {
     UNAFFECTED_TYPES,
 } from "./values.ts";
 
+type ActorType = (typeof ACTOR_TYPES)[number];
+
 /** Used exclusively to resolve `ActorPF2e#isOfType` */
 interface ActorInstances<TParent extends TokenDocumentPF2e | null> {
+    army: ActorInstance.ArmyPF2e<TParent>;
     character: ActorInstance.CharacterPF2e<TParent>;
     creature: ActorInstance.CreaturePF2e<TParent>;
     familiar: ActorInstance.FamiliarPF2e<TParent>;
@@ -45,7 +52,7 @@ interface ActorDimensions {
     height: number;
 }
 
-type SkillAbbreviation = SetElement<typeof SKILL_ABBREVIATIONS>;
+type SkillAbbreviation = (typeof SKILL_ABBREVIATIONS)[number];
 type SkillLongForm = SetElement<typeof SKILL_LONG_FORMS>;
 
 type ActorAlliance = "party" | "opposition" | null;
@@ -60,9 +67,9 @@ interface AuraData {
     slug: string;
     level: number | null;
     radius: number;
-    effects: AuraEffectData[];
-    colors: AuraColors | null;
     traits: EffectTrait[];
+    effects: AuraEffectData[];
+    appearance: AuraAppearanceData;
 }
 
 interface AuraEffectData {
@@ -76,26 +83,30 @@ interface AuraEffectData {
     predicate: PredicatePF2e;
     removeOnExit: boolean;
     includesSelf: boolean;
+    alterations: ItemAlteration[];
 }
 
-interface AuraColors {
-    border: `#${string}` | null;
-    fill: `#${string}` | null;
+interface AuraAppearanceData {
+    border: { color: number; alpha: number } | null;
+    highlight: { color: number; alpha: number };
+    texture: {
+        src: ImageFilePath | VideoFilePath;
+        alpha: number;
+        scale: number;
+        translation: { x: number; y: number } | null;
+        loop: boolean;
+        playbackRate: number;
+    } | null;
 }
 
 /* -------------------------------------------- */
 /*  Attack Rolls                                */
 /* -------------------------------------------- */
 
-type AttackItem =
-    | ItemInstance.WeaponPF2e<ActorPF2e>
-    | ItemInstance.MeleePF2e<ActorPF2e>
-    | ItemInstance.SpellPF2e<ActorPF2e>;
-
 interface StrikeSelf<
     TActor extends ActorPF2e = ActorPF2e,
     TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null,
-    TItem extends AttackItem | null = AttackItem | null
+    TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null,
 > {
     actor: TActor;
     token: TokenDocumentPF2e | null;
@@ -118,18 +129,18 @@ interface RollTarget {
 interface RollContext<
     TActor extends ActorPF2e,
     TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null,
-    TItem extends AttackItem | null = AttackItem | null
+    TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null,
 > {
     /** Roll options */
     options: Set<string>;
     self: StrikeSelf<TActor, TStatistic, TItem>;
     target: RollTarget | null;
-    traits: TraitViewData[];
+    traits: ActionTrait[];
 }
 
 interface RollContextParams<
     TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null,
-    TItem extends AttackItem | null = AttackItem | null
+    TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null,
 > {
     /** The statistic used for the roll */
     statistic: TStatistic;
@@ -143,29 +154,36 @@ interface RollContextParams<
     options: Set<string>;
     /** Whether the request is for display in a sheet view. If so, targets are not considered */
     viewOnly?: boolean;
-    /** A direct way of informing a check is part of a melee action: it is otherwise inferred from the attack item */
+    /** A direct way of informing a roll is part of a melee action: it is otherwise inferred from the attack item */
     melee?: boolean;
+    /** Action traits associated with the roll */
+    traits?: ActionTrait[];
 }
 
 interface CheckContextParams<
     TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData,
-    TItem extends AttackItem | null = AttackItem | null
+    TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null,
 > extends RollContextParams<TStatistic, TItem> {
     defense: string;
 }
 
 interface DamageRollContextParams<
     TStatistic extends StatisticCheck | StrikeData | null = StatisticCheck | StrikeData | null,
-    TItem extends AttackItem | null = AttackItem | null
+    TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null,
 > extends RollContextParams<TStatistic, TItem> {
-    /** An outcome of a preceding check roll */
-    outcome?: DegreeOfSuccessString | null;
+    /** The context object of the preceding check roll */
+    checkContext: Maybe<CheckRollContextFlag>;
+    /**
+     * An outcome of a preceding check roll:
+     * This may be different than what is in the context object if the user rolled damage despite a failure
+     */
+    outcome: Maybe<DegreeOfSuccessString>;
 }
 
 interface CheckContext<
     TActor extends ActorPF2e,
     TStatistic extends StatisticCheck | StrikeData = StatisticCheck | StrikeData,
-    TItem extends AttackItem | null = AttackItem | null
+    TItem extends ItemPF2e<ActorPF2e> | null = ItemPF2e<ActorPF2e> | null,
 > extends RollContext<TActor, TStatistic, TItem> {
     dc: CheckDC | null;
 }
@@ -190,14 +208,14 @@ type ResistanceType = keyof typeof resistanceTypes;
 type UnaffectedType = SetElement<typeof UNAFFECTED_TYPES>;
 type IWRType = ImmunityType | WeaknessType | ResistanceType;
 
-export {
-    AttributeString,
+export type {
     ActorAlliance,
     ActorDimensions,
     ActorInstances,
+    ActorType,
     ApplyDamageParams,
-    AttackItem,
-    AuraColors,
+    AttributeString,
+    AuraAppearanceData,
     AuraData,
     AuraEffectData,
     CheckContext,

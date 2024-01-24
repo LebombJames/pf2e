@@ -1,6 +1,6 @@
 {
     "_id": "1VLOhyq0IFMY2rqh",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Animal Rage",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p>You transform into your animal. You gain the effects of the 3rd-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Animal Form]</em> spell except you use your own statistics, temporary Hit Points, and unarmed attacks instead of those granted by animal form. You also retain the constant abilities of your gear. If your animal is a frog, your tongue's reach increases to 15 feet. Dismissing the transformation gains the rage trait.</p>"
+            "value": "<p>You transform into your animal. You gain the effects of the 3rd-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Animal Form]</em> spell except you use your own statistics, temporary Hit Points, and unarmed attacks instead of those granted by animal form. You also retain the constant abilities of your gear. If your animal is a frog, your tongue's reach increases to 15 feet. Dismissing the transformation gains the rage trait.</p>"
         },
         "level": {
             "value": 8
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [
@@ -34,8 +36,7 @@
                 "concentrate",
                 "polymorph",
                 "primal",
-                "rage",
-                "transmutation"
+                "rage"
             ]
         }
     },

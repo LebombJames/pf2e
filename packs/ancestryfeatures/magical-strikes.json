@@ -1,6 +1,6 @@
 {
     "_id": "TRw4oBZBFZG96jKO",
-    "img": "systems/pf2e/icons/spells/fey-form.webp",
+    "img": "icons/creatures/magical/fae-fairy-winged-glowing-green.webp",
     "name": "Magical Strikes",
     "system": {
         "actionType": {
@@ -19,10 +19,19 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
         },
+        "rules": [
+            {
+                "key": "AdjustStrike",
+                "mode": "add",
+                "property": "traits",
+                "value": "magical"
+            }
+        ],
         "traits": {
             "rarity": "common",
             "value": [

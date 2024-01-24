@@ -1,20 +1,22 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { StrikeData } from "@actor/data/base.ts";
-import { ItemPF2e } from "@item";
+import type { ItemPF2e } from "@item";
+import { createActionRangeLabel } from "@item/ability/helpers.ts";
 import { ChatMessagePF2e, DamageRollContextFlag } from "@module/chat-message/index.ts";
 import { ZeroToThree } from "@module/data.ts";
+import { RollNotePF2e } from "@module/notes.ts";
 import { extractNotes } from "@module/rules/helpers.ts";
-import { DEGREE_OF_SUCCESS_STRINGS } from "@system/degree-of-success.ts";
-import { DamageRoll, DamageRollDataPF2e } from "./roll.ts";
+import { DEGREE_OF_SUCCESS, DEGREE_OF_SUCCESS_STRINGS } from "@system/degree-of-success.ts";
+import { createHTMLElement } from "@util";
+import { DamageRoll, DamageRollData } from "./roll.ts";
 import { DamageRollContext, DamageTemplate } from "./types.ts";
-import { localizer } from "@util";
 
 /** Create a chat message containing a damage roll */
 export class DamagePF2e {
     static async roll(
         data: DamageTemplate,
         context: DamageRollContext,
-        callback?: Function
+        callback?: Function,
     ): Promise<Rolled<DamageRoll> | null> {
         const outcome = context.outcome ?? null;
 
@@ -36,7 +38,7 @@ export class DamagePF2e {
             subtitle,
         });
 
-        if (data.traits) {
+        if (context.traits) {
             interface ToTagsParams {
                 labels?: Record<string, string | undefined>;
                 descriptions?: Record<string, string | undefined>;
@@ -45,11 +47,11 @@ export class DamagePF2e {
             }
             const toTags = (
                 slugs: string[],
-                { labels = {}, descriptions = {}, cssClass, dataAttr }: ToTagsParams
+                { labels = {}, descriptions = {}, cssClass, dataAttr }: ToTagsParams,
             ): string =>
                 slugs
                     .map((s) => ({ value: s, label: game.i18n.localize(labels[s] ?? "") }))
-                    .sort((a, b) => a.label.localeCompare(b.label))
+                    .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
                     .map((tag) => {
                         const description = descriptions[tag.value] ?? "";
 
@@ -57,14 +59,14 @@ export class DamagePF2e {
                         span.className = "tag";
                         if (cssClass) span.classList.add(cssClass);
                         span.dataset[dataAttr] = tag.value;
-                        span.dataset.description = description;
+                        if (description) span.dataset.tooltip = description;
                         span.innerText = tag.label;
 
                         return span.outerHTML;
                     })
                     .join("");
 
-            const traits = toTags(data.traits, {
+            const traits = toTags(context.traits, {
                 labels: CONFIG.PF2E.actionTraits,
                 descriptions: CONFIG.PF2E.traitsDescriptions,
                 cssClass: null,
@@ -72,7 +74,7 @@ export class DamagePF2e {
             });
 
             const item = context.self?.item;
-            const itemTraits = item?.isOfType("weapon", "melee", "spell")
+            const itemTraits = item?.isOfType("weapon", "melee")
                 ? toTags(
                       // Materials are listed in a separate group of tags
                       Array.from(item.traits).filter((t) => !(t in CONFIG.PF2E.materialDamageEffects)),
@@ -81,21 +83,31 @@ export class DamagePF2e {
                           descriptions: CONFIG.PF2E.traitsDescriptions,
                           cssClass: "tag_alt",
                           dataAttr: "trait",
-                      }
+                      },
                   )
                 : "";
 
+            const runeTags = ((): string => {
+                const hasGhostTouch = context.options.has("item:rune:property:ghost-touch");
+                const hasAstral =
+                    context.options.has("item:rune:property:astral") ||
+                    context.options.has("item:rune:property:greater-astral");
+                return (hasGhostTouch || hasAstral) && context.options.has("target:trait:incorporeal")
+                    ? toTags(["ghost-touch"], {
+                          labels: { "ghost-touch": "PF2E.WeaponPropertyRune.ghostTouch.Name" },
+                          descriptions: { "ghost-touch": "PF2E.WeaponPropertyRune.ghostTouch.Note" },
+                          cssClass: "ghost-touch",
+                          dataAttr: "slug",
+                      })
+                    : "";
+            })();
+
             const properties = ((): string => {
-                const localize = localizer("PF2E.Action.Range");
-                const { increment, max } =
-                    context.range ??
-                    (item?.isOfType("weapon") ? { increment: item.rangeIncrement, max: item.maxRange } : {});
-                if (increment || max) {
+                const range = item?.isOfType("action", "melee", "weapon") ? item.range : null;
+                const label = createActionRangeLabel(range);
+                if (label && (range?.increment || range?.max)) {
                     // Show the range increment or max range as a tag
-                    const [slug, key, value] = increment
-                        ? [`range-increment-${increment}`, "IncrementN", increment]
-                        : [`range-max`, "MaxN", max];
-                    const label = localize(key, { n: value ?? null });
+                    const slug = range.increment ? `range-increment-${range.increment}` : `range-${range.max}`;
                     return toTags([slug], {
                         labels: { [slug]: label },
                         descriptions: { [slug]: "PF2E.Item.Weapon.RangeIncrementN.Hint" },
@@ -114,29 +126,41 @@ export class DamagePF2e {
                 dataAttr: "material",
             });
 
-            const otherTags = [itemTraits, properties, materialEffects].join("");
+            const otherTags = [itemTraits, properties, materialEffects, runeTags].join("");
 
-            flavor +=
-                otherTags.length > 0
-                    ? `<div class="tags">${traits}<hr class="vr" />${otherTags}</div><hr>`
-                    : `<div class="tags">${traits}</div><hr>`;
+            const tagsElem = createHTMLElement("div", { classes: ["tags"], dataset: { tooltipClass: "pf2e" } });
+            tagsElem.innerHTML = otherTags.length > 0 ? `${traits}<hr class="vr" />${otherTags}` : traits;
+            flavor += tagsElem.outerHTML;
+            flavor += "\n<hr />";
         }
 
         // Add breakdown to flavor
+        const showBreakdown =
+            data.damage.roll?.options.showBreakdown ??
+            (game.pf2e.settings.metagame.breakdowns || !!context.self?.actor?.hasPlayerOwner);
         const breakdown = Array.isArray(data.damage.breakdown)
             ? data.damage.breakdown
             : data.damage.breakdown[outcome ?? "success"];
-        const breakdownTags = breakdown.map((b) => `<span class="tag tag_transparent">${b}</span>`);
-        flavor += `<div class="tags">${breakdownTags.join("")}</div>`;
+        const breakdownTags = breakdown.map((b) =>
+            createHTMLElement("span", {
+                classes: ["tag", "tag_transparent"],
+                dataset: { visibility: showBreakdown ? null : "gm" },
+                children: [b],
+            }),
+        );
+        flavor +=
+            breakdownTags.length > 0
+                ? createHTMLElement("div", { classes: ["tags", "modifiers"], children: breakdownTags }).outerHTML
+                : "";
 
         // Create the damage roll and evaluate. If already created, evalute the one we've been given instead
         const roll = await (() => {
             const damage = data.damage;
-            if ("roll" in damage) {
+            if (damage.roll) {
                 return damage.roll.evaluate({ async: true });
             }
 
-            const formula = deepClone(damage.formula[outcome ?? "success"]);
+            const formula = fu.deepClone(damage.formula[outcome ?? "success"]);
             if (!formula) {
                 ui.notifications.error(game.i18n.format("PF2E.UI.noDamageInfoForOutcome", { outcome }));
                 return null;
@@ -144,15 +168,22 @@ export class DamagePF2e {
 
             const rollerId = game.userId;
             const degreeOfSuccess = outcome ? (DEGREE_OF_SUCCESS_STRINGS.indexOf(outcome) as ZeroToThree) : null;
-            const critRule = game.settings.get("pf2e", "critRule") === "doubledamage" ? "double-damage" : "double-dice";
+            const critRule =
+                degreeOfSuccess !== DEGREE_OF_SUCCESS.CRITICAL_SUCCESS
+                    ? null
+                    : game.settings.get("pf2e", "critRule") === "doubledamage"
+                      ? "double-damage"
+                      : "double-dice";
 
-            const options: DamageRollDataPF2e = {
+            const options: DamageRollData = {
                 rollerId,
                 damage: data,
                 degreeOfSuccess,
-                ignoredResistances: damage.ignoredResistances,
                 critRule,
+                ignoredResistances: damage.ignoredResistances,
+                showBreakdown,
             };
+
             return new DamageRoll(formula, {}, options).evaluate({ async: true });
         })();
 
@@ -161,21 +192,13 @@ export class DamagePF2e {
         const syntheticNotes = context.self?.actor
             ? extractNotes(context.self?.actor.synthetics.rollNotes, context.domains ?? [])
             : [];
-        const allNotes = [...syntheticNotes, ...data.notes];
-        const filteredNotes = allNotes.filter(
+        const contextNotes = context.notes?.map((n) => (n instanceof RollNotePF2e ? n : new RollNotePF2e(n))) ?? [];
+        const notes = [...syntheticNotes, ...contextNotes].filter(
             (n) =>
                 (n.outcome.length === 0 || (outcome && n.outcome.includes(outcome))) &&
-                n.predicate.test(context.options)
+                n.predicate.test(context.options),
         );
-        const noteRollData = context.self?.item?.getRollData() ?? {};
-        const notesFlavor = (
-            await Promise.all(
-                filteredNotes.map(
-                    async (n) => await TextEditor.enrichHTML(n.text, { rollData: noteRollData, async: true })
-                )
-            )
-        ).join("\n");
-        flavor += notesFlavor;
+        flavor += RollNotePF2e.notesToHTML(notes)?.outerHTML ?? "";
 
         const { self, target } = context;
         const item = self?.item ?? null;
@@ -188,7 +211,7 @@ export class DamagePF2e {
                 const strikes: StrikeData[] = self.actor.system.actions;
                 const strike = strikes.find(
                     (a): a is StrikeData & { item: ItemPF2e<ActorPF2e> } =>
-                        a.item?.id === item.id && a.item.slug === item.slug
+                        a.item?.id === item.id && a.item.slug === item.slug,
                 );
 
                 if (strike) {
@@ -215,32 +238,34 @@ export class DamagePF2e {
             domains: context.domains ?? [],
             options: Array.from(context.options).sort(),
             mapIncreases: context.mapIncreases,
-            notes: allNotes.map((n) => n.toObject()),
+            notes: notes.map((n) => n.toObject()),
             secret: context.secret ?? false,
             rollMode,
             traits: context.traits ?? [],
-            skipDialog: context.skipDialog ?? !game.user.settings.showRollDialogs,
+            skipDialog: context.skipDialog ?? !game.user.settings.showDamageDialogs,
             outcome,
             unadjustedOutcome: context.unadjustedOutcome ?? null,
         };
 
-        const messageData = await roll.toMessage(
-            {
-                speaker: ChatMessagePF2e.getSpeaker({ actor: self?.actor, token: self?.token }),
-                flavor,
-                flags: {
-                    pf2e: {
-                        context: contextFlag,
-                        target: targetFlag,
-                        modifiers: data.modifiers?.map((m) => m.toObject()) ?? [],
-                        origin: item?.getOriginData(),
-                        strike,
-                        preformatted: "both",
+        const messageData: Omit<foundry.documents.ChatMessageSource, "rolls"> & { rolls: (string | RollJSON)[] } =
+            await roll.toMessage(
+                {
+                    speaker: ChatMessagePF2e.getSpeaker({ actor: self?.actor, token: self?.token }),
+                    flavor,
+                    flags: {
+                        pf2e: {
+                            context: contextFlag,
+                            target: targetFlag,
+                            modifiers: data.modifiers?.flatMap((m) => ("kind" in m ? m.toObject() : [])) ?? [],
+                            dice: data.modifiers?.flatMap((m) => ("diceNumber" in m ? m.toObject() : [])) ?? [],
+                            origin: item?.getOriginData(),
+                            strike,
+                            preformatted: "both",
+                        },
                     },
                 },
-            },
-            { create: false }
-        );
+                { create: false },
+            );
 
         // If there is splash damage, include it as an additional roll for separate application
         const splashRolls = await (async (): Promise<RollJSON[]> => {

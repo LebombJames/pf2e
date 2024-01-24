@@ -1,6 +1,6 @@
 {
     "_id": "4GAJHkurmZ1ttKDv",
-    "img": "systems/pf2e/icons/spells/blood-ward.webp",
+    "img": "icons/skills/wounds/blood-cells-vessel-red-orange.webp",
     "name": "Effect: Blood Magic",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 6
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #165: Eyes of Empty Death"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder #165: Eyes of Empty Death"
-        },
         "start": {
             "initiative": null,
             "value": 0

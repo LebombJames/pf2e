@@ -1,6 +1,6 @@
 {
     "_id": "4tGVIEqwH4TQoF0O",
-    "img": "systems/pf2e/icons/spells/cloak-of-light.webp",
+    "img": "icons/skills/targeting/target-glowing-yellow.webp",
     "name": "Effect: Bastion Aura",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 20
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 2"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 2"
-        },
         "start": {
             "initiative": null,
             "value": 0

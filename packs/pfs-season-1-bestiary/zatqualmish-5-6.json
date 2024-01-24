@@ -22,6 +22,11 @@
                 "proficiency": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": true
@@ -92,9 +97,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 25,
                     "mod": 0,
@@ -125,6 +127,11 @@
                 },
                 "proficiency": {
                     "value": 0
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "showSlotlessLevels": {
@@ -196,9 +203,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 25,
                     "mod": 0,
@@ -221,33 +225,19 @@
             "name": "Haste",
             "sort": 300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>Magic empowers the target to act faster. It gains the @UUID[Compendium.pf2e.conditionitems.Item.Quickened] condition and can use the extra action each round only for Strike and Stride actions.</p>\n<hr />\n<p><strong>Heightened (7th)</strong> You can target up to 6 creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 3
@@ -256,56 +246,33 @@
                     "heightenedLevel": 3,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "haste",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
-                        "transmutation"
+                        "concentrate",
+                        "manipulate"
                     ]
                 }
             },
@@ -318,37 +285,28 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.WsUwpfmhKrKwoIe3"
                 }
             },
-            "img": "systems/pf2e/icons/spells/slow.webp",
+            "img": "icons/magic/time/hourglass-tilted-gray.webp",
             "name": "Slow",
             "sort": 400000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "fortitude"
+                    }
                 },
                 "description": {
                     "value": "<p>You dilate the flow of time around the target, slowing its actions.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} for 1 round.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} for 1 minute.</p>\n<p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 2} for 1 minute.</p>\n<hr />\n<p><strong>Heightened (6th)</strong> You can target up to 10 creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 3
@@ -357,56 +315,33 @@
                     "heightenedLevel": 3,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "fortitude"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "slow",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
-                        "transmutation"
+                        "concentrate",
+                        "manipulate"
                     ]
                 }
             },
@@ -423,41 +358,34 @@
             "name": "Vampiric Touch",
             "sort": 500000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "type": {
-                                "categories": [],
-                                "value": "negative"
-                            },
-                            "value": "6d6"
-                        }
+                    "0": {
+                        "category": null,
+                        "formula": "6d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "void"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": true,
+                        "statistic": "fortitude"
                     }
                 },
                 "description": {
-                    "value": "<p>Your touch leeches the lifeblood out of a target to empower yourself. You deal 6d6 negative damage to the target. You gain temporary Hit Points equal to half the negative damage the target takes (after applying resistances and the like). You lose any remaining temporary Hit Points after 1 minute.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d6.</p>"
+                    "value": "<p>Your touch leeches the lifeblood out of a target to empower yourself. You deal 6d6 void damage to the target. You gain temporary Hit Points equal to half the void damage the target takes (after applying resistances and the like). You lose any remaining temporary Hit Points after 1 minute.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d6.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -473,58 +401,35 @@
                     "heightenedLevel": 3,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "touch"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "basic",
-                    "value": "fortitude"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "vampiric-touch",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 living creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
+                        "concentrate",
                         "death",
-                        "negative",
-                        "necromancy"
+                        "manipulate",
+                        "void"
                     ]
                 }
             },
@@ -541,33 +446,19 @@
             "name": "Blur",
             "sort": 600000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>The target's form appears blurry. It becomes @UUID[Compendium.pf2e.conditionitems.Item.Concealed]. As the nature of this effect still leaves the target's location obvious, the target can't use this concealment to Hide or Sneak.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 2
@@ -576,56 +467,34 @@
                     "heightenedLevel": 2,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "touch"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "blur",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
-                        "visual",
-                        "illusion"
+                        "concentrate",
+                        "illusion",
+                        "manipulate",
+                        "visual"
                     ]
                 }
             },
@@ -642,33 +511,24 @@
             "name": "Hideous Laughter",
             "sort": 700000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
-                    "value": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr /><strong>Critical Success</strong> The target is unaffected.\n<p><strong>Success</strong> The target is plagued with uncontrollable laugher. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] and can't use actions or reactions for 1 round. It then suffers the failure effects.</p>"
+                    "value": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr /><strong>Critical Success</strong> The target is unaffected.\n<p><strong>Success</strong> The target is plagued with uncontrollable laughter. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] and can't use actions or reactions for 1 round. It then suffers the failure effects.</p>"
                 },
                 "duration": {
-                    "value": "sustained"
-                },
-                "hasCounteractCheck": {
-                    "value": false
+                    "sustained": true,
+                    "value": ""
                 },
                 "level": {
                     "value": 2
@@ -677,57 +537,34 @@
                     "heightenedLevel": 2,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "hideous-laughter",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 living creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
+                        "concentrate",
                         "emotion",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -740,37 +577,23 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB"
                 }
             },
-            "img": "systems/pf2e/icons/spells/invisibility.webp",
+            "img": "icons/creatures/magical/construct-stone-earth-gray.webp",
             "name": "Invisibility",
             "sort": 800000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": true,
-                    "somatic": true,
-                    "verbal": false
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>Cloaked in illusion, the target becomes @UUID[Compendium.pf2e.conditionitems.Item.Invisible]. This makes it @UUID[Compendium.pf2e.conditionitems.Item.Undetected] to all creatures, though the creatures can attempt to find the target, making it @UUID[Compendium.pf2e.conditionitems.Item.Hidden] to them instead. If the target uses a hostile action, the spell ends after that hostile action is completed.</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The spell lasts 1 minute, but it doesn't end if the target uses a hostile action.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "10 minutes"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 2
@@ -779,55 +602,32 @@
                     "heightenedLevel": 2,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "touch"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "invisibility",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
-                        "illusion"
+                        "illusion",
+                        "manipulate"
                     ]
                 }
             },
@@ -844,36 +644,22 @@
             "name": "Triple Time",
             "sort": 900000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "emanation",
                     "value": 60
                 },
-                "category": {
-                    "value": "focus"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": false
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>You dance at a lively tempo, speeding your allies' movement. You and all allies in the area gain a +10-foot status bonus to all Speeds for 1 round.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 round"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 2
@@ -881,58 +667,33 @@
                 "location": {
                     "value": "WnyvODoKHXNpP72V"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "triple-time",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "custom": "",
-                    "value": []
-                },
                 "traits": {
                     "rarity": "uncommon",
+                    "traditions": [],
                     "value": [
                         "bard",
                         "cantrip",
                         "composition",
                         "emotion",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -949,33 +710,24 @@
             "name": "Charm",
             "sort": 1000000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>To the target, your words are honey and your visage seems bathed in a dreamy haze. It must attempt a Will save, with a +4 circumstance bonus if you or your allies recently threatened it or used hostile actions against it.</p>\n<p>You can Dismiss the spell. If you use hostile actions against the target, the spell ends. When the spell ends, the target doesn't necessarily realize it was charmed unless its friendship with you or the actions you convinced it to take clash with its expectations, meaning you could potentially convince the target to continue being your friend via mundane means.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected and aware you tried to charm it.</p>\n<p><strong>Success</strong> The target is unaffected but thinks your spell was something harmless instead of charm, unless it identifies the spell.</p>\n<p><strong>Failure</strong> The target's attitude becomes @UUID[Compendium.pf2e.conditionitems.Item.Friendly] toward you. If it was Friendly, it becomes @UUID[Compendium.pf2e.conditionitems.Item.Helpful]. It can't use hostile actions against you.</p>\n<p><strong>Critical Failure</strong> The target's attitude becomes Helpful toward you, and it can't use hostile actions against you.</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The duration lasts until the next time you make your daily preparations.</p>\n<p><strong>Heightened (8th)</strong> The duration lasts until the next time you make your daily preparations, and you can target up to 10 creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 hour"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -984,59 +736,36 @@
                     "heightenedLevel": 1,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "charm",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
+                        "concentrate",
                         "emotion",
                         "incapacitation",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -1053,42 +782,35 @@
             "name": "Chill Touch",
             "sort": 1100000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": true,
-                            "type": {
-                                "categories": [],
-                                "value": "negative"
-                            },
-                            "value": "1d4"
-                        }
+                    "0": {
+                        "applyMod": true,
+                        "category": null,
+                        "formula": "1d4",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "void"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": true,
+                        "statistic": "fortitude"
                     }
                 },
                 "description": {
-                    "value": "<p>Siphoning negative energy into yourself, your hand radiates a pale darkness. Your touch weakens the living and disorients undead, possibly even causing them to flee. The effect depends on whether the target is living or undead.</p>\n<ul>\n<li><strong>Living Creature</strong> The spell deals negative damage equal to 1d4 plus your spellcasting modifier. The target attempts a basic Fortitude save, but is also @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} for 1 round on a critical failure.</li>\n<li><strong>Undead Creature</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] for 1 round on a failed Fortitude save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] for 1 round unless it succeeds at a Will save.</li>\n</ul>\n<hr />\n<p><strong>Heightened (+1)</strong> The negative damage to living creatures increases by 1d4.</p>"
+                    "value": "<p>Siphoning void energy into yourself, your hand radiates a pale darkness. Your touch weakens the living and disorients undead, possibly even causing them to flee. The effect depends on whether the target is living or undead.</p>\n<ul>\n<li><strong>Living Creature</strong> The spell deals void damage equal to 1d4 plus your spellcasting modifier. The target attempts a basic Fortitude save, but is also @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} for 1 round on a critical failure.</li>\n<li><strong>Undead Creature</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] for 1 round on a failed Fortitude save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] for 1 round unless it succeeds at a Will save.</li>\n</ul>\n<hr />\n<p><strong>Heightened (+1)</strong> The void damage to living creatures increases by 1d4.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -1103,58 +825,35 @@
                 "location": {
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "touch"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "basic",
-                    "value": "fortitude"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "chill-touch",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 living or undead creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
                         "cantrip",
-                        "negative",
-                        "necromancy"
+                        "concentrate",
+                        "manipulate",
+                        "void"
                     ]
                 }
             },
@@ -1167,40 +866,31 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.UKsIOWmMx4hSpafl"
                 }
             },
-            "img": "systems/pf2e/icons/spells/color-spray.webp",
+            "img": "icons/magic/control/buff-luck-fortune-rainbow.webp",
             "name": "Color Spray",
             "sort": 1200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "cone",
                     "value": 15
                 },
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>Swirling colors affect viewers based on their Will saves.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Dazzled] for 1 round.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1}, @UUID[Compendium.pf2e.conditionitems.Item.Blinded] for 1 round, and Dazzled for 1 minute.</p>\n<p><strong>Critical Failure</strong> The creature is Stunned for 1 round and Blinded for 1 minute.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 or more rounds (see below)"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1209,57 +899,35 @@
                     "heightenedLevel": 1,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "color-spray",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
+                        "concentrate",
+                        "illusion",
                         "incapacitation",
-                        "visual",
-                        "illusion"
+                        "manipulate",
+                        "visual"
                     ]
                 }
             },
@@ -1276,36 +944,22 @@
             "name": "Counter Performance",
             "sort": 1300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "emanation",
                     "value": 60
                 },
-                "category": {
-                    "value": "focus"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": false
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p><strong>Trigger</strong> You or an ally within 60 feet rolls a saving throw against an auditory or visual effect.</p>\n<hr />\n<p>Your performance protects you and your allies. Roll a Performance check for a type you know: an auditory performance if the trigger was auditory, or a visual one for a visual trigger. You and allies in the area can use the better result between your Performance check and the saving throw.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1313,55 +967,31 @@
                 "location": {
                     "value": "WnyvODoKHXNpP72V"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "counter-performance",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "reaction"
                 },
-                "traditions": {
-                    "value": []
-                },
                 "traits": {
                     "rarity": "uncommon",
+                    "traditions": [],
                     "value": [
                         "bard",
                         "composition",
-                        "mental",
-                        "enchantment"
+                        "focus",
+                        "mental"
                     ]
                 }
             },
@@ -1378,36 +1008,22 @@
             "name": "Detect Magic",
             "sort": 1400000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "emanation",
                     "value": 30
                 },
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
-                    "value": "<p>You send out a pulse that registers the presence of magic. You receive no information beyond the presence or absence of magic. You can choose to ignore magic you're fully aware of, such as the magic items and ongoing spells of you and your allies.</p>\n<p>You detect illusion magic only if that magic's effect has a lower level than the level of your detect magic spell. However, items that have an illusion aura but aren't deceptive in appearance (such as an invisibility potion) typically are detected normally.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You learn the school of magic for the highest-level effect within range that the spell detects. If multiple effects are equally strong, the GM determines which you learn.</p>\n<p><strong>Heightened (4th)</strong> As 3rd level, but you also pinpoint the source of the highest-level magic. Like for an imprecise sense, you don't learn the exact location, but can narrow down the source to within a 5-foot cube (or the nearest if larger than that).</p>"
+                    "value": "<p>You send out a pulse that registers the presence of magic. You receive no information beyond the presence or absence of magic. You can choose to ignore magic you're fully aware of, such as the magic items and ongoing spells of you and your allies.</p>\n<p>You detect illusion magic only if that magic's effect has a lower level than the rank of your detect magic spell. However, items that have an illusion aura but aren't deceptive in appearance (such as an invisibility potion) typically are detected normally.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You learn the school of magic for the highest-level effect within range that the spell detects. If multiple effects are equally strong, the GM determines which you learn.</p>\n<p><strong>Heightened (4th)</strong> As 3rd level, but you also pinpoint the source of the highest-level magic. Like for an imprecise sense, you don't learn the exact location, but can narrow down the source to within a 5-foot cube (or the nearest if larger than that).</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1415,60 +1031,36 @@
                 "location": {
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "detect-magic",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "custom": "",
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
-                        "detection",
                         "cantrip",
-                        "divination"
+                        "concentrate",
+                        "detection",
+                        "manipulate"
                     ]
                 }
             },
@@ -1485,33 +1077,19 @@
             "name": "Guidance",
             "sort": 1500000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>You ask for divine guidance, granting the target a +1 status bonus to one attack roll, Perception check, saving throw, or skill check the target attempts before the duration ends. The target chooses which roll to use the bonus on before rolling. If the target uses the bonus, the spell ends. Either way, the target is then temporarily immune for 1 hour.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Guidance]</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "until the start of your next turn"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1519,58 +1097,33 @@
                 "location": {
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "guidance",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "custom": "",
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "divine",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
                         "cantrip",
-                        "divination"
+                        "concentrate"
                     ]
                 }
             },
@@ -1587,36 +1140,22 @@
             "name": "Inspire Courage",
             "sort": 1600000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "emanation",
                     "value": 60
                 },
-                "category": {
-                    "value": "focus"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
-                    "value": "<p>You inspire yourself and your allies with words or tunes of encouragement. You and all allies in the area gain a +1 status bonus to attack rolls, damage rolls, and saves against fear effects.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Inspire Courage]</p>"
+                    "value": "<p>You inspire yourself and your allies with words or tunes of encouragement. You and all allies in the area gain a +1 status bonus to attack rolls, damage rolls, and saves against fear effects.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Courageous Anthem]</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 round"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1624,58 +1163,33 @@
                 "location": {
                     "value": "WnyvODoKHXNpP72V"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "inspire-courage",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "custom": "",
-                    "value": []
-                },
                 "traits": {
                     "rarity": "uncommon",
+                    "traditions": [],
                     "value": [
                         "bard",
                         "cantrip",
                         "composition",
+                        "concentrate",
                         "emotion",
-                        "mental",
-                        "enchantment"
+                        "mental"
                     ]
                 }
             },
@@ -1692,41 +1206,29 @@
             "name": "Magic Missile",
             "sort": 1700000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "type": {
-                                "categories": [],
-                                "value": "force"
-                            },
-                            "value": "1d4+1"
-                        }
+                    "0": {
+                        "category": null,
+                        "formula": "1d4+1",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "force"
                     }
                 },
+                "defense": null,
                 "description": {
                     "value": "<p>You send a dart of force streaking toward a creature that you can see. It automatically hits and deals 1d4+1 force damage. For each additional action you use when Casting the Spell, increase the number of missiles you shoot by one, to a maximum of three missiles for 3 actions. You choose the target for each missile individually. If you shoot more than one missile at the same target, combine the damage before applying bonuses or penalties to damage, resistances, weaknesses, and so forth.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> You shoot one additional missile with each action you spend.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1735,56 +1237,33 @@
                     "heightenedLevel": 1,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "120 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "magic-missile",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "1 to 3"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
+                        "concentrate",
                         "force",
-                        "evocation"
+                        "manipulate"
                     ]
                 }
             },
@@ -1797,37 +1276,23 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.OhD2Z6rIGGD5ocZA"
                 }
             },
-            "img": "systems/pf2e/icons/spells/read-aura.webp",
+            "img": "icons/magic/light/explosion-star-glow-silhouette.webp",
             "name": "Read Aura",
             "sort": 1800000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
-                    "value": "<p>You focus on the target object, opening your mind to perceive magical auras. When the casting is complete, you know whether that item is magical, and if it is, you learn the school of magic.</p>\n<p>If the object is illusory, you detect this only if the effect's level is lower than the level of your read aura spell.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to 10 objects.</p>\n<p><strong>Heightened (6th)</strong> You can target any number of objects.</p>"
+                    "value": "<p>You focus on the target object, opening your mind to perceive magical auras. When the casting is complete, you know whether that item is magical, and if it is, you learn the school of magic.</p>\n<p>If the object is illusory, you detect this only if the effect's level is lower than the rank of your read aura spell.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to 10 objects.</p>\n<p><strong>Heightened (6th)</strong> You can target any number of objects.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1835,60 +1300,36 @@
                 "location": {
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "read-aura",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 object"
                 },
                 "time": {
                     "value": "1 minute"
                 },
-                "traditions": {
-                    "custom": "",
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
-                        "detection",
                         "cantrip",
-                        "divination"
+                        "concentrate",
+                        "detection",
+                        "manipulate"
                     ]
                 }
             },
@@ -1905,33 +1346,19 @@
             "name": "Shield",
             "sort": 1900000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": false,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
-                    "value": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.Shield Block] reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the <em>@UUID[Compendium.pf2e.spells-srd.Item.Magic Missile]</em> spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Shield]</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
+                    "value": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.Shield Block] reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the <em>@UUID[Compendium.pf2e.spells-srd.Item.Force Barrage]</em> spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Shield]</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "until the start of your next turn"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 1
@@ -1939,58 +1366,34 @@
                 "location": {
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "shield",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "1"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "divine",
                         "occult"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
                         "cantrip",
-                        "force",
-                        "abjuration"
+                        "concentrate",
+                        "force"
                     ]
                 }
             },
@@ -2003,37 +1406,23 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.xqmHD8JIjak15lRk"
                 }
             },
-            "img": "systems/pf2e/icons/spells/unseen-servant.webp",
+            "img": "icons/magic/air/wind-stream-blue-gray.webp",
             "name": "Unseen Servant",
             "sort": 2000000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": true,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>You summon an unseen servant, which you can command as part of Sustaining the Spell. It serves you until its Hit Points are reduced to 0, at which point the spell ends, or until you stop Sustaining the Spell. The unseen servant gains the summoned trait.</p>\n<p><strong>Unseen Servant</strong> [Creature] [-1] [No Alignment] [Medium]</p>\n<hr />\n<p><strong>AC</strong> 13, <strong>Fort</strong> +0, <strong>Ref</strong> +4, <strong>Will</strong> +0 <strong>HP</strong> 4</p>\n<p><strong>Immunities</strong> disease, mental, non-magical attacks, paralysis, poison, precision, unconscious</p>\n<p><strong>Resistances</strong> all damage 5 (except force or ghost touch)</p>\n<p><strong>Speed</strong> fly 30 feet</p>\n<p><strong>Force Body</strong> An unseen servant's physical body is made of force. It can't use attack actions. It can move and use Interact actions to do things such as fetch objects, open unstuck or unlocked doors, hold chairs, and clean. It can't pass through solid objects.</p>"
                 },
                 "duration": {
-                    "value": "sustained"
-                },
-                "hasCounteractCheck": {
-                    "value": false
+                    "sustained": true,
+                    "value": ""
                 },
                 "level": {
                     "value": 1
@@ -2042,56 +1431,33 @@
                     "heightenedLevel": 1,
                     "value": "kIsUNQP8hXFkW4gH"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": "60 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "unseen-servant",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "3"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "occult"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "occult"
+                    ],
                     "value": [
-                        "mindless",
-                        "conjuration"
+                        "concentrate",
+                        "manipulate",
+                        "mindless"
                     ]
                 }
             },
@@ -2108,15 +1474,15 @@
             "name": "Shortbow",
             "sort": 2100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "shortbow",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -2133,9 +1499,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -2145,34 +1508,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": 60,
@@ -2180,17 +1528,15 @@
                     "value": "0"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "shortbow",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -2200,9 +1546,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-plus-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -2218,15 +1561,15 @@
             "name": "Rapier",
             "sort": 2200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "rapier",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -2243,9 +1586,6 @@
                     "handsHeld": 1,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -2255,34 +1595,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": null,
@@ -2290,17 +1615,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "rapier",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -2312,9 +1635,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -2326,6 +1646,9 @@
             "sort": 2300000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
                     "value": ""
@@ -2335,9 +1658,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -2346,35 +1666,28 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": 0
                 }
             },
             "type": "equipment"
@@ -2386,11 +1699,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.jJZbdMHMdh8UL2j8"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/clothes-fine.webp",
+            "img": "icons/equipment/chest/breastplate-purple.webp",
             "name": "Clothing (Fine)",
             "sort": 2400000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Fine clothing, suitable for a noble or royal, is made with expensive fabrics, precious metals, and intricate patterns.</p>"
@@ -2398,9 +1714,6 @@
                 "equipped": {
                     "carryType": "worn",
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -2410,37 +1723,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "clothing-fine",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "worn"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -2452,11 +1758,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.QJb8S927Yj81EgHH"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/writing-set.webp",
+            "img": "icons/tools/scribal/ink-quill-red.webp",
             "name": "Writing Set",
             "sort": 2500000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Using a writing set, you can draft correspondence and scribe scrolls. A set includes stationery, including a variety of paper and parchment, as well as ink, a quill or inkpen, sealing wax, and a simple seal. If you've written a large amount, you can refill your kit with extra ink and paper.</p>"
@@ -2466,9 +1775,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -2477,37 +1783,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "writing-set",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -2519,11 +1818,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.3yLu12TCwN8utY0u"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/ink-and-paper.webp",
+            "img": "icons/sundries/scrolls/scroll-plain-tan.webp",
             "name": "Writing Set (Extra Ink and Paper)",
             "sort": 2600000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Extra ink and paper to refill your writing set.</p>"
@@ -2533,9 +1835,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -2544,37 +1843,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "writing-set-extra-ink-and-paper",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -2586,11 +1878,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.MPv5Yx4w7scZGj2Y"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/musical-instrument-handheld.webp",
+            "img": "icons/tools/instruments/pipe-flue-tan.webp",
             "name": "Piccolo",
             "sort": 2700000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Handheld instruments include bagpipes, a small set of chimes, small drums, fiddles and viols, flutes and recorders, small harps, lutes, trumpets, and similarly sized instruments. The GM might rule that an especially large handheld instrument (like a tuba) has greater Bulk. Heavy instruments such as large drums, a full set of chimes, and keyboard instruments are less portable and generally need to be stationary while played.</p>"
@@ -2600,9 +1895,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -2611,37 +1903,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 8
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "musical-instrument-handheld",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "equipment"
@@ -2653,22 +1938,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.zvLyCVD8g2PdHJAc"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/thieves-tools.webp",
+            "img": "icons/tools/hand/lockpicks-steel-grey.webp",
             "name": "Thieves' Tools",
             "sort": 2800000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
-                    "value": "<p>You need thieves' tools to Pick Locks or Disable Devices (of some types) using the Thievery skill.</p>\n<p>If your thieves' tools are broken, you can repair them by replacing the lock picks with @UUID[Compendium.pf2e.equipment-srd.Item.Thieves' Tools (Replacement Picks)]{Replacement Picks} appropriate to your tools; this doesn't require using the Repair action.</p>"
+                    "value": "<p>You need thieves' tools to Pick Locks or Disable Devices (of some types) using the Thievery skill.</p>\n<p>If your thieves' tools are broken, you can repair them by replacing the lock picks with @UUID[Compendium.pf2e.equipment-srd.Item.Thieves' Toolkit (Replacement Picks)]{Replacement Picks} appropriate to your tools; this doesn't require using the Repair action.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -2678,37 +1963,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": ""
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "thieves-tools",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -2720,34 +1998,27 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.2RuepCemJhrpKKao"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/consumables/potions/healing-potion.webp",
+            "img": "icons/consumables/potions/bottle-round-corked-orante-red.webp",
             "name": "Healing Potion (Minor)",
             "sort": 2900000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": "1d8"
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": {
+                    "formula": "1d8",
+                    "kind": "healing",
+                    "type": "vitality"
+                },
                 "description": {
                     "value": "<p>A healing potion is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a healing potion, you regain [[/r 1d8[healing]]] Hit Points.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -2757,44 +2028,41 @@
                 "level": {
                     "value": 1
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 4
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "healing-potion-minor",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "consumable",
                         "healing",
                         "magical",
-                        "necromancy",
-                        "positive",
-                        "potion"
+                        "potion",
+                        "vitality"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -2810,30 +2078,19 @@
             "name": "Arrows",
             "sort": 3000000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
-                    "value": 0
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "ammo",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>These projectiles are the ammunition for bows. The shaft of an arrow is made of wood. It is stabilized in flight by fletching at one end and bears a metal head on the other.</p>"
                 },
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -2843,14 +2100,9 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "per": 10,
@@ -2858,13 +2110,15 @@
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 10,
                 "rules": [],
                 "size": "med",
                 "slug": "arrows",
-                "source": {
-                    "value": ""
-                },
                 "stackGroup": "arrows",
                 "traits": {
                     "rarity": "common",
@@ -2873,8 +2127,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -2908,11 +2164,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -2956,11 +2214,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -2994,23 +2254,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -3031,8 +2284,10 @@
                 "description": {
                     "value": ""
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -3057,18 +2312,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -3089,23 +2335,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature ends its movement adjacent to Zatqualmish</p>\n<hr />\n<p><strong>Effect</strong> Zatqualmish Strides up to 10 feet (or his Speed, if that Speed is less than 10 feet). He must end his movement in a location that isn't within 5 feet of a foe.</p>\n<p>This movement doesn't trigger reactions.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -3125,11 +2364,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3148,11 +2389,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3171,11 +2414,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3194,11 +2439,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3217,11 +2464,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3240,11 +2489,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3263,6 +2514,11 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [
                     {
                         "key": "FlatModifier",
@@ -3276,9 +2532,6 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "variants": {
                     "0": {
                         "label": "+12 to Create Forgeries",
@@ -3303,11 +2556,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -3326,11 +2581,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -3374,31 +2631,45 @@
                 "temp": 0,
                 "value": 76
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 12
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "dwarven",
+                    "elven",
+                    "fey",
+                    "gnomish"
+                ]
+            },
             "level": {
                 "value": 6
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Quest #8: Shadows of the Black Sovereign"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Quest #8: Shadows of the Black Sovereign"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 12,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {
             "focus": {
@@ -3421,25 +2692,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "dwarven",
-                    "elven",
-                    "fey",
-                    "gnomish"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "+1 against illusions; low-light vision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
+                "evil",
                 "gnome",
                 "humanoid"
             ]

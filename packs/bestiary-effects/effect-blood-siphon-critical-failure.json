@@ -1,6 +1,6 @@
 {
     "_id": "ceOkHxhJNTcvZkCy",
-    "img": "systems/pf2e/icons/spells/boil-blood.webp",
+    "img": "icons/skills/wounds/blood-cells-red.webp",
     "name": "Effect: Blood Siphon (Critical Failure)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 3
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 2"
         },
         "rules": [
             {
@@ -33,9 +38,6 @@
                 "uuid": "Compendium.pf2e.conditionitems.Item.Quickened"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 2"
-        },
         "start": {
             "initiative": null,
             "value": 0

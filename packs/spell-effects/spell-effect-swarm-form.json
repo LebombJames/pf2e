@@ -1,6 +1,6 @@
 {
     "_id": "tC0Qk4AjYRd3csL7",
-    "img": "systems/pf2e/icons/spells/swarm-form.webp",
+    "img": "icons/creatures/mammals/bat-movement-flying-purple.webp",
     "name": "Spell Effect: Swarm Form",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 4
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Gods & Magic"
         },
         "rules": [
             {
@@ -39,9 +44,6 @@
                 "value": "max((floor(@item.level/2)-1)*5,5)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Gods & Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

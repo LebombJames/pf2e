@@ -1,6 +1,6 @@
 {
     "_id": "peUBtdoG5LyVaf5g",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Lich Dedication",
     "system": {
         "actionType": {
@@ -22,7 +22,7 @@
                     "value": "living creature"
                 },
                 {
-                    "value": "ability to cast 6th-level or higher spells from spell slots"
+                    "value": "ability to cast 6th-rank or higher spells from spell slots"
                 },
                 {
                     "value": "expert in Crafting"
@@ -31,6 +31,11 @@
                     "value": "completed ritual to become a lich and crafted a soul cage"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
         },
         "rules": [
             {
@@ -44,9 +49,6 @@
                 "uuid": "Compendium.pf2e.ancestryfeatures.Item.Basic Undead Benefits"
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

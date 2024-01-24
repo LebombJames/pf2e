@@ -1,6 +1,6 @@
 {
     "_id": "r4kb2zDepFeczMsl",
-    "img": "systems/pf2e/icons/spells/bone-spray.webp",
+    "img": "icons/commodities/bones/bones-stack-tan.webp",
     "name": "Effect: Bone Swarm",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
         },
         "rules": [
             {
@@ -37,9 +42,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "start": {
             "initiative": null,
             "value": 0

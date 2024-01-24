@@ -14,23 +14,19 @@
             "sort": 100000,
             "system": {
                 "acBonus": 2,
-                "baseItem": null,
-                "category": "shield",
-                "checkPenalty": null,
+                "baseItem": "steel-shield",
+                "bulk": {
+                    "value": 0
+                },
                 "containerId": null,
                 "description": {
-                    "value": "<p>The fleshforge dreg's large arm can be used as a shield (Hardness 5, HP 20, BT 10) and it gains the Shield Block reaction.</p>\n<p>The prototype's AC is 21 with its shield raised. If the shield is destroyed, it can no longer use its fist attack.</p>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>Hardness</th>\n<th>HP</th>\n<th>BT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>5</td>\n<td>20</td>\n<td>10</td>\n</tr>\n</tbody>\n</table>"
+                    "value": "<p>The fleshforge dreg's large arm can be used as a shield (Hardness 5, HP 20, BT 10) and it gains the Shield Block reaction.</p>\n<p>The prototype's AC is 21 with its shield raised. If the shield is destroyed, it can no longer use its fist attack.</p>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>Hardness</th>\n<th>HP</th>\n<th>BT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>5</td>\n<td>20</td>\n<td>10</td>\n</tr>\n</tbody>\n</table>"
                 },
-                "dexCap": 0,
                 "equipped": {
                     "carryType": "held",
                     "handsHeld": 1,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
-                "group": null,
                 "hardness": 5,
                 "hp": {
                     "max": 20,
@@ -39,59 +35,33 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "reinforcing": 0
+                },
                 "size": "med",
                 "slug": "steel-shield",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
-                "strength": null,
+                "speedPenalty": 0,
                 "traits": {
+                    "integrated": null,
                     "rarity": "unique",
                     "value": []
-                },
-                "usage": {
-                    "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
-            "type": "armor"
+            "type": "shield"
         },
         {
             "_id": "RCBb2BsGeUNPKoF8",
@@ -117,11 +87,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -156,11 +128,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -194,23 +168,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ShieldBlock]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "shield-block",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -230,11 +197,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -253,11 +222,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -276,11 +247,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -325,31 +298,37 @@
                 "value": 75
             },
             "immunities": [],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 9
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "(can't speak any language)",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": 5
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Society Scenario #1-01: The Absalom Initiation"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #1-01: The Absalom Initiation"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 9,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -367,20 +346,7 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "(Can't Speak Any Language)",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "rare",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },

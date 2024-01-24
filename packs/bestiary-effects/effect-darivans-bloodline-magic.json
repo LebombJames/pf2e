@@ -1,6 +1,6 @@
 {
     "_id": "1toVzNVJZx0RwG1v",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/magic/nature/mushrooms-fire-glow-blue.webp",
     "name": "Effect: Darivan's Bloodline Magic",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Kingmaker"
         },
         "rules": [
             {
@@ -37,9 +42,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Kingmaker"
-        },
         "start": {
             "initiative": null,
             "value": 0

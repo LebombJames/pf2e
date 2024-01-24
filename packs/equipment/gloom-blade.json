@@ -3,15 +3,15 @@
     "img": "systems/pf2e/icons/equipment/weapons/specific-magic-weapons/gloom-blade.webp",
     "name": "Gloom Blade",
     "system": {
-        "MAP": {
-            "value": ""
-        },
         "baseItem": "shortsword",
         "bonus": {
             "value": 1
         },
         "bonusDamage": {
             "value": 0
+        },
+        "bulk": {
+            "value": 0.1
         },
         "category": "martial",
         "containerId": null,
@@ -21,10 +21,7 @@
             "die": "d6"
         },
         "description": {
-            "value": "<p>As black as coal, this blade grows more potent in darkness. While in bright light, it functions as a +1 shortsword and doesn't appear to radiate a magic aura to <em>@UUID[Compendium.pf2e.spells-srd.Item.Detect Magic]</em> or similar spells unless the spells are 4th level or higher.</p>\n<p>In dim light or darkness, the <em>gloom blade</em> becomes a <em>+2 striking shortsword</em>. Whenever you use the <em>gloom blade</em> to attack a creature you're undetected by, you deal 1d6 additional precision damage.</p>\n<p>To upgrade the <em>gloom blade's</em> fundamental runes, start with the base <em>+1 shortsword</em>, but if you improve it beyond a <em>+2 striking shortsword</em>, the runes apply in dim light or darkness as well.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>As black as coal, this blade grows more potent in darkness. While in bright light, it functions as a <em>+1 shortsword</em> and doesn't appear to radiate a magic aura to <em>@UUID[Compendium.pf2e.spells-srd.Item.Detect Magic]</em> or similar spells unless the spells are 4th rank or higher.</p>\n<p>In dim light or darkness, the <em>gloom blade</em> becomes a <em>+2 striking shortsword</em>. Whenever you use the <em>gloom blade</em> to attack a creature you're undetected by, you deal 1d6 additional precision damage.</p>\n<p>To upgrade the <em>gloom blade's</em> fundamental runes, start with the base <em>+1 shortsword</em>, but if you improve it beyond a <em>+2 striking shortsword</em>, the runes apply in dim light or darkness as well.</p>"
         },
         "group": "sword",
         "hardness": 0,
@@ -35,34 +32,19 @@
         "level": {
             "value": 9
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "potencyRune": {
-            "value": 1
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 700
             }
         },
-        "propertyRune1": {
-            "value": null
-        },
-        "propertyRune2": {
-            "value": null
-        },
-        "propertyRune3": {
-            "value": null
-        },
-        "propertyRune4": {
-            "value": null
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder GM Core"
         },
         "quantity": 1,
         "range": null,
@@ -71,7 +53,7 @@
         },
         "rules": [
             {
-                "domain": "attack",
+                "domain": "all",
                 "key": "RollOption",
                 "label": "PF2E.SkillVariant.DimLightOrDarkness",
                 "option": "lighting:dim-light",
@@ -114,30 +96,30 @@
                 "selector": "{item|_id}-damage"
             }
         ],
-        "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "runes": {
+            "potency": 1,
+            "property": [],
+            "striking": 0
         },
+        "size": "med",
         "specific": {
-            "material": null,
+            "material": {
+                "grade": null,
+                "type": null
+            },
             "runes": {
                 "potency": 1,
-                "striking": ""
-            },
-            "value": true
+                "property": [],
+                "striking": 0
+            }
         },
         "splashDamage": {
             "value": 0
-        },
-        "stackGroup": null,
-        "strikingRune": {
-            "value": null
         },
         "traits": {
             "rarity": "common",
             "value": [
                 "agile",
-                "evocation",
                 "finesse",
                 "magical",
                 "versatile-s"
@@ -145,9 +127,6 @@
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "weapon"

@@ -1,6 +1,6 @@
 {
     "_id": "JuKD6k7nDwfO0Ckv",
-    "img": "systems/pf2e/icons/features/classes/giant-instinct.webp",
+    "img": "icons/creatures/magical/humanoid-horned-rider.webp",
     "name": "Giant Instinct",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -108,10 +113,10 @@
                 "value": 18
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
+            "otherTags": [
+                "barbarian-instinct"
+            ],
             "rarity": "common",
             "value": [
                 "barbarian"

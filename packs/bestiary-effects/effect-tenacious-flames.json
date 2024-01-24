@@ -1,6 +1,6 @@
 {
     "_id": "ekpt4mFw1kJkZ2pK",
-    "img": "systems/pf2e/icons/spells/wall-of-fire.webp",
+    "img": "icons/magic/fire/flame-burning-campfire-rocks.webp",
     "name": "Effect: Tenacious Flames",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 2"
+        },
         "rules": [
             {
                 "adjustment": {
@@ -28,9 +33,6 @@
                 "selector": "pd-recovery-check"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 2"
-        },
         "start": {
             "initiative": null,
             "value": 0

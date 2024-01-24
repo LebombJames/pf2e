@@ -1,6 +1,6 @@
 {
     "_id": "Tju9kpQlwcKkyKor",
-    "img": "systems/pf2e/icons/features/classes/lore-mystery.webp",
+    "img": "icons/sundries/scrolls/scroll-symbol-sun-brown.webp",
     "name": "Effect: Curse of Torrential Knowledge",
     "system": {
         "badge": {
@@ -24,6 +24,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -100,9 +105,6 @@
                 "option": "oracular-curse:stage:{item|badge.value}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

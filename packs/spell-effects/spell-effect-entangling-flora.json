@@ -1,6 +1,6 @@
 {
     "_id": "rjM25qfw5BKj9h97",
-    "img": "systems/pf2e/icons/spells/entangle.webp",
+    "img": "icons/magic/nature/root-vines-grow-brown.webp",
     "name": "Spell Effect: Entangling Flora",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -10
             }
         ],
-        "source": {
-            "value": "Pathfinder Player Core"
-        },
         "start": {
             "initiative": null,
             "value": 0

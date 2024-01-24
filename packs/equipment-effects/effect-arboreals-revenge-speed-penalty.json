@@ -1,6 +1,6 @@
 {
     "_id": "Hx4MOTujp5z6SlQu",
-    "img": "systems/pf2e/icons/spells/entangle.webp",
+    "img": "icons/magic/nature/root-vines-grow-brown.webp",
     "name": "Effect: Arboreal's Revenge (Speed Penalty)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 6
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -10
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "start": {
             "initiative": null,
             "value": 0

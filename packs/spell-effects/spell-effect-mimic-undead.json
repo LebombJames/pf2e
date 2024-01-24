@@ -1,6 +1,6 @@
 {
     "_id": "xPVOvWNJORvm8EwP",
-    "img": "systems/pf2e/icons/spells/mimic-undead.webp",
+    "img": "icons/magic/death/undead-skeleton-rags-fire-green.webp",
     "name": "Spell Effect: Mimic Undead",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -39,9 +44,6 @@
                 "value": "@actor.level"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

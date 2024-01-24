@@ -1,6 +1,6 @@
 {
     "_id": "cvQmPkJtybMcHinK",
-    "img": "systems/pf2e/icons/features/classes/esoteric-lore.webp",
+    "img": "icons/sundries/documents/document-tree-brown.webp",
     "name": "Esoteric Lore",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
+        },
         "rules": [
             {
                 "ability": "cha",
@@ -36,9 +41,6 @@
                 "uuid": "Compendium.pf2e.feats-srd.Item.Dubious Knowledge"
             }
         ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
-        },
         "traits": {
             "rarity": "common",
             "value": [

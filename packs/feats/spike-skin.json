@@ -1,6 +1,6 @@
 {
     "_id": "9p28s0zg4Vv4r5i2",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Spike Skin",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

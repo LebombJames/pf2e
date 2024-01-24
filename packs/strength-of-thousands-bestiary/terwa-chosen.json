@@ -13,15 +13,15 @@
             "name": "Mambele",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "mambele",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 1,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 6
                     }
                 },
-                "propertyRune1": {
-                    "value": "returning"
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Gods & Magic"
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,17 @@
                     "value": "-"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [
+                        "returning"
+                    ],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "mambele",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Gods & Magic"
-                },
                 "splashDamage": {
                     "value": null
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "uncommon",
@@ -107,9 +89,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -121,12 +100,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4tIVTg9wj56RrveA"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
+            "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
             "name": "Leather Armor",
             "sort": 200000,
             "system": {
                 "acBonus": 1,
                 "baseItem": "leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -139,9 +121,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "1"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -151,58 +130,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "med",
                 "slug": "leather-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "speedPenalty": 0,
                 "strength": 0,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -237,16 +192,18 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "disarm",
-                        "deadly-d8"
+                        "deadly-d8",
+                        "disarm"
                     ]
                 },
                 "weaponType": {
@@ -280,11 +237,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -328,16 +287,18 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "disarm",
                         "deadly-d8",
+                        "disarm",
                         "thrown-20"
                     ]
                 },
@@ -368,23 +329,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "attack-of-opportunity",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -410,22 +364,18 @@
                     "per": "day",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "divine"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -446,20 +396,16 @@
                 "description": {
                     "value": "<p>A Terwa chosen can hold their breath for 10 minutes.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -485,8 +431,10 @@
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -500,22 +448,16 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "damage-roll",
+                        "domain": "damage",
                         "key": "RollOption",
                         "option": "celestial-might",
                         "toggleable": true
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -534,30 +476,25 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per hour</p><hr />\n<p><strong>Effect</strong> The Terwa chosen looks to the sky for a star to guide their attack. The Terwa chosen gains the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.True Strike]</em>.</p>"
+                    "value": "<p><strong>Frequency</strong> once per hour</p><hr />\n<p><strong>Effect</strong> The Terwa chosen looks to the sky for a star to guide their attack. The Terwa chosen gains the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.Sure Strike]</em>.</p>"
                 },
                 "frequency": {
                     "max": 1,
                     "per": "PT1H"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "divine",
-                        "divination",
                         "fortune"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -577,11 +514,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -600,11 +539,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -623,11 +564,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -646,11 +589,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -669,11 +614,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -692,11 +639,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -743,31 +692,38 @@
                 "temp": 0,
                 "value": 140
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 19
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "LN"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "iruxi"
+                ]
+            },
             "level": {
                 "value": 8
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #171: Hurricane's Howl"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #171: Hurricane's Howl"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 19,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -785,23 +741,13 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "iruxi"
-                ]
-            },
             "rarity": "uncommon",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },
             "value": [
                 "humanoid",
+                "lawful",
                 "lizardfolk"
             ]
         }

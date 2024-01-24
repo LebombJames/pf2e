@@ -1,6 +1,6 @@
 {
     "_id": "bJzANqEGTkho1bv6",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Arcane Safeguards",
     "system": {
         "actionType": {
@@ -11,13 +11,18 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>The magic powering you makes it difficult for outside magic to affect you. You gain the @UUID[Compendium.pf2e.actionspf2e.Item.Resist Magic] reaction.</p>\n<p><strong>Enhancement</strong> Your safeguards improve. When you Resist Magic, you gain a number of temporary Hit Points equal to the spell level of the triggering effect.</p>"
+            "value": "<p>The magic powering you makes it difficult for outside magic to affect you. You gain the @UUID[Compendium.pf2e.actionspf2e.Item.Resist Magic] reaction.</p>\n<p><strong>Enhancement</strong> Your safeguards improve. When you Resist Magic, you gain a number of temporary Hit Points equal to the spell rank of the triggering effect.</p>"
         },
         "level": {
             "value": 5
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [
             {
@@ -53,9 +58,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

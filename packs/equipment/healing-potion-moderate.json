@@ -1,28 +1,21 @@
 {
     "_id": "G7haQ5gDt30ftJLC",
-    "img": "systems/pf2e/icons/equipment/consumables/potions/healing-potion.webp",
+    "img": "icons/consumables/potions/bottle-round-corked-orante-red.webp",
     "name": "Healing Potion (Moderate)",
     "system": {
-        "autoDestroy": {
-            "value": true
-        },
         "baseItem": null,
-        "charges": {
-            "max": 1,
-            "value": 1
+        "bulk": {
+            "value": 0.1
         },
-        "consumableType": {
-            "value": "potion"
-        },
-        "consume": {
-            "value": "3d8+10"
-        },
+        "category": "potion",
         "containerId": null,
-        "description": {
-            "value": "<p>A healing potion is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a healing potion, you regain [[/r (3d8+10)[healing]]]{3d8+10 Hit Points}.</p>"
+        "damage": {
+            "formula": "3d8+10",
+            "kind": "healing",
+            "type": "vitality"
         },
-        "equippedBulk": {
-            "value": ""
+        "description": {
+            "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">A</span> (manipulate)</p>\n<hr />\n<p>A <em>healing potion</em> is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a <em>healing potion</em>, you regain [[/r (3d8+10)[healing]]]{3d8+10 Hit Points}.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -32,43 +25,40 @@
         "level": {
             "value": 6
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 50
             }
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder GM Core"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
                 "consumable",
                 "healing",
                 "magical",
-                "necromancy",
-                "positive",
-                "potion"
+                "potion",
+                "vitality"
             ]
         },
         "usage": {
             "value": "held-in-one-hand"
         },
-        "weight": {
-            "value": "L"
+        "uses": {
+            "autoDestroy": true,
+            "max": 1,
+            "value": 1
         }
     },
     "type": "consumable"

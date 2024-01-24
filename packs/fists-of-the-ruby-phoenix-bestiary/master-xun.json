@@ -13,15 +13,15 @@
             "name": "Dagger",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "dagger",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": "shock"
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,17 @@
                     "value": "-"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [
+                        "shock"
+                    ],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "dagger",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -108,9 +90,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -148,11 +127,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -200,11 +181,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -235,23 +218,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> The xun's Strike hits an @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creature and deals damage</p>\n<hr />\n<p><strong>Effect</strong> The xun applies one of the following debilitations, which lasts until the end of the xun's next turn or for 1 week on a critical hit.</p>\n<p><strong>Debilitation</strong> The target takes a -10-foot status penalty to its Speeds.</p>\n<p><strong>Debilitation</strong> The target becomes @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -272,23 +248,16 @@
                 "description": {
                     "value": "<p>The master xun @UUID[Compendium.pf2e.actionspf2e.Item.Step]{Steps} or @UUID[Compendium.pf2e.actionspf2e.Item.Feint]{Feints}, then @UUID[Compendium.pf2e.actionspf2e.Item.Demoralize]{Demoralizes}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -312,10 +281,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The master xun deals an extra 3d6 precision damage to off-guard opponents.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
+                    "value": "<p>The master xun deals an extra 3d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] opponents.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -324,21 +295,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -351,18 +308,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -382,11 +330,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -405,11 +355,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -428,11 +380,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -451,11 +405,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -474,11 +430,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -497,11 +455,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -542,12 +502,6 @@
                 "temp": 0,
                 "value": 250
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 25
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -559,19 +513,31 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "Tian-Shu Golden League ruffians",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "tien"
+                ]
+            },
             "level": {
                 "value": 14
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #167: Ready? Fight!"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #167: Ready? Fight!"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 25,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -589,23 +555,15 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "tien"
-                ]
-            },
             "rarity": "rare",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "human",
-                "humanoid"
+                "humanoid",
+                "lawful"
             ]
         }
     },

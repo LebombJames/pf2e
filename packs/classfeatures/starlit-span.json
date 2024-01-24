@@ -1,6 +1,6 @@
 {
     "_id": "Pew7duAozEeAemif",
-    "img": "systems/pf2e/icons/features/classes/starlit-span.webp",
+    "img": "icons/skills/ranged/arrows-flying-salvo-blue-light.webp",
     "name": "Starlit Span",
     "system": {
         "actionType": {
@@ -19,11 +19,16 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
+        "rules": [],
         "traits": {
+            "otherTags": [
+                "magus-hybrid-study"
+            ],
             "rarity": "common",
             "value": [
                 "magus"

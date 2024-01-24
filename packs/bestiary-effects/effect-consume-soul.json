@@ -1,6 +1,6 @@
 {
     "_id": "YOH7YsdlsLzlMu69",
-    "img": "systems/pf2e/icons/spells/adaptive-ablation.webp",
+    "img": "icons/magic/unholy/energy-smoke-pink.webp",
     "name": "Effect: Consume Soul",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #192: Worst of All Possible Worlds"
         },
         "rules": [
             {
@@ -82,9 +87,6 @@
                 "value": "{item|flags.pf2e.rulesSelections.rune}"
             }
         ],
-        "source": {
-            "value": "Pathfinder #192: Worst of All Possible Worlds"
-        },
         "start": {
             "initiative": null,
             "value": 0

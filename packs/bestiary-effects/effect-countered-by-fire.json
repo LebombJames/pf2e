@@ -1,6 +1,6 @@
 {
     "_id": "a4bZrBNL17zPjDiH",
-    "img": "systems/pf2e/icons/spells/wall-of-fire.webp",
+    "img": "icons/magic/fire/flame-burning-campfire-rocks.webp",
     "name": "Effect: Countered by Fire",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,15 +31,12 @@
                 "value": -1
             },
             {
-                "domain": "damage-roll",
+                "domain": "damage",
                 "key": "RollOption",
                 "option": "countered-by-fire",
                 "value": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

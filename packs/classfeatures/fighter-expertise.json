@@ -1,6 +1,6 @@
 {
     "_id": "bAaI7h937Nr3g93U",
-    "img": "systems/pf2e/icons/features/classes/fighter-expertise.webp",
+    "img": "icons/equipment/head/helm-barbute-rounded-steel.webp",
     "name": "Fighter Expertise",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "classfeature",
         "description": {
-            "value": "<p>Your practiced techniques are hard to resist. Your proficiency rank for your fighter class DC increases to expert.</p>"
+            "value": "<p>Your practiced techniques have made you even more formidable. Your proficiency rank for your fighter class DC increases to expert.</p>"
         },
         "level": {
             "value": 11
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.classDCs.fighter.rank",
-                "value": 2
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "fighter": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

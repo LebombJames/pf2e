@@ -1,6 +1,6 @@
 {
     "_id": "L5nSP8CkHWSLp2vV",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Arcane Fists",
     "system": {
         "actionType": {
@@ -19,36 +19,27 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
-                "baseType": "fist",
-                "category": "unarmed",
-                "damage": {
-                    "base": {
-                        "damageType": "bludgeoning",
-                        "dice": 1,
-                        "die": "d6"
-                    }
+                "fist": true,
+                "key": "Strike"
+            },
+            {
+                "key": "DamageDice",
+                "override": {
+                    "upgrade": true
                 },
-                "group": "brawling",
-                "img": "systems/pf2e/icons/features/classes/powerful-fist.webp",
-                "key": "Strike",
-                "label": "PF2E.Strike.Fist.Label",
                 "predicate": [
-                    {
-                        "nor": [
-                            "feature:powerful-fist",
-                            "feat:martial-artist-dedication"
-                        ]
-                    }
+                    "item:category:unarmed",
+                    "item:damage:die:faces:4"
                 ],
-                "range": null,
-                "slug": "fist",
-                "traits": [
-                    "agile",
-                    "finesse",
-                    "nonlethal",
-                    "unarmed"
+                "selector": [
+                    "fist-base-damage"
                 ]
             },
             {
@@ -59,11 +50,20 @@
                 "mode": "add",
                 "property": "weapon-traits",
                 "value": "arcane"
+            },
+            {
+                "key": "CriticalSpecialization",
+                "predicate": [
+                    "item:group:brawling",
+                    {
+                        "gte": [
+                            "self:level",
+                            5
+                        ]
+                    }
+                ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "traits": {
             "rarity": "common",
             "value": [

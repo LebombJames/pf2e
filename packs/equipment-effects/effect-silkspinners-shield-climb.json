@@ -1,6 +1,6 @@
 {
     "_id": "SbYcOry1cxbndSve",
-    "img": "systems/pf2e/icons/spells/spider-climb.webp",
+    "img": "icons/creatures/invertebrates/spider-striped-web-red.webp",
     "name": "Effect: Silkspinner's Shield (Climb)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Grand Bazaar"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -22,9 +27,6 @@
                 "value": 25
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Grand Bazaar"
-        },
         "start": {
             "initiative": null,
             "value": 0

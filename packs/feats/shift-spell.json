@@ -1,6 +1,6 @@
 {
     "_id": "q2t5qfgQHFJbbV8d",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Shift Spell",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #167: Ready? Fight!"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #167: Ready? Fight!"
         },
+        "rules": [],
         "traits": {
             "rarity": "uncommon",
             "value": [

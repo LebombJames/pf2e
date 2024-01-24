@@ -1,6 +1,6 @@
 {
     "_id": "byXkHIKFwuKrZ55M",
-    "img": "systems/pf2e/icons/spells/shifting-form.webp",
+    "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
     "name": "Spell Effect: Shifting Form (Scent)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "acuity": "imprecise",
@@ -23,9 +28,6 @@
                 "selector": "scent"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

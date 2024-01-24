@@ -1,25 +1,36 @@
-import type { ItemSourcePF2e, ItemType } from "@item/data/index.ts";
+import { ItemPF2e } from "@item";
+import { ArmorTrait } from "@item/armor/types.ts";
+import type { ItemSourcePF2e, ItemType } from "@item/base/data/index.ts";
 import { itemIsOfType } from "@item/helpers.ts";
-import { PHYSICAL_ITEM_TYPES } from "@item/physical/values.ts";
+import { PHYSICAL_ITEM_TYPES, PRECIOUS_MATERIAL_TYPES } from "@item/physical/values.ts";
 import { RARITIES } from "@module/data.ts";
-import { ItemPF2e } from "@module/documents.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
 import type { DamageType } from "@system/damage/types.ts";
-import type { DataField, DataFieldOptions, NumberField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { SlugField, StrictNumberField } from "@system/schema-data-fields.ts";
+import * as R from "remeda";
+import type {
+    ArrayField,
+    DataField,
+    DataFieldOptions,
+    NumberField,
+    SchemaField,
+    SourcePropFromDataField,
+    StringField,
+} from "types/foundry/common/data/fields.d.ts";
 import type { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.d.ts";
 import type { AELikeChangeMode } from "../ae-like.ts";
 
 const { fields, validation } = foundry.data;
 
 /** A `SchemaField` reappropriated for validation of specific item alterations */
-class ItemAlterationValidator<TDataSchema extends AlterationSchema> extends fields.SchemaField<TDataSchema> {
+class ItemAlterationValidator<TSchema extends AlterationSchema> extends fields.SchemaField<TSchema> {
     #validateForItem?: (item: ItemPF2e | ItemSourcePF2e) => DataModelValidationFailure | void;
 
     operableOnInstances: boolean;
 
     operableOnSource: boolean;
 
-    constructor(fields: TDataSchema, options: AlterationFieldOptions<SourceFromSchema<TDataSchema>> = {}) {
+    constructor(fields: TSchema, options: AlterationFieldOptions<SourceFromSchema<TSchema>> = {}) {
         super(fields, options);
         if (options.validateForItem) this.#validateForItem = options.validateForItem;
         this.operableOnInstances = options.operableOnInstances ?? true;
@@ -31,8 +42,8 @@ class ItemAlterationValidator<TDataSchema extends AlterationSchema> extends fiel
      * Errors will bubble all the way up to the originating parent rule element
      */
     isValid(data: { item: ItemPF2e | ItemSourcePF2e; alteration: { itemType: string } }): data is {
-        item: ItemOrSource<SourceFromSchema<TDataSchema>["itemType"]>;
-        alteration: SourceFromSchema<TDataSchema>;
+        item: ItemOrSource<SourceFromSchema<TSchema>["itemType"]>;
+        alteration: SourceFromSchema<TSchema>;
     } {
         const { item, alteration } = data;
         const failure = this.validate(alteration);
@@ -61,8 +72,8 @@ const itemHasCounterBadge = (item: ItemPF2e | ItemSourcePF2e): void => {
     const hasBadge = itemIsOfType(item, "condition")
         ? typeof item.system.value.value === "number"
         : itemIsOfType(item, "effect")
-        ? item.system.badge?.type === "counter"
-        : false;
+          ? item.system.badge?.type === "counter"
+          : false;
     if (!hasBadge) {
         throw new foundry.data.validation.DataModelValidationError("effect lacks a badge");
     }
@@ -70,7 +81,7 @@ const itemHasCounterBadge = (item: ItemPF2e | ItemSourcePF2e): void => {
 
 const ITEM_ALTERATION_VALIDATORS = {
     "ac-bonus": new ItemAlterationValidator({
-        itemType: new fields.StringField({ required: true, choices: ["armor"] }),
+        itemType: new fields.StringField({ required: true, choices: ["armor", "shield"] }),
         mode: new fields.StringField({
             required: true,
             choices: ["add", "downgrade", "override", "remove", "subtract", "upgrade"],
@@ -95,7 +106,7 @@ const ITEM_ALTERATION_VALIDATORS = {
                 initial: undefined,
             } as const),
         },
-        { validateForItem: itemHasCounterBadge }
+        { validateForItem: itemHasCounterBadge },
     ),
     "badge-value": new ItemAlterationValidator(
         {
@@ -112,8 +123,18 @@ const ITEM_ALTERATION_VALIDATORS = {
                 initial: undefined,
             } as const),
         },
-        { validateForItem: itemHasCounterBadge }
+        { validateForItem: itemHasCounterBadge },
     ),
+    bulk: new ItemAlterationValidator({
+        itemType: new fields.StringField({ required: true, choices: Array.from(PHYSICAL_ITEM_TYPES) }),
+        mode: new fields.StringField({ required: true, choices: ["override"] }),
+        value: new StrictNumberField<number, number, true, false, false>({
+            required: true,
+            nullable: false,
+            choices: [0, 0.1, ...Array.fromRange(100, 1)],
+            initial: undefined,
+        } as const),
+    }),
     category: new ItemAlterationValidator({
         itemType: new fields.StringField({ required: true, choices: ["armor"] }),
         mode: new fields.StringField({ required: true, choices: ["override"] }),
@@ -123,6 +144,93 @@ const ITEM_ALTERATION_VALIDATORS = {
             choices: ["light", "heavy", "medium"] as const,
             initial: undefined,
         } as const),
+    }),
+    "check-penalty": new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            choices: ["armor"],
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "downgrade", "override", "remove", "subtract", "upgrade"],
+        }),
+        value: new StrictNumberField({
+            required: true,
+            nullable: false,
+            integer: true,
+            initial: undefined,
+        } as const),
+    }),
+    /** The passive defense targeted by an attack spell */
+    "defense-passive": new ItemAlterationValidator({
+        itemType: new fields.StringField({ required: true, choices: ["spell"] }),
+        mode: new fields.StringField({ required: true, choices: ["override"] }),
+        value: new fields.StringField({
+            required: true,
+            nullable: false,
+            choices: ["ac", "fortitude-dc", "reflex-dc", "will-dc"],
+        } as const),
+    }),
+    description: new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            nullable: false,
+            choices: () => R.keys.strict(CONFIG.PF2E.Item.documentClasses),
+            initial: undefined,
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add"],
+        }),
+        value: new fields.ArrayField<
+            DescriptionElementField,
+            SourcePropFromDataField<DescriptionValueField>,
+            SourcePropFromDataField<DescriptionValueField>,
+            true,
+            false,
+            false
+        >(
+            new fields.SchemaField({
+                title: new fields.StringField({
+                    required: false,
+                    nullable: true,
+                    blank: false,
+                    initial: null,
+                } as const),
+                text: new fields.StringField({
+                    required: true,
+                    nullable: false,
+                    blank: false,
+                    initial: undefined,
+                } as const),
+            }) satisfies DescriptionElementField,
+            { required: true, nullable: false, initial: undefined } as const,
+        ) satisfies DescriptionValueField,
+    }),
+
+    "dex-cap": new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            choices: ["armor"],
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "downgrade", "override", "remove", "subtract", "upgrade"],
+        }),
+        value: new StrictNumberField({
+            required: true,
+            nullable: false,
+            integer: true,
+            initial: undefined,
+        } as const),
+    }),
+    "focus-point-cost": new ItemAlterationValidator({
+        itemType: new fields.StringField({ required: true, choices: ["spell"] } as const),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "override", "upgrade"],
+        }),
+        value: new StrictNumberField({ required: true, nullable: false, integer: true, initial: undefined } as const),
     }),
     hardness: new ItemAlterationValidator({
         itemType: new fields.StringField({ required: true, choices: Array.from(PHYSICAL_ITEM_TYPES) }),
@@ -142,6 +250,16 @@ const ITEM_ALTERATION_VALIDATORS = {
             required: true,
             nullable: false,
             positive: true,
+            initial: undefined,
+        } as const),
+    }),
+    "material-type": new ItemAlterationValidator({
+        itemType: new fields.StringField({ required: true, choices: Array.from(PHYSICAL_ITEM_TYPES) }),
+        mode: new fields.StringField({ required: true, choices: ["override"] }),
+        value: new fields.StringField({
+            required: true,
+            nullable: false,
+            choices: Array.from(PRECIOUS_MATERIAL_TYPES),
             initial: undefined,
         } as const),
     }),
@@ -168,7 +286,7 @@ const ITEM_ALTERATION_VALIDATORS = {
                     });
                 }
             },
-        }
+        },
     ),
     "persistent-damage": new ItemAlterationValidator(
         {
@@ -196,7 +314,7 @@ const ITEM_ALTERATION_VALIDATORS = {
                         initial: 15,
                     }),
                 },
-                { nullable: false } as const
+                { nullable: false } as const,
             ),
         },
         {
@@ -207,7 +325,7 @@ const ITEM_ALTERATION_VALIDATORS = {
                     });
                 }
             },
-        }
+        },
     ),
     rarity: new ItemAlterationValidator({
         itemType: new fields.StringField({ required: true, choices: Array.from(PHYSICAL_ITEM_TYPES) }),
@@ -230,7 +348,7 @@ const ITEM_ALTERATION_VALIDATORS = {
         itemType: new fields.StringField({ required: true, choices: ["action", "feat"] }),
         mode: new fields.StringField({
             required: true,
-            choices: ["downgrade", "override", "upgrade"] as const,
+            choices: ["downgrade", "override", "upgrade"],
         }),
         value: new fields.StringField({
             required: true,
@@ -239,12 +357,77 @@ const ITEM_ALTERATION_VALIDATORS = {
             initial: undefined,
         } as const),
     }),
+    "other-tags": new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            choices: () => R.keys.strict(CONFIG.PF2E.Item.documentClasses),
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "subtract", "remove"],
+        }),
+        value: new SlugField({
+            required: true,
+            nullable: false,
+            blank: false,
+            initial: undefined,
+        } as const),
+    }),
+    "speed-penalty": new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            choices: ["armor", "shield"],
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "downgrade", "override", "remove", "subtract", "upgrade"],
+        }),
+        value: new StrictNumberField({
+            required: true,
+            nullable: false,
+            integer: true,
+            initial: undefined,
+        } as const),
+    }),
+    strength: new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            choices: ["armor"],
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "downgrade", "override", "remove", "subtract", "upgrade"],
+        }),
+        value: new StrictNumberField({
+            required: true,
+            nullable: false,
+            integer: true,
+            positive: true,
+            initial: undefined,
+        } as const),
+    }),
+    traits: new ItemAlterationValidator({
+        itemType: new fields.StringField({
+            required: true,
+            choices: ["armor"],
+        }),
+        mode: new fields.StringField({
+            required: true,
+            choices: ["add", "remove", "subtract"],
+        }),
+        value: new fields.StringField<ArmorTrait, ArmorTrait, true, false, false>({
+            required: true,
+            nullable: false,
+            choices: () => CONFIG.PF2E.armorTraits,
+            initial: undefined,
+        }),
+    }),
 };
 
 interface AlterationFieldOptions<TSourceProp extends SourceFromSchema<AlterationSchema>>
     extends DataFieldOptions<TSourceProp, true, false, false> {
     validateForItem?: (
-        item: ItemPF2e | ItemSourcePF2e
+        item: ItemPF2e | ItemSourcePF2e,
     ) => asserts item is
         | InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][TSourceProp["itemType"]]>
         | InstanceType<ConfigPF2e["PF2E"]["Item"]["documentClasses"][TSourceProp["itemType"]]>["_source"];
@@ -257,7 +440,7 @@ interface AlterationFieldOptions<TSourceProp extends SourceFromSchema<Alteration
 type AlterationSchema = {
     itemType: StringField<ItemType, ItemType, true, false, false>;
     mode: StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
-    value: DataField<unknown, unknown, true, boolean, boolean>;
+    value: DataField<JSONValue, unknown, true, boolean, boolean>;
 };
 
 type PersistentDamageValueSchema = {
@@ -265,5 +448,18 @@ type PersistentDamageValueSchema = {
     damageType: StringField<DamageType, DamageType, true, false, false>;
     dc: NumberField<number, number, true, false, true>;
 };
+
+type DescriptionValueField = ArrayField<
+    DescriptionElementField,
+    SourcePropFromDataField<DescriptionElementField>[],
+    { title: string | null; text: string }[],
+    true,
+    false,
+    false
+>;
+type DescriptionElementField = SchemaField<{
+    title: StringField<string, string, false, true, true>;
+    text: StringField<string, string, true, false, false>;
+}>;
 
 export { ITEM_ALTERATION_VALIDATORS };

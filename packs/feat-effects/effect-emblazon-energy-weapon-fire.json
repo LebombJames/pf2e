@@ -1,6 +1,6 @@
 {
     "_id": "GCEOngH5zL0rRyle",
-    "img": "systems/pf2e/icons/spells/spiritual-weapon.webp",
+    "img": "icons/skills/melee/strike-sword-slashing-red.webp",
     "name": "Effect: Emblazon Energy (Weapon, Fire)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 8
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -52,9 +57,6 @@
                 "selector": "{item|flags.pf2e.rulesSelections.effectEmblazonEnergyWeaponFire}-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

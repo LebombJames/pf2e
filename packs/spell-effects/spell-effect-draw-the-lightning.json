@@ -15,9 +15,14 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
-                "domain": "damage-roll",
+                "domain": "damage",
                 "key": "RollOption",
                 "label": "First strike of the round",
                 "option": "first-strike",
@@ -51,9 +56,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

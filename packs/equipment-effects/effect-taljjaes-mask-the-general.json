@@ -1,6 +1,6 @@
 {
     "_id": "X2ZZgTqanpoCMDmd",
-    "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+    "img": "icons/equipment/head/mask-horned-brown.webp",
     "name": "Effect: Taljjae's Mask (The General)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Monsters of Myth"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 3
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Monsters of Myth"
-        },
         "start": {
             "initiative": null,
             "value": 0

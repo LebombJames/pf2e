@@ -15,6 +15,11 @@
         "level": {
             "value": 5
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "key": "Weakness",
@@ -36,35 +41,35 @@
             {
                 "choices": [
                     {
-                        "label": "PF2E.Damage.RollFlavor.acid",
+                        "label": "PF2E.TraitAcid",
                         "value": "acid"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.cold",
+                        "label": "PF2E.TraitCold",
                         "value": "cold"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.electricity",
+                        "label": "PF2E.TraitElectricity",
                         "value": "electricity"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.fire",
+                        "label": "PF2E.TraitFire",
                         "value": "fire"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.force",
+                        "label": "PF2E.TraitForce",
                         "value": "force"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.negative",
-                        "value": "negative"
+                        "label": "PF2E.TraitVoid",
+                        "value": "void"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.positive",
-                        "value": "positive"
+                        "label": "PF2E.TraitVitality",
+                        "value": "vitality"
                     },
                     {
-                        "label": "PF2E.Damage.RollFlavor.sonic",
+                        "label": "PF2E.TraitSonic",
                         "value": "sonic"
                     }
                 ],
@@ -73,9 +78,6 @@
                 "prompt": "PF2E.SpecificRule.Prompt.EnergyType"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

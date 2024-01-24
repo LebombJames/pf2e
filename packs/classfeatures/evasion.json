@@ -1,6 +1,6 @@
 {
     "_id": "MV6XIuAgN9uSA0Da",
-    "img": "systems/pf2e/icons/features/classes/evasion.webp",
+    "img": "icons/magic/fire/explosion-embers-evade-silhouette.webp",
     "name": "Evasion",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "Note",
@@ -36,16 +41,14 @@
                 "key": "AdjustDegreeOfSuccess",
                 "selector": "reflex",
                 "type": "save"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.reflex.rank",
-                "value": 3
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "reflex": {
+                    "rank": 3
+                }
+            }
         },
         "traits": {
             "rarity": "common",

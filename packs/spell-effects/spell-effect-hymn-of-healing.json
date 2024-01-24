@@ -1,10 +1,10 @@
 {
     "_id": "C1GAlZ6Gmmw0QIJN",
-    "img": "systems/pf2e/icons/spells/hymn-of-healing.webp",
+    "img": "icons/magic/life/cross-beam-green.webp",
     "name": "Spell Effect: Hymn of Healing",
     "system": {
         "description": {
-            "value": "<p>Granted by <em>@UUID[Compendium.pf2e.spells-srd.Item.Hymn of Healing]</em></p>\n<p>Your divine singing mends wounds and provides a temporary respite from harm. The target gains fast healing 2. When you Cast the Spell and the first time each round you Sustain the Spell, the target gains 2 temporary Hit Points, which last for 1 round.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Hymn of Healing]</p>\n<p>The target gains fast healing. When you Cast the Spell and the first time each round you Sustain the Spell, the target gains temporary Hit Points, which last for 1 round.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "rules": [
             {
@@ -25,9 +30,6 @@
                 "value": "@item.level * 2"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

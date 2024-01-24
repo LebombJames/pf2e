@@ -1,10 +1,10 @@
 {
     "_id": "nlMZCi8xi9YSvlYR",
-    "img": "systems/pf2e/icons/features/feats/engine-of-destruction.webp",
+    "img": "icons/environment/traps/saw-steel-grey.webp",
     "name": "Effect: Engine of Destruction",
     "system": {
         "description": {
-            "value": "<p>Your construct innovation gains a +2 circumstance bonus to its attack rolls.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Engine of Destruction]</p>\n<p>Your construct innovation gains a +2 circumstance bonus to its attack rolls.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -13,7 +13,12 @@
             "value": 1
         },
         "level": {
-            "value": 1
+            "value": 18
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [
             {
@@ -23,9 +28,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "start": {
             "initiative": null,
             "value": 0

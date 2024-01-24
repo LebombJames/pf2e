@@ -1,6 +1,6 @@
 {
     "_id": "RtYOsmb9R71J9ce2",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Hilt Hammer",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Knights of Lastwall"
+        },
         "rules": [
             {
                 "definition": [
@@ -34,9 +39,6 @@
                 "value": "versatile-b"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Knights of Lastwall"
-        },
         "traits": {
             "rarity": "common",
             "value": [

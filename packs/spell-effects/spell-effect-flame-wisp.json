@@ -1,9 +1,11 @@
 {
     "_id": "ei9MIyZbIaP4AZmh",
-    "img": "systems/pf2e/icons/spells/flame-wisp.webp",
+    "img": "icons/magic/fire/projectile-fireball-embers-yellow.webp",
     "name": "Spell Effect: Flame Wisp",
     "system": {
         "badge": {
+            "max": 3,
+            "min": 0,
             "type": "counter",
             "value": 3
         },
@@ -19,6 +21,11 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
                 "damageType": "fire",
@@ -28,9 +35,6 @@
                 "selector": "strike-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

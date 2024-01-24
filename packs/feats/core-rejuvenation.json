@@ -1,6 +1,6 @@
 {
     "_id": "uclbKFsrqCW6tQmB",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Core Rejuvenation",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -34,9 +39,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

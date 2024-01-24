@@ -15,7 +15,27 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    "fear"
+                ],
+                "selector": "saving-throw",
+                "type": "status",
+                "value": 1
+            },
+            {
+                "key": "FlatModifier",
+                "selector": "damage",
+                "type": "status",
+                "value": "@item.origin.flags.pf2e.highestWeaponDamageDice"
+            },
             {
                 "key": "Note",
                 "outcome": [
@@ -24,17 +44,8 @@
                 "selector": "strike-damage",
                 "text": "PF2E.SpecificRule.Marshal.DreadMarshalStance.Note",
                 "title": "PF2E.SpecificRule.Marshal.DreadMarshalStance.Title"
-            },
-            {
-                "key": "FlatModifier",
-                "selector": "damage",
-                "type": "status",
-                "value": "@item.origin.flags.pf2e.highestWeaponDamageDice"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

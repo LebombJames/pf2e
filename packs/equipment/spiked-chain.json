@@ -3,15 +3,15 @@
     "img": "systems/pf2e/icons/equipment/weapons/spiked-chain.webp",
     "name": "Spiked Chain",
     "system": {
-        "MAP": {
-            "value": ""
-        },
         "baseItem": "spiked-chain",
         "bonus": {
             "value": 0
         },
         "bonusDamage": {
             "value": 0
+        },
+        "bulk": {
+            "value": 1
         },
         "category": "martial",
         "containerId": null,
@@ -21,10 +21,7 @@
             "die": "d8"
         },
         "description": {
-            "value": "<p>This 4‑foot‑long length of chain is covered with barbs and has spikes on one or both ends. Some feature metal hoops used as handgrips.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>This 4-foot-long length of chain is covered with barbs and has spikes on one or both ends. Some feature metal hoops used as handgrips.</p>"
         },
         "group": "flail",
         "hardness": 0,
@@ -35,34 +32,19 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "potencyRune": {
-            "value": null
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 3
             }
         },
-        "propertyRune1": {
-            "value": ""
-        },
-        "propertyRune2": {
-            "value": ""
-        },
-        "propertyRune3": {
-            "value": ""
-        },
-        "propertyRune4": {
-            "value": ""
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "quantity": 1,
         "range": null,
@@ -70,16 +52,14 @@
             "value": ""
         },
         "rules": [],
+        "runes": {
+            "potency": 0,
+            "property": [],
+            "striking": 0
+        },
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "splashDamage": {
-            "value": null
-        },
-        "stackGroup": null,
-        "strikingRune": {
-            "value": ""
+            "value": 0
         },
         "traits": {
             "rarity": "uncommon",
@@ -91,9 +71,6 @@
         },
         "usage": {
             "value": "held-in-two-hands"
-        },
-        "weight": {
-            "value": "1"
         }
     },
     "type": "weapon"

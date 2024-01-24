@@ -1,6 +1,6 @@
 {
     "_id": "8Jjy7VsQAJJqCeyE",
-    "img": "systems/pf2e/icons/spells/adapt-self.webp",
+    "img": "icons/creatures/magical/spirit-undead-ghost-purple.webp",
     "name": "Wraith Deviant Classification",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
         },
         "rules": [
             {
@@ -211,13 +216,18 @@
                 }
             },
             {
+                "allowDuplicate": false,
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.classfeatures.Item.Encroaching Presence"
+            },
+            {
+                "extends": "class-spell",
+                "key": "SpecialStatistic",
+                "label": "PF2E.SpecificRule.DeviantAbilities.Label",
+                "slug": "deviant",
+                "type": "attack-roll"
             }
         ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
-        },
         "traits": {
             "rarity": "common",
             "value": []

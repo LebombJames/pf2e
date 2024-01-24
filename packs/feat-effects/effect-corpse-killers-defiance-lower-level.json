@@ -13,7 +13,12 @@
             "value": 1
         },
         "level": {
-            "value": 1
+            "value": 10
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Knights of Lastwall"
         },
         "rules": [
             {
@@ -29,9 +34,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Knights of Lastwall"
-        },
         "start": {
             "initiative": null,
             "value": 0

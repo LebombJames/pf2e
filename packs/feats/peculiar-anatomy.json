@@ -1,6 +1,6 @@
 {
     "_id": "As8cRK5jVzf62fEd",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Peculiar Anatomy",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Adventure: The Slithering"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -32,7 +37,6 @@
             },
             {
                 "key": "FlatModifier",
-                "label": "vs. poison or disease (Peculiar Anatomy)",
                 "predicate": [
                     {
                         "or": [
@@ -54,11 +58,13 @@
                 ],
                 "property": "pd-recovery-dc",
                 "value": 8
+            },
+            {
+                "key": "Resistance",
+                "type": "poison",
+                "value": "max(1,floor(@actor.level/2))"
             }
         ],
-        "source": {
-            "value": "Pathfinder Adventure: The Slithering"
-        },
         "traits": {
             "rarity": "common",
             "selected": {

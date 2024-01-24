@@ -1,6 +1,6 @@
 {
     "_id": "IcQMLYWYDMZbq3XE",
-    "img": "systems/pf2e/icons/spells/inscrutable-mask.webp",
+    "img": "icons/creatures/magical/construct-face-stone-pink.webp",
     "name": "Spell Effect: Inscrutable Mask",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 3
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -63,9 +68,6 @@
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

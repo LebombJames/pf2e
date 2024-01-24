@@ -37,7 +37,7 @@
         }
     }
 
-    .familiar-sheet-header {
+    header {
         display: flex;
         flex-direction: row;
         padding: 4px 6px 0;
@@ -45,12 +45,13 @@
         .image-container {
             display: flex;
             img.actor-image {
-                flex: 0;
-                width: 125px;
-                height: 100%;
                 border-radius: 0;
+                flex: 0;
+                height: 100%;
+                min-width: 125px;
+                width: 125px;
             }
-            [data-action=show-image] {
+            [data-action="show-image"] {
                 bottom: 2px;
                 right: 2px;
             }
@@ -119,7 +120,7 @@
             .traits {
                 margin: 0.25em 0;
                 span {
-                    color: white;
+                    color: var(--text-light);
                     font-size: 0.75em;
                     font-weight: 700;
                     padding: 0.25em 0.5em;
@@ -174,7 +175,8 @@
                             background: none;
                             height: auto;
 
-                            &:hover, &:focus {
+                            &:hover,
+                            &:focus {
                                 border: 1px solid black;
                                 box-shadow: 0 0 10px #00005a;
                             }
@@ -205,7 +207,8 @@
                         justify-content: space-between;
                         gap: 12px;
 
-                        .save-name, .ac {
+                        .save,
+                        .ac {
                             display: flex;
                             flex-direction: column;
                             align-items: center;
@@ -218,15 +221,16 @@
 
                             .value {
                                 font-style: normal;
+
                                 i {
-                                    margin-right: 2px;
+                                    margin-right: var(--space-2);
                                 }
                             }
                         }
 
                         .ac {
                             border-right: 1px solid rgba(0, 0, 0, 0.15);
-                            padding-right: 12px;
+                            padding-right: var(--space-12);
                         }
                     }
                 }
@@ -234,19 +238,16 @@
 
             .dying-section {
                 display: flex;
-                gap: 10px;
+                gap: var(--space-10);
                 justify-content: end;
+
                 .name {
                     font-weight: bold;
                 }
-                .dots {
-                    display: flex;
-                    gap: 4px;
-                    align-items: baseline;
-                }
+
                 .pips {
                     display: flex;
-                    gap: 1px;
+                    gap: var(--space-1);
                 }
             }
         }
@@ -259,7 +260,7 @@
         overflow: hidden;
 
         .main-container {
-            @include scrollbar;
+            overflow: hidden scroll;
             flex-grow: 2;
         }
     }
@@ -302,7 +303,7 @@
             flex-wrap: nowrap;
             margin-top: 3px;
 
-            .detail-label {
+            label {
                 font-size: var(--font-size-10);
                 font-weight: 800;
                 line-height: 1;
@@ -369,7 +370,6 @@
                 flex-basis: 50%;
                 height: min-content;
 
-
                 .tags {
                     margin: 0;
                     padding: 0;
@@ -399,13 +399,13 @@
             flex-direction: column;
             justify-content: center;
 
-            .skill-name {
+            a {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 border: 1px solid #999;
                 border-radius: 3px;
-                height: 20px;
+                height: var(--font-size-20);
                 cursor: pointer;
                 font-size: var(--font-size-14);
 
@@ -416,16 +416,16 @@
                     border: 1px solid #323232;
                 }
 
-                .name {
-                    flex: 4;
-                }
-
-                .score {
+                .mod {
                     flex: 1;
                     text-align: center;
                     padding-left: 1em;
                     color: var(--primary);
                     font-weight: bold;
+                }
+
+                .name {
+                    flex: 4;
                 }
             }
         }

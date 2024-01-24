@@ -1,6 +1,6 @@
 {
     "_id": "BgHrucbZ9TH92RDv",
-    "img": "systems/pf2e/icons/spells/unblinking-flame-revalation.webp",
+    "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
     "name": "Sunlight Healing",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

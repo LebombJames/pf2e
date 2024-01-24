@@ -21,10 +21,17 @@ interface ItemInstances<TParent extends ActorPF2e | null> {
     kit: ItemInstance.KitPF2e<TParent>;
     lore: ItemInstance.LorePF2e<TParent>;
     melee: ItemInstance.MeleePF2e<TParent>;
+    shield: ItemInstance.ShieldPF2e<TParent>;
     spell: ItemInstance.SpellPF2e<TParent>;
     spellcastingEntry: ItemInstance.SpellcastingEntryPF2e<TParent>;
     treasure: ItemInstance.TreasurePF2e<TParent>;
     weapon: ItemInstance.WeaponPF2e<TParent>;
 }
 
-export { ItemInstances };
+/** Data describing the range restrictions of an action, weapon, spell, etc. */
+type RangeData = {
+    increment: number | null;
+    max: number;
+};
+
+export type { ItemInstances, RangeData };

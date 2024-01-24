@@ -1,6 +1,6 @@
 {
     "_id": "9cq4j15EbVyrHKFX",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Forge-Blessed Shot",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [
             {
@@ -49,9 +54,6 @@
                 "title": "{item|name}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "uncommon",
             "value": [

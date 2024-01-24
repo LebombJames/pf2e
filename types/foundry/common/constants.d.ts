@@ -95,7 +95,7 @@ export const DOCUMENT_TYPES: [
     "Playlist",
     "RollTable",
     "Scene",
-    "User"
+    "User",
 ];
 
 /** The allowed Document types which may exist within a Compendium pack. */
@@ -108,7 +108,7 @@ export const COMPENDIUM_DOCUMENT_TYPES: [
     "Playlist",
     "RollTable",
     "Scene",
-    "Adventure"
+    "Adventure",
 ];
 
 /**
@@ -139,7 +139,7 @@ export const DOCUMENT_LINK_TYPES: [
     "JournalEntry",
     "Macro",
     "RollTable",
-    "PlaylistSound"
+    "PlaylistSound",
 ];
 
 /** The supported dice roll visibility modes */
@@ -173,7 +173,7 @@ export const FOLDER_DOCUMENT_TYPES: [
     "Playlist",
     "RollTable",
     "Cards",
-    "Macro"
+    "Macro",
 ];
 
 /** The maximum allowed level of depth for Folder nesting */
@@ -316,13 +316,19 @@ export const TOKEN_DISPLAY_MODES: {
 
 /**
  * The allowed Token disposition types
- * HOSTILE - Displayed as an enemy with a red border
- * NEUTRAL - Displayed as neutral with a yellow border
- * FRIENDLY - Displayed as an ally with a cyan border
+ * @see https://foundryvtt.com/article/tokens/
  */
 export const TOKEN_DISPOSITIONS: {
+    /** Displayed with a purple borders for owners and with no borders for others (and no pointer change). */
+    SECRET: -2;
+
+    /** Displayed as an enemy with a red border. */
     HOSTILE: -1;
+
+    /** Displayed as neutral with a yellow border. */
     NEUTRAL: 0;
+
+    /** Displayed as an ally with a cyan border. */
     FRIENDLY: 1;
 };
 
@@ -374,6 +380,12 @@ export const USER_PERMISSIONS: {
         hint: "PERMISSION.BroadcastVideoHint";
         disableGM: true;
         defaultRole: typeof USER_ROLES.TRUSTED;
+    };
+    CARDS_CREATE: {
+        label: "PERMISSION.CardsCreate";
+        hint: "PERMISSION.CardsCreateHint";
+        disableGM: false;
+        defaultRole: typeof USER_ROLES.ASSISTANT;
     };
     DRAWING_CREATE: {
         label: "PERMISSION.DrawingCreate";
@@ -668,9 +680,11 @@ declare global {
     type CanvasPerformanceMode = (typeof CANVAS_PERFORMANCE_MODES)[keyof typeof CANVAS_PERFORMANCE_MODES];
     type ChatMessageType = (typeof CONST.CHAT_MESSAGE_TYPES)[keyof typeof CONST.CHAT_MESSAGE_TYPES];
     type CompatibilityMode = (typeof CONST.COMPATIBILITY_MODES)[keyof typeof CONST.COMPATIBILITY_MODES];
+    type DirectorySearchMode = (typeof DIRECTORY_SEARCH_MODES)[keyof typeof DIRECTORY_SEARCH_MODES];
     type DocumentOwnershipLevel = (typeof DOCUMENT_OWNERSHIP_LEVELS)[DocumentOwnershipString];
     type DocumentOwnershipString = keyof typeof DOCUMENT_OWNERSHIP_LEVELS;
     type DrawingFillType = (typeof DRAWING_FILL_TYPES)[keyof typeof DRAWING_FILL_TYPES];
+    type DrawingShapeType = "r" | "e" | "t" | "p" | "f";
     type FileCategory = keyof typeof FILE_CATEGORIES;
     type FileExtension = keyof typeof UPLOADABLE_FILE_EXTENSIONS;
     type FolderDocumentType = (typeof FOLDER_DOCUMENT_TYPES)[number];
@@ -680,6 +694,7 @@ declare global {
     type MacroScope = (typeof MACRO_SCOPES)[number];
     type MacroType = (typeof MACRO_TYPES)[keyof typeof MACRO_TYPES];
     type MeasuredTemplateType = (typeof MEASURED_TEMPLATE_TYPES)[keyof typeof MEASURED_TEMPLATE_TYPES];
+    type PackageAvailabilityCode = (typeof PACKAGE_AVAILABILITY_CODES)[keyof typeof PACKAGE_AVAILABILITY_CODES];
     type PackageType = (typeof PACKAGE_TYPES)[number];
     type PlaylistMode = (typeof PLAYLIST_MODES)[keyof typeof PLAYLIST_MODES];
     type PlaylistSortMode = (typeof PLAYLIST_SORT_MODES)[keyof typeof PLAYLIST_SORT_MODES];
@@ -700,5 +715,4 @@ declare global {
     type WallMovementType = (typeof WALL_MOVEMENT_TYPES)[keyof typeof WALL_MOVEMENT_TYPES];
     type WallRestrictionType = (typeof WALL_RESTRICTION_TYPES)[number];
     type WallSenseType = (typeof WALL_SENSE_TYPES)[keyof typeof WALL_SENSE_TYPES];
-    type DrawingShapeType = "r" | "e" | "t" | "p" | "f";
 }

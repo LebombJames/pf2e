@@ -1,6 +1,6 @@
 {
     "_id": "0FtzFbUrN56KA67z",
-    "img": "systems/pf2e/icons/features/classes/animal-instinct.webp",
+    "img": "icons/creatures/abilities/cougar-pounce-stalk-black.webp",
     "name": "Animal Instinct",
     "system": {
         "actionType": {
@@ -11,13 +11,18 @@
         },
         "category": "classfeature",
         "description": {
-            "value": "<p>The fury of a wild predator fills you when you Rage, granting you ferocious unarmed attacks. Cultures that revere vicious animals (such as apes or bears) give rise to barbarians with this instinct. You might also be at war with an uncontrollable, animalistic side of your personality, or you might be a descendant of a werewolf or another werecreature. Select an animal from Table 3-3: Animal Instincts that best matches your chosen animal.</p>\n<h2>Table 3-3: Animal Instincts</h2>\n<table class=\"pf2-table\">\n<thead>\n<tr>\n<th>Animal</th>\n<th>Attack</th>\n<th>Damage</th>\n<th>Traits</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Ape</td>\n<td>Fist</td>\n<td>1d10 B</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Bear</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Unarmed</td>\n</tr>\n<tr>\n<td>Bear (continued)</td>\n<td>Claw</td>\n<td>1d6 S</td>\n<td>Agile, unarmed</td>\n</tr>\n<tr>\n<td>Bull</td>\n<td>Horn</td>\n<td>1d10 P</td>\n<td>Shove, unarmed</td>\n</tr>\n<tr>\n<td>Cat</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Unarmed</td>\n</tr>\n<tr>\n<td>Cat (continued)</td>\n<td>Claw</td>\n<td>1d6 S</td>\n<td>Agile, unarmed</td>\n</tr>\n<tr>\n<td>Deer</td>\n<td>Antler</td>\n<td>1d10 P</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Frog</td>\n<td>Jaws</td>\n<td>1d10 B</td>\n<td>Unarmed</td>\n</tr>\n<tr>\n<td>Frog (continued)</td>\n<td>Tongue</td>\n<td>1d4 B</td>\n<td>Agile, unarmed</td>\n</tr>\n<tr>\n<td>Shark</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Snake</td>\n<td>Fangs</td>\n<td>1d10 P</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Wolf</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Trip, unarmed</td>\n</tr>\n</tbody>\n</table>\n<h2 class=\"title\">Anathema</h2>\n<p>Flagrantly disrespecting an animal of your chosen kind is anathema to your instinct, as is using weapons while raging.</p>\n<h2 class=\"title\">Bestial Rage (Instinct Ability)</h2>\n<p>When you Rage, you gain your chosen animal's unarmed attack (or attacks). The specific attack gained, the damage it deals, and its traits are listed on Table 3-3: Animal Instincts. These attacks are in the brawling group. Your Rage action gains the morph, primal, and transmutation traits.</p>\n<h2 class=\"title\">Specialization Ability<span style=\"float:right\">Level 7</span></h2>\n<p>Increase the damage die size for the unarmed attacks granted by your chosen animal by one step, and increase the additional damage from Rage from 2 to 5 for your chosen animal's unarmed attacks. The frog's tongue attack and deer's antler attack gain reach 10 feet. If you have greater weapon specialization, increase the damage from Rage from 5 to 12 for your chosen animal's unarmed attacks.</p>\n<h2 class=\"title\">Raging Resistance<span style=\"float:right\">Level 9</span></h2>\n<p>You resist piercing and slashing damage.</p>"
+            "value": "<p>The fury of a wild predator fills you when you Rage, granting you ferocious unarmed attacks. Cultures that revere vicious animals (such as apes or bears) give rise to barbarians with this instinct. You might also be at war with an uncontrollable, animalistic side of your personality, or you might be a descendant of a werewolf or another werecreature. Select an animal from Table 3-3: Animal Instincts that best matches your chosen animal.</p>\n<h2>Table 3-3: Animal Instincts</h2>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>Animal</th>\n<th>Attack</th>\n<th>Damage</th>\n<th>Traits</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Ape</td>\n<td>Fist</td>\n<td>1d10 B</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Bear</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Unarmed</td>\n</tr>\n<tr>\n<td>Bear (continued)</td>\n<td>Claw</td>\n<td>1d6 S</td>\n<td>Agile, unarmed</td>\n</tr>\n<tr>\n<td>Bull</td>\n<td>Horn</td>\n<td>1d10 P</td>\n<td>Shove, unarmed</td>\n</tr>\n<tr>\n<td>Cat</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Unarmed</td>\n</tr>\n<tr>\n<td>Cat (continued)</td>\n<td>Claw</td>\n<td>1d6 S</td>\n<td>Agile, unarmed</td>\n</tr>\n<tr>\n<td>Deer</td>\n<td>Antler</td>\n<td>1d10 P</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Frog</td>\n<td>Jaws</td>\n<td>1d10 B</td>\n<td>Unarmed</td>\n</tr>\n<tr>\n<td>Frog (continued)</td>\n<td>Tongue</td>\n<td>1d4 B</td>\n<td>Agile, unarmed</td>\n</tr>\n<tr>\n<td>Shark</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Snake</td>\n<td>Fangs</td>\n<td>1d10 P</td>\n<td>Grapple, unarmed</td>\n</tr>\n<tr>\n<td>Wolf</td>\n<td>Jaws</td>\n<td>1d10 P</td>\n<td>Trip, unarmed</td>\n</tr>\n</tbody>\n</table>\n<h2 class=\"title\">Anathema</h2>\n<p>Flagrantly disrespecting an animal of your chosen kind is anathema to your instinct, as is using weapons while raging.</p>\n<h2 class=\"title\">Bestial Rage (Instinct Ability)</h2>\n<p>When you Rage, you gain your chosen animal's unarmed attack (or attacks). The specific attack gained, the damage it deals, and its traits are listed on Table 3-3: Animal Instincts. These attacks are in the brawling group. Your Rage action gains the morph, primal, and transmutation traits.</p>\n<h2 class=\"title\">Specialization Ability<span style=\"float:right\">Level 7</span></h2>\n<p>Increase the damage die size for the unarmed attacks granted by your chosen animal by one step, and increase the additional damage from Rage from 2 to 5 for your chosen animal's unarmed attacks. The frog's tongue attack and deer's antler attack gain reach 10 feet. If you have greater weapon specialization, increase the damage from Rage from 5 to 12 for your chosen animal's unarmed attacks.</p>\n<h2 class=\"title\">Raging Resistance<span style=\"float:right\">Level 9</span></h2>\n<p>You resist piercing and slashing damage.</p>"
         },
         "level": {
             "value": 1
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -127,6 +132,7 @@
                 "selector": "{item|_id}-damage"
             },
             {
+                "baseType": "fist",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -136,7 +142,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/features/classes/powerful-fist.webp",
+                "img": "icons/skills/melee/unarmed-punch-fist.webp",
                 "key": "Strike",
                 "label": "PF2E.Strike.Fist.Label",
                 "predicate": [
@@ -149,13 +155,14 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-fist",
                 "traits": [
                     "grapple",
                     "unarmed"
                 ]
             },
             {
+                "baseType": "jaws",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -165,7 +172,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Jaws",
                 "predicate": [
@@ -183,12 +190,13 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-jaws",
                 "traits": [
                     "unarmed"
                 ]
             },
             {
+                "baseType": "jaws",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -198,7 +206,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Jaws",
                 "predicate": [
@@ -211,12 +219,13 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-jaws",
                 "traits": [
                     "unarmed"
                 ]
             },
             {
+                "baseType": "jaws",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -226,7 +235,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Jaws",
                 "predicate": [
@@ -239,13 +248,14 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-jaws",
                 "traits": [
                     "unarmed",
                     "trip"
                 ]
             },
             {
+                "baseType": "claw",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -255,7 +265,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/claw.webp",
+                "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Claw",
                 "predicate": [
@@ -273,7 +283,7 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-claw",
                 "traits": [
                     "unarmed",
                     "agile"
@@ -289,7 +299,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/horn.webp",
+                "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Horn",
                 "predicate": [
@@ -302,7 +312,7 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-horn",
                 "traits": [
                     "unarmed",
                     "shove"
@@ -318,7 +328,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/antler.webp",
+                "img": "icons/commodities/bones/horn-antler-brown-red.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Antler",
                 "predicate": [
@@ -331,7 +341,7 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-antler",
                 "traits": [
                     "unarmed",
                     "grapple"
@@ -347,7 +357,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/Tongue.webp",
+                "img": "icons/commodities/biological/tongue-pink.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Tongue",
                 "predicate": [
@@ -360,13 +370,14 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-tongue",
                 "traits": [
                     "unarmed",
                     "agile"
                 ]
             },
             {
+                "baseType": "jaws",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -376,7 +387,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.BattleForm.Attack.Jaws",
                 "predicate": [
@@ -389,7 +400,7 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-jaws",
                 "traits": [
                     "unarmed",
                     "grapple"
@@ -418,7 +429,7 @@
                         ]
                     }
                 ],
-                "range": null,
+                "slug": "instinct-fangs",
                 "traits": [
                     "unarmed",
                     "grapple"
@@ -428,8 +439,8 @@
                 "definition": [
                     {
                         "or": [
-                            "item:slug:antler",
-                            "item:slug:tongue"
+                            "item:slug:instinct-antler",
+                            "item:slug:instinct-tongue"
                         ]
                     }
                 ],
@@ -448,10 +459,10 @@
                 "value": "reach"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
+            "otherTags": [
+                "barbarian-instinct"
+            ],
             "rarity": "common",
             "value": [
                 "barbarian"

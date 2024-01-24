@@ -13,15 +13,15 @@
             "name": "Spiked Chain",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "spiked-chain",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -31,15 +31,12 @@
                     "die": "d8"
                 },
                 "description": {
-                    "value": "<p>This 4‑foot‑long length of chain is covered with barbs and has spikes on one or both ends. Some feature metal hoops used as handgrips.</p>"
+                    "value": "<p>This 4-foot-long length of chain is covered with barbs and has spikes on one or both ends. Some feature metal hoops used as handgrips.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "group": "flail",
                 "hardness": 0,
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "spiked-chain",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": null
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "uncommon",
@@ -107,9 +87,6 @@
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -121,27 +98,27 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.Gq1cZWSKOtJhKd2p"
                 }
             },
-            "img": "systems/pf2e/icons/equipment//armor/fullplate.webp",
-            "name": "+2 Resilient Full Plate",
+            "img": "icons/equipment/chest/breastplate-layered-steel-green.webp",
+            "name": "Full Plate",
             "sort": 200000,
             "system": {
                 "acBonus": 6,
                 "baseItem": "full-plate",
+                "bulk": {
+                    "value": 4
+                },
                 "category": "heavy",
                 "checkPenalty": -3,
                 "containerId": null,
                 "description": {
-                    "value": "<p>Plate mail consists of interlocking plates that encase nearly the entire body in a carapace of steel. It is costly and heavy, and the wearer often requires help to don it correctly, but it provides some of the best defense armor can supply. A suit of this armor comes with an undercoat of padded armor and a pair of gauntlets.</p>"
+                    "value": "<p>Plate mail consists of interlocking plates that encase nearly the entire body in a carapace of steel. It is costly and heavy, and the wearer often requires help to don it correctly, but it provides some of the best defense armor can supply. A suit of this armor comes with an undercoat of @UUID[Compendium.pf2e.equipment-srd.Item.Padded Armor]{padded armor} and a pair of @UUID[Compendium.pf2e.equipment-srd.Item.Gauntlet]{gauntlets}.</p>"
                 },
                 "dexCap": 0,
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0,
-                    "inSlot": false,
+                    "inSlot": true,
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": "4"
                 },
                 "group": "plate",
                 "hardness": 0,
@@ -152,60 +129,36 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 30
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": "resilient"
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "resilient": 1
+                },
                 "size": "med",
                 "slug": "full-plate",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "speedPenalty": -10,
-                "stackGroup": null,
                 "strength": 4,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "bulwark"
                     ]
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "5"
                 }
             },
             "type": "armor"
@@ -240,11 +193,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -284,11 +239,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -322,23 +279,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -359,33 +309,24 @@
                 "description": {
                     "value": "<p>Gallowdead are the eyes and ears of the Whispering Tyrant, so Tar-Baphon can see through them at any time as long as they're on the same plane of existence as him.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
         },
         {
-            "_id": "dYKKjbhn2q7r853p",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.TTCw5NusiSSkJU1x"
-                }
-            },
+            "_id": "35tm9k6kvybbcwkv",
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Negative Healing",
+            "name": "Aura of Whispers",
             "sort": 700000,
             "system": {
                 "actionType": {
@@ -396,54 +337,12 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                    "value": "<p>30 feet. A gallowdead is surrounded by an aura of blasphemous whispers. A creature who hears them understands them to be mutterings of its most closely guarded secrets and private failings laid bare. A creature that first enters the area must attempt a @Check[type:will|dc:34] save. Regardless of the result of the saving throw, the creature is temporarily immune to aura of whispers for 1 minute. The frightened condition from this aura can't be reduced while in the aura.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2} and @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1}.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 3} and @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 3}.</p>"
                 },
-                "requirements": {
-                    "value": ""
-                },
-                "rules": [
-                    {
-                        "key": "ActiveEffectLike",
-                        "mode": "override",
-                        "path": "system.attributes.hp.negativeHealing",
-                        "value": true
-                    }
-                ],
-                "slug": "negative-healing",
-                "source": {
-                    "value": "Pathfinder Bestiary 2"
-                },
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
-                }
-            },
-            "type": "action"
-        },
-        {
-            "_id": "35tm9k6kvybbcwkv",
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Aura of Whispers",
-            "sort": 800000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "defensive",
-                "description": {
-                    "value": "<p>@Template[type:emanation|distance:30]{30 feet} @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Aura]</p>\n<p>A gallowdead is surrounded by an aura of blasphemous whispers. A creature who hears them understands them to be mutterings of its most closely guarded secrets and private failings laid bare. A creature that first enters the area must attempt a @Check[type:will|dc:34] save. Regardless of the result of the saving throw, the creature is temporarily immune to aura of whispers for 1 minute. The frightened condition from this aura can't be reduced while in the aura.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2} and @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1}.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 3} and @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 3}.</p>"
-                },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -452,31 +351,22 @@
                         "slug": "aura-of-whispers",
                         "traits": [
                             "auditory",
-                            "aura",
                             "divine",
-                            "enchantment",
                             "fear",
                             "mental"
                         ]
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "auditory",
                         "aura",
                         "divine",
-                        "enchantment",
                         "fear",
                         "mental"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -485,7 +375,7 @@
             "_id": "mHzpQhYPnyDQgnCL",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Chains of the Dead",
-            "sort": 900000,
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -497,20 +387,16 @@
                 "description": {
                     "value": "<p>The spiked chain of a gallowdead is wrapped around and through their body, imbuing it with foul necromantic powers. The spiked chain can't be disarmed, deals an additional weapon die of damage, and has a greater reach while wielded by the gallowdead.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -519,7 +405,7 @@
             "_id": "kpogcinxfxdtnd5j",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Gallow Curse",
-            "sort": 1000000,
+            "sort": 900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -532,24 +418,61 @@
                 "description": {
                     "value": "<p>Those who destroy gallowdead are subject to a powerful death curse. When a creature reduces a gallowdead to 0 HP, the creature must attempt a @Check[type:will|dc:34] save. A creature that fails this saving throw is @UUID[Compendium.pf2e.conditionitems.Item.Doomed]{Doomed 1} and can't remove the condition until the curse has been lifted.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "curse",
-                        "divine",
-                        "necromancy"
+                        "divine"
                     ]
+                }
+            },
+            "type": "action"
+        },
+        {
+            "_id": "dYKKjbhn2q7r853p",
+            "flags": {
+                "core": {
+                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.TTCw5NusiSSkJU1x"
+                }
+            },
+            "img": "systems/pf2e/icons/actions/Passive.webp",
+            "name": "Void Healing",
+            "sort": 1000000,
+            "system": {
+                "actionType": {
+                    "value": "passive"
                 },
-                "trigger": {
-                    "value": ""
+                "actions": {
+                    "value": null
+                },
+                "category": "defensive",
+                "description": {
+                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 2"
+                },
+                "rules": [
+                    {
+                        "key": "ActiveEffectLike",
+                        "mode": "override",
+                        "path": "system.attributes.hp.negativeHealing",
+                        "value": true
+                    }
+                ],
+                "slug": "negative-healing",
+                "traits": {
+                    "rarity": "common",
+                    "value": []
                 }
             },
             "type": "action"
@@ -570,20 +493,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> The gallowdead critically hits a target with their spiked chain</p>\n<hr />\n<p><strong>Effect</strong> The gallowdead attempts an Athletics check to @UUID[Compendium.pf2e.actionspf2e.Item.Grapple] the target. On a success, the gallowdead can also pull the target adjacent toward them to the distance the gallowdead chooses. Most often, a gallowdead chooses to pull a creature close enough that it's in their reach and out of defensive position, but so the creature still can't reach the gallowdead's body. At the start of the gallowdead's next turn, if the target hasn't Escaped, the target takes the damage of a spiked chain Strike, and the chain releases the creature.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -602,31 +521,65 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The gallowdead imbues their chain with necromantic power. The gallowdead chooses to make their next Strike with the chain this turn either deal an additional @Damage[4d6[negative]] damage or have 120-foot reach.</p>"
+                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The gallowdead imbues their chain with necromantic power. The gallowdead chooses to make their next Strike with the chain this turn either deal an additional @Damage[4d6[void]] damage or have 120-foot reach.</p>"
                 },
                 "frequency": {
                     "max": 1,
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "domain": "all",
+                        "key": "RollOption",
+                        "option": "charge-chain",
+                        "suboptions": [
+                            {
+                                "label": "PF2E.TraitVoid",
+                                "value": "damage"
+                            },
+                            {
+                                "label": "PF2E.TraitReach120",
+                                "value": "reach"
+                            }
+                        ],
+                        "toggleable": true
+                    },
+                    {
+                        "damageType": "void",
+                        "diceNumber": 4,
+                        "dieSize": "d6",
+                        "key": "DamageDice",
+                        "predicate": [
+                            "charge-chain:damage"
+                        ],
+                        "selector": "spiked-chain-damage"
+                    },
+                    {
+                        "definition": [
+                            "item:spiked-chain"
+                        ],
+                        "key": "AdjustStrike",
+                        "mode": "add",
+                        "predicate": [
+                            "charge-chain:reach"
+                        ],
+                        "property": "weapon-traits",
+                        "value": "reach-120"
+                    }
+                ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "divine",
-                        "necromancy",
-                        "negative"
+                        "void"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -646,11 +599,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -669,11 +624,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -692,11 +649,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -715,11 +674,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -755,7 +716,7 @@
                 "value": ""
             },
             "hp": {
-                "details": "negative healing",
+                "details": "void healing",
                 "max": 280,
                 "temp": 0,
                 "value": 280
@@ -777,12 +738,6 @@
                     "type": "unconscious"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 27
-            },
             "speed": {
                 "otherSpeeds": [],
                 "special": "",
@@ -790,19 +745,36 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "necril"
+                ]
+            },
             "level": {
                 "value": 15
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Book of the Dead"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Book of the Dead"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 27,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -820,23 +792,14 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "necril"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
-                "undead"
+                "evil",
+                "undead",
+                "unholy"
             ]
         }
     },

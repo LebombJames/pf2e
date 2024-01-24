@@ -1,6 +1,6 @@
 {
     "_id": "ApGnHnZEK7nv3IqL",
-    "img": "systems/pf2e/icons/equipment/held-items/codex-of-unimpreded-sight.webp",
+    "img": "icons/sundries/books/book-eye-pink.webp",
     "name": "Effect: Greater Codex of Unimpeded Sight",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 12
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

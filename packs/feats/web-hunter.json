@@ -1,6 +1,6 @@
 {
     "_id": "InTchkd50pzQok3f",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Web Hunter",
     "system": {
         "actionType": {
@@ -19,16 +19,19 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "acuity": "imprecise",
-                "key": "Sense",
-                "range": 15,
-                "selector": "tremorsense"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
+        "rules": [],
+        "subfeatures": {
+            "senses": {
+                "tremorsense": {
+                    "acuity": "imprecise",
+                    "range": 15
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
         "traits": {
             "rarity": "common",

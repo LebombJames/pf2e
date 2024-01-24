@@ -1,6 +1,6 @@
 {
     "_id": "Tkf33YglEZcZ6gOT",
-    "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/wyvern-poison.webp",
+    "img": "icons/commodities/materials/liquid-blue.webp",
     "name": "Effect: Curse of the Baneful Venom",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 6
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #170: Spoken on the Song Wind"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": -2
             }
         ],
-        "source": {
-            "value": "Pathfinder #170: Spoken on the Song Wind"
-        },
         "start": {
             "initiative": null,
             "value": 0

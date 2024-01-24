@@ -1,6 +1,6 @@
 {
     "_id": "9BUk7zy1aE092XCS",
-    "img": "systems/pf2e/icons/features/classes/lightning-reflexes.webp",
+    "img": "icons/magic/symbols/symbol-lightning-bolt.webp",
     "name": "Kinetic Quickness",
     "system": {
         "actionType": {
@@ -19,13 +19,12 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.reflex.rank",
-                "value": 3
-            },
             {
                 "adjustment": {
                     "success": "one-degree-better"
@@ -44,8 +43,12 @@
                 "title": "{item|name}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
+        "subfeatures": {
+            "proficiencies": {
+                "reflex": {
+                    "rank": 3
+                }
+            }
         },
         "traits": {
             "rarity": "common",

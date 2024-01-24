@@ -1,20 +1,24 @@
+import { AttributeString } from "@actor/types.ts";
 import { ActionTrait } from "@item/ability/types.ts";
 import { ArmorTrait } from "@item/armor/types.ts";
+import { PhysicalItemSource } from "@item/base/data/index.ts";
 import { ConsumableTrait } from "@item/consumable/data.ts";
 import { EquipmentTrait } from "@item/equipment/data.ts";
+import { ShieldTrait } from "@item/shield/types.ts";
 import { WeaponTrait } from "@item/weapon/types.ts";
-import { Size, TraitsWithRarity, ValuesList } from "@module/data.ts";
-import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../data/base.ts";
-import type { ITEM_CARRY_TYPES } from "../data/values.ts";
-import { CoinsPF2e } from "./helpers.ts";
-import { PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType } from "./types.ts";
-import { UsageDetails } from "./usage.ts";
+import { Size, TraitsWithRarity, ValuesList, ZeroToTwo } from "@module/data.ts";
+import { MaterialDamageEffect } from "@system/damage/types.ts";
+import { ActionCost, BaseItemSourcePF2e, Frequency, ItemSystemData, ItemSystemSource } from "../base/data/system.ts";
+import type { ITEM_CARRY_TYPES } from "../base/data/values.ts";
+import type { CoinsPF2e } from "./helpers.ts";
+import type { PhysicalItemType, PreciousMaterialGrade, PreciousMaterialType } from "./types.ts";
+import type { UsageDetails } from "./usage.ts";
 
-type ItemCarryType = SetElement<typeof ITEM_CARRY_TYPES>;
+type ItemCarryType = (typeof ITEM_CARRY_TYPES)[number];
 
 type BasePhysicalItemSource<
     TType extends PhysicalItemType,
-    TSystemSource extends PhysicalSystemSource = PhysicalSystemSource
+    TSystemSource extends PhysicalSystemSource = PhysicalSystemSource,
 > = BaseItemSourcePF2e<TType, TSystemSource>;
 
 interface PhysicalSystemSource extends ItemSystemSource {
@@ -22,48 +26,57 @@ interface PhysicalSystemSource extends ItemSystemSource {
     traits: PhysicalItemTraits;
     quantity: number;
     baseItem: string | null;
+    bulk: {
+        value: number;
+    };
     hp: PhysicalItemHPSource;
     hardness: number;
-    weight: {
-        value: string;
-    };
-    equippedBulk: {
-        value: string | null;
-    };
-    /** This is unused, remove when inventory bulk refactor is complete */
-    unequippedBulk: {
-        value: string;
-    };
     price: PartialPrice;
     equipped: EquippedData;
     identification: IdentificationSource;
-    stackGroup: string | null;
-    negateBulk: {
-        value: string;
-    };
     containerId: string | null;
-    preciousMaterial: {
-        value: Exclude<PreciousMaterialType, "dragonhide" | "grisantian-pelt"> | null;
-    };
-    preciousMaterialGrade: {
-        value: PreciousMaterialGrade | null;
-    };
+    material: ItemMaterialSource;
     size: Size;
-    usage: {
-        value: string;
-    };
+    usage?: { value: string };
     activations?: Record<string, ItemActivation>;
     temporary?: boolean;
+    subitems?: PhysicalItemSource[];
+
+    /**
+     * Data for apex items: the attribute upgraded and, in case of multiple apex items, whether the upgrade has been
+     * selected
+     */
+    apex?: {
+        attribute: AttributeString;
+        selected?: boolean;
+    };
 }
 
-interface PhysicalSystemData extends PhysicalSystemSource, Omit<ItemSystemData, "level"> {
+interface IdentificationSource {
+    status: IdentificationStatus;
+    unidentified: MystifiedData;
+    misidentified: object;
+}
+
+interface ItemMaterialSource {
+    grade: PreciousMaterialGrade | null;
+    type: PreciousMaterialType | null;
+}
+
+interface PhysicalSystemData extends Omit<PhysicalSystemSource, "description">, Omit<ItemSystemData, "level"> {
+    apex?: {
+        attribute: AttributeString;
+        selected: boolean;
+    };
     hp: PhysicalItemHitPoints;
     price: Price;
     bulk: BulkData;
+    material: ItemMaterialData;
     traits: PhysicalItemTraits;
     temporary: boolean;
     identification: IdentificationData;
     usage: UsageDetails;
+    stackGroup: string | null;
 }
 
 type Investable<TData extends PhysicalSystemData | PhysicalSystemSource> = TData & {
@@ -76,8 +89,6 @@ type Investable<TData extends PhysicalSystemData | PhysicalSystemSource> = TData
 interface BulkData {
     /** Held or stowed bulk */
     heldOrStowed: number;
-    /** Worn bulk, if different than when held or stowed */
-    worn: number | null;
     /** The applicable bulk value between the above two */
     value: number;
     /** The quantity of this item necessary to amount to the above bulk quantities: anything less is negligible */
@@ -96,13 +107,11 @@ interface MystifiedData {
     };
 }
 
-type IdentifiedData = DeepPartial<MystifiedData>;
-
-interface IdentificationSource {
-    status: IdentificationStatus;
-    unidentified: MystifiedData;
-    misidentified: object;
+interface ItemMaterialData extends ItemMaterialSource {
+    effects: MaterialDamageEffect[];
 }
+
+type IdentifiedData = DeepPartial<MystifiedData>;
 
 interface IdentificationData extends IdentificationSource {
     identified: MystifiedData;
@@ -111,11 +120,11 @@ interface IdentificationData extends IdentificationSource {
 type EquippedData = {
     carryType: ItemCarryType;
     inSlot?: boolean;
-    handsHeld?: number;
+    handsHeld?: ZeroToTwo;
     invested?: boolean | null;
 };
 
-type PhysicalItemTrait = ArmorTrait | ConsumableTrait | EquipmentTrait | WeaponTrait;
+type PhysicalItemTrait = ArmorTrait | ConsumableTrait | EquipmentTrait | ShieldTrait | WeaponTrait;
 interface PhysicalItemTraits<T extends PhysicalItemTrait = PhysicalItemTrait> extends TraitsWithRarity<T> {
     otherTags: string[];
 }
@@ -162,8 +171,9 @@ interface Price extends PartialPrice {
     per: number;
 }
 
-export {
+export type {
     BasePhysicalItemSource,
+    BulkData,
     Coins,
     EquippedData,
     IdentificationData,
@@ -172,6 +182,8 @@ export {
     Investable,
     ItemActivation,
     ItemCarryType,
+    ItemMaterialData,
+    ItemMaterialSource,
     MystifiedData,
     PartialPrice,
     PhysicalItemHPSource,

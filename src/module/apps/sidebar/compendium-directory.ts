@@ -1,15 +1,17 @@
 import { ActorPF2e } from "@actor";
 import { ItemPF2e } from "@item";
-import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import { ErrorPF2e, fontAwesomeIcon, htmlQuery } from "@util";
 import MiniSearch from "minisearch";
+import { CompendiumMigrationStatus } from "../compendium-migration-status.ts";
 
 /** Extend CompendiumDirectory to support a search bar */
 class CompendiumDirectoryPF2e extends CompendiumDirectory {
+    static readonly STOP_WORDS = new Set(["of", "th", "the"]);
+
     static readonly searchEngine = new MiniSearch<CompendiumIndexData>({
         fields: ["name"],
         idField: "uuid",
-        processTerm: (t) => (t.length > 1 ? t.toLocaleLowerCase(game.i18n.lang) : null),
+        processTerm: (t) => (t.length > 1 && !this.STOP_WORDS.has(t) ? t.toLocaleLowerCase(game.i18n.lang) : null),
         searchOptions: { combineWith: "AND", prefix: true },
         storeFields: ["uuid", "img", "name", "type", "documentType", "packLabel"],
     });
@@ -53,7 +55,7 @@ class CompendiumDirectoryPF2e extends CompendiumDirectory {
         super.activateListeners($html);
 
         // Hook in the compendium browser
-        $html[0]!.querySelector("footer > button")?.addEventListener("click", () => {
+        $html[0].querySelector("footer > button")?.addEventListener("click", () => {
             game.pf2e.compendiumBrowser.render(true);
         });
     }
@@ -61,27 +63,24 @@ class CompendiumDirectoryPF2e extends CompendiumDirectory {
     protected override _getEntryContextOptions(): EntryContextOption[] {
         const options = super._getEntryContextOptions();
 
-        if (BUILD_MODE === "development") {
-            options.push({
-                name: "COMPENDIUM.Migrate",
-                icon: fontAwesomeIcon("crow").outerHTML,
-                condition: ($li) => {
-                    const compendium = game.packs.get($li.data("pack"), { strict: true });
-                    const actorOrItem =
-                        compendium.documentClass === CONFIG.Actor.documentClass ||
-                        compendium.documentClass === CONFIG.Item.documentClass;
-                    const isSystemCompendium = compendium.metadata.packageType === "system";
-                    return game.user.isGM && actorOrItem && !isSystemCompendium && !compendium.locked;
-                },
-                callback: async ($li) => {
-                    const compendium = game.packs.get($li.data("pack"), { strict: true }) as CompendiumCollection<
-                        ActorPF2e<null> | ItemPF2e<null>
-                    >;
-                    const runner = new MigrationRunner(MigrationList.constructFromVersion(null));
-                    runner.runCompendiumMigration(compendium);
-                },
-            });
-        }
+        options.push({
+            name: "COMPENDIUM.MigrationStatus",
+            icon: fontAwesomeIcon("info").outerHTML,
+            condition: ($li) => {
+                const compendium = game.packs.get($li.data("pack"), { strict: true });
+                const actorOrItem =
+                    compendium.documentClass === CONFIG.Actor.documentClass ||
+                    compendium.documentClass === CONFIG.Item.documentClass;
+                const isSystemCompendium = compendium.metadata.packageType === "system";
+                return game.user.isGM && actorOrItem && !isSystemCompendium;
+            },
+            callback: async ($li) => {
+                const compendium = game.packs.get($li.data("pack"), { strict: true }) as CompendiumCollection<
+                    ActorPF2e<null> | ItemPF2e<null>
+                >;
+                new CompendiumMigrationStatus(compendium).render(true);
+            },
+        });
 
         return options;
     }
@@ -116,7 +115,7 @@ class CompendiumDirectoryPF2e extends CompendiumDirectory {
                         packCollection,
                         indexData._id,
                         {},
-                        { renderSheet: true }
+                        { renderSheet: true },
                     );
                 },
             },
@@ -141,16 +140,18 @@ class CompendiumDirectoryPF2e extends CompendiumDirectory {
         if (!matchTemplate) throw ErrorPF2e("Match template not found");
 
         const listElements = filteredMatches.map((match): HTMLLIElement => {
-            const li = matchTemplate.content.firstElementChild!.cloneNode(true) as HTMLLIElement;
+            const li = matchTemplate.content.firstElementChild?.cloneNode(true) as HTMLLIElement;
             li.dataset.uuid = match.uuid;
             li.dataset.score = match.score.toString();
 
             // Show a thumbnail if available
-            const thumbnail = li.querySelector<HTMLImageElement>("img")!;
-            if (typeof match.img === "string") {
-                thumbnail.src = game.pf2e.system.moduleArt.map.get(match.uuid)?.img ?? match.img;
-            } else if (match.documentType === "JournalEntry") {
-                thumbnail.src = "icons/svg/book.svg";
+            const thumbnail = li.querySelector<HTMLImageElement>("img");
+            if (thumbnail) {
+                if (typeof match.img === "string") {
+                    thumbnail.src = game.pf2e.system.moduleArt.map.get(match.uuid)?.img ?? match.img;
+                } else if (match.documentType === "JournalEntry") {
+                    thumbnail.src = "icons/svg/book.svg";
+                }
             }
 
             // Open compendium on result click
@@ -160,13 +161,15 @@ class CompendiumDirectoryPF2e extends CompendiumDirectory {
                 await doc?.sheet?.render(true, { editable: doc.sheet.isEditable });
             });
 
-            const anchor = li.querySelector("a")!;
-            anchor.innerText = match.name;
-            const details = li.querySelector("span")!;
+            const anchor = li.querySelector("a");
+            const details = li.querySelector("span");
             const systemType = ["Actor", "Item"].includes(match.documentType)
                 ? game.i18n.localize(`TYPES.${match.documentType}.${match.type}`)
                 : null;
-            details.innerText = systemType ? `${systemType} (${match.packLabel})` : `(${match.packLabel})`;
+            if (anchor && details) {
+                anchor.innerText = match.name;
+                details.innerText = systemType ? `${systemType} (${match.packLabel})` : `(${match.packLabel})`;
+            }
 
             return li;
         });
@@ -184,8 +187,11 @@ class CompendiumDirectoryPF2e extends CompendiumDirectory {
     }
 
     /** Replicate the functionality of dragging a compendium document from an open `Compendium` */
-    protected override _onDragStart(event: ElementDragEvent): void {
+    protected override _onDragStart(event: DragEvent): void {
         const dragElement = event.currentTarget;
+        if (!(dragElement instanceof HTMLElement && event.dataTransfer)) {
+            return super._onDragStart(event);
+        }
         const { uuid } = dragElement.dataset;
         if (!uuid) return super._onDragStart(event);
 

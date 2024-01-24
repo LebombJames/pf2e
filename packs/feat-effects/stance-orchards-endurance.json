@@ -1,6 +1,6 @@
 {
     "_id": "YNoBbHUu7enOSKyv",
-    "img": "systems/pf2e/icons/spells/one-with-the-land.webp",
+    "img": "icons/environment/wilderness/tree-oak.webp",
     "name": "Stance: Orchard's Endurance",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -40,9 +45,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "start": {
             "initiative": null,
             "value": 0

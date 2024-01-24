@@ -1,6 +1,6 @@
 {
     "_id": "SIkSIln5G1J73PrM",
-    "img": "systems/pf2e/icons/spells/control-water.webp",
+    "img": "icons/magic/fire/explosion-flame-blue.webp",
     "name": "Reflow Elements",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

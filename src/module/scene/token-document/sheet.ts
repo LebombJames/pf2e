@@ -1,12 +1,14 @@
-import { ActorPF2e, VehiclePF2e } from "@actor";
+import { ActorPF2e } from "@actor";
+import { SIZE_LINKABLE_ACTOR_TYPES } from "@actor/values.ts";
 import { ErrorPF2e, fontAwesomeIcon, htmlQuery } from "@util";
-import { TokenDocumentPF2e } from "./index.ts";
+import type { TokenDocumentPF2e } from "./index.ts";
 
 class TokenConfigPF2e<TDocument extends TokenDocumentPF2e> extends TokenConfig<TDocument> {
     static override get defaultOptions(): DocumentSheetOptions {
         return {
             ...super.defaultOptions,
             template: "systems/pf2e/templates/scene/token/sheet.hbs",
+            sheetConfig: false,
         };
     }
 
@@ -26,7 +28,7 @@ class TokenConfigPF2e<TDocument extends TokenDocumentPF2e> extends TokenConfig<T
     override async getData(options?: DocumentSheetOptions): Promise<TokenConfigDataPF2e<TDocument>> {
         return {
             ...(await super.getData(options)),
-            sizeLinkable: !!this.actor && !["hazard", "loot"].includes(this.actor.type),
+            sizeLinkable: !!this.actor && SIZE_LINKABLE_ACTOR_TYPES.has(this.actor.type),
             linkToSizeTitle: this.token.flags.pf2e.linkToActorSize ? "Unlink" : "Link",
             autoscaleTitle: this.token.flags.pf2e.autoscale ? "Unlink" : "Link",
         };
@@ -43,7 +45,7 @@ class TokenConfigPF2e<TDocument extends TokenDocumentPF2e> extends TokenConfig<T
     override activateListeners($html: JQuery): void {
         super.activateListeners($html);
 
-        const html = $html[0]!;
+        const html = $html[0];
 
         this.#disableVisionInputs(html);
 
@@ -99,18 +101,16 @@ class TokenConfigPF2e<TDocument extends TokenDocumentPF2e> extends TokenConfig<T
     }
 
     #disableVisionInputs(html: HTMLElement): void {
-        const actorIsPCOrFamiliar = ["character", "familiar"].includes(this.actor?.type ?? "");
+        const isCreature = !!this.actor?.isOfType("creature");
         const rulesBasedVision =
-            actorIsPCOrFamiliar &&
-            (this.token.rulesBasedVision ||
-                (this.isPrototype && game.settings.get("pf2e", "automation.rulesBasedVision")));
+            isCreature && (this.token.rulesBasedVision || (this.isPrototype && game.pf2e.settings.rbv));
         if (!rulesBasedVision) return;
 
         const sightInputNames = ["angle", "brightness", "range", "saturation", "visionMode"].map((n) => `sight.${n}`);
         const sightInputs = Array.from(
             html.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
-                sightInputNames.map((n) => `[name="${n}"]`).join(", ")
-            )
+                sightInputNames.map((n) => `[name="${n}"]`).join(", "),
+            ),
         );
 
         const sightEnabledInput = html.querySelector<HTMLInputElement>('input[name="sight.enabled"]');
@@ -173,7 +173,7 @@ class TokenConfigPF2e<TDocument extends TokenDocumentPF2e> extends TokenConfig<T
 
     protected override async _updateObject(event: Event, formData: Record<string, unknown>): Promise<void> {
         if (formData["flags.pf2e.linkToActorSize"] === true) {
-            if (this.actor instanceof VehiclePF2e) {
+            if (this.actor?.isOfType("vehicle")) {
                 const { dimensions } = this.actor;
                 const width = Math.max(Math.round(dimensions.width / 5), 1);
                 const length = Math.max(Math.round(dimensions.length / 5), 1);

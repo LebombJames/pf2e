@@ -1,19 +1,22 @@
 import { SaveData } from "@actor/creature/data.ts";
 import {
+    ActorAttributes,
+    ActorAttributesSource,
+    ActorDetails,
+    ActorDetailsSource,
+    ActorHitPoints,
     ActorSystemData,
     ActorSystemSource,
-    ActorAttributes,
-    BaseActorSourcePF2e,
     ActorTraitsSource,
-    ActorAttributesSource,
-    ActorHitPoints,
+    BaseActorSourcePF2e,
 } from "@actor/data/base.ts";
-import { ActorSizePF2e } from "@actor/data/size.ts";
+import type { ActorSizePF2e } from "@actor/data/size.ts";
+import { InitiativeTraceData } from "@actor/initiative.ts";
 import { NPCStrike } from "@actor/npc/index.ts";
 import { SaveType } from "@actor/types.ts";
-import { Rarity, Size } from "@module/data.ts";
+import { PublicationData, Rarity, Size } from "@module/data.ts";
+import { StatisticTraceData } from "@system/statistic/data.ts";
 import { HazardTrait } from "./types.ts";
-import { InitiativeTraceData } from "@actor/initiative.ts";
 
 /** The stored source data of a hazard actor */
 type HazardSource = BaseActorSourcePF2e<"hazard", HazardSystemSource>;
@@ -35,8 +38,6 @@ interface HazardAttributesSource extends ActorAttributesSource {
         temp: number;
         details: string;
     };
-    perception?: never;
-    initiative?: never;
     hardness: number;
     stealth: {
         value: number | null;
@@ -45,11 +46,25 @@ interface HazardAttributesSource extends ActorAttributesSource {
     emitsSound: boolean | "encounter";
 }
 
-interface HazardSystemData extends Omit<HazardSystemSource, "attributes">, Omit<ActorSystemData, "traits"> {
+interface HazardDetailsSource extends ActorDetailsSource {
+    isComplex: boolean;
+    level: { value: number };
+    disable?: string;
+    description?: string;
+    reset?: string;
+    routine?: string;
+    /** Information concerning the publication from which this actor originates */
+    publication: PublicationData;
+
+    readonly alliance?: never;
+}
+
+interface HazardSystemData extends Omit<HazardSystemSource, "attributes" | "details">, Omit<ActorSystemData, "traits"> {
+    actions: NPCStrike[];
     attributes: HazardAttributes;
     details: HazardDetails;
+    initiative?: InitiativeTraceData;
     traits: HazardTraitsData;
-    actions: NPCStrike[];
 }
 
 interface HazardTraitsSource extends ActorTraitsSource<HazardTrait> {
@@ -72,11 +87,7 @@ interface HazardAttributes
     hasHealth: boolean;
     hp: HazardHitPoints;
     hardness: number;
-    initiative?: InitiativeTraceData;
-    stealth: {
-        value: number | null;
-        details: string;
-    };
+    stealth: HazardStealthTraceData;
     /**
      * Whether the hazard emits sound and can therefore be detected via hearing. A value of "encounter" indicates it is
      * silent until an encounter begins.
@@ -86,21 +97,14 @@ interface HazardAttributes
     shield?: never;
 }
 
-interface HazardDetailsSource {
-    isComplex: boolean;
-    level: { value: number };
-    disable?: string;
-    description?: string;
-    reset?: string;
-    routine?: string;
-    /** Book source, along with author */
-    source: {
-        value: string;
-        author: string;
-    };
+interface HazardStealthTraceData extends Omit<StatisticTraceData, "dc" | "totalModifier" | "value"> {
+    dc: number | null;
+    totalModifier: number | null;
+    value: number | null;
+    details: string;
 }
 
-interface HazardDetails extends HazardDetailsSource {
+interface HazardDetails extends Omit<HazardDetailsSource, "alliance">, ActorDetails {
     alliance: null;
 }
 
@@ -108,6 +112,7 @@ interface HazardHitPoints extends ActorHitPoints {
     brokenThreshold: number;
 }
 
-type HazardSaves = Record<SaveType, SaveData>;
+type HazardSaveData = Omit<SaveData, "attribute">;
+type HazardSaves = Record<SaveType, HazardSaveData>;
 
-export { HazardSource, HazardSystemData };
+export type { HazardSource, HazardSystemData };

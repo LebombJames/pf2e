@@ -1,6 +1,6 @@
 {
     "_id": "R6rcqRsBR0KIho5n",
-    "img": "systems/pf2e/icons/spells/spider-sting.webp",
+    "img": "icons/creatures/invertebrates/tick-cross-glowing-purple.webp",
     "name": "Change Shape (Anadi)",
     "system": {
         "actionType": {
@@ -19,15 +19,17 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Change Shape (Anadi)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": [

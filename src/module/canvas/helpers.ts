@@ -1,5 +1,5 @@
-import { MeasuredTemplatePF2e } from "./measured-template.ts";
-import { TokenPF2e } from "./token/index.ts";
+import type { EffectAreaType } from "@item/spell/types.ts";
+import { TokenPF2e, type MeasuredTemplatePF2e } from "./index.ts";
 
 /**
  * Measure the minimum distance between two rectangles
@@ -18,10 +18,9 @@ function measureDistanceCuboid(
         reach?: number | null;
         token?: TokenPF2e | null;
         target?: TokenPF2e | null;
-    } = {}
+    } = {},
 ): number {
-    if (!canvas.dimensions) return NaN;
-
+    if (!canvas.grid) return NaN;
     if (canvas.grid.type !== CONST.GRID_TYPES.SQUARE) {
         return canvas.grid.measureDistance(r0, r1);
     }
@@ -120,8 +119,6 @@ function measureDistanceCuboid(
  * @param p1 The destination point
  */
 function measureDistance(p0: Point, p1: Point): number {
-    if (!canvas.dimensions) return NaN;
-
     if (canvas.grid.type !== CONST.GRID_TYPES.SQUARE) {
         return canvas.grid.measureDistance(p0, p1);
     }
@@ -136,7 +133,7 @@ function measureDistance(p0: Point, p1: Point): number {
  */
 function measureDistanceOnGrid(
     segment: { dx: number; dy: number; dz?: number | null },
-    { reach = null }: { reach?: number | null } = {}
+    { reach = null }: { reach?: number | null } = {},
 ): number {
     if (!canvas.dimensions) return NaN;
 
@@ -310,7 +307,7 @@ function highlightGrid({
 }
 
 interface HighlightGridParams {
-    areaType: "burst" | "cone" | "emanation";
+    areaType: EffectAreaType | null;
     object: MeasuredTemplatePF2e | TokenPF2e;
     /** Border and fill colors in hexadecimal */
     colors: { border: number; fill: number };

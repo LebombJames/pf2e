@@ -1,6 +1,6 @@
 {
     "_id": "JIpjpZ8VneQomkZw",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Inventor Dedication",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -37,21 +42,15 @@
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.classfeatures.Item.Innovation"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "system.proficiencies.classDCs.inventor",
-                "priority": 39,
-                "value": {
-                    "ability": "int",
-                    "label": "PF2E.TraitInventor",
+            }
+        ],
+        "subfeatures": {
+            "proficiencies": {
+                "inventor": {
+                    "attribute": "int",
                     "rank": 1
                 }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
         },
         "traits": {
             "rarity": "uncommon",

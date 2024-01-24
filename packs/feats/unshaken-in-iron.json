@@ -1,6 +1,6 @@
 {
     "_id": "d4B8uKyffvnkzUOw",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Unshaken in Iron",
     "system": {
         "actionType": {
@@ -23,10 +23,133 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Highhelm"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Highhelm"
         },
+        "rules": [
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:medium",
+                    "armor:group:composite",
+                    {
+                        "gte": [
+                            "defense:medium:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "piercing",
+                "value": "1 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:medium",
+                    "armor:group:leather",
+                    {
+                        "gte": [
+                            "defense:medium:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "bludgeoning",
+                "value": "1 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:medium",
+                    "armor:group:plate",
+                    {
+                        "gte": [
+                            "defense:medium:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "slashing",
+                "value": "1 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:medium",
+                    "armor:group:skeletal",
+                    {
+                        "gte": [
+                            "defense:medium:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "precision",
+                "value": "3 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:heavy",
+                    "armor:group:composite",
+                    {
+                        "gte": [
+                            "defense:heavy:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "piercing",
+                "value": "2 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:heavy",
+                    "armor:group:leather",
+                    {
+                        "gte": [
+                            "defense:heavy:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "bludgeoning",
+                "value": "2 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:heavy",
+                    "armor:group:plate",
+                    {
+                        "gte": [
+                            "defense:heavy:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "slashing",
+                "value": "2 + @armor.system.runes.potency"
+            },
+            {
+                "key": "Resistance",
+                "predicate": [
+                    "armor:category:heavy",
+                    "armor:group:skeletal",
+                    {
+                        "gte": [
+                            "defense:heavy:rank",
+                            1
+                        ]
+                    }
+                ],
+                "type": "precision",
+                "value": "5 + @armor.system.runes.potency"
+            }
+        ],
         "traits": {
             "rarity": "common",
             "value": [

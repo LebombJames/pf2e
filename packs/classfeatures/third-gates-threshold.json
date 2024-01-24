@@ -1,6 +1,6 @@
 {
     "_id": "GfQ5MngIn74OYhQL",
-    "img": "systems/pf2e/icons/spells/elemental-zone.webp",
+    "img": "icons/magic/symbols/elements-air-earth-fire-water.webp",
     "name": "Third Gate's Threshold",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -213,7 +218,7 @@
                 "option": "junction:{item|flags.pf2e.rulesSelections.element}:{item|flags.pf2e.rulesSelections.junction}"
             },
             {
-                "adjustName": "false",
+                "adjustName": false,
                 "choices": {
                     "filter": [
                         "item:rarity:common",
@@ -424,7 +429,7 @@
                 "uuid": "{item|flags.pf2e.rulesSelections.impulseOne}"
             },
             {
-                "adjustName": "false",
+                "adjustName": false,
                 "allowedDrops": {
                     "label": "PF2E.SpecificRule.Kineticist.KineticGate.AllowedDropsLabel",
                     "predicate": [
@@ -468,9 +473,6 @@
                 "uuid": "{item|flags.pf2e.rulesSelections.impulseTwo}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "traits": {
             "rarity": "common",
             "value": [

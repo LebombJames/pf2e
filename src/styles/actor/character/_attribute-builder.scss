@@ -118,38 +118,40 @@
     }
 
     .row-heading {
-        display: grid;
-        grid-template-columns: 42px 1fr auto;
-        grid-template-areas: "img description remaining";
         align-items: center;
+        display: grid;
+        grid-template-areas: "img description remaining";
+        grid-template-columns: 42px 1fr auto;
 
         h3 {
-            grid-column: 1 / 4;
             align-self: start;
             font-size: var(--font-size-24);
+            grid-column: 1 / 4;
         }
         .hint-container {
             grid-column: 1 / 4;
         }
         img {
-            grid-area: img;
             border: 0;
+            grid-area: img;
+            height: 2rem;
+            width: 2rem;
         }
 
         div.label {
-            grid-area: description;
             display: flex;
             flex-direction: column;
+            grid-area: description;
+            margin-right: 0.625rem;
             overflow: hidden;
-            white-space: nowrap;
             text-overflow: ellipsis;
-            margin-right: 10px;
+            white-space: nowrap;
         }
 
         div.remaining {
             grid-area: remaining;
             display: flex;
-            margin-right: 10px;
+            margin-right: 0.625rem;
             width: 1.6rem;
             height: 1.6rem;
             border-radius: 50%;
@@ -197,13 +199,14 @@
             width: 6em;
 
             > i.key-attribute {
+                bottom: 3px;
                 font-size: smaller;
                 left: 2px;
-                margin-top: 1px;
                 position: absolute;
             }
 
-            &.boost, &.apex {
+            &.boost,
+            &.apex {
                 margin-top: auto; // line up with bottom
                 --button-color: var(--color-boost);
                 --button-locked-color: var(--color-boost-dark);
@@ -259,12 +262,14 @@
                 pointer-events: none;
             }
 
-            &.locked, &.selected {
-                color: white;
+            &.locked,
+            &.selected {
+                color: var(--text-light);
             }
         }
 
-        div + .boost, button + .boost {
+        div + .boost,
+        button + .boost {
             margin-top: 4px;
         }
     }
@@ -276,14 +281,14 @@
 
         .hint-container {
             background: rgba(211, 204, 188, 0.4);
-            padding: 12px;
-            margin-right: 10px;
+            padding: 0.75rem;
+            margin-right: 0.625rem;
             border: 1px solid rgba(211, 204, 188, 1);
             border-radius: 3px;
             align-self: end;
 
             h3 {
-                color: var(--primary);
+                color: var(--color-pf-primary);
                 font-variant: small-caps;
                 font-size: var(--font-size-20);
                 line-height: var(--font-size-16);
@@ -329,7 +334,7 @@
                 color: var(--text-dark);
                 font: 500 var(--font-size-24) var(--serif);
                 border: 0;
-                border-bottom: 1px solid #D3CCBC;
+                border-bottom: 1px solid #d3ccbc;
                 border-radius: 0;
                 background-color: transparent;
                 margin: 0 10px 10px 10px;
@@ -355,7 +360,7 @@
         }
 
         button.complete {
-            color: white;
+            color: var(--text-light);
             background: var(--secondary);
             height: 35px;
             width: 131px;
@@ -370,8 +375,10 @@
         text-transform: uppercase;
     }
 
-    div[data-tooltip-content] {
-        &.description, .description {
+    div[data-tooltip-content],
+    div[data-tooltip] {
+        &.description,
+        .description {
             text-decoration: underline dotted;
             text-underline-offset: 2px;
         }
@@ -382,14 +389,17 @@
     }
 
     .extra {
-        display: flex;
         align-items: center;
+        display: flex;
         font-size: var(--font-size-12);
+        gap: 1px;
         margin-top: -0.25rem;
-        .fas {
+
+        > i {
             margin-left: 0.125rem;
         }
-        input[type=checkbox] {
+
+        input[type="checkbox"] {
             height: var(--font-size-12);
             margin: 0;
         }
@@ -409,8 +419,8 @@
             align-items: center;
 
             i {
-                font-size: var(--font-size-5);
-                margin-right: 5px;
+                font-size: var(--space-5);
+                margin-right: var(--space-5);
             }
         }
     }

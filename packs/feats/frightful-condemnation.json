@@ -1,6 +1,6 @@
 {
     "_id": "SUNLm99CgsS5M3Eq",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Frightful Condemnation",
     "system": {
         "actionType": {
@@ -29,10 +29,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Adventure: Night of the Gray Death"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Adventure: Night of the Gray Death"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

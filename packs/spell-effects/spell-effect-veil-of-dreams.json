@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -27,18 +32,18 @@
                 "value": -1
             },
             {
-                "key": "FlatModifier",
+                "key": "AdjustModifier",
+                "mode": "override",
                 "predicate": [
                     "sleep"
                 ],
-                "selector": "will",
-                "type": "status",
-                "value": -1
+                "selector": [
+                    "will"
+                ],
+                "slug": "veil-of-dreams",
+                "value": -2
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

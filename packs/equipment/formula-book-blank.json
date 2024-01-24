@@ -1,15 +1,15 @@
 {
     "_id": "qCEOZ6109Yo34tRx",
-    "img": "systems/pf2e/icons/equipment/adventuring-gear/formula-book.webp",
+    "img": "icons/sundries/books/book-tooled-brass-brown.webp",
     "name": "Formula Book (Blank)",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
-            "value": "<p>A formula book holds the formulas necessary to make items other than the common equipment from this chapter; alchemists typically get one for free. Each formula book can hold the formulas for up to 100 different items. Formulas can also appear on parchment sheets, tablets, and almost any other medium; there's no need for you to copy them into a specific book as long as you can keep them on hand to reference them.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>A formula book holds the formulas necessary to make items other than the common equipment from this chapter; characters of the alchemist class typically get one for free. Each formula book can hold the formulas for up to 100 different items. Formulas can also appear on parchment sheets, tablets, and almost any other medium; there's no need for you to copy them into a specific book as long as you can keep them on hand to reference them.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,36 +19,29 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": ""
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 1
             }
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

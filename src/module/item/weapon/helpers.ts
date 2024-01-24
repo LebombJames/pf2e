@@ -1,9 +1,8 @@
-import type { DamageType } from "@system/damage/types.ts";
-import { objectHasKey, setHasElement, tupleHasValue } from "@util";
-import { WeaponPF2e } from "./document.ts";
-import { WeaponPropertyRuneType } from "./types.ts";
-import { CharacterPF2e } from "@actor";
+import type { CharacterPF2e } from "@actor";
 import { StrikeRuleElement } from "@module/rules/rule-element/strike.ts";
+import type { DamageType } from "@system/damage/types.ts";
+import { objectHasKey, tupleHasValue } from "@util";
+import { WeaponPF2e } from "./document.ts";
 
 /** A helper class to handle toggleable weapon traits */
 class WeaponTraitToggles {
@@ -19,9 +18,9 @@ class WeaponTraitToggles {
         const selection = tupleHasValue(options, sourceSelection)
             ? sourceSelection
             : // If the weapon's damage type is represented among the modular options, set the selection to it
-            options.includes(this.#weapon.system.damage.damageType)
-            ? this.#weapon.system.damage.damageType
-            : null;
+              options.includes(this.#weapon.system.damage.damageType)
+              ? this.#weapon.system.damage.damageType
+              : null;
 
         return { options, selection };
     }
@@ -76,9 +75,11 @@ async function toggleWeaponTrait({ weapon, trait, selection }: ToggleWeaponTrait
         await item.update({ [`system.traits.toggles.${trait}.selection`]: selection });
     } else if (item?.isOfType("weapon") && weapon.altUsageType === "melee") {
         item.update({ [`system.meleeUsage.traitToggles.${trait}`]: selection });
+    } else if (trait === "versatile" && item?.isOfType("shield")) {
+        item.update({ "system.traits.integrated.versatile.selection": selection });
     } else {
         const rule = item?.rules.find(
-            (r): r is StrikeRuleElement => r.key === "Strike" && !r.ignored && r.slug === weapon.slug
+            (r): r is StrikeRuleElement => r.key === "Strike" && !r.ignored && r.slug === weapon.slug,
         );
         await rule?.toggleTrait({ trait, selection });
     }
@@ -92,10 +93,4 @@ interface ToggleWeaponTraitParams {
     selection: DamageType | null;
 }
 
-/** Remove duplicate and lesser versions from an array of property runes */
-function prunePropertyRunes(runes: WeaponPropertyRuneType[]): WeaponPropertyRuneType[] {
-    const runeSet = new Set(runes);
-    return Array.from(runeSet).filter((r) => !setHasElement(runeSet, `greater${r.titleCase()}`));
-}
-
-export { WeaponTraitToggles, prunePropertyRunes, toggleWeaponTrait };
+export { WeaponTraitToggles, toggleWeaponTrait };

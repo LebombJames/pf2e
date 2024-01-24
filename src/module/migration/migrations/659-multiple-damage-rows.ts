@@ -1,5 +1,5 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
-import { SpellDamage, SpellSystemSource } from "@item/spell/data.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
+import { SpellSystemSource } from "@item/spell/data.ts";
 import { DamageType } from "@system/damage/index.ts";
 import { tupleHasValue } from "@util";
 import { MigrationBase } from "../base.ts";
@@ -73,17 +73,13 @@ export class Migration659MultipleDamageRows extends MigrationBase {
         }
 
         if ("damageType" in data) {
-            "game" in globalThis ? (data["-=damageType"] = null) : (data.damageType = undefined);
+            data["-=damageType"] = null;
         }
     }
 }
 
 interface SpellSystemDataOld extends Omit<SpellSystemSource, "damage" | "scaling"> {
-    damage: {
-        value: string | Record<number, SpellDamage>;
-        applyMod?: boolean;
-        "-=applyMod"?: null;
-    };
+    damage: Record<string, unknown>;
     damageType?: {
         value?: DamageType;
     };

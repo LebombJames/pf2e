@@ -1,6 +1,6 @@
 {
     "_id": "f9YlMYWMjd0zoyy0",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Protective Claws",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "definition": [
@@ -34,9 +39,6 @@
                 "value": "parry"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": [

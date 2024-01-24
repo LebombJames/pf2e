@@ -1,6 +1,6 @@
 {
     "_id": "geESDWQVvwScyPph",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Basic Witchcraft",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p>You gain a 1st- or 2nd-level witch feat of your choice. Your familiar no longer has one less familiar ability than normal.</p>"
+            "value": "<p>You gain a 1st- or 2nd-level witch feat of your choice. You can select three familiar abilities for your familiar each day, instead of two.</p>"
         },
         "level": {
             "value": 4
@@ -23,26 +23,31 @@
                 }
             ]
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
                 "path": "system.attributes.familiarAbilities.value",
                 "priority": 9,
-                "value": 2
+                "value": 3
             },
             {
                 "adjustName": false,
                 "choices": {
                     "filter": [
+                        "item:category:class",
+                        "item:trait:witch",
                         {
                             "lte": [
                                 "item:level",
                                 2
                             ]
-                        },
-                        "item:category:class",
-                        "item:trait:witch"
+                        }
                     ],
                     "itemType": "feat"
                 },
@@ -55,9 +60,6 @@
                 "uuid": "{item|flags.pf2e.rulesSelections.basicWitchcraft}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

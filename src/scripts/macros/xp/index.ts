@@ -59,7 +59,7 @@ function getXPFromMap(partyLevel: number, entityLevel: number, values: Map<numbe
 }
 
 function calculateCreatureXP(partyLevel: number, npcLevel: number, dcOptions: DCOptions): number {
-    if (dcOptions.proficiencyWithoutLevel) {
+    if (dcOptions.pwol) {
         return getXPFromMap(partyLevel, npcLevel, xpVariantCreatureDifferences);
     } else {
         return getXPFromMap(partyLevel, npcLevel, xpCreatureDifferences);
@@ -95,7 +95,7 @@ function generateEncounterBudgets(partySize: number): EncounterBudgets {
 
 const rewardEncounterBudgets = generateEncounterBudgets(4);
 
-function calculateEncounterRating(challenge: number, budgets: EncounterBudgets): keyof EncounterBudgets {
+function calculateEncounterRating(challenge: number, budgets: EncounterBudgets): ThreatRating {
     if (challenge <= budgets.trivial) {
         return "trivial";
     } else if (challenge <= budgets.low) {
@@ -111,13 +111,15 @@ function calculateEncounterRating(challenge: number, budgets: EncounterBudgets):
 
 interface XPCalculation {
     encounterBudgets: EncounterBudgets;
-    rating: keyof EncounterBudgets;
+    rating: ThreatRating;
     ratingXP: number;
     xpPerPlayer: number;
     totalXP: number;
     partySize: number;
     partyLevel: number;
 }
+
+type ThreatRating = keyof EncounterBudgets;
 
 interface HazardBrief {
     level: number;
@@ -129,7 +131,7 @@ function calculateXP(
     partySize: number,
     npcLevels: number[],
     hazards: HazardBrief[],
-    dcOptions: DCOptions
+    dcOptions: DCOptions,
 ): XPCalculation {
     const creatureChallenge = npcLevels
         .map((level) => calculateCreatureXP(partyLevel, level, dcOptions))
@@ -153,4 +155,5 @@ function calculateXP(
 }
 
 export { xpFromEncounter } from "./dialog.ts";
-export { XPCalculation, calculateXP };
+export { calculateXP };
+export type { ThreatRating, XPCalculation };

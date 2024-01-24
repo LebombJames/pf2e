@@ -13,15 +13,15 @@
             "name": "Crossbow",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "crossbow",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,10 +38,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
-                "group": "bow",
+                "group": "crossbow",
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": 120,
@@ -85,17 +67,15 @@
                     "value": "1"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "crossbow",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -103,9 +83,6 @@
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -117,19 +94,19 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.LGgvev6AV0So8tP9"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/weapons/hatchet.webp",
+            "img": "icons/weapons/axes/axe-broad-black.webp",
             "name": "Hatchet",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "hatchet",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -146,9 +123,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -158,34 +132,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 4
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -193,17 +152,15 @@
                     "value": "-"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "hatchet",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -215,9 +172,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -229,12 +183,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.ewQZ0VeL38v3qFnN"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/studded-leather-armor.webp",
+            "img": "icons/equipment/chest/breastplate-layered-leather-studded-brown.webp",
             "name": "Studded Leather Armor",
             "sort": 300000,
             "system": {
                 "acBonus": 2,
                 "baseItem": "studded-leather-armor",
+                "bulk": {
+                    "value": 1
+                },
                 "category": "light",
                 "checkPenalty": -1,
                 "containerId": null,
@@ -248,9 +205,6 @@
                     "inSlot": true,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "1"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -260,58 +214,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "med",
                 "slug": "studded-leather-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "speedPenalty": null,
-                "stackGroup": null,
+                "speedPenalty": 0,
                 "strength": 1,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "armor"
@@ -327,30 +257,19 @@
             "name": "Black Adder Venom",
             "sort": 400000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "poison"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "poison",
                 "containerId": null,
+                "damage": null,
                 "description": {
-                    "value": "<p>Adder venom is a simple but effective way to enhance a weapon.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"pf2-icon\">D</span> Interact (Injury)</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>Maximum Duration</strong> 3 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d8[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d10[poison]] damage (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage (1 round)</p>"
+                    "value": "<p>Adder venom is a simple but effective way to enhance a weapon.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">D</span> Interact (Injury)</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>Maximum Duration</strong> 3 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d8[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d10[poison]] damage (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage (1 round)</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -360,28 +279,24 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 6
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 3,
                 "rules": [],
                 "size": "med",
                 "slug": "black-adder-venom",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -394,8 +309,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -411,29 +328,18 @@
             "name": "Bolts",
             "sort": 500000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
-                    "value": 0
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "ammo",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>Shorter than traditional arrows but similar in construction, bolts are the ammunition used by crossbows.</p>"
                 },
                 "equipped": {
                     "carryType": "worn"
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -443,14 +349,9 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "per": 10,
@@ -458,13 +359,15 @@
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 10,
                 "rules": [],
                 "size": "med",
                 "slug": "bolts",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "stackGroup": "bolts",
                 "traits": {
                     "rarity": "common",
@@ -473,8 +376,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -508,11 +413,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -555,11 +462,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -603,11 +512,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -642,23 +553,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -679,20 +583,32 @@
                 "description": {
                     "value": "<p><strong>Requirements</strong> Kapmek is adjacent to at least one enemy.</p>\n<hr />\n<p><strong>Effect</strong> Kapmek Strides up to his Speed plus 5 feet and gains a +2 circumstance bonus to AC against reactions triggered by this movement. He must end this movement in a space that's not adjacent to any enemy.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "domain": "ac",
+                        "key": "RollOption",
+                        "option": "hurried-retreat",
+                        "toggleable": true
+                    },
+                    {
+                        "key": "FlatModifier",
+                        "predicate": [
+                            "hurried-retreat"
+                        ],
+                        "selector": "ac",
+                        "type": "circumstance",
+                        "value": 2
+                    }
+                ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -713,20 +629,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> Kapmek loads his crossbow while he carries a dose of poison</p>\n<hr />\n<p><strong>Effect</strong> As he loads his crossbow, Kapmek can dip the crossbow bolt into a dose of carried poison as part of the action taken to load his crossbow.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -750,10 +662,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Kapmek deals an additional 1d6 precision damage to off-guard creatures.</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
+                    "value": "<p>Kapmek deals an additional 1d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -762,21 +676,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -789,18 +689,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -820,11 +711,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -843,11 +736,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -866,11 +761,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -889,11 +786,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -934,31 +833,41 @@
                 "temp": 0,
                 "value": 60
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 11
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
             }
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "Male kobold slurk-trainer",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "draconic"
+                ]
+            },
             "level": {
                 "value": 4
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Adventure: Crown of the Kobold King"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Adventure: Crown of the Kobold King"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 11,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -976,23 +885,15 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "draconic"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
+                "evil",
                 "humanoid",
-                "kobold"
+                "kobold",
+                "lawful"
             ]
         }
     },

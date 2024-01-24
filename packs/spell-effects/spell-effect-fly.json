@@ -1,6 +1,6 @@
 {
     "_id": "MuRBCiZn5IKeaoxi",
-    "img": "systems/pf2e/icons/spells/fly.webp",
+    "img": "icons/creatures/mammals/bats-movement-flying-black.webp",
     "name": "Spell Effect: Fly",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -22,9 +27,6 @@
                 "value": "max(20,@actor.attributes.speed.total)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

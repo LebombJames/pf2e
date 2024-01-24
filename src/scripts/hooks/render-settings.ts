@@ -5,7 +5,7 @@ import { ErrorPF2e, createHTMLElement, fontAwesomeIcon } from "@util";
 export const RenderSettings = {
     listen: (): void => {
         Hooks.on("renderSettings", async (_app, $html) => {
-            const html = $html[0]!;
+            const html = $html[0];
             // Additional system information resources
             const systemRow = html.querySelector<HTMLLIElement>(".settings-sidebar li.system");
             const systemInfo = systemRow?.cloneNode(false);
@@ -39,7 +39,7 @@ export const RenderSettings = {
             systemRow?.after(systemInfo);
 
             // Add PF2e section (which has license and troubleshooting)
-            const header = createHTMLElement("h2", { children: ["Pathfinder 2e"] });
+            const header = createHTMLElement("h2", { children: [game.system.title] });
             const pf2eSettings = createHTMLElement("div");
             html.querySelector("#settings-documentation")?.after(header, pf2eSettings);
 

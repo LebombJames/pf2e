@@ -1,6 +1,6 @@
 {
     "_id": "6VrKQ0PhRXuteusQ",
-    "img": "systems/pf2e/icons/features/feats/giants-stature.webp",
+    "img": "icons/skills/social/intimidation-impressing.webp",
     "name": "Effect: Giant's Stature",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 6
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -103,9 +108,6 @@
                 "value": 10
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,6 +1,6 @@
 {
     "_id": "Y96a1OedsU8PVf7z",
-    "img": "systems/pf2e/icons/spells/guiding-star.webp",
+    "img": "icons/magic/light/explosion-star-glow-blue.webp",
     "name": "Effect: Starlight Armor",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 7
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #187: The Seventh Arch"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder #187: The Seventh Arch"
-        },
         "start": {
             "initiative": null,
             "value": 0

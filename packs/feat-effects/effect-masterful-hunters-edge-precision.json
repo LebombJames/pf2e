@@ -1,6 +1,6 @@
 {
     "_id": "Lt5iSfx8fxHSdYXz",
-    "img": "systems/pf2e/icons/features/classes/precision.webp",
+    "img": "icons/skills/ranged/target-bullseye-archer-orange.webp",
     "name": "Effect: Masterful Hunter's Edge, Precision",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 17
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -70,7 +75,7 @@
                             "value": 2
                         }
                     ],
-                    "field": "actor|system.attributes.perception.rank"
+                    "field": "actor|system.perception.rank"
                 }
             },
             {
@@ -132,9 +137,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,22 +1,19 @@
 <form class="npc-sheet dead" autocomplete="off">
-    <div class="side-bar">
+    <section class="sidebar">
         <div class="profile" style="background-image: url('{{actor.img}}')">
             <img src="/icons/svg/skull.svg" />
         </div>
         <h2 class="name">{{actor.name}}</h2>
-    </div>
-    <div class="npc-body sheet-body">
-        <div class="tab inventory item-container" data-container-type="actorInventory" data-group="primary" data-tab="inventory">
-            <div class="items inventory-section">
-                {{#if @root.owner}}
-                    {{> "systems/pf2e/templates/actors/partials/coinage.hbs" owner=@root.owner}}
-                {{/if}}
-                <div class="body">
-                    {{> "systems/pf2e/templates/actors/partials/inventory.hbs"}}
-                </div>
-                <div class="footer">
+    </section>
+    <section class="npc-body">
+        <div class="sheet-body">
+            <div class="tab inventory item-container active" data-container-type="actorInventory" data-group="primary" data-tab="inventory">
+                <div class="items inventory-section">
+                    <div class="body">
+                        {{> "systems/pf2e/templates/actors/partials/inventory.hbs"}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </form>

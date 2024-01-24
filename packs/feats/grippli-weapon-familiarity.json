@@ -1,6 +1,6 @@
 {
     "_id": "CvtJ98EZvBGSCLOX",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Grippli Weapon Familiarity",
     "system": {
         "actionType": {
@@ -19,35 +19,40 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-blowgun.rank",
+                "path": "system.proficiencies.attacks.weapon-base-blowgun.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-hatchet.rank",
+                "path": "system.proficiencies.attacks.weapon-base-hatchet.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-scythe.rank",
+                "path": "system.proficiencies.attacks.weapon-base-scythe.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-shortbow.rank",
+                "path": "system.proficiencies.attacks.weapon-base-shortbow.rank",
                 "value": 1
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.weapon-base-composite-shortbow.rank",
+                "path": "system.proficiencies.attacks.weapon-base-composite-shortbow.rank",
                 "value": 1
             },
             {
@@ -64,9 +69,6 @@
                 "slug": "martial-grippli-weapons"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": [

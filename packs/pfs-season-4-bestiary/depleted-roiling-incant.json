@@ -21,6 +21,11 @@
                 "proficiency": {
                     "value": 1
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": false
@@ -91,9 +96,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 25,
                     "value": 17
@@ -111,50 +113,42 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.sxQZ6yqTn0czJxVd"
                 }
             },
-            "img": "systems/pf2e/icons/spells/fireball.webp",
+            "img": "icons/magic/fire/projectile-fireball-orange-yellow.webp",
             "name": "Fireball (At Will) (See Unstable Magic)",
             "sort": 200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": {
                     "type": "burst",
                     "value": 20
                 },
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": false,
-                            "type": {
-                                "categories": [],
-                                "subtype": "",
-                                "value": "fire"
-                            },
-                            "value": "6d6"
-                        }
+                    "0": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "6d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "fire"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": true,
+                        "statistic": "reflex"
                     }
                 },
                 "description": {
                     "value": "<p>A roaring blast of fire appears at a spot you designate, dealing 6d6 fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 2d6.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -170,57 +164,33 @@
                     "heightenedLevel": 3,
                     "value": "DqllMZa6Ja60FhmJ"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "500 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "basic",
-                    "value": "reflex"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "fireball",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "primal"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
-                    "value": [
+                    "traditions": [
                         "arcane",
+                        "primal"
+                    ],
+                    "value": [
+                        "concentrate",
                         "fire",
-                        "evocation"
+                        "manipulate"
                     ]
                 }
             },
@@ -233,47 +203,39 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.2ZdHjnpEQJuqOYSG"
                 }
             },
-            "img": "systems/pf2e/icons/spells/flaming-sphere.webp",
+            "img": "icons/magic/earth/orb-lava-ball-yellow.webp",
             "name": "Flaming Sphere (At Will) (See Unstable Magic)",
             "sort": 300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": false,
-                            "type": {
-                                "categories": [],
-                                "subtype": "",
-                                "value": "fire"
-                            },
-                            "value": "3d6"
-                        }
+                    "0": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "3d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "fire"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "reflex"
                     }
                 },
                 "description": {
                     "value": "<p>You create a sphere of flame in a square within range. The sphere must be supported by a solid surface, such as a stone floor. The sphere deals 3d6 fire damage to each creature in the square where it first appears; each creature must attempt a basic Reflex save. On subsequent rounds, the first time you Sustain this Spell, you can leave the sphere in its square or roll it to another square within range. It deals 3d6 fire damage (basic Reflex save) to each creature in that square.</p>\n<p>Creatures that succeed at their save take no damage (instead of half).</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d6.</p>"
                 },
                 "duration": {
-                    "value": "sustained up to 1 minute"
-                },
-                "hasCounteractCheck": {
-                    "value": false
+                    "sustained": true,
+                    "value": "1 minute"
                 },
                 "heightening": {
                     "damage": {
@@ -289,57 +251,33 @@
                     "heightenedLevel": 2,
                     "value": "DqllMZa6Ja60FhmJ"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "reflex"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "flaming-sphere",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "arcane",
-                        "primal"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
-                    "value": [
+                    "traditions": [
                         "arcane",
+                        "primal"
+                    ],
+                    "value": [
+                        "concentrate",
                         "fire",
-                        "evocation"
+                        "manipulate"
                     ]
                 }
             },
@@ -352,46 +290,34 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.O9w7r4BKgPogYDDe"
                 }
             },
-            "img": "systems/pf2e/icons/spells/produce-flame.webp",
+            "img": "icons/magic/fire/flame-burning-earth-orange.webp",
             "name": "Produce Flame",
             "sort": 400000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
+                "counteraction": false,
                 "damage": {
-                    "value": {
-                        "0": {
-                            "applyMod": true,
-                            "type": {
-                                "categories": [],
-                                "value": "fire"
-                            },
-                            "value": "1d4"
-                        }
+                    "0": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "2d4",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "fire"
                     }
                 },
+                "defense": null,
                 "description": {
-                    "value": "<p>A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach.</p>\n<p>On a success, you deal 1d4 fire damage plus your spellcasting ability modifier. On a critical success, the target takes double damage and @Damage[1d4[persistent,fire]] damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage by 1d4 and the @UUID[Compendium.pf2e.conditionitems.Item.Persistent Damage] on a critical hit by 1d4.</p>"
+                    "value": "<p>A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach.</p>\n<p>On a success, you deal 2d4 fire damage. On a critical success, the target takes double damage and [[/r (@item.level)d4[persistent,fire]]] damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage by 1d4 and the persistent damage on a critical hit by 1d4.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": ""
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "damage": {
@@ -406,59 +332,35 @@
                 "location": {
                     "value": "DqllMZa6Ja60FhmJ"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "produce-flame",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "attack"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "custom": "",
-                    "value": [
-                        "arcane",
-                        "primal"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "primal"
+                    ],
                     "value": [
                         "attack",
-                        "fire",
                         "cantrip",
-                        "evocation"
+                        "concentrate",
+                        "fire",
+                        "manipulate"
                     ]
                 }
             },
@@ -489,16 +391,17 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "arcane",
-                        "evocation",
                         "magical",
                         "reach-10"
                     ]
@@ -534,16 +437,17 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "arcane",
-                        "evocation",
                         "magical",
                         "range-increment-30"
                     ]
@@ -575,23 +479,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "at-will-spells",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -612,23 +509,16 @@
                 "description": {
                     "value": "<p>A roiling incant is made of evocation energy. Any time it would be affected by another creature's non-cantrip evocation spell, after applying its immunity, it also regains [[/r 5[healing]]]{5 Hit Points}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -654,23 +544,16 @@
                 "description": {
                     "value": "<p>@Check[type:reflex|dc:25], @Damage[2d6[force],3d4[fire]]{2d6 force damage plus 3d4 fire damage}, @UUID[Compendium.pf2e.actionspf2e.Item.Escape] DC 25, Rupture 15</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "engulf",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -691,23 +574,16 @@
                 "description": {
                     "value": "<p>A roiling incant is as much a mass of unstable magic as it is a creature. Is isn't living or undead, nor is it even a construct. It can't be healed or @UUID[Compendium.pf2e.actionspf2e.Item.Repair]{Repaired} and is destroyed at 0 Hit Points, though it naturally recovers a number of Hit Points equal to its level × its Constitution modifier ([[/r 42[healing]]]{42} for most depleted roiling incants) each day.</p>\n<p>Each time a roiling incant casts one of its non-cantrip spells, it drains its own magic to do so, taking @Damage[5[force]] damage.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -727,11 +603,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -789,19 +667,13 @@
                     "type": "drained"
                 },
                 {
-                    "type": "evocation"
-                },
-                {
                     "type": "fatigued"
                 },
                 {
                     "type": "healing"
                 },
                 {
-                    "type": "necromancy"
-                },
-                {
-                    "type": "negative"
+                    "type": "void"
                 },
                 {
                     "type": "nonlethal-attacks"
@@ -819,12 +691,6 @@
                     "type": "unconscious"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 12
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -836,19 +702,29 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "Variant roiling incant",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": []
+            },
             "level": {
                 "value": 7
             },
             "privateNotes": "",
             "publicNotes": "<p>Though many spellcasters can harness the forces of magic in a consistent manner, such power can't always be controlled, especially in the hands of reckless researchers, megalomaniacal villains, or untested novices. When magical accidents result in large-scale property damage and the loss of life, these forces sometimes take on lives of their own, forming a dangerous amalgamation of ongoing magical energy known as a roiling incant.</p>\n<p>A roiling incant's appearance depends on the type of magic it sprang forth from, though it always carries with it an echo of the destruction it has caused. A fiery evocation roiling incant might look like a storm of burning ashes echoing with the sounds of crackling timber, while a necromancy roiling incant could be mistaken for ghostly tendrils puppeteering shambling corpses. No matter what it looks like, a roiling incant roams mindlessly, attacking everything it encounters, heedless of further carnage it causes.</p>",
-            "source": {
-                "value": "Pathfinder Society Scenario #4-06: Signal from the Electric Laboratory"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Society Scenario #4-06: Signal from the Electric Laboratory"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 12,
+            "senses": []
         },
         "resources": {
             "focus": {
@@ -871,21 +747,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": []
-            },
             "rarity": "rare",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "lg"
             },
             "value": [
                 "arcane",
-                "evocation",
                 "mindless"
             ]
         }

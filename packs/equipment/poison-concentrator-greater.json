@@ -4,12 +4,12 @@
     "name": "Poison Concentrator (Greater)",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
             "value": "<p>This compression apparatus can reduce two poisons into a more concentrated dose. As a 10-minute activity that has the manipulate trait, you can use a poison concentrator to combine two doses of the same alchemical poison of level 14 or lower, creating a single concentrated poison with a +1 item bonus to its DC.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,27 +19,23 @@
         "level": {
             "value": 15
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 5900
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
@@ -49,9 +45,6 @@
         },
         "usage": {
             "value": "held-in-two-hands"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

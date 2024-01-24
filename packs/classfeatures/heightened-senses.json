@@ -1,6 +1,6 @@
 {
     "_id": "7MhzrbOyue5GQsck",
-    "img": "systems/pf2e/icons/features/classes/heightened-senses.webp",
+    "img": "icons/creatures/eyes/human-single-brown.webp",
     "name": "Heightened Senses",
     "system": {
         "actionType": {
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.attributes.perception.rank",
-                "value": 3
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "perception": {
+                    "rank": 3
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

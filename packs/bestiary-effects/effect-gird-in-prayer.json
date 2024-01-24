@@ -1,6 +1,6 @@
 {
     "_id": "VLOvyQiZKeXppS2L",
-    "img": "systems/pf2e/icons/spells/miracle.webp",
+    "img": "icons/magic/holy/prayer-hands-glowing-yellow-white.webp",
     "name": "Effect: Gird in Prayer",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #186: Ghost King's Rage"
         },
         "rules": [
             {
@@ -32,9 +37,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder #186: Ghost King's Rage"
-        },
         "start": {
             "initiative": null,
             "value": 0

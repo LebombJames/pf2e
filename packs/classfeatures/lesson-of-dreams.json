@@ -19,11 +19,16 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
+        "rules": [],
         "traits": {
+            "otherTags": [
+                "witch-lesson"
+            ],
             "rarity": "common",
             "value": [
                 "witch"

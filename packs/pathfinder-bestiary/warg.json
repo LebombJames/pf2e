@@ -29,11 +29,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -65,23 +67,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -107,23 +102,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "scent",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -144,23 +132,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature within reach of the warg's jaws attacks one of the warg's allies.</p>\n<hr />\n<p><strong>Effect</strong> The warg makes a jaws Strike against the triggering creature.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": "avenging-bite",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -179,14 +160,16 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The warg's Strikes deals an extra [[/r {1d4}]]{1d4 damage} to any creature within reach of at least two of the warg's allies.</p>"
+                    "value": "<p>The warg's Strikes deals an extra 1d4 damage to any creature within reach of at least two of the warg's allies.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
-                        "domain": "damage-roll",
+                        "domain": "damage",
                         "key": "RollOption",
                         "option": "pack-attack",
                         "toggleable": true
@@ -202,18 +185,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -239,25 +213,18 @@
                 "description": {
                     "value": "<p>Small, @Damage[(1d6+2)[bludgeoning]] damage, Rupture 9</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "swallow-whole",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "attack"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -283,23 +250,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "grab",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -319,11 +279,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -342,11 +304,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -365,11 +329,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -388,11 +354,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -411,11 +379,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -434,11 +404,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -479,31 +451,48 @@
                 "temp": 0,
                 "value": 36
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 8
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 40
             }
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "Beast",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "goblin",
+                    "orcish"
+                ]
+            },
             "level": {
                 "value": 2
             },
             "privateNotes": "",
             "publicNotes": "<p>Wargs hunt in packs and surround their prey like common wolves, but their cunning and penchant for taunting victims makes them easy to distinguish from their less-intelligent cousins. But despite their intelligence, wargs have simple desires for food and shelter, making them easy for evil humanoids such as orcs and hobgoblins to recruit to protect their camps or join them in battle. Most wargs are amenable to this arrangement, but if food should run out, wargs are more than willing to integrate goblinoid flesh into their diet.</p>\n<hr />\n<p>The warg is an intelligent and malevolent wolf that dwells among goblins, hobgoblins, orcs, and other violent humanoids.</p>",
-            "source": {
-                "value": "Pathfinder Bestiary"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Bestiary"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 8,
+            "senses": [
+                {
+                    "type": "darkvision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 30,
+                    "type": "scent"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -521,24 +510,13 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "goblin",
-                    "orcish"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "darkvision, scent (imprecise) 30 feet"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
-                "beast"
+                "beast",
+                "evil"
             ]
         }
     },

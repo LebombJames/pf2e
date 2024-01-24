@@ -1,6 +1,6 @@
 {
     "_id": "WQ0DxUzMgAvo0zy9",
-    "img": "systems/pf2e/icons/equipment/consumables/other-consumables/panacea-fruit.webp",
+    "img": "icons/consumables/fruit/apricot-ripe-orange.webp",
     "name": "Effect: Apricot of Bestial Might",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #167: Ready? Fight!"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder #167: Ready? Fight!"
-        },
         "start": {
             "initiative": null,
             "value": 0

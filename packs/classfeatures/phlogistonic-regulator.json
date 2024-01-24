@@ -1,6 +1,6 @@
 {
     "_id": "5Xj38QeMKcFdrzqH",
-    "img": "systems/pf2e/icons/features/classes/phlogistonic-regulator.webp",
+    "img": "icons/magic/defensive/armor-shield-barrier-steel.webp",
     "name": "Phlogistonic Regulator",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [
             {
@@ -49,10 +54,10 @@
                 "value": "2 + floor(@actor.level / 2)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
+            "otherTags": [
+                "armor-innovation-modification"
+            ],
             "rarity": "common",
             "value": [
                 "inventor"

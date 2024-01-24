@@ -1,10 +1,10 @@
 {
     "_id": "Qr5rgoZvI4KmFY0N",
-    "img": "systems/pf2e/icons/spells/calm-emotions.webp",
+    "img": "icons/creatures/abilities/wolf-heads-swirl-purple.webp",
     "name": "Spell Effect: Calm",
     "system": {
         "description": {
-            "value": "<p>Granted by <em>@UUID[Compendium.pf2e.spells-srd.Item.Calm]</em></p>\n<p>Calming urges impose a -1 status penalty to the creatures attack rolls.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Calm]</p>\n<p>Calming urges impose a -1 status penalty to the creature's attack rolls.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Player Core"
-        },
         "start": {
             "initiative": null,
             "value": 0

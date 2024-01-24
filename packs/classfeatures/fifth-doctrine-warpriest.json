@@ -1,6 +1,6 @@
 {
     "_id": "kmimy4VOaoEOgOiQ",
-    "img": "systems/pf2e/icons/features/classes/warpriest.webp",
+    "img": "icons/equipment/chest/breastplate-helmet-metal.webp",
     "name": "Fifth Doctrine (Warpriest)",
     "system": {
         "actionType": {
@@ -11,13 +11,18 @@
         },
         "category": "classfeature",
         "description": {
-            "value": "<p>Your proficiency rank for Fortitude saves increases to master.</p>\n<p>When you roll a success at a Fortitude save, you get a critical success instead.</p>"
+            "value": "<p>Your proficiency rank for Fortitude saves increases to master. When you roll a success at a Fortitude save, you get a critical success instead.</p>"
         },
         "level": {
             "value": 15
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "rules": [
             {
@@ -30,12 +35,6 @@
                 "title": "{item|name}"
             },
             {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.fortitude.rank",
-                "value": 3
-            },
-            {
                 "adjustment": {
                     "success": "one-degree-better"
                 },
@@ -44,8 +43,12 @@
                 "type": "save"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "fortitude": {
+                    "rank": 3
+                }
+            }
         },
         "traits": {
             "rarity": "common",

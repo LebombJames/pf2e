@@ -1,6 +1,6 @@
 {
     "_id": "SUUdWG0t33VKa5q4",
-    "img": "systems/pf2e/icons/features/classes/master-strike.webp",
+    "img": "icons/skills/melee/weapons-crossed-swords-yellow-teal.webp",
     "name": "Master Strike",
     "system": {
         "actionType": {
@@ -19,20 +19,23 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.classDCs.rogue.rank",
-                "value": 3
-            },
             {
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Master Strike"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "proficiencies": {
+                "rogue": {
+                    "rank": 3
+                }
+            }
         },
         "traits": {
             "rarity": "common",

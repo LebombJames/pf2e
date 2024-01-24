@@ -1,6 +1,6 @@
 {
     "_id": "i9YITDcrq1nKjV5l",
-    "img": "systems/pf2e/icons/spells/infectious-melody.webp",
+    "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp",
     "name": "Spell Effect: Infectious Melody",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": -2
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

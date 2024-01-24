@@ -15,7 +15,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "9IwSktj0Xj7A2Ruh",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/apex-items/anklets-of-alacrity.webp",
+            "img": "icons/equipment/neck/collar-rounded-gold-blue.webp",
             "range": [
                 1,
                 1
@@ -99,7 +99,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "aLA7pikfeNIAAGLw",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/armor/specific-magic-armor/impenetrable-scale.webp",
+            "img": "icons/equipment/chest/breastplate-banded-steel.webp",
             "range": [
                 7,
                 7
@@ -258,7 +258,7 @@
                 19,
                 19
             ],
-            "text": "Darkwood Weapon (High-Grade)",
+            "text": "Duskwood Weapon (High-Grade)",
             "type": 0,
             "weight": 3
         },
@@ -300,7 +300,7 @@
                 22,
                 22
             ],
-            "text": "Mithral Weapon (High-Grade)",
+            "text": "Dawnsilver Weapon (High-Grade)",
             "type": 0,
             "weight": 3
         },
@@ -393,7 +393,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "mOY0STwY5hx4UPCN",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/cursed-items/necklace-of-strangulation.webp",
+            "img": "icons/equipment/neck/collar-rounded-carved-wood-spiral.webp",
             "range": [
                 31,
                 31

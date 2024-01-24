@@ -1,7 +1,7 @@
+import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { RollTwiceSynthetic } from "../synthetics.ts";
 import { RuleElementPF2e } from "./base.ts";
-import { RuleElementSchema } from "./index.ts";
-import type { BooleanField, StringField } from "types/foundry/common/data/fields.d.ts";
+import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
 
 /** Roll Twice and keep either the higher or lower result */
 class RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema> {
@@ -25,7 +25,7 @@ class RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema> {
         synthetics.push(synthetic);
     }
 
-    override async afterRoll({ selectors, roll, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void> {
+    override async afterRoll({ domains, roll, rollOptions }: RuleElementPF2e.AfterRollParams): Promise<void> {
         if (!this.actor.items.has(this.item.id)) {
             return;
         }
@@ -36,7 +36,7 @@ class RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema> {
             this.removeAfterRoll ?? ((expireEffects || removeExpired) && this.item.isOfType("effect"));
 
         const rolledTwice = roll?.dice.some((d) => ["kh", "kl"].some((m) => d.modifiers.includes(m))) ?? false;
-        if (!(rolledTwice && removeAfterRoll && selectors.includes(this.selector) && this.test(rollOptions))) {
+        if (!(rolledTwice && removeAfterRoll && domains.includes(this.selector) && this.test(rollOptions))) {
             return;
         }
 
@@ -54,7 +54,7 @@ class RollTwiceRuleElement extends RuleElementPF2e<RollTwiceRuleSchema> {
 
 interface RollTwiceRuleElement
     extends RuleElementPF2e<RollTwiceRuleSchema>,
-        ModelPropsFromSchema<RollTwiceRuleSchema> {}
+        ModelPropsFromRESchema<RollTwiceRuleSchema> {}
 
 type RollTwiceRuleSchema = RuleElementSchema & {
     selector: StringField<string, string, true, false, false>;

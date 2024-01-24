@@ -1,6 +1,6 @@
 {
     "_id": "aKRo5TIhUtu0kyEr",
-    "img": "systems/pf2e/icons/features/classes/demonic.webp",
+    "img": "icons/commodities/treasure/statuette-gargoyle-green-gold.webp",
     "name": "Effect: Demonic Blood Magic (Self)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

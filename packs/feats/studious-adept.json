@@ -1,6 +1,6 @@
 {
     "_id": "C2PmqTxQgWGTHluf",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Studious Adept",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>You achieve a breakthrough in your exploration of magic. You gain <em>@UUID[Compendium.pf2e.spells-srd.Item.Humanoid Form]</em> and <em>@UUID[Compendium.pf2e.spells-srd.Item.Mirror Image]</em> as 2nd-level arcane innate spells. You can cast each of these arcane innate spells once per day.</p>"
+            "value": "<p>You achieve a breakthrough in your exploration of magic. You gain <em>@UUID[Compendium.pf2e.spells-srd.Item.Humanoid Form]</em> and <em>@UUID[Compendium.pf2e.spells-srd.Item.Mirror Image]</em> as 2nd-rank arcane innate spells. You can cast each of these arcane innate spells once per day.</p>"
         },
         "level": {
             "value": 9
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

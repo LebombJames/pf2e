@@ -1,15 +1,16 @@
 import { CreatureTrait, Language } from "@actor/creature/index.ts";
 import { AttributeString } from "@actor/types.ts";
 import { ABCSystemData, ABCSystemSource } from "@item/abc/index.ts";
-import { BaseItemSourcePF2e } from "@item/data/base.ts";
+import { BaseItemSourcePF2e, ItemTraits } from "@item/base/data/system.ts";
 import { Size, TraitsWithRarity, ValuesList } from "@module/data.ts";
 
 type AncestrySource = BaseItemSourcePF2e<"ancestry", AncestrySystemSource>;
 
-export type CreatureTraits = TraitsWithRarity<CreatureTrait>;
+type CreatureTraits = TraitsWithRarity<CreatureTrait>;
+type AncestryTraits = ItemTraits<CreatureTrait>;
 
 interface AncestrySystemSource extends ABCSystemSource {
-    traits: CreatureTraits;
+    traits: AncestryTraits;
     additionalLanguages: {
         count: number; // plus int
         value: string[];
@@ -28,10 +29,12 @@ interface AncestrySystemSource extends ABCSystemSource {
     speed: number;
     size: Size;
     reach: number;
-    vision: "normal" | "darkvision" | "lowLightVision";
+    vision: "normal" | "darkvision" | "low-light-vision";
     level?: never;
 }
 
-interface AncestrySystemData extends Omit<AncestrySystemSource, "items">, Omit<ABCSystemData, "level" | "traits"> {}
+interface AncestrySystemData
+    extends Omit<AncestrySystemSource, "description" | "items">,
+        Omit<ABCSystemData, "level" | "traits"> {}
 
-export { AncestrySource, AncestrySystemData };
+export type { AncestrySource, AncestrySystemData, AncestrySystemSource, AncestryTraits, CreatureTraits };

@@ -1,6 +1,6 @@
 {
     "_id": "Rn1aE4uvq30iiH0Y",
-    "img": "systems/pf2e/icons/spells/shrink.webp",
+    "img": "icons/magic/unholy/strike-body-life-soul-purple.webp",
     "name": "Effect: Regression",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 11
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -261,9 +266,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

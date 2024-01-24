@@ -4,15 +4,15 @@
     "name": "Adventurer's Pack",
     "system": {
         "description": {
-            "value": "<p>This item is the starter kit for an adventurer, containing the essential items for exploration and survival. The Bulk value is for the entire pack together, but see the descriptions of individual items as necessary.</p>"
+            "value": "<p>This item is the starter kit for an adventurer, containing the essential items for exploration and survival. The Bulk value is for the entire pack together, but see the descriptions of individual items as necessary.</p>\n<p>The pack contains the following items: a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks' rations, soap, 5 torches, and a waterskin.</p>"
         },
         "items": {
             "mca3x": {
-                "img": "systems/pf2e/icons/equipment/adventuring-gear/backpack.webp",
+                "img": "icons/containers/bags/pack-leather-white-tan.webp",
                 "isContainer": true,
                 "items": {
                     "02xhi": {
-                        "img": "systems/pf2e/icons/equipment/adventuring-gear/rope.webp",
+                        "img": "icons/sundries/survival/rope-wrapped-brown.webp",
                         "isContainer": false,
                         "items": {},
                         "name": "Rope",
@@ -36,7 +36,7 @@
                         "uuid": "Compendium.pf2e.equipment-srd.Item.Chalk"
                     },
                     "fabyb": {
-                        "img": "systems/pf2e/icons/equipment/adventuring-gear/flint-and-steel.webp",
+                        "img": "icons/commodities/stone/geode-raw-tan.webp",
                         "isContainer": false,
                         "items": {},
                         "name": "Flint and Steel",
@@ -52,7 +52,7 @@
                         "uuid": "Compendium.pf2e.equipment-srd.Item.Rations"
                     },
                     "lems2": {
-                        "img": "systems/pf2e/icons/equipment/adventuring-gear/torch.webp",
+                        "img": "icons/sundries/lights/torch-brown.webp",
                         "isContainer": false,
                         "items": {},
                         "name": "Torch",
@@ -60,7 +60,7 @@
                         "uuid": "Compendium.pf2e.equipment-srd.Item.Torch"
                     },
                     "lpl11": {
-                        "img": "systems/pf2e/icons/equipment/adventuring-gear/bedroll.webp",
+                        "img": "icons/containers/ammunition/quiver-simple-brown.webp",
                         "isContainer": false,
                         "items": {},
                         "name": "Bedroll",
@@ -68,7 +68,7 @@
                         "uuid": "Compendium.pf2e.equipment-srd.Item.Bedroll"
                     },
                     "z9tim": {
-                        "img": "systems/pf2e/icons/equipment/adventuring-gear/soap.webp",
+                        "img": "icons/sundries/survival/soap.webp",
                         "isContainer": false,
                         "items": {},
                         "name": "Soap",
@@ -83,14 +83,18 @@
         },
         "price": {
             "value": {
-                "gp": 1,
-                "sp": 5
+                "cp": 0,
+                "gp": 0,
+                "pp": 0,
+                "sp": 15
             }
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": []

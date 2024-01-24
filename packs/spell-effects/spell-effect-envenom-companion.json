@@ -1,6 +1,6 @@
 {
     "_id": "zPGVOLz6xhsQN35C",
-    "img": "systems/pf2e/icons/spells/envenom-companion.webp",
+    "img": "icons/creatures/mammals/elk-moose-marked-green.webp",
     "name": "Spell Effect: Envenom Companion",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 3
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -52,16 +57,13 @@
                 }
             },
             {
-                "domain": "damage-roll",
+                "domain": "damage",
                 "key": "RollOption",
                 "label": "First hit of the round",
                 "option": "first-hit",
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

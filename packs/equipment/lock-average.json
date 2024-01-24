@@ -4,12 +4,12 @@
     "name": "Lock (Average)",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0
+        },
         "containerId": null,
         "description": {
             "value": "<p>Picking an average lock requires four successful @Check[type:thievery|dc:25|traits:action:pick-a-lock|immutable:true] checks.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,36 +19,29 @@
         "level": {
             "value": 3
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 15
             }
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
         },
         "usage": {
-            "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "-"
+            "value": "held-in-two-hands"
         }
     },
     "type": "equipment"

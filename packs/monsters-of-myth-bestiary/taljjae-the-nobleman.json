@@ -9,12 +9,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.dPg0hrkIaCdMKQoK"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The Beast)",
             "sort": 100000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
                     "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The Beast brings out its wearer's feral nature, granting it a claw melee unarmed attack that deals 1d4 slashing damage and has the agile trait, or increasing the damage die of their claw unarmed attack from 1d4 to 1d6 damage if they have a claw unarmed attack that deals 1d4 damage.</p>"
                 },
@@ -22,9 +25,6 @@
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -34,26 +34,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-beast",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -63,9 +59,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -77,22 +70,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.JSbBiTCtFctuJFhS"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The General)",
             "sort": 200000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
-                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">1</span></p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The General grants its wearer a +3 status bonus to attack rolls with polearms for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Taljjae's Mask (The General)]</p>"
+                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span></p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The General grants its wearer a +3 status bonus to attack rolls with polearms for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Taljjae's Mask (The General)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -102,26 +95,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-general",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -131,9 +120,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -145,22 +131,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.ma4BlTSjaMHrQmoz"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The Grandmother)",
             "sort": 300000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
-                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The <em>Grandmother</em> allows its wearer to cast 8th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Heal]</em> and 7th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Breath of Life]</em>, each as a divine innate spell, once per day.</p>"
+                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The <em>Grandmother</em> allows its wearer to cast 8th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Heal]</em> and 7th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Breath of Life]</em>, each as a divine innate spell, once per day.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -170,26 +156,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-grandmother",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -199,9 +181,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -213,22 +192,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.d8w28UjKHALM2GNu"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The Hermit)",
             "sort": 400000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
-                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The <em>Hermit</em> allows its wearer to cast 8th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Spirit Blast]</em> and 7th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Flame Strike]</em>, each as a divine innate spell, once per day.</p>"
+                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The <em>Hermit</em> allows its wearer to cast 8th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Spirit Blast]</em> and 7th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Flame Strike]</em>, each as a divine innate spell, once per day.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -238,26 +217,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-hermit",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -267,9 +242,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -281,22 +253,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.2LO9eMNpQiku5UDn"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The Hero)",
             "sort": 500000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
-                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">1</span></p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The Hero grants its wearer a +3 status bonus to attack rolls with bows for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Taljjae's Mask (The Hero)]</p>"
+                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">1</span></p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The Hero grants its wearer a +3 status bonus to attack rolls with bows for 1 minute.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Taljjae's Mask (The Hero)]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -306,26 +278,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-hero",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -335,9 +303,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -349,22 +314,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.4jzASWzF2riszO3U"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The Nobleman)",
             "sort": 600000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
-                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">2</span></p>\n<p><strong>Frequency</strong> once per 10 minutes</p>\n<hr />\n<p><strong>Effect</strong> You hold out a hand and attempt to take something that doesn't belong to you. You telekinetically attracts an unattended, unsecured object of up to 5 Bulk within 100 feet. If the object is in a creature's possession, you must critically succeed at an attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Disarm] that creature, but you can't critically fail.</p>"
+                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span></p>\n<p><strong>Frequency</strong> once per 10 minutes</p>\n<hr />\n<p><strong>Effect</strong> You hold out a hand and attempt to take something that doesn't belong to you. You telekinetically attracts an unattended, unsecured object of up to 5 Bulk within 100 feet. If the object is in a creature's possession, you must critically succeed at an attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Disarm] that creature, but you can't critically fail.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -374,26 +339,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-nobleman",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -403,9 +364,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -417,22 +375,22 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.nbBtszla32wRC1bp"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/demon-mask.webp",
+            "img": "icons/equipment/head/mask-horned-brown.webp",
             "name": "Taljjae's Mask (The Wanderer)",
             "sort": 700000,
             "system": {
                 "baseItem": null,
-                "containerId": "null",
+                "bulk": {
+                    "value": 0
+                },
+                "containerId": null,
                 "description": {
-                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The <em>Wanderer</em> allows its wearer to cast 7th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Air Walk]</em> and 8th-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Freedom of Movement]</em>, each as a divine innate spell, once per day.</p>"
+                    "value": "<p>Those who gain one of Taljjae's masks, either by defeating Taljjae or some other means, are known as its understudies and gain a fraction of its power. Each of Taljjae's masks is an 18th-level unique item with the invested and magical traits; if broken, they're automatically repaired to full HP when invested during daily preparations. The effect of a mask on a PC is noted in the mask's Understudy entry. Wearing one of Taljjae's masks also imposes Taljjae's jelly sense and jelly gluttony on the creature as long as it wears the mask.</p>\n<p>The <em>Wanderer</em> allows its wearer to cast 7th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Air Walk]</em> and 8th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Unfettered Movement]</em>, each as a divine innate spell, once per day.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "inSlot": false,
                     "invested": false
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -442,26 +400,22 @@
                 "level": {
                     "value": 18
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {}
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Lost Omens: Monsters of Myth"
                 },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "taljjaes-mask-the-wanderer",
-                "source": {
-                    "value": "Pathfinder Lost Omens: Monsters of Myth"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "unique",
                     "value": [
@@ -471,9 +425,6 @@
                 },
                 "usage": {
                     "value": "wornmask"
-                },
-                "weight": {
-                    "value": "-"
                 }
             },
             "type": "equipment"
@@ -503,11 +454,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -548,11 +501,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -587,23 +542,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -625,24 +573,19 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> Taljjae is reduced to 0 Hit Points</p>\n<hr />\n<p><strong>Effect</strong> Taljjae retains 1 Hit Point and teleports to an empty space within 30 feet. One of its masks remains behind and is broken.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "conjuration",
                         "primal",
                         "teleportation"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -663,20 +606,16 @@
                 "description": {
                     "value": "<p>If Taljjae detects buckwheat jelly with its jelly sense, it becomes @UUID[Compendium.pf2e.conditionitems.Item.Fascinated] by the food and the creature possessing it (if applicable) and @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] to all other creatures for [[/br 1d4 #Rounds]]{1d4 rounds}, or until it uses an appropriate number of Interact actions to consume the jelly (generally 2: 1 to take the jelly, and another to eat it). If there's more than one helping of jelly, the condition ends once Taljjae consumes the jelly once.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -697,20 +636,16 @@
                 "description": {
                     "value": "<p>Taljjae has scent as a precise sense out to 120 feet, but only to detect buckwheat jelly, the only food Taljjae loves more than flesh.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -736,22 +671,18 @@
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "stance"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -772,20 +703,16 @@
                 "description": {
                     "value": "<p>Taljjae holds out a hand and attempts to take something that doesn't belong to it. It telekinetically attracts an unattended, unsecured object of up to 5 Bulk within 100 feet. If the object is in a creature's possession, Taljjae must critically succeed at an attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Disarm] that creature, but it can't critically fail.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -806,20 +733,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature within 60 feet regains Hit Points</p>\n<hr />\n<p><strong>Effect</strong> Taljjae takes what should belong to another. The triggering creature regains only half the number of Hit Points, and Taljjae regains the full amount.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -840,20 +763,16 @@
                 "description": {
                     "value": "<p>Taljjae has access to the critical specialization effects of any weapons it wields from one of its masks.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -874,20 +793,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> Taljjae's turn begins <strong>Requirements</strong> Taljjae has 200 or fewer Hit Points</p><hr /><p><strong>Effect</strong> Taljjae's dance reaches a frantic climax, allowing it to change personas rapidly. Taljjae Changes Characters.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -907,11 +822,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -930,11 +847,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -953,11 +872,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -976,11 +897,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -1024,12 +947,6 @@
                 "temp": 0,
                 "value": 400
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 33
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -1042,19 +959,36 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "CN"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "(can't speak any language)",
+                "value": [
+                    "hwan",
+                    "senzar"
+                ]
+            },
             "level": {
                 "value": 18
             },
             "privateNotes": "",
             "publicNotes": "<p>The form of Taljjae's body can vary from visit to visit or even moment to moment, but it's easily recognized due to its signature cloak and masks. So long as Taljjae's mood is placid, it can be approached safely, but its mercurial temperament can be hard to predict.</p>\n<p>This twisted mask mocks members of the nobility for their parasitic greed.</p>",
-            "source": {
-                "value": "Pathfinder Lost Omens: Monsters of Myth"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Lost Omens: Monsters of Myth"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "jelly sense 120 feet",
+            "mod": 33,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -1072,22 +1006,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "(Can't Speak Any Language)",
-                "selected": [],
-                "value": [
-                    "hwan",
-                    "senzar"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "darkvision, jelly sense 120 feet"
-            },
             "size": {
                 "value": "lg"
             },
             "value": [
+                "chaotic",
                 "fey"
             ]
         }

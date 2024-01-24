@@ -1,17 +1,16 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e, CharacterPF2e } from "@actor";
 import { ModifierPF2e } from "@actor/modifiers.ts";
-import { ArmorPF2e, WeaponPF2e } from "@item";
+import type { ArmorPF2e, WeaponPF2e } from "@item";
 import { ZeroToThree } from "@module/data.ts";
-import { FlatModifierRuleElement } from "@module/rules/rule-element/flat-modifier.ts";
+import type { FlatModifierRuleElement } from "@module/rules/rule-element/flat-modifier.ts";
 import { PotencySynthetic } from "@module/rules/synthetics.ts";
 import { PredicatePF2e } from "@system/predication.ts";
-import { CharacterPF2e } from "./document.ts";
 
 class AutomaticBonusProgression {
     /** Whether the ABP variant is enabled and also not selectively disabled for a particular actor */
     static isEnabled(actor: ActorPF2e | null): boolean {
         if (actor && !actor.flags?.pf2e) return false;
-        const settingEnabled = game.settings.get("pf2e", "automaticBonusVariant") !== "noABP";
+        const settingEnabled = game.pf2e.settings.variants.abp !== "noABP";
         const abpDisabledForActor = !!actor?.flags.pf2e.disableABP;
 
         return settingEnabled && !abpDisabledForActor;
@@ -34,7 +33,7 @@ class AutomaticBonusProgression {
         const ac = values.ac;
         const perception = values.perception;
         const save = values.save;
-        const setting = game.settings.get("pf2e", "automaticBonusVariant");
+        const setting = game.pf2e.settings.variants.abp;
 
         if (save > 0) {
             const modifiers = (synthetics.modifiers["saving-throw"] ??= []);
@@ -45,7 +44,7 @@ class AutomaticBonusProgression {
                         label: "PF2E.AutomaticBonusProgression.savePotency",
                         modifier: save,
                         type: "potency",
-                    })
+                    }),
             );
         }
 
@@ -58,7 +57,7 @@ class AutomaticBonusProgression {
                         label: "PF2E.AutomaticBonusProgression.defensePotency",
                         modifier: ac,
                         type: "potency",
-                    })
+                    }),
             );
         }
 
@@ -71,7 +70,7 @@ class AutomaticBonusProgression {
                         label: "PF2E.AutomaticBonusProgression.perceptionPotency",
                         modifier: perception,
                         type: "potency",
-                    })
+                    }),
             );
         }
 
@@ -87,7 +86,7 @@ class AutomaticBonusProgression {
                             label: "PF2E.AutomaticBonusProgression.attackPotency",
                             modifier: attack,
                             type: "potency",
-                        })
+                        }),
                 );
             }
         }
@@ -113,16 +112,15 @@ class AutomaticBonusProgression {
     static cleanupRunes(item: ArmorPF2e | WeaponPF2e): void {
         if (!this.isEnabled(item.actor)) return;
 
-        item.system.potencyRune.value = null;
-        const otherFundamental = item.isOfType("weapon") ? item.system.strikingRune : item.system.resiliencyRune;
-        otherFundamental.value = null;
+        item.system.runes.potency = 0;
+        if (item.isOfType("weapon")) {
+            item.system.runes.striking = 0;
+        } else {
+            item.system.runes.resilient = 0;
+        }
 
-        const setting = game.settings.get("pf2e", "automaticBonusVariant");
-        if (setting === "ABPRulesAsWritten") {
-            const propertyRunes = ([1, 2, 3, 4] as const).map((n) => item.system[`propertyRune${n}` as const]);
-            for (const rune of propertyRunes) {
-                rune.value = null;
-            }
+        if (game.pf2e.settings.variants.abp === "ABPRulesAsWritten") {
+            item.system.runes.property = [];
         }
     }
 

@@ -1,6 +1,6 @@
 {
     "_id": "ltIvO9ZQlmqGD89Y",
-    "img": "systems/pf2e/icons/features/classes/outwit.webp",
+    "img": "icons/creatures/invertebrates/spider-web-black.webp",
     "name": "Effect: Hunter's Edge, Outwit",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
         "rules": [
             {
@@ -81,9 +86,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 3648

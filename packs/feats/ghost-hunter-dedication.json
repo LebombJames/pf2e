@@ -1,6 +1,6 @@
 {
     "_id": "mkp6lhBbTASEmKwY",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Ghost Hunter Dedication",
     "system": {
         "actionType": {
@@ -23,9 +23,18 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #163: Ruins of Gauntlight"
+        },
         "rules": [],
-        "source": {
-            "value": "Pathfinder #163: Ruins of Gauntlight"
+        "subfeatures": {
+            "proficiencies": {
+                "spellcasting": {
+                    "rank": 1
+                }
+            }
         },
         "traits": {
             "rarity": "uncommon",

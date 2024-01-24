@@ -4,12 +4,12 @@
     "name": "Rune of Sin (Pride)",
     "system": {
         "baseItem": null,
-        "containerId": "null",
+        "bulk": {
+            "value": 0
+        },
+        "containerId": null,
         "description": {
             "value": "<p>This jagged glyph, the pride Thassilonian rune of sin, reacts to illusion magic. When you Cast an illusion Spell, you gain resistance 5 to damage from spells until the start of your next turn. This resistance is increased to 7 against illusion spells.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,27 +19,23 @@
         "level": {
             "value": 12
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 1700
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "uncommon",
             "value": [
@@ -51,9 +47,6 @@
         },
         "usage": {
             "value": "tattooed-on-the-body"
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "equipment"

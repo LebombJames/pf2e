@@ -1,6 +1,6 @@
 import { ActorSourcePF2e } from "@actor/data/index.ts";
 import { AttributeString } from "@actor/types.ts";
-import { ClassSource, ItemSourcePF2e } from "@item/data/index.ts";
+import { ClassSource, ItemSourcePF2e } from "@item/base/data/index.ts";
 import type { EffectChangeData } from "types/foundry/common/documents/active-effect.d.ts";
 import { MigrationBase } from "../base.ts";
 
@@ -37,7 +37,7 @@ export class Migration653AEstoREs extends MigrationBase {
 
     override async updateActor(actorSource: ActorSourcePF2e): Promise<void> {
         if (actorSource.type !== "character") return;
-        const systemData = actorSource.system;
+        const systemData: { saves?: object; martial?: object } = actorSource.system;
         systemData.martial = {}; // Only remove on compendium JSON
 
         // Remove transferred ActiveEffects, some of which will be converted to RuleElements

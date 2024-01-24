@@ -1,6 +1,6 @@
 {
     "_id": "vuaungtl9VCBoHDK",
-    "img": "systems/pf2e/icons/spells/transmute-rock-and-mud.webp",
+    "img": "icons/environment/wilderness/terrain-rocks-brown.webp",
     "name": "Effect: Rockfall Failure",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Society Scenario #3-10: Delve the Pallid Depths"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -10
             }
         ],
-        "source": {
-            "value": "Pathfinder Society Scenario #3-10: Delve the Pallid Depths"
-        },
         "start": {
             "initiative": null,
             "value": 0

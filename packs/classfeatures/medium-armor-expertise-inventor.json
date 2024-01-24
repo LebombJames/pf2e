@@ -1,6 +1,6 @@
 {
     "_id": "esyKPSDbFQPB4lhq",
-    "img": "systems/pf2e/icons/features/classes/medium-armor-expertise.webp",
+    "img": "icons/equipment/chest/breastplate-quilted-brown.webp",
     "name": "Medium Armor Expertise (Inventor)",
     "system": {
         "actionType": {
@@ -19,28 +19,24 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmored.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.light.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.medium.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "light": {
+                    "rank": 2
+                },
+                "medium": {
+                    "rank": 2
+                },
+                "unarmored": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
         },
         "traits": {
             "rarity": "common",

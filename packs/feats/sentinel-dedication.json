@@ -1,6 +1,6 @@
 {
     "_id": "8foxmfC6FFT3oYpV",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Sentinel Dedication",
     "system": {
         "actionType": {
@@ -19,21 +19,26 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.heavy.rank",
+                "path": "system.proficiencies.defenses.heavy.rank",
                 "priority": 41,
                 "value": {
                     "brackets": [
                         {
                             "end": 12,
-                            "value": "min(1,@actor.system.martial.light.rank)*min(1,@actor.system.martial.medium.rank)*max(@actor.system.martial.light.rank, @actor.system.martial.medium.rank)"
+                            "value": "min(1,@actor.system.proficiencies.defenses.light.rank)*min(1,@actor.system.proficiencies.defenses.medium.rank)*max(@actor.system.proficiencies.defenses.light.rank, @actor.system.proficiencies.defenses.medium.rank)"
                         },
                         {
                             "start": 13,
-                            "value": "min(1,@actor.system.martial.light.rank)*min(1,@actor.system.martial.medium.rank)*max(@actor.system.martial.light.rank,@actor.system.martial.medium.rank,min(2,@actor.system.martial.unarmored.rank))"
+                            "value": "min(1,@actor.system.proficiencies.defenses.light.rank)*min(1,@actor.system.proficiencies.defenses.medium.rank)*max(@actor.system.proficiencies.defenses.light.rank,@actor.system.proficiencies.defenses.medium.rank,min(2,@actor.system.proficiencies.defenses.unarmored.rank))"
                         }
                     ]
                 }
@@ -41,17 +46,17 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.medium.rank",
+                "path": "system.proficiencies.defenses.medium.rank",
                 "priority": 41,
                 "value": {
                     "brackets": [
                         {
                             "end": 12,
-                            "value": "max(1,@actor.system.martial.light.rank)"
+                            "value": "max(1,@actor.system.proficiencies.defenses.light.rank)"
                         },
                         {
                             "start": 13,
-                            "value": "max(1,@actor.system.martial.light.rank,min(2,@actor.system.martial.unarmored.rank))"
+                            "value": "max(1,@actor.system.proficiencies.defenses.light.rank,min(2,@actor.system.proficiencies.defenses.unarmored.rank))"
                         }
                     ]
                 }
@@ -59,7 +64,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.light.rank",
+                "path": "system.proficiencies.defenses.light.rank",
                 "priority": 41,
                 "value": {
                     "brackets": [
@@ -69,15 +74,12 @@
                         },
                         {
                             "start": 13,
-                            "value": "max(1,min(2,@actor.system.martial.unarmored.rank))"
+                            "value": "max(1,min(2,@actor.system.proficiencies.defenses.unarmored.rank))"
                         }
                     ]
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "rTjGshtUMHnlBUfH",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Marine Ally",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -28,9 +33,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

@@ -1,6 +1,6 @@
 {
     "_id": "hc7kR6quUE9ryRyj",
-    "img": "systems/pf2e/icons/spells/earthbind.webp",
+    "img": "icons/magic/earth/barrier-stone-explosion-debris.webp",
     "name": "Effect: Splintered Ground (Critical Failure)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 18
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": -15
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

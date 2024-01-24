@@ -16,13 +16,13 @@
     </nav>
     <div class="container">
         <section class="tab" data-category="charter" data-tab="charter">
-            {{> buildElement categories.charter choices=database.charter}}
+            {{> buildElement categories.charter choices=database.charter category="charter"}}
         </section>
         <section class="tab" data-category="heartland" data-tab="heartland">
-            {{> buildElement categories.heartland choices=database.heartland}}
+            {{> buildElement categories.heartland choices=database.heartland category="heartland"}}
         </section>
         <section class="tab" data-category="government" data-tab="government">
-            {{> buildElement categories.government choices=database.government}}
+            {{> buildElement categories.government choices=database.government category="government"}}
         </section>
         <section class="tab" data-tab="ability">
             <div class="ability-builder">
@@ -31,7 +31,7 @@
                         <h3>{{localize "PF2E.Kingmaker.KingdomBuilder.AssignBoostsHeader"}}</h3>
                     </div>
                     <div class="abilities">
-                        {{#each abilities as |ability|}}
+                        {{#each abilityLabels as |ability|}}
                             <div class="row-column">
                                 <h3>{{localize ability}}</h3>
                             </div>
@@ -112,7 +112,7 @@
                                 {{else}}
                                     <div class="value">{{ability.value}}</div>
                                 {{/if}}
-                                <h4>{{localize (lookup ../abilities key)}}</h4>
+                                <h4>{{localize (lookup ../abilityLabels key)}}</h4>
                             </div>
                         {{/each}}
                         <div class="complete">
@@ -148,36 +148,14 @@
                     {{buildEntry.name}}
                     {{#if @root.options.editable}}
                         <div class="item-controls">
-                            <a data-action="unset" {{disabled (not stale)}}><i class="fas fa-fw fa-redo"></i></a>
-                            <a data-action="set" {{disabled (not stale)}}><i class="fas fa-fw fa-save"></i></a>
+                            <a data-action="set" {{disabled (not stale)}}><i class="fa-solid fa-fw fa-save"></i></a>
                         </div>
                     {{/if}}
                 </h3>
                 <div class="description"><div class="content">{{buildEntry.description}}</div></div>
             </div>
             <footer>
-                <div class="boosts">
-                    <section>
-                        <strong>{{localize "PF2E.Kingmaker.KingdomBuilder.BoostsLabel"}}:</strong>
-                        <div class="abilities">
-                            {{#each buildEntry.boosts as |boost|}}
-                                {{#if (eq boost "free")}}
-                                    <span>{{localize "PF2E.Kingmaker.KingdomBuilder.Free"}}</span>
-                                {{else}}
-                                    <span>{{localize (lookup @root.abilities boost)}}</span>
-                                {{/if}}
-                            {{/each}}
-                        </div>
-                    </section>
-                    <section>
-                        <strong>{{localize "PF2E.Kingmaker.KingdomBuilder.FlawLabel"}}:</strong>
-                        {{#if buildEntry.flaw}}
-                            <span>{{localize (lookup @root.abilities buildEntry.flaw)}}</span>
-                        {{else}}
-                            <span>{{localize "PF2E.Kingmaker.KingdomBuilder.None"}}</span>
-                        {{/if}}
-                    </section>
-                </div>
+                {{> "systems/pf2e/templates/actors/party/kingdom/partials/build-entry-boosts.hbs"}}
                 <button class="complete" data-action="save-and-continue" type="button">
                     {{localize "PF2E.Kingmaker.KingdomBuilder.SaveAndContinue"}}
                 </button>
@@ -239,7 +217,7 @@
 
     {{#*inline "boostButtonSingle"}}
         <button type="button" data-action="{{type}}" class="tooltip boost-button {{type}} {{number}}{{#if button.selected}} selected{{/if}}{{#if button.locked}} locked{{/if}}" {{disabled (and button.disabled (not button.selected))}}>
-            {{#if button.locked}}<i class="fas fa-lock"></i>{{/if}}
+            {{#if button.locked}}<i class="fa-solid fa-lock"></i>{{/if}}
             {{#if (eq number "second")}}
                 x2
             {{else if (eq type "flaw")}}

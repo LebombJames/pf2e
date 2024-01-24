@@ -1,6 +1,6 @@
 {
     "_id": "rJpkKaPRGaH0pLse",
-    "img": "systems/pf2e/icons/features/classes/fey.webp",
+    "img": "icons/commodities/biological/wing-insect-blue.webp",
     "name": "Effect: Fey Blood Magic",
     "system": {
         "description": {
@@ -15,10 +15,12 @@
         "level": {
             "value": 1
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
+        "rules": [],
         "start": {
             "initiative": null,
             "value": 0

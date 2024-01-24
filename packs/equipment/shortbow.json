@@ -1,17 +1,17 @@
 {
     "_id": "hIgqLgH3YcLZBeoT",
-    "img": "systems/pf2e/icons/equipment/weapons/shortbow.webp",
+    "img": "icons/weapons/bows/shortbow-leather.webp",
     "name": "Shortbow",
     "system": {
-        "MAP": {
-            "value": ""
-        },
         "baseItem": "shortbow",
         "bonus": {
             "value": 0
         },
         "bonusDamage": {
             "value": 0
+        },
+        "bulk": {
+            "value": 1
         },
         "category": "martial",
         "containerId": null,
@@ -23,9 +23,6 @@
         "description": {
             "value": "<p>This smaller bow is made of a single piece of wood and favored by skirmishers and cavalry.</p>"
         },
-        "equippedBulk": {
-            "value": ""
-        },
         "group": "bow",
         "hardness": 0,
         "hp": {
@@ -35,34 +32,19 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "potencyRune": {
-            "value": 0
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 3
             }
         },
-        "propertyRune1": {
-            "value": null
-        },
-        "propertyRune2": {
-            "value": null
-        },
-        "propertyRune3": {
-            "value": null
-        },
-        "propertyRune4": {
-            "value": null
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "quantity": 1,
         "range": 60,
@@ -70,16 +52,14 @@
             "value": "0"
         },
         "rules": [],
-        "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "runes": {
+            "potency": 0,
+            "property": [],
+            "striking": 0
         },
+        "size": "med",
         "splashDamage": {
             "value": 0
-        },
-        "stackGroup": null,
-        "strikingRune": {
-            "value": ""
         },
         "traits": {
             "rarity": "common",
@@ -89,9 +69,6 @@
         },
         "usage": {
             "value": "held-in-one-plus-hands"
-        },
-        "weight": {
-            "value": "1"
         }
     },
     "type": "weapon"

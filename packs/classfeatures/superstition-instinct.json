@@ -1,6 +1,6 @@
 {
     "_id": "SCYSjUbMmw8JD9P9",
-    "img": "systems/pf2e/icons/features/classes/superstition-instinct.webp",
+    "img": "icons/weapons/wands/wand-skull-horned.webp",
     "name": "Superstition Instinct",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -153,10 +158,10 @@
                 "value": 4
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
+            "otherTags": [
+                "barbarian-instinct"
+            ],
             "rarity": "common",
             "value": [
                 "barbarian"

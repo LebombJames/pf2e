@@ -4,12 +4,12 @@
     "name": "Earplugs",
     "system": {
         "baseItem": null,
-        "containerId": "null",
-        "description": {
-            "value": "<p>These small pieces of cloth and stuffing have been crafted to dramatically muffle sound and easily slide into and out of the ear canals of humanoid creatures. You can insert or remove earplugs from your ears or a willing creature's ears with a single Interact action using one hand. They take a -2 circumstance penalty to all auditory Perception checks but also gain a +2 circumstance bonus to saving throws against auditory effects.</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Earplugs]</p>"
+        "bulk": {
+            "value": 0
         },
-        "equippedBulk": {
-            "value": ""
+        "containerId": null,
+        "description": {
+            "value": "<p>These small pieces of cloth and stuffing have been crafted to dramatically muffle sound and easily slide into and out of the ear canals of humanoid creatures. You can insert or remove earplugs from your ears or a willing creature's ears with a single Interact action using one hand. They take a -2 circumstance penalty to all auditory Perception checks but also gain a +2 circumstance bonus to saving throws against auditory effects.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,19 +19,19 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "sp": 1
             }
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "quantity": 1,
         "rules": [
@@ -55,19 +55,12 @@
             }
         ],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
         },
         "usage": {
             "value": "worn"
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "equipment"

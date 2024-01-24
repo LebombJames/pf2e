@@ -1,6 +1,6 @@
 {
     "_id": "PS17dsXkTdQmOv7w",
-    "img": "systems/pf2e/icons/equipment/shields/buckler.webp",
+    "img": "icons/equipment/shield/buckler-wooden-boss-brown.webp",
     "name": "Stance: Buckler Dance",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -32,9 +37,6 @@
                 "value": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

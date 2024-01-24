@@ -1,6 +1,6 @@
 {
     "_id": "5GC2iGtVp3UAH2nm",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Glutton For Flesh",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
+        },
         "rules": [
             {
                 "domain": "all",
@@ -35,9 +40,6 @@
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "common",
             "value": [

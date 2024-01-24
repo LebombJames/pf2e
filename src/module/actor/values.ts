@@ -6,6 +6,8 @@ const ATTRIBUTE_ABBREVIATIONS = new Set(["str", "dex", "con", "int", "wis", "cha
 
 const CREATURE_ACTOR_TYPES = ["character", "npc", "familiar"] as const;
 
+const ACTOR_TYPES = ["army", "character", "familiar", "hazard", "loot", "npc", "party", "vehicle"] as const;
+
 const SAVE_TYPES = ["fortitude", "reflex", "will"] as const;
 
 const IMMUNITY_TYPES = new Set(Object.keys(immunityTypes)) as Set<ImmunityType>;
@@ -14,18 +16,9 @@ const WEAKNESS_TYPES = new Set(Object.keys(weaknessTypes)) as Set<WeaknessType>;
 
 const RESISTANCE_TYPES = new Set(Object.keys(resistanceTypes)) as Set<ResistanceType>;
 
-const UNAFFECTED_TYPES = new Set([
-    "bleed",
-    "good",
-    "evil",
-    "lawful",
-    "chaotic",
-    "negative",
-    "positive",
-    "spirit",
-] as const);
+const UNAFFECTED_TYPES = new Set(["bleed", "good", "evil", "lawful", "chaotic", "spirit", "vitality", "void"] as const);
 
-const SKILL_ABBREVIATIONS = new Set([
+const SKILL_ABBREVIATIONS = [
     "acr",
     "arc",
     "ath",
@@ -42,7 +35,7 @@ const SKILL_ABBREVIATIONS = new Set([
     "ste",
     "sur",
     "thi",
-] as const);
+] as const;
 
 const SKILL_DICTIONARY = {
     acr: "acrobatics",
@@ -66,38 +59,42 @@ const SKILL_DICTIONARY = {
 const SKILL_LONG_FORMS = new Set(Object.values(SKILL_DICTIONARY));
 
 const SKILL_DICTIONARY_REVERSE = Object.fromEntries(
-    Object.entries(SKILL_DICTIONARY).map(([abbrev, value]) => [value, abbrev] as [SkillLongForm, SkillAbbreviation])
+    Object.entries(SKILL_DICTIONARY).map(([abbrev, value]) => [value, abbrev] as [SkillLongForm, SkillAbbreviation]),
 );
 
 const DC_SLUGS = new Set(["ac", "armor", "perception", ...SAVE_TYPES, ...SKILL_LONG_FORMS] as const);
 
 interface SkillExpanded {
-    ability: AttributeString;
+    attribute: AttributeString;
     shortForm: SkillAbbreviation;
 }
 
 const SKILL_EXPANDED: Record<SkillLongForm, SkillExpanded> = {
-    acrobatics: { ability: "dex", shortForm: "acr" },
-    arcana: { ability: "int", shortForm: "arc" },
-    athletics: { ability: "str", shortForm: "ath" },
-    crafting: { ability: "int", shortForm: "cra" },
-    deception: { ability: "cha", shortForm: "dec" },
-    diplomacy: { ability: "cha", shortForm: "dip" },
-    intimidation: { ability: "cha", shortForm: "itm" },
-    medicine: { ability: "wis", shortForm: "med" },
-    nature: { ability: "wis", shortForm: "nat" },
-    occultism: { ability: "int", shortForm: "occ" },
-    performance: { ability: "cha", shortForm: "prf" },
-    religion: { ability: "wis", shortForm: "rel" },
-    society: { ability: "int", shortForm: "soc" },
-    stealth: { ability: "dex", shortForm: "ste" },
-    survival: { ability: "wis", shortForm: "sur" },
-    thievery: { ability: "dex", shortForm: "thi" },
+    acrobatics: { attribute: "dex", shortForm: "acr" },
+    arcana: { attribute: "int", shortForm: "arc" },
+    athletics: { attribute: "str", shortForm: "ath" },
+    crafting: { attribute: "int", shortForm: "cra" },
+    deception: { attribute: "cha", shortForm: "dec" },
+    diplomacy: { attribute: "cha", shortForm: "dip" },
+    intimidation: { attribute: "cha", shortForm: "itm" },
+    medicine: { attribute: "wis", shortForm: "med" },
+    nature: { attribute: "wis", shortForm: "nat" },
+    occultism: { attribute: "int", shortForm: "occ" },
+    performance: { attribute: "cha", shortForm: "prf" },
+    religion: { attribute: "wis", shortForm: "rel" },
+    society: { attribute: "int", shortForm: "soc" },
+    stealth: { attribute: "dex", shortForm: "ste" },
+    survival: { attribute: "wis", shortForm: "sur" },
+    thievery: { attribute: "dex", shortForm: "thi" },
 };
 
 const MOVEMENT_TYPES = ["land", "burrow", "climb", "fly", "swim"] as const;
 
+/** Actor types that are valid for token size linking */
+const SIZE_LINKABLE_ACTOR_TYPES = new Set([...CREATURE_ACTOR_TYPES, "vehicle"]);
+
 export {
+    ACTOR_TYPES,
     ATTRIBUTE_ABBREVIATIONS,
     CREATURE_ACTOR_TYPES,
     DC_SLUGS,
@@ -105,6 +102,7 @@ export {
     MOVEMENT_TYPES,
     RESISTANCE_TYPES,
     SAVE_TYPES,
+    SIZE_LINKABLE_ACTOR_TYPES,
     SKILL_ABBREVIATIONS,
     SKILL_DICTIONARY,
     SKILL_DICTIONARY_REVERSE,

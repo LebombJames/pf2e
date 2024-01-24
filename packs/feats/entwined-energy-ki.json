@@ -1,6 +1,6 @@
 {
     "_id": "PSqxbLzKKzbMUnU9",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Entwined Energy Ki",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #166: Despair on Danger Island"
         },
         "rules": [
             {
@@ -53,9 +58,6 @@
                 "option": "entwined-energy-ki:{item|flags.pf2e.rulesSelections.entwinedEnergyKi}"
             }
         ],
-        "source": {
-            "value": "Pathfinder #166: Despair on Danger Island"
-        },
         "traits": {
             "rarity": "uncommon",
             "value": [

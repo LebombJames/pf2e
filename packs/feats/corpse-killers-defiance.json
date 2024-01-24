@@ -1,6 +1,6 @@
 {
     "_id": "fzERYW7BJQoxlvoD",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Corpse-Killer's Defiance",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p><strong>Trigger</strong> You destroy an undead foe.</p>\n<hr />\n<p>You defy Tar-Baphon with every undead you destroy, using your victory to rally your allies. Allies that can see you gain a +1 status bonus to attack and damage rolls against undead for 1 round, or a +2 status bonus to attack and damage rolls against undead for 2 rounds if the undead foe destroyed was a creature of your level or higher.</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.Effect: Corpse-Killer's Defiance]</p>"
+            "value": "<p><strong>Trigger</strong> You destroy an undead foe.</p>\n<hr />\n<p>You defy Tar-Baphon with every undead you destroy, using your victory to rally your allies. Allies that can see you gain a +1 status bonus to attack and damage rolls against undead for 1 round, or a +2 status bonus to attack and damage rolls against undead for 2 rounds if the undead foe destroyed was a creature of your level or higher.</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.Effect: Corpse-Killer's Defiance (Lower Level)]</p>\n<p>@UUID[Compendium.pf2e.feat-effects.Item.Effect: Corpse-Killer's Defiance]</p>"
         },
         "level": {
             "value": 10
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Knights of Lastwall"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Knights of Lastwall"
         },
+        "rules": [],
         "traits": {
             "rarity": "uncommon",
             "value": [

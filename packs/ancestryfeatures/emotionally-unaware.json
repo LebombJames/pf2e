@@ -1,6 +1,6 @@
 {
     "_id": "uSAYmU7PO2QoOWhB",
-    "img": "systems/pf2e/icons/spells/befuddle.webp",
+    "img": "icons/magic/control/fear-fright-white.webp",
     "name": "Emotionally Unaware",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
         },
         "rules": [
             {
@@ -40,9 +45,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

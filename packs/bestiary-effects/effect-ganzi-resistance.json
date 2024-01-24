@@ -1,6 +1,6 @@
 {
     "_id": "PFeGCDFOo2AjI6ib",
-    "img": "systems/pf2e/icons/spells/elemental-zone.webp",
+    "img": "icons/magic/symbols/elements-air-earth-fire-water.webp",
     "name": "Effect: Ganzi Resistance",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -40,9 +45,6 @@
                 "key": "ChoiceSet"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

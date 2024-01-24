@@ -1,8 +1,20 @@
-import { AttributeString } from "@actor/types.ts";
+import { Language, SenseAcuity, SenseType } from "@actor/creature/types.ts";
+import { AttributeString, SaveType } from "@actor/types.ts";
 import { SelfEffectReference, SelfEffectReferenceSource } from "@item/ability/index.ts";
-import { ActionType, BaseItemSourcePF2e, Frequency, FrequencySource, ItemSystemSource } from "@item/data/base.ts";
-import { OneToThree, TraitsWithRarity } from "@module/data.ts";
-import { FeatCategory, FeatTrait } from "./types.ts";
+import { ArmorCategory } from "@item/armor/types.ts";
+import {
+    ActionType,
+    BaseItemSourcePF2e,
+    Frequency,
+    FrequencySource,
+    ItemSystemData,
+    ItemSystemSource,
+    ItemTraits,
+} from "@item/base/data/system.ts";
+import { ClassTrait } from "@item/class/types.ts";
+import { WeaponCategory } from "@item/weapon/types.ts";
+import { OneToFour, OneToThree } from "@module/data.ts";
+import { FeatOrFeatureCategory, FeatTrait } from "./types.ts";
 
 type FeatSource = BaseItemSourcePF2e<"feat", FeatSystemSource>;
 
@@ -11,10 +23,10 @@ interface PrerequisiteTagData {
 }
 
 interface FeatSystemSource extends ItemSystemSource {
-    level: { value: number };
+    level: FeatLevelSource;
     traits: FeatTraits;
     /** The category of feat or feature of this item */
-    category: FeatCategory;
+    category: FeatOrFeatureCategory;
     /** Whether this feat must be taken at character level 1 */
     onlyLevel1: boolean;
     /** The maximum number of times this feat can be taken by a character. A value of `null` indicates no limit */
@@ -35,7 +47,14 @@ interface FeatSystemSource extends ItemSystemSource {
     selfEffect?: SelfEffectReferenceSource | null;
 }
 
-interface FeatSystemData extends Omit<FeatSystemSource, "maxTaken"> {
+interface FeatLevelSource {
+    value: number;
+    taken?: number | null;
+}
+
+interface FeatSystemData extends Omit<FeatSystemSource, "description" | "maxTaken">, Omit<ItemSystemData, "traits"> {
+    level: FeatLevelData;
+
     /** `null` is set to `Infinity` during data preparation */
     maxTakable: number;
     frequency?: Frequency;
@@ -44,10 +63,42 @@ interface FeatSystemData extends Omit<FeatSystemSource, "maxTaken"> {
     selfEffect: SelfEffectReference | null;
 }
 
+interface FeatLevelData extends Required<FeatLevelSource> {}
+
 interface FeatSubfeatures {
     keyOptions: AttributeString[];
+    languages: LanguagesSubfeature;
+    proficiencies: { [K in IncreasableProficiency]?: { rank: OneToFour; attribute?: AttributeString | null } };
+    senses: { [K in SenseType]?: SenseSubfeature };
 }
 
-type FeatTraits = TraitsWithRarity<FeatTrait>;
+interface LanguagesSubfeature {
+    /** A number of open slots fillable with any language */
+    slots: number;
+    /** Additional specific languages the character knows */
+    granted: Language[];
+}
 
-export { FeatSource, FeatSystemData, FeatSystemSource, FeatTraits, PrerequisiteTagData };
+interface SenseSubfeature {
+    acuity?: SenseAcuity;
+    /** The radius of the sense in feet: `null` indicates no limit. */
+    range?: number | null;
+    /** "Special" clauses for darkvision */
+    special?: {
+        /** Only grant darkvision if the PC's ancestry grants low-light vision. */
+        ancestry: boolean;
+        /**
+         * Grant darkvision if the PC has low-light vision from any prior source (ancestry, earlier feats, etc.). This
+         * option is mutually exclusive with `ancestry`.
+         */
+        llv: boolean;
+        /** Grant darkvision if this feat is taken a second time. */
+        second: boolean;
+    };
+}
+
+type IncreasableProficiency = ArmorCategory | ClassTrait | SaveType | WeaponCategory | "perception" | "spellcasting";
+
+type FeatTraits = ItemTraits<FeatTrait>;
+
+export type { FeatSource, FeatSubfeatures, FeatSystemData, FeatSystemSource, FeatTraits, PrerequisiteTagData };

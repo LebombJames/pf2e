@@ -1,6 +1,6 @@
 {
     "_id": "bqBCatllklPceA34",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Turn to Mist",
     "system": {
         "actionType": {
@@ -27,17 +27,22 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
+        },
         "rules": [],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
+        "selfEffect": {
+            "name": "Spell Effect: Vapor Form",
+            "uuid": "Compendium.pf2e.spell-effects.Item.Spell Effect: Vapor Form"
         },
         "traits": {
             "rarity": "common",
             "value": [
                 "archetype",
                 "concentrate",
-                "divine",
-                "transmutation"
+                "divine"
             ]
         }
     },

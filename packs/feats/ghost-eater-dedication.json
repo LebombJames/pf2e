@@ -1,6 +1,6 @@
 {
     "_id": "r1um0cn7MRIMLqcq",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Ghost Eater Dedication",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #166: Despair on Danger Island"
+        },
         "rules": [
             {
                 "key": "AdjustStrike",
@@ -40,9 +45,6 @@
                 "value": "magical"
             }
         ],
-        "source": {
-            "value": "Pathfinder #166: Despair on Danger Island"
-        },
         "subfeatures": {},
         "traits": {
             "rarity": "uncommon",

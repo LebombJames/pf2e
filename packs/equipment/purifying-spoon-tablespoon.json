@@ -1,15 +1,15 @@
 {
     "_id": "ZDoB4t7P2OBMRwvh",
-    "img": "systems/pf2e/icons/default-icons/equipment.svg",
+    "img": "icons/tools/cooking/soup-ladle.webp",
     "name": "Purifying Spoon (Tablespoon)",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
-            "value": "<p>A phrase of luck is carved into the handle of this wooden tablespoon. While a variety of other cutlery with similar properties exists, a spoon is often the most convenient and inconspicuous to carry.</p>\n<hr />\n<p><strong>Activate - Purify</strong> <span class=\"pf2-icon\">2</span> (manipulate)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You stir the spoon in food or drink, casting <em>cleanse cuisine</em> on the substance as you stir. This larger spoon can purify up to 8 gallons of food or drink.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>A phrase of luck is carved into the handle of this wooden tablespoon. While a variety of other cutlery with similar properties exists, a spoon is often the most convenient and inconspicuous to carry.</p>\n<hr />\n<p><strong>Activate - Purify</strong> <span class=\"action-glyph\">2</span> (manipulate)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You stir the spoon in food or drink, casting <em>@UUID[Compendium.pf2e.spells-srd.Item.Cleanse Cuisine]</em> on the substance as you stir. This larger spoon can purify up to 8 gallons of food or drink.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,27 +19,23 @@
         "level": {
             "value": 1
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 20
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
@@ -49,9 +45,6 @@
         },
         "usage": {
             "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
         }
     },
     "type": "equipment"

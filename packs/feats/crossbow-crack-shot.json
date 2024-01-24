@@ -1,6 +1,6 @@
 {
     "_id": "s6h0xkdKf3gecLk6",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Crossbow Crack Shot",
     "system": {
         "actionType": {
@@ -19,9 +19,14 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
-                "domain": "damage-roll",
+                "domain": "damage",
                 "key": "RollOption",
                 "option": "crossbow-crack-shot",
                 "toggleable": true
@@ -34,7 +39,7 @@
                 "predicate": [
                     "crossbow-crack-shot",
                     "item:category:simple",
-                    "item:tag:crossbow"
+                    "item:group:crossbow"
                 ],
                 "selector": "strike-damage"
             },
@@ -42,16 +47,13 @@
                 "key": "FlatModifier",
                 "predicate": [
                     "crossbow-crack-shot",
-                    "item:tag:crossbow"
+                    "item:group:crossbow"
                 ],
                 "selector": "strike-damage",
                 "type": "circumstance",
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

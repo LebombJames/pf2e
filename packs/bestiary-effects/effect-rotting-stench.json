@@ -1,6 +1,6 @@
 {
     "_id": "xXfzzNaBOqDUbYBD",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/magic/acid/dissolve-bone-skull.webp",
     "name": "Effect: Rotting Stench",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Kingmaker"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "text": "<p>While within the aura, creatures take a -2 circumstance penalty to recover from the sickened condition.</p>"
             }
         ],
-        "source": {
-            "value": "Pathfinder Kingmaker"
-        },
         "start": {
             "initiative": null,
             "value": 0

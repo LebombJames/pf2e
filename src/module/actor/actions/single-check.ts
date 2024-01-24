@@ -1,7 +1,8 @@
 import { ActorPF2e } from "@actor";
-import { ModifierPF2e, RawModifier } from "@actor/modifiers.ts";
+import { ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import { DCSlug } from "@actor/types.ts";
-import { ItemPF2e } from "@item";
+import { DC_SLUGS } from "@actor/values.ts";
+import type { ItemPF2e } from "@item";
 import { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
 import { ActionMacroHelpers } from "@system/action-macros/index.ts";
 import {
@@ -12,9 +13,10 @@ import {
     CheckResultCallback,
 } from "@system/action-macros/types.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
-import { getActionGlyph } from "@util";
+import { getActionGlyph, isObject, setHasElement } from "@util";
 import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base.ts";
 import { ActionUseOptions } from "./types.ts";
+import { TokenPF2e } from "@module/canvas/index.ts";
 
 type SingleCheckActionRollNoteData = Omit<RollNoteSource, "selector"> & { selector?: string };
 function toRollNoteSource(data: SingleCheckActionRollNoteData): RollNoteSource {
@@ -22,12 +24,16 @@ function toRollNoteSource(data: SingleCheckActionRollNoteData): RollNoteSource {
     return data as RollNoteSource;
 }
 
+function isValidDifficultyClass(dc: unknown): dc is CheckDC | DCSlug {
+    return setHasElement(DC_SLUGS, dc) || (isObject<{ value: unknown }>(dc) && typeof dc.value === "number");
+}
+
 interface SingleCheckActionVariantData extends BaseActionVariantData {
     difficultyClass?: CheckDC | DCSlug;
     modifiers?: RawModifier[];
     notes?: SingleCheckActionRollNoteData[];
     rollOptions?: string[];
-    statistic?: string;
+    statistic?: string | string[];
 }
 
 interface SingleCheckActionData extends BaseActionData<SingleCheckActionVariantData> {
@@ -35,11 +41,25 @@ interface SingleCheckActionData extends BaseActionData<SingleCheckActionVariantD
     modifiers?: RawModifier[];
     notes?: SingleCheckActionRollNoteData[];
     rollOptions?: string[];
-    statistic: string;
+    statistic: string | string[];
+}
+
+interface ActionVariantCheckPreviewOptions {
+    actor: ActorPF2e;
+}
+
+interface ActionCheckPreviewOptions extends ActionVariantCheckPreviewOptions {
+    variant: string;
+}
+
+interface ActionCheckPreview {
+    label: string;
+    modifier?: number;
+    slug: string;
 }
 
 interface SingleCheckActionUseOptions extends ActionUseOptions {
-    difficultyClass: CheckDC | string;
+    difficultyClass: CheckDC | DCSlug | number;
     modifiers: ModifierPF2e[];
     multipleAttackPenalty: number;
     notes: SingleCheckActionRollNoteData[];
@@ -53,7 +73,7 @@ class SingleCheckActionVariant extends BaseActionVariant {
     readonly #modifiers?: RawModifier[];
     readonly #notes?: RollNoteSource[];
     readonly #rollOptions?: string[];
-    readonly #statistic?: string;
+    readonly #statistic?: string | string[];
 
     constructor(action: SingleCheckAction, data?: SingleCheckActionVariantData) {
         super(action, data);
@@ -83,41 +103,69 @@ class SingleCheckActionVariant extends BaseActionVariant {
         return this.#rollOptions ?? this.#action.rollOptions;
     }
 
-    get statistic(): string {
+    get statistic(): string | string[] {
         return this.#statistic ?? this.#action.statistic;
     }
 
+    preview(options: Partial<ActionVariantCheckPreviewOptions> = {}): ActionCheckPreview[] {
+        const slugs = this.#statistic || this.#action.statistic;
+        const candidates = Array.isArray(slugs) ? slugs : [slugs];
+
+        // TODO: append relevant statistic replacements from the actor
+
+        return candidates
+            .map((candidate) =>
+                this.toActionCheckPreview({ actor: options.actor, rollOptions: this.rollOptions, slug: candidate }),
+            )
+            .filter((preview): preview is ActionCheckPreview => !!preview);
+    }
+
     override async use(options: Partial<SingleCheckActionUseOptions> = {}): Promise<CheckResultCallback[]> {
-        const modifiers = this.modifiers.map((raw) => new ModifierPF2e(raw)).concat(options?.modifiers ?? []);
-        if (options?.multipleAttackPenalty) {
+        const modifiers = this.modifiers.map((raw) => new ModifierPF2e(raw)).concat(options.modifiers ?? []);
+        if (options.multipleAttackPenalty) {
             const map = options.multipleAttackPenalty;
             const modifier = map > 0 ? Math.min(2, map) * -5 : map;
             modifiers.push(new ModifierPF2e({ label: "PF2E.MultipleAttackPenalty", modifier }));
         }
         const notes = (this.notes as SingleCheckActionRollNoteData[])
-            .concat(options?.notes ?? [])
+            .concat(options.notes ?? [])
             .map(toRollNoteSource)
             .map((note) => new RollNotePF2e(note));
-        const rollOptions = this.rollOptions.concat(options?.rollOptions ?? []);
-        const slug = options?.statistic?.trim() || this.statistic;
+        const rollOptions = this.rollOptions.concat(options.rollOptions ?? []);
+        const slug = options.statistic?.trim() || (Array.isArray(this.statistic) ? this.statistic[0] : this.statistic);
         const title = this.name
             ? `${game.i18n.localize(this.#action.name)} - ${game.i18n.localize(this.name)}`
             : game.i18n.localize(this.#action.name);
+        const difficultyClass = Number.isNumeric(options.difficultyClass)
+            ? { value: Number(options.difficultyClass) }
+            : isValidDifficultyClass(options.difficultyClass)
+              ? options.difficultyClass
+              : this.difficultyClass;
         const results: CheckResultCallback[] = [];
 
         await ActionMacroHelpers.simpleRollActionCheck({
-            actors: options?.actors,
+            actors: options.actors,
             title,
             actionGlyph: getActionGlyph(this.cost ?? null) as ActionGlyph,
             callback: (result) => results.push(result),
             checkContext: (opts) => this.checkContext(opts, { modifiers, rollOptions, slug }),
-            difficultyClass: this.difficultyClass,
-            event: options?.event,
+            difficultyClass,
+            event: options.event,
             extraNotes: (selector) =>
                 notes.map((note) => {
                     note.selector ||= selector; // treat empty selectors as always applicable to this check
                     return note;
                 }),
+            target: () => {
+                if (options.target instanceof ActorPF2e) {
+                    return { token: null, actor: options.target };
+                } else if (options.target instanceof TokenPF2e) {
+                    return options.target.actor
+                        ? { token: options.target.document, actor: options.target.actor }
+                        : null;
+                }
+                return null;
+            },
             traits: this.traits.concat(options?.traits ?? []),
         });
 
@@ -126,9 +174,31 @@ class SingleCheckActionVariant extends BaseActionVariant {
 
     protected checkContext<ItemType extends ItemPF2e<ActorPF2e>>(
         opts: CheckContextOptions<ItemType>,
-        data: CheckContextData<ItemType>
+        data: CheckContextData<ItemType>,
     ): CheckContext<ItemType> | undefined {
         return ActionMacroHelpers.defaultCheckContext(opts, data);
+    }
+
+    protected toActionCheckPreview(args: {
+        actor?: ActorPF2e;
+        rollOptions: string[];
+        slug: string;
+    }): ActionCheckPreview | null {
+        if (args.actor) {
+            const statistic = args.actor.getStatistic(args.slug);
+            if (statistic) {
+                const modifier = new StatisticModifier(args.slug, statistic.modifiers, args.rollOptions);
+                return { label: statistic.label, modifier: modifier.totalModifier, slug: args.slug };
+            }
+        } else {
+            const labels: Record<string, string> = {
+                perception: "PF2E.PerceptionLabel",
+                ...CONFIG.PF2E.saves,
+                ...CONFIG.PF2E.skillList,
+            };
+            return { label: game.i18n.localize(labels[args.slug] ?? args.slug), slug: args.slug };
+        }
+        return null;
     }
 }
 
@@ -137,7 +207,7 @@ class SingleCheckAction extends BaseAction<SingleCheckActionVariantData, SingleC
     readonly modifiers: RawModifier[];
     readonly notes: RollNoteSource[];
     readonly rollOptions: string[];
-    readonly statistic: string;
+    readonly statistic: string | string[];
 
     constructor(data: SingleCheckActionData) {
         super(data);
@@ -148,9 +218,14 @@ class SingleCheckAction extends BaseAction<SingleCheckActionVariantData, SingleC
         this.statistic = data.statistic;
     }
 
+    preview(options: Partial<ActionCheckPreviewOptions> = {}): ActionCheckPreview[] {
+        return this.getDefaultVariant(options).preview(options);
+    }
+
     protected override toActionVariant(data?: SingleCheckActionVariantData): SingleCheckActionVariant {
         return new SingleCheckActionVariant(this, data);
     }
 }
 
-export { SingleCheckAction, SingleCheckActionUseOptions, SingleCheckActionVariant, SingleCheckActionVariantData };
+export { SingleCheckAction, SingleCheckActionVariant };
+export type { ActionCheckPreview, SingleCheckActionUseOptions, SingleCheckActionVariantData };

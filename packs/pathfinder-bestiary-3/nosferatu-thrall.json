@@ -13,15 +13,15 @@
             "name": "Greatclub",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "greatclub",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 2
                 },
                 "category": "martial",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 2,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "greatclub",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -106,9 +86,6 @@
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "weapon"
@@ -143,11 +120,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -187,11 +166,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -226,8 +207,10 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -237,18 +220,9 @@
                     }
                 ],
                 "slug": "fast-healing",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -274,20 +248,16 @@
                 "description": {
                     "value": "<p>A nosferatu master exerts a fierce hold over their thrall's mind. If any creature other than the thrall's master targets them with an effect that would give them the @UUID[Compendium.pf2e.conditionitems.Item.Controlled] condition, the thrall's master rolls a counteract check against it using their Dominate DC - 10 as the counteract check modifier.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "vampire-nosferatu-thrall-mindbound",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -313,20 +283,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> The thrall's master would take damage from a Strike or spell attack and is in an adjacent square</p>\n<hr />\n<p><strong>Effect</strong> The thrall throws themself in front of their master, taking half the damage of the attack (before applying any weaknesses or resistances). The thrall's master takes the remaining damage, applying any weaknesses or resistances as normal.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "vampire-nosferatu-thrall-mortal-shield",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -352,20 +318,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> The thrall ends their turn more than 30 feet away from their master</p>\n<hr />\n<p><strong>Effect</strong> The thrall Strides up to their Speed toward their master.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary 3"
                 },
                 "rules": [],
                 "slug": "vampire-nosferatu-thrall-rally",
-                "source": {
-                    "value": "Pathfinder Bestiary 3"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -391,23 +353,16 @@
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -427,11 +382,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -450,11 +407,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -473,11 +432,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -496,11 +457,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -541,12 +504,6 @@
                 "temp": 0,
                 "value": 135
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 16
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
@@ -559,19 +516,31 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": 8
             },
             "privateNotes": "",
             "publicNotes": "<p>Nosferatu thralls are mortals bound to a nosferatu's will. While thralls aren't undead, they stay alive through unnatural means: feeding on the blood of their masters.</p>\n<hr />\n<p>Among the most ancient of vampires are the nosferatus, twisted remnants of mortals who died in great plagues of old. Perhaps because of their age, nosferatus can no longer create more of their kind. Yet they still lurk among the living, manipulating the hearts and minds of their prey to either serve them beyond the limits of natural life or to become sustenance for the nosferatu like so many others before.</p>",
-            "source": {
-                "value": "Pathfinder Bestiary 3"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Bestiary 3"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 16,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -589,21 +558,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "uncommon",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "human",
                 "humanoid"
             ]

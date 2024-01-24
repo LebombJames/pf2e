@@ -1,26 +1,34 @@
 import { ActorPF2e } from "@actor";
-import { KitPF2e, PhysicalItemPF2e, TreasurePF2e } from "@item";
+import { ItemProxyPF2e, KitPF2e, PhysicalItemPF2e } from "@item";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { Coins } from "@item/physical/data.ts";
+import { CoinsPF2e, coinCompendiumIds } from "@item/physical/helpers.ts";
 import { DENOMINATIONS } from "@item/physical/values.ts";
-import { coinCompendiumIds, CoinsPF2e } from "@item/physical/helpers.ts";
-import { ErrorPF2e, groupBy } from "@util";
+import { DelegatedCollection, ErrorPF2e, groupBy } from "@util";
 import { InventoryBulk } from "./bulk.ts";
 
-class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF2e<TActor>> {
-    constructor(public readonly actor: TActor, entries?: PhysicalItemPF2e<TActor>[]) {
+class ActorInventory<TActor extends ActorPF2e> extends DelegatedCollection<PhysicalItemPF2e<TActor>> {
+    actor: TActor;
+    bulk: InventoryBulk;
+
+    constructor(actor: TActor, entries?: PhysicalItemPF2e<TActor>[]) {
         super(entries?.map((entry) => [entry.id, entry]));
+        this.actor = actor;
+
+        // Created in the constructor so its ready for RE modification
+        this.bulk = new InventoryBulk(this.actor);
     }
 
     get coins(): CoinsPF2e {
         return this.filter((i) => i.isOfType("treasure") && i.isCoinage)
             .map((item) => item.assetValue)
-            .reduce((first, second) => first.add(second), new CoinsPF2e());
+            .reduce((first, second) => first.plus(second), new CoinsPF2e());
     }
 
     get totalWealth(): CoinsPF2e {
         return this.filter((item) => game.user.isGM || item.isIdentified)
             .map((item) => item.assetValue)
-            .reduce((first, second) => first.add(second), new CoinsPF2e());
+            .reduce((first, second) => first.plus(second), new CoinsPF2e());
     }
 
     get invested(): { value: number; max: number } | null {
@@ -34,8 +42,22 @@ class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF
         return null;
     }
 
-    get bulk(): InventoryBulk {
-        return new InventoryBulk(this.actor);
+    /** Find an item already owned by the actor that can stack with the given item */
+    findStackableItem(item: PhysicalItemPF2e | ItemSourcePF2e): PhysicalItemPF2e<TActor> | null {
+        // Prevent upstream from mutating property descriptors
+        const testItem = item instanceof PhysicalItemPF2e ? item.clone() : new ItemProxyPF2e(fu.deepClone(item));
+        if (!testItem.isOfType("physical")) return null;
+
+        const stackCandidates = this.filter((i) => !i.isInContainer && i.isStackableWith(testItem));
+        if (stackCandidates.length === 0) {
+            return null;
+        } else if (stackCandidates.length > 1) {
+            // Prefer stacking with unequipped items
+            const notEquipped = stackCandidates.filter((item) => !item.isEquipped);
+            return notEquipped.length > 0 ? notEquipped[0] : stackCandidates[0];
+        } else {
+            return stackCandidates[0];
+        }
     }
 
     async addCoins(coins: Partial<Coins>, { combineStacks = true }: { combineStacks?: boolean } = {}): Promise<void> {
@@ -51,7 +73,7 @@ class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF
                 } else {
                     const compendiumId = coinCompendiumIds[denomination];
                     const pack = game.packs.find<CompendiumCollection<PhysicalItemPF2e<null>>>(
-                        (p) => p.collection === "pf2e.equipment-srd"
+                        (p) => p.collection === "pf2e.equipment-srd",
                     );
                     if (!pack) throw ErrorPF2e("Unexpected error retrieving equipment compendium");
 
@@ -121,7 +143,7 @@ class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF
         }
 
         // Test if the actor has enough coins to pull
-        const coinsToPull = actorCoins.add(coinsToAdd);
+        const coinsToPull = actorCoins.plus(coinsToAdd);
         const sufficient =
             coinsToRemove.pp <= coinsToPull.pp &&
             coinsToRemove.gp <= coinsToPull.gp &&
@@ -143,7 +165,7 @@ class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF
             let quantityToRemove = coinsToRemove[denomination];
             const coinItems = coinsByDenomination.get(denomination);
             if (!!quantityToRemove && coinItems) {
-                const itemsToUpdate: EmbeddedDocumentUpdateData<TreasurePF2e>[] = [];
+                const itemsToUpdate: EmbeddedDocumentUpdateData[] = [];
                 const itemsToDelete: string[] = [];
                 for (const item of coinItems) {
                     if (quantityToRemove === 0) break;
@@ -180,7 +202,7 @@ class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF
         const treasureIds = treasures.map((item) => item.id);
         const coins = treasures
             .map((item) => item.assetValue)
-            .reduce((first, second) => first.add(second), new CoinsPF2e());
+            .reduce((first, second) => first.plus(second), new CoinsPF2e());
         await this.actor.deleteEmbeddedDocuments("Item", treasureIds);
         await this.actor.inventory.addCoins(coins);
     }
@@ -188,7 +210,7 @@ class ActorInventory<TActor extends ActorPF2e> extends Collection<PhysicalItemPF
     /** Adds an item to this inventory without removing from its original location */
     async add(item: PhysicalItemPF2e | KitPF2e, options: AddItemOptions = {}): Promise<void> {
         if (options.stack && item.isOfType("physical")) {
-            const stackableItem = this.actor.findStackableItem(this.actor, item._source);
+            const stackableItem = this.findStackableItem(item._source);
             if (stackableItem) {
                 await stackableItem.update({ "system.quantity": stackableItem.quantity + item.quantity });
                 return;

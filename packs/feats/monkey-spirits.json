@@ -1,6 +1,6 @@
 {
     "_id": "7NsqI50oBIJ4bFwb",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Monkey Spirits",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>Vanaras generally consider the spirits of departed monkeys to be less informative or interesting than their own ancestors traveling the cycles of existence, yet these monkey spirits can prove useful when the situation is dire. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Mad Monkeys]</em> once per day as a 5th-level primal innate spell. You become an expert in primal spell DCs and primal spell attack rolls. If you choose flagrant burglary for this casting of mad monkeys, you can have the monkeys use your Thievery modifier instead of your spell DC – 10.</p>"
+            "value": "<p>Vanaras generally consider the spirits of departed monkeys to be less informative or interesting than their own ancestors traveling the cycles of existence, yet these monkey spirits can prove useful when the situation is dire. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Mad Monkeys]</em> once per day as a 5th-rank primal innate spell. You become an expert in primal spell DCs and primal spell attack rolls. If you choose flagrant burglary for this casting of mad monkeys, you can have the monkeys use your Thievery modifier instead of your spell DC – 10.</p>"
         },
         "level": {
             "value": 13
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.proficiencies.traditions.primal.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "spellcasting": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
         },
         "traits": {
             "rarity": "common",

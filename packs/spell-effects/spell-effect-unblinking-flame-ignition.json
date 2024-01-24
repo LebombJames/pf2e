@@ -1,6 +1,6 @@
 {
     "_id": "hya8NfBB1GJofTXm",
-    "img": "systems/pf2e/icons/spells/shroud-of-flame.webp",
+    "img": "icons/magic/fire/projectile-feathers-embers-gold.webp",
     "name": "Spell Effect: Unblinking Flame Ignition",
     "system": {
         "description": {
@@ -15,18 +15,23 @@
         "level": {
             "value": 9
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "key": "Sense",
-                "selector": "greaterDarkvision"
+                "selector": "greater-darkvision"
             },
             {
                 "key": "Sense",
-                "selector": "lowLightVision"
+                "selector": "low-light-vision"
             },
             {
                 "key": "Sense",
-                "selector": "seeInvisibility"
+                "selector": "see-invisibility"
             },
             {
                 "key": "BaseSpeed",
@@ -38,9 +43,6 @@
                 "uuid": "Compendium.pf2e.conditionitems.Item.Quickened"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "start": {
             "initiative": null,
             "value": 0

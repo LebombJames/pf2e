@@ -1,6 +1,6 @@
 {
     "_id": "MEwvBnT2VsO5lQ6I",
-    "img": "systems/pf2e/icons/features/classes/choice-feature.webp",
+    "img": "icons/magic/symbols/question-stone-yellow.webp",
     "name": "Greater Field Discovery",
     "system": {
         "actionType": {
@@ -19,15 +19,17 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "GrantItem",
                 "uuid": "{actor|flags.pf2e.alchemist.greaterFieldDiscovery}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
             "rarity": "common",
             "value": [

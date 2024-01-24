@@ -38,7 +38,7 @@ function decipherWriting(options: SkillActionOptions): void {
 
 class DecipherWritingActionVariant extends SingleCheckActionVariant {
     override async use(
-        options: Partial<SingleCheckActionUseOptions> & { statistic: string }
+        options: Partial<SingleCheckActionUseOptions> & { statistic: string },
     ): Promise<CheckResultCallback[]> {
         if (!options?.statistic) {
             throw new Error(game.i18n.localize("PF2E.Actions.DecipherWriting.Warning.NoSkill"));
@@ -64,8 +64,15 @@ class DecipherWritingAction extends SingleCheckAction {
                 { outcome: ["criticalFailure"], text: "PF2E.Actions.DecipherWriting.Notes.criticalFailure" },
             ],
             rollOptions: ["action:decipher-writing"],
+            sampleTasks: {
+                trained: "PF2E.Actions.DecipherWriting.SampleTasks.Trained",
+                expert: "PF2E.Actions.DecipherWriting.SampleTasks.Expert",
+                master: "PF2E.Actions.DecipherWriting.SampleTasks.Master",
+                legendary: "PF2E.Actions.DecipherWriting.SampleTasks.Legendary",
+            },
+            section: "skill",
             slug: "decipher-writing",
-            statistic: "",
+            statistic: ["arcana", "occultism", "religion", "society"],
             traits: ["concentrate", "exploration", "secret"],
         });
     }

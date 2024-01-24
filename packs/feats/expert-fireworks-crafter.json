@@ -1,6 +1,6 @@
 {
     "_id": "dDFQJem5K9Jzxgda",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Expert Fireworks Crafter",
     "system": {
         "actionType": {
@@ -26,6 +26,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -38,9 +43,6 @@
                 "value": "@actor.level - 3"
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

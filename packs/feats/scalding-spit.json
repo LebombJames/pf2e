@@ -1,6 +1,6 @@
 {
     "_id": "ulQzdBOnZH9LQu8M",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Scalding Spit",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Character Guide"
+        },
         "rules": [
             {
                 "category": "unarmed",
@@ -36,20 +41,18 @@
                 "img": "systems/pf2e/icons/unarmed-attacks/fire-mote.webp",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Goblin.ScaldingSpit.BoilingSpit",
-                "maxRange": 30,
                 "predicate": [
                     "self:condition:persistent-damage:fire"
                 ],
-                "range": 30,
+                "range": {
+                    "max": 30
+                },
                 "slug": "boiling-spit",
                 "traits": [
                     "unarmed"
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Character Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

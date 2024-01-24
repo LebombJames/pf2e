@@ -1,6 +1,6 @@
 {
     "_id": "mHIdEC7RX6isILiM",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/commodities/tech/tube-chamber-lightning.webp",
     "name": "Effect: Jolt Coil - Weapon",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 3
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -36,9 +41,6 @@
                 "selector": "{item|flags.pf2e.rulesSelections.effectJoltCoilWeapon}-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -19,25 +19,12 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 2
-            },
             {
                 "key": "CriticalSpecialization",
                 "predicate": [
@@ -46,8 +33,18 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 2
+                },
+                "simple": {
+                    "rank": 2
+                },
+                "unarmed": {
+                    "rank": 2
+                }
+            }
         },
         "traits": {
             "rarity": "common",

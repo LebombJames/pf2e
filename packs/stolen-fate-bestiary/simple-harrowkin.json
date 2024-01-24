@@ -9,19 +9,19 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.7tKkkF8eZ4iCLJtp"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/weapons/shortsword.webp",
+            "img": "icons/weapons/swords/sword-guard-purple.webp",
             "name": "Shortsword",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "shortsword",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 9
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "shortsword",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -107,9 +87,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -126,6 +103,9 @@
             "sort": 200000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 0.1
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>Used by gamblers and seers alike, this deck of cards comes in several varieties.</p>\n<hr />\n<p>Simple harrow decks are made from low-quality paper and typically have only an icon and a number to signify the suit and alignment. These simple decks are mostly used for games of chance, as the actual image and significance of the cards are irrelevant for such games.</p>"
@@ -133,9 +113,6 @@
                 "equipped": {
                     "carryType": "worn",
                     "invested": null
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -145,37 +122,30 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder #160: Assault on Hunting Lodge Seven"
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "harrow-deck-simple",
-                "source": {
-                    "value": "Pathfinder #160: Assault on Hunting Lodge Seven"
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "equipment"
@@ -209,11 +179,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "agile",
@@ -254,11 +226,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "agile",
@@ -296,11 +270,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "agile",
@@ -336,23 +312,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "darkvision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -373,19 +342,15 @@
                 "description": {
                     "value": "<p>Any</p>\n<hr />\n<p><em>Note: To select a suit add the following ability and follow the prompt @UUID[Compendium.pf2e.bestiary-family-ability-glossary.Item.(Harrowkin) Harrowkin Suit]{(Harrowkin) Harrow Suit}</em></p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -415,19 +380,15 @@
                     "max": 1,
                     "per": "day"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder #192: Worst of All Possible Worlds"
                 },
                 "rules": [],
                 "slug": "",
-                "source": {
-                    "value": "Pathfinder #192: Worst of All Possible Worlds"
-                },
                 "traits": {
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -451,10 +412,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The harrowkin deals 1d6 extra precision damage to off-guard creatures.</p>\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
+                    "value": "<p>The harrowkin deals 1d6 extra precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -463,21 +426,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -490,18 +439,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -527,23 +467,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "grab",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -563,11 +496,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -586,11 +521,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -609,11 +546,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -632,11 +571,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -683,12 +624,6 @@
                     "type": "misfortune-effects"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 10
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 25
@@ -696,19 +631,35 @@
             "weaknesses": []
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common"
+                ]
+            },
             "level": {
                 "value": 4
             },
             "privateNotes": "",
             "publicNotes": "<p>When a harrow deck becomes infused with great magical power, it can produce a harrowkin.</p>\n<h2>Harrowkin Agency</h2>\n<p>Harrowkin lack free will, despite being sapient. All are neutral, even in the case of fabled harrowkin whose legacies force them into specific roles. They do not possess souls. When slain they revert back to the card from which they sprang.</p>\n\n<h2>Ancient Harrowkin</h2>\n<p>Some harrowkin form from ancient decks, even originating from the days before Earthfall. These harrowkin are especially powerful as they've spent a long time—sometimes millennia—learning to control their own abilities and their magical influence over the power of fate. These harrowkin are known to keep weaker harrowkin as companions or servants, living secluded lives in their own courts of fate. Unlike other harrowkin, ancient harrowkin have souls, agency, free will, and can be of any alignment.</p>",
-            "source": {
-                "value": "Pathfinder #192: Worst of All Possible Worlds"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #192: Worst of All Possible Worlds"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 10,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -726,17 +677,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common"
-                ]
-            },
             "rarity": "uncommon",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "sm"
             },

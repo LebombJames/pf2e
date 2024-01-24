@@ -1,6 +1,6 @@
 {
     "_id": "S4MZzALqFoXJsr6o",
-    "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-tools/bloodhound-mask.webp",
+    "img": "icons/equipment/head/mask-carved-wood-white.webp",
     "name": "Effect: Bloodhound Mask (Lesser)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -33,9 +38,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

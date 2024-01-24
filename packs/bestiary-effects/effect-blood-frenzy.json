@@ -1,6 +1,6 @@
 {
     "_id": "ScZ8tlV5zS0Jwnqn",
-    "img": "systems/pf2e/icons/features/classes/hunt-prey.webp",
+    "img": "icons/creatures/eyes/humanoid-single-red-brown.webp",
     "name": "Effect: Blood Frenzy",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
+        },
         "rules": [
             {
                 "key": "TempHP",
@@ -27,9 +32,6 @@
                 "value": 0
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

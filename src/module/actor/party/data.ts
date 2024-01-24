@@ -2,6 +2,7 @@ import {
     ActorAttributes,
     ActorAttributesSource,
     ActorDetails,
+    ActorDetailsSource,
     ActorSystemData,
     ActorSystemSource,
     BaseActorSourcePF2e,
@@ -20,25 +21,25 @@ interface PartySystemSource extends ActorSystemSource {
 interface PartyAttributesSource extends ActorAttributesSource {
     hp?: never;
     ac?: never;
-    initiative?: never;
     immunities?: never;
     weaknesses?: never;
     resistances?: never;
 }
 
-interface PartyDetailsSource {
+interface PartyDetailsSource extends ActorDetailsSource {
     description: string;
-    level: {
-        value: number;
-    };
     members: MemberData[];
+    readonly alliance?: never;
+    readonly level?: never;
 }
 
 interface MemberData {
     uuid: ActorUUID;
 }
 
-interface PartySystemData extends Omit<PartySystemSource, "attributes" | "campaign">, Omit<ActorSystemData, "traits"> {
+interface PartySystemData
+    extends Omit<PartySystemSource, "attributes" | "campaign" | "details">,
+        Omit<ActorSystemData, "traits"> {
     attributes: PartyAttributes;
     details: PartyDetails;
     campaign: PartyCampaign;
@@ -53,8 +54,10 @@ interface PartyAttributes
     speed: { total: number };
 }
 
-interface PartyDetails extends PartyDetailsSource, ActorDetails {}
+interface PartyDetails extends Omit<PartyDetailsSource, "alliance" | "level">, ActorDetails {
+    level: { value: number };
+}
 
-type PartyCampaignSource = { type: string } & Record<string, unknown>;
+type PartyCampaignSource = { type: string } & Record<string, JSONValue>;
 
-export { MemberData, PartyCampaignSource, PartySource, PartySystemData };
+export type { MemberData, PartyCampaignSource, PartySource, PartySystemData };

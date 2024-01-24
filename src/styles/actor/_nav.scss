@@ -1,19 +1,20 @@
 nav.sheet-navigation {
-    display: inline-flex;
-    justify-content: center;
     align-items: center;
-    height: 20px;
-    background: var(--secondary);
-    background: url("/assets/sheet/border-pattern.webp") repeat-x top,
+    background:
+        url("/assets/sheet/border-pattern.webp") repeat-x top,
         url("/assets/sheet/border-pattern.webp") repeat-x bottom,
         var(--secondary);
-    transition: all 0.1s ease-out;
-    box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+    display: inline-flex;
+    gap: var(--space-11);
+    height: 1.25rem;
+    justify-content: center;
     position: relative;
+    transition: all 0.1s ease-out;
 
-    .navigation-title {
+    .panel-title {
         color: var(--text-light);
         margin-right: auto;
         padding-left: 1em;
@@ -23,13 +24,12 @@ nav.sheet-navigation {
 
     > a {
         @include flex-center;
-        margin: 0 6px;
         font-size: var(--font-size-12);
     }
 
     .item {
-        height: 24px;
-        width: 24px;
+        height: 1.5rem;
+        width: 1.5rem;
         border-radius: 50%;
         z-index: 1;
         transition: all 0.1s ease-out;
@@ -45,8 +45,11 @@ nav.sheet-navigation {
             inset 0 0 4px rgba(black, 0.25);
 
         &.active {
-            box-shadow: 0 0 0 1px var(--tertiary), 0 0 0 2px #9f725b,
-                inset 0 0 4px rgba(black, 0.25), 0 0 8px var(--tertiary);
+            box-shadow:
+                0 0 0 1px var(--tertiary),
+                0 0 0 2px #9f725b,
+                inset 0 0 4px rgba(black, 0.25),
+                0 0 8px var(--tertiary);
         }
 
         &:last-child {
@@ -62,17 +65,16 @@ nav.sheet-navigation {
             background-image: url("/assets/sheet/nav-item.webp");
         }
 
-        .fas {
+        i.fa-solid {
             padding-bottom: 0;
         }
 
         &:hover .pfs-icon {
-            filter: drop-shadow( 0 0 8px var(--color-shadow-primary));
+            filter: drop-shadow(0 0 8px var(--color-shadow-primary));
         }
 
-        // Actions and PFS tabs
-        .action-icon {
-            font-family: "Pathfinder2eActions", sans-serif;
+        // Actions tab icon
+        .action-glyph {
             font-size: 1rem;
         }
     }
@@ -81,18 +83,18 @@ nav.sheet-navigation {
 /** White background navigation with little decorations on the left and right */
 nav.sub-nav {
     @include p-reset;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
     align-items: center;
-    list-style: none;
-
     background-color: var(--bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
     flex: 0 0 2.5rem;
+    justify-content: center;
+    list-style: none;
+    width: 100%;
 
-    &::before, &::after {
+    &::before,
+    &::after {
         content: "";
         width: 37px;
         height: 16px;
@@ -104,7 +106,8 @@ nav.sub-nav {
         transform: scaleX(-100%);
     }
 
-    a, .tab {
+    a,
+    .tab {
         border-left: 1px solid rgba(255, 255, 255, 0.3);
         border-right: 1px solid rgba(0, 0, 0, 0.2);
         color: var(--alt);
@@ -138,5 +141,5 @@ nav.sub-nav {
 }
 
 .tab nav.sub-nav {
-    padding-right: 20px;
+    padding-right: 1.25rem;
 }

@@ -19,7 +19,7 @@
                 "uuid": "Compendium.pf2e.equipment-srd.Item.Dart"
             },
             "7r1bn": {
-                "img": "systems/pf2e/icons/equipment/adventuring-gear/climbing-kit.webp",
+                "img": "icons/containers/bags/pouch-simple-leather-tan.webp",
                 "isContainer": false,
                 "items": {},
                 "name": "Climbing Kit",
@@ -48,7 +48,7 @@
                 "items": {},
                 "name": "Smokestick (Lesser)",
                 "quantity": 1,
-                "uuid": "Compendium.pf2e.equipment-srd.Item.Smokestick (Lesser)"
+                "uuid": "Compendium.pf2e.equipment-srd.Item.Smoke Ball (Lesser)"
             }
         },
         "price": {
@@ -57,10 +57,12 @@
                 "sp": 3
             }
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

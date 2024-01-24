@@ -1,6 +1,6 @@
 {
     "_id": "Xb8CyW9sYS27ElcC",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Lucky Escape",
     "system": {
         "actionType": {
@@ -27,10 +27,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

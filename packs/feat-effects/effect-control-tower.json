@@ -1,6 +1,6 @@
 {
     "_id": "mkIamZGtQaSsUWLk",
-    "img": "systems/pf2e/icons/features/feats/control-tower.webp",
+    "img": "icons/environment/settlement/watchtower-tribe.webp",
     "name": "Effect: Control Tower",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [
             {
@@ -33,9 +38,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "start": {
             "initiative": null,
             "value": 0

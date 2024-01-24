@@ -1,6 +1,6 @@
 {
     "_id": "APJJCYdq4gNe0PF4",
-    "img": "systems/pf2e/icons/spells/blinding-fury.webp",
+    "img": "icons/magic/fire/flame-burning-eye.webp",
     "name": "Effect: Susceptible to Mockery (Critical Failure)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #184: The Ghouls Hunger"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder #184: The Ghouls Hunger"
-        },
         "start": {
             "initiative": null,
             "value": 0

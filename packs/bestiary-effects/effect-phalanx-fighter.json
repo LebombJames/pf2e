@@ -1,6 +1,6 @@
 {
     "_id": "KjWPSJonzrZ8jv7X",
-    "img": "systems/pf2e/icons/equipment/shields/tower-shield.webp",
+    "img": "icons/equipment/shield/wardoor-wooden-boss-brown.webp",
     "name": "Effect: Phalanx Fighter",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 3
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

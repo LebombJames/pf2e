@@ -1,21 +1,23 @@
-import { CharacterPF2e, CreaturePF2e } from "@actor";
+import { CreaturePF2e, type CharacterPF2e } from "@actor";
 import { CreatureSaves, CreatureSkills, LabeledSpeed } from "@actor/creature/data.ts";
 import { ActorSizePF2e } from "@actor/data/size.ts";
 import { createEncounterRollOptions, setHitPointsRollOptions } from "@actor/helpers.ts";
 import { ModifierPF2e, applyStackingRules } from "@actor/modifiers.ts";
 import { SaveType } from "@actor/types.ts";
 import { SAVE_TYPES, SKILL_ABBREVIATIONS, SKILL_DICTIONARY, SKILL_EXPANDED } from "@actor/values.ts";
-import { ItemType } from "@item/data/index.ts";
-import { RuleElementPF2e } from "@module/rules/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
+import { ItemType } from "@item/base/data/index.ts";
+import type { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
+import type { RuleElementPF2e } from "@module/rules/index.ts";
+import type { TokenDocumentPF2e } from "@scene";
 import { PredicatePF2e } from "@system/predication.ts";
-import { ArmorStatistic } from "@system/statistic/armor-class.ts";
-import { HitPointsStatistic } from "@system/statistic/hit-points.ts";
-import { Statistic } from "@system/statistic/index.ts";
+import { ArmorStatistic, HitPointsStatistic, PerceptionStatistic, Statistic } from "@system/statistic/index.ts";
 import * as R from "remeda";
 import { FamiliarSource, FamiliarSystemData } from "./data.ts";
 
 class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends CreaturePF2e<TParent> {
+    /** The familiar's attack statistic, for the rare occasion it must make an attack roll */
+    declare attackStatistic: Statistic;
+
     override get allowedItemTypes(): (ItemType | "physical")[] {
         return [...super.allowedItemTypes, "action"];
     }
@@ -26,7 +28,7 @@ class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e 
         if (!game.ready || !this.system.master.id) return null;
 
         const master = game.actors.get(this.system.master.id ?? "");
-        if (master instanceof CharacterPF2e) {
+        if (master?.isOfType("character")) {
             master.familiar ??= this;
             return master;
         }
@@ -39,22 +41,33 @@ class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e 
         return this.master?.system.abilities[this.system.master.ability].mod ?? 0;
     }
 
+    /** @deprecated for internal use but not rule elements referencing it until a migration is in place. */
+    get masterAbilityModifier(): number {
+        return this.masterAttributeModifier;
+    }
+
+    override get combatant(): CombatantPF2e<EncounterPF2e> | null {
+        return this.master?.combatant ?? null;
+    }
+
     /** Re-render the sheet if data preparation is called from the familiar's master */
     override reset({ fromMaster = false } = {}): void {
         super.reset();
         if (fromMaster) this.sheet.render();
     }
 
-    /** Set base emphemeral data for later updating by derived-data preparation */
+    /** Set base emphemeral data for later updating by derived-data preparation. */
     override prepareBaseData(): void {
-        type PartialSystemData = DeepPartial<FamiliarSystemData> & {
-            attributes: { speed: RawSpeed; flanking: {} };
-            details: {};
+        this.system.details = {
+            alliance: null,
+            creature: this.system.details.creature,
+            languages: { value: [], details: "" },
+            level: { value: 0 },
         };
-        const systemData: PartialSystemData = this.system;
-        systemData.traits = {
+
+        this.system.traits = {
             value: ["minion"],
-            senses: [{ type: "lowLightVision", label: CONFIG.PF2E.senses.lowLightVision, value: "" }],
+            rarity: "common",
             size: new ActorSizePF2e({ value: "tiny" }),
         };
 
@@ -68,45 +81,49 @@ class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e 
             suppress: true,
         });
 
+        type PartialSystemData = DeepPartial<FamiliarSystemData> & {
+            attributes: { speed: RawSpeed; flanking: {} };
+            details: {};
+        };
         type RawSpeed = { value: number; otherSpeeds: LabeledSpeed[] };
 
-        systemData.details.alignment = { value: "N" };
-
-        systemData.attributes.flanking.canFlank = false;
-        systemData.attributes.perception = {};
-        systemData.attributes.speed = {
+        const system: PartialSystemData = this.system;
+        system.attributes.flanking.canFlank = false;
+        system.perception = {
+            senses: [
+                {
+                    type: "low-light-vision",
+                    acuity: "precise",
+                    range: Infinity,
+                },
+            ],
+        };
+        system.attributes.speed = {
             value: 25,
-            label: game.i18n.localize("PF2E.SpeedTypesLand"),
+            label: CONFIG.PF2E.speedTypes.land,
             otherSpeeds: [],
         };
 
-        systemData.skills = {};
+        system.attributes.reach = { base: 0, manipulate: 0 };
 
-        systemData.saves = {
+        system.skills = {};
+
+        system.saves = {
             fortitude: {},
             reflex: {},
             will: {},
         };
 
-        // Fields that need to exist for sheet compatibility so that they can exist pleasantly while doing nothing.
-        // They should be automated via specific familiar item types, or added to template.json and manually edited.
-        // This requires dev investment and interest aimed at what amounts to feat expensive set dressing (familiars).
-        systemData.traits = mergeObject(systemData.traits, {
-            dv: [],
-            di: [],
-            dr: [],
-        });
-
         const { master } = this;
-        systemData.details.level = { value: master?.level ?? 0 };
+        this.system.details.level.value = master?.level ?? 0;
         this.rollOptions.all[`self:level:${this.level}`] = true;
-        systemData.details.alliance = master?.alliance ?? "party";
+        system.details.alliance = master?.alliance ?? "party";
 
         // Set encounter roll options from the master's perspective
         if (master) {
-            this.flags.pf2e.rollOptions.all = mergeObject(
+            this.flags.pf2e.rollOptions.all = fu.mergeObject(
                 this.flags.pf2e.rollOptions.all,
-                createEncounterRollOptions(master)
+                createEncounterRollOptions(master),
             );
         }
     }
@@ -119,18 +136,13 @@ class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e 
     override prepareDerivedData(): void {
         super.prepareDerivedData();
 
-        const { master } = this;
-        const systemData = this.system;
-        const { attributes, traits } = systemData;
+        const { level, master, masterAttributeModifier, system } = this;
+        const { attributes, traits } = system;
 
         // Ensure uniqueness of traits
         traits.value = [...this.traits].sort();
+        const masterLevel = game.pf2e.settings.variants.pwol.enabled ? 0 : level;
 
-        const { level, masterAttributeModifier } = this;
-
-        const masterLevel = game.settings.get("pf2e", "proficiencyVariant") === "ProficiencyWithoutLevel" ? 0 : level;
-
-        const { synthetics } = this;
         const speeds = (attributes.speed = this.prepareSpeed("land"));
         speeds.otherSpeeds = (["burrow", "climb", "fly", "swim"] as const).flatMap((m) => this.prepareSpeed(m) ?? []);
 
@@ -152,82 +164,76 @@ class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e 
 
         const statistic = new ArmorStatistic(this, { modifiers: R.compact([masterModifier]) });
         this.armorClass = statistic.dc;
-        systemData.attributes.ac = statistic.getTraceData();
+        system.attributes.ac = fu.mergeObject(statistic.getTraceData(), { attribute: statistic.attribute ?? "dex" });
 
         // Saving Throws
-        this.saves = SAVE_TYPES.reduce((partialSaves, saveType) => {
-            const save = master?.saves[saveType];
-            const source = save?.modifiers.filter((m) => !["status", "circumstance"].includes(m.type)) ?? [];
-            const totalMod = applyStackingRules(source);
-            const ability = CONFIG.PF2E.savingThrowDefaultAbilities[saveType];
-            const selectors = [saveType, `${ability}-based`, "saving-throw", "all"];
-            const stat = new Statistic(this, {
-                slug: saveType,
-                label: game.i18n.localize(CONFIG.PF2E.saves[saveType]),
-                domains: selectors,
-                modifiers: [new ModifierPF2e(`PF2E.MasterSavingThrow.${saveType}`, totalMod, "untyped")],
-                check: { type: "saving-throw" },
-            });
+        this.saves = SAVE_TYPES.reduce(
+            (partialSaves, saveType) => {
+                const save = master?.saves[saveType];
+                const source = save?.modifiers.filter((m) => !["status", "circumstance"].includes(m.type)) ?? [];
+                const totalMod = applyStackingRules(source);
+                const attribute = CONFIG.PF2E.savingThrowDefaultAttributes[saveType];
+                const selectors = [saveType, `${attribute}-based`, "saving-throw", "all"];
+                const stat = new Statistic(this, {
+                    slug: saveType,
+                    label: game.i18n.localize(CONFIG.PF2E.saves[saveType]),
+                    domains: selectors,
+                    modifiers: [new ModifierPF2e(`PF2E.MasterSavingThrow.${saveType}`, totalMod, "untyped")],
+                    check: { type: "saving-throw" },
+                });
 
-            return { ...partialSaves, [saveType]: stat };
-        }, {} as Record<SaveType, Statistic>);
+                return { ...partialSaves, [saveType]: stat };
+            },
+            {} as Record<SaveType, Statistic>,
+        );
 
         this.system.saves = SAVE_TYPES.reduce(
             (partial, saveType) => ({ ...partial, [saveType]: this.saves[saveType].getTraceData() }),
-            {} as CreatureSaves
+            {} as CreatureSaves,
         );
 
-        // Senses
-        traits.senses = this.prepareSenses(this.system.traits.senses, synthetics);
-
         // Attack
-        if (master) {
-            systemData.attack = new Statistic(this, {
-                slug: "attack-roll",
-                label: "PF2E.Familiar.AttackRoll",
-                modifiers: [new ModifierPF2e("PF2E.MasterLevel", masterLevel, "untyped")],
-                domains: ["attack", "attack-roll"],
-                check: { type: "attack-roll", domains: ["attack", "attack-roll"] },
-            });
-        }
+        this.attackStatistic = new Statistic(this, {
+            slug: "attack-roll",
+            label: "PF2E.Familiar.AttackRoll",
+            modifiers: [new ModifierPF2e("PF2E.MasterLevel", masterLevel, "untyped")],
+            check: { type: "attack-roll" },
+        });
+
+        this.system.attack = this.attackStatistic.getTraceData();
 
         // Perception
-        {
-            const domains = ["perception", "wis-based", "all"];
-            const modifiers = [
+        this.perception = new PerceptionStatistic(this, {
+            slug: "perception",
+            label: "PF2E.PerceptionLabel",
+            attribute: "wis",
+            domains: ["perception", "wis-based", "all"],
+            modifiers: [
                 new ModifierPF2e("PF2E.MasterLevel", masterLevel, "untyped"),
-                new ModifierPF2e(`PF2E.MasterAbility.${systemData.master.ability}`, masterAttributeModifier, "untyped"),
-            ];
-            this.perception = new Statistic(this, {
-                slug: "perception",
-                label: "PF2E.PerceptionLabel",
-                domains,
-                modifiers,
-                check: { type: "perception-check" },
-            });
-            systemData.attributes.perception = mergeObject(
-                systemData.attributes.perception,
-                this.perception.getTraceData({ value: "mod" })
-            );
-        }
+                new ModifierPF2e(`PF2E.MasterAbility.${system.master.ability}`, masterAttributeModifier, "untyped"),
+            ],
+            check: { type: "perception-check" },
+            senses: system.perception.senses,
+        });
+        system.perception = fu.mergeObject(this.perception.getTraceData(), { attribute: "wis" as const });
 
         // Skills
         this.skills = Array.from(SKILL_ABBREVIATIONS).reduce((builtSkills, shortForm) => {
             const longForm = SKILL_DICTIONARY[shortForm];
             const modifiers = [new ModifierPF2e("PF2E.MasterLevel", masterLevel, "untyped")];
             if (["acr", "ste"].includes(shortForm)) {
-                const label = `PF2E.MasterAbility.${systemData.master.ability}`;
+                const label = `PF2E.MasterAbility.${system.master.ability}`;
                 modifiers.push(new ModifierPF2e(label, masterAttributeModifier, "untyped"));
             }
 
-            const ability = SKILL_EXPANDED[longForm].ability;
-            const domains = [longForm, `${ability}-based`, "skill-check", "all"];
+            const attribute = SKILL_EXPANDED[longForm].attribute;
+            const domains = [longForm, `${attribute}-based`, "skill-check", "all"];
 
             const label = CONFIG.PF2E.skills[shortForm] ?? longForm;
             const statistic = new Statistic(this, {
                 slug: longForm,
                 label,
-                ability,
+                attribute,
                 domains,
                 modifiers,
                 lore: false,
@@ -235,7 +241,7 @@ class FamiliarPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e 
             });
 
             builtSkills[longForm] = statistic;
-            this.system.skills[shortForm] = statistic.getTraceData();
+            this.system.skills[shortForm] = fu.mergeObject(statistic.getTraceData(), { attribute });
 
             return builtSkills;
         }, {} as CreatureSkills);

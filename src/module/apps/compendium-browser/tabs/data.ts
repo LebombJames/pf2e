@@ -1,9 +1,10 @@
 import { CreatureTrait } from "@actor/creature/types.ts";
 import { HazardTrait } from "@actor/hazard/types.ts";
 import { ActionTrait } from "@item/ability/index.ts";
+import { KingmakerTrait } from "@item/campaign-feature/types.ts";
 import { FeatTrait } from "@item/feat/types.ts";
 import { PhysicalItemTrait } from "@item/physical/data.ts";
-import { SearchResult } from "minisearch";
+import type { SearchResult } from "minisearch";
 import { SortDirection } from "../data.ts";
 
 type CheckboxOptions = Record<string, { label: string; selected: boolean }>;
@@ -34,7 +35,7 @@ interface OrderData {
     options: Record<string, string>;
 }
 
-interface RangesData {
+interface RangesInputData {
     changed: boolean;
     isExpanded: boolean;
     values: {
@@ -78,7 +79,6 @@ interface ActionFilters extends BaseFilterData {
 
 interface BestiaryFilters extends BaseFilterData {
     checkboxes: {
-        alignments: CheckboxData;
         rarity: CheckboxData;
         sizes: CheckboxData;
         source: CheckboxData;
@@ -91,10 +91,20 @@ interface BestiaryFilters extends BaseFilterData {
     };
 }
 
+interface CampaignFeatureFilters extends BaseFilterData {
+    checkboxes: Record<"category" | "rarity" | "source", CheckboxData>;
+    multiselects: {
+        traits: MultiselectData<KingmakerTrait>;
+    };
+    sliders: {
+        level: SliderData;
+    };
+}
+
 interface EquipmentFilters extends BaseFilterData {
     checkboxes: {
         armorTypes: CheckboxData;
-        itemtypes: CheckboxData;
+        itemTypes: CheckboxData;
         rarity: CheckboxData;
         source: CheckboxData;
         weaponTypes: CheckboxData;
@@ -103,7 +113,7 @@ interface EquipmentFilters extends BaseFilterData {
         traits: MultiselectData<PhysicalItemTrait>;
     };
     ranges: {
-        price: RangesData;
+        price: RangesInputData;
     };
     sliders: {
         level: SliderData;
@@ -137,7 +147,7 @@ interface HazardFilters extends BaseFilterData {
 interface SpellFilters extends BaseFilterData {
     checkboxes: {
         category: CheckboxData;
-        level: CheckboxData;
+        rank: CheckboxData;
         rarity: CheckboxData;
         source: CheckboxData;
         traditions: CheckboxData;
@@ -150,7 +160,14 @@ interface SpellFilters extends BaseFilterData {
     };
 }
 
-type BrowserFilter = ActionFilters | BestiaryFilters | EquipmentFilters | FeatFilters | HazardFilters | SpellFilters;
+type BrowserFilter =
+    | ActionFilters
+    | BestiaryFilters
+    | CampaignFeatureFilters
+    | EquipmentFilters
+    | FeatFilters
+    | HazardFilters
+    | SpellFilters;
 
 type CompendiumBrowserIndexData = Omit<CompendiumIndexData, "_id"> & Partial<SearchResult>;
 
@@ -160,11 +177,12 @@ interface RenderResultListOptions {
     replace?: boolean;
 }
 
-export {
+export type {
     ActionFilters,
     BaseFilterData,
     BestiaryFilters,
     BrowserFilter,
+    CampaignFeatureFilters,
     CheckboxData,
     CheckboxOptions,
     CompendiumBrowserIndexData,
@@ -172,7 +190,7 @@ export {
     FeatFilters,
     HazardFilters,
     MultiselectData,
-    RangesData,
+    RangesInputData,
     RenderResultListOptions,
     SliderData,
     SpellFilters,

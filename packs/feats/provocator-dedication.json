@@ -1,6 +1,6 @@
 {
     "_id": "VJ3wIsfmabK02SNg",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Provocator Dedication",
     "system": {
         "actionType": {
@@ -19,26 +19,19 @@
         "prerequisites": {
             "value": [
                 {
-                    "value": "Strength 14"
+                    "value": "Strength +2"
                 },
                 {
-                    "value": "Charisma 14"
+                    "value": "Charisma +2"
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #159: All or Nothing"
+        },
         "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 1
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 1
-            },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
@@ -46,8 +39,15 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder #159: All or Nothing"
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 1
+                },
+                "simple": {
+                    "rank": 1
+                }
+            }
         },
         "traits": {
             "rarity": "uncommon",

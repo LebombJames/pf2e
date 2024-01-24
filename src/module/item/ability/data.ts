@@ -5,16 +5,14 @@ import {
     FrequencySource,
     ItemSystemData,
     ItemSystemSource,
-    ItemTraits,
-} from "@item/data/base.ts";
+    ItemTraitsNoRarity,
+} from "@item/base/data/system.ts";
 import { OneToThree } from "@module/data.ts";
 import { ActionCategory, ActionTrait } from "./types.ts";
 
 type AbilityItemSource = BaseItemSourcePF2e<"action", AbilitySystemSource>;
 
-interface AbilityTraits extends ItemTraits<ActionTrait> {
-    rarity?: never;
-}
+interface AbilityTraits extends ItemTraitsNoRarity<ActionTrait> {}
 
 interface AbilitySystemSource extends ItemSystemSource {
     traits: AbilityTraits;
@@ -25,12 +23,6 @@ interface AbilitySystemSource extends ItemSystemSource {
         value: OneToThree | null;
     };
     category: ActionCategory | null;
-    requirements: {
-        value: string;
-    };
-    trigger: {
-        value: string;
-    };
     deathNote: boolean;
     frequency?: FrequencySource;
     level?: never;
@@ -44,7 +36,7 @@ interface SelfEffectReferenceSource {
     name: string;
 }
 
-interface AbilitySystemData extends AbilitySystemSource, Omit<ItemSystemData, "level" | "traits"> {
+interface AbilitySystemData extends Omit<AbilitySystemSource, "description">, Omit<ItemSystemData, "level" | "traits"> {
     frequency?: Frequency;
     /** A self-applied effect for simple actions */
     selfEffect: SelfEffectReference | null;
@@ -54,4 +46,4 @@ interface SelfEffectReference extends SelfEffectReferenceSource {
     img?: Maybe<ImageFilePath>;
 }
 
-export { AbilityItemSource, AbilitySystemData, AbilityTraits, SelfEffectReference, SelfEffectReferenceSource };
+export type { AbilityItemSource, AbilitySystemData, AbilityTraits, SelfEffectReference, SelfEffectReferenceSource };

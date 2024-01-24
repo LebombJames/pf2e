@@ -1,6 +1,6 @@
 {
     "_id": "4Zj71naHbY6O9ggP",
-    "img": "systems/pf2e/icons/unarmed-attacks/bone-shard.webp",
+    "img": "icons/commodities/claws/claws-plain-brown-orange.webp",
     "name": "Effect: Bristle",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
         "rules": [
             {
@@ -32,9 +37,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "start": {
             "initiative": null,
             "value": 0

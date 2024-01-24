@@ -1,12 +1,17 @@
-import { StrikeLookupData } from "@module/chat-message/index.ts";
 import { ZeroToThree } from "@module/data.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import { RollDataPF2e } from "@system/rolls.ts";
 import { CheckType } from "./types.ts";
 
+/** A foundry `Roll` subclass representing a Pathfinder 2e check */
 class CheckRoll extends Roll {
     static override CHAT_TEMPLATE = "systems/pf2e/templates/chat/check/roll.hbs";
+
+    constructor(formula: string, data?: Record<string, unknown>, options?: CheckRollDataPF2e) {
+        super(formula, data, options);
+        this.options.showBreakdown ??= true;
+    }
 
     get roller(): UserPF2e | null {
         return game.users.get(this.options.rollerId ?? "") ?? null;
@@ -14,15 +19,6 @@ class CheckRoll extends Roll {
 
     get type(): CheckType {
         return this.options.type ?? "check";
-    }
-
-    /** A string of some kind to help system API identify the roll */
-    get identifier(): string | null {
-        return this.options.identifier ?? null;
-    }
-
-    get action(): string | null {
-        return this.options.action ?? null;
     }
 
     get degreeOfSuccess(): DegreeOfSuccessIndex | null {
@@ -40,36 +36,55 @@ class CheckRoll extends Roll {
     override async render(this: Rolled<CheckRoll>, options: RollRenderOptions = {}): Promise<string> {
         if (!this._evaluated) await this.evaluate({ async: true });
         const { isPrivate, flavor, template } = options;
+        const { type, identifier, action, damaging } = this.options;
+        const canRollDamage = !!(damaging && identifier && (this.roller === game.user || game.user.isGM));
+        const showBreakdown = this.options.showBreakdown;
+        const showDamageCue = canRollDamage && game.pf2e.settings.metagame.results;
+        const tooltip = isPrivate || !(showBreakdown || game.user.isGM) ? "" : await this.getTooltip();
 
         const chatData: Record<string, unknown> = {
             formula: isPrivate ? "???" : this._formula,
             flavor: isPrivate ? null : flavor,
-            user: game.user.id,
-            tooltip: isPrivate ? "" : await this.getTooltip(),
+            user: game.user,
+            tooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-            identifier: this.options.identifier,
-            action: this.options.action,
+            type,
+            identifier,
+            action,
             degree: this.degreeOfSuccess,
-            damaging: this.options.damaging,
-            canRollDamage: this.roller === game.user || game.user.isGM,
+            canRollDamage,
+            showBreakdown,
+            showDamageCue,
         };
 
         return renderTemplate(template ?? CheckRoll.CHAT_TEMPLATE, chatData);
     }
+
+    override async getTooltip(): Promise<string> {
+        const tooltip = await super.getTooltip();
+        if (this.options.showBreakdown) return tooltip;
+        return tooltip.replace('"dice-tooltip"', '"dice-tooltip" data-visibility="gm"');
+    }
 }
 
 interface CheckRoll extends Roll {
-    options: CheckRollDataPF2e;
+    options: CheckRollDataPF2e & { showBreakdown: boolean };
 }
+
+/** A legacy class kept to allow chat messages to reconstruct rolls */
+class StrikeAttackRoll extends CheckRoll {}
 
 interface CheckRollDataPF2e extends RollDataPF2e {
     type?: CheckType;
+    /** A string of some kind to help system API identify the roll */
     identifier?: Maybe<string>;
+    /** The slug of an action associated with this roll */
     action?: Maybe<string>;
     isReroll?: boolean;
     degreeOfSuccess?: ZeroToThree;
-    strike?: StrikeLookupData;
+    /** Whether the check is part of a damaging action */
+    damaging?: boolean;
     domains?: string[];
 }
 
-export { CheckRoll, CheckRollDataPF2e };
+export { CheckRoll, StrikeAttackRoll, type CheckRollDataPF2e };

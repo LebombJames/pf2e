@@ -13,15 +13,15 @@
             "name": "Composite Shortbow",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "composite-shortbow",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 1
                 },
                 "category": "martial",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 14
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": 60,
@@ -85,17 +67,15 @@
                     "value": "0"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "striking": 2
+                },
                 "size": "med",
                 "slug": "composite-shortbow",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "greaterStriking"
                 },
                 "traits": {
                     "rarity": "common",
@@ -106,9 +86,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-plus-hands"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -124,9 +101,6 @@
             "name": "Hook Sword",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "hook-sword",
                 "bonus": {
                     "value": 0
@@ -134,8 +108,11 @@
                 "bonusDamage": {
                     "value": 0
                 },
+                "bulk": {
+                    "value": 1
+                },
                 "category": "advanced",
-                "containerId": "null",
+                "containerId": null,
                 "damage": {
                     "damageType": "slashing",
                     "dice": 1,
@@ -149,9 +126,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -161,34 +135,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 2
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder #166: Despair on Danger Island"
                 },
                 "quantity": 1,
                 "range": null,
@@ -196,17 +155,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 2,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "med",
                 "slug": "hook-sword",
-                "source": {
-                    "value": "Pathfinder #166: Despair on Danger Island"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "uncommon",
@@ -220,9 +177,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "1"
                 }
             },
             "type": "weapon"
@@ -238,30 +192,19 @@
             "name": "Arrows",
             "sort": 300000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
-                    "value": 0
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "ammo",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>These projectiles are the ammunition for bows. The shaft of an arrow is made of wood. It is stabilized in flight by fletching at one end and bears a metal head on the other.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -271,14 +214,9 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "per": 10,
@@ -286,13 +224,15 @@
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
                 "quantity": 20,
                 "rules": [],
                 "size": "med",
                 "slug": "arrows",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "stackGroup": "arrows",
                 "traits": {
                     "rarity": "common",
@@ -301,8 +241,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -336,11 +278,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -385,11 +329,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -426,23 +372,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -463,23 +402,16 @@
                 "description": {
                     "value": "<p>While in natural terrain, Surjit can @UUID[Compendium.pf2e.actionspf2e.Item.Sneak] even while @UUID[Compendium.pf2e.conditionitems.Item.Observed].</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -500,23 +432,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> Surjit fails a Perception check to @UUID[Compendium.pf2e.actionspf2e.Item.Seek]</p>\n<hr />\n<p><strong>Effect</strong> Surjit automatically senses any @UUID[Compendium.pf2e.conditionitems.Item.Undetected] creatures in the area where he was Seeking, making them merely @UUID[Compendium.pf2e.conditionitems.Item.Hidden] to him.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -542,23 +467,16 @@
                 "description": {
                     "value": "<p>Surjit can use a ranged weapon to make an Attack of Opportunity as though the weapon had a reach of 10 feet.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "attack-of-opportunity",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -579,23 +497,16 @@
                 "description": {
                     "value": "<p>Surjit Strides twice. Difficult terrain doesn't slow his movement. Any space Surjit enters becomes normal terrain rather than difficult terrain (or difficult terrain rather than greater difficult terrain) until the start of his next turn.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -614,25 +525,18 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>When Surjit critically hits a creature with a ranged weapon or hits a creature for the second time on a turn with a ranged weapon, Surjit can attempt to counteract one magic effect on the creature (counteract level 7th). He uses his attack modifier as his counteract modifier.</p>"
+                    "value": "<p>When Surjit critically hits a creature with a ranged weapon or hits a creature for the second time on a turn with a ranged weapon, Surjit can attempt to counteract one magic effect on the creature (counteract rank 7th). He uses his attack modifier as his counteract modifier.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -656,10 +560,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Surjit deals an extra 2d6 precision damage to off-guard targets.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.SneakAttack]</p>"
+                    "value": "<p>Surjit deals an extra 2d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] targets.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -668,21 +574,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -695,18 +587,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -726,11 +609,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -749,11 +634,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -772,11 +659,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -795,11 +684,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -840,12 +731,6 @@
                 "temp": 0,
                 "value": 220
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 25
-            },
             "speed": {
                 "otherSpeeds": [
                     {
@@ -861,19 +746,38 @@
             }
         },
         "details": {
-            "alignment": {
-                "value": "LN"
-            },
             "blurb": "Male gnome Rain-Scribe attendant",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "gnomish",
+                    "mwangi",
+                    "taldane",
+                    "tien"
+                ]
+            },
             "level": {
                 "value": 13
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #167: Ready? Fight!"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #167: Ready? Fight!"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 25,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -891,26 +795,14 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "gnomish",
-                    "mwangi",
-                    "taldane",
-                    "tien"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
                 "gnoll",
-                "humanoid"
+                "humanoid",
+                "lawful"
             ]
         }
     },

@@ -1,6 +1,6 @@
 {
     "_id": "R3j6song8sYLY5vG",
-    "img": "systems/pf2e/icons/spells/community-repair.webp",
+    "img": "icons/commodities/tech/cog-brass.webp",
     "name": "Spell Effect: Community Repair (Critical Success)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #170: Spoken on the Song Wind"
         },
         "rules": [
             {
@@ -44,9 +49,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder #170: Spoken on the Song Wind"
-        },
         "start": {
             "initiative": null,
             "value": 0

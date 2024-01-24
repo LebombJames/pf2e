@@ -1,6 +1,6 @@
 {
     "_id": "KP5VugClDb7I8enS",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "That Was a Close One, Huh?",
     "system": {
         "actionType": {
@@ -31,10 +31,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

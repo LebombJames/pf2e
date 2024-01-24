@@ -4,12 +4,12 @@
     "name": "Voicebox",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0
+        },
         "containerId": null,
         "description": {
             "value": "<p>This box contains small, magical amplifiers that allow a nonverbal character to translate thought into speech, which emits from the necklace. The speech produced matches any language you understand.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,27 +19,23 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "sp": 5
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
@@ -49,9 +45,6 @@
         },
         "usage": {
             "value": "wornnecklace"
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "equipment"

@@ -15,8 +15,14 @@
         "level": {
             "value": 5
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
         "rules": [
             {
+                "baseType": "claw",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -48,9 +54,6 @@
                 "value": "@actor.attributes.speed.total"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,6 +1,6 @@
 {
     "_id": "0AD7BiKjT8a6Uh92",
-    "img": "systems/pf2e/icons/spells/horrific-visage.webp",
+    "img": "icons/magic/unholy/strike-body-explode-disintegrate.webp",
     "name": "Effect: Energetic Meltdown",
     "system": {
         "badge": {
@@ -24,6 +24,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
+        },
         "rules": [
             {
                 "key": "Weakness",
@@ -39,9 +44,6 @@
                 "value": "floor(@actor.level/3)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,10 +1,10 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { ConditionPF2e } from "@item";
 import { ConditionSource } from "@item/condition/data.ts";
 import { ConditionSlug } from "@item/condition/types.ts";
-import { TokenPF2e } from "@module/canvas/index.ts";
-import { ErrorPF2e, localizer, setHasElement, sluggify, tupleHasValue } from "@util";
 import { CONDITION_SLUGS } from "@item/condition/values.ts";
+import type { TokenPF2e } from "@module/canvas/index.ts";
+import { ErrorPF2e, localizer, setHasElement, sluggify, tupleHasValue } from "@util";
 
 /** A helper class to manage PF2e Conditions */
 export class ConditionManager {
@@ -28,17 +28,17 @@ export class ConditionManager {
                         [condition.slug, condition],
                         [condition.uuid, condition],
                     ];
-                }) ?? []
+                }) ?? [],
             );
             delete this.CONDITION_SOURCES;
         }
 
-        if ((!this.#initialized || force) && game.i18n.lang !== "en") {
+        if ((!this.#initialized || force) && game.i18n.lang !== "en" && game.modules.get("babele")?.active) {
             const localize = localizer("PF2E.condition");
             for (const condition of this.conditions.values()) {
                 condition.name = condition._source.name = localize(`${condition.slug}.name`);
                 condition.system.description.value = condition._source.system.description.value = localize(
-                    `${condition.slug}.rules`
+                    `${condition.slug}.rules`,
                 );
             }
         }
@@ -67,9 +67,9 @@ export class ConditionManager {
     static async updateConditionValue(
         itemId: string,
         actorOrToken: ActorPF2e | TokenPF2e,
-        value: number
+        value: number,
     ): Promise<void> {
-        const actor = actorOrToken instanceof ActorPF2e ? actorOrToken : actorOrToken.actor;
+        const actor = "prototypeToken" in actorOrToken ? actorOrToken : actorOrToken.actor;
         const condition = actor?.items.get(itemId);
 
         if (condition?.isOfType("condition")) {

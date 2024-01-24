@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "disabledIf": [
@@ -34,6 +39,9 @@
                 "suboptions": [
                     {
                         "label": "PF2E.SpecificRule.Swashbuckler.Finisher.Basic",
+                        "predicate": [
+                            "feat:finishing-precision"
+                        ],
                         "value": "basic"
                     },
                     {
@@ -235,9 +243,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

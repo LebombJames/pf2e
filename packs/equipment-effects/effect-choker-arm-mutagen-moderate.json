@@ -1,6 +1,6 @@
 {
     "_id": "IBu1RWKW5JX70nse",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/consumables/potions/bottle-conical-corked-green.webp",
     "name": "Effect: Choker-Arm Mutagen (Moderate)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 3
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -53,9 +58,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

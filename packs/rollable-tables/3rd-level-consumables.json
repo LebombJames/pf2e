@@ -127,7 +127,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "evBPzM1VsuYcoenn",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-bombs/tanglefoot-bag.webp",
+            "img": "icons/containers/bags/sack-simple-leather-tan.webp",
             "range": [
                 49,
                 54
@@ -155,7 +155,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "fFq8nsGvSUgzVeND",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/consumables/other-consumables/feather-token.webp",
+            "img": "icons/commodities/materials/feather-blue.webp",
             "range": [
                 61,
                 66
@@ -169,7 +169,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "Dn2KQgIeWNijaUzL",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/consumables/other-consumables/feather-token.webp",
+            "img": "icons/commodities/materials/feather-blue.webp",
             "range": [
                 67,
                 72
@@ -183,7 +183,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "VISk5uLPVIvNWovB",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-elixirs/bestial-mutagen.webp",
+            "img": "icons/consumables/potions/bottle-round-flask-fumes-purple.webp",
             "range": [
                 73,
                 78
@@ -197,7 +197,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "qpzL9UnTi4cDhy6J",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-elixirs/cognitive-mutagen.webp",
+            "img": "icons/consumables/potions/potion-vial-corked-purple.webp",
             "range": [
                 79,
                 84
@@ -211,7 +211,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "mj9i9GeQTADByNPZ",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-elixirs/juggernaut-mutagen.webp",
+            "img": "icons/consumables/potions/bottle-round-corked-green.webp",
             "range": [
                 85,
                 90
@@ -253,7 +253,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "lIExlUFBKvBue8hb",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-elixirs/silvertongue-mutagen.webp",
+            "img": "icons/consumables/potions/potion-bottle-corked-fancy-blue.webp",
             "range": [
                 103,
                 108
@@ -281,7 +281,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "aZm1x9tpvBAT8YCd",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/cytillesh-oil.webp",
+            "img": "icons/commodities/materials/liquid-purple.webp",
             "range": [
                 115,
                 120
@@ -309,7 +309,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "e0vSAQfxhHauiAoD",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/consumables/potions/healing-potion.webp",
+            "img": "icons/consumables/potions/bottle-round-corked-orante-red.webp",
             "range": [
                 127,
                 132
@@ -337,7 +337,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "Y7UD64foDbDMV9sx",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/consumables/other-consumables/spell-scroll.webp",
+            "img": "icons/sundries/scrolls/scroll-symbol-eye-brown.webp",
             "range": [
                 139,
                 144

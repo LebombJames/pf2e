@@ -1,10 +1,10 @@
 {
     "_id": "wcNGbhwn3AuamtsX",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/magic/sonic/bell-alarm-red-purple.webp",
     "name": "Effect: Scraping Clamor",
     "system": {
         "description": {
-            "value": ""
+            "value": "<p>You gain a +1 circumstance bonus to any saves to resist auditory spells or abilities.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #159: All or Nothing"
         },
         "rules": [
             {
@@ -26,9 +31,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder #159: All or Nothing"
-        },
         "start": {
             "initiative": null,
             "value": 0

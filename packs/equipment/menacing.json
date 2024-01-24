@@ -4,12 +4,12 @@
     "name": "Menacing",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0
+        },
         "containerId": null,
         "description": {
             "value": "<p>Common among brutes who use the magic to scare others into compliance, menacing runes lend you a formidable appearance, granting you a +1 item bonus to Intimidation checks to @UUID[Compendium.pf2e.actionspf2e.Item.Coerce] others.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
         },
         "hardness": 0,
         "hp": {
@@ -19,19 +19,19 @@
         "level": {
             "value": 3
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 50
             }
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "quantity": 1,
         "rules": [
@@ -46,22 +46,14 @@
             }
         ],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": [
-                "enchantment",
                 "magical"
             ]
         },
         "usage": {
             "value": "applied-to-any-visible-article-of-clothing"
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "equipment"

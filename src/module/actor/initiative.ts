@@ -1,6 +1,7 @@
+import type { ActorPF2e } from "@actor";
 import { createPonderousPenalty } from "@actor/character/helpers.ts";
 import { InitiativeData } from "@actor/data/base.ts";
-import { ActorPF2e } from "@module/documents.ts";
+import { ZeroToTwo } from "@module/data.ts";
 import { CombatantPF2e, EncounterPF2e } from "@module/encounter/index.ts";
 import { CheckRoll } from "@system/check/index.ts";
 import { Statistic, StatisticData, StatisticRollParameters, StatisticTraceData } from "@system/statistic/index.ts";
@@ -20,31 +21,16 @@ interface InitiativeRollParams extends StatisticRollParameters {
 /** A statistic wrapper used to roll initiative for actors */
 class ActorInitiative {
     actor: ActorPF2e;
+
     statistic: Statistic;
 
-    get attribute(): AttributeString | null {
-        return this.statistic.ability;
-    }
+    tiebreakPriority: ZeroToTwo;
 
-    /** @deprecated */
-    get ability(): AttributeString | null {
-        foundry.utils.logCompatibilityWarning(
-            "`ActorInitiative#ability` is deprecated. Use `ActorInitiative#attribute` instead.",
-            { since: "5.3.0", until: "6.0.0" }
-        );
-        return this.attribute;
-    }
-
-    constructor(actor: ActorPF2e) {
+    constructor(actor: ActorPF2e, { statistic, tiebreakPriority }: { statistic: string; tiebreakPriority: ZeroToTwo }) {
         this.actor = actor;
+        this.tiebreakPriority = tiebreakPriority;
 
-        const initiativeSkill = actor.isOfType("hazard")
-            ? "stealth"
-            : actor.isOfType("character", "npc")
-            ? actor.attributes.initiative?.statistic || "perception"
-            : null;
-        const base = initiativeSkill ? actor.getStatistic(initiativeSkill) : null;
-
+        const base = actor.getStatistic(statistic);
         const ponderousPenalty = actor.isOfType("character") ? createPonderousPenalty(actor) : null;
         const rollLabel = game.i18n.format("PF2E.InitiativeWithSkill", { skillName: base?.label ?? "" });
 
@@ -58,6 +44,23 @@ class ActorInitiative {
         };
 
         this.statistic = base ? base.extend(data) : new Statistic(actor, data);
+    }
+
+    get attribute(): AttributeString | null {
+        return this.statistic.attribute;
+    }
+
+    get mod(): number {
+        return this.statistic.check.mod;
+    }
+
+    /** @deprecated */
+    get ability(): AttributeString | null {
+        fu.logCompatibilityWarning(
+            "`ActorInitiative#ability` is deprecated. Use `ActorInitiative#attribute` instead.",
+            { since: "5.3.0", until: "6.0.0" },
+        );
+        return this.attribute;
     }
 
     async roll(args: InitiativeRollParams = {}): Promise<InitiativeRollResult | null> {
@@ -87,17 +90,17 @@ class ActorInitiative {
     }
 
     getTraceData(): InitiativeTraceData {
-        const initiativeData = this.actor.attributes.initiative;
-        const tiebreakPriority = initiativeData?.tiebreakPriority ?? 0;
+        const initiativeData = this.actor.system.initiative;
 
         return {
             ...this.statistic.getTraceData(),
             statistic: initiativeData?.statistic ?? "perception",
-            tiebreakPriority,
+            tiebreakPriority: this.tiebreakPriority,
         };
     }
 }
 
 type InitiativeTraceData = StatisticTraceData & InitiativeData;
 
-export { ActorInitiative, InitiativeRollResult, InitiativeTraceData };
+export { ActorInitiative };
+export type { InitiativeRollResult, InitiativeTraceData };

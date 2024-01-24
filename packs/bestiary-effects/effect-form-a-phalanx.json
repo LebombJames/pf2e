@@ -1,6 +1,6 @@
 {
     "_id": "l62iAFL3EO7wSsLL",
-    "img": "systems/pf2e/icons/equipment/shields/steel-shield.webp",
+    "img": "icons/equipment/shield/heater-steel-boss-red.webp",
     "name": "Effect: Form a Phalanx",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 6
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

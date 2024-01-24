@@ -1,6 +1,6 @@
 {
     "_id": "EHJRMCBRL4YeBN6l",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Ghoul Dedication",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
+        },
         "rules": [
             {
                 "add": [
@@ -42,7 +47,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/claw.webp",
+                "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
                 "key": "Strike",
                 "label": "PF2E.Weapon.Base.claw",
                 "range": null,
@@ -64,7 +69,7 @@
                     }
                 },
                 "group": "brawling",
-                "img": "systems/pf2e/icons/unarmed-attacks/jaws.webp",
+                "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
                 "key": "Strike",
                 "label": "PF2E.Weapon.Base.jaws",
                 "range": null,
@@ -90,9 +95,6 @@
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Consume Flesh"
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

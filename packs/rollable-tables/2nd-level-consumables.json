@@ -15,7 +15,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "cwurQLvQaqjK70UI",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/consumables/other-consumables/feather-token.webp",
+            "img": "icons/commodities/materials/feather-blue.webp",
             "range": [
                 1,
                 6
@@ -267,7 +267,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "6DmHDtIsGzH1s5JO",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/consumables/oils/oil-of-weightlessness.webp",
+            "img": "icons/tools/laboratory/bowl-mixing.webp",
             "range": [
                 106,
                 111
@@ -295,12 +295,12 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "8fbsKEEbZ0CfBMIr",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-tools/silversheen.webp",
+            "img": "icons/consumables/drinks/alcohol-spirits-bottle-blue.webp",
             "range": [
                 118,
                 123
             ],
-            "text": "Silversheen",
+            "text": "Silver Salve",
             "type": 2,
             "weight": 6
         }

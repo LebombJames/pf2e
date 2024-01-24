@@ -1,6 +1,6 @@
 {
     "_id": "n1vhmOd7aNiuR3nk",
-    "img": "systems/pf2e/icons/features/classes/diabolic.webp",
+    "img": "icons/sundries/scrolls/scroll-symbol-eye-brown.webp",
     "name": "Effect: Diabolic Blood Magic (Self)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -23,9 +28,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

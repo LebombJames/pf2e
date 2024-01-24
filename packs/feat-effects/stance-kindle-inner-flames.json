@@ -1,6 +1,6 @@
 {
     "_id": "hrEG2smy3tZyGxIn",
-    "img": "systems/pf2e/icons/spells/cleansing-flames.webp",
+    "img": "icons/magic/fire/flame-burning-campfire-rocks.webp",
     "name": "Stance: Kindle Inner Flames",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -39,9 +44,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "start": {
             "initiative": null,
             "value": 0

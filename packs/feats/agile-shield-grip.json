@@ -1,6 +1,6 @@
 {
     "_id": "dFQj6gLrbQi7APiA",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Agile Shield Grip",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Knights of Lastwall"
         },
         "rules": [
             {
@@ -57,9 +62,6 @@
                 "value": "agile"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Knights of Lastwall"
-        },
         "traits": {
             "rarity": "uncommon",
             "value": [

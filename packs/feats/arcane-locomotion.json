@@ -1,6 +1,6 @@
 {
     "_id": "FI4MnH0KQfIKJRNT",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Arcane Locomotion",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -36,11 +41,11 @@
             {
                 "choices": [
                     {
-                        "label": "PF2E.SpeedTypesClimb",
+                        "label": "PF2E.Actor.Speed.Type.Climb",
                         "value": "climb"
                     },
                     {
-                        "label": "PF2E.SpeedTypesSwim",
+                        "label": "PF2E.Actor.Speed.Type.Swim",
                         "value": "swim"
                     }
                 ],
@@ -87,9 +92,6 @@
                 "value": "@actor.attributes.speed.total"
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

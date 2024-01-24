@@ -15,7 +15,21 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    "fear"
+                ],
+                "selector": "saving-throw",
+                "type": "status",
+                "value": 1
+            },
             {
                 "key": "FlatModifier",
                 "selector": "attack",
@@ -32,9 +46,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

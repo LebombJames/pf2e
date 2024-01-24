@@ -1,6 +1,6 @@
 {
     "_id": "kDTiRg9vVOYNnTyr",
-    "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/handwraps-of-mighty-blows.webp",
+    "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
     "name": "Stance: Powder Punch Stance",
     "system": {
         "description": {
@@ -15,9 +15,14 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #178: Punks in a Powder Keg"
+        },
         "rules": [
             {
-                "domain": "damage-roll",
+                "domain": "damage",
                 "key": "RollOption",
                 "label": "PF2E.SpecificRule.PowderPunchStance.Label",
                 "option": "powder-punch",
@@ -49,9 +54,6 @@
                 "title": "{item|name}"
             }
         ],
-        "source": {
-            "value": "Pathfinder #178: Punks in a Powder Keg"
-        },
         "start": {
             "initiative": null,
             "value": 0

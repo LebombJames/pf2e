@@ -1,10 +1,10 @@
 {
     "_id": "5yCL7InrJDHpaQjz",
-    "img": "systems/pf2e/icons/spells/ant-haul.webp",
+    "img": "icons/creatures/invertebrates/ant-strength-green.webp",
     "name": "Spell Effect: Ant Haul",
     "system": {
         "description": {
-            "value": ""
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Ant Haul]</p>\n<p>The target can carry 3 more Bulk than normal before becoming @UUID[Compendium.pf2e.conditionitems.Item.Encumbered] and up to a maximum of 6 more Bulk.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -15,23 +15,25 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "add",
-                "path": "system.attributes.bonusEncumbranceBulk",
+                "path": "inventory.bulk.encumberedAfterAddend",
                 "value": 3
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "add",
-                "path": "system.attributes.bonusLimitBulk",
+                "path": "inventory.bulk.maxAddend",
                 "value": 6
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,22 +1,18 @@
 import {
     BaseCreatureSource,
     CreatureAttributes,
+    CreatureDetails,
+    CreatureDetailsSource,
     CreatureSystemData,
     CreatureSystemSource,
-    CreatureTraitsData,
 } from "@actor/creature/data.ts";
-import type { CreatureSensePF2e } from "@actor/creature/sense.ts";
 import { AttributeString } from "@actor/types.ts";
-import type { Statistic } from "@system/statistic/index.ts";
+import { StatisticTraceData } from "@system/statistic/index.ts";
 
 type FamiliarSource = BaseCreatureSource<"familiar", FamiliarSystemSource>;
 
-interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
-    details: {
-        creature: {
-            value: string;
-        };
-    };
+interface FamiliarSystemSource extends CreatureSystemSource {
+    details: FamiliarDetailsSource;
     attributes: FamiliarAttributesSource;
     master: {
         id: string | null;
@@ -24,46 +20,58 @@ interface FamiliarSystemSource extends Pick<CreatureSystemSource, "schema"> {
     };
 
     customModifiers?: never;
-
+    perception?: never;
     resources?: never;
-
+    saves?: never;
+    skills?: never;
     traits?: never;
 }
 
-/** The raw information contained within the actor data object for familiar actors. */
-interface FamiliarSystemData
-    extends Omit<FamiliarSystemSource, "attributes" | "customModifiers" | "toggles" | "resources" | "traits">,
-        CreatureSystemData {
-    details: CreatureSystemData["details"] & {
-        creature: {
-            value: string;
-        };
-    };
-    actions?: never;
-    attack: Statistic;
-    attributes: FamiliarAttributes;
-    master: {
-        id: string | null;
-        ability: AttributeString | null;
-    };
-    traits: FamiliarTraitsData;
-}
-
 interface FamiliarAttributesSource {
-    hp: { value: number };
-    initiative?: never;
+    hp: { value: number; temp: number };
     immunities?: never;
     weaknesses?: never;
     resistances?: never;
 }
 
-interface FamiliarAttributes extends CreatureAttributes {
-    ac: { value: number; breakdown: string; check?: number };
+interface FamiliarDetailsSource extends CreatureDetailsSource {
+    creature: {
+        value: string;
+    };
+    alliance?: never;
+    languages?: never;
+    level?: never;
+}
+
+/** The raw information contained within the actor data object for familiar actors. */
+interface FamiliarSystemData extends Omit<FamiliarSystemSource, SourceOmission>, CreatureSystemData {
+    details: FamiliarDetails;
+    attack: StatisticTraceData;
+    attributes: CreatureAttributes;
+    master: {
+        id: string | null;
+        ability: AttributeString | null;
+    };
+
+    actions?: never;
     initiative?: never;
 }
 
-interface FamiliarTraitsData extends CreatureTraitsData {
-    senses: CreatureSensePF2e[];
+type SourceOmission =
+    | "attributes"
+    | "customModifiers"
+    | "details"
+    | "perception"
+    | "toggles"
+    | "resources"
+    | "saves"
+    | "skills"
+    | "traits";
+
+interface FamiliarDetails extends CreatureDetails {
+    creature: {
+        value: string;
+    };
 }
 
-export { FamiliarSource, FamiliarSystemData, FamiliarSystemSource };
+export type { FamiliarSource, FamiliarSystemData, FamiliarSystemSource };

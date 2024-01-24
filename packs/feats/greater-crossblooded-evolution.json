@@ -1,6 +1,6 @@
 {
     "_id": "doD3jZylVXZ0oHWO",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Greater Crossblooded Evolution",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p>Your bloodline is extraordinarily complex. You can have up to three spells from other traditions in your spell repertoire, rather than just one. These spells must each be of a different spell level, but they don't need to be from the same tradition.</p>"
+            "value": "<p>Your bloodline is extraordinarily complex. You can have up to three spells from other traditions in your spell repertoire, rather than just one. These spells must each be of a different spell rank, but they don't need to be from the same tradition.</p>"
         },
         "level": {
             "value": 18
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

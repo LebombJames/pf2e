@@ -1,6 +1,6 @@
 {
     "_id": "H99PJXU5cvJ4Oycm",
-    "img": "systems/pf2e/icons/spells/elemental-form-fire.webp",
+    "img": "icons/magic/fire/elemental-fire-flying.webp",
     "name": "Effect: Fiery Form",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 4
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
         },
         "rules": [
             {
@@ -47,9 +52,6 @@
                 "key": "ActorTraits"
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -1,20 +1,20 @@
 {
     "_id": "WOwVBsiwLQxnIJRV",
-    "img": "systems/pf2e/icons/equipment/armor/studded-leather-armor.webp",
+    "img": "icons/equipment/chest/breastplate-layered-leather-studded-brown.webp",
     "name": "Devil's Bargain",
     "system": {
         "acBonus": 2,
         "baseItem": "studded-leather-armor",
+        "bulk": {
+            "value": 0.1
+        },
         "category": "light",
         "checkPenalty": -1,
         "containerId": null,
         "description": {
-            "value": "<p>Those favored by Asmodeus can be found wearing this <em>+1 studded leather</em>, which is lacquered in red and black.</p>\n<p><strong>Activate</strong> <span class=\"pf2-icon\">r</span> envision (fortune)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You critically fail an attack roll, check, or saving throw</p>\n<hr />\n<p><strong>Effect</strong> You offer a prayer to Asmodeus, who accepts under a reciprocal condition. Reroll the triggering roll with a +2 circumstance bonus and use the higher result.</p>\n<p>If this reroll improves your degree of success, the GM can later reroll one Strike against you, one saving throw against your abilities, or one secret check or saving throw you make. This is a fortune effect if used on a Strike or save against you, or a misfortune effect if used on your secret check or saving throw. The GM must use this reroll before the end of the last day you activated the armor.</p>"
+            "value": "<p>Those favored by Asmodeus can be found wearing this <em>+1 studded leather</em>, which is lacquered in red and black.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">r</span> envision (fortune)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You critically fail an attack roll, check, or saving throw</p>\n<hr />\n<p><strong>Effect</strong> You offer a prayer to Asmodeus, who accepts under a reciprocal condition. Reroll the triggering roll with a +2 circumstance bonus and use the higher result.</p>\n<p>If this reroll improves your degree of success, the GM can later reroll one Strike against you, one saving throw against your abilities, or one secret check or saving throw you make. This is a fortune effect if used on a Strike or save against you, or a misfortune effect if used on your secret check or saving throw. The GM must use this reroll before the end of the last day you activated the armor.</p>"
         },
         "dexCap": 3,
-        "equippedBulk": {
-            "value": "L"
-        },
         "group": "leather",
         "hardness": 0,
         "hp": {
@@ -24,40 +24,21 @@
         "level": {
             "value": 6
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "potency": {},
-        "potencyRune": {
-            "value": 1
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 250
             }
         },
-        "propertyRune1": {
-            "value": null
-        },
-        "propertyRune2": {
-            "value": null
-        },
-        "propertyRune3": {
-            "value": null
-        },
-        "propertyRune4": {
-            "value": null
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "quantity": 1,
-        "resiliencyRune": {
-            "value": null
-        },
         "rules": [
             {
                 "domain": "all",
@@ -80,25 +61,30 @@
                 "value": 2
             }
         ],
-        "size": "med",
-        "source": {
-            "value": "Pathfinder Treasure Vault"
+        "runes": {
+            "potency": 1,
+            "property": [],
+            "resilient": 0
         },
-        "speedPenalty": null,
-        "stackGroup": null,
+        "size": "med",
+        "specific": {
+            "material": {
+                "grade": null,
+                "type": null
+            },
+            "runes": {
+                "potency": 1,
+                "property": [],
+                "resilient": 0
+            }
+        },
+        "speedPenalty": 0,
         "strength": 1,
         "traits": {
             "rarity": "uncommon",
             "value": [
-                "divination",
                 "evil"
             ]
-        },
-        "usage": {
-            "value": "wornarmor"
-        },
-        "weight": {
-            "value": "1"
         }
     },
     "type": "armor"

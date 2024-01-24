@@ -1,6 +1,6 @@
 {
     "_id": "Q5FUu7yhWPJlcXei",
-    "img": "systems/pf2e/icons/spells/medusas-wrath.webp",
+    "img": "icons/magic/defensive/armor-stone-skin.webp",
     "name": "Effect: Hydration",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -24,9 +29,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Absalom, City of Lost Omens"
-        },
         "start": {
             "initiative": null,
             "value": 0

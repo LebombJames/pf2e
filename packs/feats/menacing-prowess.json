@@ -1,6 +1,6 @@
 {
     "_id": "S36WQ8o2MvPxQp0p",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Menacing Prowess",
     "system": {
         "actionType": {
@@ -26,10 +26,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #167: Ready? Fight!"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #167: Ready? Fight!"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

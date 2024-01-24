@@ -1,15 +1,15 @@
 {
     "_id": "Jvp0x2Sc82WVpExT",
-    "img": "systems/pf2e/icons/equipment/adventuring-gear/disguisekit.webp",
+    "img": "icons/containers/chest/chest-simple-box-red.webp",
     "name": "Disguise Kit",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
         "containerId": null,
         "description": {
-            "value": "<p>This small wooden box contains cosmetics, false facial hair, spirit gum, and a few simple wigs. You usually need a disguise kit to set up a disguise in order to Impersonate someone using the Deception skill. If you've crafted a large number of disguises, you can replenish your cosmetics supply with replacement cosmetics suitable for the type of your disguise kit.</p>"
-        },
-        "equippedBulk": {
-            "value": ""
+            "value": "<p>This small wooden box contains cosmetics, false facial hair, spirit gum, and a few simple wigs. You usually need a disguise kit to set up a disguise in order to Impersonate someone using the Deception skill. If you've crafted a large number of disguises, you can replenish your cosmetics supply with replacement cosmetics suitable for the type of your disguise kit. You can draw and replace a worn disguise kit as part of the action that uses it.</p>"
         },
         "hardness": 0,
         "hp": {
@@ -19,36 +19,29 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": ""
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 2
             }
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
         },
         "usage": {
-            "value": "held-in-one-hand"
-        },
-        "weight": {
-            "value": "L"
+            "value": "held-in-two-hands"
         }
     },
     "type": "equipment"

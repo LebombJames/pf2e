@@ -1,12 +1,64 @@
 import { combatantAndTokenDoc } from "@module/doc-helpers.ts";
-import { CombatantPF2e, EncounterPF2e, RolledCombatant } from "@module/encounter/index.ts";
-import { TokenDocumentPF2e } from "@scene/index.ts";
+import type { CombatantPF2e, EncounterPF2e, RolledCombatant } from "@module/encounter/index.ts";
+import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { eventToRollParams } from "@scripts/sheet-util.ts";
-import { ErrorPF2e, createHTMLElement, fontAwesomeIcon, htmlQuery, htmlQueryAll, localizeList } from "@util";
+import { TextEditorPF2e } from "@system/text-editor.ts";
+import {
+    ErrorPF2e,
+    createHTMLElement,
+    fontAwesomeIcon,
+    htmlQuery,
+    htmlQueryAll,
+    localizeList,
+    localizer,
+    parseHTML,
+} from "@util";
 import Sortable, { SortableEvent } from "sortablejs";
 
 export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> extends CombatTracker<TEncounter> {
     declare sortable: Sortable;
+
+    /** Show encounter analysis data if obtainable */
+    protected override async _renderInner(data: object, options: RenderOptions): Promise<JQuery> {
+        const $html = await super._renderInner(data, options);
+        if (!game.user.isGM) return $html;
+        const metrics = this.viewed?.metrics;
+        if (!metrics) return $html;
+
+        const localize = localizer("PF2E.Encounter.Metrics");
+        const threat = ((): { label: string; tooltip: string } => {
+            const label = game.i18n.localize(`PF2E.Encounter.Budget.Threats.${metrics.threat}`);
+            const tooltip = localize("Budget", metrics.budget);
+            const tempContainer = createHTMLElement("div", { innerHTML: localize("Threat", { threat: label }) });
+            TextEditorPF2e.convertXMLNode(tempContainer, "threat", { classes: ["value", metrics.threat] });
+            return { label: tempContainer.innerHTML, tooltip };
+        })();
+
+        const award = ((): { label: string; tooltip: string } => {
+            const label = localize("Award.Label", { xp: metrics.award.xp });
+            const numRecipients = metrics.award.recipients.length;
+            const tooltip = localize(
+                numRecipients === 1
+                    ? "Award.Tooltip.Singular"
+                    : numRecipients === 4
+                      ? "Award.Tooltip.Four"
+                      : "Award.Tooltip.Plural",
+                { xpPerFour: metrics.budget.spent, recipients: numRecipients },
+            );
+            return { label, tooltip };
+        })();
+
+        const threatAward = parseHTML(
+            await renderTemplate("systems/pf2e/templates/sidebar/encounter-tracker/threat-award.hbs", {
+                threat,
+                award,
+            }),
+        );
+        const html = $html[0];
+        htmlQuery(html, "nav.encounters")?.after(threatAward);
+
+        return $(html);
+    }
 
     /** Make the combatants sortable */
     override activateListeners($html: JQuery): void {
@@ -17,7 +69,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
         const encounter = this.viewed;
         if (!encounter) return super.activateListeners($html);
 
-        const tokenSetsNameVisibility = game.settings.get("pf2e", "metagame_tokenSetsNameVisibility");
+        const tokenSetsNameVisibility = game.pf2e.settings.tokens.nameVisibility;
         const allyColor = (c: CombatantPF2e<EncounterPF2e>) =>
             c.actor?.hasPlayerOwner ? CONFIG.Canvas.dispositionColors.PARTY : CONFIG.Canvas.dispositionColors.FRIENDLY;
 
@@ -32,19 +84,20 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
             // Highlight the active-turn participant's alliance color
             if (combatant?.actor && this.viewed?.combatant === combatant) {
                 const alliance = combatant.actor.alliance;
-                const dispositionColor = new foundry.utils.Color(
+                const dispositionColor = new fu.Color(
                     alliance === "party"
                         ? allyColor(combatant)
                         : alliance === "opposition"
-                        ? CONFIG.Canvas.dispositionColors.HOSTILE
-                        : CONFIG.Canvas.dispositionColors.NEUTRAL
+                          ? CONFIG.Canvas.dispositionColors.HOSTILE
+                          : CONFIG.Canvas.dispositionColors.NEUTRAL,
                 );
                 row.style.background = dispositionColor.toRGBA(0.1);
                 row.style.borderColor = dispositionColor.toString();
             }
 
             // Create section for list of users targeting a combatant's token
-            const nameHeader = htmlQuery(row, ".token-name h4")!;
+            const nameHeader = htmlQuery(row, ".token-name h4");
+            if (!nameHeader) continue;
             nameHeader.innerHTML = [
                 createHTMLElement("span", { classes: ["name"], children: [nameHeader.innerText] }).outerHTML,
                 createHTMLElement("span", { classes: ["users-targeting"] }).outerHTML,
@@ -80,9 +133,10 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
             // Hide names in the tracker of combatants with tokens that have unviewable nameplates
             if (tokenSetsNameVisibility) {
-                if (!game.user.isGM && !combatant.playersCanSeeName) {
-                    htmlQuery(nameHeader, "span.name")!.innerText = "";
-                    row.querySelector<HTMLImageElement>("img.token-image")?.removeAttribute("title");
+                const nameElement = htmlQuery(nameHeader, "span.name");
+                if (nameElement && !game.user.isGM && !combatant.playersCanSeeName) {
+                    nameElement.innerText = "";
+                    row.querySelector("img.token-image")?.removeAttribute("title");
                 }
 
                 if (game.user.isGM && combatant.actor && combatant.actor.alliance !== "party") {
@@ -91,14 +145,14 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
                     toggleNameVisibility.classList.add(...["combatant-control", isActive ? "active" : []].flat());
                     toggleNameVisibility.dataset.control = "toggleNameVisibility";
                     toggleNameVisibility.dataset.tooltip = game.i18n.localize(
-                        isActive ? "PF2E.Encounter.HideName" : "PF2E.Encounter.RevealName"
+                        isActive ? "PF2E.Encounter.HideName" : "PF2E.Encounter.RevealName",
                     );
                     const icon = fontAwesomeIcon("signature", { fixedWidth: true });
                     toggleNameVisibility.append(icon);
 
-                    row.querySelector('.combatant-controls a[data-control="toggleHidden"]')?.after(
-                        toggleNameVisibility
-                    );
+                    row
+                        .querySelector('.combatant-controls a[data-control="toggleHidden"]')
+                        ?.after(toggleNameVisibility);
 
                     if (!isActive) {
                         row.classList.add("hidden-name");
@@ -143,7 +197,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
             if (!combatantRow) return;
 
             const usersTargetting = game.users.filter((u) =>
-                Array.from(u.targets).some((t) => t.document === tokenDoc)
+                Array.from(u.targets).some((t) => t.document === tokenDoc),
             );
 
             const userIndicators = usersTargetting.map((user): HTMLElement => {
@@ -158,7 +212,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
                 targetingSection.dataset.tooltip = game.i18n.format("COMBAT.TargetedBy", {
                     list: localizeList(
                         usersTargetting.map((u) => u.name),
-                        { conjunction: "and" }
+                        { conjunction: "and" },
                     ),
                 });
             }
@@ -178,12 +232,12 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
     /** Allow CTRL-clicking to make the rolls blind */
     protected override async _onCombatControl(
-        event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>
+        event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>,
     ): Promise<void> {
         const control = event.currentTarget.dataset.control;
         if ((control === "rollNPC" || control === "rollAll") && this.viewed) {
             event.stopPropagation();
-            const args = eventToRollParams(event);
+            const args = eventToRollParams(event, { type: "check" });
             await this.viewed[control]({ ...args, messageOptions: { rollMode: args.rollMode } });
         } else {
             await super._onCombatControl(event);
@@ -192,7 +246,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
     /** Allow CTRL-clicking to make the roll blind */
     protected override async _onCombatantControl(
-        event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>
+        event: JQuery.ClickEvent<HTMLElement, HTMLElement, HTMLElement>,
     ): Promise<void> {
         event.stopPropagation();
         if (!this.viewed) return;
@@ -203,7 +257,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
         switch (control) {
             case "rollInitiative": {
-                await this.viewed.rollInitiative([combatant.id], eventToRollParams(event));
+                await this.viewed.rollInitiative([combatant.id], eventToRollParams(event, { type: "check" }));
                 break;
             }
             case "toggleTarget": {
@@ -227,7 +281,8 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
         const isTargeted = Array.from(game.user.targets).some((t) => t.document === tokenDoc);
         if (!tokenDoc.object?.visible) {
-            return ui.notifications.warn("COMBAT.PingInvisibleToken", { localize: true });
+            ui.notifications.warn("COMBAT.PingInvisibleToken", { localize: true });
+            return;
         }
 
         tokenDoc.object.setTarget(!isTargeted, { releaseOthers: !event?.shiftKey });
@@ -251,7 +306,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
         const newOrder = this.getCombatantsFromDOM();
         const oldOrder = encounter.turns.filter(
-            (c): c is RolledCombatant<NonNullable<TEncounter>> => c.initiative !== null
+            (c): c is RolledCombatant<NonNullable<TEncounter>> => c.initiative !== null,
         );
         // Exit early if the order wasn't changed
         if (newOrder.every((c) => newOrder.indexOf(c) === oldOrder.indexOf(c))) return;
@@ -262,7 +317,7 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
 
     private setInitiativeFromDrop(
         newOrder: RolledCombatant<NonNullable<TEncounter>>[],
-        dropped: RolledCombatant<NonNullable<TEncounter>>
+        dropped: RolledCombatant<NonNullable<TEncounter>>,
     ): void {
         const aboveDropped = newOrder.find((c) => newOrder.indexOf(c) === newOrder.indexOf(dropped) - 1);
         const belowDropped = newOrder.find((c) => newOrder.indexOf(c) === newOrder.indexOf(dropped) + 1);
@@ -281,10 +336,10 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
             hasBelowAndNoAbove || (aboveIsHigherThanBelow && wasDraggedUp)
                 ? belowDropped.initiative + 1
                 : hasAboveAndNoBelow || (belowIsHigherThanAbove && wasDraggedDown)
-                ? aboveDropped.initiative - 1
-                : hasAboveAndBelow
-                ? belowDropped.initiative
-                : dropped.initiative;
+                  ? aboveDropped.initiative - 1
+                  : hasAboveAndBelow
+                    ? belowDropped.initiative
+                    : dropped.initiative;
 
         const withSameInitiative = newOrder.filter((c) => c.initiative === dropped.initiative);
         if (withSameInitiative.length > 1) {
@@ -297,7 +352,11 @@ export class EncounterTrackerPF2e<TEncounter extends EncounterPF2e | null> exten
     /** Save the new order, or reset the viewed order if no change was made */
     private async saveNewOrder(newOrder: RolledCombatant<NonNullable<TEncounter>>[]): Promise<void> {
         await this.viewed?.setMultipleInitiatives(
-            newOrder.map((c) => ({ id: c.id, value: c.initiative, overridePriority: c.overridePriority(c.initiative) }))
+            newOrder.map((c) => ({
+                id: c.id,
+                value: c.initiative,
+                overridePriority: c.overridePriority(c.initiative),
+            })),
         );
     }
 

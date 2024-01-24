@@ -13,19 +13,22 @@
         "description": {
             "value": "<p>Your familiar is keenly aware of any vibrations traveling through a surface. It gains imprecise tremorsense with a range of 30 feet.</p>"
         },
-        "requirements": {
-            "value": ""
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Grand Bazaar"
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Grand Bazaar"
-        },
+        "rules": [
+            {
+                "acuity": "imprecise",
+                "key": "Sense",
+                "range": "30",
+                "selector": "tremorsense"
+            }
+        ],
         "traits": {
             "rarity": "common",
             "value": []
-        },
-        "trigger": {
-            "value": ""
         }
     },
     "type": "action"

@@ -26,11 +26,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -60,23 +62,19 @@
                 "description": {
                     "value": "<p>Each reflection has 2 actions which it uses to Step, Stride, or Strike (in any combination). Reflections can act on the same turn they're created.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "magical",
                         "trap"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -123,31 +121,35 @@
                     "type": "object-immunities"
                 }
             ],
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 0
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 50
             }
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": []
+            },
             "level": {
                 "value": 6
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Dark Archive"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Dark Archive"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 0,
+            "senses": []
         },
         "resources": {},
         "saves": {
@@ -165,15 +167,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": []
-            },
             "rarity": "common",
-            "senses": {
-                "value": ""
-            },
             "size": {
                 "value": "med"
             },

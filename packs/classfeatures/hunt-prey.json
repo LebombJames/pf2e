@@ -1,6 +1,6 @@
 {
     "_id": "0nIOGpHQNHsKSFKT",
-    "img": "systems/pf2e/icons/features/classes/hunt-prey.webp",
+    "img": "icons/creatures/eyes/humanoid-single-red-brown.webp",
     "name": "Hunt Prey",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "allowDuplicate": false,
@@ -33,9 +38,6 @@
                 "priority": 99
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
             "rarity": "common",
             "value": [

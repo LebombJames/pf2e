@@ -1,6 +1,6 @@
 {
     "_id": "g0hHetVM9UmmIDKU",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Fighting Horn",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                     "value": "Puncturing Horn or xyloshi"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
         },
         "rules": [
             {
@@ -134,9 +139,6 @@
                 "value": "{item|flags.pf2e.rulesSelections.traitTwo}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [

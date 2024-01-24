@@ -21,6 +21,11 @@
                 "proficiency": {
                     "value": 1
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": false
@@ -91,9 +96,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 27,
                     "value": 19
@@ -115,33 +117,24 @@
             "name": "Charm (At Will)",
             "sort": 200000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
+                "counteraction": false,
+                "damage": {},
+                "defense": {
+                    "save": {
+                        "basic": false,
+                        "statistic": "will"
+                    }
                 },
                 "description": {
                     "value": "<p>To the target, your words are honey and your visage seems bathed in a dreamy haze. It must attempt a Will save, with a +4 circumstance bonus if you or your allies recently threatened it or used hostile actions against it.</p>\n<p>You can Dismiss the spell. If you use hostile actions against the target, the spell ends. When the spell ends, the target doesn't necessarily realize it was charmed unless its friendship with you or the actions you convinced it to take clash with its expectations, meaning you could potentially convince the target to continue being your friend via mundane means.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected and aware you tried to charm it.</p>\n<p><strong>Success</strong> The target is unaffected but thinks your spell was something harmless instead of charm, unless it identifies the spell.</p>\n<p><strong>Failure</strong> The target's attitude becomes @UUID[Compendium.pf2e.conditionitems.Item.Friendly] toward you. If it was Friendly, it becomes @UUID[Compendium.pf2e.conditionitems.Item.Helpful]. It can't use hostile actions against you.</p>\n<p><strong>Critical Failure</strong> The target's attitude becomes Helpful toward you, and it can't use hostile actions against you.</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The duration lasts until the next time you make your daily preparations.</p>\n<p><strong>Heightened (8th)</strong> The duration lasts until the next time you make your daily preparations, and you can target up to 10 creatures.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "1 hour"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "heightening": {
                     "levels": {
@@ -160,60 +153,36 @@
                     "heightenedLevel": 1,
                     "value": "9x6UoyWK1LPpP2M1"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "range": {
                     "value": "30 feet"
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": "will"
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "charm",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
-                "spellType": {
-                    "value": "save"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": "1 creature"
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
                         "arcane",
                         "occult",
                         "primal"
-                    ]
-                },
-                "traits": {
-                    "rarity": "common",
+                    ],
                     "value": [
-                        "arcane",
+                        "concentrate",
                         "emotion",
                         "incapacitation",
-                        "mental",
-                        "enchantment"
+                        "manipulate",
+                        "mental"
                     ]
                 }
             },
@@ -246,11 +215,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
@@ -286,11 +257,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -324,23 +297,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -366,23 +332,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "at-will-spells",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -408,23 +367,16 @@
                 "description": {
                     "value": "<p>@Damage[(1d10+9)[piercing]], @Check[type:fortitude|dc:26|basic:true] (@UUID[Compendium.pf2e.conditionitems.Item.Grabbed] by jaws only)</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "constrict",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -445,23 +397,16 @@
                 "description": {
                     "value": "<p>The kishi switches between showing their attractive human face and their snarling hyena face. A kishi can use their innate spell and their Deception and Diplomacy skills only when their human face is showing, and they can use their jaws Strike only when their hyena face is showing.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -482,23 +427,16 @@
                 "description": {
                     "value": "<p>The kishi Strides twice. If they end their movement within melee reach of at least one enemy, they can make a melee Strike against that enemy.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -519,23 +457,16 @@
                 "description": {
                     "value": "<p>A creature @UUID[Compendium.pf2e.conditionitems.Item.Grabbed] in the kishi's jaws can barely speak; a creature must succeed at a @Check[type:flat|dc:8] check to provide verbal components for spells, doing so in a choked whisper.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -561,23 +492,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Grab]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "grab",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -597,11 +521,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -620,11 +546,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -643,11 +571,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -666,11 +596,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -689,11 +621,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -734,12 +668,6 @@
                 "temp": 0,
                 "value": 138
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 14
-            },
             "resistances": [
                 {
                     "type": "piercing",
@@ -758,19 +686,36 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "NE"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "fey"
+                ]
+            },
             "level": {
                 "value": 8
             },
             "privateNotes": "",
             "publicNotes": "<p>Kishis are duplicitous and murderous fey who dwell on the edges of Golarion's densest jungles. At first glance, kishis appear to be attractive humans, usually of a local ethnicity, but their full heads of thick hair conceal a second face: that of a snarling hyena. When a kishi lures their prey into a vulnerable situation, their head swivels around, revealing this fearsome visage. In this form, a kishi's powerful jaws are almost impossible to pry loose and can crush a victim's bones in a matter of moments.</p>\n<p>Kishi range widely in their physical features, and their height and weight vary as much as the people whose communities they infiltrate. They dress in fine clothing aligned with the latest fashion trends, and they wear flashy jewelry with the intention of drawing onlookers' eyes.</p>\n<p>Like most fey, a kishi has inscrutable motives, though to their victims, the kishi's goal seems simple-to revel in the expression of shock, betrayal, and terror on a victim's face. Although kishis can cast charm to make unwitting companions complacent, most of these sinister creatures prefer to trick their prey using guile, gifts, and their dashing good looks. These ultimate sadists derive pleasure from the thrill of the hunt as well as the delicious reward at the end. The more uptight, prudish, or haughty a target, the better-for nothing satisfies kishis as much as earning (and destroying) the trust of someone who rarely grants it.</p>\n<p>When kishis get their new friends or lovers alone, they choose the most dramatic moments to reveal their true monstrous forms and clamp their jaws down on their victim. Kishis have no desire to share their true nature with the entire community, so they typically aim for the throats of their victims, who can no longer cry out for help after being cut off from air. Kishis consume every part of their victims' bodies, leaving no trace of the crime-even lapping up any spilled blood, claiming the victim's treasures as their own, and cleaning the murder scene as much as possible.</p>\n<p>Few things can bind a community together as swiftly as uncovering a kishi. Once found out, a kishi flees, hoping to find a new community to prey upon.</p>",
-            "source": {
-                "value": "Pathfinder Bestiary 3"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Bestiary 3"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 14,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {
             "focus": {
@@ -793,22 +738,12 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "fey"
-                ]
-            },
             "rarity": "common",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "med"
             },
             "value": [
+                "evil",
                 "fey"
             ]
         }

@@ -1,6 +1,6 @@
 {
     "_id": "75B7z49jfQbWcSy9",
-    "img": "systems/pf2e/icons/spells/blazing-fissure.webp",
+    "img": "icons/magic/fire/blast-jet-stream-embers-orange.webp",
     "name": "Effect: Spray Toxic Oil",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 4
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #163: Ruins of Gauntlight"
         },
         "rules": [
             {
@@ -32,9 +37,6 @@
                 "visibility": "gm"
             }
         ],
-        "source": {
-            "value": "Pathfinder #163: Ruins of Gauntlight"
-        },
         "start": {
             "initiative": null,
             "value": 0

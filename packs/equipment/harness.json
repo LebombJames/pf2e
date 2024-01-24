@@ -1,14 +1,14 @@
 {
     "_id": "FphoSIj3t6iQj3ew",
-    "img": "systems/pf2e/icons/equipment/worn-items/companion-items/barding-of-the-zephyr.webp",
+    "img": "icons/environment/creatures/horse-tan.webp",
     "name": "Harness",
     "system": {
         "baseItem": null,
+        "bulk": {
+            "value": 0
+        },
         "containerId": null,
         "description": {
-            "value": ""
-        },
-        "equippedBulk": {
             "value": ""
         },
         "hardness": 0,
@@ -19,36 +19,29 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "sp": 8
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Travel Guide"
+        },
         "quantity": 1,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Lost Omens: Travel Guide"
-        },
-        "stackGroup": null,
         "traits": {
             "rarity": "common",
             "value": []
         },
         "usage": {
             "value": "worn"
-        },
-        "weight": {
-            "value": "-"
         }
     },
     "type": "equipment"

@@ -9,10 +9,16 @@
             "uuid": "Compendium.pf2e.ancestries.Item.c4secsSNG2AO7I5i"
         },
         "description": {
-            "value": "<p>The chitin on your hands forms powerful claws that allow you to defend yourself. You gain a claw unarmed attack that deals @Damage[1d6[slashing]] damage. Your claws are in the brawling group and have the agile, finesse, and unarmed traits.</p>"
+            "value": "<p>The chitin on your hands forms powerful claws that allow you to defend yourself. You gain a claw unarmed attack that deals 1d6 slashing damage. Your claws are in the brawling group and have the agile, finesse, and unarmed traits.</p>"
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
         "rules": [
             {
+                "baseType": "claw",
                 "category": "unarmed",
                 "damage": {
                     "base": {
@@ -33,9 +39,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": []

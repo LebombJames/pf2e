@@ -1,6 +1,6 @@
 {
     "_id": "HCoDbriaPwnurcNP",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Gear Up",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
+        },
         "rules": [
             {
                 "key": "GrantItem",
@@ -33,9 +38,6 @@
                 "uuid": "Compendium.pf2e.feats-srd.Item.Prescient Consumable"
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "common",
             "value": [

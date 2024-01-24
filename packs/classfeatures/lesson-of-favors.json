@@ -1,6 +1,6 @@
 {
     "_id": "2IhZbkx889pATIjq",
-    "img": "systems/pf2e/icons/features/classes/lesson-of-favors.webp",
+    "img": "icons/skills/social/diplomacy-handshake-yellow.webp",
     "name": "Lesson of Favors",
     "system": {
         "actionType": {
@@ -19,11 +19,16 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Dark Archive"
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
+        "rules": [],
         "traits": {
+            "otherTags": [
+                "witch-lesson"
+            ],
             "rarity": "common",
             "value": [
                 "witch"

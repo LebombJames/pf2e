@@ -1,6 +1,6 @@
 {
     "_id": "BEqXsP6UqARzpEFD",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Megaton Strike",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
                     "value": "armor, construct, or weapon innovation"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [
             {
@@ -104,9 +109,6 @@
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
-        },
         "traits": {
             "rarity": "common",
             "value": [

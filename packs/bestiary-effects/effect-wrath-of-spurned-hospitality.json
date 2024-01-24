@@ -1,6 +1,6 @@
 {
     "_id": "he0QiJSgJWNeIoxt",
-    "img": "systems/pf2e/icons/spells/avatar.webp",
+    "img": "icons/equipment/head/helm-barbute-horned-gold-red.webp",
     "name": "Effect: Wrath of Spurned Hospitality",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

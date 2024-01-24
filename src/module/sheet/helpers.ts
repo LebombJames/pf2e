@@ -4,7 +4,7 @@ import { htmlClosest, htmlQuery, sortLabeledRecord } from "@util";
 function createSheetOptions(
     options: Record<string, string>,
     selections: SheetSelections = [],
-    { selected = false } = {}
+    { selected = false } = {},
 ): SheetOptions {
     const sheetOptions = Object.entries(options).reduce((compiledOptions: SheetOptions, [stringKey, label]) => {
         const selectionList = Array.isArray(selections) ? selections : selections.value;
@@ -30,9 +30,9 @@ function createSheetTags(options: Record<string, string>, selections: SheetSelec
 
 function createTagifyTraits(
     traits: Iterable<string>,
-    { sourceTraits, record }: TagifyTraitOptions
+    { sourceTraits, record }: TagifyTraitOptions,
 ): { id: string; value: string; readonly: boolean }[] {
-    const sourceSet = new Set(sourceTraits);
+    const sourceSet = new Set(sourceTraits ?? traits);
     const traitSlugs = [...traits];
     const readonlyTraits = traitSlugs.filter((t) => !sourceSet.has(t));
     return traitSlugs
@@ -60,6 +60,39 @@ function processTagifyInSubmitData(form: HTMLFormElement, data: Record<string, u
                 .map((s: { id?: string; value?: string }) => s.id ?? s.value);
         }
     }
+}
+
+/**
+ * Get a CSS class for an adjusted value
+ * @param value A value from prepared/derived data
+ * @param base A value from base/source data
+ * @param options.better Which value is "better" in the context of the data: default is "higher"
+ **/
+function getAdjustment(
+    value: number,
+    base: number,
+    { better = "higher" }: { better?: "higher" | "lower" } = {},
+): "adjusted-higher" | "adjusted-lower" | null {
+    if (value === base) return null;
+    const isBetter = better === "higher" ? value > base : value < base;
+    return isBetter ? "adjusted-higher" : "adjusted-lower";
+}
+
+function getAdjustedValue(value: number, reference: number, options?: { better?: "higher" | "lower" }): AdjustedValue {
+    const adjustmentClass = getAdjustment(value, reference, options);
+    return {
+        value,
+        adjustmentClass,
+        adjustedHigher: adjustmentClass === "adjusted-higher",
+        adjustedLower: adjustmentClass === "adjusted-lower",
+    };
+}
+
+interface AdjustedValue {
+    value: number;
+    adjustedHigher: boolean;
+    adjustedLower: boolean;
+    adjustmentClass: "adjusted-higher" | "adjusted-lower" | null;
 }
 
 /** Override to refocus tagify elements in _render() to workaround handlebars full re-render */
@@ -93,7 +126,7 @@ type SheetOptions = Record<string, SheetOption>;
 type SheetSelections = { value: (string | number)[] } | (string[] & { custom?: never });
 
 interface TagifyTraitOptions {
-    sourceTraits: Iterable<string>;
+    sourceTraits?: Iterable<string>;
     record: Record<string, string>;
 }
 
@@ -104,12 +137,12 @@ interface TraitTagifyEntry {
 }
 
 export {
-    SheetOption,
-    SheetOptions,
-    TraitTagifyEntry,
     createSheetOptions,
     createSheetTags,
     createTagifyTraits,
+    getAdjustedValue,
+    getAdjustment,
     maintainFocusInRender,
     processTagifyInSubmitData,
 };
+export type { AdjustedValue, SheetOption, SheetOptions, TraitTagifyEntry };

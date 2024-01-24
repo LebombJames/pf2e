@@ -31,10 +31,17 @@
                 "uuid": "Compendium.pf2e.feats-srd.Item.Charming Liar"
             }
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder: Stolen Fate Player's Guide"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder: Stolen Fate Player's Guide"
         },
+        "rules": [
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.actionspf2e.Item.Chaotic Destiny"
+            }
+        ],
         "trainedLore": "",
         "trainedSkills": {
             "value": []

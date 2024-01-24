@@ -1,6 +1,6 @@
 {
     "_id": "fiA3rfqPcCKFCI83",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Towering Growth",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>You're capable of growing as tall as a pine tree for a short time. You gain 2nd-level <em>@UUID[Compendium.pf2e.spells-srd.Item.Enlarge]</em> as a primal innate spell. You can cast this spell twice per day and you must target yourself.</p>"
+            "value": "<p>You're capable of growing as tall as a pine tree for a short time. You gain 2nd-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Enlarge]</em> as a primal innate spell. You can cast this spell twice per day and you must target yourself.</p>"
         },
         "level": {
             "value": 9
@@ -23,13 +23,17 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder #176: Lost Mammoth Valley"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #176: Lost Mammoth Valley"
         },
+        "rules": [],
         "traits": {
             "rarity": "uncommon",
-            "value": []
+            "value": [
+                "leshy"
+            ]
         }
     },
     "type": "feat"

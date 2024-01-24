@@ -1,13 +1,15 @@
-import { ImmunityData } from "@actor/data/iwr.ts";
+import type { ActorPF2e } from "@actor";
+import { Immunity } from "@actor/data/iwr.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { ImmunityType } from "@actor/types.ts";
-import { ConditionPF2e, MeleePF2e, WeaponPF2e } from "@item";
+import type { AbilityItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
+import { ConditionPF2e } from "@item";
 import { PredicatePF2e } from "@system/predication.ts";
 import { ErrorPF2e } from "@util";
-import { CreaturePF2e } from "./document.ts";
+import type { CreaturePF2e } from "./document.ts";
 
 /** A static class of helper functions for applying automation for certain weapon traits on attack rolls */
-class StrikeAttackTraits {
+class AttackTraitHelpers {
     protected static getLabel(traitOrTag: string): string {
         const traits: Record<string, string | undefined> = CONFIG.PF2E.weaponTraits;
         const tags: Record<string, string | undefined> = CONFIG.PF2E.otherWeaponTags;
@@ -18,15 +20,16 @@ class StrikeAttackTraits {
         return trait.replace(/-d?\d{1,3}$/, "");
     }
 
-    static createAttackModifiers({ weapon }: { weapon: WeaponPF2e | MeleePF2e }): ModifierPF2e[] {
-        const { actor } = weapon;
+    static createAttackModifiers({ item }: CreateAttackModifiersParams): ModifierPF2e[] {
+        const { actor } = item;
         if (!actor) throw ErrorPF2e("The weapon must be embedded");
 
-        return weapon.system.traits.value.flatMap((trait) => {
+        return item.system.traits.value.flatMap((trait) => {
             const unannotatedTrait = this.getUnannotatedTrait(trait);
             switch (unannotatedTrait) {
                 case "volley": {
-                    if (!weapon.rangeIncrement) return [];
+                    const rangeIncrement = item.range?.increment;
+                    if (!rangeIncrement) return [];
 
                     const penaltyRange = Number(/-(\d+)$/.exec(trait)![1]);
                     return new ModifierPF2e({
@@ -37,7 +40,7 @@ class StrikeAttackTraits {
                         ignored: true,
                         predicate: new PredicatePF2e(
                             { lte: ["target:distance", penaltyRange] },
-                            { not: "self:ignore-volley-penalty" }
+                            { not: "self:ignore-volley-penalty" },
                         ),
                     });
                 }
@@ -47,7 +50,7 @@ class StrikeAttackTraits {
                         label: this.getLabel(trait),
                         modifier: 1,
                         type: "circumstance",
-                        predicate: new PredicatePF2e("self:sweep-bonus"),
+                        predicate: new PredicatePF2e("sweep-bonus"),
                     });
                 }
                 case "backswing": {
@@ -56,7 +59,7 @@ class StrikeAttackTraits {
                         label: this.getLabel(trait),
                         modifier: 1,
                         type: "circumstance",
-                        predicate: new PredicatePF2e("self:backswing-bonus"),
+                        predicate: new PredicatePF2e("backswing-bonus"),
                     });
                 }
                 default:
@@ -64,6 +67,10 @@ class StrikeAttackTraits {
             }
         });
     }
+}
+
+interface CreateAttackModifiersParams {
+    item: AbilityItemPF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>;
 }
 
 /** Set immunities for creatures with traits call for them */
@@ -86,7 +93,6 @@ function setImmunitiesFromTraits(actor: CreaturePF2e): void {
             "drained",
             "fatigued",
             "healing",
-            "necromancy",
             "nonlethal-attacks",
             "paralyzed",
             "poison",
@@ -97,7 +103,7 @@ function setImmunitiesFromTraits(actor: CreaturePF2e): void {
         for (const immunityType of constructImmunities) {
             if (!immunities.some((i) => i.type === immunityType)) {
                 immunities.push(
-                    new ImmunityData({ type: immunityType, source: game.i18n.localize("PF2E.TraitConstruct") })
+                    new Immunity({ type: immunityType, source: game.i18n.localize("PF2E.TraitConstruct") }),
                 );
             }
         }
@@ -105,22 +111,23 @@ function setImmunitiesFromTraits(actor: CreaturePF2e): void {
 
     // "They are immune to all mental effects." – CRB pg. 634
     if (traits.has("mindless") && !immunities.some((i) => i.type === "mental")) {
-        immunities.push(new ImmunityData({ type: "mental", source: game.i18n.localize("PF2E.TraitMindless") }));
+        immunities.push(new Immunity({ type: "mental", source: game.i18n.localize("PF2E.TraitMindless") }));
     }
 }
 
 function imposeEncumberedCondition(actor: CreaturePF2e): void {
-    if (!game.settings.get("pf2e", "automation.encumbrance")) return;
+    if (!game.pf2e.settings.encumbrance) return;
     if (actor.inventory.bulk.isEncumbered && actor.conditions.bySlug("encumbered").length === 0) {
         const source = game.pf2e.ConditionManager.getCondition("encumbered").toObject();
-        const encumbered = new ConditionPF2e(mergeObject(source, { _id: "xxxENCUMBEREDxxx" }), { parent: actor });
+        const encumbered = new ConditionPF2e(fu.mergeObject(source, { _id: "xxxENCUMBEREDxxx" }), { parent: actor });
+        actor.conditions.set(encumbered.id, encumbered);
         encumbered.prepareSiblingData();
         encumbered.prepareActorData();
         for (const rule of encumbered.prepareRuleElements()) {
+            rule.onApplyActiveEffects?.();
             rule.beforePrepareData?.();
         }
-        actor.conditions.set(encumbered.id, encumbered);
     }
 }
 
-export { StrikeAttackTraits, imposeEncumberedCondition, setImmunitiesFromTraits };
+export { AttackTraitHelpers, imposeEncumberedCondition, setImmunitiesFromTraits };

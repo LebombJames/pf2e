@@ -1,6 +1,6 @@
 {
     "_id": "xOCmeskMkd8nCmba",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Moon May",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>Your mother was a moon hag, a handmaiden of Groetus, and you have a single scarlet eye and a sliver of her supernal foresight. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Guidance]</em> as an occult innate cantrip. A cantrip is heightened to a spell level equal to half your level rounded up.</p>"
+            "value": "<p>Your mother was a moon hag, a handmaiden of Groetus, and you have a single scarlet eye and a sliver of her supernal foresight. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Guidance]</em> as an occult innate cantrip. A cantrip is heightened to a spell rank equal to half your level rounded up.</p>"
         },
         "level": {
             "value": 1
@@ -20,10 +20,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

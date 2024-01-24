@@ -25,13 +25,7 @@
             },
             "immunities": [
                 {
-                    "type": "critical-hits"
-                },
-                {
                     "type": "object-immunities"
-                },
-                {
-                    "type": "precision"
                 }
             ]
         },
@@ -42,9 +36,14 @@
             "level": {
                 "value": 1
             },
-            "passengers": "2",
+            "passengers": "4",
             "pilotingCheck": "Driving Lore (DC 15) or Nature (DC 17 to DC 25, depending on the pulling creature)",
-            "price": "25",
+            "price": 25,
+            "publication": {
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder GM Core"
+            },
             "space": {
                 "high": 7,
                 "long": 10,
@@ -59,9 +58,6 @@
                 "saveDetail": "",
                 "value": 7
             }
-        },
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
         },
         "traits": {
             "rarity": "common",

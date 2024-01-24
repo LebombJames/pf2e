@@ -1,24 +1,23 @@
 import { AttributeString } from "@actor/types.ts";
-import { AncestryPF2e, BackgroundPF2e, ClassPF2e, FeatPF2e, ItemPF2e } from "@item";
+import type { AncestryPF2e, BackgroundPF2e, ClassPF2e, FeatPF2e } from "@item";
+import { ItemPF2e } from "@item";
 import { ABCFeatureEntryData } from "@item/abc/data.ts";
-import { FeatCategory } from "@item/feat/types.ts";
+import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
+import { FeatOrFeatureCategory } from "@item/feat/types.ts";
 import { FEAT_CATEGORIES } from "@item/feat/values.ts";
-import { ItemSheetDataPF2e, ItemSheetPF2e } from "@item/sheet/index.ts";
 import { htmlClosest, htmlQuery, htmlQueryAll, setHasElement } from "@util";
 
 abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> {
-    static override get defaultOptions(): DocumentSheetOptions {
+    static override get defaultOptions(): ItemSheetOptions {
         return {
             ...super.defaultOptions,
-            scrollY: [".item-details"],
-            dragDrop: [{ dropSelector: ".item-details" }],
+            dragDrop: [{ dropSelector: ".tab[data-tab=details]" }],
         };
     }
 
-    override async getData(options?: Partial<DocumentSheetOptions>): Promise<ABCSheetData<TItem>> {
-        const itemType = this.item.type;
-
+    override async getData(options?: Partial<ItemSheetOptions>): Promise<ABCSheetData<TItem>> {
         const sheetData = await super.getData(options);
+
         // Exclude any added during data preparation
         const features = Object.entries(this.item.toObject().system.items)
             .map(([key, ref]) => ({
@@ -27,14 +26,7 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
             }))
             .sort((a, b) => a.item.level - b.item.level);
 
-        return {
-            ...sheetData,
-            hasSidebar: itemType === "ancestry",
-            sidebarTemplate: () => `systems/pf2e/templates/items/${itemType}-sidebar.hbs`,
-            hasDetails: true,
-            detailsTemplate: () => `systems/pf2e/templates/items/${itemType}-details.hbs`,
-            features,
-        };
+        return { ...sheetData, features };
     }
 
     protected getLocalizedAbilities(traits: { value: AttributeString[] }): { [key: string]: string } {
@@ -47,16 +39,16 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
     }
 
     /** Is the dropped feat or feature valid for the given section? */
-    #isValidDrop(event: ElementDragEvent, feat: FeatPF2e): boolean {
-        const validCategories = (htmlClosest(event.target, ".abc-list")?.dataset.validDrops?.split(" ") ?? []).filter(
-            (f): f is FeatCategory => setHasElement(FEAT_CATEGORIES, f)
-        );
+    #isValidDrop(event: DragEvent, feat: FeatPF2e): boolean {
+        const validCategories = (
+            htmlClosest(event.target, "[data-valid-drops]")?.dataset.validDrops?.split(" ") ?? []
+        ).filter((f): f is FeatOrFeatureCategory => setHasElement(FEAT_CATEGORIES, f));
         if (validCategories.includes(feat.category)) {
             return true;
         }
 
         const goodCategories = validCategories.map((c) => game.i18n.localize(CONFIG.PF2E.featCategories[c]));
-        if (goodCategories.length === 1) {
+        if (goodCategories.length > 0) {
             const badCategory = game.i18n.localize(CONFIG.PF2E.featCategories[feat.category]);
             const warning = game.i18n.format("PF2E.Item.ABC.InvalidDrop", {
                 badType: badCategory,
@@ -70,7 +62,7 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
         return true;
     }
 
-    protected override async _onDrop(event: ElementDragEvent): Promise<void> {
+    protected override async _onDrop(event: DragEvent): Promise<void> {
         event.preventDefault();
         const dataString = event.dataTransfer?.getData("text/plain");
         const dropData = JSON.parse(dataString ?? "");
@@ -92,7 +84,7 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
 
         let id: string;
         do {
-            id = randomID(5);
+            id = fu.randomID(5);
         } while (items[id]);
 
         await this.item.update({
@@ -111,7 +103,7 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
 
             if (itemUUID) {
                 htmlQuery(li, "a.name")?.addEventListener("click", () =>
-                    fromUuid(itemUUID).then((i) => i?.sheet.render(true))
+                    fromUuid(itemUUID).then((i) => i?.sheet.render(true)),
                 );
             }
 
@@ -123,7 +115,6 @@ abstract class ABCSheetPF2e<TItem extends ABCItem> extends ItemSheetPF2e<TItem> 
 }
 
 interface ABCSheetData<TItem extends ABCItem> extends ItemSheetDataPF2e<TItem> {
-    hasDetails: true;
     features: { key: string; item: FeatureSheetData }[];
 }
 
@@ -133,4 +124,4 @@ interface FeatureSheetData extends ABCFeatureEntryData {
     fromWorld: boolean;
 }
 
-export { ABCSheetData, ABCSheetPF2e };
+export { ABCSheetPF2e, type ABCSheetData };

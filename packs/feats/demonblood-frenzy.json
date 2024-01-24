@@ -1,6 +1,6 @@
 {
     "_id": "ehPnY1PuPK7EXkYc",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Demonblood Frenzy",
     "system": {
         "actionType": {
@@ -27,10 +27,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
+        "rules": [],
         "traits": {
             "rarity": "uncommon",
             "value": [

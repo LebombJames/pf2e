@@ -1,6 +1,6 @@
 {
     "_id": "FISKjI7bal26AnyL",
-    "img": "systems/pf2e/icons/spells/artistic-flourish.webp",
+    "img": "icons/commodities/treasure/bust-carved-stone.webp",
     "name": "Effect: Timely Advice",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 1
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Gamemastery Guide"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Gamemastery Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

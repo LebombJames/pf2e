@@ -46,8 +46,8 @@ class MoveLootPopup extends FormApplication<{}, MoveLootOptions> {
     }
 
     override async _updateObject(
-        _event: ElementDragEvent,
-        formData: Record<string, unknown> & MoveLootFormData
+        _event: DragEvent,
+        formData: Record<string, unknown> & MoveLootFormData,
     ): Promise<void> {
         this.onSubmitCallback(formData.quantity, formData.newStack);
     }

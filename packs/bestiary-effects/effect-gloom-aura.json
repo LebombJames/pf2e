@@ -1,6 +1,6 @@
 {
     "_id": "Me16QQGxpivWE2WW",
-    "img": "systems/pf2e/icons/spells/calm-emotions.webp",
+    "img": "icons/creatures/abilities/wolf-heads-swirl-purple.webp",
     "name": "Effect: Gloom Aura",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 3"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -26,9 +31,6 @@
                 "value": -1
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary 3"
-        },
         "start": {
             "initiative": null,
             "value": 0

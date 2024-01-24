@@ -1,6 +1,6 @@
 {
     "_id": "ABYmUcLdxDFXEtzu",
-    "img": "systems/pf2e/icons/features/classes/weapon-expertise.webp",
+    "img": "icons/skills/melee/hand-grip-sword-red.webp",
     "name": "Thaumaturge Weapon Expertise",
     "system": {
         "actionType": {
@@ -19,28 +19,24 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
-                "value": 2
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 2
+                },
+                "simple": {
+                    "rank": 2
+                },
+                "unarmed": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
         },
         "traits": {
             "rarity": "common",

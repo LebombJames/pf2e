@@ -1,6 +1,6 @@
 {
     "_id": "CDNKDV3UsAp95D1m",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/weapons/swords/sword-broad-serrated-blue.webp",
     "name": "Spell Effect: Serrate",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 "selector": "{item|flags.pf2e.rulesSelections.serrateWeapon}-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "start": {
             "initiative": null,
             "value": 0

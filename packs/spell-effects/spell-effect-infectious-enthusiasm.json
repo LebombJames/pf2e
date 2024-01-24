@@ -1,6 +1,6 @@
 {
     "_id": "nU4SxAk6XreHUi5h",
-    "img": "systems/pf2e/icons/spells/infectious-enthusiasm.webp",
+    "img": "icons/skills/social/diplomacy-unity-alliance.webp",
     "name": "Spell Effect: Infectious Enthusiasm",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -41,9 +46,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

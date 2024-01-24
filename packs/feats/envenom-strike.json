@@ -1,6 +1,6 @@
 {
     "_id": "6px0s2nE8fHVWswz",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Envenom Strike",
     "system": {
         "actionType": {
@@ -27,6 +27,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
+        },
         "rules": [
             {
                 "domain": "all",
@@ -45,9 +50,6 @@
                 "selector": "strike-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
-        },
         "traits": {
             "rarity": "common",
             "value": [

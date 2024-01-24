@@ -1,23 +1,22 @@
 import { SkillAbbreviation } from "@actor/creature/data.ts";
-import { Alignment } from "@actor/creature/types.ts";
-import { DeityPF2e, ItemPF2e, SpellPF2e } from "@item";
-import { ItemSheetPF2e } from "@item/sheet/base.ts";
-import { ItemSheetDataPF2e } from "@item/sheet/data-types.ts";
+import { ItemPF2e, SpellPF2e, type DeityPF2e } from "@item";
+import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
 import { SheetOptions, createSheetOptions } from "@module/sheet/helpers.ts";
 import { ErrorPF2e, htmlClosest, htmlQuery, htmlQueryAll, tagify } from "@util";
 import { UUIDUtils } from "@util/uuid.ts";
 import * as R from "remeda";
+import { DeitySanctification } from "./data.ts";
+import { DEITY_SANCTIFICATIONS } from "./values.ts";
 
 export class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
-    static override get defaultOptions(): DocumentSheetOptions {
+    static override get defaultOptions(): ItemSheetOptions {
         return {
             ...super.defaultOptions,
-            scrollY: [".item-details"],
             dragDrop: [{ dropSelector: ".sheet-header, .sheet-content" }],
         };
     }
 
-    override async getData(options?: Partial<DocumentSheetOptions>): Promise<DeitySheetData> {
+    override async getData(options?: Partial<ItemSheetOptions>): Promise<DeitySheetData> {
         const sheetData = await super.getData(options);
 
         const spellEntries = Object.entries(sheetData.data.spells);
@@ -29,16 +28,25 @@ export class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
             })
             .sort((spellA, spellB) => spellA.level - spellB.level);
 
+        const sanctifications = [
+            ...DEITY_SANCTIFICATIONS.map((value) => {
+                const modal = value.modal.capitalize();
+                const what = value.what.map((c) => c.capitalize()).join("");
+                return {
+                    value,
+                    label: `PF2E.Item.Deity.Sanctification.${modal}.${what}`,
+                };
+            }),
+            { value: null, label: "PF2E.Item.Deity.Sanctification.None" },
+        ];
+
         return {
             ...sheetData,
-            hasDetails: true,
-            detailsTemplate: () => "systems/pf2e/templates/items/deity-details.hbs",
-            alignments: CONFIG.PF2E.alignments,
-            atheistic: this.item.category === "philosophy",
+            sanctifications,
             skills: CONFIG.PF2E.skills,
             divineFonts: createSheetOptions(
                 { harm: "PF2E.Item.Deity.DivineFont.Harm", heal: "PF2E.Item.Deity.DivineFont.Heal" },
-                sheetData.data.font
+                sheetData.data.font,
             ),
             spells,
         };
@@ -50,13 +58,12 @@ export class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
 
     override activateListeners($html: JQuery): void {
         super.activateListeners($html);
+        const html = $html[0];
 
         // Create tagify selection inputs
-        const html = $html.get(0)!;
         const getInput = (name: string): HTMLInputElement | null => html.querySelector(`input[name="${name}"]`);
 
-        tagify(getInput("system.ability"), { whitelist: CONFIG.PF2E.abilities, maxTags: 2 });
-        tagify(getInput("system.alignment.follower"), { whitelist: CONFIG.PF2E.alignments, maxTags: 9 });
+        tagify(getInput("system.attribute"), { whitelist: CONFIG.PF2E.abilities, maxTags: 2 });
 
         // Everything past this point requires a deity or pantheon
         if (this.item.category === "philosophy") return;
@@ -77,7 +84,8 @@ export class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
                 const spell = await fromUuid(uuid);
                 if (!(spell instanceof SpellPF2e)) {
                     this.render(false);
-                    return ui.notifications.error(`A spell with the UUID "${uuid}" no longer exists`);
+                    ui.notifications.error(`A spell with the UUID "${uuid}" no longer exists`);
+                    return;
                 }
 
                 spell.sheet.render(true);
@@ -122,7 +130,7 @@ export class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
         }
     }
 
-    override async _onDrop(event: ElementDragEvent): Promise<void> {
+    override async _onDrop(event: DragEvent): Promise<void> {
         if (!this.isEditable) return;
 
         const item = await (async (): Promise<ItemPF2e | null> => {
@@ -151,18 +159,15 @@ export class DeitySheetPF2e extends ItemSheetPF2e<DeityPF2e> {
             formData["system.font"] = formData["system.font"].filter((f) => !!f);
         }
 
-        // Null out empty strings for some properties
-        for (const property of ["system.alignment.own", "system.skill"]) {
-            if (typeof formData[property] === "string") formData[property] ||= null;
-        }
+        // Null out empty string for divine skill
+        if (typeof formData["system.skill"] === "string") formData["system.skill"] ||= null;
 
         return super._updateObject(event, formData);
     }
 }
 
 interface DeitySheetData extends ItemSheetDataPF2e<DeityPF2e> {
-    alignments: Record<Alignment, string>;
-    atheistic: boolean;
+    sanctifications: { value: DeitySanctification | null; label: string }[];
     skills: Record<SkillAbbreviation, string>;
     divineFonts: SheetOptions;
     spells: SpellBrief[];

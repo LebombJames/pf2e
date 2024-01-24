@@ -1,16 +1,28 @@
-import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
-import { ConsumablePF2e, SpellcastingEntryPF2e } from "@item";
-import { SpellcastingEntrySource } from "@item/spellcasting-entry/index.ts";
+import type { ActorPF2e } from "@actor";
+import type { ConsumablePF2e, SpellPF2e } from "@item";
+import { SpellcastingEntryPF2e } from "@item";
 import { SpellCollection } from "@item/spellcasting-entry/collection.ts";
+import { SpellcastingEntrySource } from "@item/spellcasting-entry/index.ts";
 import { RitualSpellcasting } from "@item/spellcasting-entry/rituals.ts";
+import { TRICK_MAGIC_SKILLS, TrickMagicItemEntry } from "@item/spellcasting-entry/trick.ts";
 import { BaseSpellcastingEntry } from "@item/spellcasting-entry/types.ts";
-import { ErrorPF2e } from "@util";
+import { Statistic } from "@system/statistic/statistic.ts";
+import { DelegatedCollection, ErrorPF2e, tupleHasValue } from "@util";
 
-export class ActorSpellcasting<TActor extends ActorPF2e> extends Collection<BaseSpellcastingEntry<TActor>> {
+export class ActorSpellcasting<TActor extends ActorPF2e> extends DelegatedCollection<BaseSpellcastingEntry<TActor>> {
+    /** The base casting proficiency, off of which spellcasting builds */
+    declare base: Statistic;
+
     /** All available spell lists on this actor */
     collections = new Collection<SpellCollection<TActor, BaseSpellcastingEntry<TActor>>>();
 
-    constructor(public readonly actor: TActor, entries: BaseSpellcastingEntry<TActor>[]) {
+    /** Cache of trick magic item entries */
+    #trickEntries: Record<string, BaseSpellcastingEntry<TActor> | undefined> = {};
+
+    constructor(
+        public readonly actor: TActor,
+        entries: BaseSpellcastingEntry<TActor>[],
+    ) {
         super(entries.map((entry) => [entry.id, entry]));
 
         for (const entry of entries) {
@@ -29,12 +41,31 @@ export class ActorSpellcasting<TActor extends ActorPF2e> extends Collection<Base
         return ritualCasting instanceof RitualSpellcasting ? ritualCasting : null;
     }
 
+    /** Spells not belonging to any collection */
+    get orphanedSpells(): SpellPF2e<TActor>[] {
+        return this.actor.itemTypes.spell.filter((s) => !s.spellcasting);
+    }
+
     /**
      * All spellcasting entries that count as prepared/spontaneous, which qualify as a
      * full fledged spellcasting feature for wands and scrolls.
      */
     get spellcastingFeatures(): SpellcastingEntryPF2e<TActor>[] {
         return this.regular.filter((e) => e.isPrepared || e.isSpontaneous);
+    }
+
+    /** Returns an existing spellcasting entry or trick magic item if given "trick-{skillName}" */
+    override get(id: string): BaseSpellcastingEntry<TActor> | undefined {
+        const existing = this.#trickEntries[id] ?? super.get(id);
+        if (!existing && id.startsWith("trick-")) {
+            const skill = id.split("-")[1];
+            if (tupleHasValue(TRICK_MAGIC_SKILLS, skill)) {
+                this.#trickEntries[id] = new TrickMagicItemEntry(this.actor, skill);
+                return this.#trickEntries[id];
+            }
+        }
+
+        return existing;
     }
 
     canCastConsumable(item: ConsumablePF2e): boolean {
@@ -47,7 +78,7 @@ export class ActorSpellcasting<TActor extends ActorPF2e> extends Collection<Base
             throw ErrorPF2e("Actors do not currently support regular refocusing");
         }
 
-        if (this.actor instanceof NPCPF2e || this.actor instanceof CharacterPF2e) {
+        if (this.actor.isOfType("character", "npc")) {
             const focus = this.actor.system.resources.focus;
 
             const rechargeFocus = focus?.max && focus.value < focus.max;
@@ -68,9 +99,7 @@ export class ActorSpellcasting<TActor extends ActorPF2e> extends Collection<Base
         itemUpdates: ((Record<string, unknown> | Partial<SpellcastingEntrySource>) & { _id: string })[];
         actorUpdates: { "system.resources.focus.value": number } | null;
     } {
-        type SpellcastingUpdate =
-            | EmbeddedDocumentUpdateData<SpellcastingEntryPF2e>
-            | EmbeddedDocumentUpdateData<SpellcastingEntryPF2e>[];
+        type SpellcastingUpdate = EmbeddedDocumentUpdateData | EmbeddedDocumentUpdateData[];
 
         const itemUpdates = this.contents.flatMap((entry): SpellcastingUpdate => {
             if (!(entry instanceof SpellcastingEntryPF2e)) return [];

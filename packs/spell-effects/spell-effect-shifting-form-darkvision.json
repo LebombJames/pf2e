@@ -1,6 +1,6 @@
 {
     "_id": "A48jNUOAmCljx8Ru",
-    "img": "systems/pf2e/icons/spells/shifting-form.webp",
+    "img": "icons/creatures/claws/claw-bear-paw-swipe-red.webp",
     "name": "Spell Effect: Shifting Form (Darkvision)",
     "system": {
         "description": {
@@ -15,15 +15,17 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "Sense",
                 "selector": "darkvision"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

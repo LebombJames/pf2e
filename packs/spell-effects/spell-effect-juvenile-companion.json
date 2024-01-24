@@ -1,6 +1,6 @@
 {
     "_id": "0bfqYkNaWsdTmtrc",
-    "img": "systems/pf2e/icons/spells/juvenile-companion.webp",
+    "img": "icons/creatures/mammals/dog-husky-white-blue.webp",
     "name": "Spell Effect: Juvenile Companion",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -31,9 +36,6 @@
                 "value": 5
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

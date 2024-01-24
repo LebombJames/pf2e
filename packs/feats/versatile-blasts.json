@@ -1,6 +1,6 @@
 {
     "_id": "DSN8HoWGaf42eyxY",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Versatile Blasts",
     "system": {
         "actionType": {
@@ -19,12 +19,18 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "add",
                 "path": "flags.pf2e.kineticist.elementalBlast.air.damageTypes",
                 "predicate": [
+                    "self:effect:kinetic-aura",
                     "kinetic-gate:air"
                 ],
                 "value": "cold"
@@ -34,6 +40,7 @@
                 "mode": "add",
                 "path": "flags.pf2e.kineticist.elementalBlast.earth.damageTypes",
                 "predicate": [
+                    "self:effect:kinetic-aura",
                     "kinetic-gate:earth"
                 ],
                 "value": "poison"
@@ -43,6 +50,7 @@
                 "mode": "add",
                 "path": "flags.pf2e.kineticist.elementalBlast.fire.damageTypes",
                 "predicate": [
+                    "self:effect:kinetic-aura",
                     "kinetic-gate:fire"
                 ],
                 "value": "cold"
@@ -52,6 +60,7 @@
                 "mode": "add",
                 "path": "flags.pf2e.kineticist.elementalBlast.metal.damageTypes",
                 "predicate": [
+                    "self:effect:kinetic-aura",
                     "kinetic-gate:metal"
                 ],
                 "value": "electricity"
@@ -61,6 +70,7 @@
                 "mode": "add",
                 "path": "flags.pf2e.kineticist.elementalBlast.water.damageTypes",
                 "predicate": [
+                    "self:effect:kinetic-aura",
                     "kinetic-gate:water"
                 ],
                 "value": "acid"
@@ -70,14 +80,12 @@
                 "mode": "add",
                 "path": "flags.pf2e.kineticist.elementalBlast.wood.damageTypes",
                 "predicate": [
+                    "self:effect:kinetic-aura",
                     "kinetic-gate:wood"
                 ],
                 "value": "poison"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "traits": {
             "rarity": "common",
             "value": [

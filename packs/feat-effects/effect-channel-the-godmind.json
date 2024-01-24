@@ -15,17 +15,19 @@
         "level": {
             "value": 17
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "acuity": "precise",
                 "key": "Sense",
                 "range": 60,
-                "selector": "motionsense"
+                "selector": "motion-sense"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

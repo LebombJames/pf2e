@@ -1,5 +1,4 @@
-import { ActorPF2e, CharacterPF2e, NPCPF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorPF2e, ActorType, CharacterPF2e, NPCPF2e } from "@actor";
 import { AttributeString } from "@actor/types.ts";
 import { WeaponPF2e } from "@item";
 import { NPCAttackTrait } from "@item/melee/data.ts";
@@ -14,6 +13,7 @@ import {
 } from "@item/weapon/types.ts";
 import { DamageDieSize, DamageType } from "@system/damage/index.ts";
 import { PredicatePF2e } from "@system/predication.ts";
+import { StrictBooleanField } from "@system/schema-data-fields.ts";
 import { objectHasKey, sluggify } from "@util";
 import type {
     ArrayField,
@@ -23,8 +23,8 @@ import type {
     SchemaField,
     StringField,
 } from "types/foundry/common/data/fields.d.ts";
-import { RuleElementOptions, RuleElementPF2e, RuleElementSchema, RuleElementSource } from "./index.ts";
-import { ResolvableValueField } from "./data.ts";
+import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
+import { ModelPropsFromRESchema, ResolvableValueField, RuleElementSchema, RuleElementSource } from "./data.ts";
 
 /**
  * Create an ephemeral strike on an actor
@@ -33,8 +33,10 @@ import { ResolvableValueField } from "./data.ts";
 class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     protected static override validActorTypes: ActorType[] = ["character", "npc"];
 
+    declare graspingAppendage: boolean;
+
     constructor(source: StrikeSource, options: RuleElementOptions) {
-        source.img ??= options.parent.img;
+        source.img ??= source.fist ? StrikeRuleElement.#defaultFistIcon : options.parent.img;
 
         super(source, options);
 
@@ -48,7 +50,14 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
         this.battleForm ??= false;
         this.fist ??= false;
         this.options ??= [];
+        this.graspingAppendage = ["fist", "claw"].includes(this.baseType ?? "")
+            ? true
+            : this.category === "unarmed" || this.traits.includes("unarmed")
+              ? !!this.graspingAppendage
+              : false;
     }
+
+    static #defaultFistIcon = "icons/skills/melee/unarmed-punch-fist.webp";
 
     static override defineSchema(): StrikeSchema {
         const { fields } = foundry.data;
@@ -75,7 +84,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                 initial: null,
             }),
             traits: new fields.ArrayField(
-                new fields.StringField({ required: true, blank: false, choices: CONFIG.PF2E.npcAttackTraits })
+                new fields.StringField({ required: true, blank: false, choices: CONFIG.PF2E.npcAttackTraits }),
             ),
             traitToggles: new fields.SchemaField(
                 {
@@ -94,19 +103,19 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                         initial: null,
                     }),
                 },
-                { required: true, nullable: false, initial: { modular: null, versatile: null } }
+                { required: true, nullable: false, initial: { modular: null, versatile: null } },
             ),
             otherTags: new fields.ArrayField(
                 new fields.StringField({ required: true, blank: false, choices: CONFIG.PF2E.otherWeaponTags }),
-                { required: false, nullable: false, initial: [] }
+                { required: false, nullable: false, initial: [] },
             ),
             range: new fields.SchemaField(
                 {
                     increment: new fields.NumberField({
-                        required: true,
+                        required: false,
                         integer: true,
                         min: 5,
-                        nullable: false,
+                        nullable: true,
                         initial: 5,
                     }),
                     max: new fields.NumberField({
@@ -117,7 +126,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                         initial: null,
                     }),
                 },
-                { required: false, nullable: true, initial: null }
+                { required: false, nullable: true, initial: null },
             ),
             damage: new fields.SchemaField({
                 base: new fields.SchemaField({
@@ -145,6 +154,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
             }),
             options: new fields.ArrayField(new fields.StringField(), { required: false, initial: undefined }),
             fist: new fields.BooleanField({ required: false, nullable: false, initial: undefined }),
+            graspingAppendage: new StrictBooleanField({ required: false, nullable: false, initial: undefined }),
         };
     }
 
@@ -171,14 +181,14 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     protected override _initialize(options?: Record<string, unknown>): void {
         if (this._source.fist) {
             this.key = "Strike";
-            this.priority = 100;
+            this.priority = 99;
             this.slug = "fist";
-            this.img = "systems/pf2e/icons/features/classes/powerful-fist.webp";
+            this.img = this._source.img;
             this.category = "unarmed";
             this.group = "brawling";
             this.baseType = "fist";
             this.traits = ["agile", "finesse", "nonlethal"];
-            this.traitToggles = mergeObject({ modular: null, versatile: null }, this._source.traitToggles ?? {});
+            this.traitToggles = fu.mergeObject({ modular: null, versatile: null }, this._source.traitToggles ?? {});
             this.otherTags = [];
             this.range = null;
             this.damage = {
@@ -192,27 +202,13 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
 
             this.battleForm = false;
             this.fist = true;
+            this.graspingAppendage = true;
             this.replaceAll = false;
             this.replaceBasicUnarmed = false;
-            this.predicate = new PredicatePF2e([...(this._source.predicate ?? []), { gt: ["hands-free", 0] }]);
+            this.predicate = new PredicatePF2e(Array.isArray(this._source.predicate) ? this._source.predicate : []);
         } else {
             super._initialize(options);
         }
-    }
-
-    /** Temporary workaround until real migration */
-    static override migrateData<TSource extends { range?: unknown; maxRange?: unknown }>(source: TSource): TSource {
-        const premigrated = super.migrateData(source);
-
-        if (typeof premigrated.range === "number") {
-            const maxRange = typeof premigrated.maxRange === "number" ? premigrated.maxRange : null;
-            premigrated.range = { increment: premigrated.range, max: maxRange };
-        } else if ("maxRange" in premigrated && typeof premigrated.maxRange === "number") {
-            premigrated.range = { increment: premigrated.maxRange, max: premigrated.maxRange };
-        }
-        delete premigrated.maxRange;
-
-        return premigrated;
     }
 
     override beforePrepareData(): void {
@@ -239,6 +235,11 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
         }
 
         if (predicatePassed) {
+            // Prefer a non-default fist icon if one is set
+            if (this.fist && this.img === StrikeRuleElement.#defaultFistIcon) {
+                this.img = this.actor.synthetics.strikes.get("fist")?.img ?? this.img;
+            }
+
             const weapon = this.#constructWeapon(damageType, dice);
             const slug = weapon.slug ?? sluggify(weapon.name);
             this.actor.synthetics.strikes.set(slug, weapon);
@@ -252,7 +253,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
         if (this.replaceAll) {
             const systemData = this.actor.system;
             systemData.actions = systemData.actions.filter(
-                (a) => a.item.id === this.item.id && a.item.name === this.label && a.item.group === this.group
+                (a) => a.item.id === this.item.id && a.item.name === this.label && a.item.group === this.group,
             );
         } else if (this.replaceBasicUnarmed) {
             const systemData = this.actor.system;
@@ -266,7 +267,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
      */
     #constructWeapon(damageType: DamageType, dice: number): WeaponPF2e<ActorPF2e> {
         const actorIsNPC = this.actor.isOfType("npc");
-        const source: PreCreate<WeaponSource> = deepClone({
+        const source: PreCreate<WeaponSource> = fu.deepClone({
             _id: this.item.id,
             name: this.label,
             type: "weapon",
@@ -283,7 +284,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                 category: this.category,
                 group: this.group,
                 baseItem: this.baseType,
-                ability: this.ability,
+                attribute: this.ability,
                 bonus: {
                     value: actorIsNPC ? this.attackModifier ?? 0 : 0,
                 },
@@ -309,6 +310,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
                     carryType: "held",
                     handsHeld: 1,
                 },
+                graspingAppendage: this.graspingAppendage,
             },
         });
 
@@ -317,7 +319,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
 
     /** Toggle the modular or versatile trait of this strike's weapon */
     async toggleTrait({ trait, selection }: UpdateToggleParams): Promise<void> {
-        const ruleSources = deepClone(this.item._source.system.rules);
+        const ruleSources = fu.deepClone(this.item._source.system.rules);
         const rule: StrikeSource | undefined = ruleSources.at(this.sourceIndex ?? NaN);
         if (rule?.key === "Strike") {
             rule.traitToggles = { ...this.traitToggles, [trait]: selection };
@@ -326,7 +328,7 @@ class StrikeRuleElement extends RuleElementPF2e<StrikeSchema> {
     }
 }
 
-interface StrikeRuleElement extends RuleElementPF2e<StrikeSchema>, ModelPropsFromSchema<StrikeSchema> {
+interface StrikeRuleElement extends RuleElementPF2e<StrikeSchema>, ModelPropsFromRESchema<StrikeSchema> {
     slug: string;
     fist: boolean;
     options: string[];
@@ -369,11 +371,11 @@ type StrikeSchema = RuleElementSchema & {
     attackModifier: NumberField<number, number, false, true, true>;
     range: SchemaField<
         {
-            increment: NumberField<number, number, true, false, true>;
+            increment: NumberField<number, number, false, true, true>;
             max: NumberField<number, number, false, true, true>;
         },
-        { increment: number; max: number | null },
-        { increment: number; max: number | null } | null,
+        { increment: number | null; max: number | null },
+        { increment: number | null; max: number | null } | null,
         false,
         true,
         true
@@ -398,6 +400,8 @@ type StrikeSchema = RuleElementSchema & {
     options: ArrayField<StringField<string, string, true, false, false>, string[], string[], false, false, false>;
     /** Whether this was a request for a standard fist attack */
     fist: BooleanField<boolean, boolean, false, false, false>;
+    /** Whether the unarmed attack is a grasping appendage */
+    graspingAppendage: StrictBooleanField<false, false, false>;
 };
 
 interface StrikeSource extends RuleElementSource {

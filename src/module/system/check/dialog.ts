@@ -1,8 +1,9 @@
-import { ModifierPF2e, MODIFIER_TYPES, StatisticModifier } from "@actor/modifiers.ts";
+import { MODIFIER_TYPES, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import { RollSubstitution } from "@module/rules/synthetics.ts";
 import { ErrorPF2e, htmlQuery, htmlQueryAll, setHasElement, tupleHasValue } from "@util";
-import { CheckRollContext } from "./types.ts";
+import * as R from "remeda";
 import { RollTwiceOption } from "../rolls.ts";
+import { CheckRollContext } from "./types.ts";
 
 /**
  * Dialog for excluding certain modifiers before rolling a check.
@@ -15,15 +16,16 @@ export class CheckModifiersDialog extends Application {
     context: CheckRollContext;
     /** A Promise resolve method */
     resolve: (value: boolean) => void;
-    /** Pre-determined D20 roll results */
-    substitutions: RollSubstitution[];
     /** Has the promise been resolved? */
     isResolved = false;
+
+    /** A set of originally enabled modifiers to circumvent hideIfDisabled for manual disables */
+    #originallyEnabled: Set<ModifierPF2e>;
 
     constructor(
         check: StatisticModifier,
         resolve: (value: boolean) => void,
-        context: CheckRollContext = { options: new Set() }
+        context: CheckRollContext = { options: new Set() },
     ) {
         // The title often has HTML in it: get the base text
         const title = ((): string => {
@@ -41,15 +43,16 @@ export class CheckModifiersDialog extends Application {
 
         this.check = check;
         this.resolve = resolve;
-        this.substitutions = context?.substitutions ?? [];
         this.context = context;
+
+        this.#originallyEnabled = new Set(check.modifiers.filter((m) => m.enabled));
     }
 
     static override get defaultOptions(): ApplicationOptions {
         return {
             ...super.defaultOptions,
             template: "systems/pf2e/templates/chat/check-modifiers-dialog.hbs",
-            classes: ["dice-checks", "dialog"],
+            classes: ["roll-modifiers-dialog", "dice-checks", "dialog"],
             popOut: true,
             width: 380,
             height: "auto",
@@ -65,16 +68,33 @@ export class CheckModifiersDialog extends Application {
 
         return {
             appId: this.id,
-            modifiers: this.check.modifiers,
+            modifiers: this.check.modifiers.map((m) => ({
+                ...m,
+                hideIfDisabled: !this.#originallyEnabled.has(m) && m.hideIfDisabled,
+            })),
             totalModifier: this.check.totalModifier,
             rollModes: CONFIG.Dice.rollModes,
             rollMode,
-            showRollDialogs: game.user.settings.showRollDialogs,
-            substitutions: this.substitutions,
+            showCheckDialogs: game.user.settings.showCheckDialogs,
+            substitutions: this.#resolveSubstitutions(),
             fortune,
             none,
             misfortune,
         };
+    }
+
+    #resolveSubstitutions(): RollSubstitutionDialogData[] {
+        this.context.substitutions ??= [];
+        const hasRequired = {
+            fortune: this.context.substitutions.some((s) => s.required && s.effectType === "fortune"),
+            misfortune: this.context.substitutions.some((s) => s.required && s.effectType === "misfortune"),
+        };
+
+        return this.context.substitutions.map((substitution) => {
+            const toggleable = !hasRequired[substitution.effectType];
+            const selected = substitution.required ? true : substitution.selected && toggleable;
+            return { ...substitution, selected, toggleable };
+        });
     }
 
     override activateListeners($html: JQuery): void {
@@ -88,19 +108,23 @@ export class CheckModifiersDialog extends Application {
 
         for (const checkbox of htmlQueryAll<HTMLInputElement>(html, ".substitutions input[type=checkbox]")) {
             checkbox.addEventListener("click", () => {
+                const substitutions = this.context.substitutions ?? [];
                 const index = Number(checkbox.dataset.subIndex);
-                const substitution = this.substitutions.at(index);
-                if (!substitution) return;
+                const toggledSub = substitutions.at(index);
+                if (!toggledSub) return;
 
-                substitution.ignored = !checkbox.checked;
+                toggledSub.selected = toggledSub.required || checkbox.checked;
                 const options = (this.context.options ??= new Set());
-                const option = `substitute:${substitution.slug}`;
 
-                if (substitution.ignored) {
-                    options.delete(option);
-                } else {
-                    options.add(option);
+                for (const substitution of substitutions) {
+                    const option = `substitute:${substitution.slug}`;
+                    if (substitution.selected) {
+                        options.add(option);
+                    } else {
+                        options.delete(option);
+                    }
                 }
+                this.context.substitutions = this.#resolveSubstitutions().map((s) => R.omit(s, ["toggleable"]));
 
                 this.check.calculateTotal(this.context.options);
                 this.render();
@@ -158,42 +182,16 @@ export class CheckModifiersDialog extends Application {
             this.context.rollMode = rollMode;
         });
 
-        // Dialog settings menu
-        const $settings = $html.closest(`#${this.id}`).find("a.header-button.settings");
-        if (!$settings[0].dataset.tooltipContent) {
-            const $tooltip = $settings.attr({ "data-tooltip-content": `#${this.id}-settings` }).tooltipster({
-                animation: "fade",
-                trigger: "click",
-                arrow: false,
-                contentAsHTML: true,
-                debug: BUILD_MODE === "development",
-                interactive: true,
-                side: ["top"],
-                theme: "crb-hover",
-                minWidth: 165,
-            });
-            $html.find<HTMLInputElement>(".settings-list input.quick-rolls-submit").on("change", async (event) => {
-                const $checkbox = $(event.delegateTarget);
-                await game.user.setFlag("pf2e", "settings.showRollDialogs", $checkbox[0].checked);
-                $tooltip.tooltipster("close");
-            });
-        }
+        // Toggle show dialog default
+        const toggle = htmlQuery<HTMLInputElement>(html, "input[data-action=change-show-default]");
+        toggle?.addEventListener("click", async () => {
+            await game.user.update({ "flags.pf2e.settings.showCheckDialogs": toggle.checked });
+        });
     }
 
     override async close(options?: { force?: boolean }): Promise<void> {
         if (!this.isResolved) this.resolve(false);
         super.close(options);
-    }
-
-    protected override _getHeaderButtons(): ApplicationHeaderButton[] {
-        const buttons = super._getHeaderButtons();
-        const settingsButton: ApplicationHeaderButton = {
-            label: game.i18n.localize("PF2E.SETTINGS.Settings"),
-            class: `settings`,
-            icon: "fas fa-cog",
-            onclick: () => null,
-        };
-        return [settingsButton, ...buttons];
     }
 
     /** Overriden to add some additional first-render behavior */
@@ -207,13 +205,17 @@ export class CheckModifiersDialog extends Application {
 
 interface CheckDialogData {
     appId: string;
-    modifiers: readonly ModifierPF2e[];
+    modifiers: RawModifier[];
     totalModifier: number;
     rollModes: Record<RollMode, string>;
     rollMode: RollMode | "roll" | undefined;
-    showRollDialogs: boolean;
-    substitutions: RollSubstitution[];
+    showCheckDialogs: boolean;
+    substitutions: RollSubstitutionDialogData[];
     fortune: boolean;
     none: boolean;
     misfortune: boolean;
+}
+
+interface RollSubstitutionDialogData extends RollSubstitution {
+    toggleable: boolean;
 }

@@ -1,6 +1,6 @@
 {
     "_id": "P19AnciwNcSqxU7z",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Distant Cackle",
     "system": {
         "actionType": {
@@ -11,7 +11,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>It takes a very brave person to enter the laughter-haunted forest where you dwell. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Ventriloquism]</em> once per day as a 1st-level occult innate spell.</p>"
+            "value": "<p>It takes a very brave person to enter the laughter-haunted forest where you dwell. You can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Ventriloquism]</em> once per day as a 1st-rank occult innate spell.</p>"
         },
         "level": {
             "value": 5
@@ -23,10 +23,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

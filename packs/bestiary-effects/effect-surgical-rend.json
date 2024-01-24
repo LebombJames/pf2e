@@ -1,6 +1,6 @@
 {
     "_id": "9iL6CeZlmtIuAZOJ",
-    "img": "systems/pf2e/icons/spells/bloodspray-curse.webp",
+    "img": "icons/skills/melee/strike-sword-blood-red.webp",
     "name": "Effect: Surgical Rend",
     "system": {
         "description": {
@@ -15,10 +15,12 @@
         "level": {
             "value": 1
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Bestiary 2"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary 2"
         },
+        "rules": [],
         "start": {
             "initiative": null,
             "value": 0

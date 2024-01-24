@@ -1,6 +1,6 @@
 {
     "_id": "ADDOwO0QWOXAV85x",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Telluric Power",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -31,15 +36,12 @@
                 "value": "@weapon.system.damage.dice"
             },
             {
-                "domain": "all",
+                "domain": "damage",
                 "key": "RollOption",
                 "option": "telluric-power",
                 "toggleable": true
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

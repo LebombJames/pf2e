@@ -1,6 +1,6 @@
 {
     "_id": "5f0EbNl7DHkiKCIr",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Empyreal Aura",
     "system": {
         "actionType": {
@@ -26,20 +26,21 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Knights of Lastwall"
+        },
         "rules": [
             {
                 "key": "Aura",
                 "radius": 30,
                 "slug": "empyreal-aura",
                 "traits": [
-                    "archetype",
-                    "aura"
+                    "archetype"
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Knights of Lastwall"
-        },
         "traits": {
             "rarity": "common",
             "value": [

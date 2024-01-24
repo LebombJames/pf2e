@@ -19,34 +19,31 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
-                "baseType": "fist",
-                "category": "unarmed",
-                "damage": {
-                    "base": {
-                        "damageType": "bludgeoning",
-                        "dice": 1,
-                        "die": "d6"
-                    }
-                },
-                "group": "brawling",
+                "fist": true,
                 "img": "systems/pf2e/icons/features/classes/powerful-fist.webp",
-                "key": "Strike",
-                "label": "PF2E.Strike.Fist.Label",
-                "range": null,
-                "slug": "fist",
-                "traits": [
-                    "agile",
-                    "finesse",
-                    "nonlethal",
-                    "unarmed"
+                "key": "Strike"
+            },
+            {
+                "key": "DamageDice",
+                "override": {
+                    "upgrade": true
+                },
+                "predicate": [
+                    "item:category:unarmed",
+                    "item:damage:die:faces:4"
+                ],
+                "selector": [
+                    "fist-base-damage"
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "traits": {
             "rarity": "common",
             "value": [

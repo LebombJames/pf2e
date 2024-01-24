@@ -1,6 +1,6 @@
 {
     "_id": "wjnfdh6WzN7HbmeE",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Aura Of Despair",
     "system": {
         "actionType": {
@@ -23,10 +23,24 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
+        "rules": [
+            {
+                "effects": [
+                    {
+                        "affects": "enemies",
+                        "uuid": "Compendium.pf2e.feat-effects.Item.Effect: Aura of Despair"
+                    }
+                ],
+                "key": "Aura",
+                "radius": 15,
+                "slug": "aura-of-despair"
+            }
+        ],
         "traits": {
             "rarity": "uncommon",
             "value": [

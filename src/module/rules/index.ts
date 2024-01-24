@@ -27,7 +27,6 @@ import { ImmunityRuleElement } from "./rule-element/iwr/immunity.ts";
 import { ResistanceRuleElement } from "./rule-element/iwr/resistance.ts";
 import { WeaknessRuleElement } from "./rule-element/iwr/weakness.ts";
 import { LoseHitPointsRuleElement } from "./rule-element/lose-hit-points.ts";
-import { MarkTokenRuleElement } from "./rule-element/mark-token/rule-element.ts";
 import { MartialProficiencyRuleElement } from "./rule-element/martial-proficiency.ts";
 import { MultipleAttackPenaltyRuleElement } from "./rule-element/multiple-attack-penalty.ts";
 import { RollNoteRuleElement } from "./rule-element/roll-note.ts";
@@ -42,6 +41,7 @@ import { TempHPRuleElement } from "./rule-element/temp-hp.ts";
 import { TokenEffectIconRuleElement } from "./rule-element/token-effect-icon.ts";
 import { TokenImageRuleElement } from "./rule-element/token-image.ts";
 import { TokenLightRuleElement } from "./rule-element/token-light.ts";
+import { TokenMarkRuleElement } from "./rule-element/token-mark/rule-element.ts";
 import { TokenNameRuleElement } from "./rule-element/token-name.ts";
 import { WeaponPotencyRuleElement } from "./rule-element/weapon-potency.ts";
 export type { RuleElementSynthetics } from "./synthetics.ts";
@@ -74,7 +74,6 @@ class RuleElements {
         Immunity: ImmunityRuleElement,
         ItemAlteration: ItemAlterationRuleElement,
         LoseHitPoints: LoseHitPointsRuleElement,
-        MarkToken: MarkTokenRuleElement,
         MartialProficiency: MartialProficiencyRuleElement,
         MultipleAttackPenalty: MultipleAttackPenaltyRuleElement,
         Note: RollNoteRuleElement,
@@ -90,6 +89,7 @@ class RuleElements {
         TokenEffectIcon: TokenEffectIconRuleElement,
         TokenImage: TokenImageRuleElement,
         TokenLight: TokenLightRuleElement,
+        TokenMark: TokenMarkRuleElement,
         TokenName: TokenNameRuleElement,
         Weakness: WeaknessRuleElement,
         WeaponPotency: WeaponPotencyRuleElement,
@@ -107,7 +107,7 @@ class RuleElements {
         for (const [sourceIndex, source] of item.system.rules.entries()) {
             if (typeof source.key !== "string") {
                 console.error(
-                    `PF2e System | Missing key in rule element ${source.key} on item ${item.name} (${item.uuid})`
+                    `PF2e System | Missing key in rule element ${source.key} on item ${item.name} (${item.uuid})`,
                 );
                 continue;
             }
@@ -120,7 +120,7 @@ class RuleElements {
                         if (!options?.suppressWarnings) {
                             console.warn(
                                 `PF2e System | Failed to construct rule element ${source.key} on item ${item.name}`,
-                                `(${item.uuid})`
+                                `(${item.uuid})`,
                             );
                             console.warn(error);
                         }
@@ -139,7 +139,7 @@ class RuleElements {
 
 type RuleElementConstructor = { schema: LaxSchemaField<RuleElementSchema> } & (new (
     data: RuleElementSource,
-    options: RuleElementOptions
+    options: RuleElementOptions,
 ) => RuleElementPF2e);
 
 export { RuleElementOptions, RuleElementPF2e, RuleElementSource, RuleElements };

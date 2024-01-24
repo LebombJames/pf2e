@@ -1,6 +1,6 @@
 {
     "_id": "IY86Kvopp4ACuQsw",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Envenom Fangs",
     "system": {
         "actionType": {
@@ -23,9 +23,15 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Character Guide"
+        },
         "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Character Guide"
+        "selfEffect": {
+            "name": "Effect: Envenom Fangs",
+            "uuid": "Compendium.pf2e.feat-effects.Item.Effect: Envenom Fangs"
         },
         "traits": {
             "rarity": "common",

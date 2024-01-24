@@ -19,46 +19,43 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Guns & Gears"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.unarmed.rank",
+                "path": "system.proficiencies.attacks.advanced-firearms-crossbows.rank",
                 "value": 3
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.simple.rank",
-                "value": 3
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.martial.rank",
-                "value": 3
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.advanced-firearms-crossbows.rank",
-                "value": 3
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.martial.simple-firearms-crossbows.rank",
+                "path": "system.proficiencies.attacks.simple-firearms-crossbows.rank",
                 "value": 4
             },
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.martial.martial-firearms-crossbows.rank",
+                "path": "system.proficiencies.attacks.martial-firearms-crossbows.rank",
                 "value": 4
             }
         ],
-        "source": {
-            "value": "Pathfinder Guns & Gears"
+        "subfeatures": {
+            "proficiencies": {
+                "martial": {
+                    "rank": 3
+                },
+                "simple": {
+                    "rank": 3
+                },
+                "unarmed": {
+                    "rank": 3
+                }
+            }
         },
         "traits": {
             "rarity": "common",

@@ -7,13 +7,18 @@
             "value": "<p>Granted by <em>@UUID[Compendium.pf2e.spells-srd.Item.Blood Vendetta]</em></p>\n<p>Until the bleeding stops, the target has weakness 1 to piercing and slashing damage.</p>"
         },
         "duration": {
-            "expiry": "turn-end",
+            "expiry": null,
             "sustained": false,
             "unit": "unlimited",
             "value": -1
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "rules": [
             {
@@ -25,9 +30,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

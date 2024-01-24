@@ -1,6 +1,6 @@
 {
     "_id": "N0zhJ0whkDJPlftl",
-    "img": "systems/pf2e/icons/features/ancestry/plant-nourishment.webp",
+    "img": "icons/magic/nature/root-vine-beanstolk-green.webp",
     "name": "Photosynthesis",
     "system": {
         "actionType": {
@@ -19,10 +19,12 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Impossible Lands"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Impossible Lands"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": []

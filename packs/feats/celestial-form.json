@@ -1,6 +1,6 @@
 {
     "_id": "VAbfepohLNtubfi3",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Celestial Form",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -30,12 +35,16 @@
                 "value": "@actor.attributes.speed.total"
             },
             {
-                "key": "Sense",
-                "selector": "darkvision"
+                "add": [
+                    "celestial"
+                ],
+                "key": "ActorTraits"
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "subfeatures": {
+            "senses": {
+                "darkvision": {}
+            }
         },
         "traits": {
             "rarity": "common",

@@ -1,6 +1,6 @@
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { recursiveReplaceString, sluggify } from "@util";
-import { MigrationBase } from "../base.js";
+import { MigrationBase } from "../base.ts";
 
 /** Move paths of "system.custom.*" set by AE-likes to flags. */
 export class Migration856NoSystemDotCustom extends MigrationBase {
@@ -12,8 +12,8 @@ export class Migration856NoSystemDotCustom extends MigrationBase {
                 s.replace(/\bsystem\.custom\.(?:modifiers\.)?([-a-z]+)/, (_match, group1) => {
                     const property = sluggify(group1, { camel: "dromedary" });
                     return `flags.pf2e.${property}`;
-                })
-            )
+                }),
+            ),
         );
     }
 }

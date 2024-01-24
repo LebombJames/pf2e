@@ -1,6 +1,6 @@
 {
     "_id": "pvFRMbIazwAO0fjH",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Echo of the Fallen",
     "system": {
         "actionType": {
@@ -22,6 +22,11 @@
                     "value": "You helped to lay a haunt, ghost, or spirit to rest"
                 }
             ]
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
         },
         "rules": [
             {
@@ -126,9 +131,6 @@
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Accept Echo"
             }
         ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

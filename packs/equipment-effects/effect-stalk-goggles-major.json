@@ -15,6 +15,11 @@
         "level": {
             "value": 8
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #187: The Seventh Arch"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -33,12 +38,9 @@
             },
             {
                 "key": "Sense",
-                "selector": "lowLightVision"
+                "selector": "low-light-vision"
             }
         ],
-        "source": {
-            "value": "Pathfinder #187: The Seventh Arch"
-        },
         "start": {
             "initiative": null,
             "value": 0

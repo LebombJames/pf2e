@@ -13,15 +13,15 @@
             "name": "Dagger",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "dagger",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -38,9 +38,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "sp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": null,
@@ -85,17 +67,15 @@
                     "value": "-"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "dagger",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -108,9 +88,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -126,15 +103,15 @@
             "name": "+1 Sling",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "sling",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 0.1
                 },
                 "category": "simple",
                 "containerId": null,
@@ -151,9 +128,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "sling",
                 "hardness": 0,
                 "hp": {
@@ -163,34 +137,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 35
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "range": 60,
@@ -198,17 +157,15 @@
                     "value": "1"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "med",
                 "slug": "sling",
-                "source": {
-                    "value": ""
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -218,9 +175,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -232,11 +186,14 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.P2DjThbSOWwra49r"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/snare-kit.webp",
+            "img": "icons/containers/boxes/crate-worn-brown.webp",
             "name": "Snare Kit (Specialist)",
             "sort": 300000,
             "system": {
                 "baseItem": null,
+                "bulk": {
+                    "value": 2
+                },
                 "containerId": null,
                 "description": {
                     "value": "<p>This kit contains tools and materials for creating snares. A snare kit allows you to Craft snares using the Crafting skill. A specialist snare kit gives you a +1 item bonus to the check.</p>"
@@ -246,9 +203,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "hardness": 0,
                 "hp": {
                     "max": 0,
@@ -257,19 +211,19 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 55
                     }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "quantity": 1,
                 "rules": [
@@ -286,19 +240,12 @@
                 ],
                 "size": "med",
                 "slug": "snare-kit-specialist",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": []
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "equipment"
@@ -310,34 +257,23 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.AFX1V0Go9DqPWBlN"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/snares/alarm-snare.webp",
+            "img": "icons/tools/instruments/bell-silver.webp",
             "name": "Alarm Snare",
             "sort": 400000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": "1",
-                    "value": "1"
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "snare"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "snare",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>You create an alarm snare by rigging one or more noisy objects to a trip wire or pressure plate. When you create an alarm snare, you designate a range between 100 to 500 feet at which it can be heard. When a Small or larger creature enters the square, the snare makes a noise loud enough that it can be heard by all creatures in the range you designated.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -347,28 +283,24 @@
                 "level": {
                     "value": 1
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 3
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "alarm-snare",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -382,8 +314,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -395,34 +329,27 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.9EZb1hmSKOGrU4Cf"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/snares/biting-snare.webp",
+            "img": "icons/environment/traps/trap-jaw-steel.webp",
             "name": "Biting Snare",
             "sort": 500000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": "1",
-                    "value": "1"
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "snare"
-                },
-                "consume": {
-                    "value": "5d6"
-                },
+                "category": "snare",
                 "containerId": null,
+                "damage": {
+                    "formula": "5d6",
+                    "kind": "damage",
+                    "type": "piercing"
+                },
                 "description": {
                     "value": "<p>The snare's jaws shut on the leg of a creature that steps on it. The snare deals 5d6 piercing damage to the first creature that enters its square; that creature must attempt a @Check[type:reflex|dc:18].</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half damage.</p>\n<p><strong>Failure</strong> The creature takes full damage.</p>\n<p><strong>Critical Failure</strong> The creature takes double damage and takes a -10-foot status penalty to its Speed until it recovers at least 1 Hit Point.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -432,28 +359,24 @@
                 "level": {
                     "value": 4
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 15
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "biting-snare",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -466,8 +389,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -479,34 +404,27 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.9EZb1hmSKOGrU4Cf"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/snares/biting-snare.webp",
+            "img": "icons/environment/traps/trap-jaw-steel.webp",
             "name": "Biting Snare",
             "sort": 600000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": "1",
-                    "value": "1"
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "snare"
-                },
-                "consume": {
-                    "value": "5d6"
-                },
+                "category": "snare",
                 "containerId": null,
+                "damage": {
+                    "formula": "5d6",
+                    "kind": "damage",
+                    "type": "piercing"
+                },
                 "description": {
                     "value": "<p>The snare's jaws shut on the leg of a creature that steps on it. The snare deals 5d6 piercing damage to the first creature that enters its square; that creature must attempt a @Check[type:reflex|dc:18].</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half damage.</p>\n<p><strong>Failure</strong> The creature takes full damage.</p>\n<p><strong>Critical Failure</strong> The creature takes double damage and takes a -10-foot status penalty to its Speed until it recovers at least 1 Hit Point.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -516,28 +434,24 @@
                 "level": {
                     "value": 4
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 15
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "biting-snare",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -550,8 +464,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -567,30 +483,19 @@
             "name": "Flare Snare",
             "sort": 700000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": "1",
-                    "value": "1"
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "snare"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "snare",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>Using bioluminescent matter or alchemical reagents, you rig a short-lived flare to a trip wire or pressure plate. When a Small or larger creature enters the square, this flare shoots into the sky. To creatures with a clear view of the sky, this flare is visible from up to 2 miles away on a clear day or up to 5 miles away on a clear night.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -600,28 +505,24 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 5
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "flare-snare",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -635,8 +536,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -652,30 +555,19 @@
             "name": "Flare Snare",
             "sort": 800000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": "1",
-                    "value": "1"
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "snare"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "snare",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>Using bioluminescent matter or alchemical reagents, you rig a short-lived flare to a trip wire or pressure plate. When a Small or larger creature enters the square, this flare shoots into the sky. To creatures with a clear view of the sky, this flare is visible from up to 2 miles away on a clear day or up to 5 miles away on a clear night.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -685,28 +577,24 @@
                 "level": {
                     "value": 2
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 5
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "flare-snare",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -720,8 +608,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -733,34 +623,27 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.e0vSAQfxhHauiAoD"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/consumables/potions/healing-potion.webp",
+            "img": "icons/consumables/potions/bottle-round-corked-orante-red.webp",
             "name": "Healing Potion (Lesser)",
             "sort": 900000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 1,
-                    "value": 1
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "potion"
-                },
-                "consume": {
-                    "value": "2d8+5"
-                },
+                "category": "potion",
                 "containerId": null,
+                "damage": {
+                    "formula": "2d8+5",
+                    "kind": "healing",
+                    "type": "untyped"
+                },
                 "description": {
                     "value": "<p>A healing potion is a vial of a ruby-red liquid that imparts a tingling sensation as the drinker's wounds heal rapidly. When you drink a healing potion, you regain [[/r (2d8+5)[healing]]]{2d8+5 Hit Points}.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -770,43 +653,40 @@
                 "level": {
                     "value": 3
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 12
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "healing-potion-lesser",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "consumable",
                         "healing",
                         "magical",
-                        "necromancy",
                         "potion"
                     ]
                 },
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -818,34 +698,23 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.MbPboT76BBKVGepB"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/snares/nauseating-snare.webp",
+            "img": "icons/commodities/materials/slime-thick-green.webp",
             "name": "Nauseating Snare",
             "sort": 1000000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": "1",
-                    "value": "1"
+                "bulk": {
+                    "value": 0
                 },
-                "consumableType": {
-                    "value": "snare"
-                },
-                "consume": {
-                    "value": ""
-                },
+                "category": "snare",
                 "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>You position particularly foul substances to splash over a creature. The first creature to enter the square must attempt a DC 20 Fortitude saving throw.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1}.</p>\n<p><strong>Failure</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2}.</p>\n<p><strong>Critical Failure</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 3}.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -855,28 +724,24 @@
                 "level": {
                     "value": 6
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 40
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "quantity": 1,
                 "rules": [],
                 "size": "med",
                 "slug": "nauseating-snare",
-                "source": {
-                    "value": ""
-                },
-                "stackGroup": null,
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -890,8 +755,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "-"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -925,11 +792,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -973,11 +842,13 @@
                 "description": {
                     "value": "<p>(range 50 feet, reload 1)</p>"
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1007,14 +878,13 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A creature Duhgik is aware of critically succeeds on a Strike against her and would deal damage to her</p>\n<hr />\n<p><strong>Effect</strong> With pitiful posturing, she causes her foe to pull back a deadly attack. The attacking creature takes a -8 circumstance penalty to the damage of the triggering Strike. This penalty applies after doubling the damage for a critical hit. The attacker is then immune to Duhgik's for 24 hours.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": "cringe",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -1023,12 +893,6 @@
                         "mental",
                         "visual"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1049,23 +913,16 @@
                 "description": {
                     "value": "<p>Duhgik has learned how to trigger snares from afar, creating ranged hazards to assail her opponents and allowing her to disarm enemies' snares harmlessly. She can Strike a snare to trigger it prematurely. If she crafted the snare, she automatically hits. If someone else crafted it, she must attempt a ranged Strike against the Crafting DC, triggering the snare only if she hits.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1089,10 +946,12 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>When the monster Strikes a creature that has the @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] condition with an agile or finesse melee weapon, an agile or finesse unarmed attack, or a ranged weapon attack, it also deals 1d6 precision damage. For a ranged attack with a thrown weapon, that weapon must also be an agile or finesse weapon.</p>"
+                    "value": "<p>Duhgik deals an extra 1d6 precision damage to @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] creatures.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [
                     {
@@ -1101,21 +960,7 @@
                         "dieSize": "d6",
                         "key": "DamageDice",
                         "predicate": [
-                            "target:condition:off-guard",
-                            {
-                                "or": [
-                                    "item:trait:agile",
-                                    "item:trait:finesse",
-                                    {
-                                        "and": [
-                                            "item:ranged",
-                                            {
-                                                "not": "item:thrown-melee"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
+                            "target:condition:off-guard"
                         ],
                         "selector": "strike-damage"
                     },
@@ -1128,18 +973,9 @@
                     }
                 ],
                 "slug": "sneak-attack",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1160,25 +996,18 @@
                 "description": {
                     "value": "<p>Duhgik installs one of her snares prepared for quick deployment in a space that's occupied by an opponent. It must be a snare that normally takes 1 minute or less to Craft. The snare automatically triggers, but it takes a -2 circumstance penalty to any applicable save DC, as well as any attack rolls or other checks the snare attempts.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "manipulate"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -1198,11 +1027,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1221,11 +1052,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1244,11 +1077,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1267,11 +1102,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1290,11 +1127,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1313,11 +1152,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -1336,11 +1177,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -1381,31 +1224,45 @@
                 "temp": 0,
                 "value": 66
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 14
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 30
             }
         },
         "details": {
-            "alignment": {
-                "value": "NG"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "draconic",
+                    "dwarven",
+                    "gnomish",
+                    "sakvroth"
+                ]
+            },
             "level": {
                 "value": 6
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder Blog"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder Blog"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 14,
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -1423,28 +1280,12 @@
             }
         },
         "traits": {
-            "attitude": {
-                "value": "hostile"
-            },
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "draconic",
-                    "dwarven",
-                    "gnomish",
-                    "undercommon"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "darkvision"
-            },
             "size": {
                 "value": "sm"
             },
             "value": [
+                "good",
                 "humanoid",
                 "kobold"
             ]

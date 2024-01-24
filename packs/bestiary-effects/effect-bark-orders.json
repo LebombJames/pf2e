@@ -1,19 +1,24 @@
 {
     "_id": "Hv4NO0HADyAAdS4F",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/skills/social/intimidation-impressing.webp",
     "name": "Effect: Bark Orders",
     "system": {
         "description": {
             "value": "<p>All kobold allies within 30 feet of him gain a +1 status bonus on attack rolls and saving throws against fear effects until the start of Chief Sootscale's next turn.</p>"
         },
         "duration": {
-            "expiry": "turn-end",
+            "expiry": "turn-start",
             "sustained": false,
             "unit": "rounds",
             "value": 1
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Kingmaker"
         },
         "rules": [
             {
@@ -32,9 +37,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Kingmaker"
-        },
         "start": {
             "initiative": null,
             "value": 0

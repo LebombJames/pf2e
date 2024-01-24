@@ -1,6 +1,6 @@
 {
     "_id": "I0g5oaSwaqZ8fFAV",
-    "img": "systems/pf2e/icons/features/classes/tempest-mystery.webp",
+    "img": "icons/magic/water/pseudopod-swirl-blue.webp",
     "name": "Effect: Curse of the Perpetual Storm",
     "system": {
         "badge": {
@@ -24,6 +24,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
         },
         "rules": [
             {
@@ -130,9 +135,6 @@
                 "option": "oracular-curse:stage:{item|badge.value}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

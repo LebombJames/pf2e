@@ -267,7 +267,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "9cK0QVSjNd8tQtiQ",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/knapsack-of-halflingkind.webp",
+            "img": "icons/containers/bags/pouch-simple-leather-tan.webp",
             "range": [
                 94,
                 96
@@ -281,7 +281,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "hDO0vRS8r9K2Zw87",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/cursed-items/necklace-of-strangulation.webp",
+            "img": "icons/equipment/neck/collar-rounded-carved-wood-spiral.webp",
             "range": [
                 97,
                 102

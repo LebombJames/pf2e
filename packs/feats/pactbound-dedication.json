@@ -1,6 +1,6 @@
 {
     "_id": "BVxcuJ5TWfN1px4L",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Pactbound Dedication",
     "system": {
         "actionType": {
@@ -29,6 +29,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Monsters of Myth"
+        },
         "rules": [
             {
                 "key": "Resistance",
@@ -36,9 +41,6 @@
                 "value": "floor(@actor.level/2)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Monsters of Myth"
-        },
         "traits": {
             "rarity": "rare",
             "value": [

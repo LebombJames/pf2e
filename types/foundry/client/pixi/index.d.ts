@@ -17,6 +17,7 @@ import {
     FORMATS,
     FederatedEvent,
     FederatedPointerEvent,
+    FederatedWheelEvent,
     Filter,
     FilterState,
     FilterSystem,
@@ -27,6 +28,7 @@ import {
     Graphics as LegacyGraphics,
     MIPMAP_MODES,
     MSAA_QUALITY,
+    Matrix,
     Mesh,
     ParticleContainer,
     ParticleRenderer,
@@ -41,6 +43,7 @@ import {
     SCALE_MODES,
     Shader,
     Sprite,
+    Spritesheet,
     Text,
     TextStyle,
     Texture,
@@ -49,11 +52,10 @@ import {
     UniformGroup,
     utils,
 } from "pixi.js";
-import "./canvas.d.ts";
+import "./board.d.ts";
 import "./core/index.d.ts";
 import "./groups/index.d.ts";
-import "./layers/controls/ruler.d.ts";
-import "./layers/effects/visibility.d.ts";
+import "./layers/index.d.ts";
 import "./perception/index.d.ts";
 import "./placeable.d.ts";
 import "./placeables/index.d.ts";
@@ -78,6 +80,7 @@ declare global {
             Extract,
             FederatedEvent,
             FederatedPointerEvent,
+            FederatedWheelEvent,
             Filter,
             FilterState,
             FilterSystem,
@@ -87,6 +90,7 @@ declare global {
             IDestroyOptions,
             ITextStyle,
             LegacyGraphics,
+            Matrix,
             Mesh,
             MIPMAP_MODES,
             MSAA_QUALITY,
@@ -103,6 +107,7 @@ declare global {
             SCALE_MODES,
             Shader,
             Sprite,
+            Spritesheet,
             Text,
             TextStyle,
             Texture,

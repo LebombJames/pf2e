@@ -1,6 +1,6 @@
 {
     "_id": "iiV80Kexj6vPmzqU",
-    "img": "systems/pf2e/icons/spells/rapid-adaptation.webp",
+    "img": "icons/magic/nature/leaf-oak-wreath-glow-green.webp",
     "name": "Spell Effect: Rapid Adaptation (Arctic)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 2
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -34,9 +39,6 @@
                 "type": "skill"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

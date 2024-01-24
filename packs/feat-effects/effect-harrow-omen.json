@@ -1,6 +1,6 @@
 {
     "_id": "rp6hA52dWVwtuu5F",
-    "img": "systems/pf2e/icons/equipment/cursed-items/euryale-curse-card.webp",
+    "img": "icons/sundries/gaming/playing-cards-grey.webp",
     "name": "Effect: Harrow Omen",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder: Stolen Fate Player's Guide"
         },
         "rules": [
             {
@@ -48,9 +53,6 @@
                 "rollOption": "harrow-omen"
             }
         ],
-        "source": {
-            "value": "Pathfinder: Stolen Fate Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

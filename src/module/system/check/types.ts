@@ -1,9 +1,9 @@
-import { ActorPF2e } from "@actor";
+import type { ActorPF2e } from "@actor";
 import { RollTarget } from "@actor/types.ts";
-import { ItemPF2e } from "@item";
+import type { ItemPF2e } from "@item";
 import { ZeroToTwo } from "@module/data.ts";
 import { RollSubstitution } from "@module/rules/synthetics.ts";
-import { TokenDocumentPF2e } from "@scene/token-document/index.ts";
+import type { TokenDocumentPF2e } from "@scene/token-document/index.ts";
 import { CheckDC, DegreeOfSuccessAdjustment } from "@system/degree-of-success.ts";
 import { BaseRollContext } from "@system/rolls.ts";
 
@@ -56,4 +56,4 @@ interface CheckRollContext extends BaseRollContext {
     dosAdjustments?: DegreeOfSuccessAdjustment[];
 }
 
-export { CheckRollContext, CheckType, RollTwiceOption };
+export type { CheckRollContext, CheckType, RollTwiceOption };

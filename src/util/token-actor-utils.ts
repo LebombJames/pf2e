@@ -1,22 +1,50 @@
-import { ActorPF2e } from "@actor";
-import { ActorType } from "@actor/data/index.ts";
+import type { ActorPF2e, ActorType } from "@actor";
+import { ACTOR_TYPES } from "@actor/values.ts";
+import * as R from "remeda";
+
+const actorTypes: (ActorType | "creature")[] = [...ACTOR_TYPES];
 
 /**
- * Collects every actor whose token is controlled on the canvas, and if none are, collects the current user's character, if it exists.
- *
- * @param types The actor types the function should take into consideration.
- * @param useOwnCharacter If true, the function will append the user's own character to the list of collected actors.
- * @returns An array of ActorPF2E elements according to the aforementioned filters.
+ * Collects every actor whose token is controlled on the canvas.
+ * @param [options.types]
+ * @param [options.assignedFallback=false] If no actors are controlled, fall back to the user's assigned character.
+ * @returns An array of ActorPF2E instances filtered by the requested types.
  */
-function getSelectedOrOwnActors(types?: ActorType[], useOwnCharacter = true): ActorPF2e[] {
-    const actors = canvas.tokens.controlled
-        .flatMap((token) => (token.actor ? token.actor : []))
-        .filter((actor) => actor.isOwner)
-        .filter((actor) => !types || actor.isOfType(...types));
+function getSelectedActors(params: GetSelectedActorsParams = {}): ActorPF2e[] {
+    const { include = actorTypes, exclude = [], assignedFallback = false } = params;
+    const actors = R.uniq(
+        game.user
+            .getActiveTokens()
+            .flatMap((t) =>
+                t.actor &&
+                (include.length === 0 || t.actor.isOfType(...include)) &&
+                (exclude.length === 0 || !t.actor.isOfType(...exclude))
+                    ? t.actor
+                    : [],
+            ),
+    );
+    const assigned = game.user.character;
+    if (actors.length > 0 || !assignedFallback || !assigned) {
+        return actors;
+    }
 
-    if (actors.length === 0 && game.user.character && useOwnCharacter) actors.push(game.user.character);
+    if (
+        (include.length === 0 || assigned.isOfType(...include)) &&
+        (exclude.length === 0 || !assigned.isOfType(...exclude))
+    ) {
+        return [assigned];
+    }
 
-    return actors;
+    return [];
 }
 
-export { getSelectedOrOwnActors };
+interface GetSelectedActorsParams {
+    /** Actor types that should be included (defaults to all) */
+    include?: (ActorType | "creature")[];
+    /** Actor types that should be excluded (defaults to none) */
+    exclude?: (ActorType | "creature")[];
+    /** Given no qualifying actor is selected, fall back to the user's assigned character if it also qualifies. */
+    assignedFallback?: boolean;
+}
+
+export { getSelectedActors };

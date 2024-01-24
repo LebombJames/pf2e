@@ -1,6 +1,6 @@
 {
     "_id": "Bwh3kiNX8nxEwVZ5",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/creatures/abilities/fang-tooth-blood-red.webp",
     "name": "Effect: Sanguine Fang - Weapon (Greater)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 12
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -36,9 +41,6 @@
                 "selector": "{item|flags.pf2e.rulesSelections.effectSanguineFangWeaponGreater}-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

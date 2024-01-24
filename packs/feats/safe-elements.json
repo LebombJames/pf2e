@@ -1,6 +1,6 @@
 {
     "_id": "ZBPRABDXeLVwxFC7",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Safe Elements",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
         "rules": [
             {
                 "allowDuplicate": false,
@@ -26,9 +31,6 @@
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Pacifying Infusion"
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "traits": {
             "rarity": "common",
             "value": [

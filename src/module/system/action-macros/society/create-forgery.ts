@@ -18,7 +18,7 @@ interface ChatMessageCheckFlags {
 
 async function createForgeryCallback(
     result: CheckResultCallback,
-    callback?: (result: CheckResultCallback) => void
+    callback?: (result: CheckResultCallback) => void,
 ): Promise<void> {
     // consider any modifiers enabled in the roll dialog
     const societyDC = (() => {
@@ -74,7 +74,7 @@ async function createForgeryCallback(
         },
         {
             parent: result.actor,
-        }
+        },
     );
 
     // remind user that an item was created in the actor's inventory
@@ -152,6 +152,7 @@ class CreateForgeryAction extends SingleCheckAction {
                 { outcome: ["criticalFailure"], text: "PF2E.Actions.CreateForgery.Notes.criticalFailure" },
             ],
             rollOptions: ["action:create-forgery"],
+            section: "skill",
             slug: "create-forgery",
             statistic: "society",
             traits: ["downtime", "secret"],

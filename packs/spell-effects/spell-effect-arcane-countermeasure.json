@@ -1,6 +1,6 @@
 {
     "_id": "14m4s0FeRSqRlHwL",
-    "img": "systems/pf2e/icons/spells/arcane-countermeasure.webp",
+    "img": "icons/magic/light/projectiles-star-purple.webp",
     "name": "Spell Effect: Arcane Countermeasure",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 5
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "FlatModifier",
@@ -28,9 +33,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

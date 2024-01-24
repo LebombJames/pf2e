@@ -1,10 +1,10 @@
 {
     "_id": "GqXIV46JqB8x8eEN",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/sundries/books/book-symbol-link-brown.webp",
     "name": "Effect: Book of Warding Prayers",
     "system": {
         "description": {
-            "value": ""
+            "value": "<p>Granted by @UUID[Compendium.pf2e.equipment-srd.Item.Book of Warding Prayers]</p>\n<p>You and all allies within 30 feet are suffused with your deity's protection, gaining resistance 10 to damage of that type for 1 minute.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -13,30 +13,28 @@
             "value": 1
         },
         "level": {
-            "value": 1
+            "value": 8
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
                 "choices": [
                     {
-                        "label": "PF2E.TraitChaotic",
-                        "value": "chaotic"
+                        "label": "PF2E.TraitHoly",
+                        "value": "holy"
                     },
                     {
-                        "label": "PF2E.TraitEvil",
-                        "value": "evil"
-                    },
-                    {
-                        "label": "PF2E.TraitGood",
-                        "value": "good"
-                    },
-                    {
-                        "label": "PF2E.TraitLawful",
-                        "value": "lawful"
+                        "label": "PF2E.TraitUnholy",
+                        "value": "unholy"
                     }
                 ],
                 "flag": "bowpResistance",
-                "key": "ChoiceSet"
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Sanctification"
             },
             {
                 "key": "Resistance",
@@ -44,9 +42,6 @@
                 "value": 10
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

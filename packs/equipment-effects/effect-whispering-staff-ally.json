@@ -1,6 +1,6 @@
 {
     "_id": "VKdiRnhrsgQTFSCM",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/weapons/staves/staff-simple-spiral-brown.webp",
     "name": "Effect: Whispering Staff (Ally)",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 20
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Treasure Vault"
         },
         "rules": [
             {
@@ -35,9 +40,6 @@
                 "selector": "skill-check"
             }
         ],
-        "source": {
-            "value": "Pathfinder Treasure Vault"
-        },
         "start": {
             "initiative": null,
             "value": 0

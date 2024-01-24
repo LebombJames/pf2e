@@ -5,15 +5,28 @@
         padding: 0;
 
         &.empty {
-            background-color: rgba(120, 100, 82, 0.1);
-            height: 28px;
+            height: 1.75rem;
+
+            > li {
+                font-style: italic;
+                font-weight: 500;
+                opacity: 0.75;
+
+                .image-placeholder {
+                    background: rgba(black, 0.1);
+                    border: 1px solid var(--color-disabled);
+                    border-radius: 2px;
+                    box-sizing: border-box;
+                    height: 1.625rem;
+                }
+            }
         }
 
         > li {
             align-items: center;
             display: grid;
-            grid-template-columns: 26px auto 2em 1em;
-            padding: 1px;
+            grid-template-columns: 1.625rem auto 2em 1em;
+            padding: var(--space-1);
 
             &:nth-of-type(even) {
                 background-color: rgba(120, 100, 82, 0.1);
@@ -21,24 +34,23 @@
 
             .name {
                 display: block;
-                margin-left: 0.25em;
-                line-height: 1em;
                 height: 1em;
+                line-height: 1em;
+                margin-left: 0.25em;
 
-                .fa.fa-globe {
-                    padding: 0 3px;
-                    float: right;
+                i.fa-globe {
+                    padding: 0 var(--space-3);
                 }
             }
 
             .level {
-                font-weight: bold;
+                font-weight: 500;
                 height: 1.25em;
                 text-align: center;
             }
 
             a.remove {
-                padding: 0 2px;
+                padding: 0 var(--space-2);
             }
         }
 
@@ -54,6 +66,10 @@
     }
 }
 
+fieldset.item-ref-group .item-refs {
+    border: none;
+}
+
 .item-ref-list {
     align-items: start;
 }
@@ -61,18 +77,18 @@
 .form-group {
     &.form-group-trait {
         height: auto;
-        margin: 2px 0;
+        margin: var(--space-2) 0;
 
         label {
             vertical-align: top;
         }
 
         > ul.abc-traits-list {
+            display: flex;
+            flex-wrap: wrap;
             list-style: none;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-wrap: wrap;
 
             span.tag {
                 float: none;
@@ -81,15 +97,23 @@
     }
 
     &.other-weapons {
-        input { flex: 2; }
-        select { flex: 1; }
+        input {
+            flex: 2;
+        }
+        select {
+            flex: 1;
+        }
     }
 
     &.additional-language {
-        input { flex: 0.5; }
+        gap: var(--space-4);
+
+        input {
+            flex: 0.5;
+        }
+
         span {
             flex: 2.5;
-            padding-left: 4px;
         }
     }
 }

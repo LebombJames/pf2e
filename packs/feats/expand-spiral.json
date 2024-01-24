@@ -1,6 +1,6 @@
 {
     "_id": "L7hs5XOCbJmh0H0e",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Expand Spiral",
     "system": {
         "actionType": {
@@ -23,6 +23,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Book of the Dead"
+        },
         "rules": [
             {
                 "key": "ActiveEffectLike",
@@ -31,9 +36,6 @@
                 "value": 1
             }
         ],
-        "source": {
-            "value": "Pathfinder Book of the Dead"
-        },
         "traits": {
             "rarity": "common",
             "value": [

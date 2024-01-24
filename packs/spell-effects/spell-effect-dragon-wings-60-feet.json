@@ -1,6 +1,6 @@
 {
     "_id": "V7jAnItnVqtfCAKt",
-    "img": "systems/pf2e/icons/spells/dragon-wings.webp",
+    "img": "icons/creatures/abilities/wing-batlike-red-pink.webp",
     "name": "Spell Effect: Dragon Wings (60 Feet)",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 5
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Core Rulebook"
+        },
         "rules": [
             {
                 "key": "BaseSpeed",
@@ -22,9 +27,6 @@
                 "value": 60
             }
         ],
-        "source": {
-            "value": "Pathfinder Core Rulebook"
-        },
         "start": {
             "initiative": null,
             "value": 0

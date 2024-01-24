@@ -1,6 +1,6 @@
 {
     "_id": "dZNAXTQovlWVvAyX",
-    "img": "systems/pf2e/icons/features/classes/lightning-reflexes.webp",
+    "img": "icons/magic/symbols/symbol-lightning-bolt.webp",
     "name": "Shared Reflexes",
     "system": {
         "actionType": {
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.reflex.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "reflex": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
         },
         "traits": {
             "rarity": "common",

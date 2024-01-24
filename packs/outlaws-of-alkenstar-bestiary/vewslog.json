@@ -13,9 +13,6 @@
             "name": "Dueling Pistol",
             "sort": 100000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "dueling-pistol",
                 "bonus": {
                     "value": 0
@@ -23,8 +20,11 @@
                 "bonusDamage": {
                     "value": 0
                 },
+                "bulk": {
+                    "value": 0.1
+                },
                 "category": "martial",
-                "containerId": "null",
+                "containerId": null,
                 "damage": {
                     "damageType": "piercing",
                     "dice": 1,
@@ -38,9 +38,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "firearm",
                 "hardness": 0,
                 "hp": {
@@ -50,34 +47,19 @@
                 "level": {
                     "value": 1
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": 1
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 12
                     }
                 },
-                "propertyRune1": {
-                    "value": null
-                },
-                "propertyRune2": {
-                    "value": null
-                },
-                "propertyRune3": {
-                    "value": null
-                },
-                "propertyRune4": {
-                    "value": null
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Guns & Gears"
                 },
                 "quantity": 2,
                 "range": 60,
@@ -85,17 +67,15 @@
                     "value": "1"
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 1,
+                    "property": [],
+                    "striking": 1
+                },
                 "size": "lg",
                 "slug": "dueling-pistol",
-                "source": {
-                    "value": "Pathfinder Guns & Gears"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": "striking"
                 },
                 "traits": {
                     "rarity": "uncommon",
@@ -107,9 +87,6 @@
                 },
                 "usage": {
                     "value": "held-in-one-hand"
-                },
-                "weight": {
-                    "value": "L"
                 }
             },
             "type": "weapon"
@@ -121,19 +98,19 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.8COlYvHe6hKCXY8x"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/weapons/greataxe.webp",
+            "img": "icons/weapons/axes/axe-double-engraved.webp",
             "name": "Greataxe",
             "sort": 200000,
             "system": {
-                "MAP": {
-                    "value": ""
-                },
                 "baseItem": "greataxe",
                 "bonus": {
                     "value": 0
                 },
                 "bonusDamage": {
                     "value": 0
+                },
+                "bulk": {
+                    "value": 2
                 },
                 "category": "martial",
                 "containerId": null,
@@ -150,9 +127,6 @@
                     "handsHeld": 0,
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": ""
-                },
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -162,34 +136,19 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potencyRune": {
-                    "value": null
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
                 "range": null,
@@ -197,17 +156,15 @@
                     "value": ""
                 },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "striking": 0
+                },
                 "size": "lg",
                 "slug": "greataxe",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "splashDamage": {
                     "value": 0
-                },
-                "stackGroup": null,
-                "strikingRune": {
-                    "value": ""
                 },
                 "traits": {
                     "rarity": "common",
@@ -217,9 +174,6 @@
                 },
                 "usage": {
                     "value": "held-in-two-hands"
-                },
-                "weight": {
-                    "value": "2"
                 }
             },
             "type": "weapon"
@@ -231,12 +185,15 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.AnwzlOs0njF9Jqnr"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/armor/hide.webp",
+            "img": "icons/equipment/chest/vest-leather-tattered-white.webp",
             "name": "Hide Armor",
             "sort": 300000,
             "system": {
                 "acBonus": 3,
                 "baseItem": "hide-armor",
+                "bulk": {
+                    "value": 2
+                },
                 "category": "medium",
                 "checkPenalty": -2,
                 "containerId": null,
@@ -248,9 +205,6 @@
                     "carryType": "worn",
                     "invested": null
                 },
-                "equippedBulk": {
-                    "value": "2"
-                },
                 "group": "leather",
                 "hardness": 0,
                 "hp": {
@@ -260,58 +214,34 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "potency": {},
-                "potencyRune": {
-                    "value": 0
-                },
-                "preciousMaterial": {
-                    "value": ""
-                },
-                "preciousMaterialGrade": {
-                    "value": ""
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "value": {
                         "gp": 2
                     }
                 },
-                "propertyRune1": {
-                    "value": ""
-                },
-                "propertyRune2": {
-                    "value": ""
-                },
-                "propertyRune3": {
-                    "value": ""
-                },
-                "propertyRune4": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "quantity": 1,
-                "resiliencyRune": {
-                    "value": ""
-                },
                 "rules": [],
+                "runes": {
+                    "potency": 0,
+                    "property": [],
+                    "resilient": 0
+                },
                 "size": "lg",
                 "slug": "hide-armor",
-                "source": {
-                    "value": "Pathfinder Core Rulebook"
-                },
                 "speedPenalty": -5,
-                "stackGroup": null,
                 "strength": 2,
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "usage": {
-                    "value": "wornarmor"
-                },
-                "weight": {
-                    "value": "3"
                 }
             },
             "type": "armor"
@@ -323,34 +253,23 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.FKPuzveKRNJhA1mi"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/consumables/ammunition/rounds-small.webp",
+            "img": "icons/weapons/ammunition/shot-round-lead.webp",
             "name": "Rounds (Dueling Pistol)",
             "sort": 400000,
             "system": {
-                "autoDestroy": {
-                    "value": true
-                },
                 "baseItem": null,
-                "charges": {
-                    "max": 0,
-                    "value": 0
+                "bulk": {
+                    "value": 0.1
                 },
-                "consumableType": {
-                    "value": "ammo"
-                },
-                "consume": {
-                    "value": ""
-                },
-                "containerId": "null",
+                "category": "ammo",
+                "containerId": null,
+                "damage": null,
                 "description": {
                     "value": "<p>Firearms require ammunition consisting of a projectile and black powder. A round of ammo can vary in its composition but is typically either a prepackaged paper cartridge, including wadding, bullet, and black powder, or loose shot packed in manually. Some weapons, like hand cannons and blunderbusses, can fire other materials, but their ammunition has the same Price due to the cost of the black powder. Because making rounds of firearm ammunition requires creating black powder, you need the @UUID[Compendium.pf2e.feats-srd.Item.Alchemical Crafting] skill feat to make them. Firearm rounds are a valid option for magical ammunition, just like arrows or bolts. Crafting magical firearm ammunition requires you to be able to craft both alchemical and magical items.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
                     "handsHeld": 0
-                },
-                "equippedBulk": {
-                    "value": ""
                 },
                 "hardness": 0,
                 "hp": {
@@ -360,14 +279,9 @@
                 "level": {
                     "value": 0
                 },
-                "negateBulk": {
-                    "value": "0"
-                },
-                "preciousMaterial": {
-                    "value": null
-                },
-                "preciousMaterialGrade": {
-                    "value": null
+                "material": {
+                    "grade": null,
+                    "type": null
                 },
                 "price": {
                     "per": 10,
@@ -375,13 +289,15 @@
                         "sp": 1
                     }
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Guns & Gears"
+                },
                 "quantity": 40,
                 "rules": [],
                 "size": "lg",
                 "slug": "rounds-dueling-pistol",
-                "source": {
-                    "value": "Pathfinder Guns & Gears"
-                },
                 "stackGroup": "rounds10",
                 "traits": {
                     "rarity": "common",
@@ -392,8 +308,10 @@
                 "usage": {
                     "value": "held-in-one-hand"
                 },
-                "weight": {
-                    "value": "L"
+                "uses": {
+                    "autoDestroy": true,
+                    "max": 1,
+                    "value": 1
                 }
             },
             "type": "consumable"
@@ -427,11 +345,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "reach-10",
@@ -473,11 +393,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "value": [
                         "concealable",
@@ -515,23 +437,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -558,23 +473,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Ferocity]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": "ferocity",
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -600,14 +508,13 @@
                     "per": "day",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -615,9 +522,6 @@
                         "fortune",
                         "occult"
                     ]
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -638,20 +542,16 @@
                 "description": {
                     "value": "<p><strong>Trigger</strong> A foe within 60 feet critically fails an attack roll against Vewslog</p>\n<hr />\n<p><strong>Effect</strong> Vewslog makes a dueling pistol Strike against the triggering foe.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -672,8 +572,10 @@
                 "description": {
                     "value": "<p>Vewslog's ranged attacks deal an additional 4d6 precision damage.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -681,19 +583,16 @@
                         "diceNumber": 4,
                         "dieSize": "d6",
                         "key": "DamageDice",
-                        "selector": "dueling-pistol-damage"
+                        "predicate": [
+                            "item:ranged"
+                        ],
+                        "selector": "strike-damage"
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -714,8 +613,10 @@
                 "description": {
                     "value": "<p>When Vewslog makes a critical hit with a firearm, the target must succeed at a @Check[type:fortitude|dc:25] save or become @UUID[Compendium.pf2e.conditionitems.Item.Stunned]{Stunned 1}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -732,15 +633,9 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -766,20 +661,16 @@
                     "per": "round",
                     "value": 1
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -799,11 +690,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -822,11 +715,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -845,11 +740,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         },
@@ -868,11 +765,13 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "slug": null
             },
             "type": "lore"
         }
@@ -913,31 +812,43 @@
                 "temp": 0,
                 "value": 161
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 18
-            },
             "speed": {
                 "otherSpeeds": [],
                 "value": 30
             }
         },
         "details": {
-            "alignment": {
-                "value": "LE"
-            },
             "blurb": "Male cyclops gunslinger",
-            "creatureType": "",
+            "languages": {
+                "details": "",
+                "value": [
+                    "common",
+                    "cyclops",
+                    "jotun"
+                ]
+            },
             "level": {
                 "value": 9
             },
             "privateNotes": "",
             "publicNotes": "",
-            "source": {
-                "value": "Pathfinder #180: The Smoking Gun"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #180: The Smoking Gun"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 18,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                }
+            ]
         },
         "resources": {},
         "saves": {
@@ -955,25 +866,15 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "",
-                "selected": [],
-                "value": [
-                    "common",
-                    "cyclops",
-                    "jotun"
-                ]
-            },
             "rarity": "unique",
-            "senses": {
-                "value": "low-light vision"
-            },
             "size": {
                 "value": "lg"
             },
             "value": [
+                "evil",
                 "giant",
-                "humanoid"
+                "humanoid",
+                "lawful"
             ]
         }
     },

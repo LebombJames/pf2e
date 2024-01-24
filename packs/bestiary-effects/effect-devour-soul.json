@@ -1,6 +1,6 @@
 {
     "_id": "QpG9AaYpXJzDEjZA",
-    "img": "systems/pf2e/icons/spells/eject-soul.webp",
+    "img": "icons/creatures/fish/jellyfish-swarm-eyed-teal.webp",
     "name": "Effect: Devour Soul",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 16
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Bestiary"
         },
         "rules": [
             {
@@ -30,9 +35,6 @@
                 "value": 2
             }
         ],
-        "source": {
-            "value": "Pathfinder Bestiary"
-        },
         "start": {
             "initiative": null,
             "value": 0

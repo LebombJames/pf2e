@@ -21,6 +21,11 @@
                 "proficiency": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "showSlotlessLevels": {
                     "value": true
@@ -91,9 +96,6 @@
                     }
                 },
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "spelldc": {
                     "dc": 38,
                     "mod": 0,
@@ -101,9 +103,79 @@
                 },
                 "tradition": {
                     "value": "primal"
-                }
+                },
+                "traits": {}
             },
             "type": "spellcastingEntry"
+        },
+        {
+            "_id": "fh8Lzor93Nd0M9GA",
+            "flags": {
+                "core": {
+                    "sourceId": "Compendium.pf2e.spells-srd.Item.Tc5NLaMu71vrGTJQ"
+                }
+            },
+            "img": "systems/pf2e/icons/spells/natures-enmity.webp",
+            "name": "Nature's Enmity",
+            "sort": 200000,
+            "system": {
+                "area": {
+                    "type": "burst",
+                    "value": 500
+                },
+                "cost": {
+                    "value": ""
+                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
+                "description": {
+                    "value": "<p>Animals, plants, and fungi in the area turn against the targets. Each target suffers from the following effects as long as it remains in the area.</p>\n<ul>\n<li>Vegetation springs up from every surface, giving each target a -10-foot circumstance penalty to its Speed any time it's adjacent to the plants and fungi.</li>\n<li>Aggressive animals attack unpredictably. At the start of its turn, each target rolls a @Check[type:flat|dc:8]. On a failure, it's attacked by swarming creatures that deal 2d10 slashing damage. The target attempts a basic Reflex save, and it is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] for 1 round on any outcome other than a critical success.</li>\n<li>The target loses any connection to nature or natural creatures. The target has to succeed at a @Check[type:flat|dc:5] when casting any primal spell or the spell fails. Furthermore, animal, fungus, and plant creatures become hostile to it, even one with a strong bond to the target, such as an animal companion.</li>\n</ul>\n<p>The GM might decide that you can't subject some creatures, such as an emissary of a nature deity, to the ire of nature.</p>"
+                },
+                "duration": {
+                    "sustained": false,
+                    "value": "10 minutes"
+                },
+                "level": {
+                    "value": 9
+                },
+                "location": {
+                    "heightenedLevel": 9,
+                    "uses": {
+                        "max": 4,
+                        "value": 4
+                    },
+                    "value": "Epu50OvxZEgFJeOb"
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
+                "range": {
+                    "value": "120 feet"
+                },
+                "requirements": "",
+                "rules": [],
+                "slug": "natures-enmity",
+                "target": {
+                    "value": "up to 5 creatures"
+                },
+                "time": {
+                    "value": "2"
+                },
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
+                        "primal"
+                    ],
+                    "value": [
+                        "concentrate",
+                        "manipulate"
+                    ]
+                }
+            },
+            "type": "spell"
         },
         {
             "_id": "W3PGMqV8juR1dOX0",
@@ -112,37 +184,23 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.BBvV7qoXGdw09q1C"
                 }
             },
-            "img": "systems/pf2e/icons/spells/speak-with-animals.webp",
+            "img": "icons/creatures/mammals/ox-buffalo-horned-green.webp",
             "name": "Speak with Animals (Constant)",
-            "sort": 200000,
+            "sort": 300000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>You can ask questions of, receive answers from, and use the Diplomacy skill with animals. The spell doesn't make them more friendly than normal. Cunning animals are likely to be terse and evasive, while less intelligent ones often make inane comments.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "10 minutes"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 9
@@ -150,54 +208,31 @@
                 "location": {
                     "value": "Epu50OvxZEgFJeOb"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "speak-with-animals",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "primal"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "primal"
+                    ],
                     "value": [
-                        "divination"
+                        "concentrate",
+                        "manipulate"
                     ]
                 }
             },
@@ -210,37 +245,23 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.qvwIwJ9QBihy8R0t"
                 }
             },
-            "img": "systems/pf2e/icons/spells/speak-with-plants.webp",
+            "img": "icons/magic/nature/plant-poison-spit-green.webp",
             "name": "Speak with Plants (Constant)",
-            "sort": 300000,
+            "sort": 400000,
             "system": {
-                "ability": {
-                    "value": ""
-                },
                 "area": null,
-                "category": {
-                    "value": "spell"
-                },
-                "components": {
-                    "focus": false,
-                    "material": false,
-                    "somatic": true,
-                    "verbal": true
-                },
                 "cost": {
                     "value": ""
                 },
-                "damage": {
-                    "value": {}
-                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
                 "description": {
                     "value": "<p>You can ask questions of and receive answers from plants, but the spell doesn't make them more friendly or intelligent than normal. Most normal plants have a distinctive view of the world around them, so they don't recognize details about creatures or know anything about the world beyond their immediate vicinity. Cunning plant monsters are likely to be terse and evasive, while less intelligent ones often make inane comments.</p>"
                 },
                 "duration": {
+                    "sustained": false,
                     "value": "10 minutes"
-                },
-                "hasCounteractCheck": {
-                    "value": false
                 },
                 "level": {
                     "value": 9
@@ -248,55 +269,32 @@
                 "location": {
                     "value": "Epu50OvxZEgFJeOb"
                 },
-                "materials": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": ""
-                },
-                "primarycheck": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "range": {
                     "value": ""
                 },
+                "requirements": "",
                 "rules": [],
-                "save": {
-                    "basic": "",
-                    "value": ""
-                },
-                "secondarycasters": {
-                    "value": ""
-                },
-                "secondarycheck": {
-                    "value": ""
-                },
                 "slug": "speak-with-plants",
-                "source": {
-                    "value": ""
-                },
-                "spellType": {
-                    "value": "utility"
-                },
-                "sustained": {
-                    "value": false
-                },
                 "target": {
                     "value": ""
                 },
                 "time": {
                     "value": "2"
                 },
-                "traditions": {
-                    "value": [
-                        "primal"
-                    ]
-                },
                 "traits": {
                     "rarity": "common",
+                    "traditions": [
+                        "primal"
+                    ],
                     "value": [
-                        "plant",
-                        "divination"
+                        "concentrate",
+                        "manipulate",
+                        "plant"
                     ]
                 }
             },
@@ -306,7 +304,7 @@
             "_id": "WWD5GxUGGCVvtpKK",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Branch",
-            "sort": 400000,
+            "sort": 500000,
             "system": {
                 "attack": {
                     "value": ""
@@ -329,11 +327,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -350,7 +350,7 @@
             "_id": "hrgfbriQFfWRXCez",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Root",
-            "sort": 500000,
+            "sort": 600000,
             "system": {
                 "attack": {
                     "value": ""
@@ -373,11 +373,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -394,7 +396,7 @@
             "_id": "2h5p2PjGcoLDmKPl",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Vine",
-            "sort": 600000,
+            "sort": 700000,
             "system": {
                 "attack": {
                     "value": ""
@@ -417,11 +419,13 @@
                 "description": {
                     "value": ""
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
@@ -444,7 +448,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Low-Light Vision",
-            "sort": 700000,
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -456,23 +460,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "low-light-vision",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -486,7 +483,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Tremorsense",
-            "sort": 800000,
+            "sort": 900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -498,23 +495,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "tremorsense",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -523,7 +513,7 @@
             "_id": "8jTwv2f4MCK6dNhk",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Axe Vulnerability 15",
-            "sort": 900000,
+            "sort": 1000000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -535,23 +525,16 @@
                 "description": {
                     "value": "<p>A canopy elder has a weakness to axes.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -565,7 +548,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Constant Spells",
-            "sort": 1000000,
+            "sort": 1100000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -577,23 +560,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "constant-spells",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -607,7 +583,7 @@
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Attack of Opportunity",
-            "sort": 1100000,
+            "sort": 1200000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -619,23 +595,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "attack-of-opportunity",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -644,7 +613,7 @@
             "_id": "Pw8geIuf7RVWG9mn",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Vine Splint",
-            "sort": 1200000,
+            "sort": 1300000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -656,25 +625,18 @@
                 "description": {
                     "value": "<p>The canopy elder grows a mesh of vines around its broken branches, repairing the damage and restoring 40 HP to itself. The canopy elder can't use Vine Splint again for [[/br 1d4 #Recharge Vine Splint]]{1d4 rounds}.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": [
                         "healing"
                     ]
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -683,7 +645,7 @@
             "_id": "OMOLhCqLoPJemrk0",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Fungal Web",
-            "sort": 1300000,
+            "sort": 1400000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -695,23 +657,16 @@
                 "description": {
                     "value": "<p>The canopy elder launches a rapidly growing net of fungus from the mushrooms growing on its body at a single creature within 80 feet. The target must attempt a @Check[type:reflex|dc:39] save or become restrained by the fungal web (Escape DC 39). While restrained, the creature takes @Damage[4d6[poison]] damage at the end of each of their turns.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -720,7 +675,7 @@
             "_id": "3bf0he47VZDexEYP",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Pollen Cloud",
-            "sort": 1400000,
+            "sort": 1500000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -732,23 +687,16 @@
                 "description": {
                     "value": "<p>The canopy elder releases a dense cloud of pollen from the epiphytes living in its branches. The cloud emanates from the canopy elder in a @Template[type:emanation|distance:40]. The cloud doesn't move with the canopy elder and remains in place for [[/br 1d6 #rounds]]{1d6 rounds} before dissipating. Creatures inside the cloud become @UUID[Compendium.pf2e.conditionitems.Item.Concealed], and all creatures outside the cloud become concealed to creatures within it. Non-plant and non-fungus creatures within the cloud must attempt a @Check[type:fortitude|dc:38] save. On a failure, the creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 3}, and on a critical failure the creature is also @UUID[Compendium.pf2e.conditionitems.Item.Blinded] for 1 minute. Regardless of the result, a creature is then temporarily immune to the sickening and blinding effects of the canopy elder's pollen for 24 hours.</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -762,7 +710,7 @@
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Grab",
-            "sort": 1500000,
+            "sort": 1600000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -774,23 +722,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedGrab]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "improved-grab",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -804,7 +745,7 @@
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Push",
-            "sort": 1600000,
+            "sort": 1700000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -816,23 +757,16 @@
                 "description": {
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedPush]</p>"
                 },
-                "requirements": {
-                    "value": ""
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Bestiary"
                 },
                 "rules": [],
                 "slug": "improved-push",
-                "source": {
-                    "value": "Pathfinder Bestiary"
-                },
                 "traits": {
                     "rarity": "common",
                     "value": []
-                },
-                "trigger": {
-                    "value": ""
-                },
-                "weapon": {
-                    "value": ""
                 }
             },
             "type": "action"
@@ -841,7 +775,7 @@
             "_id": "TGFZcZZIF8Kmu6n4",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Athletics",
-            "sort": 1700000,
+            "sort": 1800000,
             "system": {
                 "description": {
                     "value": ""
@@ -852,11 +786,14 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "traits": {}
             },
             "type": "lore"
         },
@@ -864,29 +801,6 @@
             "_id": "IjBjNo9SiCcfCYMp",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Deception",
-            "sort": 1800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "rules": [],
-                "slug": null,
-                "source": {
-                    "value": ""
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "87FEs0y7o7ZOMm7o",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Forest Lore",
             "sort": 1900000,
             "system": {
                 "description": {
@@ -898,18 +812,21 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "traits": {}
             },
             "type": "lore"
         },
         {
-            "_id": "YNzt7rYfCWqjekiZ",
+            "_id": "87FEs0y7o7ZOMm7o",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
+            "name": "Forest Lore",
             "sort": 2000000,
             "system": {
                 "description": {
@@ -921,11 +838,40 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
+                "traits": {}
+            },
+            "type": "lore"
+        },
+        {
+            "_id": "YNzt7rYfCWqjekiZ",
+            "img": "systems/pf2e/icons/default-icons/lore.svg",
+            "name": "Intimidation",
+            "sort": 2100000,
+            "system": {
+                "description": {
                     "value": ""
-                }
+                },
+                "mod": {
+                    "value": 35
+                },
+                "proficient": {
+                    "value": 0
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
+                "rules": [],
+                "slug": null,
+                "traits": {}
             },
             "type": "lore"
         },
@@ -933,7 +879,7 @@
             "_id": "6Eb7rdBmiwB9LG4G",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Nature",
-            "sort": 2100000,
+            "sort": 2200000,
             "system": {
                 "description": {
                     "value": ""
@@ -944,11 +890,14 @@
                 "proficient": {
                     "value": 0
                 },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
                 "rules": [],
                 "slug": null,
-                "source": {
-                    "value": ""
-                }
+                "traits": {}
             },
             "type": "lore"
         },
@@ -956,7 +905,7 @@
             "_id": "gF7lJ0d8vJ02DpHq",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Stealth",
-            "sort": 2200000,
+            "sort": 2300000,
             "system": {
                 "description": {
                     "value": ""
@@ -966,6 +915,11 @@
                 },
                 "proficient": {
                     "value": 0
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
                 },
                 "rules": [
                     {
@@ -979,9 +933,7 @@
                     }
                 ],
                 "slug": null,
-                "source": {
-                    "value": ""
-                },
+                "traits": {},
                 "variants": {
                     "0": {
                         "label": "+39 in forests",
@@ -1028,12 +980,6 @@
                 "temp": 0,
                 "value": 445
             },
-            "initiative": {
-                "statistic": "perception"
-            },
-            "perception": {
-                "value": 32
-            },
             "resistances": [
                 {
                     "type": "bludgeoning",
@@ -1056,19 +1002,42 @@
             ]
         },
         "details": {
-            "alignment": {
-                "value": "N"
-            },
             "blurb": "",
-            "creatureType": "",
+            "languages": {
+                "details": "speak with animals, speak with plants",
+                "value": [
+                    "arboreal",
+                    "common",
+                    "fey"
+                ]
+            },
             "level": {
                 "value": 19
             },
             "privateNotes": "",
             "publicNotes": "<p>In the densest and oldest jungles, arboreals can reach heights of 200 feet or more. Given thousands of undisturbed years, these massive creatures enter into a symbiotic relationship with a myriad of plants, fungi, and animals to achieve the esteemed status of canopy elder. They provide a safe home for the creatures they host and develop a variety of powers that help them defend their forest realms.</p>",
-            "source": {
-                "value": "Pathfinder #168: King of the Mountain"
+            "publication": {
+                "license": "OGL",
+                "remaster": false,
+                "title": "Pathfinder #168: King of the Mountain"
             }
+        },
+        "initiative": {
+            "statistic": "perception"
+        },
+        "perception": {
+            "details": "",
+            "mod": 32,
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 120,
+                    "type": "tremorsense"
+                }
+            ]
         },
         "resources": {
             "focus": {
@@ -1091,19 +1060,7 @@
             }
         },
         "traits": {
-            "languages": {
-                "custom": "Speak With Animals, Speak With Plants",
-                "selected": [],
-                "value": [
-                    "arboreal",
-                    "common",
-                    "fey"
-                ]
-            },
             "rarity": "rare",
-            "senses": {
-                "value": "low-light vision, tremorsense (imprecise) 120 feet"
-            },
             "size": {
                 "value": "grg"
             },

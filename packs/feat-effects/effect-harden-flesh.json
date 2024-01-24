@@ -1,6 +1,6 @@
 {
     "_id": "Np3OSqKxuB9rTbij",
-    "img": "systems/pf2e/icons/spells/flesh-to-stone.webp",
+    "img": "icons/magic/defensive/armor-stone-skin.webp",
     "name": "Effect: Harden Flesh",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 10
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -47,9 +52,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

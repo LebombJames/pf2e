@@ -1,6 +1,6 @@
 {
     "_id": "T7AJQbfmlA57y625",
-    "img": "systems/pf2e/icons/spells/angelic-halo.webp",
+    "img": "icons/magic/light/explosion-star-glow-blue.webp",
     "name": "Effect: Vivacious Bravado",
     "system": {
         "description": {
@@ -15,15 +15,17 @@
         "level": {
             "value": 8
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
         "rules": [
             {
                 "key": "TempHP",
                 "value": "@actor.level + @actor.abilities.cha.mod"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 0

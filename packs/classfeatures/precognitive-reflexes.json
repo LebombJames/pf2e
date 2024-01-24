@@ -1,6 +1,6 @@
 {
     "_id": "Ftz5jVa9X6aXybkC",
-    "img": "systems/pf2e/icons/features/classes/lightning-reflexes.webp",
+    "img": "icons/magic/symbols/symbol-lightning-bolt.webp",
     "name": "Precognitive Reflexes",
     "system": {
         "actionType": {
@@ -19,16 +19,18 @@
         "prerequisites": {
             "value": []
         },
-        "rules": [
-            {
-                "key": "ActiveEffectLike",
-                "mode": "upgrade",
-                "path": "system.saves.reflex.rank",
-                "value": 2
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Dark Archive"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {
+                "reflex": {
+                    "rank": 2
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Dark Archive"
         },
         "traits": {
             "rarity": "common",

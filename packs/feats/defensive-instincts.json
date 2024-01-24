@@ -1,6 +1,6 @@
 {
     "_id": "RxA1PdgGbijkieJD",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Defensive Instincts",
     "system": {
         "actionType": {
@@ -19,13 +19,15 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [],
         "selfEffect": {
             "name": "Effect: Defensive Instincts",
             "uuid": "Compendium.pf2e.feat-effects.Item.Effect: Defensive Instincts"
-        },
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
         },
         "traits": {
             "rarity": "common",

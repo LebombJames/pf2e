@@ -1,6 +1,6 @@
 {
     "_id": "No817gKxdliCVQ9K",
-    "img": "systems/pf2e/icons/spells/elemental-zone.webp",
+    "img": "icons/magic/symbols/elements-air-earth-fire-water.webp",
     "name": "Effect: Energy Ward",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 16
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #185: A Taste of Ashes"
         },
         "rules": [
             {
@@ -57,9 +62,6 @@
                 "selector": "strike-damage"
             }
         ],
-        "source": {
-            "value": "Pathfinder #185: A Taste of Ashes"
-        },
         "start": {
             "initiative": null,
             "value": 0

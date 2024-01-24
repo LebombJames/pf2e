@@ -1,6 +1,6 @@
 {
     "_id": "Bn9yK3FBndHkbVsu",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Spine Stabber",
     "system": {
         "actionType": {
@@ -19,6 +19,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+        },
         "rules": [
             {
                 "category": "unarmed",
@@ -30,7 +35,7 @@
                     }
                 },
                 "group": "knife",
-                "img": "systems/pf2e/icons/unarmed-attacks/bone-shard.webp",
+                "img": "icons/commodities/claws/claws-plain-brown-orange.webp",
                 "key": "Strike",
                 "label": "PF2E.SpecificRule.Shisk.Quills",
                 "options": [
@@ -43,9 +48,6 @@
                 ]
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Mwangi Expanse"
-        },
         "traits": {
             "rarity": "common",
             "value": [

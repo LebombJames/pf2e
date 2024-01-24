@@ -1,10 +1,13 @@
 {
     "_id": "4tIVTg9wj56RrveA",
-    "img": "systems/pf2e/icons/equipment/armor/leather-armor.webp",
+    "img": "icons/equipment/chest/breastplate-banded-simple-leather-brown.webp",
     "name": "Leather Armor",
     "system": {
         "acBonus": 1,
         "baseItem": "leather-armor",
+        "bulk": {
+            "value": 1
+        },
         "category": "light",
         "checkPenalty": -1,
         "containerId": null,
@@ -12,9 +15,6 @@
             "value": "<p>A mix of flexible and molded boiled leather, a suit of this type of armor provides some protection with maximum flexibility.</p>"
         },
         "dexCap": 4,
-        "equippedBulk": {
-            "value": "1"
-        },
         "group": "leather",
         "hardness": 0,
         "hp": {
@@ -24,57 +24,33 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "potency": {},
-        "potencyRune": {
-            "value": 0
-        },
-        "preciousMaterial": {
-            "value": ""
-        },
-        "preciousMaterialGrade": {
-            "value": ""
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "value": {
                 "gp": 2
             }
         },
-        "propertyRune1": {
-            "value": ""
-        },
-        "propertyRune2": {
-            "value": ""
-        },
-        "propertyRune3": {
-            "value": ""
-        },
-        "propertyRune4": {
-            "value": ""
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
         },
         "quantity": 1,
-        "resiliencyRune": {
-            "value": ""
-        },
         "rules": [],
-        "size": "med",
-        "source": {
-            "value": "Pathfinder Core Rulebook"
+        "runes": {
+            "potency": 0,
+            "property": [],
+            "resilient": 0
         },
-        "speedPenalty": null,
-        "stackGroup": null,
+        "size": "med",
+        "speedPenalty": 0,
         "strength": 0,
         "traits": {
             "rarity": "common",
             "value": []
-        },
-        "usage": {
-            "value": "wornarmor"
-        },
-        "weight": {
-            "value": "2"
         }
     },
     "type": "armor"

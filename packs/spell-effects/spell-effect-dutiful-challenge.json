@@ -1,6 +1,6 @@
 {
     "_id": "UH2sT6eW5e31Xytd",
-    "img": "systems/pf2e/icons/spells/dutiful-challenge.webp",
+    "img": "icons/sundries/flags/banner-sword-blue.webp",
     "name": "Spell Effect: Dutiful Challenge",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 4
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Gods & Magic"
         },
         "rules": [
             {
@@ -114,9 +119,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Gods & Magic"
-        },
         "start": {
             "initiative": null,
             "value": 0

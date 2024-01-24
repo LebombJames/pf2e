@@ -1,6 +1,6 @@
 {
     "_id": "YGBPIpHaOgCsa2qO",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Soulsight (Sorcerer)",
     "system": {
         "actionType": {
@@ -23,17 +23,19 @@
                 }
             ]
         },
-        "rules": [
-            {
-                "acuity": "imprecise",
-                "key": "Sense",
-                "label": "spiritsense",
-                "range": 60,
-                "selector": "spiritsense"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Advanced Player's Guide"
+        },
+        "rules": [],
+        "subfeatures": {
+            "senses": {
+                "spiritsense": {
+                    "acuity": "imprecise",
+                    "range": 60
+                }
             }
-        ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
         },
         "traits": {
             "rarity": "common",

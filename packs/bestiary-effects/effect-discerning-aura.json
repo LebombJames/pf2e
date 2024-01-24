@@ -1,6 +1,6 @@
 {
     "_id": "mo4IRyv7GGRBJihU",
-    "img": "systems/pf2e/icons/spells/thundering-dominance.webp",
+    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp",
     "name": "Effect: Discerning Aura",
     "system": {
         "description": {
@@ -14,6 +14,11 @@
         },
         "level": {
             "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #186: Ghost King's Rage"
         },
         "rules": [
             {
@@ -30,9 +35,6 @@
                 }
             }
         ],
-        "source": {
-            "value": "Pathfinder #186: Ghost King's Rage"
-        },
         "start": {
             "initiative": null,
             "value": 0

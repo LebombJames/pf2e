@@ -1,6 +1,6 @@
 {
     "_id": "AKrxQ2JuDObM8coY",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Animal Senses",
     "system": {
         "actionType": {
@@ -20,6 +20,11 @@
         "prerequisites": {
             "value": []
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Ancestry Guide"
+        },
         "rules": [
             {
                 "key": "Sense",
@@ -31,9 +36,9 @@
             {
                 "key": "Sense",
                 "predicate": [
-                    "beastkin-senses:lowLightVision"
+                    "beastkin-senses:low-light-vision"
                 ],
-                "selector": "lowLightVision"
+                "selector": "low-light-vision"
             },
             {
                 "acuity": "imprecise",
@@ -52,7 +57,7 @@
                     },
                     {
                         "label": "PF2E.Actor.Creature.Sense.Type.LowLightVision",
-                        "value": "lowLightVision"
+                        "value": "low-light-vision"
                     },
                     {
                         "label": "PF2E.SpecificRule.Beastkin.Senses.Scent",
@@ -65,9 +70,6 @@
                 "rollOption": "beastkin-senses"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: Ancestry Guide"
-        },
         "traits": {
             "rarity": "common",
             "value": [

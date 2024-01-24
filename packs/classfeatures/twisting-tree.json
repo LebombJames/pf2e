@@ -1,6 +1,6 @@
 {
     "_id": "6YJ8KFl7THkVy6Gm",
-    "img": "systems/pf2e/icons/features/classes/twisting-tree.webp",
+    "img": "icons/weapons/staves/staff-simple-gold.webp",
     "name": "Twisting Tree",
     "system": {
         "actionType": {
@@ -18,6 +18,11 @@
         },
         "prerequisites": {
             "value": []
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Secrets of Magic"
         },
         "rules": [
             {
@@ -73,10 +78,10 @@
                 "value": "trip"
             }
         ],
-        "source": {
-            "value": "Pathfinder Secrets of Magic"
-        },
         "traits": {
+            "otherTags": [
+                "magus-hybrid-study"
+            ],
             "rarity": "common",
             "value": [
                 "magus"

@@ -1,6 +1,6 @@
 {
     "_id": "eHjqNXgylSuvA887",
-    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Student of Perfection Dedication",
     "system": {
         "actionType": {
@@ -26,6 +26,11 @@
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: World Guide"
+        },
         "rules": [
             {
                 "key": "GrantItem",
@@ -34,7 +39,7 @@
             {
                 "choices": [
                     {
-                        "img": "systems/pf2e/icons/spells/unblinking-flame-revalation.webp",
+                        "img": "icons/magic/light/explosion-beam-impact-silhouette.webp",
                         "label": "PF2E.SpecificRule.HouseOfPerfection.UnblinkingFlame",
                         "value": "fire"
                     },
@@ -44,12 +49,12 @@
                         "value": "water"
                     },
                     {
-                        "img": "systems/pf2e/icons/spells/unfolding-wind-rush.webp",
+                        "img": "icons/skills/movement/arrow-upward-yellow.webp",
                         "label": "PF2E.SpecificRule.HouseOfPerfection.UnfoldingWind",
                         "value": "air"
                     },
                     {
-                        "img": "systems/pf2e/icons/spells/untwisting-iron-buffer.webp",
+                        "img": "icons/magic/lightning/projectile-tendrils-teal.webp",
                         "label": "PF2E.SpecificRule.HouseOfPerfection.UntwistingIron",
                         "value": "earth"
                     }
@@ -66,9 +71,6 @@
                 "value": "{item|flags.pf2e.rulesSelections.houseOfPerfectionElement}"
             }
         ],
-        "source": {
-            "value": "Pathfinder Lost Omens: World Guide"
-        },
         "traits": {
             "rarity": "uncommon",
             "value": [

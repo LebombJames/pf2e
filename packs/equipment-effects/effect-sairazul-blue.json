@@ -1,10 +1,10 @@
 {
     "_id": "hexHnjCuq6vaEZEx",
-    "img": "systems/pf2e/icons/default-icons/effect.svg",
+    "img": "icons/consumables/potions/potion-bottle-corked-blue.webp",
     "name": "Effect: Sairazul Blue",
     "system": {
         "description": {
-            "value": "<p>You gain resistance 5 to poison damage and void damage.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.equipment-srd.Item.Sairazul Blue]</p>\n<p>You gain resistance 5 to poison damage and void damage.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -15,19 +15,21 @@
         "level": {
             "value": 10
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
         "rules": [
             {
                 "key": "Resistance",
                 "type": [
                     "poison",
-                    "negative"
+                    "void"
                 ],
                 "value": 5
             }
         ],
-        "source": {
-            "value": "Pathfinder Rage of Elements"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -211,7 +211,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "YCjVrQnHfOtpmjYW",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/belt-of-the-five-kings.webp",
+            "img": "icons/equipment/waist/belt-buckle-round-steel-purple.webp",
             "range": [
                 79,
                 81
@@ -281,7 +281,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "Hd1AfC08ytBg67Ey",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/hat-of-the-magi.webp",
+            "img": "icons/equipment/head/hat-belted-simple-grey.webp",
             "range": [
                 106,
                 111
@@ -295,7 +295,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "0GOHTXBxs6H6ARBz",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/healers-gloves.webp",
+            "img": "icons/equipment/hand/glove-simple-cloth-white.webp",
             "range": [
                 112,
                 117
@@ -309,7 +309,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "rdF2RKgFK0vOlaeV",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/knapsack-of-halflingkind.webp",
+            "img": "icons/containers/bags/pouch-simple-leather-tan.webp",
             "range": [
                 118,
                 120
@@ -337,7 +337,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "IufO3dNPhC1c2ZcL",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/cursed-items/necklace-of-strangulation.webp",
+            "img": "icons/equipment/neck/collar-rounded-carved-wood-spiral.webp",
             "range": [
                 127,
                 132
@@ -351,7 +351,7 @@
             "documentCollection": "pf2e.equipment-srd",
             "documentId": "1bvH8zFQvDYky9tr",
             "drawn": false,
-            "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/pendant-of-the-occult.webp",
+            "img": "icons/commodities/biological/eye-purple.webp",
             "range": [
                 133,
                 138

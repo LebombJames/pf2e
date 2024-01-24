@@ -1,6 +1,6 @@
 import { AttributeString } from "@actor/types.ts";
-import { AncestrySystemData } from "@item/ancestry/data.ts";
-import { ItemSourcePF2e } from "@item/data/index.ts";
+import { AncestrySystemSource } from "@item/ancestry/data.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { MigrationBase } from "../base.ts";
 
 export class Migration767ConvertVoluntaryFlaws extends MigrationBase {
@@ -41,7 +41,7 @@ interface DatumOld {
     selected: AttributeString | null;
 }
 
-interface AncestrySystemDataMaybeOld extends AncestrySystemData {
+interface AncestrySystemDataMaybeOld extends AncestrySystemSource {
     voluntaryBoosts?: Record<string, DatumOld>;
     voluntaryFlaws?: Record<string, DatumOld>;
     "-=voluntaryBoosts"?: null;

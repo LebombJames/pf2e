@@ -1,6 +1,6 @@
 {
     "_id": "1RsScTvNdGD9zGWe",
-    "img": "systems/pf2e/icons/spells/fire-shield.webp",
+    "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
     "name": "Spell Effect: Fire Shield",
     "system": {
         "description": {
@@ -15,6 +15,11 @@
         "level": {
             "value": 4
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "Resistance",
@@ -22,9 +27,6 @@
                 "value": "5 + 5*floor((@item.level -4)/2)"
             }
         ],
-        "source": {
-            "value": "Pathfinder Player Core"
-        },
         "start": {
             "initiative": null,
             "value": 0

@@ -2,7 +2,10 @@
     "_id": "vbJL4dPQcXfYigwv",
     "img": "systems/pf2e/icons/default-icons/vehicle.svg",
     "items": [],
-    "name": "Sky Chariot, Medium",
+    "name": "Sky Chariot (Medium)",
+    "prototypeToken": {
+        "name": "Medium Sky Chariot"
+    },
     "system": {
         "attributes": {
             "ac": {
@@ -44,7 +47,12 @@
             },
             "passengers": "3",
             "pilotingCheck": "Arcana (DC 29), Nature (DC 29 to 37, depending on pulling creature), or Piloting Lore (DC 27)",
-            "price": "3000",
+            "price": 3000,
+            "publication": {
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder GM Core"
+            },
             "space": {
                 "high": 8,
                 "long": 10,
@@ -59,9 +67,6 @@
                 "saveDetail": "",
                 "value": 19
             }
-        },
-        "source": {
-            "value": "Pathfinder #167: Ready? Fight!"
         },
         "traits": {
             "rarity": "uncommon",

@@ -1,6 +1,6 @@
 {
     "_id": "UJcuACMlspc1raL1",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Curse of the Saumen Kar",
     "system": {
         "actionType": {
@@ -27,10 +27,12 @@
                 }
             ]
         },
-        "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: Monsters of Myth"
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Monsters of Myth"
         },
+        "rules": [],
         "traits": {
             "rarity": "common",
             "value": [

@@ -6,6 +6,7 @@ declare global {
     // Sequence of hooks called on world load
     type HookParamsInit = HookParameters<"init", never>;
     type HookParamsSetup = HookParameters<"setup", never>;
+    type HookParamsI18nInit = HookParameters<"i18nInit", never>;
     type HookParamsCanvasInit = HookParameters<"canvasInit", [DrawnCanvas]>;
     type HookParamsCanvasReady = HookParameters<"canvasReady", [DrawnCanvas]>;
     type HookParamsReady = HookParameters<"ready", never>;
@@ -19,11 +20,7 @@ declare global {
     type HookParamsLightingRefresh = HookParameters<"lightingRefresh", [LightingLayer]>;
     type HookParamsPreCreateItem = HookParameters<
         "preCreateItem",
-        [
-            PreCreate<foundry.documents.ItemSource>,
-            DocumentModificationContext<Actor<TokenDocument<Scene | null> | null> | null>,
-            string
-        ]
+        [PreCreate<foundry.documents.ItemSource>, DocumentModificationContext<Actor | null>, string]
     >;
     type HooksParamsPreUpdateCombat = HookParameters<
         "preUpdateCombat",
@@ -36,12 +33,12 @@ declare global {
             foundry.documents.TokenSource,
             DeepPartial<foundry.documents.TokenSource>,
             { diff: boolean; [key: string]: unknown },
-            string
+            string,
         ]
     >;
     type HookParamsRender<T extends Application, N extends string> = HookParameters<
         `render${N}`,
-        [T, JQuery, ReturnType<T["getData"]>]
+        [T, JQuery, Awaited<ReturnType<T["getData"]>>]
     >;
     type HookParamsRenderChatMessage = HookParameters<
         "renderChatMessage",
@@ -50,7 +47,7 @@ declare global {
     type HookParamsTargetToken = HookParameters<"targetToken", [User, Token<TokenDocument<Scene>>, boolean]>;
     type HookParamsUpdate<T extends foundry.abstract.Document, N extends string> = HookParameters<
         `update${N}`,
-        [T, DocumentUpdateData<T>, DocumentModificationContext<T["parent"]>]
+        [T, Record<string, unknown>, DocumentModificationContext<T["parent"]>]
     >;
     type HookParamsUpdateWorldTime = HookParameters<"updateWorldTime", [number, number]>;
 
@@ -64,6 +61,7 @@ declare global {
         static on(...args: HookParamsSetup): number;
         static on(...args: HookParamsInit): number;
         static on(...args: HookParamsReady): number;
+        static on(...args: HookParamsI18nInit): number;
         static on(...args: HookParamsCanvasInit): number;
         static on(...args: HookParamsCanvasReady): number;
         static on(...args: HookParamsClose<CombatTrackerConfig, "CombatTrackerConfig">): number;

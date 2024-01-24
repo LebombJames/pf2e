@@ -1,6 +1,6 @@
 {
     "_id": "IrxtH1BFlUOS0DnQ",
-    "img": "systems/pf2e/icons/default-icons/feats.webp",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
     "name": "Captivator Dedication",
     "system": {
         "actionType": {
@@ -19,16 +19,25 @@
         "prerequisites": {
             "value": [
                 {
-                    "value": "Charisma 14"
+                    "value": "trained in Deception or Diplomacy"
                 },
                 {
-                    "value": "trained in Deception or Diplomacy"
+                    "value": "Charisma +2"
                 }
             ]
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: The Grand Bazaar"
+        },
         "rules": [],
-        "source": {
-            "value": "Pathfinder Lost Omens: The Grand Bazaar"
+        "subfeatures": {
+            "proficiencies": {
+                "spellcasting": {
+                    "rank": 1
+                }
+            }
         },
         "traits": {
             "rarity": "common",

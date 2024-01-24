@@ -3,25 +3,14 @@
     "img": "systems/pf2e/icons/default-icons/consumable.svg",
     "name": "Shield Pistol Rounds",
     "system": {
-        "autoDestroy": {
-            "value": true
-        },
         "baseItem": null,
-        "charges": {
-            "max": 0,
+        "bulk": {
             "value": 0
         },
-        "consumableType": {
-            "value": "ammo"
-        },
-        "consume": {
-            "value": ""
-        },
+        "category": "ammo",
         "containerId": null,
+        "damage": null,
         "description": {
-            "value": ""
-        },
-        "equippedBulk": {
             "value": ""
         },
         "hardness": 0,
@@ -32,14 +21,9 @@
         "level": {
             "value": 0
         },
-        "negateBulk": {
-            "value": "0"
-        },
-        "preciousMaterial": {
-            "value": null
-        },
-        "preciousMaterialGrade": {
-            "value": null
+        "material": {
+            "grade": null,
+            "type": null
         },
         "price": {
             "per": 10,
@@ -47,12 +31,14 @@
                 "sp": 1
             }
         },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder Lost Omens: Firebrands"
+        },
         "quantity": 10,
         "rules": [],
         "size": "med",
-        "source": {
-            "value": "Pathfinder Lost Omens: Firebrands"
-        },
         "stackGroup": "rounds10",
         "traits": {
             "rarity": "uncommon",
@@ -61,8 +47,10 @@
         "usage": {
             "value": "other"
         },
-        "weight": {
-            "value": "-"
+        "uses": {
+            "autoDestroy": true,
+            "max": 1,
+            "value": 1
         }
     },
     "type": "consumable"

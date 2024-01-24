@@ -1,6 +1,6 @@
 {
     "_id": "dCQCzapIk53xmDo5",
-    "img": "systems/pf2e/icons/spells/animal-feature.webp",
+    "img": "icons/commodities/biological/eye-lizard-orange.webp",
     "name": "Spell Effect: Animal Feature (Cat Eyes)",
     "system": {
         "description": {
@@ -15,15 +15,17 @@
         "level": {
             "value": 2
         },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core"
+        },
         "rules": [
             {
                 "key": "Sense",
-                "selector": "lowLightVision"
+                "selector": "low-light-vision"
             }
         ],
-        "source": {
-            "value": "Pathfinder Advanced Player's Guide"
-        },
         "start": {
             "initiative": null,
             "value": 3648
