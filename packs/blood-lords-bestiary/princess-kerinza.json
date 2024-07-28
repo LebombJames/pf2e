@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -30,71 +29,7 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 28,
@@ -710,7 +645,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> <strong>Slowly</strong> lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
+                    "value": "<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> Slowly lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -774,7 +709,7 @@
                 "containerId": null,
                 "description": {
                     "gm": "<p>Also the key to area <strong>F10</strong></p>",
-                    "value": "<p>A grinning skull tops the bow of this macabre key. This key can be used in place of thieves' tools when attempting to Pick a Lock, and it grants a +1 item bonus to the Thievery check.</p>\n<p>If the <em>skeleton key</em> becomes broken due to a critical failure on the check, it works as normal thieves' tools and loses its benefits until repaired.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You attempt to Pick a Lock but haven't rolled yet</p>\n<hr />\n<p><strong>Effect</strong> The key casts <em>@UUID[Compendium.pf2e.spells-srd.Item.Knock]</em> on the lock you're trying to pick.</p>"
+                    "value": "<p>A grinning skull tops the bow of this macabre key. This key can be used in place of thieves' tools when attempting to Pick a Lock, and it grants a +1 item bonus to the Thievery check.</p>\n<p>If the <em>skeleton key</em> becomes broken due to a critical failure on the check, it works as normal thieves' tools and loses its benefits until repaired.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You attempt to Pick a Lock but haven't rolled yet</p>\n<hr />\n<p><strong>Effect</strong> The key casts @UUID[Compendium.pf2e.spells-srd.Item.Knock] on the lock you're trying to pick.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -927,14 +862,9 @@
             "type": "melee"
         },
         {
-            "_id": "p4IzvHJTNIvvPL4m",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
+            "_id": "0qLV4XXhIJyka38A",
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
+            "name": "Personality Fragments",
             "sort": 1200000,
             "system": {
                 "actionType": {
@@ -945,37 +875,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
-            "_id": "0qLV4XXhIJyka38A",
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Personality Fragments",
-            "sort": 1300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>The Kerinza doll is animated by a piece of Kerinza's soul, energized by the happiest time in her life. She can telepathically communicate with the Doriel doll as long as they're within 60 feet of each other. If the Doriel doll is defeated, her eyes turn black, and black veins run beneath her porcelain skin. She can cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Wave of Despair]</em> again if she's already cast it, and she can cast it as a single action.</p>"
+                    "value": "<p>The Kerinza doll is animated by a piece of Kerinza's soul, energized by the happiest time in her life. She can telepathically communicate with the Doriel doll as long as they're within 60 feet of each other. If the Doriel doll is defeated, her eyes turn black, and black veins run beneath her porcelain skin. She can cast @UUID[Compendium.pf2e.spells-srd.Item.Wave of Despair] again if she's already cast it, and she can cast it as a single action.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1000,7 +900,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Sneak Attack",
-            "sort": 1400000,
+            "sort": 1300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1048,7 +948,7 @@
             "_id": "Padh4azq1HtiVrHg",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Surprise Attack",
-            "sort": 1500000,
+            "sort": 1400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1093,106 +993,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "udamNImmSq01ELU9",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 1600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "iA2w2Cn685nsA8Mt",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Society",
-            "sort": 1700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 18
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "tal77FHycX1gS4AS",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 1800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 23
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "pxgoax2a73lTjHa8",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Thievery",
-            "sort": 1900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Princess Kerinza",
@@ -1292,6 +1092,20 @@
             "will": {
                 "saveDetail": "",
                 "value": 16
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 21
+            },
+            "society": {
+                "base": 18
+            },
+            "stealth": {
+                "base": 23
+            },
+            "thievery": {
+                "base": 21
             }
         },
         "traits": {

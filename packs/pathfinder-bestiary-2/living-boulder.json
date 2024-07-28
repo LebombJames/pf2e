@@ -44,41 +44,6 @@
             "type": "melee"
         },
         {
-            "_id": "QTFJOKoZto5yRgDd",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 200000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "UvIa41hvZRkj3zM0",
             "flags": {
                 "core": {
@@ -86,8 +51,8 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Tremorsense",
-            "sort": 300000,
+            "name": "Tremorsense 30 feet",
+            "sort": 200000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -117,7 +82,7 @@
             "_id": "1fTRsJAGDuFgPeXF",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Earth Glide",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -147,7 +112,7 @@
             "_id": "MJIrkULpmp4soA0F",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Rolling Charge",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -172,72 +137,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "Ym8YsDLM7tdido3b",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 8
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "XhhI5NeGekRv5yOP",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 5
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "In Rocky Areas",
-                        "predicate": [
-                            "terrain:rocky"
-                        ],
-                        "selector": "stealth",
-                        "value": 2
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+7 in rocky areas",
-                        "options": "terrain:rocky"
-                    }
-                }
-            },
-            "type": "lore"
         }
     ],
     "name": "Living Boulder",
@@ -347,6 +246,23 @@
             "will": {
                 "saveDetail": "",
                 "value": 8
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 8
+            },
+            "stealth": {
+                "base": 5,
+                "special": [
+                    {
+                        "base": 7,
+                        "label": "in rocky areas",
+                        "predicate": [
+                            "terrain:rocky"
+                        ]
+                    }
+                ]
             }
         },
         "traits": {

@@ -1,7 +1,7 @@
 import { ArmyPF2e, CharacterPF2e, FamiliarPF2e, HazardPF2e, LootPF2e, NPCPF2e, PartyPF2e, VehiclePF2e } from "@actor";
 import { SenseAcuity } from "@actor/creature/types.ts";
 import { LANGUAGES, SENSE_TYPES } from "@actor/creature/values.ts";
-import { ActorType, AttributeString } from "@actor/types.ts";
+import type { ActorType, AttributeString, SkillSlug } from "@actor/types.ts";
 import { MOVEMENT_TYPES } from "@actor/values.ts";
 import {
     AbilityItemPF2e,
@@ -46,11 +46,11 @@ import {
     actionTraits,
     ancestryTraits,
     armorTraits,
-    backgroundTraits,
     classTraits,
     consumableTraits,
     creatureTraits,
     damageTraits,
+    effectTraits,
     elementTraits,
     equipmentTraits,
     featTraits,
@@ -298,13 +298,6 @@ const weaponReload: Record<WeaponReloadTime, string> = {
     10: "PF2E.Item.Weapon.Reload.OneMinute",
 };
 
-function notifyDeprecatedPath(configPath: string, locPath: string): void {
-    fu.logCompatibilityWarning(
-        `CONFIG.PF2E.${configPath} is deprecated. Use localization path ${locPath} directly instead.`,
-        { since: "5.2.0", until: "6.0.0" },
-    );
-}
-
 export const PF2ECONFIG = {
     defaultPartyId: "xxxPF2ExPARTYxxx",
     chatDamageButtonShieldToggle: false,
@@ -340,24 +333,6 @@ export const PF2ECONFIG = {
 
     abilities,
 
-    attributes: {
-        get perception(): string {
-            const locPath = "PF2E.PerceptionLabel";
-            notifyDeprecatedPath("attributes.perception", locPath);
-            return locPath;
-        },
-        get stealth(): string {
-            const locPath = "PF2E.StealthLabel";
-            notifyDeprecatedPath("attributes.stealth", locPath);
-            return locPath;
-        },
-        get initiative(): string {
-            const locPath = "PF2E.InitiativeLabel";
-            notifyDeprecatedPath("attributes.initiative", locPath);
-            return locPath;
-        },
-    },
-
     dcAdjustments: {
         "incredibly-easy": "PF2E.DCAdjustmentIncrediblyEasy",
         "very-easy": "PF2E.DCAdjustmentVeryEasy",
@@ -369,25 +344,6 @@ export const PF2ECONFIG = {
     },
 
     checkDCs: configFromLocalization(EN_JSON.PF2E.Check.DC, "PF2E.Check.DC"),
-
-    skills: {
-        acr: "PF2E.SkillAcr",
-        arc: "PF2E.SkillArc",
-        ath: "PF2E.SkillAth",
-        cra: "PF2E.SkillCra",
-        dec: "PF2E.SkillDec",
-        dip: "PF2E.SkillDip",
-        itm: "PF2E.SkillItm",
-        med: "PF2E.SkillMed",
-        nat: "PF2E.SkillNat",
-        occ: "PF2E.SkillOcc",
-        prf: "PF2E.SkillPrf",
-        rel: "PF2E.SkillRel",
-        soc: "PF2E.SkillSoc",
-        ste: "PF2E.SkillSte",
-        sur: "PF2E.SkillSur",
-        thi: "PF2E.SkillThi",
-    },
 
     saves: {
         fortitude: "PF2E.SavesFortitude",
@@ -428,7 +384,6 @@ export const PF2ECONFIG = {
     damageTypes,
     damageRollFlavors,
     damageCategories,
-    elementTraits,
     materialDamageEffects,
     resistanceTypes,
 
@@ -558,6 +513,7 @@ export const PF2ECONFIG = {
         "held-in-one-hand-or-free-standing": "PF2E.TraitHeldOneHandFreeStanding",
         "held-in-one-or-two-hands": "PF2E.TraitHeldOneTwoHands",
         "held-in-two-hands": "PF2E.TraitHeldTwoHands",
+        implanted: "PF2E.TraitImplanted",
         other: "Other",
         "sewn-into-clothing": "PF2E.TraitSewnIntoClothing",
         "tattooed-on-the-body": "PF2E.TraitTattooedOnTheBody",
@@ -601,38 +557,37 @@ export const PF2ECONFIG = {
         "worn-under-armor": "PF2E.TraitWornUnderArmor",
     },
 
+    magicTraditions,
+    deityDomains,
+
+    otherArmorTags,
+    otherConsumableTags,
+    otherWeaponTags,
+
+    actionTraits,
+    ancestryTraits,
+    armorTraits,
+    classTraits,
+    consumableTraits,
+    creatureTraits,
+    effectTraits,
+    elementTraits,
+    equipmentTraits,
+    featTraits,
+    hazardTraits,
+    kingmakerTraits,
+    npcAttackTraits,
+    shieldTraits,
+    spellTraits,
+    vehicleTraits,
+    weaponTraits,
+
     rarityTraits: {
         common: "PF2E.TraitCommon",
         uncommon: "PF2E.TraitUncommon",
         rare: "PF2E.TraitRare",
         unique: "PF2E.TraitUnique",
     },
-
-    magicTraditions,
-    classTraits,
-    ancestryTraits,
-    deityDomains,
-
-    weaponTraits,
-    otherWeaponTags,
-
-    armorTraits,
-    otherArmorTags,
-
-    equipmentTraits,
-
-    consumableTraits,
-    otherConsumableTags,
-
-    actionTraits,
-    shieldTraits,
-    spellTraits,
-    featTraits,
-    creatureTraits,
-    kingmakerTraits,
-    npcAttackTraits,
-    hazardTraits,
-    vehicleTraits,
 
     traitsDescriptions: traitDescriptions,
 
@@ -691,39 +646,6 @@ export const PF2ECONFIG = {
         ritual: "PF2E.Item.Spell.Ritual.Label",
     },
 
-    areaTypes: {
-        burst: "PF2E.AreaTypeBurst",
-        cone: "PF2E.AreaTypeCone",
-        cube: "PF2E.AreaTypeCube",
-        emanation: "PF2E.AreaTypeEmanation",
-        line: "PF2E.AreaTypeLine",
-        square: "PF2E.AreaTypeSquare",
-    },
-
-    areaSizes: {
-        5: "PF2E.AreaSize5",
-        10: "PF2E.AreaSize10",
-        15: "PF2E.AreaSize15",
-        20: "PF2E.AreaSize20",
-        25: "PF2E.AreaSize25",
-        30: "PF2E.AreaSize30",
-        40: "PF2E.AreaSize40",
-        45: "PF2E.AreaSize45",
-        50: "PF2E.AreaSize50",
-        60: "PF2E.AreaSize60",
-        65: "PF2E.AreaSize65",
-        75: "PF2E.AreaSize75",
-        80: "PF2E.AreaSize80",
-        90: "PF2E.AreaSize90",
-        100: "PF2E.AreaSize100",
-        120: "PF2E.AreaSize120",
-        360: "PF2E.AreaSize360",
-        500: "PF2E.AreaSize500",
-        1000: "PF2E.AreaSize1000",
-        1320: "PF2E.AreaSizeQuarterMile",
-        5280: "PF2E.AreaSize1Mile",
-    },
-
     attitude: {
         hostile: "PF2E.Attitudes.Hostile",
         unfriendly: "PF2E.Attitudes.Unfriendly",
@@ -732,32 +654,24 @@ export const PF2ECONFIG = {
         helpful: "PF2E.Attitudes.Helpful",
     },
 
-    skillList: {
-        acrobatics: "PF2E.SkillAcrobatics",
-        arcana: "PF2E.SkillArcana",
-        athletics: "PF2E.SkillAthletics",
-        crafting: "PF2E.SkillCrafting",
-        deception: "PF2E.SkillDeception",
-        diplomacy: "PF2E.SkillDiplomacy",
-        intimidation: "PF2E.SkillIntimidation",
-        medicine: "PF2E.SkillMedicine",
-        nature: "PF2E.SkillNature",
-        occultism: "PF2E.SkillOccultism",
-        performance: "PF2E.SkillPerformance",
-        religion: "PF2E.SkillReligion",
-        society: "PF2E.SkillSociety",
-        stealth: "PF2E.SkillStealth",
-        survival: "PF2E.SkillSurvival",
-        thievery: "PF2E.SkillThievery",
-        lore: "PF2E.SkillLore",
-    },
-
-    spellComponents: {
-        V: "PF2E.SpellComponentV",
-        S: "PF2E.SpellComponentS",
-        M: "PF2E.SpellComponentM",
-        F: "PF2E.SpellComponentF",
-    },
+    skills: Object.freeze({
+        acrobatics: { label: "PF2E.Skill.Acrobatics", attribute: "dex" },
+        arcana: { label: "PF2E.Skill.Arcana", attribute: "int" },
+        athletics: { label: "PF2E.Skill.Athletics", attribute: "str" },
+        crafting: { label: "PF2E.Skill.Crafting", attribute: "int" },
+        deception: { label: "PF2E.Skill.Deception", attribute: "cha" },
+        diplomacy: { label: "PF2E.Skill.Diplomacy", attribute: "cha" },
+        intimidation: { label: "PF2E.Skill.Intimidation", attribute: "cha" },
+        medicine: { label: "PF2E.Skill.Medicine", attribute: "wis" },
+        nature: { label: "PF2E.Skill.Nature", attribute: "wis" },
+        occultism: { label: "PF2E.Skill.Occultism", attribute: "int" },
+        performance: { label: "PF2E.Skill.Performance", attribute: "cha" },
+        religion: { label: "PF2E.Skill.Religion", attribute: "wis" },
+        society: { label: "PF2E.Skill.Society", attribute: "int" },
+        stealth: { label: "PF2E.Skill.Stealth", attribute: "dex" },
+        survival: { label: "PF2E.Skill.Survival", attribute: "wis" },
+        thievery: { label: "PF2E.Skill.Thievery", attribute: "dex" },
+    }) satisfies Record<SkillSlug, { label: string; attribute: AttributeString }>,
 
     featCategories,
 
@@ -889,6 +803,28 @@ export const PF2ECONFIG = {
         Infinity: 4,
     },
 
+    environmentFeatures: {
+        crowd: "PF2E.Environment.Feature.Crowd",
+        ice: "PF2E.Environment.Feature.Ice",
+        lava: "PF2E.Environment.Feature.Lava",
+        rubble: "PF2E.Environment.Feature.Rubble",
+        sand: "PF2E.Environment.Feature.Sand",
+        sewer: "PF2E.Environment.Feature.Sewer",
+        snow: "PF2E.Environment.Feature.Snow",
+    },
+
+    environmentTypes: {
+        aquatic: "PF2E.Environment.Type.Aquatic",
+        arctic: "PF2E.Environment.Type.Arctic",
+        desert: "PF2E.Environment.Type.Desert",
+        forest: "PF2E.Environment.Type.Forest",
+        mountain: "PF2E.Environment.Type.Mountain",
+        plains: "PF2E.Environment.Type.Plains",
+        swamp: "PF2E.Environment.Type.Swamp",
+        underground: "PF2E.Environment.Type.Underground",
+        urban: "PF2E.Environment.Type.Urban",
+    },
+
     SETTINGS: {
         automation: {
             rulesBasedVision: {
@@ -960,6 +896,10 @@ export const PF2ECONFIG = {
                 name: "PF2E.SETTINGS.Homebrew.EquipmentTraits.Name",
                 hint: "PF2E.SETTINGS.Homebrew.EquipmentTraits.Hint",
             },
+            environmentTypes: {
+                name: "PF2E.SETTINGS.Homebrew.EnvironmentTypes.Name",
+                hint: "PF2E.SETTINGS.Homebrew.EnvironmentTypes.Hint",
+            },
         },
         worldClock: {
             name: "PF2E.SETTINGS.WorldClock.Name",
@@ -969,6 +909,7 @@ export const PF2ECONFIG = {
                 name: "PF2E.SETTINGS.WorldClock.DateTheme.Name",
                 hint: "PF2E.SETTINGS.WorldClock.DateTheme.Hint",
                 AR: "PF2E.SETTINGS.WorldClock.DateTheme.AR",
+                IC: "PF2E.SETTINGS.WorldClock.DateTheme.IC",
                 AD: "PF2E.SETTINGS.WorldClock.DateTheme.AD",
                 CE: "PF2E.SETTINGS.WorldClock.DateTheme.CE",
             },
@@ -1047,25 +988,6 @@ export const PF2ECONFIG = {
             spellcastingEntry: SpellcastingEntryPF2e,
             treasure: TreasurePF2e,
             weapon: WeaponPF2e,
-        },
-        traits: {
-            action: actionTraits,
-            affliction: actionTraits,
-            armor: armorTraits,
-            ancestry: creatureTraits,
-            background: backgroundTraits,
-            backpack: equipmentTraits,
-            book: equipmentTraits,
-            campaignFeature: kingmakerTraits,
-            consumable: consumableTraits,
-            equipment: equipmentTraits,
-            feat: featTraits,
-            heritage: featTraits,
-            kit: classTraits,
-            melee: npcAttackTraits,
-            shield: shieldTraits,
-            spell: spellTraits,
-            weapon: weaponTraits,
         },
     },
 

@@ -1,6 +1,11 @@
 import { LightLevels, SceneFlagsPF2e } from "./data.ts";
 import { checkAuras } from "./helpers.ts";
-import type { AmbientLightDocumentPF2e, MeasuredTemplateDocumentPF2e, TileDocumentPF2e } from "./index.ts";
+import type {
+    AmbientLightDocumentPF2e,
+    MeasuredTemplateDocumentPF2e,
+    RegionDocumentPF2e,
+    TileDocumentPF2e,
+} from "./index.ts";
 import { TokenDocumentPF2e } from "./index.ts";
 import type { SceneConfigPF2e } from "./sheet.ts";
 
@@ -27,7 +32,7 @@ class ScenePF2e extends Scene {
     }
 
     get lightLevel(): number {
-        return 1 - this.darkness;
+        return 1 - this.environment.darknessLevel;
     }
 
     get isBright(): boolean {
@@ -40,11 +45,6 @@ class ScenePF2e extends Scene {
 
     get isDark(): boolean {
         return this.lightLevel <= LightLevels.DARKNESS;
-    }
-
-    get hasHexGrid(): boolean {
-        const squareOrGridless: number[] = [CONST.GRID_TYPES.GRIDLESS, CONST.GRID_TYPES.SQUARE];
-        return !squareOrGridless.includes(this.grid.type);
     }
 
     /** Whether this scene is "in focus": the active scene, or the viewed scene if only a single GM is logged in */
@@ -82,8 +82,25 @@ class ScenePF2e extends Scene {
         );
 
         if (this.rulesBasedVision) {
-            this.globalLight = true;
-            this.globalLightThreshold = 1 - (LightLevels.DARKNESS + 0.001);
+            this.environment.globalLight.enabled = true;
+            this.environment.globalLight.darkness.max = 1 - (LightLevels.DARKNESS + 0.001);
+        }
+    }
+
+    /** Check for tokens that moved into or out of difficult terrain and reset their respective actors */
+    #refreshTerrainAwareness(): void {
+        if (this.regions.some((r) => r.behaviors.some((b) => b.type === "environmentFeature"))) {
+            for (const token of this.tokens.filter((t) => t.isLinked)) {
+                const rollOptionsAll = token.actor?.rollOptions.all ?? {};
+                const actorDifficultTerrain = rollOptionsAll["self:position:difficult-terrain"]
+                    ? rollOptionsAll["self:position:difficult-terrain:greater"]
+                        ? 2
+                        : 1
+                    : 0;
+                if (actorDifficultTerrain !== token.difficultTerrain) {
+                    token.actor?.reset();
+                }
+            }
         }
     }
 
@@ -91,13 +108,16 @@ class ScenePF2e extends Scene {
     /*  Event Handlers                              */
     /* -------------------------------------------- */
 
-    /** Redraw auras if the scene was activated while being viewed */
-    override _onUpdate(changed: DeepPartial<this["_source"]>, options: SceneUpdateContext, userId: string): void {
-        super._onUpdate(changed, options, userId);
+    override _onUpdate(changed: DeepPartial<this["_source"]>, operation: SceneUpdateOperation, userId: string): void {
+        super._onUpdate(changed, operation, userId);
 
         const flagChanges = changed.flags?.pf2e ?? {};
         if (this.isView && ["rulesBasedVision", "hearingRange"].some((k) => flagChanges[k] !== undefined)) {
             canvas.perception.update({ initializeLighting: true, initializeVision: true });
+        }
+
+        if (changed.active === true || (this.active && changed.flags?.pf2e?.environmentTypes)) {
+            this.#refreshTerrainAwareness();
         }
 
         // Check if this is the new active scene or an update to an already active scene
@@ -108,15 +128,30 @@ class ScenePF2e extends Scene {
         }
     }
 
+    protected override _onUpdateDescendantDocuments(
+        parent: this,
+        collection: string,
+        documents: ClientDocument[],
+        changes: object[],
+        options: DatabaseUpdateOperation<this>,
+        userId: string,
+    ): void {
+        super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+
+        if (["behaviors", "regions", "tokens"].includes(collection)) {
+            this.#refreshTerrainAwareness();
+        }
+    }
+
     protected override _onDeleteDescendantDocuments(
         parent: this,
         collection: string,
         documents: foundry.abstract.Document[],
         ids: string[],
-        options: DocumentModificationContext<this>,
+        operation: DatabaseDeleteOperation<this>,
         userId: string,
     ): void {
-        super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+        super._onDeleteDescendantDocuments(parent, collection, documents, ids, operation, userId);
 
         // Upstream will only refresh lighting if the delete token's source is emitting light: handle cases where
         // the token's prepared data light data was overridden from TokenLight REs.
@@ -138,12 +173,11 @@ interface ScenePF2e extends Scene {
     /** Check for auras containing newly-placed or moved tokens (added as a debounced method) */
     checkAuras(): void;
 
-    _sheet: SceneConfigPF2e<this> | null;
-
     readonly lights: foundry.abstract.EmbeddedCollection<AmbientLightDocumentPF2e<this>>;
+    readonly regions: foundry.abstract.EmbeddedCollection<RegionDocumentPF2e<this>>;
     readonly templates: foundry.abstract.EmbeddedCollection<MeasuredTemplateDocumentPF2e<this>>;
-    readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e<this>>;
     readonly tiles: foundry.abstract.EmbeddedCollection<TileDocumentPF2e<this>>;
+    readonly tokens: foundry.abstract.EmbeddedCollection<TokenDocumentPF2e<this>>;
 
     get sheet(): SceneConfigPF2e<this>;
 }

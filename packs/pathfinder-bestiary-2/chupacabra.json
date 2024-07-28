@@ -93,45 +93,10 @@
             "type": "melee"
         },
         {
-            "_id": "XSrKkFryn35jFMnz",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "abGmJgduMKED2VeX",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Chupar",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -161,7 +126,7 @@
             "_id": "UmF9ATrgifYyt9He",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Pounce",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -196,7 +161,7 @@
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Grab",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -221,95 +186,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "OQE9ap0Mj3pykdzk",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 9
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.HighJumpOrLongJump",
-                        "predicate": [
-                            "action:high-jump",
-                            "action:long-jump"
-                        ],
-                        "selector": "acrobatics",
-                        "type": "untyped",
-                        "value": 2
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+11 to Leap",
-                        "options": "action:high-jump,action:long-jump"
-                    }
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gfmpjwebcEUzSXoN",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 9
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "In undergrowth or rocky terrain",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "terrain:undergrowth",
-                                    "terrain:rocky"
-                                ]
-                            }
-                        ],
-                        "selector": "stealth",
-                        "value": 2
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+11 in undergrowth or rocky areas",
-                        "options": "terrain:undergrowth,terrain:rocky"
-                    }
-                }
-            },
-            "type": "lore"
         }
     ],
     "name": "Chupacabra",
@@ -397,6 +273,38 @@
             "will": {
                 "saveDetail": "",
                 "value": 7
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 9,
+                "special": [
+                    {
+                        "base": 11,
+                        "label": "to Leap",
+                        "predicate": [
+                            "action:high-jump",
+                            "action:long-jump"
+                        ]
+                    }
+                ]
+            },
+            "stealth": {
+                "base": 9,
+                "special": [
+                    {
+                        "base": 11,
+                        "label": "in undergrowth or rocky areas",
+                        "predicate": [
+                            {
+                                "or": [
+                                    "terrain:undergrowth",
+                                    "terrain:rocky"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         },
         "traits": {

@@ -153,7 +153,7 @@ function generateItemName(item: PhysicalItemPF2e): string {
                   ? "OneProperty"
                   : null;
         const material = params.material && "Material";
-        const key = R.compact([potency, reinforcing, fundamental2, properties, material]).join("") || null;
+        const key = [potency, reinforcing, fundamental2, properties, material].filter(R.isTruthy).join("") || null;
         return key && game.i18n.localize(key);
     })();
 
@@ -236,17 +236,15 @@ async function detachSubitem(subitem: PhysicalItemPF2e, skipConfirm: boolean): P
         const deletePromise = subitem.delete();
         const createPromise = (async (): Promise<unknown> => {
             // Find a stack match, cloning the subitem as worn so the search won't fail due to it being equipped
-            const stack = parentItem.actor?.inventory.findStackableItem(
-                subitem.clone({ "system.equipped.carryType": "worn" }),
-            );
+            const stack = subitem.isOfType("consumable")
+                ? parentItem.actor?.inventory.findStackableItem(subitem.clone({ "system.equipped.carryType": "worn" }))
+                : null;
+            const keepId = !!parentItem.actor && !parentItem.actor.items.has(subitem.id);
             return (
                 stack?.update({ "system.quantity": stack.quantity + 1 }) ??
                 Item.implementation.create(
-                    fu.mergeObject(subitem.toObject(), {
-                        _id: null,
-                        "system.containerId": parentItem.system.containerId,
-                    }),
-                    { parent: parentItem.actor },
+                    fu.mergeObject(subitem.toObject(), { "system.containerId": parentItem.system.containerId }),
+                    { parent: parentItem.actor, keepId },
                 )
             );
         })();

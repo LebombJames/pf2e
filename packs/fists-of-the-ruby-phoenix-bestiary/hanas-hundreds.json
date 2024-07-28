@@ -176,7 +176,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><span class=\"action-glyph\">A</span> to <span class=\"action-glyph\">T</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<p>Hana's Hundreds flail their swords wildly at each enemy adjacent to the team (@Check[type:reflex|dc:33|basic:true] save). The damage depends on the number of actions.</p>\n<hr />\n<p><span class=\"action-glyph\">1 </span>@Damage[2d8[slashing]] damage</p>\n<p><span class=\"action-glyph\">2 </span> @Damage[(3d8+13)[slashing]] damage</p>\n<p><span class=\"action-glyph\">3 </span> @Damage[(4d8+16)[slashing]] damage</p>"
+                    "value": "<p><span class=\"action-glyph\">A</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<p>Hana's Hundreds flail their swords wildly at each enemy adjacent to the team (@Check[type:reflex|dc:33|basic:true] save). The damage depends on the number of actions.</p>\n<hr />\n<p><span class=\"action-glyph\">1</span> @Damage[2d8[slashing]] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(3d8+13)[slashing]] damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+16)[slashing]] damage</p>"
                 },
                 "frequency": {
                     "max": 1,
@@ -196,81 +196,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "s0MuIZ3bVj7LGbP1",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 27
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "HjccGbnQ2CkKstaz",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 30
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "1UJW0YkYQNdgquRT",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 27
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Hana's Hundreds",
@@ -365,6 +290,17 @@
             "will": {
                 "saveDetail": "",
                 "value": 23
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 27
+            },
+            "athletics": {
+                "base": 30
+            },
+            "intimidation": {
+                "base": 27
             }
         },
         "traits": {

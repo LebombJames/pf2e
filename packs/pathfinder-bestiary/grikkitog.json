@@ -49,41 +49,6 @@
             "type": "melee"
         },
         {
-            "_id": "7h8dpLvJlgmuZE2b",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 200000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "QIkp9jKMkUCmBsVW",
             "flags": {
                 "core": {
@@ -92,7 +57,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Tremorsense (Imprecise) 30 feet",
-            "sort": 300000,
+            "sort": 200000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -122,7 +87,7 @@
             "_id": "ABE8at8xt3SIvjqx",
             "img": "systems/pf2e/icons/actions/ThreeActions.webp",
             "name": "Implant Core",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -161,7 +126,7 @@
             "_id": "39ZIhV5v80216sO2",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Manifold Vision",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -191,7 +156,7 @@
             "_id": "QMCJ4eMLrKIZq31c",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Infestation Aura",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -238,7 +203,7 @@
             "_id": "bDkXVdgOwJv0PBRc",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Barbed Maw",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -268,7 +233,7 @@
             "_id": "ADJpet8hkChh9ljl",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Earth Glide",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -293,97 +258,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "vbbrkFU0aanHBgbo",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 28
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "VQu2kLUgSRrCTMRP",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 27
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.ImitateStone",
-                        "predicate": [
-                            "imitate-stone"
-                        ],
-                        "selector": "deception",
-                        "value": 4
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+31 to imitate stone",
-                        "options": "imitate-stone"
-                    }
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "BYQJJlUoWR56obUd",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 25
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Grikkitog",
@@ -491,6 +365,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 24
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 28
+            },
+            "deception": {
+                "base": 27,
+                "special": [
+                    {
+                        "base": 31,
+                        "label": "to imitate stone",
+                        "predicate": [
+                            "imitate-stone"
+                        ]
+                    }
+                ]
+            },
+            "survival": {
+                "base": 25
             }
         },
         "traits": {

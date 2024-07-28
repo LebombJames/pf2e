@@ -36,6 +36,8 @@ import type { UserPF2e } from "@module/user/index.ts";
 import type {
     AmbientLightDocumentPF2e,
     MeasuredTemplateDocumentPF2e,
+    RegionBehaviorPF2e,
+    RegionDocumentPF2e,
     ScenePF2e,
     TileDocumentPF2e,
     TokenDocumentPF2e,
@@ -59,11 +61,12 @@ import type { CheckPF2e } from "@system/check/index.ts";
 import type { ConditionManager } from "@system/conditions/manager.ts";
 import type { EffectTracker } from "@system/effect-tracker.ts";
 import type { ModuleArt } from "@system/module-art.ts";
+import type { Predicate } from "@system/predication.ts";
 import type {
     CustomDamageData,
     HomebrewTag,
     HomebrewTraitSettingsKey,
-    LanguageRaritiesData,
+    LanguageSettings,
 } from "@system/settings/homebrew/index.ts";
 import type { TextEditorPF2e } from "@system/text-editor.ts";
 import type { sluggify } from "@util";
@@ -115,6 +118,7 @@ interface GamePF2e
         ElementalBlast: typeof ElementalBlast;
         Modifier: typeof ModifierPF2e;
         ModifierType: { [K in Uppercase<ModifierType>]: Lowercase<K> };
+        Predicate: typeof Predicate;
         RuleElement: typeof RuleElementPF2e;
         RuleElements: typeof RuleElements;
         StatisticModifier: typeof StatisticModifier;
@@ -122,15 +126,23 @@ interface GamePF2e
         TextEditor: typeof TextEditorPF2e;
         /** Cached values of frequently-checked settings */
         settings: {
+            automation: {
+                /** Flanking detection */
+                flanking: boolean;
+            };
             /** Campaign feat slots */
             campaign: {
-                enabled: boolean;
-                sections: FeatGroupOptions[];
+                feats: {
+                    enabled: boolean;
+                    sections: FeatGroupOptions[];
+                };
+                languages: LanguageSettings;
             };
             critFumble: {
                 buttons: boolean;
                 cards: boolean;
             };
+            dragMeasurement: "always" | "encounters" | "never";
             /** Encumbrance automation */
             encumbrance: boolean;
             gmVision: boolean;
@@ -139,6 +151,7 @@ interface GamePF2e
             metagame: {
                 breakdowns: boolean;
                 dcs: boolean;
+                secretChecks: boolean;
                 partyStats: boolean;
                 partyVision: boolean;
                 results: boolean;
@@ -191,6 +204,8 @@ type ConfiguredConfig = Config<
     ItemPF2e,
     MacroPF2e,
     MeasuredTemplateDocumentPF2e,
+    RegionDocumentPF2e,
+    RegionBehaviorPF2e,
     TileDocumentPF2e,
     TokenDocumentPF2e,
     WallDocument<ScenePF2e | null>,
@@ -225,7 +240,8 @@ declare global {
             ItemDirectory<ItemPF2e<null>>,
             ChatLogPF2e,
             CompendiumDirectoryPF2e,
-            EncounterTrackerPF2e<EncounterPF2e | null>
+            EncounterTrackerPF2e<EncounterPF2e | null>,
+            HotbarPF2e
         >;
 
         // Add functions to the `Math` namespace for use in `Roll` formulas
@@ -274,6 +290,7 @@ declare global {
         get(module: "pf2e", setting: "metagame_showPartyStats"): boolean;
         get(module: "pf2e", setting: "metagame_showResults"): boolean;
         get(module: "pf2e", setting: "metagame_tokenSetsNameVisibility"): boolean;
+        get(module: "pf2e", setting: "metagame_secretChecks"): boolean;
 
         get(module: "pf2e", setting: "tokens.autoscale"): boolean;
 
@@ -296,17 +313,18 @@ declare global {
         get(module: "pf2e", setting: "homebrew.weaponCategories"): HomebrewTag<"weaponCategories">[];
         get(module: "pf2e", setting: HomebrewTraitSettingsKey): HomebrewTag[];
         get(module: "pf2e", setting: "homebrew.damageTypes"): CustomDamageData[];
-        get(module: "pf2e", setting: "homebrew.languageRarities"): LanguageRaritiesData;
+        get(module: "pf2e", setting: "homebrew.languageRarities"): LanguageSettings;
 
         get(module: "pf2e", setting: "compendiumBrowserPacks"): CompendiumBrowserSettings;
         get(module: "pf2e", setting: "compendiumBrowserSources"): CompendiumBrowserSources;
         get(module: "pf2e", setting: "critFumbleButtons"): boolean;
         get(module: "pf2e", setting: "critRule"): "doubledamage" | "doubledice";
         get(module: "pf2e", setting: "deathIcon"): ImageFilePath;
+        get(module: "pf2e", setting: "dragMeasurement"): "always" | "encounters" | "never";
         get(module: "pf2e", setting: "drawCritFumble"): boolean;
-        get(module: "pf2e", setting: "enabledRulesUI"): boolean;
         get(module: "pf2e", setting: "gmVision"): boolean;
         get(module: "pf2e", setting: "identifyMagicNotMatchingTraditionModifier"): 0 | 2 | 5 | 10;
+        get(module: "pf2e", setting: "minimumRulesUI"): Exclude<UserRole, 0>;
         get(module: "pf2e", setting: "nathMode"): boolean;
         get(module: "pf2e", setting: "seenRemasterJournalEntry"): boolean;
         get(module: "pf2e", setting: "statusEffectType"): StatusEffectIconTheme;
@@ -333,4 +351,5 @@ declare global {
     const CONDITION_SOURCES: ConditionSource[];
     const EN_JSON: typeof EnJSON;
     const ROLL_PARSER: string;
+    const UUID_REDIRECTS: Record<CompendiumUUID, CompendiumUUID>;
 }

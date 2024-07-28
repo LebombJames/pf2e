@@ -4,7 +4,20 @@
         <i class="fa-solid fa-message"></i>
     </a>
 
-    <h4 class="name"><a data-action="toggle-summary">{{action.name}}</a></h4>
+    <h4 class="name">
+        <a data-action="toggle-summary">{{action.name}}</a>
+        <div class="toggles" data-tooltip-direction="UP">
+            {{#each action.toggles as |toggle|}}
+                <button
+                    type="button"
+                    class="{{#if toggle.selected}} selected{{/if}} {{toggle.classes}}"
+                    data-tooltip="{{toggle.tooltip}}"
+                    data-action="toggle-trait"
+                    data-trait="{{toggle.trait}}"
+                ><i class="fa-solid fa-fw fa-{{toggle.icon}}"></i></button>
+            {{/each}}
+        </div>
+    </h4>
 
     <div class="button-group">
         {{#if action.hasEffect}}
@@ -16,7 +29,7 @@
     </div>
 
     {{#if action.frequency}}
-        <div class="tracking">
+        <div class="frequency">
             <input type="number" value="{{action.frequency.value}}" data-item-id="{{action.id}}" data-item-property="system.frequency.value" />
             <span>
                 /

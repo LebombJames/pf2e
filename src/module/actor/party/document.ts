@@ -14,7 +14,7 @@ import { MemberData, PartySource, PartySystemData } from "./data.ts";
 import { InvalidCampaign } from "./invalid-campaign.ts";
 import { Kingdom } from "./kingdom/index.ts";
 import { PartySheetRenderOptions } from "./sheet.ts";
-import { PartyCampaign, PartyUpdateContext } from "./types.ts";
+import { PartyCampaign, PartyUpdateOperation } from "./types.ts";
 
 class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     override armorClass = null;
@@ -80,7 +80,7 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return R.isEmpty(campaignDiff) ? diff : fu.mergeObject(diff, campaignDiff);
     }
 
-    /** Only prepare rule elements for non-physical items (in case campaigin items exist) */
+    /** Only prepare rule elements for non-physical items (in case campaign items exist) */
     protected override prepareRuleElements(): RuleElementPF2e<RuleElementSchema>[] {
         return this.items.contents
             .filter((item) => !item.isOfType("physical"))
@@ -101,13 +101,15 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
         super.prepareBaseData();
 
+        // Fetch members, and update their parties if this isn't a clone
         this.members = this.system.details.members
             .map((m) => fromUuidSync(m.uuid))
             .filter((a): a is CreaturePF2e => a instanceof ActorPF2e && a.isOfType("creature"))
             .sort((a, b) => a.name.localeCompare(b.name, game.i18n.lang));
-
-        for (const member of this.members) {
-            member?.parties.add(this);
+        if (fromUuidSync(this.uuid) === this) {
+            for (const member of this.members) {
+                member.parties.add(this);
+            }
         }
 
         // Determine alliance based on the contained members
@@ -157,16 +159,10 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         this.system.details.level.value = partyLevel;
     }
 
-    /** Run rule elements (which may occur if it contains a kingdom) */
-    override prepareEmbeddedDocuments(): void {
-        super.prepareEmbeddedDocuments();
-        for (const rule of this.rules) {
-            rule.onApplyActiveEffects?.();
-        }
-    }
-
     override prepareDerivedData(): void {
         super.prepareDerivedData();
+        if (!game.ready) return; // exit early if game isn't ready yet
+
         // Compute travel speed. Creature travel speed isn't implemented yet
         const travelSpeed = Math.min(...this.members.map((m) => m.attributes.speed.total));
         this.attributes.speed = { total: travelSpeed };
@@ -227,6 +223,7 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     }
 
     /** Include campaign statistics in party statistics */
+    override getStatistic(slug: string): Statistic<this> | null;
     override getStatistic(slug: string): Statistic | null {
         const statistic = super.getStatistic(slug);
         if (statistic) return statistic;
@@ -245,11 +242,23 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     /*  Event Handlers                              */
     /* -------------------------------------------- */
 
-    protected override async _preUpdate(
-        changed: DeepPartial<PartySource>,
-        options: PartyUpdateContext<TParent>,
+    protected override _preCreate(
+        data: this["_source"],
+        options: DatabaseCreateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
+        data.folder = null;
+        return super._preCreate(data, options, user);
+    }
+
+    protected override async _preUpdate(
+        changed: DeepPartial<PartySource>,
+        options: PartyUpdateOperation<TParent>,
+        user: UserPF2e,
+    ): Promise<boolean | void> {
+        // Prevent party actors from being dragged to folders
+        changed.folder = null;
+
         const members = this.members;
         const newMemberUUIDs = changed?.system?.details?.members?.map((m) => m?.uuid);
         if (newMemberUUIDs) {
@@ -269,12 +278,12 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     /** Override to inform creatures when they were booted from a party */
     protected override _onUpdate(
         changed: DeepPartial<PartySource>,
-        options: PartyUpdateContext<TParent>,
+        operation: PartyUpdateOperation<TParent>,
         userId: string,
     ): void {
-        super._onUpdate(changed, options, userId);
+        super._onUpdate(changed, operation, userId);
 
-        const removedCreatures = (options.removedMembers ?? [])
+        const removedCreatures = (operation.removedMembers ?? [])
             .map((uuid) => fromUuidSync(uuid))
             .filter((a): a is CreaturePF2e => a instanceof ActorPF2e && a.isOfType("creature"));
         for (const actor of removedCreatures) {
@@ -298,8 +307,8 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     }
 
     /** Overriden to inform creatures the party is defunct */
-    protected override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
-        super._onDelete(options, userId);
+    protected override _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void {
+        super._onDelete(operation, userId);
         for (const member of this.members) {
             member.parties.delete(this);
         }

@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -28,108 +27,54 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "Q6ZI5kDVbNceAEWW"
                             },
-                            "1": {
+                            {
                                 "id": "5HLMXCQFR9fGD6Le"
                             },
-                            "2": {
+                            {
                                 "id": "yPOwFT0kx3lAfQtP"
                             },
-                            "3": {
+                            {
                                 "id": "WrxndbtI77Zd3QIL"
                             },
-                            "4": {
+                            {
                                 "id": "P5hGPWgdFdGGNMWy"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot1": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "BrtkyOWHPdkjaJuM"
                             },
-                            "1": {
+                            {
                                 "id": "v7BpzAyi8pfLFhs0"
                             },
-                            "2": {
+                            {
                                 "id": "hiTsxNqwMQZpdtUw"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     },
                     "slot2": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "kKxojagPaxadxMP7"
                             },
-                            "1": {
+                            {
                                 "id": "x0GpIGoJ4862ZZnk"
                             },
-                            "2": {
+                            {
                                 "id": "iNUR0px70u3VX5U6"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     }
                 },
                 "slug": null,
@@ -156,7 +101,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "focus"
@@ -170,72 +114,10 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": true
-                },
                 "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
                     "slot1": {
                         "max": 1,
-                        "prepared": [],
                         "value": 1
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
                     }
                 },
                 "slug": null,
@@ -758,7 +640,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You hurl a held melee weapon with which you are trained at the target, making a spell attack roll. On a success, you deal the weapon's damage as if you had hit with a melee Strike, but adding your spellcasting ability modifier to damage, rather than your Strength modifier. On a critical success, you deal double damage, and you add the weapon's critical specialization effect. Regardless of the outcome, the weapon flies back to you and returns to your hand.</p>"
+                    "value": "<p>You take advantage of one of the most fundamental lessons of magic to levitate and propel your weapon. You hurl a held melee weapon with which you are trained at the target, making a spell attack roll. On a success, you deal the weapon's damage as if you had hit with a melee Strike, but adding your spellcasting ability modifier to damage, rather than your Strength modifier. On a critical success, you deal double damage, and you add the weapon's critical specialization effect. Regardless of the outcome, the weapon flies back to you and returns to your hand.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Hand of the Apprentice]</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -771,9 +653,9 @@
                     "value": "tzZVfzUPknx67q3l"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": "500 feet"
@@ -1229,7 +1111,7 @@
                 },
                 "containerId": null,
                 "description": {
-                    "value": "<p><strong>Cantrips</strong></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Telekinetic Projectile]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Daze]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Detect Magic]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Light]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Telekinetic Hand]</em></p>\n<hr />\n<p><strong>1st Level</strong></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Dizzying Colors]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Force Barrage]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Phantasmal Minion]</em></p>\n<hr />\n<p><strong>2nd Level</strong></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Translate]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Illusory Creature]</em></p>"
+                    "value": "<p><strong>Cantrips</strong></p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Telekinetic Projectile]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Daze]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Detect Magic]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Light]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Telekinetic Hand]</p>\n<hr />\n<p><strong>1st Level</strong></p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Dizzying Colors]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Force Barrage]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Phantasmal Minion]</p>\n<hr />\n<p><strong>2nd Level</strong></p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Translate]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Illusory Creature]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -1416,7 +1298,7 @@
                         "damage": {},
                         "defense": null,
                         "description": {
-                            "value": "<p>You make the target easier to open. Knock grants a +4 status bonus to any creature that tries to open the target door, lock, or container with an Athletics or a Thievery check. You can attempt a Thievery check to open the target as part of casting knock, and you add your level even if you're untrained.</p>\n<p>Knock counteracts <em>@UUID[Compendium.pf2e.spells-srd.Item.Lock]</em>.</p>"
+                            "value": "<p>You make the target easier to open. Knock grants a +4 status bonus to any creature that tries to open the target door, lock, or container with an Athletics or a Thievery check. You can attempt a Thievery check to open the target as part of casting knock, and you add your level even if you're untrained.</p>\n<p>Knock counteracts @UUID[Compendium.pf2e.spells-srd.Item.Lock].</p>"
                         },
                         "duration": {
                             "sustained": false,
@@ -1830,231 +1712,6 @@
                 "slug": null
             },
             "type": "lore"
-        },
-        {
-            "_id": "NG5SilQRKQjbdKXR",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Arcana",
-            "sort": 2500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 12
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "BzxnWkJAYV0Of1i2",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Crafting",
-            "sort": 2600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 10
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "OBSe0T7vt5GXijYc",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 2700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 8
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "efBxaev3qzvdlmIZ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Medicine",
-            "sort": 2800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 7
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "NFLSoXSUanEbekf1",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Nature",
-            "sort": 2900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 7
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "ZiJJbEDTzFQylCbK",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Occultism",
-            "sort": 3000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 10
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "JDANlKskEY3jRklo",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Performance",
-            "sort": 3100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 8
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "hxAOrxEGs7x0gIZf",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 3200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 7
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "Nl06m5cWms6kboeU",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Society",
-            "sort": 3300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 10
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Morlibint",
@@ -2148,6 +1805,35 @@
             "will": {
                 "saveDetail": "",
                 "value": 9
+            }
+        },
+        "skills": {
+            "arcana": {
+                "base": 12
+            },
+            "crafting": {
+                "base": 10
+            },
+            "diplomacy": {
+                "base": 8
+            },
+            "medicine": {
+                "base": 7
+            },
+            "nature": {
+                "base": 7
+            },
+            "occultism": {
+                "base": 10
+            },
+            "performance": {
+                "base": 8
+            },
+            "religion": {
+                "base": 7
+            },
+            "society": {
+                "base": 10
             }
         },
         "traits": {

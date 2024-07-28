@@ -1,15 +1,15 @@
 import { ActorPF2e } from "@actor";
-import { ActionMacroHelpers, SkillActionOptions } from "../index.ts";
-import { ItemPF2e, WeaponPF2e } from "@item";
-import { CheckContext, CheckContextData, CheckContextOptions } from "@system/action-macros/types.ts";
 import { SingleCheckAction, SingleCheckActionVariant, SingleCheckActionVariantData } from "@actor/actions/index.ts";
+import { ItemPF2e, WeaponPF2e } from "@item";
+import { CheckContextData, CheckContextOptions, CheckMacroContext } from "@system/action-macros/types.ts";
+import { ActionMacroHelpers, SkillActionOptions } from "../index.ts";
 
 const PREFIX = "PF2E.Actions.Shove";
 
 function shoveCheckContext<ItemType extends ItemPF2e<ActorPF2e>>(
     opts: CheckContextOptions<ItemType>,
     data: CheckContextData<ItemType>,
-): CheckContext<ItemType> | undefined {
+): CheckMacroContext<ItemType> | undefined {
     // weapon
     const weapon = (ActionMacroHelpers.getApplicableEquippedWeapons(opts.actor, "shove") ?? []).shift();
 
@@ -53,7 +53,7 @@ class ShoveActionVariant extends SingleCheckActionVariant {
     protected override checkContext<ItemType extends ItemPF2e<ActorPF2e>>(
         opts: CheckContextOptions<ItemType>,
         data: CheckContextData<ItemType>,
-    ): CheckContext<ItemType> | undefined {
+    ): CheckMacroContext<ItemType> | undefined {
         return shoveCheckContext(opts, data);
     }
 }
@@ -64,6 +64,7 @@ class ShoveAction extends SingleCheckAction {
             cost: 1,
             description: `${PREFIX}.Description`,
             difficultyClass: "fortitude",
+            img: "icons/skills/melee/unarmed-punch-fist-white.webp",
             name: `${PREFIX}.Title`,
             notes: [
                 { outcome: ["criticalSuccess"], text: `${PREFIX}.Notes.criticalSuccess` },
@@ -85,4 +86,4 @@ class ShoveAction extends SingleCheckAction {
 
 const action = new ShoveAction();
 
-export { shove as legacy, action };
+export { action, shove as legacy };

@@ -26,7 +26,7 @@
         },
         "items": {
             "r7b3d": {
-                "img": "systems/pf2e/icons/features/feats/feats.webp",
+                "img": "icons/sundries/books/book-red-exclamation.webp",
                 "level": 1,
                 "name": "Group Coercion",
                 "uuid": "Compendium.pf2e.feats-srd.Item.Group Coercion"
@@ -38,10 +38,12 @@
             "title": "Pathfinder Player Core"
         },
         "rules": [],
-        "trainedLore": "<Terrain> Lore",
         "trainedSkills": {
+            "lore": [
+                "<Terrain> Lore"
+            ],
             "value": [
-                "itm"
+                "intimidation"
             ]
         },
         "traits": {

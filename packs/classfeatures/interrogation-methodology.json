@@ -1,6 +1,6 @@
 {
     "_id": "UIHUNNYZyQ3p4Vmo",
-    "img": "systems/pf2e/icons/features/classes/interrogation-methodology.webp",
+    "img": "icons/sundries/scrolls/scroll-writing-brown-grey.webp",
     "name": "Interrogation Methodology",
     "system": {
         "actionType": {
@@ -28,7 +28,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.skills.dip.rank",
+                "path": "system.skills.diplomacy.rank",
                 "value": 1
             },
             {

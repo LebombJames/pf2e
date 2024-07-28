@@ -3,41 +3,6 @@
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
-            "_id": "y88j6KWZ9Pbqb5qn",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 100000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "Ab8glJdnLoSgyNX9",
             "flags": {
                 "core": {
@@ -46,7 +11,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Swarm Mind",
-            "sort": 200000,
+            "sort": 100000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -76,7 +41,7 @@
             "_id": "1KVCijz14rjhWH4s",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Cling",
-            "sort": 300000,
+            "sort": 200000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -106,7 +71,7 @@
             "_id": "KzMaVpEg8SuAZnIC",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Snapping Jaws",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -136,7 +101,7 @@
             "_id": "5wLXffcbq6o32892",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Trip and Tangle",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -161,97 +126,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "CVIZG9yRf3XJO7lZ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 12
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "cOkWZXiB25iB5540",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 6
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.TripTangle",
-                        "predicate": [
-                            "trip-tangle"
-                        ],
-                        "selector": "athletics",
-                        "value": 4
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+10 to Trip and Tangle",
-                        "options": "trip-tangle"
-                    }
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "skd9Kz7vm7VE2PmQ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 13
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Trapjaw Tangle",
@@ -376,6 +250,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 9
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 12
+            },
+            "athletics": {
+                "base": 6,
+                "special": [
+                    {
+                        "base": 10,
+                        "label": "to Trip and Tangle",
+                        "predicate": [
+                            "trip-tangle"
+                        ]
+                    }
+                ]
+            },
+            "stealth": {
+                "base": 13
             }
         },
         "traits": {

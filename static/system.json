@@ -2,12 +2,12 @@
     "id": "pf2e",
     "title": "Pathfinder Second Edition",
     "description": "A community contributed game system for Pathfinder Second Edition",
-    "version": "5.12.7",
+    "version": "6.1.3",
     "license": "./LICENSE",
     "compatibility": {
-        "minimum": "11.311",
-        "verified": "11.315",
-        "maximum": "11"
+        "minimum": "12.327",
+        "verified": "12.330",
+        "maximum": "12"
     },
     "authors": [
         {
@@ -27,6 +27,17 @@
     "styles": [
         "styles/pf2e.css"
     ],
+    "grid": {
+        "distance": 5,
+        "units": "ft",
+        "diagonals": 4
+    },
+    "documentTypes": {
+        "RegionBehavior": {
+            "environment": {},
+            "environmentFeature": {}
+        }
+    },
     "packs": [
         {
             "name": "abomination-vaults-bestiary",
@@ -107,6 +118,19 @@
             "flags": {}
         },
         {
+            "name": "curtain-call-bestiary",
+            "label": "Curtain Call",
+            "path": "packs/curtain-call-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
             "name": "extinction-curse-bestiary",
             "label": "Extinction Curse",
             "path": "packs/extinction-curse-bestiary",
@@ -149,6 +173,19 @@
             "name": "hazards",
             "label": "Hazards (Rulebooks)",
             "path": "packs/hazards",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
+            "name": "howl-of-the-wild-bestiary",
+            "label": "Howl of the Wild",
+            "path": "packs/howl-of-the-wild-bestiary",
             "type": "Actor",
             "banner": "systems/pf2e/assets/compendium-banner/red.webp",
             "system": "pf2e",
@@ -214,6 +251,19 @@
             "name": "lost-omens-monsters-of-myth-bestiary",
             "label": "Lost Omens: Monsters of Myth",
             "path": "packs/monsters-of-myth-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
+            "name": "lost-omens-tian-xia-world-guide",
+            "label": "Lost Omens: Tian Xia World Guide",
+            "path": "packs/tian-xia-world-guide-bestiary",
             "type": "Actor",
             "banner": "systems/pf2e/assets/compendium-banner/red.webp",
             "system": "pf2e",
@@ -354,6 +404,19 @@
             "flags": {}
         },
         {
+            "name": "pathfinder-monster-core",
+            "label": "Monster Core",
+            "path": "packs/pathfinder-monster-core",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
             "name": "pathfinder-dark-archive",
             "label": "Dark Archive",
             "path": "packs/pathfinder-dark-archive",
@@ -445,6 +508,32 @@
             "flags": {}
         },
         {
+            "name": "pfs-season-6-bestiary",
+            "label": "Season 6",
+            "path": "packs/pfs-season-6-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
+            "name": "prey-for-death-bestiary",
+            "label": "Prey for Death",
+            "path": "packs/prey-for-death-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
             "name": "quest-for-the-frozen-flame-bestiary",
             "label": "Quest for the Frozen Flame",
             "path": "packs/quest-for-the-frozen-flame-bestiary",
@@ -474,6 +563,19 @@
             "name": "season-of-ghosts-bestiary",
             "label": "Season of Ghosts",
             "path": "packs/season-of-ghosts-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
+            "name": "seven-dooms-for-sandpoint-bestiary",
+            "label": "Seven Dooms for Sandpoint",
+            "path": "packs/seven-dooms-for-sandpoint-bestiary",
             "type": "Actor",
             "banner": "systems/pf2e/assets/compendium-banner/red.webp",
             "system": "pf2e",
@@ -604,6 +706,19 @@
             "name": "rage-of-elements-bestiary",
             "label": "Rage of Elements",
             "path": "packs/rage-of-elements-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
+            "name": "wardens-of-wildwood-bestiary",
+            "label": "Wardens of Wildwood",
+            "path": "packs/wardens-of-wildwood-bestiary",
             "type": "Actor",
             "banner": "systems/pf2e/assets/compendium-banner/red.webp",
             "system": "pf2e",
@@ -965,19 +1080,6 @@
             "flags": {}
         },
         {
-            "name": "gmg-srd",
-            "label": "Game Mastery Guide",
-            "path": "packs/gmg-srd",
-            "type": "JournalEntry",
-            "banner": "systems/pf2e/assets/compendium-banner/orange.webp",
-            "system": "pf2e",
-            "ownership": {
-                "PLAYER": "OBSERVER",
-                "ASSISTANT": "OWNER"
-            },
-            "flags": {}
-        },
-        {
             "name": "action-macros",
             "label": "Action Macros",
             "path": "packs/action-macros",
@@ -1060,15 +1162,18 @@
         {
             "name": "Bestiaries",
             "sorting": "m",
+            "color": "#3b2524",
             "folders": [
                 {
                     "name": "Adventure Paths",
                     "sorting": "m",
+                    "color": "#573938",
                     "packs": [
                         "abomination-vaults-bestiary",
                         "age-of-ashes-bestiary",
                         "agents-of-edgewatch-bestiary",
                         "blood-lords-bestiary",
+                        "curtain-call-bestiary",
                         "extinction-curse-bestiary",
                         "fists-of-the-ruby-phoenix-bestiary",
                         "gatewalkers-bestiary",
@@ -1076,23 +1181,28 @@
                         "kingmaker-bestiary",
                         "quest-for-the-frozen-flame-bestiary",
                         "season-of-ghosts-bestiary",
+                        "seven-dooms-for-sandpoint-bestiary",
                         "sky-kings-tomb-bestiary",
                         "strength-of-thousands-bestiary",
-                        "stolen-fate-bestiary"
+                        "stolen-fate-bestiary",
+                        "wardens-of-wildwood-bestiary"
                     ]
                 },
                 {
                     "name": "Rulebooks",
                     "sorting": "m",
+                    "color": "#573938",
                     "packs": [
                         "pathfinder-dark-archive",
                         "book-of-the-dead-bestiary",
                         "rage-of-elements-bestiary",
                         "hazards",
+                        "howl-of-the-wild-bestiary",
                         "lost-omens-impossible-lands-bestiary",
                         "lost-omens-highhelm-bestiary",
                         "lost-omens-mwangi-expanse-bestiary",
                         "lost-omens-monsters-of-myth-bestiary",
+                        "lost-omens-tian-xia-world-guide",
                         "lost-omens-travel-guide-bestiary",
                         "npc-gallery",
                         "vehicles",
@@ -1102,11 +1212,13 @@
                 {
                     "name": "Standalone Adventures",
                     "sorting": "m",
+                    "color": "#573938",
                     "packs": [
                         "fall-of-plaguestone-bestiary",
                         "malevolence-bestiary",
                         "menace-under-otari-bestiary",
                         "one-shot-bestiary",
+                        "prey-for-death-bestiary",
                         "rusthenge-bestiary",
                         "shadows-at-sundown-bestiary",
                         "the-enmity-cycle-bestiary",
@@ -1119,25 +1231,29 @@
                 {
                     "name": "Pathfinder Society",
                     "sorting": "m",
+                    "color": "#573938",
                     "packs": [
                         "pfs-introductions-bestiary",
                         "pfs-season-1-bestiary",
                         "pfs-season-2-bestiary",
                         "pfs-season-3-bestiary",
                         "pfs-season-4-bestiary",
-                        "pfs-season-5-bestiary"
+                        "pfs-season-5-bestiary",
+                        "pfs-season-6-bestiary"
                     ]
                 }
             ],
             "packs": [
                 "pathfinder-bestiary",
                 "pathfinder-bestiary-2",
-                "pathfinder-bestiary-3"
+                "pathfinder-bestiary-3",
+                "pathfinder-monster-core"
             ]
         },
         {
             "name": "Pregenerated PCs",
             "sorting": "m",
+            "color": "#3b2524",
             "packs": [
                 "iconics",
                 "paizo-pregens"
@@ -1146,6 +1262,7 @@
         {
             "name": "Effects",
             "sorting": "m",
+            "color": "#2f3339",
             "packs": [
                 "bestiary-effects",
                 "conditionitems",
@@ -1159,6 +1276,7 @@
         {
             "name": "Character Building",
             "sorting": "m",
+            "color": "#343c33",
             "packs": [
                 "actionspf2e",
                 "ancestries",
@@ -1178,6 +1296,7 @@
         {
             "name": "GM Tools",
             "sorting": "m",
+            "color": "#181818",
             "packs": [
                 "adventure-specific-actions",
                 "boons-and-curses",
@@ -1190,6 +1309,7 @@
         {
             "name": "Macros",
             "sorting": "m",
+            "color": "#181818",
             "packs": [
                 "action-macros",
                 "pf2e-macros"
@@ -1198,11 +1318,11 @@
         {
             "name": "Journals",
             "sorting": "m",
+            "color": "#181818",
             "packs": [
                 "criticaldeck",
                 "domains",
-                "journals",
-                "gmg-srd"
+                "journals"
             ]
         }
     ],
@@ -1234,8 +1354,6 @@
     ],
     "socket": true,
     "initiative": "1d20 + @attributes.perception.value + (@abilities.wis.value / 100)",
-    "gridDistance": 5,
-    "gridUnits": "ft",
     "primaryTokenAttribute": "attributes.hp",
     "url": "https://github.com/foundryvtt/pf2e",
     "bugs": "https://github.com/foundryvtt/pf2e/issues",

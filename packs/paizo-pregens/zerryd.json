@@ -69,7 +69,7 @@
                     "uuid": "Compendium.pf2e.ancestries.Item.GXcC6oVa5quzgNHD"
                 },
                 "description": {
-                    "value": "<p>You are a dedicated nocturnal avian, keeping watch and predating in the most lightless environments. You gain @UUID[Compendium.pf2e.ancestryfeatures.Item.Darkvision].</p>"
+                    "value": "<p>You are a dedicated nocturnal avian, keeping watch and predating in the most lightless environments. You gain darkvision.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -126,7 +126,7 @@
                 },
                 "items": {
                     "cxx9n": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Multilingual",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Multilingual"
@@ -139,10 +139,12 @@
                 },
                 "rules": [],
                 "slug": "emissary",
-                "trainedLore": "<City> Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "<City> Lore"
+                    ],
                     "value": [
-                        "soc"
+                        "society"
                     ]
                 },
                 "traits": {
@@ -196,7 +198,7 @@
                         "key": "ActiveEffectLike",
                         "mode": "add",
                         "path": "system.build.languages.max",
-                        "value": "ternary(eq(@actor.system.skills.soc.rank, 4), 2, ternary(eq(@actor.system.skills.soc.rank, 3), 1, 0))"
+                        "value": "ternary(eq(@actor.system.skills.society.rank, 4), 2, ternary(eq(@actor.system.skills.society.rank, 3), 1, 0))"
                     },
                     {
                         "key": "ActiveEffectLike",
@@ -386,7 +388,7 @@
                                     "value": 2
                                 }
                             ],
-                            "field": "actor|system.skills.thi.rank"
+                            "field": "actor|system.skills.thievery.rank"
                         }
                     },
                     {
@@ -410,7 +412,7 @@
                                     "value": 2
                                 }
                             ],
-                            "field": "actor|system.skills.thi.rank"
+                            "field": "actor|system.skills.thievery.rank"
                         }
                     },
                     {
@@ -434,7 +436,7 @@
                                     "value": 2
                                 }
                             ],
-                            "field": "actor|system.skills.thi.rank"
+                            "field": "actor|system.skills.thievery.rank"
                         }
                     }
                 ],
@@ -1081,7 +1083,7 @@
                 },
                 "containerId": null,
                 "description": {
-                    "value": "<p>This elegant copper ring has miniature images of songbirds engraved around its circumference. You gain a +1 item bonus to Deception checks.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">D</span> Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> Twisting the ring around your finger allows you to magically throw your voice, with the effects of a <em>@UUID[Compendium.pf2e.spells-srd.Item.Ventriloquism]</em> spell (DC 19).</p>"
+                    "value": "<p>This elegant copper ring has miniature images of songbirds engraved around its circumference. You gain a +1 item bonus to Deception checks.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> Twisting the ring around your finger allows you to magically throw your voice, with the effects of a @UUID[Compendium.pf2e.spells-srd.Item.Ventriloquism] spell (DC 19).</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -1221,7 +1223,7 @@
                 "containerId": null,
                 "damage": null,
                 "description": {
-                    "value": "<p>Adder venom is a simple but effective way to enhance a weapon.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">D</span> Interact (Injury)</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>Maximum Duration</strong> 3 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d8[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d10[poison]] damage (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage (1 round)</p>"
+                    "value": "<p>Adder venom is a simple but effective way to enhance a weapon.</p>\n<hr />\n<p><strong>Activate</strong> <span class=\"action-glyph\">2</span> Interact (Injury)</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>Maximum Duration</strong> 3 rounds</p>\n<p><strong>Stage 1</strong> @Damage[1d8[poison]] damage (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[1d10[poison]] damage (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage (1 round)</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -1560,13 +1562,13 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Light Armor Mastery"
                     },
                     "2xl4q": {
-                        "img": "systems/pf2e/icons/features/classes/master-tricks.webp",
+                        "img": "icons/weapons/swords/swords-short.webp",
                         "level": 13,
                         "name": "Master Tricks",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Master Tricks"
                     },
                     "4al2i": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -1578,7 +1580,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Fortitude Expertise"
                     },
                     "6ddtr": {
-                        "img": "systems/pf2e/icons/features/classes/light-armor-expertise.webp",
+                        "img": "icons/equipment/back/mantle-collared-green.webp",
                         "level": 13,
                         "name": "Light Armor Expertise",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Light Armor Expertise"
@@ -1614,7 +1616,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Agile Mind"
                     },
                     "i70zj": {
-                        "img": "systems/pf2e/icons/features/classes/vigilant-senses.webp",
+                        "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
                         "level": 7,
                         "name": "Vigilant Senses",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Mastery"
@@ -1756,7 +1758,7 @@
                 "trainedSkills": {
                     "additional": 7,
                     "value": [
-                        "ste"
+                        "stealth"
                     ]
                 },
                 "traits": {
@@ -2114,13 +2116,13 @@
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.dip.rank",
+                        "path": "system.skills.diplomacy.rank",
                         "value": 1
                     },
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.dec.rank",
+                        "path": "system.skills.deception.rank",
                         "value": 1
                     },
                     {
@@ -2425,52 +2427,52 @@
             }
         },
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 1
             },
-            "ath": {
+            "athletics": {
                 "rank": 2
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 2
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 1
             },
-            "itm": {
+            "intimidation": {
                 "rank": 1
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 0
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 1
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 1
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 2
             }
         }

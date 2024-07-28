@@ -109,4 +109,19 @@
         <li class="tag tag_secondary" data-resistance="{{resistance.type}}">{{resistance.label}}</li>
     {{/each}}
 </ol>
+<section class="emits-sound">
+    <header class="sound-label">
+        <h2>
+            <span>{{localize "PF2E.Actor.Vehicle.EmitsSound.Title"}}</span>
+            <i
+                class="fa-solid fa-info-circle"
+                data-tooltip="PF2E.Actor.Vehicle.EmitsSound.Hint"
+                data-tooltip-direction="RIGHT"
+            ></i>
+        </h2>
+    </header>
+    <select name="system.attributes.emitsSound">
+        {{selectOptions emitsSoundOptions selected=data.attributes.emitsSound localize=true}}
+    </select>
+</section>
 

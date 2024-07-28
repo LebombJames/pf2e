@@ -81,7 +81,7 @@
                 },
                 "items": {
                     "diizj": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Seasoned",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Seasoned"
@@ -94,10 +94,12 @@
                 },
                 "rules": [],
                 "slug": "cook",
-                "trainedLore": "Cooking Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Cooking Lore"
+                    ],
                     "value": [
-                        "sur"
+                        "survival"
                     ]
                 },
                 "traits": {
@@ -174,7 +176,7 @@
                                     "value": 1
                                 }
                             ],
-                            "field": "actor|system.skills.cra.rank"
+                            "field": "actor|system.skills.crafting.rank"
                         }
                     }
                 ],
@@ -999,7 +1001,7 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.Du05UxCyCM0ZWH8z"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/adventuring-gear/oil.webp",
+            "img": "icons/consumables/potions/potion-bottle-labeled-medicine-capped-red-black.webp",
             "name": "Oil (1 pint)",
             "sort": 0,
             "system": {
@@ -1197,19 +1199,19 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Juggernaut"
                     },
                     "ihbgk": {
-                        "img": "systems/pf2e/icons/features/classes/devastator.webp",
+                        "img": "icons/skills/melee/shield-damaged-broken-orange.webp",
                         "level": 19,
                         "name": "Devastator",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Devastator"
                     },
                     "njgcl": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Barbarian)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization (Barbarian)"
                     },
                     "o4ypa": {
-                        "img": "systems/pf2e/icons/features/classes/weapon-fury.webp",
+                        "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
                         "level": 13,
                         "name": "Weapon Fury",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Weapon Fury"
@@ -1221,13 +1223,13 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Deny Advantage"
                     },
                     "qh9xw": {
-                        "img": "systems/pf2e/icons/features/classes/mighty-rage.webp",
+                        "img": "icons/magic/symbols/mask-yellow-orange.webp",
                         "level": 11,
                         "name": "Mighty Rage",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Mighty Rage"
                     },
                     "s5lxl": {
-                        "img": "systems/pf2e/icons/features/classes/armor-of-fury.webp",
+                        "img": "icons/tools/smithing/furnace-fire-metal-orange.webp",
                         "level": 19,
                         "name": "Armor of Fury",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Armor of Fury"
@@ -1306,7 +1308,7 @@
                 "trainedSkills": {
                     "additional": 3,
                     "value": [
-                        "ath"
+                        "athletics"
                     ]
                 },
                 "traits": {
@@ -2160,52 +2162,52 @@
         },
         "saves": {},
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 0
             },
-            "cra": {
+            "crafting": {
                 "rank": 2
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 1
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 1
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 0
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

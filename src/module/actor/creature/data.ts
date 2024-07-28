@@ -13,9 +13,9 @@ import type {
 } from "@actor/data/base.ts";
 import type { ActorSizePF2e } from "@actor/data/size.ts";
 import type { DamageDicePF2e, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
-import type { AttributeString, MovementType, SaveType, SkillAbbreviation, SkillLongForm } from "@actor/types.ts";
-import type { LabeledNumber, ValueAndMax, ZeroToThree } from "@module/data.ts";
-import type { ArmorClassTraceData, Statistic } from "@system/statistic/index.ts";
+import type { AttributeString, MovementType, SaveType, SkillSlug } from "@actor/types.ts";
+import type { LabeledNumber, Size, ValueAndMax, ZeroToThree } from "@module/data.ts";
+import type { ArmorClassTraceData } from "@system/statistic/index.ts";
 import type { PerceptionTraceData } from "@system/statistic/perception.ts";
 import type { CreatureActorType, CreatureTrait, Language, SenseAcuity, SenseType, SpecialVisionType } from "./types.ts";
 
@@ -25,7 +25,6 @@ type BaseCreatureSource<
 > = BaseActorSourcePF2e<TType, TSystemSource>;
 
 /** Skill and Lore statistics for rolling. */
-type CreatureSkills = Record<SkillLongForm, Statistic> & Partial<Record<string, Statistic>>;
 
 interface CreatureSystemSource extends ActorSystemSource {
     attributes: CreatureAttributesSource;
@@ -120,6 +119,8 @@ type Abilities = Record<AttributeString, AbilityData>;
 
 interface CreatureTraitsData extends Required<CreatureTraitsSource> {
     size: ActorSizePF2e;
+    /** Temporary variable that holds pre-equipment resize data */
+    naturalSize?: Size;
 }
 interface CreatureDetails extends Required<CreatureDetailsSource> {}
 
@@ -183,7 +184,7 @@ interface LabeledSpeed extends Omit<LabeledNumber, "exceptions"> {
 /** Creature initiative statistic */
 interface CreatureInitiativeSource {
     /** What skill or ability is currently being used to compute initiative. */
-    statistic: SkillLongForm | "perception";
+    statistic: SkillSlug | "perception";
 }
 
 interface CreatureResources extends CreatureResourcesSource {
@@ -244,7 +245,6 @@ export type {
     CreatureResources,
     CreatureResourcesSource,
     CreatureSaves,
-    CreatureSkills,
     CreatureSpeeds,
     CreatureSystemData,
     CreatureSystemSource,
@@ -254,7 +254,6 @@ export type {
     LabeledSpeed,
     SaveData,
     SenseData,
-    SkillAbbreviation,
     SkillData,
     VisionLevel,
 };

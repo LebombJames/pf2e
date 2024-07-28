@@ -1,4 +1,4 @@
-import { PartyPF2e } from "@actor";
+import { ActorPF2e, PartyPF2e } from "@actor";
 import { resetActors } from "@actor/helpers.ts";
 import { createFirstParty } from "@actor/party/helpers.ts";
 import { MigrationSummary } from "@module/apps/migration-summary.ts";
@@ -9,14 +9,37 @@ import { SetGamePF2e } from "@scripts/set-game-pf2e.ts";
 import { activateSocketListener } from "@scripts/socket.ts";
 import { storeInitialWorldVersions } from "@scripts/store-versions.ts";
 import { extendDragData } from "@scripts/system/dragstart-handler.ts";
-import * as R from "remeda";
 
 export const Ready = {
     listen: (): void => {
         Hooks.once("ready", () => {
+            // Proceed no further if blacklisted modules are enabled
+            const blacklistedModules = ["pf2e-action-support-engine", "pf2e-action-support-engine-macros"];
+            const blacklistedId = blacklistedModules.find((id) => game.modules.get(id)?.active);
+            if (blacklistedId) {
+                const message = `PF2E System halted: module "${blacklistedId}" is not supported.`;
+                ui.notifications.error(message, { permanent: true });
+                CONFIG.PF2E = {} as typeof CONFIG.PF2E;
+                game.pf2e = {} as typeof game.pf2e;
+                return;
+            }
+
             /** Once the entire VTT framework is initialized, check to see if we should perform a data migration */
             console.log("PF2e System | Starting Pathfinder 2nd Edition System");
             console.debug(`PF2e System | Build mode: ${BUILD_MODE}`);
+
+            // Enforce certain grid settings. These should be handled by our defaults, but a user may have changed them.
+            // Changing a setting to the default still triggers onChange, and in V12.322 can trigger console errors
+            // The actual manipulation of the setting is locked down by the renderSettingsConfig hook.
+            const defaultGridSettings = {
+                gridTemplates: false,
+                coneTemplateType: "round",
+            };
+            for (const [key, value] of Object.entries(defaultGridSettings)) {
+                if (game.settings.get("core", key) !== value) {
+                    game.settings.set("core", key, value);
+                }
+            }
 
             // Some of game.pf2e must wait until the ready phase
             SetGamePF2e.onReady();
@@ -56,10 +79,10 @@ export const Ready = {
                 }
 
                 // These modules claim compatibility with V11 but are abandoned
-                const abandonedModules = new Set<string>([]);
+                const abandonedModules = new Set(["pf2e-rules-based-npc-vision", "foundryvtt-drag-ruler"]);
 
                 // Nag the GM for running unmaintained modules
-                const subV10Modules = game.modules.filter(
+                const subV11Modules = game.modules.filter(
                     (m) =>
                         m.active &&
                         (m.esmodules.size > 0 || m.scripts.size > 0) &&
@@ -70,10 +93,9 @@ export const Ready = {
                         (abandonedModules.has(m.id) || !fu.isNewerVersion(m.compatibility.verified, "10.312")),
                 );
 
-                for (const badModule of subV10Modules) {
+                for (const badModule of subV11Modules) {
                     const message = game.i18n.format("PF2E.ErrorMessage.SubV9Module", { module: badModule.title });
                     ui.notifications.warn(message);
-                    console.warn(message);
                 }
             });
 
@@ -92,31 +114,44 @@ export const Ready = {
                 game.pf2e.settings.gmVision
             ) {
                 CONFIG.Canvas.darknessColor = CONFIG.PF2E.Canvas.darkness.gmVision;
-                canvas.colorManager.initialize();
+                canvas.environment.initialize();
             }
 
-            // Sort item types for display in sidebar create-item dialog
-            game.system.documentTypes.Item.sort((typeA, typeB) => {
-                return game.i18n
-                    .localize(CONFIG.Item.typeLabels[typeA] ?? "")
-                    .localeCompare(game.i18n.localize(CONFIG.Item.typeLabels[typeB] ?? ""));
-            });
-
             game.pf2e.system.moduleArt.refresh().then(() => {
-                ui.compendium.compileSearchIndex();
+                if (game.modules.get("babele")?.active && game.i18n.lang !== "en") {
+                    // For some reason, Babele calls its own "ready" hook twice, and only the second one is genuine.
+                    Hooks.once("babele.ready", () => {
+                        Hooks.once("babele.ready", () => {
+                            ui.compendium.compileSearchIndex();
+                        });
+                    });
+                } else {
+                    ui.compendium.compileSearchIndex();
+                }
             });
 
             // Now that all game data is available, Determine what actors we need to reprepare.
-            // Add actors currently in an encounter, a party, and all familiars (last)
-            const actorsToReprepare = R.compact([
-                ...game.combats.contents.flatMap((e) => e.combatants.contents).map((c) => c.actor),
-                ...game.actors
-                    .filter((a): a is PartyPF2e<null> => a.isOfType("party"))
-                    .flatMap((p) => p.members)
-                    .filter((a) => !a.isOfType("familiar")),
+            // Add actors currently in an encounter, then in a party, then all familiars, then parties, then in terrains
+            const inEnvironments: ActorPF2e[] = [];
+            const hasSceneEnvironments = !!game.scenes.viewed?.flags.pf2e.environmentTypes?.length;
+            for (const token of game.scenes.active?.tokens ?? []) {
+                const inEnvironmentRegion = !!token.regions?.some((r) =>
+                    r.behaviors.some((b) => ["environment", "environmentFeature"].includes(b.type)),
+                );
+                if (token.actor && (hasSceneEnvironments || inEnvironmentRegion)) {
+                    inEnvironments.push(token.actor);
+                }
+            }
+            const parties = game.actors.filter((a): a is PartyPF2e<null> => a.isOfType("party"));
+            const actorsToReprepare: Set<ActorPF2e> = new Set([
+                ...game.combats.contents.flatMap((e) => e.combatants.contents).flatMap((c) => c.actor ?? []),
+                ...parties.flatMap((p) => p.members).filter((a) => !a.isOfType("familiar")),
+                ...inEnvironments.filter((a) => !a.isOfType("familiar", "hazard", "loot", "party")),
                 ...game.actors.filter((a) => a.type === "familiar"),
+                ...parties,
             ]);
-            resetActors(new Set(actorsToReprepare));
+            resetActors(actorsToReprepare, { sheets: false, tokens: inEnvironments.length > 0 });
+            ui.actors.render();
 
             // Show the GM the Remaster changes journal entry if they haven't seen it already.
             if (game.user.isGM && !game.settings.get("pf2e", "seenRemasterJournalEntry")) {

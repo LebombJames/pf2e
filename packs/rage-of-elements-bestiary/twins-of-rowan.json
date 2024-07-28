@@ -147,7 +147,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>A twins of rowan’s protective mask shields them from blinding and dazzling effects.</p>"
+                    "value": "<p>A twins of rowan's protective mask shields them from blinding and dazzling effects.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -176,7 +176,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>40 feet.</p>\n<p>The lantern carried by the twins of rowan contains pure elemental life energy that resonates with and empowers all wood elementals. While within the emanation, a creature with the elemental trait and either the plant trait or wood trait gains fast healing 10 and a +2 circumstance bonus to all attack and damage rolls. The aura can be counteracted with a DC 30 check to <em>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</em>; doing so deactivates the aura for [[/br 1d6 #Rounds Deactivated]] rounds</p>"
+                    "value": "<p>40 feet.</p>\n<p>The lantern carried by the twins of rowan contains pure elemental life energy that resonates with and empowers all wood elementals. While within the emanation, a creature with the elemental trait and either the plant trait or wood trait gains fast healing 10 and a +2 circumstance bonus to all attack and damage rolls. The aura can be counteracted with a DC 30 check to @UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]; doing so deactivates the aura for [[/br 1d6 #Rounds Deactivated]] rounds</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -331,81 +331,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "2JsQZ8ISIK6HSIXw",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 24
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "UJhICzqUfSlPZOWN",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 26
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gO7yBO54UPzchq9M",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Nature",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Twins of Rowan",
@@ -507,7 +432,7 @@
                 "value": 13
             },
             "privateNotes": "",
-            "publicNotes": "<p>Twins of rowan are among the most powerful elementals on the Plane of Wood, specially crafted to patrol a wide range of wilderness and maintain the plane’s carefully constructed order. Despite having two heads and torsos, each twins of rowan is a singular creature; like all wood elementals, their true consciousness is not in their heads but in the roots, and their true body is the trunk of the tree, not the extended limbs.</p>",
+            "publicNotes": "<p>Twins of rowan are among the most powerful elementals on the Plane of Wood, specially crafted to patrol a wide range of wilderness and maintain the plane's carefully constructed order. Despite having two heads and torsos, each twins of rowan is a singular creature; like all wood elementals, their true consciousness is not in their heads but in the roots, and their true body is the trunk of the tree, not the extended limbs.</p>",
             "publication": {
                 "license": "OGL",
                 "remaster": true,
@@ -541,6 +466,17 @@
             "will": {
                 "saveDetail": "",
                 "value": 27
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 24
+            },
+            "intimidation": {
+                "base": 26
+            },
+            "nature": {
+                "base": 21
             }
         },
         "traits": {

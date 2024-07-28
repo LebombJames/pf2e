@@ -1,4 +1,3 @@
-import type { EffectAreaType } from "@item/spell/types.ts";
 import type { MeasuredTemplatePF2e } from "../measured-template.ts";
 
 export class TemplateLayerPF2e<
@@ -7,26 +6,24 @@ export class TemplateLayerPF2e<
     /** Preview event listeners that can be referenced across methods */
     #previewListeners: TemplatePreviewEventListeners | null = null;
 
-    #gridPrecision = 2;
-
-    override get gridPrecision(): number {
-        return this.#gridPrecision;
-    }
-
-    /** Set a grid-snapping precision appropriate for an effect area type */
-    snapFor(areaType: EffectAreaType | null): void {
-        if (areaType && canvas.grid.type === CONST.GRID_TYPES.SQUARE) {
-            this.#gridPrecision = areaType === "burst" ? 1 : 2;
-        } else {
-            this.#gridPrecision = 2;
-        }
-    }
-
     async createPreview(createData: Record<string, unknown>): Promise<TObject> {
         const initialLayer = canvas.activeLayer;
         const preview = await this._createPreview({ ...createData, ...canvas.mousePosition }, { renderSheet: false });
         this.#activatePreviewListeners(preview, initialLayer);
         return preview;
+    }
+
+    /** Overriden to snap according to the dragged template's type */
+    override getSnappedPoint(point: Point): Point {
+        const template = this.preview.children.at(0);
+        if (!template || !canvas.grid.isSquare) {
+            return super.getSnappedPoint(point);
+        }
+
+        return canvas.grid.getSnappedPoint(point, {
+            mode: template.snappingMode,
+            resolution: 1,
+        });
     }
 
     /* -------------------------------------------- */
@@ -38,24 +35,24 @@ export class TemplateLayerPF2e<
             return super._onDragLeftMove(event);
         }
 
-        const { destination, layerDragState, preview: template, origin } = event.interactionData;
-        const dragState = layerDragState ?? 0;
-        if (!template || template.destroyed || dragState === 0) return;
+        const { destination, preview: template, origin } = event.interactionData;
+        if (!template || template.destroyed) return;
 
-        this.snapFor(template.areaType);
         const dimensions = canvas.dimensions;
 
         // Snap the destination to the grid
-        const { x, y } = canvas.grid.getSnappedPosition(destination.x, destination.y, this.gridPrecision);
+        const { x, y } = canvas.grid.getSnappedPoint(destination, {
+            mode: template.snappingMode,
+        });
         destination.x = x;
         destination.y = y;
         const ray = new Ray(origin, destination);
         const ratio = dimensions.size / dimensions.distance;
-        const { document } = template;
+        const document = template.document;
 
         // Update the shape data
         if (["cone", "circle"].includes(document.t)) {
-            const snapAngle = Math.PI / (canvas.scene.hasHexGrid ? 6 : 4);
+            const snapAngle = Math.PI / (canvas.grid.isHexagonal ? 6 : 4);
             document.direction = Math.toDegrees(Math.floor((ray.angle + Math.PI * 0.125) / snapAngle) * snapAngle);
         } else {
             document.direction = Math.toDegrees(ray.angle);
@@ -66,10 +63,9 @@ export class TemplateLayerPF2e<
 
         // Draw the pending shape
         template.refresh();
-        event.interactionData.layerDragState = 2;
     }
 
-    protected override _onMouseWheel(event: WheelEvent): Promise<TObject["document"] | undefined> | void {
+    protected override _onMouseWheel(event: WheelEvent): Promise<TObject> | void {
         // Abort if there's no hovered template
         const template = this.hover;
         if (!template || !canvas.scene || canvas.grid.type === CONST.GRID_TYPES.GRIDLESS) {
@@ -80,7 +76,7 @@ export class TemplateLayerPF2e<
         const shapeType = template.document.t;
         const distance = template.document.distance ?? 5;
         const increment = event.shiftKey || distance <= 30 ? 15 : 5;
-        const coneMultiplier = shapeType === "cone" ? (canvas.scene.hasHexGrid ? 2 : 3) : 1;
+        const coneMultiplier = shapeType === "cone" ? (canvas.grid.isHexagonal ? 2 : 3) : 1;
         const snap = increment * coneMultiplier;
         const delta = snap * Math.sign(event.deltaY);
 
@@ -131,10 +127,13 @@ export class TemplateLayerPF2e<
             wheelAbortController: new AbortController(),
             mousedown: (event: PIXI.FederatedPointerEvent): void => {
                 event.stopPropagation();
-                preview.snapForShape();
                 const { document, position } = preview;
                 this.#deactivatePreviewListeners(initialLayer, event);
-                document.updateSource(canvas.grid.getSnappedPosition(position.x, position.y, this.gridPrecision));
+                document.updateSource(
+                    canvas.grid.getSnappedPoint(position, {
+                        mode: preview.snappingMode,
+                    }),
+                );
                 canvas.scene?.createEmbeddedDocuments("MeasuredTemplate", [document.toObject()]);
             },
             rightdown: (event: PIXI.FederatedPointerEvent): void => {

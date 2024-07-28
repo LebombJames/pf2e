@@ -9,7 +9,7 @@ import type {
     StrictObjectField,
     StrictStringField,
 } from "@system/schema-data-fields.ts";
-import type { SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
+import type { BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import type { RuleElementSchema, RuleElementSource } from "../data.ts";
 
 type ChoiceSetSchema = RuleElementSchema & {
@@ -39,6 +39,11 @@ type ChoiceSetSchema = RuleElementSchema & {
      * parent item's slug, falling back to name.
      */
     flag: StringField<string, string, false, false, false>;
+    /**
+     * Whether to propagate the flag to the actor: instead of `flags.pf2e.rulesSelections.${flag}`, it will take the
+     * form of `flags.pf2e.${flag}`.
+     */
+    actorFlag: BooleanField<boolean, boolean, false, false, true>;
     /** An optional roll option to be set from the selection */
     rollOption: StringField<string, string, false, true, true>;
     /** A predicate indicating valid dropped item selections */
@@ -61,10 +66,11 @@ type AllowedDropsSchema = {
 
 type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
 
-type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery;
+type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery | ChoiceSetConfig;
 type UninflatedChoiceSet = string | PickableThing[] | ChoiceSetObject;
 
 interface ChoiceSetSource extends RuleElementSource {
+    choices?: unknown;
     flag?: unknown;
     prompt?: unknown;
     selection?: unknown;
@@ -84,6 +90,7 @@ interface ChoiceSetOwnedItems {
     predicate: RawPredicate;
     attacks?: never;
     unarmedAttacks?: never;
+    config?: never;
     types: (ItemType | "physical")[];
 }
 
@@ -95,6 +102,7 @@ interface ChoiceSetAttacks {
     /** The filter to apply the actor's own weapons/unarmed attacks */
     predicate: RawPredicate;
     ownedItems?: never;
+    config?: never;
 }
 
 interface ChoiceSetPackQuery {
@@ -109,11 +117,24 @@ interface ChoiceSetPackQuery {
     ownedItems?: never;
     attacks?: never;
     unarmedAttacks?: never;
+    config?: never;
+}
+
+interface ChoiceSetConfig {
+    /** The config path to pull this choice set from */
+    config: string;
+    /** The filter to apply to the config options */
+    predicate: RawPredicate;
+
+    ownedItems?: never;
+    attacks?: never;
+    unarmedAttacks?: never;
 }
 
 export type {
     AllowedDropsData,
     ChoiceSetAttacks,
+    ChoiceSetConfig,
     ChoiceSetObject,
     ChoiceSetOwnedItems,
     ChoiceSetPackQuery,

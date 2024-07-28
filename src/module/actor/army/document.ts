@@ -3,6 +3,7 @@ import { Sense } from "@actor/creature/sense.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { Kingdom } from "@actor/party/kingdom/model.ts";
+import { DamageContext } from "@actor/roll-context/damage.ts";
 import { type CampaignFeaturePF2e } from "@item";
 import type { ItemSourcePF2e, ItemType } from "@item/base/data/index.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
@@ -13,12 +14,12 @@ import { eventToRollParams } from "@scripts/sheet-util.ts";
 import { DamagePF2e } from "@system/damage/damage.ts";
 import { createDamageFormula } from "@system/damage/formula.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import type { DamageRollContext, SimpleDamageTemplate } from "@system/damage/types.ts";
+import type { DamageDamageContext, SimpleDamageTemplate } from "@system/damage/types.ts";
 import type { AttackRollParams, DamageRollParams } from "@system/rolls.ts";
 import { ArmorStatistic, Statistic, StatisticDifficultyClass } from "@system/statistic/index.ts";
 import { createHTMLElement, signedInteger, tupleHasValue } from "@util";
 import * as R from "remeda";
-import { ActorPF2e, type ActorUpdateContext, type HitPointsSummary } from "../base.ts";
+import { ActorPF2e, type ActorUpdateOperation, type HitPointsSummary } from "../base.ts";
 import type { ArmySource, ArmySystemData } from "./data.ts";
 import type { ArmyStrike } from "./types.ts";
 import { ARMY_STATS, ARMY_TYPES } from "./values.ts";
@@ -66,7 +67,7 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
         this.system.ac.value ??= this._source.system.ac.value ??= ARMY_STATS.ac[this.level];
         this.system.scouting ??= this._source.system.scouting ??= ARMY_STATS.scouting[this.level];
 
-        this.system.details.level.value = Math.clamped(this.system.details.level.value, 1, 20);
+        this.system.details.level.value = Math.clamp(this.system.details.level.value, 1, 20);
         this.system.resources.potions.max = 3;
         this.system.saves.strongSave = this.system.saves.maneuver >= this.system.saves.morale ? "maneuver" : "morale";
         this.system.perception = { senses: [] };
@@ -114,10 +115,10 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
         const acAdjustment = this.system.ac.value - expectedAC;
         this.armorClass = new ArmorStatistic(this, {
             attribute: null,
-            modifiers: R.compact([
+            modifiers: [
                 new ModifierPF2e({
                     slug: "base",
-                    label: "PF2E.Kingmaker.Army.Base",
+                    label: "PF2E.ModifierTitle",
                     modifier: expectedAC - 10,
                 }),
                 acAdjustment &&
@@ -128,7 +129,7 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
                     }),
                 this.system.ac.potency &&
                     new ModifierPF2e({ slug: "potency", label: "Potency", modifier: this.system.ac.potency }),
-            ]),
+            ].filter(R.isTruthy),
         }).dc;
         this.system.ac.value = this.armorClass.value;
 
@@ -138,8 +139,8 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
             slug: "scouting",
             label: "PF2E.Kingmaker.Army.Scouting",
             domains: ["scouting"],
-            modifiers: R.compact([
-                new ModifierPF2e({ slug: "base", label: "PF2E.Kingmaker.Army.Base", modifier: baseScouting }),
+            modifiers: [
+                new ModifierPF2e({ slug: "base", label: "PF2E.ModifierTitle", modifier: baseScouting }),
                 scoutAdjustment
                     ? new ModifierPF2e({
                           slug: "adjustment",
@@ -147,7 +148,7 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
                           modifier: scoutAdjustment,
                       })
                     : null,
-            ]),
+            ].filter(R.isTruthy),
         });
         this.system.scouting = this.scouting.mod;
 
@@ -162,8 +163,8 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
                 slug: saveType,
                 label: `PF2E.Kingmaker.Army.Save.${saveType}`,
                 domains: ["saving-throw", saveType],
-                modifiers: R.compact([
-                    new ModifierPF2e({ slug: "base", label: "PF2E.Kingmaker.Army.Base", modifier: baseValue }),
+                modifiers: [
+                    new ModifierPF2e({ slug: "base", label: "PF2E.ModifierTitle", modifier: baseValue }),
                     adjustment
                         ? new ModifierPF2e({
                               slug: "adjustment",
@@ -171,14 +172,18 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
                               modifier: adjustment,
                           })
                         : null,
-                ]),
+                ].filter(R.isTruthy),
             });
         }
 
         const tiebreakPriority = this.hasPlayerOwner ? 2 : 1;
         this.initiative = new ActorInitiative(this, { statistic: "scouting", tiebreakPriority });
-        this.strikes = R.flatMapToObj(["melee", "ranged"] as const, (t) =>
-            this.system.weapons[t] ? [[t, this.prepareArmyStrike(t)]] : [],
+        this.strikes = Object.fromEntries(
+            (["melee", "ranged"] as const)
+                .map((t): [string, ArmyStrike | null] | null =>
+                    this.system.weapons[t] ? [t, this.prepareArmyStrike(t)] : null,
+                )
+                .filter(R.isTruthy),
         );
 
         for (const tactic of this.itemTypes.campaignFeature.filter((i) => i.category === "army-tactic")) {
@@ -209,7 +214,7 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
             content: createHTMLElement("p", {
                 children: [game.i18n.localize("PF2E.Kingmaker.Army.Potions.UsedPotionContent")],
             }).outerHTML,
-            type: CONST.CHAT_MESSAGE_TYPES.EMOTE,
+            style: CONST.CHAT_MESSAGE_STYLES.EMOTE,
         });
     }
 
@@ -252,10 +257,10 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
             domains: attackDomains,
             rollOptions: [`item:${type}`],
             check: { type: "attack-roll" },
-            modifiers: R.compact([
+            modifiers: [
                 new ModifierPF2e({
                     slug: "base",
-                    label: "PF2E.Kingmaker.Army.Base",
+                    label: "PF2E.ModifierTitle",
                     modifier: ARMY_STATS.attack[this.level],
                 }),
                 data.potency && new ModifierPF2e({ slug: "potency", label: "Potency", modifier: data.potency }),
@@ -267,31 +272,33 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
                     predicate: ["target:effect:concealed"],
                     hideIfDisabled: true,
                 }),
-            ]),
+            ].filter(R.isTruthy),
         });
 
         const dealDamage = async (
             params: DamageRollParams = {},
             outcome: "success" | "criticalSuccess" = "success",
         ): Promise<string | Rolled<DamageRoll> | null> => {
-            const targetToken = params.target ?? game.user.targets.first() ?? null;
+            const targetToken = (params.target ?? game.user.targets.first())?.document ?? null;
 
             const domains = ["damage", "strike-damage", `${type}-damage`];
 
-            const context = await this.getDamageRollContext({
+            const context = await new DamageContext({
                 viewOnly: params.getFormula ?? false,
-                statistic: statistic.check,
+                origin: { actor: this, statistic },
                 target: { token: targetToken },
                 domains,
                 outcome,
                 checkContext: params.checkContext,
                 options: new Set(),
-            });
+            }).resolve();
+            const origin = context.origin;
+            if (!origin) return null;
 
-            const damageContext: DamageRollContext = {
+            const damageContext: DamageDamageContext = {
                 type: "damage-roll",
                 sourceType: "attack",
-                self: context.self,
+                self: context.origin,
                 target: context.target,
                 outcome,
                 options: context.options,
@@ -302,12 +309,12 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
             // Compute damage formula. Since army damage has no category/type, we skip processing stacking rules here
             const { formula, breakdown } = createDamageFormula({
                 base: [{ modifier: outcome === "success" ? 1 : 2, damageType: "untyped", category: null }],
-                modifiers: extractModifiers(context.self.actor.synthetics, domains, { test: context.options }),
-                dice: extractDamageDice(context.self.actor.synthetics.damageDice, domains, {
+                modifiers: extractModifiers(origin.actor.synthetics, domains, { test: context.options }),
+                dice: extractDamageDice(origin.actor.synthetics.damageDice, {
+                    selectors: domains,
                     test: context.options,
                     resolvables: { target: context.target?.actor ?? null },
                 }),
-                ignoredResistances: [],
             });
 
             const template: SimpleDamageTemplate = {
@@ -373,7 +380,7 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
 
     /** Updates the army's level, scaling all attributes that are intended to scale as the army levels up */
     updateLevel(newLevel: number): Promise<this | undefined> {
-        newLevel = Math.clamped(newLevel, 1, 20);
+        newLevel = Math.clamp(newLevel, 1, 20);
         const currentLevel = this.system.details.level.value;
 
         const strongSave = this.system.saves.strongSave;
@@ -421,6 +428,7 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
         return super.checkItemValidity(source);
     }
 
+    override getStatistic(slug: string): Statistic<this> | null;
     override getStatistic(slug: string): Statistic | null {
         if (tupleHasValue(["scouting", "morale", "maneuver"], slug)) {
             return this[slug];
@@ -431,19 +439,22 @@ class ArmyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nu
 
     override _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: ActorUpdateContext<TParent>,
+        operation: ActorUpdateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
+        const isFullReplace = !((operation.diff ?? true) && (operation.recursive ?? true));
+        if (isFullReplace) return super._preUpdate(changed, operation, user);
+
         if (typeof changed?.system?.attributes?.hp?.value === "number") {
             const max = Number(changed.system.attributes.hp.max ?? this.system.attributes.hp.max);
-            changed.system.attributes.hp.value = Math.clamped(changed.system.attributes.hp.value, 0, max);
+            changed.system.attributes.hp.value = Math.clamp(changed.system.attributes.hp.value, 0, max);
         }
 
-        return super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, operation, user);
     }
 
-    override _onDelete(options: DocumentModificationContext<TParent>, userId: string): void {
-        super._onDelete(options, userId);
+    override _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void {
+        super._onDelete(operation, userId);
         this.kingdom?.reset();
     }
 }

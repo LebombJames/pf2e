@@ -99,41 +99,6 @@
             "type": "melee"
         },
         {
-            "_id": "d7qSq3HVLR2AAayU",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.fFu2sZz4KB01fVRc"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Low-Light Vision",
-            "sort": 300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "low-light-vision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "ihGm6kH3jaNxYb3p",
             "flags": {
                 "core": {
@@ -142,7 +107,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Tremorsense (Precise) 30 feet",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -177,7 +142,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Regeneration 30 (Deactivated by Fire or Holy)",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -218,7 +183,7 @@
             "_id": "R6qqK2TgPEbgEcH0",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Defensive Burst",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -248,7 +213,7 @@
             "_id": "wO3hSmCvgcCzSah3",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Bloom Curse",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -258,7 +223,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>A living creature is exposed to the bloom curse if it eats any portion of a bloom of Lamashtu, fails a save against the bloom's seed pod, or is critically hit by the bloom's thorny vine Strike. Unlike the bloom curse contracted from secondary sources, there is no onset time for this version of the curse, and the creature spawned by the victim's death may be much more powerful and is always chaotic evil.</p>\n<hr />\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:29]</p>\n<p><strong>Stage 1</strong> no ill effects (1 day)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} (1 day)</p>\n<p><strong>Stage 3</strong> enfeebled 1 and @Damage[2d6[poison]] damage (8 hours)</p>\n<p><strong>Stage 4</strong> @UUID[Compendium.pf2e.conditionitems.Item.Unconscious] and @Damage[4d6[poison]] damage (10 minutes)</p>\n<p><strong>Stage 5</strong> death;</p>\n<p><strong>Special</strong> A creature that dies from the bloom curse explodes in a blast of First World foliage and releases a monster into the world. This creature is a chaotic evil low-intelligence beast or dragon (chosen by the GM ) of the same level as the dead creature.</p>"
+                    "value": "<p>A living creature is exposed to the bloom curse if it eats any portion of a bloom of Lamashtu, fails a save against the bloom's seed pod, or is critically hit by the bloom's thorny vine Strike. Unlike the bloom curse contracted from secondary sources, there is no onset time for this version of the curse, and the creature spawned by the victim's death may be much more powerful and is always chaotic evil.</p>\n<hr />\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:29]</p>\n<p><strong>Stage 1</strong> no ill effects (1 day)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} (1 day)</p>\n<p><strong>Stage 3</strong> enfeebled 1 and @Damage[2d6[poison]] damage (8 hours)</p>\n<p><strong>Stage 4</strong> @UUID[Compendium.pf2e.conditionitems.Item.Unconscious] and @Damage[4d6[poison]] damage (10 minutes)</p>\n<p><strong>Stage 5</strong> death;</p>\n<p><strong>Special</strong> A creature that dies from the bloom curse explodes in a blast of First World foliage and releases a monster into the world. This creature is a chaotic evil low-intelligence beast or dragon (chosen by the GM) of the same level as the dead creature.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -290,7 +255,7 @@
             "_id": "z3giiwwqKX9RBgD8",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Spew Seed Pod",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -318,77 +283,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "FeErz5QUtiB9aEu1",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "dhHfUP1VQHRPtvdU",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 18
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.ForestsOrUnderground",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "terrain:forest",
-                                    "terrain:underground"
-                                ]
-                            }
-                        ],
-                        "selector": "stealth",
-                        "value": 4
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+22 in wooded or underground areas",
-                        "options": "terrain:forest,terrain:underground"
-                    }
-                }
-            },
-            "type": "lore"
         }
     ],
     "name": "Bloom of Lamashtu",
@@ -509,6 +403,28 @@
             "will": {
                 "saveDetail": "",
                 "value": 19
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 21
+            },
+            "stealth": {
+                "base": 18,
+                "special": [
+                    {
+                        "base": 22,
+                        "label": "in wooded or underground areas",
+                        "predicate": [
+                            {
+                                "or": [
+                                    "terrain:forest",
+                                    "terrain:underground"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         },
         "traits": {

@@ -1,7 +1,13 @@
 import type { AbilityItemPF2e } from "@item/ability/document.ts";
 import { ItemSheetDataPF2e, ItemSheetOptions, ItemSheetPF2e } from "@item/base/sheet/sheet.ts";
+import { ancestryTraits } from "@scripts/config/traits.ts";
+import * as R from "remeda";
 import { SelfEffectReference } from "./data.ts";
 import { activateActionSheetListeners, createSelfEffectSheetData, handleSelfEffectDrop } from "./helpers.ts";
+
+// Gather traits to restrict to avoid trait selection noise in the selection
+// We fetch at load time to avoid propagated homebrew traits
+const originalAncestryTraits = R.keys.strict(ancestryTraits);
 
 class AbilitySheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
     static override get defaultOptions(): ItemSheetOptions {
@@ -10,6 +16,20 @@ class AbilitySheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
             dragDrop: [{ dropSelector: ".tab[data-tab=details]" }],
             hasSidebar: true,
         };
+    }
+
+    protected override get validTraits(): Record<string, string> {
+        return R.omit(this.item.constructor.validTraits, [
+            ...originalAncestryTraits,
+            "archetype",
+            "cantrip",
+            "class",
+            "dedication",
+            "focus",
+            "general",
+            "skill",
+            "summoned",
+        ] as const);
     }
 
     override async getData(options: Partial<ItemSheetOptions> = {}): Promise<ActionSheetData> {
@@ -22,7 +42,6 @@ class AbilitySheetPF2e extends ItemSheetPF2e<AbilityItemPF2e> {
             actionsNumber: CONFIG.PF2E.actionsNumber,
             actionTraits: CONFIG.PF2E.actionTraits,
             frequencies: CONFIG.PF2E.frequencies,
-            skills: CONFIG.PF2E.skillList,
             proficiencies: CONFIG.PF2E.proficiencyLevels,
             selfEffect: createSelfEffectSheetData(sheetData.data.selfEffect),
         };
@@ -51,7 +70,6 @@ interface ActionSheetData extends ItemSheetDataPF2e<AbilityItemPF2e> {
     actionsNumber: ConfigPF2e["PF2E"]["actionsNumber"];
     actionTraits: ConfigPF2e["PF2E"]["actionTraits"];
     frequencies: ConfigPF2e["PF2E"]["frequencies"];
-    skills: ConfigPF2e["PF2E"]["skillList"];
     proficiencies: ConfigPF2e["PF2E"]["proficiencyLevels"];
     selfEffect: SelfEffectReference | null;
 }

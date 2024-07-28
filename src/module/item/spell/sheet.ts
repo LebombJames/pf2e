@@ -4,6 +4,7 @@ import { OneToTen } from "@module/data.ts";
 import { TraitTagifyEntry, createTagifyTraits } from "@module/sheet/helpers.ts";
 import { DamageCategoryUnique, DamageType } from "@system/damage/types.ts";
 import { DAMAGE_CATEGORIES_UNIQUE } from "@system/damage/values.ts";
+import { HTMLTagifyTagsElement } from "@system/html-elements/tagify-tags.ts";
 import {
     ErrorPF2e,
     fontAwesomeIcon,
@@ -12,28 +13,30 @@ import {
     htmlQuery,
     htmlQueryAll,
     objectHasKey,
+    ordinalString,
     sortStringRecord,
     tagify,
     tupleHasValue,
 } from "@util";
 import * as R from "remeda";
-import { createDescriptionPrepend, createSpellRankLabel, getPassiveDefenseLabel } from "./helpers.ts";
+import { createDescriptionPrepend, createSpellRankLabel } from "./helpers.ts";
 import type {
+    EffectAreaShape,
     SpellDamageSource,
     SpellHeighteningInterval,
     SpellPF2e,
     SpellSystemData,
     SpellSystemSource,
 } from "./index.ts";
-import { MAGIC_TRADITIONS } from "./values.ts";
+import { EFFECT_AREA_SHAPES, MAGIC_TRADITIONS } from "./values.ts";
 
 /** Set of properties that are legal for the purposes of spell overrides */
 const spellOverridable: Partial<Record<keyof SpellSystemData, string>> = {
     traits: "PF2E.Traits",
     time: "PF2E.Item.Spell.Cast",
     target: "PF2E.SpellTargetLabel",
-    area: "PF2E.AreaLabel",
-    range: "PF2E.SpellRangeLabel",
+    area: "PF2E.Area.Label",
+    range: "PF2E.TraitRange",
     damage: "PF2E.DamageLabel",
 };
 
@@ -54,8 +57,8 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
         return baseId;
     }
 
-    protected override get validTraits(): Record<string, string> | null {
-        return R.omit(CONFIG.PF2E.Item.traits.spell, Array.from(MAGIC_TRADITIONS));
+    protected override get validTraits(): Record<string, string> {
+        return R.omit(this.item.constructor.validTraits, Array.from(MAGIC_TRADITIONS));
     }
 
     override async getData(options?: Partial<ItemSheetOptions>): Promise<SpellSheetData> {
@@ -81,19 +84,19 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
                 {
                     value: ["damage"],
                     label: "PF2E.DamageLabel",
-                    selected: R.equals(currentKinds, ["damage"]),
+                    selected: R.isDeepEqual(currentKinds, ["damage"]),
                     disabled: false,
                 },
                 {
                     value: ["healing"],
                     label: "PF2E.TraitHealing",
-                    selected: R.equals(currentKinds, ["healing"]),
+                    selected: R.isDeepEqual(currentKinds, ["healing"]),
                     disabled: healingDisabled,
                 },
                 {
                     value: ["damage", "healing"],
                     label: "PF2E.Damage.Kind.Both.Label",
-                    selected: R.equals(currentKinds, ["damage", "healing"]),
+                    selected: R.isDeepEqual(currentKinds, ["damage", "healing"]),
                     disabled: healingDisabled,
                 },
             ];
@@ -101,19 +104,27 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
 
         return {
             ...sheetData,
+            areaShapes: R.mapToObj(EFFECT_AREA_SHAPES, (s) => [s, `PF2E.Area.Shape.${s}`]),
             itemType: createSpellRankLabel(this.item),
-            passiveDefense: getPassiveDefenseLabel(spell.system.defense?.passive?.statistic ?? ""),
             variants,
             isVariant: this.item.isVariant,
             damageTypes: sortStringRecord(CONFIG.PF2E.damageTypes),
             damageSubtypes: R.pick(CONFIG.PF2E.damageCategories, [...DAMAGE_CATEGORIES_UNIQUE]),
             damageKinds,
             materials: CONFIG.PF2E.materialDamageEffects,
-            areaSizes: CONFIG.PF2E.areaSizes,
-            areaTypes: CONFIG.PF2E.areaTypes,
-            heightenIntervals: [1, 2, 3, 4],
+            heightenIntervals: R.range(1, 5).map((i) => ({
+                value: `${i}`,
+                label: game.i18n.format("PF2E.SpellScalingInterval.Selection", { interval: i }),
+            })),
             heightenOverlays: this.#prepareHeighteningLevels(),
             canHeighten: this.isEditable && this.getAvailableHeightenLevels().length > 0,
+            defensePassiveOptions: [
+                { value: "ac", label: "PF2E.Check.DC.Specific.armor" },
+                { value: "fortitude-dc", label: "PF2E.Check.DC.Specific.fortitude" },
+                { value: "reflex-dc", label: "PF2E.Check.DC.Specific.reflex" },
+                { value: "will-dc", label: "PF2E.Check.DC.Specific.will" },
+            ],
+            defenseSaveOptions: CONFIG.PF2E.saves,
         };
     }
 
@@ -137,7 +148,7 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
             if (levelInput) levelInput.readOnly = true;
         }
 
-        tagify(html.querySelector('input[name="system.traits.traditions"]'), {
+        tagify(htmlQuery<HTMLTagifyTagsElement>(html, 'tagify-tags[name="system.traits.traditions"]'), {
             whitelist: CONFIG.PF2E.magicTraditions,
         });
 
@@ -455,6 +466,7 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
                 if (key in layer.system) continue;
                 missing.push({ key: key as keyof SpellSystemData, label });
             }
+            const availableLevels = [layer.level, ...this.getAvailableHeightenLevels()].sort((a, b) => a - b);
 
             return {
                 id: null,
@@ -464,7 +476,10 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
                 dataPath: base,
                 system: layer.system,
                 missing,
-                heightenLevels: [layer.level, ...this.getAvailableHeightenLevels()].sort(),
+                heightenLevels: availableLevels.map((l) => ({
+                    value: `${l}`,
+                    label: game.i18n.format("PF2E.SpellScalingOverlay.Selection", { level: ordinalString(l) }),
+                })),
                 traits: layer.system.traits?.value
                     ? createTagifyTraits(layer.system.traits.value, { record: CONFIG.PF2E.spellTraits })
                     : null,
@@ -474,7 +489,6 @@ export class SpellSheetPF2e extends ItemSheetPF2e<SpellPF2e> {
 }
 
 interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
-    passiveDefense: string | null;
     isVariant: boolean;
     variants: {
         name: string;
@@ -486,11 +500,12 @@ interface SpellSheetData extends ItemSheetDataPF2e<SpellPF2e> {
     damageTypes: Record<DamageType, string>;
     damageSubtypes: Pick<typeof CONFIG.PF2E.damageCategories, DamageCategoryUnique>;
     damageKinds: Record<string, { value: string[]; label: string; selected: boolean; disabled: boolean }[]>;
-    areaSizes: typeof CONFIG.PF2E.areaSizes;
-    areaTypes: typeof CONFIG.PF2E.areaTypes;
-    heightenIntervals: number[];
+    areaShapes: Record<EffectAreaShape, string>;
+    heightenIntervals: FormSelectOption[];
     heightenOverlays: SpellSheetHeightenOverlayData[];
     canHeighten: boolean;
+    defensePassiveOptions: FormSelectOption[];
+    defenseSaveOptions: typeof CONFIG.PF2E.saves;
 }
 
 interface SpellSheetOverlayData {
@@ -506,7 +521,7 @@ interface SpellSheetOverlayData {
 
 interface SpellSheetHeightenOverlayData extends SpellSheetOverlayData {
     system: Partial<SpellSystemSource>;
-    heightenLevels: number[];
+    heightenLevels: FormSelectOption[];
     missing: { key: keyof SpellSystemData; label: string }[];
     traits?: TraitTagifyEntry[] | null;
 }

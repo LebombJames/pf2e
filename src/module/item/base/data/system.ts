@@ -1,12 +1,9 @@
-import { CreatureTrait } from "@actor/creature/types.ts";
-import { ActionTrait } from "@item/ability/types.ts";
-import { KingmakerTrait } from "@item/campaign-feature/types.ts";
-import { NPCAttackTrait } from "@item/melee/data.ts";
-import { PhysicalItemTrait } from "@item/physical/data.ts";
-import { MigrationRecord, OneToThree, PublicationData, Rarity } from "@module/data.ts";
-import { RuleElementSource } from "@module/rules/index.ts";
+import type { MigrationRecord, OneToThree, PublicationData, Rarity } from "@module/data.ts";
+import type { RuleElementSource } from "@module/rules/index.ts";
+import type { Predicate } from "@system/predication.ts";
 import type * as fields from "types/foundry/common/data/fields.d.ts";
-import { ItemType } from "./index.ts";
+import type { ItemTrait } from "../types.ts";
+import type { ItemType } from "./index.ts";
 
 type BaseItemSourcePF2e<
     TType extends ItemType,
@@ -15,9 +12,7 @@ type BaseItemSourcePF2e<
     flags: ItemSourceFlagsPF2e;
 };
 
-type ItemTrait = ActionTrait | CreatureTrait | PhysicalItemTrait | NPCAttackTrait | KingmakerTrait;
-
-type ActionType = keyof ConfigPF2e["PF2E"]["actionTypes"];
+type ActionType = keyof typeof CONFIG.PF2E.actionTypes;
 
 interface ActionCost {
     type: Exclude<ActionType, "passive">;
@@ -89,7 +84,7 @@ type ItemSystemSource = {
     /** A record of this actor's current world schema version as well a log of the last migration to occur */
     _migration: MigrationRecord;
     /** Legacy location of `MigrationRecord` */
-    schema?: Readonly<{ version: number | null; lastMigration: object | null }>;
+    schema?: object;
 };
 
 interface ItemDescriptionSource {
@@ -97,13 +92,24 @@ interface ItemDescriptionSource {
     value: string;
 }
 
-interface ItemSystemData extends ItemSystemSource {
+interface ItemSystemData extends Omit<ItemSystemSource, "schema"> {
     description: ItemDescriptionData;
 }
 
 interface ItemDescriptionData extends ItemDescriptionSource {
     /** Additional text added by rule elements */
-    addenda: { label: string; content: { title: string | null; text: string }[] }[];
+    addenda: {
+        label: string;
+        contents: AlteredDescriptionContent[];
+    }[];
+    override: AlteredDescriptionContent[] | null;
+}
+
+interface AlteredDescriptionContent {
+    title: string | null;
+    text: string;
+    divider: boolean;
+    predicate: Predicate;
 }
 
 type FrequencyInterval = keyof typeof CONFIG.PF2E.frequencies;
@@ -130,6 +136,7 @@ export type {
     Frequency,
     FrequencyInterval,
     FrequencySource,
+    ItemDescriptionData,
     ItemFlagsPF2e,
     ItemGrantData,
     ItemGrantDeleteAction,

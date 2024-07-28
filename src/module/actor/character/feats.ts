@@ -100,7 +100,7 @@ class CharacterFeats<TActor extends CharacterPF2e> extends Collection<FeatGroup<
             id: "skill",
             label: "PF2E.FeatSkillHeader",
             supported: ["skill"],
-            slots: R.compact([backgroundSkillFeats, classFeatSlots?.skill].flat()),
+            slots: [backgroundSkillFeats, classFeatSlots?.skill].flat().filter(R.isTruthy),
         });
 
         this.createGroup({
@@ -111,7 +111,7 @@ class CharacterFeats<TActor extends CharacterPF2e> extends Collection<FeatGroup<
         });
 
         // Add campaign feats if enabled
-        if (game.pf2e.settings.campaign.enabled) {
+        if (game.pf2e.settings.campaign.feats.enabled) {
             this.createGroup({ id: "campaign", label: "PF2E.FeatCampaignHeader" });
         }
     }
@@ -360,7 +360,9 @@ class FeatGroup<TActor extends ActorPF2e = ActorPF2e, TItem extends FeatLike = F
 
         // If this is a new feat, create a new feat item on the actor first
         if (!alreadyHasFeat && (isFeatValidInSlot || !location)) {
-            const source = fu.mergeObject(feat.toObject(), { system: { location } });
+            const source = fu.mergeObject(feat.toObject(), {
+                system: { location, level: { taken: slot?.level ?? this.actor.level } },
+            });
             changed.push(...(await this.actor.createEmbeddedDocuments("Item", [source])));
             const label = game.i18n.localize(this.label);
             ui.notifications.info(game.i18n.format("PF2E.Item.Feat.Info.Added", { item: feat.name, category: label }));

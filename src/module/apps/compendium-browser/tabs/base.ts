@@ -1,6 +1,7 @@
 import { CompendiumDirectoryPF2e } from "@module/apps/sidebar/compendium-directory.ts";
 import { ErrorPF2e, htmlQuery, sluggify } from "@util";
 import MiniSearch from "minisearch";
+import * as R from "remeda";
 import type { TableResultSource } from "types/foundry/common/documents/table-result.d.ts";
 import { BrowserTabs, ContentTabName } from "../data.ts";
 import { CompendiumBrowser } from "../index.ts";
@@ -43,6 +44,9 @@ export abstract class CompendiumBrowserTab {
      *  By default none, so resuts would only contain the id field. */
     storeFields: string[] = [];
 
+    /** Maximum size to create a roll table from as a sanity check, erring towards still too large. */
+    #MAX_TABLE_SIZE = 1000;
+
     constructor(browser: CompendiumBrowser) {
         this.browser = browser;
     }
@@ -51,16 +55,35 @@ export abstract class CompendiumBrowserTab {
     async init(): Promise<void> {
         // Load the index and populate filter data
         await this.loadData();
+
         // Initialize MiniSearch
+        const wordSegmenter =
+            "Segmenter" in Intl
+                ? new Intl.Segmenter(game.i18n.lang, { granularity: "word" })
+                : // Firefox >:(
+                  {
+                      segment(term: string): { segment: string }[] {
+                          return [{ segment: term }];
+                      },
+                  };
         this.searchEngine = new MiniSearch({
             fields: this.searchFields,
             idField: "uuid",
-            processTerm: (t) =>
-                t.length > 1 && !CompendiumDirectoryPF2e.STOP_WORDS.has(t) ? t.toLocaleLowerCase(game.i18n.lang) : null,
+            processTerm: (term): string[] | null => {
+                if (term.length <= 1 || CompendiumDirectoryPF2e.STOP_WORDS.has(term)) {
+                    return null;
+                }
+                return Array.from(wordSegmenter.segment(term))
+                    .map((t) =>
+                        SearchFilter.cleanQuery(t.segment.toLocaleLowerCase(game.i18n.lang)).replace(/['"]/g, ""),
+                    )
+                    .filter((t) => t.length > 1);
+            },
             storeFields: this.storeFields,
             searchOptions: { combineWith: "AND", prefix: true },
         });
         this.searchEngine.addAll(this.indexData);
+
         // Set defaultFilterData for resets
         this.defaultFilterData = fu.deepClone(this.filterData);
         // Initialization complete
@@ -87,7 +110,7 @@ export abstract class CompendiumBrowserTab {
         }
 
         this.currentIndex = (() => {
-            const searchText = this.filterData.search.text;
+            const searchText = SearchFilter.cleanQuery(this.filterData.search.text);
             if (searchText) {
                 const searchResult = this.searchEngine.search(searchText);
                 return this.sortResult(searchResult.filter(this.filterIndexData.bind(this)));
@@ -200,16 +223,12 @@ export abstract class CompendiumBrowserTab {
     }
 
     /** Generates a localized and sorted CheckBoxOptions object from config data */
-    protected generateCheckboxOptions(configData: Record<string, string>, sort = true): CheckboxOptions {
-        // Localize labels for sorting
-        const localized = Object.entries(configData).reduce(
-            (result: Record<string, string>, [key, label]) => ({
-                ...result,
-                [key]: game.i18n.localize(label),
-            }),
-            {},
-        );
-        // Return localized and sorted CheckBoxOptions
+    protected generateCheckboxOptions(
+        configData: Record<string, string | { label: string }>,
+        sort = true,
+    ): CheckboxOptions {
+        // Localize labels for sorting. Return localized and sorted CheckBoxOptions
+        const localized = R.mapValues(configData, (v) => game.i18n.localize(R.isObjectType(v) ? v.label : v));
         return Object.entries(sort ? this.sortedConfig(localized) : localized).reduce(
             (result: CheckboxOptions, [key, label]) => ({
                 ...result,
@@ -279,27 +298,40 @@ export abstract class CompendiumBrowserTab {
         initial?: number;
         weight?: number;
     }): Partial<TableResultSource>[] {
-        return this.currentIndex.flatMap((e, i) => {
-            const data = fromUuidSync(e.uuid);
-            if (!data?.pack || !data._id || !("name" in data)) return [];
-            const rangeMinMax = initial + i + 1;
-            return {
-                text: data.name,
-                type: CONST.TABLE_RESULT_TYPES.COMPENDIUM,
-                collection: data.pack,
-                resultId: data._id,
-                img: e.img,
-                weight,
-                range: [rangeMinMax, rangeMinMax],
-                drawn: false,
-            };
-        });
+        return this.currentIndex
+            .map((e, i): Partial<TableResultSource> | null => {
+                const data = fromUuidSync(e.uuid);
+                if (!data?.pack || !data._id || !("name" in data)) return null;
+                const rangeMinMax = initial + i + 1;
+                return {
+                    text: data.name,
+                    type: CONST.TABLE_RESULT_TYPES.COMPENDIUM,
+                    documentCollection: data.pack,
+                    documentId: data._id,
+                    img: e.img,
+                    weight,
+                    range: [rangeMinMax, rangeMinMax],
+                    drawn: false,
+                };
+            })
+            .filter((r): r is Partial<TableResultSource> => !!r);
     }
 
     async createRollTable(): Promise<void> {
         if (!this.isInitialized) {
             throw ErrorPF2e(`Compendium Browser Tab "${this.tabName}" is not initialized!`);
         }
+
+        if (this.currentIndex.length > this.#MAX_TABLE_SIZE) {
+            ui.notifications.warn(
+                game.i18n.format("PF2E.CompendiumBrowser.RollTable.TooManyResults", {
+                    size: this.currentIndex.length,
+                    maxSize: this.#MAX_TABLE_SIZE,
+                }),
+            );
+            return;
+        }
+
         const content = await renderTemplate("systems/pf2e/templates/compendium-browser/roll-table-dialog.hbs", {
             count: this.currentIndex.length,
         });
@@ -327,6 +359,17 @@ export abstract class CompendiumBrowserTab {
         if (!this.isInitialized) {
             throw ErrorPF2e(`Compendium Browser Tab "${this.tabName}" is not initialized!`);
         }
+
+        if (this.currentIndex.length > this.#MAX_TABLE_SIZE) {
+            ui.notifications.warn(
+                game.i18n.format("PF2E.CompendiumBrowser.RollTable.TooManyResults", {
+                    size: this.currentIndex.length,
+                    maxSize: this.#MAX_TABLE_SIZE,
+                }),
+            );
+            return;
+        }
+
         const content = await renderTemplate("systems/pf2e/templates/compendium-browser/roll-table-dialog.hbs", {
             count: this.currentIndex.length,
             rollTables: game.tables.contents,

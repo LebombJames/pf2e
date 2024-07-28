@@ -1243,11 +1243,11 @@
                         "adjustName": false,
                         "choices": [
                             {
-                                "label": "PF2E.SkillAcr",
+                                "label": "PF2E.Skill.Acrobatics",
                                 "value": "acrobatics"
                             },
                             {
-                                "label": "PF2E.SkillAth",
+                                "label": "PF2E.Skill.Athletics",
                                 "value": "athletics"
                             }
                         ],
@@ -1281,9 +1281,11 @@
                     }
                 ],
                 "slug": "martial-disciple",
-                "trainedLore": "Warfare Lore",
                 "trainedSkills": {
                     "custom": "",
+                    "lore": [
+                        "Warfare Lore"
+                    ],
                     "value": []
                 },
                 "traits": {
@@ -1438,7 +1440,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Shield Block"
                     },
                     "enizk": {
-                        "img": "systems/pf2e/icons/features/classes/improved-flexibility.webp",
+                        "img": "icons/environment/settlement/target-dummy.webp",
                         "level": 15,
                         "name": "Improved Flexibility",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Improved Flexibility"
@@ -1480,7 +1482,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Evasion"
                     },
                     "txlgu": {
-                        "img": "systems/pf2e/icons/features/classes/combat-flexibility.webp",
+                        "img": "icons/environment/settlement/target-dummy.webp",
                         "level": 9,
                         "name": "Combat Flexibility",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Combat Flexibility"
@@ -1498,7 +1500,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Fighter Weapon Mastery"
                     },
                     "vis8d": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Level 15)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -1978,52 +1980,52 @@
         },
         "saves": {},
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 1
             },
-            "cra": {
+            "crafting": {
                 "rank": 1
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 1
             },
-            "itm": {
+            "intimidation": {
                 "rank": 1
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 0
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 1
             },
-            "soc": {
+            "society": {
                 "rank": 1
             },
-            "ste": {
+            "stealth": {
                 "rank": 0
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

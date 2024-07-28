@@ -29,6 +29,14 @@ class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e |
         return this.system.attributes.hardness;
     }
 
+    /** Whether the creature emits sound: overridable by AE-like */
+    override get emitsSound(): boolean {
+        const { emitsSound } = this.system.attributes;
+        return !this.isDead && typeof emitsSound === "boolean"
+            ? emitsSound
+            : !!game.combats.active?.started && game.combats.active.combatants.some((c) => c.actor === this);
+    }
+
     getTokenDimensions(dimensions: Omit<ActorDimensions, "height"> = this.dimensions): TokenDimensions {
         return {
             width: Math.max(Math.round(dimensions.width / 5), 1),
@@ -52,14 +60,6 @@ class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e |
             const { width, height } = this.getTokenDimensions();
             this.prototypeToken.width = width;
             this.prototypeToken.height = height;
-        }
-    }
-
-    override prepareEmbeddedDocuments(): void {
-        super.prepareEmbeddedDocuments();
-
-        for (const rule of this.rules) {
-            rule.onApplyActiveEffects?.();
         }
     }
 
@@ -136,10 +136,10 @@ class VehiclePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e |
 
     protected override async _preUpdate(
         changed: DeepPartial<VehicleSource>,
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseUpdateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
-        const result = await super._preUpdate(changed, options, user);
+        const result = await super._preUpdate(changed, operation, user);
         if (result === false) return result;
 
         if (this.prototypeToken.flags?.pf2e?.linkToActorSize) {

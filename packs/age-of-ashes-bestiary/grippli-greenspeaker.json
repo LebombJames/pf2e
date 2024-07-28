@@ -14,12 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {
-                    "0": false,
-                    "1": false,
-                    "2": false,
-                    "3": false
-                },
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -36,112 +30,65 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "ivKmALI6lAhazMyT"
                             },
-                            "1": {
+                            {
                                 "id": "PuT68ohrWGJyMS6Z"
                             },
-                            "2": {
+                            {
                                 "id": "tKuEs0QSsXTvSi3p"
                             },
-                            "3": {
+                            {
                                 "id": "6RaQW2Q6Tv6vYqPb"
                             },
-                            "4": {
+                            {
                                 "id": "5Gs0zBZCqROPsqr5"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot1": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "ktPA2sIf37au8mco"
                             },
-                            "1": {
+                            {
                                 "id": "3I0k0LDMuNMjuXpY"
                             },
-                            "2": {
+                            {
                                 "id": "7YaTjPUQRlMpYABg"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     },
                     "slot2": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "hWs526KodsWVyJeb"
                             },
-                            "1": {
+                            {
                                 "id": "sJkduWmFyb39nPZQ"
                             },
-                            "2": {
+                            {
                                 "id": "C4Bzplj9Tz1Be3zM"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot3": {
                         "max": 2,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "BmA7HFwJoE8UOdxj"
                             },
-                            "1": {
+                            {
                                 "id": "sUjyuCZUVYFXxLTd"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     }
                 },
                 "slug": null,
@@ -175,7 +122,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You call upon primal energy to transform yourself into a Medium animal battle form. When you first cast this spell, choose ape, bear, bull, canine, cat, deer, frog, shark, or snake. You can decide the specific type of animal (such as lion or snow leopard for cat), but this has no effect on the form's Size or statistics. While in this form, you gain the animal trait. You can Dismiss the spell.</p>\n<p>You gain the following statistics and abilities regardless of which battle form you choose:</p>\n<ul>\n<li>AC = 16 + your level. Ignore your armor's check penalty and Speed reduction.</li>\n<li>5 temporary Hit Points.</li>\n<li>Low-light vision and imprecise scent 30 feet.</li>\n<li>One or more unarmed melee attacks specific to the battle form you choose, which are the only attacks you can use. You're trained with them. Your attack modifier is +9, and your damage bonus is +1. These attacks are Strength based (for the purpose of the @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled] condition, for example). If your unarmed attack bonus is higher, you can use it instead.</li>\n<li>Athletics modifier of +9, unless your own modifier is higher.</li>\n</ul>\n<p>You also gain specific abilities based on the type of animal you choose:</p>\n<ul>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Ape)]{Ape}</strong>\n<ul>\n<li>Speed 25 feet, climb Speed 20 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> fist, <strong>Damage</strong> 2d6 bludgeoning.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Bear)]{Bear}</strong>\n<ul>\n<li>Speed 30 feet; </li><li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d8 piercing;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> claw (agile), <strong>Damage</strong> 1d8 slashing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Bull)]{Bull}</strong>\n<ul>\n<li>Speed 30 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> horn , <strong>Damage</strong> 2d8 piercing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Canine)]{Canine}</strong>\n<ul>\n<li>Speed 40 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d8 piercing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Cat)]{Cat}</strong>\n<ul>\n<li>Speed 40 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d6 piercing;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> claw (agile), <strong>Damage</strong> 1d10 slashing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Deer)]{Deer}</strong>\n<ul>\n<li>Speed 50 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> antler , <strong>Damage</strong> 2d6 piercing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Frog)]{Frog}</strong>\n<ul>\n<li>Speed 25 feet, swim Speed 25 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d6 bludgeoning;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> tongue (reach 15 feet), <strong>Damage</strong> 2d4 bludgeoning.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Shark)]{Shark}</strong>\n<ul>\n<li>swim Speed 35 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d8 piercing;</li>\n<li>breathe underwater but not in air.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Snake)]{Snake}</strong>\n<ul>\n<li>Speed 20 feet, climb Speed 20 feet, swim Speed 20 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> fangs, <strong>Damage</strong> 2d4 piercing plus 1d6 poison.</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p><strong>Heightened (3rd)</strong> You instead gain 10 temporary HP, AC = 17 + your level, attack modifier +14, damage bonus +5, and Athletics +14.</p>\n<p><strong>Heightened (4th)</strong> Your battle form is Large and your attacks have 10-foot reach. You must have enough space to expand into or the spell is lost. You instead gain 15 temporary HP, AC = 18 + your level, attack modifier +16, damage bonus +9, and Athletics +16.</p>\n<p><strong>Heightened (5th)</strong> Your battle form is Huge and your attacks have 15-foot reach. You must have enough space to expand into or the spell is lost. You instead gain 20 temporary HP, AC = 18 + your level, attack modifier +18, damage bonus +7 and double the number of damage dice, and Athletics +20.</p>"
+                    "value": "<p>You call upon primal energy to transform yourself into a Medium animal battle form. When you first cast this spell, choose ape, bear, bull, canine, cat, deer, frog, shark, or snake. You can decide the specific type of animal (such as lion or snow leopard for cat), but this has no effect on the form's Size or statistics. While in this form, you gain the animal trait. You can Dismiss the spell.</p>\n<p>You gain the following statistics and abilities regardless of which battle form you choose:</p>\n<ul>\n<li>AC = 16 + your level. Ignore your armor's check penalty and Speed reduction.</li>\n<li>5 temporary Hit Points.</li>\n<li>Low-light vision and imprecise scent 30 feet.</li>\n<li>One or more unarmed melee attacks specific to the battle form you choose, which are the only attacks you can use. You're trained with them. Your attack modifier is +9, and your damage bonus is +1. These attacks are Strength based (for the purpose of the @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled] condition, for example). If your unarmed attack bonus is higher, you can use it instead.</li>\n<li>Athletics modifier of +9, unless your own modifier is higher.</li>\n</ul>\n<p>You also gain specific abilities based on the type of animal you choose:</p>\n<ul>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Ape)]{Ape}</strong>\n<ul>\n<li>Speed 25 feet, climb Speed 20 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> fist, <strong>Damage</strong> 2d6 bludgeoning.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Bear)]{Bear}</strong>\n<ul>\n<li>Speed 30 feet; </li><li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d8 piercing;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> claw (agile), <strong>Damage</strong> 1d8 slashing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Bull)]{Bull}</strong>\n<ul>\n<li>Speed 30 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> horn, <strong>Damage</strong> 2d8 piercing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Canine)]{Canine}</strong>\n<ul>\n<li>Speed 40 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d8 piercing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Cat)]{Cat}</strong>\n<ul>\n<li>Speed 40 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d6 piercing;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> claw (agile), <strong>Damage</strong> 1d10 slashing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Deer)]{Deer}</strong>\n<ul>\n<li>Speed 50 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> antler, <strong>Damage</strong> 2d6 piercing.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Frog)]{Frog}</strong>\n<ul>\n<li>Speed 25 feet, swim Speed 25 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d6 bludgeoning;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> tongue (reach 15 feet), <strong>Damage</strong> 2d4 bludgeoning.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Shark)]{Shark}</strong>\n<ul>\n<li>swim Speed 35 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> jaws, <strong>Damage</strong> 2d8 piercing;</li>\n<li>breathe underwater but not in air.</li>\n</ul>\n</li>\n<li><strong>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Animal Form (Snake)]{Snake}</strong>\n<ul>\n<li>Speed 20 feet, climb Speed 20 feet, swim Speed 20 feet;</li>\n<li><strong>Melee</strong> <span class=\"action-glyph\">a</span> fangs, <strong>Damage</strong> 2d4 piercing plus 1d6 poison.</li>\n</ul>\n</li>\n</ul>\n<hr />\n<p><strong>Heightened (3rd)</strong> You instead gain 10 temporary HP, AC = 17 + your level, attack modifier +14, damage bonus +5, and Athletics +14.</p>\n<p><strong>Heightened (4th)</strong> Your battle form is Large and your attacks have 10-foot reach. You must have enough space to expand into or the spell is lost. You instead gain 15 temporary HP, AC = 18 + your level, attack modifier +16, damage bonus +9, and Athletics +16.</p>\n<p><strong>Heightened (5th)</strong> Your battle form is Huge and your attacks have 15-foot reach. You must have enough space to expand into or the spell is lost. You instead gain 20 temporary HP, AC = 18 + your level, attack modifier +18, damage bonus +7 and double the number of damage dice, and Athletics +20.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -883,7 +830,7 @@
                 },
                 "defense": null,
                 "description": {
-                    "value": "<p>A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach.</p>\n<p>On a success, you deal 2d4 fire damage. On a critical success, the target takes double damage and [[/r (@item.level)d4[persistent,fire]]] damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage by 1d4 and the persistent damage on a critical hit by 1d4.</p>"
+                    "value": "<p>A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach.</p>\n<p>On a success, you deal 2d4 fire damage. On a critical success, the target takes double damage and @Damage[(@item.level)d4[persistent,fire]] damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage by 1d4 and the persistent damage on a critical hit by 1d4.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -1017,7 +964,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You conjure a plant or fungus to fight for you. This works like <em>@UUID[Compendium.pf2e.spells-srd.Item.Summon Animal]</em>, except you summon a common creature that has the plant or fungus trait and whose level is -1.</p>\n<hr />\n<p><strong>Heightened (2nd)</strong> Level 1</p>\n<p><strong>Heightened (3rd)</strong> Level 2</p>\n<p><strong>Heightened (4th)</strong> Level 3</p>\n<p><strong>Heightened (5th)</strong> Level 5</p>\n<p><strong>Heightened (6th)</strong> Level 7</p>\n<p><strong>Heightened (7th)</strong> Level 9</p>\n<p><strong>Heightened (8th)</strong> Level 11</p>\n<p><strong>Heightened (9th)</strong> Level 13</p>\n<p><strong>Heightened (10th)</strong> Level 15</p>"
+                    "value": "<p>You conjure a plant or fungus to fight for you. This works like @UUID[Compendium.pf2e.spells-srd.Item.Summon Animal], except you summon a common creature that has the plant or fungus trait and whose level is -1.</p>\n<hr />\n<p><strong>Heightened (2nd)</strong> Level 1</p>\n<p><strong>Heightened (3rd)</strong> Level 2</p>\n<p><strong>Heightened (4th)</strong> Level 3</p>\n<p><strong>Heightened (5th)</strong> Level 5</p>\n<p><strong>Heightened (6th)</strong> Level 7</p>\n<p><strong>Heightened (7th)</strong> Level 9</p>\n<p><strong>Heightened (8th)</strong> Level 11</p>\n<p><strong>Heightened (9th)</strong> Level 13</p>\n<p><strong>Heightened (10th)</strong> Level 15</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -1413,45 +1360,10 @@
             "type": "melee"
         },
         {
-            "_id": "tKTardJEDrHVNygR",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 1900000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "LLzxyBASOUnyUmZk",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Green Empathy",
-            "sort": 2000000,
+            "sort": 1900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1481,7 +1393,7 @@
             "_id": "RzjCNg6HpRoCBHoz",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Jungle Stride",
-            "sort": 2100000,
+            "sort": 2000000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1506,206 +1418,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "o66SSpmMtIXOUtGQ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 2200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 11
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "8eJqsn6XqGJ5dp30",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 2300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 9
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "O3AXB4twLFuptziU",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 2400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 10
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "NfilPMi50jz4zViL",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Medicine",
-            "sort": 2500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 11
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "mtfdh3zw3fZqZiqQ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Nature",
-            "sort": 2600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 14
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "vd1oOC0IEJI37G5G",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 2700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 11
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "2sAKMYDKTAyUVNdo",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 2800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 11
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gHbpMqWeuBZNKnZy",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 2900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 11
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Grippli Greenspeaker",
@@ -1805,6 +1517,32 @@
             "will": {
                 "saveDetail": "",
                 "value": 13
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 11
+            },
+            "athletics": {
+                "base": 9
+            },
+            "diplomacy": {
+                "base": 10
+            },
+            "medicine": {
+                "base": 11
+            },
+            "nature": {
+                "base": 14
+            },
+            "religion": {
+                "base": 11
+            },
+            "stealth": {
+                "base": 11
+            },
+            "survival": {
+                "base": 11
             }
         },
         "traits": {

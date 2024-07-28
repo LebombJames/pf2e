@@ -205,7 +205,7 @@
                 },
                 "items": {
                     "lzyme": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Battle Medicine",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Battle Medicine"
@@ -218,10 +218,12 @@
                 },
                 "rules": [],
                 "slug": "field-medic",
-                "trainedLore": "Warfare Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Warfare Lore"
+                    ],
                     "value": [
-                        "med"
+                        "medicine"
                     ]
                 },
                 "traits": {
@@ -504,7 +506,7 @@
                 },
                 "category": "class",
                 "description": {
-                    "value": "<p>Your study of the flow of mystical energy allows you to harness it into your physical strikes. You gain the <em>@UUID[Compendium.pf2e.spells-srd.Item.Ki Strike]</em> ki spell and a focus pool of 1 Focus Point.</p>"
+                    "value": "<p>Your study of the flow of mystical energy allows you to harness it into your physical strikes. You gain the @UUID[Compendium.pf2e.spells-srd.Item.Ki Strike] ki spell and a focus pool of 1 Focus Point.</p>"
                 },
                 "level": {
                     "taken": 1,
@@ -748,67 +750,67 @@
                     {
                         "choices": [
                             {
-                                "label": "PF2E.SkillAcr",
+                                "label": "PF2E.Skill.Acrobatics",
                                 "value": "acrobatics"
                             },
                             {
-                                "label": "PF2E.SkillArc",
+                                "label": "PF2E.Skill.Arcana",
                                 "value": "arcana"
                             },
                             {
-                                "label": "PF2E.SkillAth",
+                                "label": "PF2E.Skill.Athletics",
                                 "value": "athletics"
                             },
                             {
-                                "label": "PF2E.SkillCra",
+                                "label": "PF2E.Skill.Crafting",
                                 "value": "crafting"
                             },
                             {
-                                "label": "PF2E.SkillDec",
+                                "label": "PF2E.Skill.Deception",
                                 "value": "deception"
                             },
                             {
-                                "label": "PF2E.SkillDip",
+                                "label": "PF2E.Skill.Diplomacy",
                                 "value": "diplomacy"
                             },
                             {
-                                "label": "PF2E.SkillItm",
+                                "label": "PF2E.Skill.Intimidation",
                                 "value": "intimidation"
                             },
                             {
-                                "label": "PF2E.SkillMed",
+                                "label": "PF2E.Skill.Medicine",
                                 "value": "medicine"
                             },
                             {
-                                "label": "PF2E.SkillNat",
+                                "label": "PF2E.Skill.Nature",
                                 "value": "nature"
                             },
                             {
-                                "label": "PF2E.SkillOcc",
+                                "label": "PF2E.Skill.Occultism",
                                 "value": "occultism"
                             },
                             {
-                                "label": "PF2E.SkillPrf",
+                                "label": "PF2E.Skill.Performance",
                                 "value": "performance"
                             },
                             {
-                                "label": "PF2E.SkillRel",
+                                "label": "PF2E.Skill.Religion",
                                 "value": "religion"
                             },
                             {
-                                "label": "PF2E.SkillSoc",
+                                "label": "PF2E.Skill.Society",
                                 "value": "society"
                             },
                             {
-                                "label": "PF2E.SkillSte",
+                                "label": "PF2E.Skill.Stealth",
                                 "value": "stealth"
                             },
                             {
-                                "label": "PF2E.SkillSur",
+                                "label": "PF2E.Skill.Survival",
                                 "value": "survival"
                             },
                             {
-                                "label": "PF2E.SkillThi",
+                                "label": "PF2E.Skill.Thievery",
                                 "value": "thievery"
                             },
                             {
@@ -1026,7 +1028,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "focus"
                 },
@@ -1040,74 +1041,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 0,
@@ -2388,7 +2322,9 @@
                         "unholy"
                     ]
                 },
-                "skill": "ste",
+                "skill": [
+                    "stealth"
+                ],
                 "slug": "achaekek",
                 "spells": {
                     "1": "Compendium.pf2e.spells-srd.Item.Gb7SeieEvd0pL2Eh",
@@ -2897,7 +2833,7 @@
                 "hp": 10,
                 "items": {
                     "1fw9s": {
-                        "img": "systems/pf2e/icons/features/classes/mystic-strikes.webp",
+                        "img": "icons/magic/fire/flame-burning-embers-yellow.webp",
                         "level": 3,
                         "name": "Mystic Strikes",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Mystic Strikes"
@@ -2915,7 +2851,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Second Path to Perfection"
                     },
                     "4ru9g": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Level 15)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -2927,7 +2863,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Incredible Movement"
                     },
                     "ai4sq": {
-                        "img": "systems/pf2e/icons/features/classes/expert-strikes.webp",
+                        "img": "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
                         "level": 5,
                         "name": "Expert Strikes",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Expert Strikes"
@@ -2999,7 +2935,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Third Path to Perfection"
                     },
                     "zl9gg": {
-                        "img": "systems/pf2e/icons/features/classes/master-strikes.webp",
+                        "img": "icons/magic/fire/flame-burning-fist-strike.webp",
                         "level": 13,
                         "name": "Master Strikes",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Master Strikes"
@@ -3149,13 +3085,10 @@
                         "key": "Strike"
                     },
                     {
-                        "key": "DamageDice",
-                        "override": {
-                            "upgrade": true
-                        },
-                        "selector": [
-                            "{item|id}-damage"
-                        ]
+                        "itemId": "xxxxxxFISTxxxxxx",
+                        "key": "ItemAlteration",
+                        "mode": "upgrade",
+                        "property": "damage-dice-faces"
                     }
                 ],
                 "slug": "powerful-fist",
@@ -3259,7 +3192,7 @@
                     "sourceId": "Compendium.pf2e.classfeatures.Item.D2AE8RfMlZ3D1FuV"
                 }
             },
-            "img": "systems/pf2e/icons/features/classes/mystic-strikes.webp",
+            "img": "icons/magic/fire/flame-burning-embers-yellow.webp",
             "name": "Mystic Strikes",
             "sort": 900,
             "system": {
@@ -3374,7 +3307,7 @@
                     "sourceId": "Compendium.pf2e.classfeatures.Item.VgZIutWjFl8oZQFi"
                 }
             },
-            "img": "systems/pf2e/icons/features/classes/expert-strikes.webp",
+            "img": "icons/skills/melee/hand-grip-staff-yellow-brown.webp",
             "name": "Expert Strikes",
             "sort": 2500,
             "system": {
@@ -3639,52 +3572,52 @@
         },
         "saves": {},
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 2
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 1
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 1
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 0
             },
-            "med": {
+            "medicine": {
                 "rank": 2
             },
-            "nat": {
+            "nature": {
                 "rank": 1
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 1
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

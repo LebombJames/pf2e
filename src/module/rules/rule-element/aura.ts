@@ -1,7 +1,7 @@
 import { userColorForActor } from "@actor/helpers.ts";
-import { AuraAppearanceData, AuraData, AuraEffectData, SaveType } from "@actor/types.ts";
+import type { AuraAppearanceData, AuraData, AuraEffectData, SaveType } from "@actor/types.ts";
 import { SAVE_TYPES } from "@actor/values.ts";
-import { EffectTrait } from "@item/abstract-effect/data.ts";
+import type { EffectTrait } from "@item/abstract-effect/types.ts";
 import {
     DataUnionField,
     PredicateField,
@@ -34,6 +34,8 @@ import { ItemAlteration } from "./item-alteration/alteration.ts";
 class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
     constructor(source: AuraRuleElementSource, options: RuleElementOptions) {
         super(source, options);
+        if (this.invalid) return;
+
         this.slug ??= this.item.slug ?? sluggify(this.item.name);
         for (const effect of this.effects) {
             effect.removeOnExit ??= Array.isArray(effect.events) ? effect.events.includes("enter") : false;
@@ -41,7 +43,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
     }
 
     static override defineSchema(): AuraSchema {
-        const { fields } = foundry.data;
+        const fields = foundry.data.fields;
 
         const auraTraitField = new StrictStringField<EffectTrait, EffectTrait, true, false, false>({
             required: true,
@@ -285,7 +287,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
     override afterPrepareData(): void {
         if (!this.test()) return;
 
-        const radius = Math.clamped(Math.ceil(Number(this.resolveValue(this.radius)) / 5) * 5, 5, 240);
+        const radius = Math.clamp(Math.ceil(Number(this.resolveValue(this.radius)) / 5) * 5, 5, 240);
 
         if (Number.isInteger(radius) && radius > 0) {
             const level = this.resolveValue(this.level, null);
@@ -299,7 +301,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
                           ? this.item.level
                           : null,
                 effects: this.#processEffects(),
-                traits: R.uniq(this.traits.filter((t) => t !== "aura")).sort(),
+                traits: R.unique(this.traits.filter((t) => t !== "aura")).sort(),
                 appearance: this.#processAppearanceData(),
             };
 
@@ -319,7 +321,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
             const existing = this.actor.auras.get(this.slug);
             if (existing && this.mergeExisting) {
                 existing.radius = data.radius;
-                existing.traits = R.uniq([...existing.traits, ...data.traits]).sort();
+                existing.traits = R.unique([...existing.traits, ...data.traits]).sort();
                 existing.appearance = data.appearance;
                 for (const effect of data.effects) {
                     const existingIndex = existing.effects.findIndex((e) => e.uuid === effect.uuid);
@@ -353,12 +355,16 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
             return isImageOrVideoPath(maybeTextureSrc) ? maybeTextureSrc : "icons/svg/hazard.svg";
         })();
 
-        if (border) border.color = border.color === "user-color" ? userColorForActor(this.actor) : border.color;
-        highlight.color = highlight.color === "user-color" ? userColorForActor(this.actor) : highlight.color;
+        if (border) {
+            border.color =
+                border.color === "user-color" ? Color.fromString(userColorForActor(this.actor)) : border.color;
+        }
+        highlight.color =
+            highlight.color === "user-color" ? Color.fromString(userColorForActor(this.actor)) : highlight.color;
 
         return {
-            border: border && { color: Number(Color.fromString(border.color)), alpha: border.alpha },
-            highlight: { color: Number(Color.fromString(highlight.color)), alpha: highlight.alpha },
+            border: border && { color: Number(border.color), alpha: border.alpha },
+            highlight: { color: Number(highlight.color), alpha: highlight.alpha },
             texture: texture?.alpha && textureSrc ? { ...texture, src: textureSrc } : null,
         };
     }
@@ -456,7 +462,7 @@ type AuraAppearanceSchema = {
             alpha: AlphaField<true, false, true>;
         },
         { color: "user-color" | HexColorString; alpha: number },
-        { color: "user-color" | HexColorString; alpha: number },
+        { color: "user-color" | Color; alpha: number },
         false,
         true,
         true
@@ -473,7 +479,7 @@ type AuraAppearanceSchema = {
             alpha: AlphaField<false, false, true>;
         },
         { color: "user-color" | HexColorString; alpha: number },
-        { color: "user-color" | HexColorString; alpha: number },
+        { color: "user-color" | Color; alpha: number },
         false,
         false,
         true

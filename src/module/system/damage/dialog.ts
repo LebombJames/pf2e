@@ -6,15 +6,15 @@ import {
     htmlQuery,
     htmlQueryAll,
     setHasElement,
-    signedInteger,
     sluggify,
     sortStringRecord,
     tupleHasValue,
 } from "@util";
 import * as R from "remeda";
 import { createDamageFormula } from "./formula.ts";
+import { getDamageDiceOverrideLabel, getDamageDiceValueLabel } from "./helpers.ts";
 import { DamageRoll } from "./roll.ts";
-import { DamageCategoryUnique, DamageDieSize, DamageFormulaData, DamageRollContext, DamageType } from "./types.ts";
+import { DamageCategoryUnique, DamageDamageContext, DamageDieSize, DamageFormulaData, DamageType } from "./types.ts";
 import { DAMAGE_CATEGORIES_UNIQUE, DAMAGE_TYPE_ICONS } from "./values.ts";
 
 /**
@@ -23,7 +23,7 @@ import { DAMAGE_CATEGORIES_UNIQUE, DAMAGE_TYPE_ICONS } from "./values.ts";
  */
 class DamageModifierDialog extends Application {
     formulaData: DamageFormulaData;
-    context: DamageRollContext;
+    context: DamageDamageContext;
 
     /** The base damage type of this damage roll */
     baseDamageType: DamageType;
@@ -34,8 +34,11 @@ class DamageModifierDialog extends Application {
     /** Was the roll button pressed? */
     isRolled = false;
 
-    /** A set of originally enabled modifiers to circumvent hideIfDisabled for manual disables */
-    #originallyEnabled: Set<ModifierPF2e>;
+    /** A set of originally enabled modifiers and dice to circumvent hideIfDisabled for manual disables */
+    #originallyEnabled: {
+        modifiers: Set<ModifierPF2e>;
+        dice: Set<DamageDicePF2e>;
+    };
 
     constructor(params: DamageDialogParams) {
         super();
@@ -45,7 +48,10 @@ class DamageModifierDialog extends Application {
         this.baseDamageType = params.formulaData.base.at(0)?.damageType ?? "untyped";
         this.degree = DEGREE_OF_SUCCESS_STRINGS.indexOf(this.context.outcome ?? "success") as DegreeOfSuccessIndex;
 
-        this.#originallyEnabled = new Set(this.formulaData.modifiers.filter((m) => m.enabled));
+        this.#originallyEnabled = {
+            modifiers: new Set(this.formulaData.modifiers.filter((m) => m.enabled)),
+            dice: new Set(this.formulaData.dice.filter((d) => d.enabled)),
+        };
     }
 
     static override get defaultOptions(): ApplicationOptions {
@@ -76,7 +82,7 @@ class DamageModifierDialog extends Application {
         const icons = (() => {
             switch (object.category) {
                 case "splash":
-                    return R.compact([fontAwesomeIcon("fa-burst"), damageTypeIcon]);
+                    return [fontAwesomeIcon("fa-burst"), damageTypeIcon].filter(R.isTruthy);
                 case "persistent":
                     if (object.damageType !== "bleed") {
                         return [damageTypeIcon, fontAwesomeIcon("fa-hourglass", { style: "duotone" })];
@@ -123,7 +129,6 @@ class DamageModifierDialog extends Application {
             base: this.formulaData.base,
             modifiers: [],
             dice: [],
-            ignoredResistances: [],
         });
         const baseRoll = new DamageRoll(baseResult.formula);
         const baseFormulaTemplate = (await Promise.all(baseRoll.instances.map((i) => i.render()))).join(" + ");
@@ -146,7 +151,7 @@ class DamageModifierDialog extends Application {
                 category: m.category,
                 type: m.type,
                 modifier: m.modifier,
-                hideIfDisabled: !this.#originallyEnabled.has(m) && m.hideIfDisabled,
+                hideIfDisabled: !this.#originallyEnabled.modifiers.has(m) && m.hideIfDisabled,
                 damageType: m.damageType,
                 typeLabel: this.#getTypeLabel(m.damageType, m.damageCategory),
                 enabled: m.enabled,
@@ -160,12 +165,8 @@ class DamageModifierDialog extends Application {
                 category: d.category,
                 damageType: d.damageType,
                 typeLabel: this.#getTypeLabel(d.damageType, d.category),
-                diceLabel:
-                    d.diceNumber && d.dieSize
-                        ? `${d.diceNumber}${d.dieSize}`
-                        : d.diceNumber
-                          ? game.i18n.format("PF2E.Roll.Dialog.Damage.Dice", { dice: signedInteger(d.diceNumber) })
-                          : "",
+                hideIfDisabled: !this.#originallyEnabled.dice.has(d) && d.hideIfDisabled,
+                diceLabel: getDamageDiceValueLabel(d),
                 enabled: d.enabled,
                 ignored: d.ignored,
                 critical: d.critical,
@@ -180,26 +181,16 @@ class DamageModifierDialog extends Application {
                     label: d.label,
                     category: d.category,
                     damageType: d.override.damageType ?? d.damageType,
+                    hideIfDisabled: !this.#originallyEnabled.dice.has(d) && d.hideIfDisabled,
                     typeLabel: this.#getTypeLabel(d.override.damageType ?? d.damageType, d.category),
-                    diceLabel: R.compact([
-                        d.override.upgrade ? game.i18n.localize("PF2E.Roll.Dialog.Damage.DieSizeUpgrade") : null,
-                        d.override.diceNumber || d.override.dieSize
-                            ? game.i18n.format("PF2E.Roll.Dialog.Damage.Override", {
-                                  value:
-                                      d.override.diceNumber && d.override.dieSize
-                                          ? `${d.override.diceNumber}${d.override.dieSize}`
-                                          : d.override.diceNumber
-                                            ? game.i18n.format("PF2E.Roll.Dialog.Damage.Dice", {
-                                                  dice: d.override.diceNumber,
-                                              })
-                                            : d.override.dieSize ?? "",
-                              })
-                            : null,
-                    ]).join(" + "),
+                    diceLabel: getDamageDiceOverrideLabel(d),
                     enabled: d.enabled,
                     ignored: d.ignored,
                     critical: d.critical,
-                    icon: this.#getModifierIcon(d),
+                    icon: this.#getModifierIcon({
+                        damageType: d.override.damageType ?? d.damageType,
+                        category: d.category,
+                    }),
                 })),
             ),
             isCritical: this.isCritical,
@@ -208,7 +199,7 @@ class DamageModifierDialog extends Application {
                 R.pick(CONFIG.PF2E.damageCategories, Array.from(DAMAGE_CATEGORIES_UNIQUE)),
             ),
             rollModes: CONFIG.Dice.rollModes,
-            rollMode: this.context?.rollMode,
+            rollMode: this.context?.rollMode ?? game.settings.get("core", "rollMode"),
             showDamageDialogs: game.user.settings.showDamageDialogs,
             formula: formulaTemplate,
         };
@@ -376,7 +367,7 @@ class DamageModifierDialog extends Application {
 
 interface DamageDialogParams {
     formulaData: DamageFormulaData;
-    context: DamageRollContext;
+    context: DamageDamageContext;
 }
 
 interface BaseData {

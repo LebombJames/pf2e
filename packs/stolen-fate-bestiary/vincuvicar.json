@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -30,71 +29,7 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 40,
@@ -125,7 +60,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You perform a ritual to imprison a creature in one of several forms. While some versions of this ritual offer all of the forms, others include only a single form or only a few of them. Whichever form you use, the effect can't be counteracted, though it can be ended by <em>@UUID[Compendium.pf2e.spells-srd.Item.Freedom]</em>. Some forms of <em>imprisonment</em> can be ended by other means. Because the ritual requires the target to remain within 10 feet at all times, it typically requires you to subdue the target first.</p>\n<ul>\n<li><strong>Chains</strong> You bind the creature with chains, rendering it unable to use any actions other than to speak. Other creatures that attempt to approach, harm the chains, or free the trapped creature in any way must succeed at a Will save or be unable to do so forever. The chains have Hardness equal to 5 × the <em>imprisonment</em> ritual's spell rank, and double that many Hit Points. Destroying the chains frees the target.</li>\n<li><strong>Object (9th level or higher)</strong> You either shrink the creature to an inch in height or transform it into an insubstantial form whose body trails away into wisps below its head. Either way, you trap it inside a gem, jar, bottle, lamp, or similar container. The creature ceases aging and doesn't require food or drink. The creature is still aware of its surroundings and can move within the container and speak, but it can't use any other actions. Destroying the container kills the target rather than freeing it. This form of <em>imprisonment</em> is also transmutation magic.</li>\n<li><strong>Oubliette (10th level only)</strong> You entomb the target in a state of suspended animation deep beneath the surface of the ground and out of tune with reality so that it can't be reached by any means. You also prevent divinations from revealing the location where the <em>imprisonment</em> occurred. Powerful magic such as <em>@UUID[Compendium.pf2e.spells-srd.Item.Wish]</em> can reveal the location of the imprisonment, but even such magic can't free the target from the oubliette; only a 10th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Freedom]</em> ritual can do so.</li>\n<li><strong>Prison</strong> You render the creature completely unable to leave a particular confined area or structure of your choice, such as a jail cell or sealed cave. The magic also prevents the creature from damaging its prison, either directly or indirectly, to break free. If the creature's prison is entirely destroyed by some external force, the creature is freed, though for some larger or natural prisons, this might be unfeasible.</li>\n<li><strong>Slumber (sleep effect)</strong> You put the creature into an eternal sleep. It ceases aging and doesn't require food or drink. A single sincere physical display of affection from a creature who genuinely loves the target-whether romantically, filially, or otherwise-frees it from the slumber. This form of <em>imprisonment</em> is also enchantment magic.</li>\n<li><strong>Temporal Stasis</strong> You send the creature into a state of suspended animation outside the flow of time. The creature doesn't grow older and can't be affected by any effect from within the normal timestream. While casting this ritual, you can optionally name any amount of time for the stasis; after this duration elapses, the stasis ends. Unlike other forms of <em>imprisonment</em>, temporal stasis can be counteracted by a <em>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</em> or <em>@UUID[Compendium.pf2e.spells-srd.Item.Haste]</em> spell. This form of <em>imprisonment</em> is also transmutation magic.</li>\n</ul>\n<hr />\n<p><strong>Critical Success</strong> You imprison the target. You can either use a form of <em>imprisonment</em> that usually requires 1 additional spell rank, or give any creatures trying to use a <em>freedom</em> ritual to rescue the target a -2 circumstance penalty to checks associated with that ritual.</p>\n<p><strong>Success</strong> You imprison the target.</p>\n<p><strong>Failure</strong> You fail to imprison the target.</p>\n<p><strong>Critical Failure</strong> You imprison yourself and the secondary casters in the same way you intended to imprison the target.</p>\n<hr />\n<p><strong>Heightened (9th)</strong> You can use the object form of <em>imprisonment</em> in addition to the other options, and you can target a creature of up to 18th level. The base cost increases to 2,000 gp.</p>\n<p><strong>Heightened (10th)</strong> You can use the object and oubliette forms of <em>imprisonment</em> in addition to the other options, and you can target a creature of up to 20th level. The base cost increases to 6,000 gp.</p>"
+                    "value": "<p>You perform a ritual to imprison a creature in one of several forms. While some versions of this ritual offer all of the forms, others include only a single form or only a few of them. Whichever form you use, the effect can't be counteracted, though it can be ended by @UUID[Compendium.pf2e.spells-srd.Item.Freedom]. Some forms of <em>imprisonment</em> can be ended by other means. Because the ritual requires the target to remain within 10 feet at all times, it typically requires you to subdue the target first.</p>\n<ul>\n<li><strong>Chains</strong> You bind the creature with chains, rendering it unable to use any actions other than to speak. Other creatures that attempt to approach, harm the chains, or free the trapped creature in any way must succeed at a Will save or be unable to do so forever. The chains have Hardness equal to 5 × the <em>imprisonment</em> ritual's spell rank, and double that many Hit Points. Destroying the chains frees the target.</li>\n<li><strong>Object (9th level or higher)</strong> You either shrink the creature to an inch in height or transform it into an insubstantial form whose body trails away into wisps below its head. Either way, you trap it inside a gem, jar, bottle, lamp, or similar container. The creature ceases aging and doesn't require food or drink. The creature is still aware of its surroundings and can move within the container and speak, but it can't use any other actions. Destroying the container kills the target rather than freeing it. This form of <em>imprisonment</em> is also transmutation magic.</li>\n<li><strong>Oubliette (10th level only)</strong> You entomb the target in a state of suspended animation deep beneath the surface of the ground and out of tune with reality so that it can't be reached by any means. You also prevent divinations from revealing the location where the <em>imprisonment</em> occurred. Powerful magic such as @UUID[Compendium.pf2e.spells-srd.Item.Wish] can reveal the location of the imprisonment, but even such magic can't free the target from the oubliette; only a 10th-rank @UUID[Compendium.pf2e.spells-srd.Item.Freedom] ritual can do so.</li>\n<li><strong>Prison</strong> You render the creature completely unable to leave a particular confined area or structure of your choice, such as a jail cell or sealed cave. The magic also prevents the creature from damaging its prison, either directly or indirectly, to break free. If the creature's prison is entirely destroyed by some external force, the creature is freed, though for some larger or natural prisons, this might be unfeasible.</li>\n<li><strong>Slumber (sleep effect)</strong> You put the creature into an eternal sleep. It ceases aging and doesn't require food or drink. A single sincere physical display of affection from a creature who genuinely loves the target-whether romantically, filially, or otherwise-frees it from the slumber. This form of <em>imprisonment</em> is also enchantment magic.</li>\n<li><strong>Temporal Stasis</strong> You send the creature into a state of suspended animation outside the flow of time. The creature doesn't grow older and can't be affected by any effect from within the normal timestream. While casting this ritual, you can optionally name any amount of time for the stasis; after this duration elapses, the stasis ends. Unlike other forms of <em>imprisonment</em>, temporal stasis can be counteracted by a @UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic] or @UUID[Compendium.pf2e.spells-srd.Item.Haste] spell. This form of <em>imprisonment</em> is also transmutation magic.</li>\n</ul>\n<hr />\n<p><strong>Critical Success</strong> You imprison the target. You can either use a form of <em>imprisonment</em> that usually requires 1 additional spell rank, or give any creatures trying to use a <em>freedom</em> ritual to rescue the target a -2 circumstance penalty to checks associated with that ritual.</p>\n<p><strong>Success</strong> You imprison the target.</p>\n<p><strong>Failure</strong> You fail to imprison the target.</p>\n<p><strong>Critical Failure</strong> You imprison yourself and the secondary casters in the same way you intended to imprison the target.</p>\n<hr />\n<p><strong>Heightened (9th)</strong> You can use the object form of <em>imprisonment</em> in addition to the other options, and you can target a creature of up to 18th level. The base cost increases to 2,000 gp.</p>\n<p><strong>Heightened (10th)</strong> You can use the object and oubliette forms of <em>imprisonment</em> in addition to the other options, and you can target a creature of up to 20th level. The base cost increases to 6,000 gp.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -388,7 +323,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You cast your thoughts through a creature's mind, sifting for information. You access the target's memories and knowledge unless it fends you off with a Will save.</p>\n<hr /><strong>Success</strong> The target is unaffected.\n<p><strong>Failure</strong> Each round of the spell's duration, you can Sustain the Spell to ask a different question and attempt to uncover the answer. For each question, the target can attempt a Deception check against your spell DC; if the target succeeds, you don't learn the answer, and on a critical success, the target gives you a false answer that you believe is truthful Once you've asked the target a given question, asking it again, even with a separate casting of mind probe, produces the same result.</p>\n<p><strong>Critical Failure</strong> As failure, and the target takes a -4 circumstance penalty to Deception checks against your questions.</p>"
+                    "value": "<p>You cast your thoughts through a creature's mind, sifting for information. You access the target's memories and knowledge unless it fends you off with a Will save.</p>\n<hr /><p><strong>Success</strong> The target is unaffected.</p>\n<p><strong>Failure</strong> Each round of the spell's duration, you can Sustain the Spell to ask a different question and attempt to uncover the answer. For each question, the target can attempt a Deception check against your spell DC; if the target succeeds, you don't learn the answer, and on a critical success, the target gives you a false answer that you believe is truthful Once you've asked the target a given question, asking it again, even with a separate casting of mind probe, produces the same result.</p>\n<p><strong>Critical Failure</strong> As failure, and the target takes a -4 circumstance penalty to Deception checks against your questions.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -748,7 +683,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You shout a command that's hard to ignore. You can command the target to approach you, run away (as if it had the @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] condition), release what it's holding, drop @UUID[Compendium.pf2e.conditionitems.Item.Prone], or stand in place. It can't Delay or take any reactions until it has obeyed your command. The effects depend on the target's Will save.</p>\n<hr /><strong>Success</strong> The creature is unaffected.\n<p><strong>Failure</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>Critical Failure</strong> The target must use all its actions on its next turn to obey your command.</p>\n<hr /><strong>Heightened (5th)</strong> You can target up to 10 creatures."
+                    "value": "<p>You shout a command that's hard to ignore. You can command the target to approach you, run away (as if it had the @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] condition), release what it's holding, drop @UUID[Compendium.pf2e.conditionitems.Item.Prone], or stand in place. It can't Delay or take any reactions until it has obeyed your command. The effects depend on the target's Will save.</p>\n<hr /><p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>Critical Failure</strong> The target must use all its actions on its next turn to obey your command.</p>\n<hr /><p><strong>Heightened (5th)</strong> You can target up to 10 creatures.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -1069,7 +1004,7 @@
                 "checkPenalty": -3,
                 "containerId": null,
                 "description": {
-                    "value": "<p>Plate mail consists of interlocking plates that encase nearly the entire body in a carapace of steel. It is costly and heavy, and the wearer often requires help to don it correctly, but it provides some of the best defense armor can supply. A suit of this armor comes with an undercoat of @UUID[Compendium.pf2e.equipment-srd.Item.Padded Armor]{padded armor} and a pair of @UUID[Compendium.pf2e.equipment-srd.Item.Gauntlet]{gauntlets}.</p>"
+                    "value": "<p>Plate mail consists of interlocking plates that encase nearly the entire body in a carapace of steel. It is costly and heavy, and the wearer often requires help to don it correctly, but it provides some of the best defense armor can supply. A suit of this armor comes with an undercoat of @UUID[Compendium.pf2e.equipment-srd.Item.Padded Armor] and a pair of @UUID[Compendium.pf2e.equipment-srd.Item.Gauntlet]{gauntlets}.</p>"
                 },
                 "dexCap": 0,
                 "equipped": {
@@ -1329,7 +1264,7 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Telepathy",
+            "name": "Telepathy 100 feet",
             "sort": 2000000,
             "system": {
                 "actionType": {
@@ -1389,41 +1324,6 @@
             "type": "action"
         },
         {
-            "_id": "zLwt2rRd3nF9PRyH",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.2YRDYVnC1eljaXKK"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "At-Will Spells",
-            "sort": 2200000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "at-will-spells",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "WQVovMAYKV6U7ntG",
             "flags": {
                 "core": {
@@ -1432,7 +1332,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Constant Spells",
-            "sort": 2300000,
+            "sort": 2200000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1467,7 +1367,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "+1 Status to All Saves vs. Magic",
-            "sort": 2400000,
+            "sort": 2300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1520,7 +1420,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Regeneration 25 (Deactivated by Holy or Silver)",
-            "sort": 2500000,
+            "sort": 2400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1561,7 +1461,7 @@
             "_id": "K0u6yguFjAB5eiOt",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Alone and Forgotten",
-            "sort": 2600000,
+            "sort": 2500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1611,7 +1511,7 @@
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Attack of Opportunity",
-            "sort": 2700000,
+            "sort": 2600000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -1641,7 +1541,7 @@
             "_id": "D2yiMAqk1FllVEl4",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Focus Gaze",
-            "sort": 2800000,
+            "sort": 2700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1676,7 +1576,7 @@
             "_id": "8X3IiI3NkzIRWfIB",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Institutionalized",
-            "sort": 2900000,
+            "sort": 2800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1724,7 +1624,7 @@
             "_id": "cjU5NlZ1DXm5Haam",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Shackle",
-            "sort": 3000000,
+            "sort": 2900000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -1750,235 +1650,10 @@
             "type": "action"
         },
         {
-            "_id": "nCpRL7vYnr1giBQw",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 3100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "hNyoiVAFp3bzAsxu",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 3200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "6PmAuKwITx3KJmVe",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Crafting",
-            "sort": 3300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "XC4WwfJY2kuBu4vw",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 3400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 32
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "IU0CMV7xD3DzmuVa",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 3500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 34
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "pGppKufyiPmyXV0h",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Medicine",
-            "sort": 3600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 32
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "qT4lFc8Bfu9ZmWCV",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 3700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 30
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "zlBjPuqmDNDLokFy",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 3800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gev8wTTp9C4sVDAD",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 3900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 30
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
             "_id": "eqYSQaPrEZNAUwi1",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Torture Lore",
-            "sort": 4000000,
+            "sort": 3000000,
             "system": {
                 "description": {
                     "value": ""
@@ -2114,6 +1789,35 @@
             "will": {
                 "saveDetail": "",
                 "value": 30
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 31
+            },
+            "athletics": {
+                "base": 35
+            },
+            "crafting": {
+                "base": 29
+            },
+            "deception": {
+                "base": 32
+            },
+            "intimidation": {
+                "base": 34
+            },
+            "medicine": {
+                "base": 32
+            },
+            "religion": {
+                "base": 30
+            },
+            "stealth": {
+                "base": 31
+            },
+            "survival": {
+                "base": 30
             }
         },
         "traits": {

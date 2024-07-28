@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "innate"
@@ -28,74 +27,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": true
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 21,
@@ -953,68 +885,15 @@
             "type": "weapon"
         },
         {
-            "_id": "QNACTpWxBNKzhVKH",
-            "img": "systems/pf2e/icons/default-icons/equipment.svg",
-            "name": "Bag of Holding (Type 1)",
-            "sort": 1100000,
-            "system": {
-                "baseItem": null,
-                "bulk": {
-                    "value": 0
-                },
-                "containerId": null,
-                "description": {
-                    "value": "<p>@UUID[Compendium.pf2e.equipment-srd.Item.Spacious Pouch (Type I)]{Bag of Holding (Type I)}</p>\n<hr />\n<p><em>Note: Due to a system limitation actual container items will not display on NPCs.</em></p>"
-                },
-                "equipped": {
-                    "carryType": "worn",
-                    "handsHeld": 0,
-                    "invested": null
-                },
-                "hardness": 0,
-                "hp": {
-                    "max": 0,
-                    "value": 0
-                },
-                "level": {
-                    "value": 0
-                },
-                "material": {
-                    "grade": null,
-                    "type": null
-                },
-                "price": {
-                    "value": {}
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "quantity": 1,
-                "rules": [],
-                "size": "med",
-                "slug": null,
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                },
-                "usage": {
-                    "value": "held-in-one-hand"
-                }
-            },
-            "type": "equipment"
-        },
-        {
             "_id": "GyD4fJl60HFuJ9cB",
             "flags": {
                 "core": {
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.OIirLySQDLZgT15S"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/alchemical-items/alchemical-poisons/arsenic.webp",
+            "img": "icons/commodities/materials/bowl-powder-teal.webp",
             "name": "Arsenic",
-            "sort": 1200000,
+            "sort": 1100000,
             "system": {
                 "baseItem": null,
                 "bulk": {
@@ -1083,9 +962,9 @@
                     "sourceId": "Compendium.pf2e.equipment-srd.Item.bikFUFRLwfdvX2x2"
                 }
             },
-            "img": "systems/pf2e/icons/equipment/consumables/potions/invisibility-potion.webp",
+            "img": "icons/consumables/potions/bottle-round-ring-teal.webp",
             "name": "Invisibility Potion",
-            "sort": 1300000,
+            "sort": 1200000,
             "system": {
                 "baseItem": null,
                 "bulk": {
@@ -1155,7 +1034,7 @@
             },
             "img": "systems/pf2e/icons/equipment/treasure/currency/gold-pieces.webp",
             "name": "Gold Pieces",
-            "sort": 1400000,
+            "sort": 1300000,
             "system": {
                 "baseItem": null,
                 "bulk": {
@@ -1201,6 +1080,73 @@
                 }
             },
             "type": "treasure"
+        },
+        {
+            "_id": "NQG2nJGEWzKjZqFs",
+            "flags": {
+                "core": {
+                    "sourceId": "Compendium.pf2e.equipment-srd.Item.jaEEvuQ32GjAa8jy"
+                }
+            },
+            "img": "systems/pf2e/icons/equipment/held-items/bag-of-holding.webp",
+            "name": "Bag of Holding (Type I)",
+            "sort": 1400000,
+            "system": {
+                "baseItem": null,
+                "bulk": {
+                    "capacity": 25,
+                    "heldOrStowed": 1,
+                    "ignored": 25,
+                    "value": 1
+                },
+                "collapsed": false,
+                "containerId": null,
+                "description": {
+                    "value": "<p>Though it appears to be a cloth sack decorated with panels of richly colored silk or stylish embroidery, a <em>bag of holding</em> opens into an extradimensional space larger than its outside dimensions. The Bulk held inside the bag doesn't change the Bulk of the <em>bag of holding</em> itself. The amount of Bulk the bag's extradimensional space can hold depends on its type.</p>\n<p>You can Interact with the <em>bag of holding</em> to stow items in it or remove them just like a mundane sack. Though the bag can hold a great amount of material, an object still needs to be able to fit through the opening of the sack to be stored inside.</p>\n<p>If the bag is overloaded or broken, it ruptures and is ruined, causing the items inside to be lost forever. If it's turned inside out, the items inside spill out unharmed, but the bag must be put right before it can be used again. A living creature placed inside the bag has enough air for 10 minutes before it begins to suffocate, and it can attempt to Escape against a DC of 13. An item inside the bag provides no benefits unless it's retrieved first. An item in the bag can't be detected by magic that detects only things on the same plane.</p>\n<hr />\n<p><strong>Capacity</strong> 25 Bulk</p>"
+                },
+                "equipped": {
+                    "carryType": "worn",
+                    "invested": null
+                },
+                "hardness": 0,
+                "hp": {
+                    "max": 0,
+                    "value": 0
+                },
+                "level": {
+                    "value": 4
+                },
+                "material": {
+                    "grade": null,
+                    "type": null
+                },
+                "price": {
+                    "value": {
+                        "gp": 75
+                    }
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
+                "quantity": 1,
+                "rules": [],
+                "size": "med",
+                "slug": "spacious-pouch-type-i",
+                "stowing": true,
+                "traits": {
+                    "rarity": "common",
+                    "value": [
+                        "extradimensional",
+                        "magical"
+                    ]
+                },
+                "usage": {
+                    "value": "held-in-two-hands"
+                }
+            },
+            "type": "backpack"
         },
         {
             "_id": "0oBoPpJaPEder5Uj",
@@ -1296,41 +1242,6 @@
             "type": "melee"
         },
         {
-            "_id": "ovW00fb5RQ0fss2D",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 1700000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "bnQpqP6hIv1ISjen",
             "flags": {
                 "core": {
@@ -1339,7 +1250,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Void Healing",
-            "sort": 1800000,
+            "sort": 1700000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1376,7 +1287,7 @@
             "_id": "gDkkvEZZSC6HPnDm",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Command Zombie",
-            "sort": 1900000,
+            "sort": 1800000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1410,7 +1321,7 @@
             "_id": "ekMIs1v4IBJG2qEg",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Create Zombies",
-            "sort": 2000000,
+            "sort": 1900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1444,7 +1355,7 @@
             "_id": "CItCjF3JMpPDPOGb",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Shamble Forth",
-            "sort": 2100000,
+            "sort": 2000000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1482,7 +1393,7 @@
             "_id": "zboaidBufdR4dpax",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Whispering Scythe",
-            "sort": 2200000,
+            "sort": 2100000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -1528,91 +1439,16 @@
             "type": "action"
         },
         {
-            "_id": "FFwCmfef4Qvhdd1p",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 2300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 10
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
             "_id": "dIHvHkEhLKpQPvHh",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Mercantile Lore",
-            "sort": 2400000,
+            "sort": 2200000,
             "system": {
                 "description": {
                     "value": ""
                 },
                 "mod": {
                     "value": 9
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "NDy3nGtVz4D6Hzds",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 2500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 13
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "bHLuNNxrjgUmDFky",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 2600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 10
                 },
                 "proficient": {
                     "value": 0
@@ -1741,6 +1577,17 @@
             "will": {
                 "saveDetail": "",
                 "value": 13
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 10
+            },
+            "religion": {
+                "base": 13
+            },
+            "stealth": {
+                "base": 10
             }
         },
         "traits": {

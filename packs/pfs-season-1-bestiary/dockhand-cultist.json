@@ -334,35 +334,18 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The dockhand Interacts to either draw a bottle of alcohol or pick up a nearby unattended bottle of alcohol and drink the whole thing. For 1 minute, the dockhand gains a +2 item bonus to melee damage rolls and saving throws against fear, but they become @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1}.</p>"
+                    "value": "<p>The dockhand Interacts to either draw a bottle of @UUID[Compendium.pf2e.equipment-srd.Item.Alcohol] or pick up a nearby unattended bottle of alcohol and drink the whole thing.</p>\n<p>For 1 minute, the dockhand gains a +2 item bonus to melee damage rolls and saving throws against fear, but they become @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [
-                    {
-                        "domain": "damage",
-                        "key": "RollOption",
-                        "label": "Taken a swig of alcohol in past minute",
-                        "option": "swig",
-                        "toggleable": true
-                    },
-                    {
-                        "key": "FlatModifier",
-                        "label": "Taken a swig of alcohol in past minute",
-                        "predicate": [
-                            "swig",
-                            {
-                                "not": "range"
-                            }
-                        ],
-                        "selector": "strike-damage",
-                        "type": "item",
-                        "value": 2
-                    }
-                ],
+                "rules": [],
+                "selfEffect": {
+                    "name": "Effect: Swig",
+                    "uuid": "Compendium.pf2e.bestiary-effects.Item.Effect: Swig"
+                },
                 "slug": null,
                 "traits": {
                     "rarity": "common",
@@ -374,91 +357,16 @@
             "type": "action"
         },
         {
-            "_id": "eiP2pHleWwbKXGyh",
+            "_id": "VV23M5FDg16qYKvc",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
+            "name": "Groetus Lore",
             "sort": 800000,
             "system": {
                 "description": {
                     "value": ""
                 },
                 "mod": {
-                    "value": 3
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "o4qZmqlyjk5PEqLH",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 5
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "VV23M5FDg16qYKvc",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Groetus Lore",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
                     "value": 4
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "rHXw7f7fDMmwCKnG",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 3
                 },
                 "proficient": {
                     "value": 0
@@ -555,6 +463,17 @@
             "will": {
                 "saveDetail": "",
                 "value": 3
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 3
+            },
+            "athletics": {
+                "base": 5
+            },
+            "intimidation": {
+                "base": 3
             }
         },
         "traits": {

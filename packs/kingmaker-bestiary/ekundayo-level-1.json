@@ -38,7 +38,7 @@
                 },
                 "items": {
                     "td7d8": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Specialty Crafting",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Specialty Crafting"
@@ -51,10 +51,12 @@
                 },
                 "rules": [],
                 "slug": "artisan",
-                "trainedLore": "Guild Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Guild Lore"
+                    ],
                     "value": [
-                        "cra"
+                        "crafting"
                     ]
                 },
                 "traits": {
@@ -180,7 +182,7 @@
                                     "value": 1
                                 }
                             ],
-                            "field": "actor|system.skills.cra.rank"
+                            "field": "actor|system.skills.crafting.rank"
                         }
                     }
                 ],
@@ -1853,7 +1855,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Evasion"
                     },
                     "eha1f": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Level 15)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -1871,7 +1873,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Ranger Weapon Expertise"
                     },
                     "lzbwg": {
-                        "img": "systems/pf2e/icons/features/classes/vigilant-senses.webp",
+                        "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
                         "level": 7,
                         "name": "Vigilant Senses",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Mastery"
@@ -1952,8 +1954,8 @@
                 "trainedSkills": {
                     "additional": 4,
                     "value": [
-                        "nat",
-                        "sur"
+                        "nature",
+                        "survival"
                     ]
                 },
                 "traits": {
@@ -2464,52 +2466,52 @@
         },
         "saves": {},
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 1
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 0
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 0
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

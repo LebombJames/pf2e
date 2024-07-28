@@ -225,11 +225,11 @@
                         "adjustName": false,
                         "choices": [
                             {
-                                "label": "PF2E.SkillAcr",
+                                "label": "PF2E.Skill.Acrobatics",
                                 "value": "acrobatics"
                             },
                             {
-                                "label": "PF2E.SkillAth",
+                                "label": "PF2E.Skill.Athletics",
                                 "value": "athletics"
                             }
                         ],
@@ -263,9 +263,11 @@
                     }
                 ],
                 "slug": "martial-disciple",
-                "trainedLore": "Warfare Lore",
                 "trainedSkills": {
                     "custom": "",
+                    "lore": [
+                        "Warfare Lore"
+                    ],
                     "value": []
                 },
                 "traits": {
@@ -368,13 +370,13 @@
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.ste.rank",
+                        "path": "system.skills.stealth.rank",
                         "value": 1
                     },
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.thi.rank",
+                        "path": "system.skills.thievery.rank",
                         "value": 1
                     }
                 ],
@@ -403,7 +405,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "spontaneous"
                 },
@@ -417,72 +418,10 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
                     "slot1": {
                         "max": 3,
-                        "prepared": [],
                         "value": 3
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
                     }
                 },
                 "slug": null,
@@ -747,7 +686,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> <strong>Slowly</strong> lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
+                    "value": "<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> Slowly lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -1136,7 +1075,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "focus"
                 },
@@ -1150,74 +1088,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 0,
@@ -2795,7 +2666,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Weapon Specialization"
                     },
                     "73fw3": {
-                        "img": "systems/pf2e/icons/features/classes/vigilant-senses.webp",
+                        "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
                         "level": 11,
                         "name": "Vigilant Senses",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Mastery"
@@ -2843,7 +2714,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Muses"
                     },
                     "q84eq": {
-                        "img": "systems/pf2e/icons/features/classes/light-armor-expertise.webp",
+                        "img": "icons/equipment/back/mantle-collared-green.webp",
                         "level": 13,
                         "name": "Light Armor Expertise",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Light Armor Expertise"
@@ -2965,8 +2836,8 @@
                 "trainedSkills": {
                     "additional": 4,
                     "value": [
-                        "occ",
-                        "prf"
+                        "occultism",
+                        "performance"
                     ]
                 },
                 "traits": {
@@ -3082,7 +2953,7 @@
                 },
                 "category": "classfeature",
                 "description": {
-                    "value": "<h2>Composition Spells</h2>\n<p>You can infuse your performances with magic to create unique effects called compositions. Compositions are a special type of spell that often require you to use the Performance skill when casting them. Composition spells are a type of focus spell. It costs 1 Focus Point to cast a focus spell, and you start with a focus pool of 1 Focus Point. You refill your focus pool during your daily preparations, and you can regain 1 Focus Point by spending 10 minutes using the Refocus activity to perform, write a new composition, or otherwise engage your muse.</p>\n<p>Focus spells are automatically heightened to half your level rounded up, much like cantrips. Focus spells don't require spell slots, and you can't cast them using spell slots. Taking feats can give you more focus spells and increase the size of your focus pool, though your focus pool can never hold more than 3 Focus Points.</p>\n<p>You learn the <em>@UUID[Compendium.pf2e.spells-srd.Item.Counter Performance]</em> composition spell, protecting against auditory and visual effects.</p>\n<h3>Composition Cantrips</h3>\n<p>Composition cantrips are special composition spells that don't cost Focus Points, so you can use them as often as you like. Composition cantrips are in addition to the cantrips you choose from the occult list. Generally, only feats can give you more composition cantrips. Unlike other cantrips, you can't swap out composition cantrips gained from bard feats at a later level, unless you swap out the specific feat via retraining. You learn the <em>@UUID[Compendium.pf2e.spells-srd.Item.Courageous Anthem]</em> composition cantrip, which boosts your allies' attacks, damage, and defense against fear.</p>"
+                    "value": "<h2>Composition Spells</h2>\n<p>You can infuse your performances with magic to create unique effects called compositions. Compositions are a special type of spell that often require you to use the Performance skill when casting them. Composition spells are a type of focus spell. It costs 1 Focus Point to cast a focus spell, and you start with a focus pool of 1 Focus Point. You refill your focus pool during your daily preparations, and you can regain 1 Focus Point by spending 10 minutes using the Refocus activity to perform, write a new composition, or otherwise engage your muse.</p>\n<p>Focus spells are automatically heightened to half your level rounded up, much like cantrips. Focus spells don't require spell slots, and you can't cast them using spell slots. Taking feats can give you more focus spells and increase the size of your focus pool, though your focus pool can never hold more than 3 Focus Points.</p>\n<p>You learn the @UUID[Compendium.pf2e.spells-srd.Item.Counter Performance] composition spell, protecting against auditory and visual effects.</p>\n<h3>Composition Cantrips</h3>\n<p>Composition cantrips are special composition spells that don't cost Focus Points, so you can use them as often as you like. Composition cantrips are in addition to the cantrips you choose from the occult list. Generally, only feats can give you more composition cantrips. Unlike other cantrips, you can't swap out composition cantrips gained from bard feats at a later level, unless you swap out the specific feat via retraining. You learn the @UUID[Compendium.pf2e.spells-srd.Item.Courageous Anthem] composition cantrip, which boosts your allies' attacks, damage, and defense against fear.</p>"
                 },
                 "level": {
                     "value": 1
@@ -3281,7 +3152,7 @@
                 },
                 "category": "classfeature",
                 "description": {
-                    "value": "<p>Your muse is a mystery, driving you to uncover the hidden secrets of the multiverse. If your muse is a creature, it might be a dragon or otherworldly being; if a deity, it might be Irori or Nethys. You gain the @UUID[Compendium.pf2e.feats-srd.Item.Bardic Lore] feat and add <em>@UUID[Compendium.pf2e.spells-srd.Item.Sure Strike]</em> to your spell repertoire.</p>"
+                    "value": "<p>Your muse is a mystery, driving you to uncover the hidden secrets of the multiverse. If your muse is a creature, it might be a dragon or otherworldly being; if a deity, it might be Irori or Nethys. You gain the @UUID[Compendium.pf2e.feats-srd.Item.Bardic Lore] feat and add @UUID[Compendium.pf2e.spells-srd.Item.Sure Strike] to your spell repertoire.</p>"
                 },
                 "level": {
                     "value": 1
@@ -3650,52 +3521,52 @@
             }
         },
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 1
             },
-            "ath": {
+            "athletics": {
                 "rank": 0
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 1
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 0
             },
-            "med": {
+            "medicine": {
                 "rank": 1
             },
-            "nat": {
+            "nature": {
                 "rank": 0
             },
-            "occ": {
+            "occultism": {
                 "rank": 1
             },
-            "prf": {
+            "performance": {
                 "rank": 1
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 1
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 1
             }
         }

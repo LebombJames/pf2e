@@ -186,7 +186,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><span class=\"action-glyph\">A</span> to <span class=\"action-glyph\">T</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The garrison makes a melee attack against each enemy within 5 feet (@Check[type:reflex|dc:30|basic:true] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">A</span> @Damage[(2d8+2)[bludgeoning]] damage.</p>\n<p><span class=\"action-glyph\">D</span> @Damage[(8d8+12)[bludgeoning]] damage.</p>\n<p><span class=\"action-glyph\">T</span> @Damage[(4d8+15)[bludgeoning]] damage.</p>"
+                    "value": "<p><span class=\"action-glyph\">A</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> The garrison makes a melee attack against each enemy within 5 feet (@Check[type:reflex|dc:30|basic:true] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">A</span> @Damage[(2d8+2)[bludgeoning]] damage.</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(8d8+12)[bludgeoning]] damage.</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(4d8+15)[bludgeoning]] damage.</p>"
                 },
                 "frequency": {
                     "max": 1,
@@ -236,56 +236,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "uuvp6INqZBeLCBFF",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 28
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "tGDDOf1mOypxK17s",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 25
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Pageant Troupe",
@@ -384,6 +334,14 @@
             "will": {
                 "saveDetail": "",
                 "value": 22
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 28
+            },
+            "intimidation": {
+                "base": 25
             }
         },
         "traits": {

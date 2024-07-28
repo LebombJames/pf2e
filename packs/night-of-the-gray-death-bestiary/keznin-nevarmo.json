@@ -52,7 +52,6 @@
                 "rules": [
                     {
                         "key": "FlatModifier",
-                        "label": "Expanded Healer's Tools (1st aid, treat disease, poison or wounds",
                         "predicate": [
                             {
                                 "or": [
@@ -467,14 +466,9 @@
             "type": "melee"
         },
         {
-            "_id": "qaUj7J4TzHeIrAJZ",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.fFu2sZz4KB01fVRc"
-                }
-            },
+            "_id": "Gsp6SyiR5bBRNQWO",
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Low-Light Vision",
+            "name": "Invaded",
             "sort": 800000,
             "system": {
                 "actionType": {
@@ -485,37 +479,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "low-light-vision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
-            "_id": "Gsp6SyiR5bBRNQWO",
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Invaded",
-            "sort": 900000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>Keznin is subject to the conqueror worm's Mental Invader effect , but she doesn't realize it. (Note: This is only effective in Chapter 3)</p>"
+                    "value": "<p>Keznin is subject to the conqueror worm's Mental Invader effect, but she doesn't realize it. (Note: This is only effective in Chapter 3)</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -535,7 +499,7 @@
             "_id": "0dqz0pv2p93dvn79",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Expert Herbalist",
-            "sort": 1000000,
+            "sort": 900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -565,7 +529,7 @@
             "_id": "l1hi0v4rtyhlqmz7",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Risky Treatment",
-            "sort": 1100000,
+            "sort": 1000000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -594,156 +558,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "2h5tdd9guvpuzma7",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 1200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 18
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "0imtsrulh2rfk3ig",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Medicine",
-            "sort": 1300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 17
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "exf663zgdnabvnnb",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Nature",
-            "sort": 1400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "ymu73tlxoye9zd8a",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 1500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 17
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gv7eq4g6q4e1woq1",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Society",
-            "sort": 1600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 19
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "ifp959incm43l1n6",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 1700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 17
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Keznin Nevarmo",
@@ -839,6 +653,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 21
+            }
+        },
+        "skills": {
+            "diplomacy": {
+                "base": 18
+            },
+            "medicine": {
+                "base": 17
+            },
+            "nature": {
+                "base": 21
+            },
+            "religion": {
+                "base": 17
+            },
+            "society": {
+                "base": 19
+            },
+            "survival": {
+                "base": 17
             }
         },
         "traits": {

@@ -21,6 +21,7 @@ import {
 class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
     constructor(source: FlatModifierSource, options: RuleElementOptions) {
         super(source, options);
+        if (this.invalid) return;
 
         if (!this.item.isOfType("physical") && this.type !== "item") {
             this.fromEquipment = false;
@@ -63,7 +64,7 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
     }
 
     static override defineSchema(): FlatModifierSchema {
-        const { fields } = foundry.data;
+        const fields = foundry.data.fields;
 
         return {
             ...super.defineSchema(),
@@ -130,7 +131,7 @@ class FlatModifierRuleElement extends RuleElementPF2e<FlatModifierSchema> {
                 const resolvedValue = Number(this.resolveValue(this.value, 0, options)) || 0;
                 if (this.ignored) return null;
 
-                const finalValue = Math.clamped(resolvedValue, this.min ?? resolvedValue, this.max ?? resolvedValue);
+                const finalValue = Math.clamp(resolvedValue, this.min ?? resolvedValue, this.max ?? resolvedValue);
 
                 if (game.pf2e.variantRules.AutomaticBonusProgression.suppressRuleElement(this, finalValue)) {
                     return null;
@@ -230,16 +231,17 @@ type FlatModifierSchema = RuleElementSchema & {
 };
 
 interface FlatModifierSource extends RuleElementSource {
-    selector?: unknown;
-    min?: unknown;
-    max?: unknown;
-    type?: unknown;
-    ability?: unknown;
-    force?: unknown;
-    damageType?: unknown;
-    damageCategory?: unknown;
-    critical?: unknown;
-    hideIfDisabled?: unknown;
+    selector?: JSONValue;
+    min?: JSONValue;
+    max?: JSONValue;
+    type?: JSONValue;
+    value?: JSONValue;
+    ability?: JSONValue;
+    force?: JSONValue;
+    damageType?: JSONValue;
+    damageCategory?: JSONValue;
+    critical?: JSONValue;
+    hideIfDisabled?: JSONValue;
 }
 
 export { FlatModifierRuleElement, type FlatModifierSource };

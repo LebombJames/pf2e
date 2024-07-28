@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -31,106 +30,59 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "FKdteth7KP1E5Ntd"
                             },
-                            "1": {
+                            {
                                 "id": "7a45w8qf44YwKxam"
                             },
-                            "2": {
+                            {
                                 "id": "M1Y4GGK3GA20X4t2"
                             },
-                            "3": {
+                            {
                                 "id": "KBcgZjrLCcIbnYLt"
                             },
-                            "4": {
+                            {
                                 "id": "KW7j6zuHzvRnpEpm"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     },
                     "slot3": {
                         "max": 2,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "Hf8pXGPnK3IYkgE6"
                             },
-                            "1": {
+                            {
                                 "id": "mifyTRPt54ovTYRV"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     },
                     "slot5": {
                         "max": 2,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "belxl8Lpp4QygblS"
                             },
-                            "1": {
+                            {
                                 "id": "gA0br2NoXBfnTcUX"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot6": {
                         "max": 2,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "6VUd9lWFbNfGNMfG"
                             },
-                            "1": {
+                            {
                                 "id": "vTMLqZTszFifZvcj"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     }
                 },
                 "slug": null,
@@ -156,7 +108,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "focus"
                 },
@@ -169,74 +120,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 30,
@@ -892,7 +776,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> <strong>Slowly</strong> lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
+                    "value": "<p>The simplest magic does your bidding. You can perform simple magical effects for as long as you Sustain the Spell. Each time you Sustain the Spell, you can choose one of four options.</p>\n<ul>\n<li><strong>Cook</strong> Cool, warm, or flavor 1 pound of nonliving material.</li>\n<li><strong>Lift</strong> Slowly lift an unattended object of light Bulk or less 1 foot off the ground.</li>\n<li><strong>Make</strong> Create a temporary object of negligible Bulk, made of congealed magical substance. The object looks crude and artificial and is extremely fragile-it can't be used as a tool, weapon, or spell component.</li>\n<li><strong>Tidy</strong> Color, clean, or soil an object of light Bulk or less. You can affect an object of 1 Bulk with 10 rounds of concentration, and a larger object a 1 minute per Bulk.</li>\n</ul>\n<p>Prestidigitation can't deal damage or cause adverse conditions. Any actual change to an object (beyond what is noted above) persists only as long as you Sustain the Spell.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -1040,7 +924,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.Shield Block] reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the <em>@UUID[Compendium.pf2e.spells-srd.Item.Force Barrage]</em> spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Shield]</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Effect: Shield Immunity]</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
+                    "value": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.Shield Block] reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the @UUID[Compendium.pf2e.spells-srd.Item.Force Barrage] spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Shield]</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Effect: Shield Immunity]</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -1408,7 +1292,7 @@
                 },
                 "containerId": null,
                 "description": {
-                    "value": "<p>A spellbook holds the written knowledge necessary to learn and prepare various spells, a necessity for wizards (who typically get one for free) and a useful luxury for other spellcasters looking to learn additional spells. Each spellbook can hold up to 100 spells. The Price listed is for a blank spellbook.</p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Cursed Metamorphosis]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Chain Lightning]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Vampiric Feast]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Haste]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Sure Strike]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Acid Splash]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Telekinetic Hand]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Prestidigitation]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Ray of Frost]</em></p>\n<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Shield]</em></p>"
+                    "value": "<p>A spellbook holds the written knowledge necessary to learn and prepare various spells, a necessity for wizards (who typically get one for free) and a useful luxury for other spellcasters looking to learn additional spells. Each spellbook can hold up to 100 spells. The Price listed is for a blank spellbook.</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Cursed Metamorphosis]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Chain Lightning]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Vampiric Feast]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Haste]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Sure Strike]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Acid Splash]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Telekinetic Hand]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Prestidigitation]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Ray of Frost]</p>\n<p>@UUID[Compendium.pf2e.spells-srd.Item.Shield]</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -1805,7 +1689,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The Blade magi channels a spell into a melee Strike to deliver a magically charged attack. The Blade magi casts <em>@UUID[Compendium.pf2e.spells-srd.Item.Acid Splash]</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.Ray of Frost]</em>, or <em>@UUID[Compendium.pf2e.spells-srd.Item.Vampiric Feast]</em>. The effects of the spell don't occur immediately but are imbued into the Blade magi's attack instead. The Blade magi makes a melee Strike, which gains the arcane trait. The spell is coupled with the attack, using the Blade magi's attack roll to determine the effects of both the Strike and the spell. This counts as two attacks for their multiple attack penalty, but the penalty isn't applied until after the magus has completed the Spellstrike. After using Spellstrike, the Blade magi can't do so again until they recharge this ability as a single action, which has the concentrate trait. The Blade magi also recharges their Spellstrike when they cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Thunderous Strike]</em>.</p>"
+                    "value": "<p>The Blade magi channels a spell into a melee Strike to deliver a magically charged attack. The Blade magi casts @UUID[Compendium.pf2e.spells-srd.Item.Acid Splash], @UUID[Compendium.pf2e.spells-srd.Item.Ray of Frost], or @UUID[Compendium.pf2e.spells-srd.Item.Vampiric Feast]. The effects of the spell don't occur immediately but are imbued into the Blade magi's attack instead. The Blade magi makes a melee Strike, which gains the arcane trait. The spell is coupled with the attack, using the Blade magi's attack roll to determine the effects of both the Strike and the spell. This counts as two attacks for their multiple attack penalty, but the penalty isn't applied until after the magus has completed the Spellstrike. After using Spellstrike, the Blade magi can't do so again until they recharge this ability as a single action, which has the concentrate trait. The Blade magi also recharges their Spellstrike when they cast @UUID[Compendium.pf2e.spells-srd.Item.Thunderous Strike].</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1819,106 +1703,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "PPi2jAynkAzEERNy",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Arcana",
-            "sort": 2500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 23
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "eYrCEUYLRVfGjyJo",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 2600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 22
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "nZ7RDhAHdlCwv4lo",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Society",
-            "sort": 2700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "DIaOyVCKIpCoKrEh",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 2800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Blade Magus",
@@ -2009,6 +1793,20 @@
             "will": {
                 "saveDetail": "",
                 "value": 20
+            }
+        },
+        "skills": {
+            "arcana": {
+                "base": 23
+            },
+            "athletics": {
+                "base": 22
+            },
+            "society": {
+                "base": 21
+            },
+            "survival": {
+                "base": 20
             }
         },
         "traits": {

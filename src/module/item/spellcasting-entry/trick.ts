@@ -1,12 +1,13 @@
 import { ActorPF2e } from "@actor";
 import { createProficiencyModifier } from "@actor/modifiers.ts";
-import { AttributeString, SkillLongForm } from "@actor/types.ts";
+import { AttributeString, SkillSlug } from "@actor/types.ts";
 import { SpellPF2e } from "@item";
 import { MagicTradition } from "@item/spell/types.ts";
 import { extractModifiers } from "@module/rules/helpers.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { ErrorPF2e } from "@util/misc.ts";
 import * as R from "remeda";
+import { createCounteractStatistic } from "./helpers.ts";
 import { CastOptions, SpellcastingEntry, SpellcastingSheetData } from "./types.ts";
 
 const TRICK_MAGIC_SKILLS = ["arcana", "nature", "occultism", "religion"] as const;
@@ -32,20 +33,15 @@ class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implements Spell
 
     actor: TActor;
 
-    skill: SkillLongForm;
+    skill: SkillSlug;
 
     statistic: Statistic;
 
-    attribute: AttributeString;
-
-    /** @deprecated */
-    get ability(): AttributeString {
-        fu.logCompatibilityWarning(
-            "`TrickMagicItemEntry#ability` is deprecated. Use `TrickMagicItemEntry#attribute` instead.",
-            { since: "5.3.0", until: "6.0.0" },
-        );
-        return this.attribute;
+    get counteraction(): Statistic {
+        return createCounteractStatistic(this);
     }
+
+    attribute: AttributeString;
 
     tradition: MagicTradition;
 
@@ -93,7 +89,7 @@ class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implements Spell
             label: CONFIG.PF2E.magicTraditions[tradition],
             attribute: attribute,
             rank: trickRank,
-            modifiers: R.compact([levelProficiencyBonus, ...extractModifiers(actor.synthetics, domains)]),
+            modifiers: [levelProficiencyBonus, ...extractModifiers(actor.synthetics, domains)].filter(R.isTruthy),
             domains,
             check: {
                 type: "attack-roll",
@@ -148,6 +144,10 @@ class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implements Spell
         return false;
     }
 
+    get isEphemeral(): true {
+        return true;
+    }
+
     /** Currently no checks for whether a magic item can be tricked */
     canCast(): boolean {
         return true;
@@ -174,6 +174,7 @@ class TrickMagicItemEntry<TActor extends ActorPF2e = ActorPF2e> implements Spell
             groups: [],
             usesSpellProficiency: false,
             prepList: null,
+            isEphemeral: true,
         };
     }
 }

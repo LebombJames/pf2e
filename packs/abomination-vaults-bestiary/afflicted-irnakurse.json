@@ -3,49 +3,10 @@
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
-            "_id": "93s2yi7nb08mzhdu",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL"
-                }
-            },
-            "img": "systems/pf2e/icons/conditions/frightened.webp",
-            "name": "Frightened",
-            "sort": 100000,
-            "system": {
-                "description": {
-                    "value": "<p>You're gripped by fear and struggle to control your nerves. The frightened condition always includes a value. You take a status penalty equal to this value to all your checks and DCs. Unless specified otherwise, at the end of each of your turns, the value of your frightened condition decreases by 1.</p>"
-                },
-                "duration": {
-                    "value": 0
-                },
-                "group": null,
-                "overrides": [],
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "references": {
-                    "children": [],
-                    "immunityFrom": [],
-                    "overriddenBy": [],
-                    "overrides": []
-                },
-                "rules": [],
-                "slug": "frightened",
-                "value": {
-                    "isValued": true,
-                    "value": 2
-                }
-            },
-            "type": "condition"
-        },
-        {
             "_id": "gH06P6rp2bswuGya",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Jaws",
-            "sort": 200000,
+            "sort": 100000,
             "system": {
                 "attack": {
                     "value": ""
@@ -89,7 +50,7 @@
             "_id": "kJAxB9HM1zsPkPDC",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Tentacle",
-            "sort": 300000,
+            "sort": 200000,
             "system": {
                 "attack": {
                     "value": ""
@@ -133,41 +94,6 @@
             "type": "melee"
         },
         {
-            "_id": "iPIBtZVZ5TaPEFp6",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 400000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "bxjYZ892TLi9AizW",
             "flags": {
                 "core": {
@@ -176,7 +102,7 @@
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Attack of Opportunity",
-            "sort": 500000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -206,7 +132,7 @@
             "_id": "PXA2uFcT0VRiQkBO",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Fearful Curse",
-            "sort": 600000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -223,7 +149,20 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "alterations": [
+                            {
+                                "mode": "override",
+                                "property": "badge-value",
+                                "value": 2
+                            }
+                        ],
+                        "inMemoryOnly": true,
+                        "key": "GrantItem",
+                        "uuid": "Compendium.pf2e.conditionitems.Item.Frightened"
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "rarity": "common",
@@ -236,7 +175,7 @@
             "_id": "o40ddeHAtx8cJ0uY",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Mind Lash",
-            "sort": 700000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -275,7 +214,7 @@
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Rend",
-            "sort": 800000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -305,7 +244,7 @@
             "_id": "jr6lRjG0ZeZgW116",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Soul Scream",
-            "sort": 900000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -346,7 +285,7 @@
             "_id": "ml69ZMPwkVsbCTC7",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Storm of Tentacles",
-            "sort": 1000000,
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -371,81 +310,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "SVAyaWNQdLEB8T8O",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "SKVDodNz8cPMHoc8",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 1200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "5pLdy4qjWpi4yWh8",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 1300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Afflicted Irnakurse",
@@ -535,6 +399,17 @@
             "will": {
                 "saveDetail": "",
                 "value": 16
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 20
+            },
+            "athletics": {
+                "base": 20
+            },
+            "stealth": {
+                "base": 20
             }
         },
         "traits": {

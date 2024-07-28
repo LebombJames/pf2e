@@ -1,6 +1,6 @@
 import { ModifierAdjustment } from "@actor/modifiers.ts";
 import { DamageType } from "@system/damage/types.ts";
-import { PredicatePF2e } from "@system/predication.ts";
+import { Predicate } from "@system/predication.ts";
 import { StrictArrayField } from "@system/schema-data-fields.ts";
 import { objectHasKey } from "@util";
 import * as R from "remeda";
@@ -27,7 +27,7 @@ class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema> {
     }
 
     static override defineSchema(): AdjustModifierSchema {
-        const { fields } = foundry.data;
+        const fields = foundry.data.fields;
 
         const baseSchema = super.defineSchema();
         const PRIORITIES: Record<string, number | undefined> = AELikeRuleElement.CHANGE_MODE_DEFAULT_PRIORITIES;
@@ -71,7 +71,7 @@ class AdjustModifierRuleElement extends RuleElementPF2e<AdjustModifierSchema> {
     override beforePrepareData(): void {
         if (this.ignored) return;
 
-        const predicate = new PredicatePF2e(this.resolveInjectedProperties(fu.deepClone([...this.predicate])));
+        const predicate = new Predicate(this.resolveInjectedProperties(fu.deepClone([...this.predicate])));
 
         const adjustment: ModifierAdjustment = {
             slug: this.slug,

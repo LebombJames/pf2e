@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -28,137 +27,91 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "VQMmBpPnwliUOTxR"
                             },
-                            "1": {
+                            {
                                 "id": "USH2AhOO9I2oFgOJ"
                             },
-                            "2": {
+                            {
                                 "id": "6lJ85g95WUTYQopp"
                             },
-                            "3": {
+                            {
                                 "id": "v6YtekneYI3G5Yn8"
                             },
-                            "4": {
+                            {
                                 "id": "OtruhRv4hHPV6nxs"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot1": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "tVFFbAEJXy9hKFTB"
                             },
-                            "1": {
+                            {
                                 "id": "tVFFbAEJXy9hKFTB"
                             },
-                            "2": {
+                            {
                                 "id": "XrlxxU9rUEYAAvKg"
                             },
-                            "3": {
+                            {
                                 "id": "dM25nL2GZRfZtobH"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     },
                     "slot2": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "fspiQGQCUM0q3Abb"
                             },
-                            "1": {
+                            {
                                 "id": "owdVRBueyrm4PZsR"
                             },
-                            "2": {
+                            {
                                 "id": "YEkw9lAH5agkJErj"
                             },
-                            "3": {
+                            {
                                 "id": "2ne4JIxVFj4wQcse"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot3": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "RGut7ymIETHSavWJ"
                             },
-                            "1": {
+                            {
                                 "id": "6acNv780xiwR7ckt"
                             },
-                            "2": {
+                            {
                                 "id": "YgYmeZWzlu9B1fIs"
                             },
-                            "3": {
+                            {
                                 "id": "13dFGnEacDlxnlZr"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot4": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "fk8b4F6Xhx2gJIjM"
                             },
-                            "1": {
+                            {
                                 "id": "l8xVaY5ZH9awKPFX"
                             },
-                            "2": {
+                            {
                                 "id": "IMz4VoPp1kWXIScT"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     }
                 },
                 "slug": null,
@@ -256,7 +209,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You create an immobile sphere of force to either trap or protect the target, blocking anything that would pass through the sphere. The sphere has AC 5, Hardness 10, and 40 Hit Points. It's immune to critical hits and precision damage. Disintegrate destroys the sphere instantly. If the target is unwilling, the effects of the sphere depend on the target's Reflex save.</p>\n<hr /><strong>Critical Success</strong> The target disrupts the sphere's integrity, causing it to collapse entirely.\n<p><strong>Success</strong> The sphere functions normally but has only 10 Hit Points instead of 40.</p>\n<p><strong>Failure</strong> The sphere has its normal effect.</p>"
+                    "value": "<p>You create an immobile sphere of force to either trap or protect the target, blocking anything that would pass through the sphere. The sphere has AC 5, Hardness 10, and 40 Hit Points. It's immune to critical hits and precision damage. Disintegrate destroys the sphere instantly. If the target is unwilling, the effects of the sphere depend on the target's Reflex save.</p>\n<hr /><p><strong>Critical Success</strong> The target disrupts the sphere's integrity, causing it to collapse entirely.</p>\n<p><strong>Success</strong> The sphere functions normally but has only 10 Hit Points instead of 40.</p>\n<p><strong>Failure</strong> The sphere has its normal effect.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -637,7 +590,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You create a cloud of putrid mist in the area. The cloud functions as <em>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</em> except it sickens creatures that end their turns within the cloud. (The @UUID[Compendium.pf2e.conditionitems.Item.Concealed] condition is not a poison effect.)</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} and @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} while in the cloud.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} and @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} until it leaves the cloud.</p>"
+                    "value": "<p>You create a cloud of putrid mist in the area. The cloud functions as @UUID[Compendium.pf2e.spells-srd.Item.Mist] except it sickens creatures that end their turns within the cloud. (The @UUID[Compendium.pf2e.conditionitems.Item.Concealed] condition is not a poison effect.)</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} and @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} while in the cloud.</p>\n<p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} and @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} until it leaves the cloud.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -711,7 +664,7 @@
                 },
                 "defense": null,
                 "description": {
-                    "value": "<p>You conjure an arrow of acid that keeps corroding the target after it hits. Make a spell attack against the target. On a hit, you deal 3d8 acid damage plus [[/r floor(@item.level/2)d6[persistent,acid]]] damage. On a critical hit, double the initial damage, but not the persistent damage.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The initial damage increases by 2d8, and the persistent acid damage increases by 1d6.</p>"
+                    "value": "<p>You conjure an arrow of acid that keeps corroding the target after it hits. Make a spell attack against the target. On a hit, you deal 3d8 acid damage plus @Damage[(floor(@item.rank/2))d6[persistent,acid]] damage. On a critical hit, double the initial damage, but not the persistent damage.</p><hr /><p><strong>Heightened (+2)</strong> The initial damage increases by 2d8, and the persistent acid damage increases by 1d6.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -851,7 +804,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr /><strong>Critical Success</strong> The target is unaffected.\n<p><strong>Success</strong> The target is plagued with uncontrollable laughter. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] and can't use actions or reactions for 1 round. It then suffers the failure effects.</p>"
+                    "value": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr /><p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is plagued with uncontrollable laughter. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] and can't use actions or reactions for 1 round. It then suffers the failure effects.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -1920,7 +1873,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The demonologist can cast a 5th-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Summon Fiend]</em> arcane spell to summon a demon. To do so, they must sacrifice two 4th-rank prepared spells and voluntarily take @Damage[4d12[mental]] damage that can't be reduced or prevented.</p>\n<p>If the demonologist is unable to @UUID[Compendium.pf2e.actionspf2e.Item.Sustain] the Spell, including if they're knocked out or killed, the spell continues, but the GM rolls a @Check[type:flat|dc:10] each round, ending the spell on a failure.</p>"
+                    "value": "<p>The demonologist can cast a 5th-rank @UUID[Compendium.pf2e.spells-srd.Item.Summon Fiend] arcane spell to summon a demon. To do so, they must sacrifice two 4th-rank prepared spells and voluntarily take @Damage[4d12[mental]] damage that can't be reduced or prevented.</p>\n<p>If the demonologist is unable to @UUID[Compendium.pf2e.actionspf2e.Item.Sustain] the Spell, including if they're knocked out or killed, the spell continues, but the GM rolls a @Check[type:flat|dc:10] each round, ending the spell on a failure.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1963,110 +1916,16 @@
             "type": "lore"
         },
         {
-            "_id": "LKb7tu3AJmZp9W89",
+            "_id": "Cu79oDJClJ9C9Reu",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Arcana",
+            "name": "Demon Lore",
             "sort": 2800000,
             "system": {
                 "description": {
                     "value": ""
                 },
                 "mod": {
-                    "value": 18
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null,
-                "traits": {}
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "Cu79oDJClJ9C9Reu",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Demon Lore",
-            "sort": 2900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
                     "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null,
-                "traits": {}
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "Uq9fVOOj1180ESoY",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 3000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 13
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.VsDemons",
-                        "predicate": [
-                            "target:trait:demon"
-                        ],
-                        "selector": "diplomacy",
-                        "value": 2
-                    }
-                ],
-                "slug": null,
-                "traits": {},
-                "variants": {
-                    "0": {
-                        "label": "+15 with demons",
-                        "options": "target:trait:demon"
-                    }
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "QVD4PuwAovxQEGg1",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 3100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 28
                 },
                 "proficient": {
                     "value": 0
@@ -2171,6 +2030,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 17
+            }
+        },
+        "skills": {
+            "arcana": {
+                "base": 18
+            },
+            "diplomacy": {
+                "base": 13,
+                "special": [
+                    {
+                        "base": 15,
+                        "label": "with demons",
+                        "predicate": [
+                            "target:trait:demon"
+                        ]
+                    }
+                ]
+            },
+            "religion": {
+                "base": 28
             }
         },
         "traits": {

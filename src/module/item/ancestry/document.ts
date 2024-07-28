@@ -10,6 +10,10 @@ import { sluggify } from "@util";
 import { AncestrySource, AncestrySystemData } from "./data.ts";
 
 class AncestryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ABCItemPF2e<TParent> {
+    static override get validTraits(): Record<CreatureTrait, string> {
+        return CONFIG.PF2E.creatureTraits;
+    }
+
     get traits(): Set<CreatureTrait> {
         return new Set(this.system.traits.value);
     }
@@ -146,32 +150,28 @@ class AncestryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends 
         }
     }
 
-    override getRollOptions(prefix = this.type): string[] {
-        return [...super.getRollOptions(prefix), `${prefix}:rarity:${this.rarity}`];
-    }
-
     /** Ensure certain fields are positive integers. */
     protected override _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: DocumentUpdateContext<TParent>,
+        operation: DatabaseUpdateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
-        if (!changed.system) return super._preUpdate(changed, options, user);
+        if (!changed.system) return super._preUpdate(changed, operation, user);
 
         const additionalLanguages = changed.system.additionalLanguages;
         if (additionalLanguages?.count !== undefined) {
-            additionalLanguages.count = Math.floor(Math.clamped(Number(additionalLanguages.count) || 0, 0, 99));
+            additionalLanguages.count = Math.floor(Math.clamp(Number(additionalLanguages.count) || 0, 0, 99));
         }
 
         for (const fieldName of ["hp", "speed", "reach"] as const) {
             if (changed.system[fieldName] !== undefined) {
                 const minimum = fieldName === "speed" ? 5 : 1;
-                const value = Math.floor(Math.clamped(Number(changed.system[fieldName]) || 0, minimum, 99));
+                const value = Math.floor(Math.clamp(Number(changed.system[fieldName]) || 0, minimum, 99));
                 changed.system[fieldName] = fieldName === "hp" ? value : Math.ceil(value / 5) * 5;
             }
         }
 
-        return super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, operation, user);
     }
 }
 

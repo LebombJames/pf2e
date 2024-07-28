@@ -92,41 +92,6 @@
             "type": "melee"
         },
         {
-            "_id": "wOUnHt7rOJU7Q0Hl",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "XpXXBTpaUtpeRFzl",
             "flags": {
                 "core": {
@@ -134,8 +99,8 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Tremorsense",
-            "sort": 400000,
+            "name": "Tremorsense 100 feet",
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -165,7 +130,7 @@
             "_id": "q1bejnbw5vnnzgvq",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Dune Dispersal",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -204,7 +169,7 @@
             "_id": "iwhu8fvgh5latxtn",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Inexorable",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -221,7 +186,12 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "Immunity",
+                        "type": "immobilized"
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "rarity": "common",
@@ -234,7 +204,7 @@
             "_id": "nybqfknispi3lr65",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Sand Armor",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -296,7 +266,7 @@
             "_id": "18llnythi97z9vlp",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Fast Swallow",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -326,7 +296,7 @@
             "_id": "r3t47gh5bberowla",
             "img": "systems/pf2e/icons/actions/ThreeActions.webp",
             "name": "Gulping Charge",
-            "sort": 900000,
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -356,7 +326,7 @@
             "_id": "i7n59jc26msmr3lb",
             "img": "systems/pf2e/icons/actions/ThreeActions.webp",
             "name": "Spew Sandstorm",
-            "sort": 1000000,
+            "sort": 900000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -395,7 +365,7 @@
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Swallow Whole",
-            "sort": 1100000,
+            "sort": 1000000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -432,7 +402,7 @@
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Grab",
-            "sort": 1200000,
+            "sort": 1100000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -457,31 +427,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "2lrztpmg5exm2ln8",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 1300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 37
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Gluttonworm",
@@ -577,6 +522,11 @@
             "will": {
                 "saveDetail": "",
                 "value": 32
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 37
             }
         },
         "traits": {

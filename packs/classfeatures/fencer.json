@@ -1,6 +1,6 @@
 {
     "_id": "Jgid6Ja6Y879COlN",
-    "img": "systems/pf2e/icons/features/classes/fencer-style.webp",
+    "img": "icons/weapons/swords/scimitar-guard-brown.webp",
     "name": "Fencer",
     "system": {
         "actionType": {
@@ -28,7 +28,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.skills.dec.rank",
+                "path": "system.skills.deception.rank",
                 "predicate": [
                     "class:swashbuckler"
                 ],

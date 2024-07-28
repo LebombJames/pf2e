@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "innate"
@@ -28,74 +27,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 42,
@@ -172,91 +104,6 @@
             "type": "spell"
         },
         {
-            "_id": "purLutaIQJ6evyLg",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.spells-srd.Item.jrBa9deU2ULFWvSl"
-                }
-            },
-            "img": "icons/magic/light/projectile-beams-salvo-yellow.webp",
-            "name": "Meteor Swarm",
-            "sort": 300000,
-            "system": {
-                "area": null,
-                "cost": {
-                    "value": ""
-                },
-                "counteraction": false,
-                "damage": {
-                    "0": {
-                        "category": null,
-                        "formula": "7d10",
-                        "kinds": [
-                            "damage"
-                        ],
-                        "materials": [],
-                        "type": "bludgeoning"
-                    }
-                },
-                "defense": {
-                    "save": {
-                        "basic": true,
-                        "statistic": "reflex"
-                    }
-                },
-                "description": {
-                    "value": "<p>You call down four meteors that explode in a fiery blast. Each meteor deals 6d10 bludgeoning damage to any creatures in the 10-foot burst at the center of its area of effect before exploding, dealing 14d6 fire damage to any creatures in its 40-foot burst. The meteors' central 10-foot bursts can't overlap, and a creature takes the same amount of fire damage no matter how many overlapping explosions it's caught in. The saving throw applies to both the bludgeoning and the fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The bludgeoning damage increases by 1d10, and the fire damage increases by 2d6.</p>"
-                },
-                "duration": {
-                    "sustained": false,
-                    "value": ""
-                },
-                "heightening": {
-                    "damage": {
-                        "0": "1d10"
-                    },
-                    "interval": 1,
-                    "type": "interval"
-                },
-                "level": {
-                    "value": 10
-                },
-                "location": {
-                    "value": "CFncnCOk0MBxjpim"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "range": {
-                    "value": "500 feet"
-                },
-                "requirements": "",
-                "rules": [],
-                "slug": "meteor-swarm",
-                "target": {
-                    "value": ""
-                },
-                "time": {
-                    "value": "2"
-                },
-                "traits": {
-                    "rarity": "common",
-                    "traditions": [
-                        "arcane",
-                        "primal"
-                    ],
-                    "value": [
-                        "concentrate",
-                        "fire",
-                        "manipulate"
-                    ]
-                }
-            },
-            "type": "spell"
-        },
-        {
             "_id": "9lvTqGmBN1mGdrHe",
             "flags": {
                 "core": {
@@ -265,7 +112,7 @@
             },
             "img": "systems/pf2e/icons/spells/polar-ray.webp",
             "name": "Polar Ray",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "area": null,
                 "cost": {
@@ -346,7 +193,7 @@
             },
             "img": "systems/pf2e/icons/spells/sunburst.webp",
             "name": "Sunburst",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "area": {
                     "type": "burst",
@@ -374,7 +221,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>A powerful globe of searing sunlight explodes in the area, dealing 8d10 fire damage to creatures and objects in the area, plus 8d10 additional vitality damage to undead creatures. Each creature and object in the area must attempt a Reflex save. If the globe overlaps with an area of magical darkness, sunburst attempts to counteract the darkness effect.</p>\n<hr /><strong>Critical Success</strong> The creature or object is unaffected.\n<p><strong>Success</strong> The creature or object takes half damage.</p>\n<p><strong>Failure</strong> The creature or object takes full damage.</p>\n<p><strong>Critical Failure</strong> The creature or object takes full damage. If it's a creature, it becomes @UUID[Compendium.pf2e.conditionitems.Item.Blinded] permanently.</p>\n<hr /><strong>Heightened (+1)</strong> The fire damage increases by 1d10, and the vitality damage against undead increases by 1d10."
+                    "value": "<p>A powerful globe of searing sunlight explodes in the area, dealing 8d10 fire damage to creatures and objects in the area, plus 8d10 additional vitality damage to undead creatures. Each creature and object in the area must attempt a Reflex save. If the globe overlaps with an area of magical darkness, sunburst attempts to counteract the darkness effect.</p>\n<hr /><p><strong>Critical Success</strong> The creature or object is unaffected.</p>\n<p><strong>Success</strong> The creature or object takes half damage.</p>\n<p><strong>Failure</strong> The creature or object takes full damage.</p>\n<p><strong>Critical Failure</strong> The creature or object takes full damage. If it's a creature, it becomes @UUID[Compendium.pf2e.conditionitems.Item.Blinded] permanently.</p>\n<hr /><p><strong>Heightened (+1)</strong> The fire damage increases by 1d10, and the vitality damage against undead increases by 1d10.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -436,7 +283,7 @@
             },
             "img": "systems/pf2e/icons/spells/tongues.webp",
             "name": "Tongues (Constant)",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "area": null,
                 "cost": {
@@ -499,7 +346,7 @@
             },
             "img": "systems/pf2e/icons/spells/true-seeing.webp",
             "name": "True Seeing (Constant)",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "area": null,
                 "cost": {
@@ -556,6 +403,107 @@
             "type": "spell"
         },
         {
+            "_id": "5K6NWmbELFhghl55",
+            "flags": {
+                "core": {
+                    "sourceId": "Compendium.pf2e.spells-srd.Item.jrBa9deU2ULFWvSl"
+                }
+            },
+            "img": "icons/magic/light/projectile-beams-salvo-yellow.webp",
+            "name": "Meteor Swarm",
+            "sort": 700000,
+            "system": {
+                "area": {
+                    "type": "burst",
+                    "value": 40
+                },
+                "cost": {
+                    "value": ""
+                },
+                "counteraction": false,
+                "damage": {
+                    "0": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "6d10",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "bludgeoning"
+                    },
+                    "6BEyrCCNpDfJh5P8": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "14d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "fire"
+                    }
+                },
+                "defense": {
+                    "save": {
+                        "basic": true,
+                        "statistic": "reflex"
+                    }
+                },
+                "description": {
+                    "value": "<p>You call down four meteors that explode in a fiery blast. Each meteor deals 6d10 bludgeoning damage to any creatures in the @Template[type:burst|distance:10] at the center of its area of effect before exploding, dealing 14d6 fire damage to any creatures in its @Template[type:burst|distance:40]. The meteors' central 10-foot bursts can't overlap, and a creature attempts only one saving throw against the spell no matter how many overlapping explosions it's caught in, and they can take each type of damage once. The saving throw applies to both the bludgeoning and the fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The bludgeoning damage increases by 1d10, and the fire damage increases by 2d6.</p>"
+                },
+                "duration": {
+                    "sustained": false,
+                    "value": ""
+                },
+                "heightening": {
+                    "damage": {
+                        "0": "1d10",
+                        "6BEyrCCNpDfJh5P8": "2d6"
+                    },
+                    "interval": 1,
+                    "type": "interval"
+                },
+                "level": {
+                    "value": 9
+                },
+                "location": {
+                    "heightenedLevel": 10,
+                    "value": "CFncnCOk0MBxjpim"
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": "Pathfinder Core Rulebook"
+                },
+                "range": {
+                    "value": "500 feet"
+                },
+                "requirements": "",
+                "rules": [],
+                "slug": "meteor-swarm",
+                "target": {
+                    "value": ""
+                },
+                "time": {
+                    "value": "2"
+                },
+                "traits": {
+                    "rarity": "common",
+                    "traditions": [
+                        "arcane",
+                        "primal"
+                    ],
+                    "value": [
+                        "concentrate",
+                        "fire",
+                        "manipulate"
+                    ]
+                }
+            },
+            "type": "spell"
+        },
+        {
             "_id": "7YfzTpnNt105EkEf",
             "flags": {
                 "core": {
@@ -577,7 +525,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>A spray of rainbow light beams cascades from your open hand. Each creature in the area must roll 1d8 on the table below to see which beam affects it, then attempt a saving throw of the indicated type. The table notes any additional traits that apply to each type of ray. If a creature is struck by multiple beams, it uses the same d20 result for all its saving throws. For all rays, a successful saving throw negates the effect for that creature.</p>\n<h3><strong>Prismatic Spray</strong></h3>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>1d8</th>\n<th>Color</th>\n<th>Save</th>\n<th>Effects (Traits)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Red</td>\n<td>Reflex</td>\n<td>50 fire damage (fire)</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Orange</td>\n<td>Reflex</td>\n<td>60 acid damage (acid)</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Yellow</td>\n<td>Reflex</td>\n<td>70 electricity damage (electricity)</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Green</td>\n<td>Fortitude</td>\n<td>30 poison damage and @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} for 1 minute (poison)</td>\n</tr>\n<tr>\n<td>5</td>\n<td>Blue</td>\n<td>Fortitude</td>\n<td>Affected as if by <em>@UUID[Compendium.pf2e.spells-srd.Item.Petrify]</em></td>\n</tr>\n<tr>\n<td>6</td>\n<td>Indigo</td>\n<td>Will</td>\n<td>Confused, as the <em>@UUID[Compendium.pf2e.spells-srd.Item.Warp Mind]</em> spell (mental)</td>\n</tr>\n<tr>\n<td>7</td>\n<td>Violet</td>\n<td>Will</td>\n<td>Slowed for 1 minute; if a critical failure, sent to another plane, as <em>@UUID[Compendium.pf2e.spells-srd.Item.Interplanar Teleport]</em> (teleportation)</td>\n</tr>\n<tr>\n<td>8</td>\n<td>Potent beam</td>\n<td>-</td>\n<td>Affected by two beams - roll twice, rerolling any duplicates or results of 8</td>\n</tr>\n</tbody>\n</table>"
+                    "value": "<p>A spray of rainbow light beams cascades from your open hand. Each creature in the area must roll 1d8 on the table below to see which beam affects it, then attempt a saving throw of the indicated type. The table notes any additional traits that apply to each type of ray. If a creature is struck by multiple beams, it uses the same d20 result for all its saving throws. For all rays, a successful saving throw negates the effect for that creature.</p>\n<h3><strong>Prismatic Spray</strong></h3>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>1d8</th>\n<th>Color</th>\n<th>Save</th>\n<th>Effects (Traits)</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td>Red</td>\n<td>Reflex</td>\n<td>50 fire damage (fire)</td>\n</tr>\n<tr>\n<td>2</td>\n<td>Orange</td>\n<td>Reflex</td>\n<td>60 acid damage (acid)</td>\n</tr>\n<tr>\n<td>3</td>\n<td>Yellow</td>\n<td>Reflex</td>\n<td>70 electricity damage (electricity)</td>\n</tr>\n<tr>\n<td>4</td>\n<td>Green</td>\n<td>Fortitude</td>\n<td>30 poison damage and @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} for 1 minute (poison)</td>\n</tr>\n<tr>\n<td>5</td>\n<td>Blue</td>\n<td>Fortitude</td>\n<td>Affected as if by @UUID[Compendium.pf2e.spells-srd.Item.Petrify]</td>\n</tr>\n<tr>\n<td>6</td>\n<td>Indigo</td>\n<td>Will</td>\n<td>Confused, as the @UUID[Compendium.pf2e.spells-srd.Item.Warp Mind] spell (mental)</td>\n</tr>\n<tr>\n<td>7</td>\n<td>Violet</td>\n<td>Will</td>\n<td>Slowed for 1 minute; if a critical failure, sent to another plane, as @UUID[Compendium.pf2e.spells-srd.Item.Interplanar Teleport] (teleportation)</td>\n</tr>\n<tr>\n<td>8</td>\n<td>Potent beam</td>\n<td>-</td>\n<td>Affected by two beams - roll twice, rerolling any duplicates or results of 8</td>\n</tr>\n</tbody>\n</table>"
                 },
                 "duration": {
                     "sustained": false,
@@ -640,7 +588,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You delve into the possible futures of the next few seconds to understand all the ways your foe might avoid harm, then cast out a vision of that future to those around you. Designate a creature. The first time each target makes an attack roll against that creature during true target's duration, the attacker rolls twice and uses the better result. The attacker also ignores circumstance penalties to the attack roll and any flat check required due to the designated creature being @UUID[Compendium.pf2e.conditionitems.Item.Concealed] or @UUID[Compendium.pf2e.conditionitems.Item.Hidden].</p>"
+                    "value": "<p>You delve into the possible futures of the next few seconds to understand all the ways your foe might avoid harm, then cast out a vision of that future to those around you. Designate a creature. The first time each target makes an attack roll against that creature during <em>true target</em>'s duration, the attacker rolls twice and uses the better result. The attacker also ignores circumstance penalties to the attack roll and any flat check required due to the designated creature being @UUID[Compendium.pf2e.conditionitems.Item.Concealed] or @UUID[Compendium.pf2e.conditionitems.Item.Hidden].</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -861,9 +809,7 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "good",
                         "holy",
-                        "lawful",
                         "magical",
                         "reach-15"
                     ]
@@ -875,41 +821,6 @@
             "type": "melee"
         },
         {
-            "_id": "MkwxsOzEbMfQNQfG",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.2YRDYVnC1eljaXKK"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "At-Will Spells",
-            "sort": 1300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "at-will-spells",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "P0VFneuZMPCfZ35e",
             "flags": {
                 "core": {
@@ -918,7 +829,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Constant Spells",
-            "sort": 1400000,
+            "sort": 1300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -948,7 +859,7 @@
             "_id": "uW30KxL4NUlDPAi5",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "+1 Status to All Saves vs. Magic",
-            "sort": 1500000,
+            "sort": 1400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -996,7 +907,7 @@
             "_id": "QPrrVmViA5QTr6tE",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Bastion Aura",
-            "sort": 1600000,
+            "sort": 1500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1058,7 +969,7 @@
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Retributive Strike",
-            "sort": 1700000,
+            "sort": 1600000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -1088,7 +999,7 @@
             "_id": "2KSiu60tktdQLiFE",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Ultimate Sacrifice",
-            "sort": 1800000,
+            "sort": 1700000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1098,7 +1009,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>If the bastion archon is slain by an evil creature, it explodes in a geyser of holy light, restoring 140 HP to all good-aligned creatures in a @Template[type:emanation|distance:40]. The ground in the affected area is also subjected to a level 10 <em>@UUID[Compendium.pf2e.spells-srd.Item.Consecrate]</em> ritual, and the ground is consecrated for 10 years (or only 24 hours if the ultimate sacrifice took place in Hell, Abaddon, or the Abyss).</p>"
+                    "value": "<p>If the bastion archon is slain by an evil creature, it explodes in a geyser of holy light, restoring 140 HP to all good-aligned creatures in a @Template[type:emanation|distance:40]. The ground in the affected area is also subjected to a level 10 @UUID[Compendium.pf2e.spells-srd.Item.Consecrate] ritual, and the ground is consecrated for 10 years (or only 24 hours if the ultimate sacrifice took place in Hell, Abaddon, or the Abyss).</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1122,7 +1033,7 @@
             "_id": "xa0P6lS6jAgU3iPX",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Archon's Door",
-            "sort": 1900000,
+            "sort": 1800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1132,7 +1043,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Once per day, if an archon sees another creature cast <em>@UUID[Compendium.pf2e.spells-srd.Item.Translocate]</em>, the archon can use dimension door (heightened to 5th level) within 1 round to attempt to follow that creature to the maximum distance of the archon's dimension door. If the archon's dimension door has enough distance, the archon appears the same distance and direction from the creature as before either creature used dimension door.</p>"
+                    "value": "<p>Once per day, if an archon sees another creature cast @UUID[Compendium.pf2e.spells-srd.Item.Translocate], the archon can use dimension door (heightened to 5th level) within 1 round to attempt to follow that creature to the maximum distance of the archon's dimension door. If the archon's dimension door has enough distance, the archon appears the same distance and direction from the creature as before either creature used dimension door.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1152,7 +1063,7 @@
             "_id": "LpnkFiQmJ2nxDYm5",
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Blinding Beams",
-            "sort": 2000000,
+            "sort": 1900000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -1182,7 +1093,7 @@
             "_id": "itoyZJLBh98BavI1",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Entrench",
-            "sort": 2100000,
+            "sort": 2000000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1233,7 +1144,7 @@
             "_id": "DpIIIQSKrhsFKToW",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Holy Beam",
-            "sort": 2200000,
+            "sort": 2100000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1264,106 +1175,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "VvWdBUQSkH9G9mMG",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 2300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 38
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "nsmQJuFe17ZRJOKI",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 2400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 34
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "TpQrryQeS3hpOJGU",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 2500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 34
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "DHYD7JEG5QTeGMvt",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 2600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 32
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Bastion Archon",
@@ -1469,6 +1280,20 @@
             "will": {
                 "saveDetail": "",
                 "value": 34
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 38
+            },
+            "diplomacy": {
+                "base": 34
+            },
+            "intimidation": {
+                "base": 34
+            },
+            "religion": {
+                "base": 32
             }
         },
         "traits": {

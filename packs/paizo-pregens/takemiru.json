@@ -69,7 +69,7 @@
                     "uuid": "Compendium.pf2e.ancestries.Item.4BL5wf1VF9feC2rY"
                 },
                 "description": {
-                    "value": "<p>You are a creature of the material world, with an affinity closer to the wilds than urban society. You gain a jaws unarmed attack that deals 1d6 piercing damage. Your jaws are in the brawling group and have the finesse and unarmed traits. Your alternate form is a fox, which has the statistics of 1st-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Pest Form]</em>.</p>"
+                    "value": "<p>You are a creature of the material world, with an affinity closer to the wilds than urban society. You gain a jaws unarmed attack that deals 1d6 piercing damage. Your jaws are in the brawling group and have the finesse and unarmed traits. Your alternate form is a fox, which has the statistics of 1st-rank @UUID[Compendium.pf2e.spells-srd.Item.Pest Form].</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -142,7 +142,7 @@
                 },
                 "items": {
                     "wkfyj": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Intimidating Glare",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Intimidating Glare"
@@ -155,10 +155,12 @@
                 },
                 "rules": [],
                 "slug": "warrior",
-                "trainedLore": "Warfare Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Warfare Lore"
+                    ],
                     "value": [
-                        "itm"
+                        "intimidation"
                     ]
                 },
                 "traits": {
@@ -486,7 +488,7 @@
                                     "value": 8
                                 }
                             ],
-                            "field": "actor|system.skills.cra.rank"
+                            "field": "actor|system.skills.crafting.rank"
                         }
                     }
                 ],
@@ -751,7 +753,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -768,71 +769,7 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 0,
@@ -1775,7 +1712,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Evasion"
                     },
                     "eha1f": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Level 15)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -1793,7 +1730,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Ranger Weapon Expertise"
                     },
                     "lzbwg": {
-                        "img": "systems/pf2e/icons/features/classes/vigilant-senses.webp",
+                        "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
                         "level": 7,
                         "name": "Vigilant Senses",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Mastery"
@@ -1874,8 +1811,8 @@
                 "trainedSkills": {
                     "additional": 4,
                     "value": [
-                        "nat",
-                        "sur"
+                        "nature",
+                        "survival"
                     ]
                 },
                 "traits": {
@@ -2589,52 +2526,52 @@
             }
         },
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 1
             },
-            "cra": {
+            "crafting": {
                 "rank": 2
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 1
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 1
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 1
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

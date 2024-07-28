@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -30,71 +29,7 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 44,
@@ -135,7 +70,7 @@
                 },
                 "defense": null,
                 "description": {
-                    "value": "<p>A burst of healing energy soothes living creatures and temporarily rouses those recently slain. All living targets regain 10d8+40 Hit Points.</p>\n<p>In addition, you return any number of dead targets to life temporarily, with the same effects and limitations as <em>@UUID[Compendium.pf2e.spells-srd.Item.Raise Dead]</em>. The raised creatures have a number of temporary Hit Points equal to the Hit Points you gave living creatures, but no normal Hit Points. The raised creatures can't regain Hit Points or gain temporary Hit Points in other ways, and once revival's duration ends, they lose all temporary Hit Points and die.</p>\n<p>Revival can't resurrect creatures killed by disintegrate or a death effect. It has no effect on undead.</p>"
+                    "value": "<p>A burst of healing energy soothes living creatures and temporarily rouses those recently slain. All living targets regain 10d8+40 Hit Points.</p>\n<p>In addition, you return any number of dead targets to life temporarily, with the same effects and limitations as @UUID[Compendium.pf2e.spells-srd.Item.Raise Dead]. The raised creatures have a number of temporary Hit Points equal to the Hit Points you gave living creatures, but no normal Hit Points. The raised creatures can't regain Hit Points or gain temporary Hit Points in other ways, and once revival's duration ends, they lose all temporary Hit Points and die.</p>\n<p>Revival can't resurrect creatures killed by disintegrate or a death effect. It has no effect on undead.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -182,7 +117,7 @@
             "type": "spell"
         },
         {
-            "_id": "BNgVJNFEOa0FQgEt",
+            "_id": "nLwQyWdnX8Cvib4n",
             "flags": {
                 "core": {
                     "sourceId": "Compendium.pf2e.spells-srd.Item.jrBa9deU2ULFWvSl"
@@ -192,7 +127,10 @@
             "name": "Meteor Swarm",
             "sort": 300000,
             "system": {
-                "area": null,
+                "area": {
+                    "type": "burst",
+                    "value": 40
+                },
                 "cost": {
                     "value": ""
                 },
@@ -207,6 +145,16 @@
                         ],
                         "materials": [],
                         "type": "bludgeoning"
+                    },
+                    "6BEyrCCNpDfJh5P8": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "14d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "fire"
                     }
                 },
                 "defense": {
@@ -216,7 +164,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You call down four meteors that explode in a fiery blast. Each meteor deals 6d10 bludgeoning damage to any creatures in the 10-foot burst at the center of its area of effect before exploding, dealing 14d6 fire damage to any creatures in its 40-foot burst. The meteors' central 10-foot bursts can't overlap, and a creature attempts only one saving throw against the spell no matter how many overlapping explosions it's caught in, and they can take each type of damage once once. The saving throw applies to both the bludgeoning and the fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The bludgeoning damage increases by 1d10, and the fire damage increases by 2d6.</p>"
+                    "value": "<p>You call down four meteors that explode in a fiery blast. Each meteor deals 6d10 bludgeoning damage to any creatures in the @Template[type:burst|distance:10] at the center of its area of effect before exploding, dealing 14d6 fire damage to any creatures in its @Template[type:burst|distance:40]. The meteors' central 10-foot bursts can't overlap, and a creature attempts only one saving throw against the spell no matter how many overlapping explosions it's caught in, and they can take each type of damage once. The saving throw applies to both the bludgeoning and the fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The bludgeoning damage increases by 1d10, and the fire damage increases by 2d6.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -224,7 +172,8 @@
                 },
                 "heightening": {
                     "damage": {
-                        "0": "1d10"
+                        "0": "1d10",
+                        "6BEyrCCNpDfJh5P8": "2d6"
                     },
                     "interval": 1,
                     "type": "interval"
@@ -287,7 +236,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You perform a ritual to free a creature imprisoned, petrified, or otherwise put into stasis by any magical effects from all such effects, even effects like <em>@UUID[Compendium.pf2e.spells-srd.Item.Imprisonment]</em> that don't have a duration, as long as <em>freedom</em>'s spell rank is equal to or higher than the effect's spell rank. To perform the ritual, you must be within 10 feet of the target, or within 10 feet of the place where the target was imprisoned (in the case of effects that trap the creature in an unreachable prison, like the oubliette form of Imprisonment). You must know the name of the creature and details of its background; if the creature is not a close associate, a failure or critical failure on a secondary Society check reduces even a critical success on the primary check to a failure.</p>\n<hr />\n<p><strong>Critical Success</strong> You free the target from all magical effects imprisoning it, petrifying it, or putting it into stasis. It gains a +1 status bonus to saving throws to resist those same magical effects for 1 week.</p>\n<p><strong>Success</strong> You free the target from all magical effects imprisoning it, petrifying it, or putting it into stasis.</p>\n<p><strong>Failure</strong> You fail to free the target.</p>\n<p><strong>Critical Failure</strong> The magical effects imprisoning the target, petrifying the target, or putting it into stasis affect you and all secondary casters.</p>"
+                    "value": "<p>You perform a ritual to free a creature imprisoned, petrified, or otherwise put into stasis by any magical effects from all such effects, even effects like @UUID[Compendium.pf2e.spells-srd.Item.Imprisonment] that don't have a duration, as long as <em>freedom</em>'s spell rank is equal to or higher than the effect's spell rank. To perform the ritual, you must be within 10 feet of the target, or within 10 feet of the place where the target was imprisoned (in the case of effects that trap the creature in an unreachable prison, like the oubliette form of Imprisonment). You must know the name of the creature and details of its background; if the creature is not a close associate, a failure or critical failure on a secondary Society check reduces even a critical success on the primary check to a failure.</p>\n<hr />\n<p><strong>Critical Success</strong> You free the target from all magical effects imprisoning it, petrifying it, or putting it into stasis. It gains a +1 status bonus to saving throws to resist those same magical effects for 1 week.</p>\n<p><strong>Success</strong> You free the target from all magical effects imprisoning it, petrifying it, or putting it into stasis.</p>\n<p><strong>Failure</strong> You fail to free the target.</p>\n<p><strong>Critical Failure</strong> The magical effects imprisoning the target, petrifying the target, or putting it into stasis affect you and all secondary casters.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -423,7 +372,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You magically spy on a creature of your choice. Scrying works like <em>@UUID[Compendium.pf2e.spells-srd.Item.Clairvoyance]</em>, except that the image you receive is less precise, insufficient for teleport and similar spells. Instead of creating an eye in a set location within 500 feet, you instead create an eye that manifests just above the target. You can choose a target either by name or by touching one of its possessions or a piece of its body. If you haven't met the target in person, scrying's DC is 2 lower, and if you are unaware of the target's identity (perhaps because you found an unknown creature's fang at a crime scene), the DC is instead 10 lower. The effect of scrying depends on the target's Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The spell fails and the target is temporarily immune for 1 week. The target also gains a glimpse of you and learns its rough distance and direction from you.</p>\n<p><strong>Success</strong> The spell fails and the target is temporarily immune for 1 day.</p>\n<p><strong>Failure</strong> The spell succeeds.</p>\n<p><strong>Critical Failure</strong> The spell succeeds, and the eye follows the target if it moves, traveling up to 60 feet per round.</p>"
+                    "value": "<p>You magically spy on a creature of your choice. Scrying works like @UUID[Compendium.pf2e.spells-srd.Item.Clairvoyance], except that the image you receive is less precise, insufficient for teleport and similar spells. Instead of creating an eye in a set location within 500 feet, you instead create an eye that manifests just above the target. You can choose a target either by name or by touching one of its possessions or a piece of its body. If you haven't met the target in person, scrying's DC is 2 lower, and if you are unaware of the target's identity (perhaps because you found an unknown creature's fang at a crime scene), the DC is instead 10 lower. The effect of scrying depends on the target's Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The spell fails and the target is temporarily immune for 1 week. The target also gains a glimpse of you and learns its rough distance and direction from you.</p>\n<p><strong>Success</strong> The spell fails and the target is temporarily immune for 1 day.</p>\n<p><strong>Failure</strong> The spell succeeds.</p>\n<p><strong>Critical Failure</strong> The spell succeeds, and the eye follows the target if it moves, traveling up to 60 feet per round.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -575,9 +524,9 @@
                     "value": "WY6HZHUNFdCpdD8m"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": "planetary"
@@ -586,7 +535,7 @@
                 "rules": [],
                 "slug": "sending",
                 "target": {
-                    "value": "1 creature with whom you are familiar"
+                    "value": "1 creature you know well"
                 },
                 "time": {
                     "value": "3"
@@ -1100,41 +1049,6 @@
             "type": "melee"
         },
         {
-            "_id": "9sVRsQeqp2NqPZKy",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 1700000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "6ludWZkd4jUcg8tv",
             "flags": {
                 "core": {
@@ -1143,7 +1057,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Telepathy 100 feet",
-            "sort": 1800000,
+            "sort": 1700000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1173,41 +1087,6 @@
             "type": "action"
         },
         {
-            "_id": "lgdEGoF8XPhWshor",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.2YRDYVnC1eljaXKK"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "At-Will Spells",
-            "sort": 1900000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AtWillSpells]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "at-will-spells",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "ELmguzDIW19zBvG2",
             "flags": {
                 "core": {
@@ -1216,7 +1095,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Constant Spells",
-            "sort": 2000000,
+            "sort": 1800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1251,7 +1130,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "+4 Status to All Saves vs. Mental",
-            "sort": 2100000,
+            "sort": 1900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1291,7 +1170,7 @@
             "_id": "1GpBs3jPWwtTzZjf",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Impossible Stature",
-            "sort": 2200000,
+            "sort": 2000000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1342,7 +1221,7 @@
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Throw Rock",
-            "sort": 2300000,
+            "sort": 2100000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1372,7 +1251,7 @@
             "_id": "NizhFg0yQ725ETUd",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Titanic Grasp",
-            "sort": 2400000,
+            "sort": 2200000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1402,7 +1281,7 @@
             "_id": "Vk1vUceA5furX6Ez",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Wide Cleave",
-            "sort": 2500000,
+            "sort": 2300000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1427,181 +1306,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "CY3oCQgWnP4lKxV2",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 2600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 36
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "ZPz4ZIrit3C81k5I",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 2700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 43
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "XzS81xp4i0eoS8WZ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Crafting",
-            "sort": 2800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 37
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "H8CpkCmanUD3VkQI",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 2900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 37
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "voIp9slyTdIzLYJd",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 3000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "HsZd3NEiVb02VFrn",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 3100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 37
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "s5mM0gbw8QcELiHD",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 3200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 37
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Elysian Titan",
@@ -1710,6 +1414,29 @@
             "will": {
                 "saveDetail": "",
                 "value": 35
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 36
+            },
+            "athletics": {
+                "base": 43
+            },
+            "crafting": {
+                "base": 37
+            },
+            "diplomacy": {
+                "base": 37
+            },
+            "intimidation": {
+                "base": 35
+            },
+            "religion": {
+                "base": 37
+            },
+            "survival": {
+                "base": 37
             }
         },
         "spellcasting": {

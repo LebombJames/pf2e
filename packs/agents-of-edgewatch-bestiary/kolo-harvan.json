@@ -178,7 +178,7 @@
                 },
                 "containerId": null,
                 "description": {
-                    "value": "<p>A grinning skull tops the bow of this macabre key. This key can be used in place of thieves' tools when attempting to Pick a Lock, and it grants a +1 item bonus to the Thievery check.</p>\n<p>If the <em>skeleton key</em> becomes broken due to a critical failure on the check, it works as normal thieves' tools and loses its benefits until repaired.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You attempt to Pick a Lock but haven't rolled yet</p>\n<hr />\n<p><strong>Effect</strong> The key casts <em>@UUID[Compendium.pf2e.spells-srd.Item.Knock]</em> on the lock you're trying to pick.</p>"
+                    "value": "<p>A grinning skull tops the bow of this macabre key. This key can be used in place of thieves' tools when attempting to Pick a Lock, and it grants a +1 item bonus to the Thievery check.</p>\n<p>If the <em>skeleton key</em> becomes broken due to a critical failure on the check, it works as normal thieves' tools and loses its benefits until repaired.</p>\n<p><strong>Activate</strong> <span class=\"action-glyph\">F</span> Interact</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> You attempt to Pick a Lock but haven't rolled yet</p>\n<hr />\n<p><strong>Effect</strong> The key casts @UUID[Compendium.pf2e.spells-srd.Item.Knock] on the lock you're trying to pick.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -421,131 +421,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "ff0pcLcCE0qfVrlX",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 7
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "qWbbtn2PHFTkZ1ci",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 8
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "N8YnbMtfZTk2qc2z",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 8
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "sBfehJT0X3oRUFyu",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 9
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "2Y8pTHdCmtPpfv6a",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Thievery",
-            "sort": 1200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 7
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Kolo Harvan",
@@ -630,6 +505,23 @@
             "will": {
                 "saveDetail": "",
                 "value": 8
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 7
+            },
+            "deception": {
+                "base": 8
+            },
+            "diplomacy": {
+                "base": 8
+            },
+            "stealth": {
+                "base": 9
+            },
+            "thievery": {
+                "base": 7
             }
         },
         "traits": {

@@ -7,7 +7,7 @@ import { ConditionSlug } from "@item/condition/types.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { ConditionManager } from "@system/conditions/manager.ts";
 import { createDamageFormula, parseTermsFromSimpleFormula } from "@system/damage/formula.ts";
-import { AfflictionDamageTemplate, BaseDamageData, DamagePF2e, DamageRollContext } from "@system/damage/index.ts";
+import { AfflictionDamageTemplate, BaseDamageData, DamageDamageContext, DamagePF2e } from "@system/damage/index.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
 import { DegreeOfSuccess } from "@system/degree-of-success.ts";
 import { ErrorPF2e } from "@util";
@@ -95,7 +95,7 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
 
     override prepareBaseData(): void {
         super.prepareBaseData();
-        this.system.stage = Math.clamped(this.system.stage, this.badge.min, this.maxStage);
+        this.system.stage = Math.clamp(this.system.stage, this.badge.min, this.maxStage);
 
         // Set certain defaults
         for (const stage of Object.values(this.system.stages)) {
@@ -123,7 +123,6 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
                 base,
                 modifiers: [],
                 dice: [],
-                ignoredResistances: [],
             });
 
             const roll = new DamageRoll(formula);
@@ -136,7 +135,7 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
             };
 
             // Context isn't used for affliction damage rolls, but we still need it for creating messages
-            const context: DamageRollContext = {
+            const context: DamageDamageContext = {
                 type: "damage-roll",
                 sourceType: "save",
                 outcome: "failure",
@@ -254,7 +253,7 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
     /** Set the start time and initiative roll of a newly created effect */
     protected override async _preCreate(
         data: this["_source"],
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseCreateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
         if (this.isOwned) {
@@ -266,12 +265,12 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
             if (data.system.onset) data.system.onset.active = true;
         }
 
-        return super._preCreate(data, options, user);
+        return super._preCreate(data, operation, user);
     }
 
     protected override async _preUpdate(
         changed: DeepPartial<AfflictionSource>,
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseUpdateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
         const duration = changed.system?.duration;
@@ -279,15 +278,15 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
             if (duration.value === -1) duration.value = 1;
         }
 
-        return super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, operation, user);
     }
 
     protected override _onCreate(
         data: AfflictionSource,
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseCreateOperation<TParent>,
         userId: string,
     ): void {
-        super._onCreate(data, options, userId);
+        super._onCreate(data, operation, userId);
         if (game.user === this.actor?.primaryUpdater) {
             this.handleStageChange();
         }
@@ -295,10 +294,10 @@ class AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extend
 
     override _onUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseUpdateOperation<TParent>,
         userId: string,
     ): void {
-        super._onUpdate(changed, options, userId);
+        super._onUpdate(changed, operation, userId);
 
         // If the stage changed, perform stage change events
         if (changed.system?.stage && game.user === this.actor?.primaryUpdater) {
@@ -343,7 +342,7 @@ interface AfflictionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ex
 
 interface AfflictionDamage {
     template: AfflictionDamageTemplate;
-    context: DamageRollContext;
+    context: DamageDamageContext;
 }
 
 export { AfflictionPF2e };

@@ -4,6 +4,12 @@
         {{> "systems/pf2e/templates/actors/hazard/partials/sidebar.hbs"}}
         {{!-- BODY --}}
         <section class="content">
+            {{#if toggles.actions}}
+                <section class="toggles section-container">
+                    {{> "systems/pf2e/templates/actors/partials/toggles.hbs" toggles=toggles.actions}}
+                </section>
+            {{/if}}
+
             {{#if (or hasStealth editing)}}
                 <div class="section-container stealth">
                     <div class="section-header">
@@ -26,7 +32,7 @@
                         </div>
                     </div>
                     <div class="section-body hazard-editor">
-                        {{editor enrichedContent.stealthDetails target="system.attributes.stealth.details" button=true owner=owner editable=editable}}
+                        {{editor enrichedContent.stealthDetails target="system.attributes.stealth.details" button=true owner=owner editable=editable engine="prosemirror"}}
                     </div>
                 </div>
             {{/if}}
@@ -42,7 +48,7 @@
                         </div>
                     </div>
                     <div class="section-body hazard-editor">
-                        {{editor enrichedContent.description target="system.details.description" button=true owner=owner editable=editable}}
+                        {{editor enrichedContent.description target="system.details.description" button=true owner=owner editable=editable engine="prosemirror"}}
                     </div>
                 </div>
             {{/if}}
@@ -58,7 +64,7 @@
                         </div>
                     </div>
                     <div class="section-body hazard-editor">
-                        {{editor enrichedContent.disable target="system.details.disable" button=true owner=owner editable=editable}}
+                        {{editor enrichedContent.disable target="system.details.disable" button=true owner=owner editable=editable engine="prosemirror"}}
                     </div>
                 </div>
             {{/if}}
@@ -74,7 +80,7 @@
                         </div>
                     </div>
                     <div class="section-body hazard-editor">
-                        {{editor enrichedContent.routine target="system.details.routine" button=true owner=owner editable=editable}}
+                        {{editor enrichedContent.routine target="system.details.routine" button=true owner=owner editable=editable engine="prosemirror"}}
                     </div>
                 </div>
             {{/if}}
@@ -90,7 +96,7 @@
                         </div>
                     </div>
                     <div class="section-body hazard-editor">
-                        {{editor enrichedContent.reset target="system.details.reset" button=true owner=owner editable=editable}}
+                        {{editor enrichedContent.reset target="system.details.reset" button=true owner=owner editable=editable engine="prosemirror"}}
                     </div>
                 </div>
             {{/if}}
@@ -136,10 +142,10 @@
                     {{/each}}
 
                     {{#if actor.system.actions}}
-                        {{!-- List Attacks --}}
+                        {{!-- Attacks --}}
                         <ol class="actions-list attacks-list strikes-list item-list">
                             {{#each actor.system.actions as |action index|}}
-                                <li class="item attack flexrow" data-action-index="{{index}}" data-strike="" data-item-id="{{action.item.id}}">
+                                <li class="item action" data-action-index="{{index}}" data-strike="" data-item-id="{{action.item.id}}">
                                     <h4 class="attack-name tags">
                                         <span>
                                             <strong>{{localize action.attackRollType}}</strong>
@@ -147,7 +153,7 @@
                                             {{action.label}}
                                         </span>
                                         {{#each action.traits as |trait|}}
-                                            <div class="tag tag_transparent" title="{{localize trait.description}}">{{localize trait.label}}</div>
+                                            <div class="tag tag_transparent" data-tooltip="{{trait.description}}">{{localize trait.label}}</div>
                                         {{/each}}
                                         {{#each action.additionalEffects as |effect|}}
                                             <div class="tag tag_transparent" data-tag="{{effect.tag}}">{{localize effect.label}}</div>
@@ -161,13 +167,13 @@
                                     </div>
 
                                     <div class="button-group">
-                                        <div class="attacks sub-section">
+                                        <div class="subsection attack">
                                             {{#each action.variants as |variant vi|}}
                                                 <button type="button" class="btn attack-button" {{#if (eq vi 0)}}title="{{action.breakdown}}"{{/if}} data-action="strike-attack" data-variant-index="{{vi}}">{{variant.label}}</button>
                                             {{/each}}
                                         </div>
                                         {{#if action.item.dealsDamage}}
-                                            <div class="damage sub-section">
+                                            <div class="subsection damage">
                                                 <button type="button" class="damage-button" data-action="strike-damage">{{action.damageFormula}}</button>
                                                 <button type="button" class="critical-button" data-action="strike-critical">{{localize "PF2E.CriticalDamageLabel"}}</button>
                                             </div>

@@ -6,8 +6,8 @@ import {
     PickAThingPrompt,
     PromptTemplateData,
 } from "@module/apps/pick-a-thing-prompt.ts";
-import { DropCanvasDataPF2e } from "@module/canvas/drop-canvas-data.ts";
-import type { PredicatePF2e } from "@system/predication.ts";
+import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
+import type { Predicate } from "@system/predication.ts";
 import { createHTMLElement, ErrorPF2e, htmlQuery, htmlQueryAll, sluggify } from "@util";
 import { UUIDUtils } from "@util/uuid.ts";
 
@@ -20,7 +20,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | num
     containsItems: boolean;
 
     /** A predicate validating a dragged & dropped item selection */
-    allowedDrops: { label: string | null; predicate: PredicatePF2e } | null;
+    allowedDrops: { label: string | null; predicate: Predicate } | null;
 
     constructor(data: ChoiceSetPromptData) {
         super(data);
@@ -71,7 +71,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | num
 
         if (this.containsItems) {
             if (this.selectMenu) {
-                const itemInfoAnchor = htmlQuery(html, "a.item-info");
+                const itemInfoAnchor = htmlQuery(html, "a[data-action=view-item]");
                 if (!itemInfoAnchor) return;
 
                 const updateAnchor = (disable: boolean, value = ""): void => {
@@ -104,7 +104,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | num
                     }
                 });
             } else {
-                for (const anchor of htmlQueryAll(html, "a.item-info")) {
+                for (const anchor of htmlQueryAll(html, "a[data-action=view-item]")) {
                     anchor.addEventListener("click", (event) => {
                         renderItemSheet(this.getSelection(event));
                     });
@@ -149,7 +149,7 @@ class ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string | num
     protected override async _onDrop(event: DragEvent): Promise<void> {
         event.preventDefault();
         const dataString = event.dataTransfer?.getData("text/plain");
-        const dropData: DropCanvasDataPF2e<"Item"> | undefined = JSON.parse(dataString ?? "");
+        const dropData: DropCanvasItemDataPF2e | undefined = JSON.parse(dataString ?? "");
         if (dropData?.type !== "Item") {
             ui.notifications.error("Only an item can be dropped here.");
             return;
@@ -229,7 +229,7 @@ interface ChoiceSetPrompt extends PickAThingPrompt<ItemPF2e<ActorPF2e>, string |
 interface ChoiceSetPromptData extends PickAThingConstructorArgs<ItemPF2e<ActorPF2e>, string | number | object> {
     prompt: string;
     containsItems: boolean;
-    allowedDrops: { label: string | null; predicate: PredicatePF2e } | null;
+    allowedDrops: { label: string | null; predicate: Predicate } | null;
 }
 
 interface ChoiceSetChoice extends PickableThing {

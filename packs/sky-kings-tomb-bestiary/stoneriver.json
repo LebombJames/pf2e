@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -27,74 +26,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 29,
@@ -152,7 +84,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>A thin crack rips through the earth, erupting with magma, then swiftly seals up. Each creature along the line and on solid ground takes 4d6 bludgeoning damage and 6d6 fire damage with a Reflex save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half damage.</p>\n<p><strong>Failure</strong> The creature takes full damage, and it falls @UUID[Compendium.pf2e.conditionitems.Item.Prone].</p>\n<p><strong>Critical Failure</strong> The target takes double damage, and it falls prone.</p>\n<hr />\n<p>Heightened (+1) The damage increases by 1d6 bludgeoning and 1d6 fire</p>"
+                    "value": "<p>A thin crack rips through the earth, erupting with magma, then swiftly seals up. Each creature along the line and on solid ground takes 4d6 bludgeoning damage and 6d6 fire damage with a Reflex save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half damage.</p>\n<p><strong>Failure</strong> The creature takes full damage, and it falls @UUID[Compendium.pf2e.conditionitems.Item.Prone].</p>\n<p><strong>Critical Failure</strong> The target takes double damage, and it falls prone.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d6 bludgeoning and 1d6 fire</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -1196,80 +1128,10 @@
             "type": "melee"
         },
         {
-            "_id": "DnmcDFtmIZrTlT9c",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 1500000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
-            "_id": "1ohwhtmMy6GtzuuM",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Scent (Imprecise) 60 Feet",
-            "sort": 1600000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "scent",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "5jDHIJ0xWXWiB9nQ",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "+10 to Detect Lies and Illusions",
-            "sort": 1700000,
+            "sort": 1500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1317,7 +1179,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "+2 Status to All Saves vs. Magic",
-            "sort": 1800000,
+            "sort": 1600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1370,7 +1232,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Regeneration 30 (Deactivated by Cold or Unholy)",
-            "sort": 1900000,
+            "sort": 1700000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1410,8 +1272,8 @@
         {
             "_id": "KVJ0rUbUamghX6w7",
             "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "Bolster Torag’s Chosen",
-            "sort": 2000000,
+            "name": "Bolster Torag's Chosen",
+            "sort": 1800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1474,7 +1336,7 @@
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Retributive Strike",
-            "sort": 2100000,
+            "sort": 1900000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -1504,7 +1366,7 @@
             "_id": "NAqzcCJdxWoCQrrx",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Devour Magic",
-            "sort": 2200000,
+            "sort": 2000000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1514,7 +1376,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Whenever Stoneriver deals damage with Swallow Whole, he consumes one of the swallowed creature's magical effects, as <em>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</em> with a [[/r 1d20+21 #Counteract]]{+21} counteract modifier.</p>"
+                    "value": "<p>Whenever Stoneriver deals damage with Swallow Whole, he consumes one of the swallowed creature's magical effects, as @UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic] with a [[/r 1d20+21 #Counteract]]{+21} counteract modifier.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1535,7 +1397,7 @@
             "_id": "ONrwFvyv9DsatjWc",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Measure Soul",
-            "sort": 2300000,
+            "sort": 2100000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1588,7 +1450,7 @@
             "_id": "J5Z3ttUHqoTdRGZw",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Rock Tunneler",
-            "sort": 2400000,
+            "sort": 2200000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1622,7 +1484,7 @@
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Swallow Whole",
-            "sort": 2500000,
+            "sort": 2300000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -1659,7 +1521,7 @@
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Grab",
-            "sort": 2600000,
+            "sort": 2400000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -1686,160 +1548,10 @@
             "type": "action"
         },
         {
-            "_id": "cuCESd2M0aptldG6",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 2700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "AIpl1lGNfbo6ISiw",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 2800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 26
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "7YwXAWXh0Iihn0AS",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Diplomacy",
-            "sort": 2900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "nFg5Xtivy1bPoflb",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 3000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "xD3GNfOlwpGn2rIU",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 3100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "FXYkAFrK8U6AZo9E",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 3200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 23
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
             "_id": "OwuCiIr7ZFX0MXS8",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Torag Lore",
-            "sort": 3300000,
+            "sort": 2500000,
             "system": {
                 "description": {
                     "value": ""
@@ -1975,6 +1687,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 21
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 20
+            },
+            "athletics": {
+                "base": 26
+            },
+            "diplomacy": {
+                "base": 21
+            },
+            "intimidation": {
+                "base": 21
+            },
+            "stealth": {
+                "base": 20
+            },
+            "survival": {
+                "base": 23
             }
         },
         "traits": {

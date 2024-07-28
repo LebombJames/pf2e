@@ -3,45 +3,10 @@
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
-            "_id": "ExsxFy6Bmcgsy0GX",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.fFu2sZz4KB01fVRc"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Low-Light Vision",
-            "sort": 100000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.LowLightVision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "low-light-vision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "ZvqnxVWvm9QdJZVi",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Blood Scent",
-            "sort": 200000,
+            "sort": 100000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -78,7 +43,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Fast Healing 15",
-            "sort": 300000,
+            "sort": 200000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -114,7 +79,7 @@
             "_id": "uQFiXxjHXOCxLHe8",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Vulnerability to Supernatural Darkness",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -144,7 +109,7 @@
             "_id": "lUMpyYokJ5dTTdu9",
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Blood Drain",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -174,7 +139,7 @@
             "_id": "wrisTXltKN2ggF1B",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Mandragora Swarm Venom",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -206,7 +171,7 @@
             "_id": "w0XMZ6GmkzJcCRyO",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Piercing Shriek",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -245,7 +210,7 @@
             "_id": "FCU5JyYgiHDot5rm",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Swarming Bites",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -270,97 +235,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "iWX9xJurU9y34sZ8",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 32
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "DGvSLoUDiyqdqwn6",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "rs8cxUHAMnuhP7nv",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 34
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.Vegetation",
-                        "predicate": [
-                            "terrain:vegetation"
-                        ],
-                        "selector": "stealth",
-                        "value": 4
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+38 in vegetation",
-                        "options": "terrain:vegetation"
-                    }
-                }
-            },
-            "type": "lore"
         }
     ],
     "name": "Mandragora Swarm",
@@ -477,7 +351,7 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "blood scent, blood scent",
+            "details": "blood scent",
             "mod": 30,
             "senses": [
                 {
@@ -498,6 +372,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 28
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 32
+            },
+            "athletics": {
+                "base": 29
+            },
+            "stealth": {
+                "base": 34,
+                "special": [
+                    {
+                        "base": 38,
+                        "label": "in vegetation",
+                        "predicate": [
+                            "terrain:vegetation"
+                        ]
+                    }
+                ]
             }
         },
         "traits": {

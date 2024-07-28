@@ -38,7 +38,7 @@
                 },
                 "items": {
                     "hy4x9": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Survey Wildlife",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Survey Wildlife"
@@ -51,10 +51,12 @@
                 },
                 "rules": [],
                 "slug": "hunter",
-                "trainedLore": "Tanning Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Tanning Lore"
+                    ],
                     "value": [
-                        "sur"
+                        "survival"
                     ]
                 },
                 "traits": {
@@ -458,7 +460,7 @@
                         "predicate": [
                             {
                                 "gte": [
-                                    "skill:itm:rank",
+                                    "skill:intimidation:rank",
                                     1
                                 ]
                             }
@@ -470,7 +472,7 @@
                         "flag": "scareToDeath",
                         "key": "GrantItem",
                         "predicate": [
-                            "skill:itm:rank:4"
+                            "skill:intimidation:rank:4"
                         ],
                         "reevaluateOnUpdate": true,
                         "uuid": "Compendium.pf2e.feats-srd.Item.Scare to Death"
@@ -2561,6 +2563,7 @@
                             }
                         ],
                         "selector": "intimidation",
+                        "slug": "intimidating-prowess",
                         "type": "circumstance",
                         "value": {
                             "brackets": [
@@ -2575,7 +2578,7 @@
                                     "value": 1
                                 }
                             ],
-                            "field": "actor|system.skills.itm.rank"
+                            "field": "actor|system.skills.intimidation.rank"
                         }
                     }
                 ],
@@ -2873,19 +2876,19 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Juggernaut"
                     },
                     "ihbgk": {
-                        "img": "systems/pf2e/icons/features/classes/devastator.webp",
+                        "img": "icons/skills/melee/shield-damaged-broken-orange.webp",
                         "level": 19,
                         "name": "Devastator",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Devastator"
                     },
                     "njgcl": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Barbarian)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization (Barbarian)"
                     },
                     "o4ypa": {
-                        "img": "systems/pf2e/icons/features/classes/weapon-fury.webp",
+                        "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
                         "level": 13,
                         "name": "Weapon Fury",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Weapon Fury"
@@ -2897,13 +2900,13 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Deny Advantage"
                     },
                     "qh9xw": {
-                        "img": "systems/pf2e/icons/features/classes/mighty-rage.webp",
+                        "img": "icons/magic/symbols/mask-yellow-orange.webp",
                         "level": 11,
                         "name": "Mighty Rage",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Mighty Rage"
                     },
                     "s5lxl": {
-                        "img": "systems/pf2e/icons/features/classes/armor-of-fury.webp",
+                        "img": "icons/tools/smithing/furnace-fire-metal-orange.webp",
                         "level": 19,
                         "name": "Armor of Fury",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Armor of Fury"
@@ -2982,7 +2985,7 @@
                 "trainedSkills": {
                     "additional": 3,
                     "value": [
-                        "ath"
+                        "athletics"
                     ]
                 },
                 "traits": {
@@ -3512,7 +3515,7 @@
                     "sourceId": "Compendium.pf2e.classfeatures.Item.88Q33X2a0iYPkbzd"
                 }
             },
-            "img": "systems/pf2e/icons/features/classes/mighty-rage.webp",
+            "img": "icons/magic/symbols/mask-yellow-orange.webp",
             "name": "Mighty Rage",
             "sort": 8800,
             "system": {
@@ -4007,52 +4010,52 @@
         },
         "saves": {},
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 2
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 3
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 1
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 0
             },
-            "sur": {
+            "survival": {
                 "rank": 3
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

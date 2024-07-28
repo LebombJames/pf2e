@@ -10,6 +10,10 @@ export class EffectSheetPF2e extends ItemSheetPF2e<EffectPF2e> {
         return { ...super.defaultOptions, hasSidebar: true };
     }
 
+    protected override get validTraits(): Record<string, string> {
+        return {};
+    }
+
     override async getData(options?: Partial<ItemSheetOptions>): Promise<EffectSheetData> {
         const badge = this.item.badge;
 
@@ -17,6 +21,16 @@ export class EffectSheetPF2e extends ItemSheetPF2e<EffectPF2e> {
             ...(await super.getData(options)),
             itemType: game.i18n.localize("PF2E.LevelLabel"),
             badgeType: badge ? game.i18n.localize(`PF2E.Item.Effect.Badge.Type.${badge.type}`) : "",
+            expiryOptions: [
+                { value: "turn-start", label: "PF2E.Item.Effect.Expiry.StartOfTurn" },
+                { value: "turn-end", label: "PF2E.Item.Effect.Expiry.EndOfTurn" },
+                { value: "round-end", label: "PF2E.Item.Effect.Expiry.EndOfRound" },
+            ],
+            reevaluateOptions: [
+                { value: "initiative-roll", label: "PF2E.Item.Effect.Badge.ReevaluateFormula.InitiativeRoll" },
+                { value: "turn-start", label: "PF2E.Item.Effect.Badge.ReevaluateFormula.TurnStart" },
+                { value: "turn-end", label: "PF2E.Item.Effect.Badge.ReevaluateFormula.TurnEnd" },
+            ],
             timeUnits: CONFIG.PF2E.timeUnits,
         };
     }
@@ -84,5 +98,7 @@ export class EffectSheetPF2e extends ItemSheetPF2e<EffectPF2e> {
 
 interface EffectSheetData extends ItemSheetDataPF2e<EffectPF2e> {
     badgeType: string;
+    expiryOptions: FormSelectOption[];
+    reevaluateOptions: FormSelectOption[];
     timeUnits: ConfigPF2e["PF2E"]["timeUnits"];
 }

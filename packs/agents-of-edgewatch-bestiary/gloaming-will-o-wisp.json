@@ -77,6 +77,7 @@
                             }
                         ],
                         "value": {
+                            "alpha": 0.2,
                             "animation": {
                                 "intensity": 1,
                                 "speed": 3,
@@ -190,7 +191,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The gloaming will-o'-wisp extinguishes their hypnotic glow, becoming invisible. They can end this effect with another use of this action. If they use their shock attack while invisible, the arc of electricity lets any observer determine their location, making the will-o'-wisp only hidden to observers until they move.</p>"
+                    "value": "<p>The gloaming will-o'-wisp extinguishes their hypnotic glow, becoming @UUID[Compendium.pf2e.conditionitems.Item.Invisible]. They can end this effect with another use of this action. If they use their shock attack while invisible, the arc of electricity lets any observer determine their location, making the will-o'-wisp only @UUID[Compendium.pf2e.conditionitems.Item.Hidden] to observers until they move.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -202,7 +203,25 @@
                         "domain": "all",
                         "key": "RollOption",
                         "option": "go-dark",
+                        "suboptions": [
+                            {
+                                "label": "PF2E.ConditionTypeInvisible",
+                                "value": "Compendium.pf2e.conditionitems.Item.Invisible"
+                            },
+                            {
+                                "label": "PF2E.ConditionTypeHidden",
+                                "value": "Compendium.pf2e.conditionitems.Item.Hidden"
+                            }
+                        ],
                         "toggleable": true
+                    },
+                    {
+                        "inMemoryOnly": true,
+                        "key": "GrantItem",
+                        "predicate": [
+                            "go-dark"
+                        ],
+                        "uuid": "{item|flags.pf2e.rulesSelections.goDark}"
                     }
                 ],
                 "slug": null,
@@ -214,106 +233,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "AWy8htDL3QUiMtEI",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "sZPFat1bCH2evHPf",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 23
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "oh2XiRUFPn2E0UwP",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 23
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "2DWiwnnlIy19ERz8",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 27
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Gloaming Will-o'-Wisp",
@@ -412,6 +331,20 @@
             "will": {
                 "saveDetail": "",
                 "value": 23
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 29
+            },
+            "deception": {
+                "base": 23
+            },
+            "intimidation": {
+                "base": 23
+            },
+            "stealth": {
+                "base": 27
             }
         },
         "traits": {

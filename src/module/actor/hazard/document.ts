@@ -17,7 +17,7 @@ import * as R from "remeda";
 import { HazardSource, HazardSystemData } from "./data.ts";
 
 class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
-    declare skills: { stealth: Statistic };
+    declare skills: Record<"stealth", Statistic<this>>;
 
     override get allowedItemTypes(): (ItemType | "physical")[] {
         return [...super.allowedItemTypes, "action", "melee"];
@@ -109,7 +109,7 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
         this.skills = {
             stealth: new Statistic(this, {
                 slug: "stealth",
-                label: CONFIG.PF2E.skillList.stealth,
+                label: CONFIG.PF2E.skills.stealth.label,
                 domains: ["stealth", `dex-based`, "skill-check", `dex-skill-check`, "all"],
                 modifiers: [
                     new ModifierPF2e({
@@ -175,7 +175,7 @@ class HazardPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | 
     }
 
     private prepareSaves(): { [K in SaveType]?: Statistic } {
-        const { system } = this;
+        const system = this.system;
 
         // Saving Throws
         return SAVE_TYPES.reduce((saves: { [K in SaveType]?: Statistic }, saveType) => {

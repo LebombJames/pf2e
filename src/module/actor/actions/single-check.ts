@@ -1,22 +1,22 @@
 import { ActorPF2e } from "@actor";
 import { ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import { DCSlug } from "@actor/types.ts";
-import { DC_SLUGS } from "@actor/values.ts";
+import { SAVE_TYPES } from "@actor/values.ts";
 import type { ItemPF2e } from "@item";
+import { TokenPF2e } from "@module/canvas/index.ts";
 import { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
 import { ActionMacroHelpers } from "@system/action-macros/index.ts";
 import {
     ActionGlyph,
-    CheckContext,
     CheckContextData,
     CheckContextOptions,
+    CheckMacroContext,
     CheckResultCallback,
 } from "@system/action-macros/types.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
-import { getActionGlyph, isObject, setHasElement } from "@util";
+import { getActionGlyph, isObject, tupleHasValue } from "@util";
 import { BaseAction, BaseActionData, BaseActionVariant, BaseActionVariantData } from "./base.ts";
 import { ActionUseOptions } from "./types.ts";
-import { TokenPF2e } from "@module/canvas/index.ts";
 
 type SingleCheckActionRollNoteData = Omit<RollNoteSource, "selector"> & { selector?: string };
 function toRollNoteSource(data: SingleCheckActionRollNoteData): RollNoteSource {
@@ -25,7 +25,14 @@ function toRollNoteSource(data: SingleCheckActionRollNoteData): RollNoteSource {
 }
 
 function isValidDifficultyClass(dc: unknown): dc is CheckDC | DCSlug {
-    return setHasElement(DC_SLUGS, dc) || (isObject<{ value: unknown }>(dc) && typeof dc.value === "number");
+    if (isObject<{ value: unknown }>(dc) && typeof dc.value === "number") {
+        return true;
+    }
+
+    const slug = String(dc);
+    return (
+        ["ac", "armor", "perception"].includes(slug) || tupleHasValue(SAVE_TYPES, slug) || slug in CONFIG.PF2E.skills
+    );
 }
 
 interface SingleCheckActionVariantData extends BaseActionVariantData {
@@ -175,7 +182,7 @@ class SingleCheckActionVariant extends BaseActionVariant {
     protected checkContext<ItemType extends ItemPF2e<ActorPF2e>>(
         opts: CheckContextOptions<ItemType>,
         data: CheckContextData<ItemType>,
-    ): CheckContext<ItemType> | undefined {
+    ): CheckMacroContext<ItemType> | undefined {
         return ActionMacroHelpers.defaultCheckContext(opts, data);
     }
 
@@ -191,12 +198,8 @@ class SingleCheckActionVariant extends BaseActionVariant {
                 return { label: statistic.label, modifier: modifier.totalModifier, slug: args.slug };
             }
         } else {
-            const labels: Record<string, string> = {
-                perception: "PF2E.PerceptionLabel",
-                ...CONFIG.PF2E.saves,
-                ...CONFIG.PF2E.skillList,
-            };
-            return { label: game.i18n.localize(labels[args.slug] ?? args.slug), slug: args.slug };
+            const label = ActionMacroHelpers.getSimpleCheckLabel(args.slug) ?? game.i18n.localize(args.slug);
+            return { label, slug: args.slug };
         }
         return null;
     }

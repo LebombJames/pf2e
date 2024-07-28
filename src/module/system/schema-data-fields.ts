@@ -1,6 +1,6 @@
-import { PredicatePF2e, PredicateStatement, RawPredicate, StatementValidator } from "@system/predication.ts";
+import { Predicate, PredicateStatement, RawPredicate, StatementValidator } from "@system/predication.ts";
 import { SlugCamel, sluggify } from "@util";
-import { isObject } from "remeda";
+import * as R from "remeda";
 import type DataModel from "types/foundry/common/abstract/data.d.ts";
 import type {
     ArrayFieldOptions,
@@ -51,7 +51,7 @@ class StrictSchemaField<TDataSchema extends DataSchema> extends fields.SchemaFie
     }
 
     protected override _cleanType(data: object, options?: CleanFieldOptions): SourceFromSchema<TDataSchema> {
-        if (!isObject(data)) {
+        if (!R.isPlainObject(data)) {
             throw Error(`${this.name} is not an object`);
         }
         return super._cleanType(data, options);
@@ -61,7 +61,7 @@ class StrictSchemaField<TDataSchema extends DataSchema> extends fields.SchemaFie
 /** A `StringField` that does not cast the source value */
 class StrictStringField<
     TSourceProp extends string,
-    TModelProp = TSourceProp,
+    TModelProp extends NonNullable<JSONValue> = TSourceProp,
     TRequired extends boolean = false,
     TNullable extends boolean = false,
     THasInitial extends boolean = boolean,
@@ -74,7 +74,7 @@ class StrictStringField<
 /** A `NumberField` that does not cast the source value */
 class StrictNumberField<
     TSourceProp extends number,
-    TModelProp = TSourceProp,
+    TModelProp extends NonNullable<JSONValue> = TSourceProp,
     TRequired extends boolean = false,
     TNullable extends boolean = true,
     THasInitial extends boolean = true,
@@ -127,9 +127,34 @@ class StrictArrayField<
     }
 }
 
+/** An array field that will prune invalid elements without complaint */
+class LaxArrayField<
+    TElementField extends DataField,
+    TSourceProp extends Partial<SourcePropFromDataField<TElementField>>[] = SourcePropFromDataField<TElementField>[],
+    TModelProp extends object = ModelPropFromDataField<TElementField>[],
+    TRequired extends boolean = true,
+    TNullable extends boolean = false,
+    THasInitial extends boolean = true,
+> extends fields.ArrayField<TElementField, TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
+    protected override _validateElements(
+        value: unknown[],
+        options?: DataFieldValidationOptions,
+    ): void | DataModelValidationFailure {
+        const failure = super._validateElements(value, options);
+        if (!failure) return failure;
+
+        for (const element of failure.elements) {
+            value.splice(Number(element.id), 1);
+        }
+        failure.unresolved = false;
+
+        return failure;
+    }
+}
+
 class StrictObjectField<
     TSourceProp extends object,
-    TModelProp = TSourceProp,
+    TModelProp extends object = TSourceProp,
     TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true,
@@ -304,7 +329,7 @@ class PredicateField<
     TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true,
-> extends StrictArrayField<PredicateStatementField, RawPredicate, PredicatePF2e, TRequired, TNullable, THasInitial> {
+> extends StrictArrayField<PredicateStatementField, RawPredicate, Predicate, TRequired, TNullable, THasInitial> {
     constructor(options: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial> = {}) {
         super(new PredicateStatementField(), { label: "PF2E.RuleEditor.General.Predicate", ...options });
     }
@@ -314,26 +339,41 @@ class PredicateField<
         value: RawPredicate,
         model: ConstructorOf<foundry.abstract.DataModel>,
         options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>,
-    ): MaybeSchemaProp<PredicatePF2e, TRequired, TNullable, THasInitial>;
+    ): MaybeSchemaProp<Predicate, TRequired, TNullable, THasInitial>;
     override initialize(
         value: RawPredicate,
         model: ConstructorOf<foundry.abstract.DataModel>,
         options: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>,
-    ): PredicatePF2e | null | undefined {
+    ): Predicate | null | undefined {
         const statements = super.initialize(value, model, options);
-        return Array.isArray(statements) ? new PredicatePF2e(...statements) : statements;
+        return Array.isArray(statements) ? new Predicate(...statements) : statements;
     }
 }
 
 type RecordFieldModelProp<
     TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>,
     TValueField extends DataField,
-> = Partial<Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>>;
+    TDense extends boolean = false,
+> = TDense extends true
+    ? Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>
+    : TDense extends false
+      ? Partial<Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>>
+      :
+            | Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>
+            | Partial<Record<ModelPropFromDataField<TKeyField>, ModelPropFromDataField<TValueField>>>;
 
 type RecordFieldSourceProp<
     TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>,
     TValueField extends DataField,
-> = Partial<Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>>;
+    /** Whether this is to be treated as a "dense" record; i.e., any valid key should return a value */
+    TDense extends boolean = false,
+> = TDense extends true
+    ? Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>
+    : TDense extends false
+      ? Partial<Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>>
+      :
+            | Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>
+            | Partial<Record<SourcePropFromDataField<TKeyField>, SourcePropFromDataField<TValueField>>>;
 
 class RecordField<
     TKeyField extends StringField<string, string, true, false, false> | NumberField<number, number, true, false, false>,
@@ -341,9 +381,10 @@ class RecordField<
     TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true,
+    TDense extends boolean = false,
 > extends fields.ObjectField<
-    RecordFieldSourceProp<TKeyField, TValueField>,
-    RecordFieldModelProp<TKeyField, TValueField>,
+    RecordFieldSourceProp<TKeyField, TValueField, TDense>,
+    RecordFieldModelProp<TKeyField, TValueField, TDense>,
     TRequired,
     TNullable,
     THasInitial
@@ -356,7 +397,12 @@ class RecordField<
     constructor(
         keyField: TKeyField,
         valueField: TValueField,
-        options: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>,
+        options?: ObjectFieldOptions<
+            RecordFieldSourceProp<TKeyField, TValueField, TDense>,
+            TRequired,
+            TNullable,
+            THasInitial
+        >,
     ) {
         super(options);
 
@@ -403,6 +449,7 @@ class RecordField<
             }
         }
         if (failures.elements.length) {
+            failures.unresolved = failures.elements.some((e) => e.failure.unresolved);
             return failures;
         }
     }
@@ -412,6 +459,7 @@ class RecordField<
         options?: CleanFieldOptions | undefined,
     ): Record<string, unknown> {
         for (const [key, value] of Object.entries(values)) {
+            if (key.startsWith("-=")) continue; // Don't attempt to clean deletion entries
             values[key] = this.valueField.clean(value, options);
         }
         return values;
@@ -421,7 +469,7 @@ class RecordField<
         values: unknown,
         options?: DataFieldValidationOptions,
     ): boolean | DataModelValidationFailure | void {
-        if (!isObject(values)) {
+        if (!R.isPlainObject(values)) {
             return new foundry.data.validation.DataModelValidationFailure({ message: "must be an Object" });
         }
         return this._validateValues(values, options);
@@ -431,24 +479,37 @@ class RecordField<
         values: object | null | undefined,
         model: ConstructorOf<foundry.abstract.DataModel>,
         options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>,
-    ): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>;
+    ): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField, TDense>, TRequired, TNullable, THasInitial>;
     override initialize(
         values: object | null | undefined,
         model: ConstructorOf<foundry.abstract.DataModel>,
         options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>,
-    ): RecordFieldModelProp<TKeyField, TValueField> | null | undefined {
+    ): Record<string, unknown> | null | undefined {
         if (!values) return values;
         const data: Record<string, unknown> = {};
         for (const [key, value] of Object.entries(values)) {
             data[key] = this.valueField.initialize(value, model, options);
         }
-        return data as RecordFieldModelProp<TKeyField, TValueField>;
+        return data;
+    }
+}
+
+/** A field that always results in a value of `null` */
+class NullField extends fields.DataField<null, null, true, true, true> {
+    constructor() {
+        super({ required: true, nullable: true, initial: null });
+    }
+
+    protected override _cast(): null {
+        return null;
     }
 }
 
 export {
     DataUnionField,
+    LaxArrayField,
     LaxSchemaField,
+    NullField,
     PredicateField,
     RecordField,
     SlugField,

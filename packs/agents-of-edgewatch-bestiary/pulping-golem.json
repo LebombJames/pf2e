@@ -90,7 +90,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>Casting <em>@UUID[Compendium.pf2e.spells-srd.Item.Cleanse Affliction]</em> on the golem deactivates its Breath Weapon for 1 minute.</p>"
+                    "value": "<p>Casting @UUID[Compendium.pf2e.spells-srd.Item.Cleanse Affliction] on the golem deactivates its Breath Weapon for 1 minute.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -260,31 +260,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "lDG0TKpCybMYef7F",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 32
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Pulping Golem",
@@ -388,6 +363,11 @@
             "will": {
                 "saveDetail": "",
                 "value": 24
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 32
             }
         },
         "traits": {

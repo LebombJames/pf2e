@@ -34,6 +34,7 @@ import { CheckPF2e } from "@system/check/check.ts";
 import { ConditionManager } from "@system/conditions/index.ts";
 import { EffectTracker } from "@system/effect-tracker.ts";
 import { ModuleArt } from "@system/module-art.ts";
+import { Predicate } from "@system/predication.ts";
 import { TextEditorPF2e } from "@system/text-editor.ts";
 import { sluggify } from "@util";
 
@@ -74,14 +75,15 @@ export const SetGamePF2e = {
             Coins: CoinsPF2e,
             ConditionManager,
             Dice: DicePF2e,
+            ElementalBlast,
             Modifier: ModifierPF2e,
             ModifierType: MODIFIER_TYPE,
+            Predicate: Predicate,
             RuleElement: RuleElementPF2e,
             RuleElements: RuleElements,
             StatisticModifier: StatisticModifier,
             StatusEffects: StatusEffects,
             TextEditor: TextEditorPF2e,
-            ElementalBlast,
             actions,
             effectPanel: new EffectsPanel(),
             effectTracker: new EffectTracker(),
@@ -101,22 +103,29 @@ export const SetGamePF2e = {
             variantRules: { AutomaticBonusProgression },
         };
         game.pf2e = fu.mergeObject(game.pf2e ?? {}, initSafe);
-        game.pf2e.ConditionManager.initialize();
         game.pf2e.settings = {
+            automation: {
+                flanking: game.settings.get("pf2e", "automation.flankingDetection"),
+            },
             campaign: {
-                enabled: game.settings.get("pf2e", "campaignFeats"),
-                sections: game.settings.get("pf2e", "campaignFeatSections"),
+                feats: {
+                    enabled: game.settings.get("pf2e", "campaignFeats"),
+                    sections: game.settings.get("pf2e", "campaignFeatSections"),
+                },
+                languages: game.settings.get("pf2e", "homebrew.languageRarities"),
             },
             critFumble: {
                 buttons: game.settings.get("pf2e", "critFumbleButtons"),
                 cards: game.settings.get("pf2e", "drawCritFumble"),
             },
+            dragMeasurement: "never", // set in canvasInit hook
             encumbrance: game.settings.get("pf2e", "automation.encumbrance"),
             gmVision: game.settings.get("pf2e", "gmVision"),
             iwr: game.settings.get("pf2e", "automation.iwr"),
             metagame: {
                 breakdowns: game.settings.get("pf2e", "metagame_showBreakdowns"),
                 dcs: game.settings.get("pf2e", "metagame_showDC"),
+                secretChecks: game.settings.get("pf2e", "metagame_secretChecks"),
                 partyStats: game.settings.get("pf2e", "metagame_showPartyStats"),
                 partyVision: game.settings.get("pf2e", "metagame_partyVision"),
                 results: game.settings.get("pf2e", "metagame_showResults"),

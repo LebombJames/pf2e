@@ -14,18 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {
-                    "0": false,
-                    "1": false,
-                    "2": false,
-                    "3": false,
-                    "4": false,
-                    "5": false,
-                    "6": false,
-                    "7": false,
-                    "8": false,
-                    "9": false
-                },
                 "prepared": {
                     "value": "prepared"
                 },
@@ -41,174 +29,161 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "XaP5nxVgPw3sKeaf"
                             },
-                            "1": {
+                            {
                                 "id": "O3vEbsrFIuYllsJP"
                             },
-                            "2": {
+                            {
                                 "id": "ZQ2CAI6Cc3DA266d"
                             },
-                            "3": {
+                            {
                                 "id": "IPIWL1Xx46o2CPH9"
                             },
-                            "4": {
+                            {
                                 "id": "un7j5puPKnIPOHmL"
                             }
-                        },
+                        ],
                         "value": 5
                     },
                     "slot1": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "LbIJcPskNmLqqOcu"
                             },
-                            "1": {
+                            {
                                 "id": "EvEa01I6k4bFyQyW"
                             },
-                            "2": {
+                            {
                                 "id": "45mAYMAjcr5LVUpE"
                             }
-                        },
+                        ],
                         "value": 3
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
                     },
                     "slot2": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "fx3WsdKHqlkn0HKk"
                             },
-                            "1": {
+                            {
                                 "id": "rWGD5YPTPkl2Hyg4"
                             },
-                            "2": {
+                            {
                                 "id": "1YdCwb4JOSmnwJrK"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot3": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "3w4bIyMqd27uwWLd"
                             },
-                            "1": {
+                            {
                                 "id": "rB988t5iqWcxQHwl"
                             },
-                            "2": {
+                            {
                                 "id": "IzXXLHiRWm2gtXT0"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot4": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "D8JsbqE2Gmpw7geD"
                             },
-                            "1": {
+                            {
                                 "id": "OoB6B68EqBINyZZl"
                             },
-                            "2": {
+                            {
                                 "id": "e90Vd9NcdR7fPkPu"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot5": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "3w4bIyMqd27uwWLd"
                             },
-                            "1": {
+                            {
                                 "id": "TuHMd8R0jQhZIrv4"
                             },
-                            "2": {
+                            {
                                 "id": "CpLS2m31r8qFg49y"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot6": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "Ddk590cWV3BGCnwu"
                             },
-                            "1": {
+                            {
                                 "id": "rmR7xjXiWgEMYrbC"
                             },
-                            "2": {
+                            {
                                 "id": "eAJFA8NBiaCilp7Q"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot7": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "wO2cVULXi1R3A99D"
                             },
-                            "1": {
+                            {
                                 "id": "D8JsbqE2Gmpw7geD"
                             },
-                            "2": {
+                            {
                                 "id": "buxICVE898FNIhdd"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot8": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "nuLwDa1EyeYfZvxi"
                             },
-                            "1": {
+                            {
                                 "id": "JKDA2NVOa04w8sNw"
                             },
-                            "2": {
+                            {
                                 "id": "rB988t5iqWcxQHwl"
                             }
-                        },
+                        ],
                         "value": 3
                     },
                     "slot9": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "3w4bIyMqd27uwWLd"
                             },
-                            "1": {
+                            {
                                 "id": "54T76Dn1e3MkUSI5"
                             },
-                            "2": {
-                                "id": "ue8hOb0y2WzvY7vd"
+                            {
+                                "id": "301nxoYJEIKchyQv"
                             }
-                        },
+                        ],
                         "value": 3
                     }
                 },
@@ -221,7 +196,8 @@
                 },
                 "tradition": {
                     "value": "divine"
-                }
+                },
+                "traits": {}
             },
             "type": "spellcastingEntry"
         },
@@ -237,7 +213,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -253,68 +228,9 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": {},
-                        "value": 0
-                    },
                     "slot9": {
                         "max": 3,
-                        "prepared": {},
                         "value": 3
                     }
                 },
@@ -416,7 +332,7 @@
             "type": "spell"
         },
         {
-            "_id": "ue8hOb0y2WzvY7vd",
+            "_id": "301nxoYJEIKchyQv",
             "flags": {
                 "core": {
                     "sourceId": "Compendium.pf2e.spells-srd.Item.jrBa9deU2ULFWvSl"
@@ -426,13 +342,17 @@
             "name": "Meteor Swarm",
             "sort": 400000,
             "system": {
-                "area": null,
+                "area": {
+                    "type": "burst",
+                    "value": 40
+                },
                 "cost": {
                     "value": ""
                 },
                 "counteraction": false,
                 "damage": {
                     "0": {
+                        "applyMod": false,
                         "category": null,
                         "formula": "6d10",
                         "kinds": [
@@ -440,6 +360,16 @@
                         ],
                         "materials": [],
                         "type": "bludgeoning"
+                    },
+                    "6BEyrCCNpDfJh5P8": {
+                        "applyMod": false,
+                        "category": null,
+                        "formula": "14d6",
+                        "kinds": [
+                            "damage"
+                        ],
+                        "materials": [],
+                        "type": "fire"
                     }
                 },
                 "defense": {
@@ -449,7 +379,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You call down four meteors that explode in a fiery blast. Each meteor deals 6d10 bludgeoning damage to any creatures in the 10-foot burst at the center of its area of effect before exploding, dealing 14d6 fire damage to any creatures in its 40-foot burst. The meteors' central 10-foot bursts can't overlap, and a creature takes the same amount of fire damage no matter how many overlapping explosions it's caught in. The saving throw applies to both the bludgeoning and the fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The bludgeoning damage increases by 1d10, and the fire damage increases by 2d6.</p>"
+                    "value": "<p>You call down four meteors that explode in a fiery blast. Each meteor deals 6d10 bludgeoning damage to any creatures in the @Template[type:burst|distance:10] at the center of its area of effect before exploding, dealing 14d6 fire damage to any creatures in its @Template[type:burst|distance:40]. The meteors' central 10-foot bursts can't overlap, and a creature attempts only one saving throw against the spell no matter how many overlapping explosions it's caught in, and they can take each type of damage once. The saving throw applies to both the bludgeoning and the fire damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The bludgeoning damage increases by 1d10, and the fire damage increases by 2d6.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -457,7 +387,8 @@
                 },
                 "heightening": {
                     "damage": {
-                        "0": "1d10"
+                        "0": "1d10",
+                        "6BEyrCCNpDfJh5P8": "2d6"
                     },
                     "interval": 1,
                     "type": "interval"
@@ -730,7 +661,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You delve into the possible futures of the next few seconds to understand all the ways your foe might avoid harm, then cast out a vision of that future to those around you. Designate a creature. The first time each target makes an attack roll against that creature during true target's duration, the attacker rolls twice and uses the better result. The attacker also ignores circumstance penalties to the attack roll and any flat check required due to the designated creature being @UUID[Compendium.pf2e.conditionitems.Item.Concealed] or @UUID[Compendium.pf2e.conditionitems.Item.Hidden].</p>"
+                    "value": "<p>You delve into the possible futures of the next few seconds to understand all the ways your foe might avoid harm, then cast out a vision of that future to those around you. Designate a creature. The first time each target makes an attack roll against that creature during <em>true target</em>'s duration, the attacker rolls twice and uses the better result. The attacker also ignores circumstance penalties to the attack roll and any flat check required due to the designated creature being @UUID[Compendium.pf2e.conditionitems.Item.Concealed] or @UUID[Compendium.pf2e.conditionitems.Item.Hidden].</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -983,7 +914,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You manifest an aura that prevents creatures from approaching you. When casting the spell, you can make the area any radius you choose, up to 40 feet. A creature must attempt a Will save if it's within the area when you cast the spell or as soon as it enters the area while the spell is in effect. Once a creature has attempted the save, it uses the same result for that casting of repulsion. Any restrictions on a creature's movement apply only if it voluntarily moves toward you. For example, if you move closer to a creature, it doesn't then need to move away.</p>\n<hr /><strong>Critical Success</strong> The creature's movement is not restricted.\n<p><strong>Success</strong> The creature treats each square in the area as difficult terrain when moving closer to you.</p>\n<p><strong>Failure</strong> The creature can't move closer to you within the area.</p>"
+                    "value": "<p>You manifest an aura that prevents creatures from approaching you. When casting the spell, you can make the area any radius you choose, up to 40 feet. A creature must attempt a Will save if it's within the area when you cast the spell or as soon as it enters the area while the spell is in effect. Once a creature has attempted the save, it uses the same result for that casting of repulsion. Any restrictions on a creature's movement apply only if it voluntarily moves toward you. For example, if you move closer to a creature, it doesn't then need to move away.</p>\n<hr /><p><strong>Critical Success</strong> The creature's movement is not restricted.</p>\n<p><strong>Success</strong> The creature treats each square in the area as difficult terrain when moving closer to you.</p>\n<p><strong>Failure</strong> The creature can't move closer to you within the area.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -2228,7 +2159,7 @@
                 },
                 "defense": null,
                 "description": {
-                    "value": "<p>A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach.</p>\n<p>On a success, you deal 2d4 fire damage. On a critical success, the target takes double damage and [[/r (@item.level)d4[persistent,fire]]] damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage by 1d4 and the persistent damage on a critical hit by 1d4.</p>"
+                    "value": "<p>A small ball of flame appears in the palm of your hand, and you lash out with it either in melee or at range. Make a spell attack roll against your target's AC. This is normally a ranged attack, but you can also make a melee attack against a creature in your unarmed reach.</p>\n<p>On a success, you deal 2d4 fire damage. On a critical success, the target takes double damage and @Damage[(@item.level)d4[persistent,fire]] damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> Increase the damage by 1d4 and the persistent damage on a critical hit by 1d4.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -2452,7 +2383,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.Shield Block] reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the <em>@UUID[Compendium.pf2e.spells-srd.Item.Force Barrage]</em> spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Shield]</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
+                    "value": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.Shield Block] reaction with your magic shield. The shield has Hardness 5. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes. Unlike a normal Shield Block, you can use the spell's reaction against the @UUID[Compendium.pf2e.spells-srd.Item.Force Barrage] spell.</p>\n<p>Heightening the spell increases the shield's Hardness.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Shield]</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The shield has Hardness 10.</p>\n<p><strong>Heightened (5th)</strong> The shield has Hardness 15.</p>\n<p><strong>Heightened (7th)</strong> The shield has Hardness 20.</p>\n<p><strong>Heightened (9th)</strong> The shield has Hardness 25.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -2752,45 +2683,10 @@
             "type": "melee"
         },
         {
-            "_id": "iJAuulzNyUJ15ela",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 3600000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "hEpxe1FfIjVaqxj4",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Shadow's Displeasure",
-            "sort": 3700000,
+            "sort": 3600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -2820,7 +2716,7 @@
             "_id": "skiRGL9UQGWGEdSZ",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Vesicated Shadow",
-            "sort": 3800000,
+            "sort": 3700000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -2865,7 +2761,7 @@
             "_id": "8cIoZgJYjTSQNeqn",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Rupture Shadow",
-            "sort": 3900000,
+            "sort": 3800000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -2899,7 +2795,7 @@
             "_id": "smorxcoe1pndxktg",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Wind Step",
-            "sort": 4000000,
+            "sort": 3900000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -2909,7 +2805,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Haibram draws air around him to aid his movement. He Strides up to his Speed, gaining the effects of <em>@UUID[Compendium.pf2e.spells-srd.Item.Air Walk]</em> and ignoring difficult terrain while moving. He can increase the number of actions to 3 to Stride up to three times his Speed instead. Haibram begins to fall immediately after using Wind Step but treats the fall as 60 feet shorter thanks to the supporting winds.</p>"
+                    "value": "<p>Haibram draws air around him to aid his movement. He Strides up to his Speed, gaining the effects of @UUID[Compendium.pf2e.spells-srd.Item.Air Walk] and ignoring difficult terrain while moving. He can increase the number of actions to 3 to Stride up to three times his Speed instead. Haibram begins to fall immediately after using Wind Step but treats the fall as 60 feet shorter thanks to the supporting winds.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -2932,7 +2828,7 @@
             "_id": "g9ab3molowrdwii3",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Wind Touch",
-            "sort": 4100000,
+            "sort": 4000000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -2958,7 +2854,7 @@
                     },
                     {
                         "diceNumber": 2,
-                        "dieSize": "d8",
+                        "dieSize": "d10",
                         "key": "DamageDice",
                         "predicate": [
                             "wind-touch"
@@ -2978,213 +2874,13 @@
             "_id": "lnlc59vc4irj54zw",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Academia Lore",
-            "sort": 4200000,
+            "sort": 4100000,
             "system": {
                 "description": {
                     "value": ""
                 },
                 "mod": {
                     "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "642kz1trdtlj5agt",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 4300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 33
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "dcx8h167p4d2o2d2",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Arcana",
-            "sort": 4400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 33
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "bchbwt27t97t3va0",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 4500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "4nj2fkbr4a4hd0hb",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 4600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "r4feskfl6xcnlo6m",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 4700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "014u4ztmzckeo4gt",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Performance",
-            "sort": 4800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "ybjn7snv3i3rfn5n",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 4900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gnf3phbm3psdv47t",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 5000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
                 },
                 "proficient": {
                     "value": 0
@@ -3300,6 +2996,32 @@
             "will": {
                 "saveDetail": "",
                 "value": 27
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 33
+            },
+            "arcana": {
+                "base": 33
+            },
+            "athletics": {
+                "base": 35
+            },
+            "deception": {
+                "base": 29
+            },
+            "intimidation": {
+                "base": 31
+            },
+            "performance": {
+                "base": 31
+            },
+            "stealth": {
+                "base": 29
+            },
+            "survival": {
+                "base": 29
             }
         },
         "traits": {

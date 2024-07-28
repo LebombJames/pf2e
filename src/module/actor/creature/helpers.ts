@@ -1,12 +1,12 @@
-import type { ActorPF2e } from "@actor";
+import type { ActorPF2e, CreaturePF2e } from "@actor";
 import { Immunity } from "@actor/data/iwr.ts";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { ImmunityType } from "@actor/types.ts";
 import type { AbilityItemPF2e, MeleePF2e, WeaponPF2e } from "@item";
 import { ConditionPF2e } from "@item";
-import { PredicatePF2e } from "@system/predication.ts";
+import { extractModifierAdjustments } from "@module/rules/helpers.ts";
+import { Predicate } from "@system/predication.ts";
 import { ErrorPF2e } from "@util";
-import type { CreaturePF2e } from "./document.ts";
 
 /** A static class of helper functions for applying automation for certain weapon traits on attack rolls */
 class AttackTraitHelpers {
@@ -20,8 +20,8 @@ class AttackTraitHelpers {
         return trait.replace(/-d?\d{1,3}$/, "");
     }
 
-    static createAttackModifiers({ item }: CreateAttackModifiersParams): ModifierPF2e[] {
-        const { actor } = item;
+    static createAttackModifiers({ item, domains }: CreateAttackModifiersParams): ModifierPF2e[] {
+        const actor = item.actor;
         if (!actor) throw ErrorPF2e("The weapon must be embedded");
 
         return item.system.traits.value.flatMap((trait) => {
@@ -38,9 +38,14 @@ class AttackTraitHelpers {
                         modifier: -2,
                         type: "untyped",
                         ignored: true,
-                        predicate: new PredicatePF2e(
+                        predicate: new Predicate(
                             { lte: ["target:distance", penaltyRange] },
                             { not: "self:ignore-volley-penalty" },
+                        ),
+                        adjustments: extractModifierAdjustments(
+                            actor.synthetics.modifierAdjustments,
+                            domains,
+                            unannotatedTrait,
                         ),
                     });
                 }
@@ -50,7 +55,7 @@ class AttackTraitHelpers {
                         label: this.getLabel(trait),
                         modifier: 1,
                         type: "circumstance",
-                        predicate: new PredicatePF2e("sweep-bonus"),
+                        predicate: new Predicate("sweep-bonus"),
                     });
                 }
                 case "backswing": {
@@ -59,7 +64,7 @@ class AttackTraitHelpers {
                         label: this.getLabel(trait),
                         modifier: 1,
                         type: "circumstance",
-                        predicate: new PredicatePF2e("backswing-bonus"),
+                        predicate: new Predicate("backswing-bonus"),
                     });
                 }
                 default:
@@ -71,20 +76,22 @@ class AttackTraitHelpers {
 
 interface CreateAttackModifiersParams {
     item: AbilityItemPF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | MeleePF2e<ActorPF2e>;
+    domains: string[];
 }
 
 /** Set immunities for creatures with traits call for them */
 function setImmunitiesFromTraits(actor: CreaturePF2e): void {
     if (actor.isOfType("character")) return;
 
-    const { traits } = actor;
-    const { immunities } = actor.attributes;
+    const traits = actor.traits;
+    const immunities = actor.attributes.immunities;
+    const existing = immunities.map((i) => i.type);
 
     if (traits.has("construct") && !traits.has("eidolon")) {
-        // "Constructs are often mindless; they are immune to bleed damage, death effects, disease, healing, necromancy,
-        // nonlethal attacks, poison, and the doomed, drained, fatigued, paralyzed, sickened, and unconscious
-        // conditions; and they may have Hardness based on the materials used to construct their bodies."
-        // – Bestiary 2 pg. 346
+        // "Constructs are often mindless; they're immune to bleed damage, death effects, disease, healing,
+        // nonlethal attacks, poison, vitality, void, and the doomed, drained, fatigued, paralyzed, sickened, and
+        // unconscious conditions; and they might have Hardness based on the materials used to construct their bodies."
+        // – GMC pg. 328
         const constructImmunities: ImmunityType[] = [
             "bleed",
             "death-effects",
@@ -99,9 +106,11 @@ function setImmunitiesFromTraits(actor: CreaturePF2e): void {
             "sickened",
             "spirit",
             "unconscious",
+            "vitality",
+            "void",
         ];
         for (const immunityType of constructImmunities) {
-            if (!immunities.some((i) => i.type === immunityType)) {
+            if (!existing.includes(immunityType)) {
                 immunities.push(
                     new Immunity({ type: immunityType, source: game.i18n.localize("PF2E.TraitConstruct") }),
                 );
@@ -109,9 +118,18 @@ function setImmunitiesFromTraits(actor: CreaturePF2e): void {
         }
     }
 
-    // "They are immune to all mental effects." – CRB pg. 634
-    if (traits.has("mindless") && !immunities.some((i) => i.type === "mental")) {
+    // "They are immune to all mental effects." – GMC pg. 331
+    if (traits.has("mindless") && !existing.includes("mental")) {
         immunities.push(new Immunity({ type: "mental", source: game.i18n.localize("PF2E.TraitMindless") }));
+    }
+
+    // "Swarms are immune to the grappled [sic], prone, and restrained conditions." – GMC pg. 334
+    if (traits.has("swarm")) {
+        for (const immunity of ["grabbed", "prone", "restrained"] as const) {
+            if (!existing.includes(immunity)) {
+                immunities.push(new Immunity({ type: immunity, source: game.i18n.localize("PF2E.TraitSwarm") }));
+            }
+        }
     }
 }
 

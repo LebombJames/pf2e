@@ -3,8 +3,9 @@ import { ClassDCData } from "@actor/character/data.ts";
 import type { FeatGroup } from "@actor/character/feats.ts";
 import type { SenseData } from "@actor/creature/index.ts";
 import { ItemPF2e, type HeritagePF2e } from "@item";
-import { normalizeActionChangeData, processSanctification } from "@item/ability/helpers.ts";
-import { ActionCost, Frequency, ItemSummaryData } from "@item/base/data/index.ts";
+import { getActionCostRollOptions, normalizeActionChangeData, processSanctification } from "@item/ability/helpers.ts";
+import { AbilityTraitToggles } from "@item/ability/trait-toggles.ts";
+import { ActionCost, Frequency, RawItemChatData } from "@item/base/data/index.ts";
 import { Rarity } from "@module/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import type { UserPF2e } from "@module/user/index.ts";
@@ -18,6 +19,10 @@ import { FEATURE_CATEGORIES, FEAT_CATEGORIES } from "./values.ts";
 class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
     declare group: FeatGroup | null;
     declare grants: (FeatPF2e<ActorPF2e> | HeritagePF2e<ActorPF2e>)[];
+
+    static override get validTraits(): Record<FeatTrait, string> {
+        return CONFIG.PF2E.featTraits;
+    }
 
     get category(): FeatOrFeatureCategory {
         return this.system.category;
@@ -112,6 +117,8 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
             this.system.maxTakable = 1;
         }
 
+        this.system.traits.toggles = new AbilityTraitToggles(this);
+
         // Initialize frequency uses if not set
         if (this.actor && this.system.frequency) {
             this.system.frequency.value ??= this.system.frequency.max;
@@ -151,7 +158,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
 
         // Key attribute options
         if (subfeatures.keyOptions.length > 0) {
-            actor.system.build.attributes.keyOptions = R.uniq([
+            actor.system.build.attributes.keyOptions = R.unique([
                 ...actor.system.build.attributes.keyOptions,
                 ...subfeatures.keyOptions,
             ]);
@@ -277,7 +284,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     override async getChatData(
         this: FeatPF2e<ActorPF2e>,
         htmlOptions: EnrichmentOptions = {},
-    ): Promise<ItemSummaryData> {
+    ): Promise<RawItemChatData> {
         const actor = this.actor;
         const classSlug = actor.isOfType("character") && actor.class?.slug;
         // Exclude non-matching class traits
@@ -309,14 +316,19 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
     }
 
     /** Generate a list of strings for use in predication */
-    override getRollOptions(prefix = "feat"): string[] {
+    override getRollOptions(prefix = this.type, options?: { includeGranter?: boolean }): string[] {
         prefix = prefix === "feat" && this.isFeature ? "feature" : prefix;
-        return R.compact([
-            ...super.getRollOptions(prefix).filter((o) => !o.endsWith("level:0")),
-            `${prefix}:category:${this.category}`,
-            this.isFeat ? `${prefix}:rarity:${this.rarity}` : null,
-            this.frequency ? `${prefix}:frequency:limited` : null,
-        ]);
+
+        const rollOptions = new Set([...super.getRollOptions(prefix, options), `${prefix}:category:${this.category}`]);
+        rollOptions.delete(`${prefix}:level:0`);
+        if (!this.isFeat) rollOptions.delete(`${prefix}:rarity:${this.rarity}`);
+        if (this.frequency) rollOptions.add(`${prefix}:frequency:limited`);
+
+        for (const option of getActionCostRollOptions(prefix, this)) {
+            rollOptions.add(option);
+        }
+
+        return Array.from(rollOptions);
     }
 
     /* -------------------------------------------- */
@@ -325,7 +337,7 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
 
     protected override async _preCreate(
         data: this["_source"],
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseCreateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
         // In case this was copied from an actor, clear the location if there's no parent.
@@ -337,15 +349,15 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
             }
         }
 
-        return super._preCreate(data, options, user);
+        return super._preCreate(data, operation, user);
     }
 
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: DocumentModificationContext<TParent>,
+        operation: DatabaseUpdateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
-        if (!changed.system) return super._preUpdate(changed, options, user);
+        if (!changed.system) return super._preUpdate(changed, operation, user);
 
         // Ensure an empty-string `location` property is null
         if ("location" in changed.system) {
@@ -372,16 +384,12 @@ class FeatPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Item
             fu.mergeObject(changed, { system: { maxTakable: 1 } });
         }
 
-        return super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, operation, user);
     }
 
     /** Warn the owning user(s) if this feat was taken despite some restriction */
-    protected override _onCreate(
-        data: FeatSource,
-        options: DocumentModificationContext<TParent>,
-        userId: string,
-    ): void {
-        super._onCreate(data, options, userId);
+    protected override _onCreate(data: FeatSource, operation: DatabaseCreateOperation<TParent>, userId: string): void {
+        super._onCreate(data, operation, userId);
 
         if (!(this.isOwner && this.actor?.isOfType("character") && this.isFeat)) return;
 

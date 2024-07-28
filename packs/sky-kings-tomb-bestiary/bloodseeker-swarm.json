@@ -3,80 +3,10 @@
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
-            "_id": "QTV2nXdoLzSvbGuh",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 100000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
-            "_id": "RU6ZfKDRlk8E8sZb",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.rqfnQ5VHT5hxm25r"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Scent (imprecise) 60 feet",
-            "sort": 200000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Scent]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "scent",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "e44gk6MR2y3O2w5G",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Blood Draining Bites",
-            "sort": 300000,
+            "sort": 100000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -100,56 +30,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "8fWbqpQyzJRmAMON",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 12
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "cGyXdj8L5dFkIPoE",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 12
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Bloodseeker Swarm",
@@ -250,7 +130,7 @@
                 "value": 3
             },
             "privateNotes": "",
-            "publicNotes": "<h4>Bloodseeker</h4>\n<p>Decades ago, the Court of Ether bred bloodseekers as show animals, thinking them adorably ugly. Generations later, the insects have become giantic. Visitors to the Court are impressed by how the bloodseekers to hover in place, fly through hoops, and only drink the blood of specific creatures.</p>\n<h4>Bloodseeker Swarm</h4>\n<p>The Court of Ether release the less useful, smaller breed of bloodseekers into the Endless Gulf, where they form into dangerous swarms of the insatiable devourers. This has lead to a dangerous new game, Seek-a-Bang, where fey mounted on giant bloodseekers throw thunderstones at swarms of their mounts’ smaller cousins and see how many they can kill with a single throw. So far, the fatalities are few enough to be acceptable.</p>\n<h4>Bloodseeker Breeds</h4>\n<p>While the giant bloodseeker has the most notoriety for its size and use as a cavalry mount, other breeds have been created by determined ranchers. These including the longhaired bloodseeker, bloodseeker retriever, and the difficult-tocontain burrowing bloodseeker. Each of these recognized breeds can be submitted to the annual Court of Ether Bloodseeker Show, where breeders enter their prized, expensive, and well-trained bloodseekers in hopes of gaining the elusive “Best in Show” award.</p>",
+            "publicNotes": "<h4>Bloodseeker</h4>\n<p>Decades ago, the Court of Ether bred bloodseekers as show animals, thinking them adorably ugly. Generations later, the insects have become giantic. Visitors to the Court are impressed by how the bloodseekers to hover in place, fly through hoops, and only drink the blood of specific creatures.</p>\n<h4>Bloodseeker Swarm</h4>\n<p>The Court of Ether release the less useful, smaller breed of bloodseekers into the Endless Gulf, where they form into dangerous swarms of the insatiable devourers. This has lead to a dangerous new game, Seek-a-Bang, where fey mounted on giant bloodseekers throw thunderstones at swarms of their mounts' smaller cousins and see how many they can kill with a single throw. So far, the fatalities are few enough to be acceptable.</p>\n<h4>Bloodseeker Breeds</h4>\n<p>While the giant bloodseeker has the most notoriety for its size and use as a cavalry mount, other breeds have been created by determined ranchers. These including the longhaired bloodseeker, bloodseeker retriever, and the difficult-tocontain burrowing bloodseeker. Each of these recognized breeds can be submitted to the annual Court of Ether Bloodseeker Show, where breeders enter their prized, expensive, and well-trained bloodseekers in hopes of gaining the elusive “Best in Show” award.</p>",
             "publication": {
                 "license": "OGL",
                 "remaster": false,
@@ -287,6 +167,14 @@
             "will": {
                 "saveDetail": "",
                 "value": 6
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 12
+            },
+            "stealth": {
+                "base": 12
             }
         },
         "traits": {

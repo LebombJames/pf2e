@@ -47,41 +47,6 @@
             "type": "melee"
         },
         {
-            "_id": "bIfz2rvBHXjIjmyK",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 200000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "2MrVVGinZvjfZN22",
             "flags": {
                 "core": {
@@ -89,8 +54,8 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Tremorsense",
-            "sort": 300000,
+            "name": "Tremorsense 60 feet",
+            "sort": 200000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -120,7 +85,7 @@
             "_id": "O5P2324cJfYLLpmm",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Glass Armor",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -181,7 +146,7 @@
             "_id": "6NgDd3kvRPxleBuE",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Blinding Sand",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -211,7 +176,7 @@
             "_id": "XHjNDrJBXaCEsi2i",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Earth Glide",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -236,72 +201,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "k1W45MkufYejTTye",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 14
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "3IKSOIIWyaxP7Xbh",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 14
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.Sand",
-                        "predicate": [
-                            "terrain:sand"
-                        ],
-                        "selector": "stealth",
-                        "value": 3
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+17 in sand",
-                        "options": "terrain:sand"
-                    }
-                }
-            },
-            "type": "lore"
         }
     ],
     "name": "Glass Sentry",
@@ -414,6 +313,23 @@
             "will": {
                 "saveDetail": "",
                 "value": 14
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 14
+            },
+            "stealth": {
+                "base": 14,
+                "special": [
+                    {
+                        "base": 17,
+                        "label": "in sand",
+                        "predicate": [
+                            "terrain:sand"
+                        ]
+                    }
+                ]
             }
         },
         "traits": {

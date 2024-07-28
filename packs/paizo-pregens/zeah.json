@@ -205,7 +205,7 @@
                 },
                 "items": {
                     "hcet5": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Streetwise",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Streetwise"
@@ -218,10 +218,12 @@
                 },
                 "rules": [],
                 "slug": "detective",
-                "trainedLore": "Underworld Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Underworld Lore"
+                    ],
                     "value": [
-                        "soc"
+                        "society"
                     ]
                 },
                 "traits": {
@@ -324,7 +326,9 @@
                         "unholy"
                     ]
                 },
-                "skill": "ste",
+                "skill": [
+                    "stealth"
+                ],
                 "slug": "achaekek",
                 "spells": {
                     "1": "Compendium.pf2e.spells-srd.Item.Gb7SeieEvd0pL2Eh",
@@ -612,7 +616,7 @@
                                     "value": 2
                                 }
                             ],
-                            "field": "actor|system.skills.thi.rank"
+                            "field": "actor|system.skills.thievery.rank"
                         }
                     },
                     {
@@ -636,7 +640,7 @@
                                     "value": 2
                                 }
                             ],
-                            "field": "actor|system.skills.thi.rank"
+                            "field": "actor|system.skills.thievery.rank"
                         }
                     },
                     {
@@ -660,7 +664,7 @@
                                     "value": 2
                                 }
                             ],
-                            "field": "actor|system.skills.thi.rank"
+                            "field": "actor|system.skills.thievery.rank"
                         }
                     }
                 ],
@@ -932,67 +936,67 @@
                     {
                         "choices": [
                             {
-                                "label": "PF2E.SkillAcr",
+                                "label": "PF2E.Skill.Acrobatics",
                                 "value": "acrobatics"
                             },
                             {
-                                "label": "PF2E.SkillArc",
+                                "label": "PF2E.Skill.Arcana",
                                 "value": "arcana"
                             },
                             {
-                                "label": "PF2E.SkillAth",
+                                "label": "PF2E.Skill.Athletics",
                                 "value": "athletics"
                             },
                             {
-                                "label": "PF2E.SkillCra",
+                                "label": "PF2E.Skill.Crafting",
                                 "value": "crafting"
                             },
                             {
-                                "label": "PF2E.SkillDec",
+                                "label": "PF2E.Skill.Deception",
                                 "value": "deception"
                             },
                             {
-                                "label": "PF2E.SkillDip",
+                                "label": "PF2E.Skill.Diplomacy",
                                 "value": "diplomacy"
                             },
                             {
-                                "label": "PF2E.SkillItm",
+                                "label": "PF2E.Skill.Intimidation",
                                 "value": "intimidation"
                             },
                             {
-                                "label": "PF2E.SkillMed",
+                                "label": "PF2E.Skill.Medicine",
                                 "value": "medicine"
                             },
                             {
-                                "label": "PF2E.SkillNat",
+                                "label": "PF2E.Skill.Nature",
                                 "value": "nature"
                             },
                             {
-                                "label": "PF2E.SkillOcc",
+                                "label": "PF2E.Skill.Occultism",
                                 "value": "occultism"
                             },
                             {
-                                "label": "PF2E.SkillPrf",
+                                "label": "PF2E.Skill.Performance",
                                 "value": "performance"
                             },
                             {
-                                "label": "PF2E.SkillRel",
+                                "label": "PF2E.Skill.Religion",
                                 "value": "religion"
                             },
                             {
-                                "label": "PF2E.SkillSoc",
+                                "label": "PF2E.Skill.Society",
                                 "value": "society"
                             },
                             {
-                                "label": "PF2E.SkillSte",
+                                "label": "PF2E.Skill.Stealth",
                                 "value": "stealth"
                             },
                             {
-                                "label": "PF2E.SkillSur",
+                                "label": "PF2E.Skill.Survival",
                                 "value": "survival"
                             },
                             {
-                                "label": "PF2E.SkillThi",
+                                "label": "PF2E.Skill.Thievery",
                                 "value": "thievery"
                             },
                             {
@@ -1205,7 +1209,7 @@
                 },
                 "category": "skill",
                 "description": {
-                    "value": "<p>Your study of magic allows you to instinctively sense its presence. You can cast 1st-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Detect Magic]</em> at will as an arcane innate spell. If you're a master in Arcana, the spell is heightened to 3rd level; if you're legendary, it is heightened to 4th level.</p>"
+                    "value": "<p>Your study of magic allows you to instinctively sense its presence. You can cast 1st-rank @UUID[Compendium.pf2e.spells-srd.Item.Detect Magic] at will as an arcane innate spell. If you're a master in Arcana, the spell is heightened to 3rd level; if you're legendary, it is heightened to 4th level.</p>"
                 },
                 "level": {
                     "taken": 6,
@@ -1310,7 +1314,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "innate"
                 },
@@ -1327,71 +1330,7 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 0,
@@ -1487,7 +1426,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -1505,69 +1443,15 @@
                 "showSlotlessLevels": {
                     "value": false
                 },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
-                        "max": 2,
-                        "prepared": [],
-                        "value": 0
+                        "max": 2
                     },
                     "slot1": {
-                        "max": 1,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        "max": 1
                     },
                     "slot2": {
-                        "max": 1,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        "max": 1
                     }
                 },
                 "slug": null,
@@ -2761,7 +2645,7 @@
                 },
                 "containerId": null,
                 "description": {
-                    "value": "<p>This mask allows you to cloak yourself in illusions.</p>\n<p><strong>Activate</strong> 1 minute (Interact)</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The mask casts a 1st-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Illusory Disguise]</em> spell on you. While setting up the disguise, you can magically alter the mask to appear as a comb, ribbon, helm, or other piece of headwear.</p>"
+                    "value": "<p>This mask allows you to cloak yourself in illusions.</p>\n<p><strong>Activate</strong> 1 minute (Interact)</p>\n<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The mask casts a 1st-rank @UUID[Compendium.pf2e.spells-srd.Item.Illusory Disguise] spell on you. While setting up the disguise, you can magically alter the mask to appear as a comb, ribbon, helm, or other piece of headwear.</p>"
                 },
                 "equipped": {
                     "carryType": "worn",
@@ -2828,7 +2712,7 @@
                 "containerId": null,
                 "damage": null,
                 "description": {
-                    "value": "<p>After you drink this bitter draft, your skin thickens like bark. You gain the effects of a 2nd-rank <em>@UUID[Compendium.pf2e.spells-srd.Item.Oaken Resilience]</em> spell for 10 minutes.</p>"
+                    "value": "<p>After you drink this bitter draft, your skin thickens like bark. You gain the effects of a 2nd-rank @UUID[Compendium.pf2e.spells-srd.Item.Oaken Resilience] spell for 10 minutes.</p>"
                 },
                 "equipped": {
                     "carryType": "worn"
@@ -3035,7 +2919,7 @@
                 "containerId": null,
                 "damage": null,
                 "description": {
-                    "value": "<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</em></p><hr /><p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>To Cast a Spell from a scroll, the spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack roll and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical material components and costs are provided when a scroll is created, so you don't need to provide them when Casting a Spell from a scroll. You must replace any required material component for that spell with a somatic component. If the spell requires a focus, you must have that focus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+                    "value": "<p>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</p><hr /><p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>To Cast a Spell from a scroll, the spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack roll and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical material components and costs are provided when a scroll is created, so you don't need to provide them when Casting a Spell from a scroll. You must replace any required material component for that spell with a somatic component. If the spell requires a focus, you must have that focus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
                 },
                 "equipped": {
                     "carryType": "worn"
@@ -3067,7 +2951,7 @@
                 "size": "med",
                 "slug": "scroll-of-2nd-level-spell",
                 "spell": {
-                    "_id": null,
+                    "_id": "Cepym2oGEP5qPXj8",
                     "flags": {
                         "core": {
                             "sourceId": "Compendium.pf2e.spells-srd.Item.9XHmC2JgTUIQ1CCm"
@@ -4379,13 +4263,13 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Light Armor Mastery"
                     },
                     "2xl4q": {
-                        "img": "systems/pf2e/icons/features/classes/master-tricks.webp",
+                        "img": "icons/weapons/swords/swords-short.webp",
                         "level": 13,
                         "name": "Master Tricks",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Master Tricks"
                     },
                     "4al2i": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -4397,7 +4281,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Fortitude Expertise"
                     },
                     "6ddtr": {
-                        "img": "systems/pf2e/icons/features/classes/light-armor-expertise.webp",
+                        "img": "icons/equipment/back/mantle-collared-green.webp",
                         "level": 13,
                         "name": "Light Armor Expertise",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Light Armor Expertise"
@@ -4433,7 +4317,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Agile Mind"
                     },
                     "i70zj": {
-                        "img": "systems/pf2e/icons/features/classes/vigilant-senses.webp",
+                        "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
                         "level": 7,
                         "name": "Vigilant Senses",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Mastery"
@@ -4575,7 +4459,7 @@
                 "trainedSkills": {
                     "additional": 7,
                     "value": [
-                        "ste"
+                        "stealth"
                     ]
                 },
                 "traits": {
@@ -5055,7 +4939,7 @@
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.thi.rank",
+                        "path": "system.skills.thievery.rank",
                         "value": 1
                     }
                 ],
@@ -5286,52 +5170,52 @@
         },
         "saves": {},
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 1
             },
-            "ath": {
+            "athletics": {
                 "rank": 2
             },
-            "cra": {
+            "crafting": {
                 "rank": 1
             },
-            "dec": {
+            "deception": {
                 "rank": 2
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 1
             },
-            "itm": {
+            "intimidation": {
                 "rank": 1
             },
-            "med": {
+            "medicine": {
                 "rank": 0
             },
-            "nat": {
+            "nature": {
                 "rank": 1
             },
-            "occ": {
+            "occultism": {
                 "rank": 1
             },
-            "prf": {
+            "performance": {
                 "rank": 1
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 0
             },
-            "sur": {
+            "survival": {
                 "rank": 1
             },
-            "thi": {
+            "thievery": {
                 "rank": 2
             }
         }

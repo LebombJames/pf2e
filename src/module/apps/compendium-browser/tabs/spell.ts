@@ -12,7 +12,7 @@ export class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
     templatePath = "systems/pf2e/templates/compendium-browser/partials/spell.hbs";
 
     /* MiniSearch */
-    override searchFields = ["name"];
+    override searchFields = ["name", "originalName"];
     override storeFields = [
         "type",
         "name",
@@ -57,7 +57,7 @@ export class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
                 spellData.filters = {};
 
                 if (spellData.type === "spell") {
-                    if ("system" in spellData && R.isObject(spellData.system)) {
+                    if ("system" in spellData && R.isPlainObject(spellData.system)) {
                         spellData.system.ritual ??= null;
                     }
 
@@ -74,12 +74,15 @@ export class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
                         (isCantrip && (spellData.system.traits.traditions ?? []).length === 0);
                     const isRitual = !!spellData.system.ritual;
                     const isSpell = !isCantrip && !isFocusSpell && !isRitual;
-                    const categories = R.compact([
+                    const categories = [
                         isSpell ? "spell" : null,
                         isCantrip ? "cantrip" : null,
                         isFocusSpell ? "focus" : null,
                         isRitual ? "ritual" : null,
-                    ]);
+                    ].filter(R.isTruthy);
+
+                    // format casting time (before value is sluggified)
+                    const actionGlyph = getActionGlyph(spellData.system.time.value);
 
                     // recording casting times
                     const time: unknown = spellData.system.time.value;
@@ -91,9 +94,6 @@ export class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
                         spellData.system.time.value = normalizedTime;
                     }
 
-                    // format casting time
-                    const actionGlyph = getActionGlyph(spellData.system.time.value);
-
                     // Prepare publication source
                     const { system } = spellData;
                     const pubSource = String(system.publication?.title ?? system.source?.value ?? "").trim();
@@ -103,8 +103,9 @@ export class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
                     spells.push({
                         type: spellData.type,
                         name: spellData.name,
+                        originalName: spellData.originalName, // Added by Babele
                         img: spellData.img,
-                        uuid: `Compendium.${pack.collection}.${spellData._id}`,
+                        uuid: spellData.uuid,
                         rank: spellData.system.level.value,
                         categories,
                         time: spellData.system.time,
@@ -167,7 +168,7 @@ export class CompendiumBrowserSpellTab extends CompendiumBrowserTab {
         // Categories
         if (
             checkboxes.category.selected.length > 0 &&
-            !R.equals(checkboxes.category.selected.sort(), indexData.categories.sort())
+            !R.isDeepEqual(checkboxes.category.selected.sort(), indexData.categories.sort())
         ) {
             return false;
         }

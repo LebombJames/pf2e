@@ -1,4 +1,5 @@
-import { ItemSourcePF2e, isPhysicalData } from "@item/base/data/index.ts";
+import { ItemSourcePF2e } from "@item/base/data/index.ts";
+import { itemIsOfType } from "@item/helpers.ts";
 import { PhysicalSystemSource } from "@item/physical/data.ts";
 import { RuleElementSource } from "@module/rules/index.ts";
 import * as R from "remeda";
@@ -10,7 +11,7 @@ export class Migration901ReorganizeBulkData extends MigrationBase {
 
     override async updateItem(source: ItemSourcePF2e): Promise<void> {
         this.#migrateRules(source);
-        if (!isPhysicalData(source)) return;
+        if (!itemIsOfType(source, "physical")) return;
 
         const system: MaybeWithOldBulkData = source.system;
         system.bulk ??= { value: 0 };
@@ -46,7 +47,7 @@ export class Migration901ReorganizeBulkData extends MigrationBase {
 
         if ("bulkCapacity" in system) {
             if (source.type === "backpack") {
-                source.system.bulk.capacity = R.isObject(system.bulkCapacity)
+                source.system.bulk.capacity = R.isPlainObject(system.bulkCapacity)
                     ? Math.floor(Math.abs(Number(system.bulkCapacity.value))) || 0
                     : 0;
             }
@@ -55,7 +56,7 @@ export class Migration901ReorganizeBulkData extends MigrationBase {
 
         if ("negateBulk" in system) {
             if (source.type === "backpack") {
-                source.system.bulk.ignored = R.isObject(system.negateBulk)
+                source.system.bulk.ignored = R.isPlainObject(system.negateBulk)
                     ? Math.floor(Math.abs(Number(system.negateBulk.value))) || 0
                     : 0;
             }
@@ -83,7 +84,7 @@ export class Migration901ReorganizeBulkData extends MigrationBase {
     }
 
     #bulkStringToNumber(bulkObject: unknown): number {
-        if (!R.isObject(bulkObject)) return 0;
+        if (!R.isPlainObject(bulkObject)) return 0;
         const bulkString = String(bulkObject["value"] || "-").toLocaleUpperCase("en");
 
         switch (bulkString) {

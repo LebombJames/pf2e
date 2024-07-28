@@ -3,7 +3,7 @@
     "img": "systems/pf2e/icons/equipment/weapons/reinforced-stock.webp",
     "name": "Reinforced Stock",
     "system": {
-        "baseItem": null,
+        "baseItem": "reinforced-stock",
         "bonus": {
             "value": 0
         },
@@ -66,7 +66,7 @@
             "value": [
                 "attached-to-crossbow-or-firearm",
                 "finesse",
-                "two-hand-d6"
+                "two-hand-d8"
             ]
         },
         "usage": {

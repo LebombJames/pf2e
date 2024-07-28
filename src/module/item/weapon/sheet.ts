@@ -16,6 +16,10 @@ import type { WeaponPF2e } from "./document.ts";
 import { MANDATORY_RANGED_GROUPS, WEAPON_RANGES } from "./values.ts";
 
 export class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
+    protected override get validTraits(): Record<string, string> {
+        return CONFIG.PF2E.weaponTraits;
+    }
+
     override async getData(options?: Partial<ItemSheetOptions>): Promise<WeaponSheetData> {
         const sheetData = await super.getData(options);
         const weapon = this.item;
@@ -76,6 +80,10 @@ export class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
             damage: { type: "piercing", die: "d4" },
             traits: [],
         };
+        const meleeUsageBaseDamage = Object.entries(CONFIG.PF2E.damageDie).map(([die, label]) => ({
+            label: `1${game.i18n.localize(label)}`,
+            value: die,
+        }));
 
         const specificMagicData =
             weapon._source.system.specific ?? R.pick(weapon._source.system, ["material", "runes"]);
@@ -99,6 +107,7 @@ export class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
             mandatoryRanged,
             meleeGroups: sortStringRecord(CONFIG.PF2E.meleeWeaponGroups),
             meleeUsage,
+            meleeUsageBaseDamage,
             meleeUsageTraits: createSheetTags(CONFIG.PF2E.weaponTraits, meleeUsage.traits ?? []),
             otherTags,
             preciousMaterials: this.getMaterialSheetData(weapon, MATERIAL_DATA.weapon),
@@ -156,14 +165,6 @@ export class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
         formData["system.bonusDamage.value"] ||= 0;
         formData["system.splashDamage.value"] ||= 0;
 
-        // Coerce a weapon range of zero to null
-        formData["system.range"] ||= null;
-
-        // Clamp damage dice to between zero and eight
-        if ("system.damage.dice" in formData) {
-            formData["system.damage.dice"] = Math.clamped(Number(formData["system.damage.dice"]) || 0, 0, 12);
-        }
-
         // Ensure melee usage is absent if not a combination weapon
         if (weapon.system.meleeUsage && !this.item.traits.has("combination")) {
             formData["system.-=meleeUsage"] = null;
@@ -172,11 +173,13 @@ export class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
         const propertyRuneIndices = [0, 1, 2, 3] as const;
         const propertyRuneUpdates = propertyRuneIndices.flatMap((i) => formData[`system.runes.property.${i}`] ?? []);
         if (propertyRuneUpdates.length > 0) {
-            formData[`system.runes.property`] = R.compact(propertyRuneUpdates);
+            formData[`system.runes.property`] = propertyRuneUpdates.filter(R.isTruthy);
             for (const index of propertyRuneIndices) {
                 delete formData[`system.runes.property.${index}`];
             }
         }
+        formData["system.runes.potency"] ||= 0;
+        formData["system.runes.striking"] ||= 0;
 
         return super._updateObject(event, formData);
     }
@@ -208,6 +211,7 @@ interface WeaponSheetData extends PhysicalItemSheetData<WeaponPF2e> {
     mandatoryRanged: boolean;
     meleeGroups: typeof CONFIG.PF2E.meleeWeaponGroups;
     meleeUsage: ComboWeaponMeleeUsage | undefined;
+    meleeUsageBaseDamage: FormSelectOption[];
     meleeUsageTraits: SheetOptions;
     otherTags: SheetOptions;
     preciousMaterials: MaterialSheetData;

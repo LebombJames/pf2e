@@ -1,10 +1,11 @@
-import type { RollNoteRuleElement, RollNoteSource } from "@module/rules/rule-element/roll-note.ts";
+import type { NoteRESource, RollNoteRuleElement } from "@module/rules/rule-element/roll-note.ts";
 import { DEGREE_OF_SUCCESS_STRINGS } from "@system/degree-of-success.ts";
+import type { HTMLTagifyTagsElement } from "@system/html-elements/tagify-tags.ts";
 import { htmlQuery, tagify } from "@util";
 import { RuleElementForm, RuleElementFormSheetData } from "./base.ts";
 
 /** Form handler for the RollNote rule element */
-class RollNoteForm extends RuleElementForm<RollNoteSource, RollNoteRuleElement> {
+class RollNoteForm extends RuleElementForm<NoteRESource, RollNoteRuleElement> {
     override template = "systems/pf2e/templates/items/rules/note.hbs";
 
     override async getData(): Promise<RollNoteFormSheetData> {
@@ -23,11 +24,11 @@ class RollNoteForm extends RuleElementForm<RollNoteSource, RollNoteRuleElement> 
             const newValue = Array.isArray(selector) ? selector.at(0) ?? "" : [selector ?? ""].filter((s) => !!s);
             this.updateItem({ selector: newValue });
         });
-        const optionsEl = htmlQuery<HTMLInputElement>(html, ".outcomes");
+        const optionsEl = htmlQuery<HTMLTagifyTagsElement>(html, "tagify-tags.outcomes");
         tagify(optionsEl, { whitelist: [...DEGREE_OF_SUCCESS_STRINGS], maxTags: 3 });
     }
 
-    override updateObject(ruleData: Partial<Record<string, unknown>>): void {
+    override updateObject(ruleData: Partial<Record<string, JSONValue>>): void {
         const shouldBeHidden = htmlQuery<HTMLInputElement>(this.element, ".hidden-value")?.checked;
         const isHidden = ["gm", "owner"].includes(String(this.rule.visibility));
         if (shouldBeHidden !== isHidden) {
@@ -50,7 +51,7 @@ class RollNoteForm extends RuleElementForm<RollNoteSource, RollNoteRuleElement> 
     }
 }
 
-interface RollNoteFormSheetData extends RuleElementFormSheetData<RollNoteSource, RollNoteRuleElement> {
+interface RollNoteFormSheetData extends RuleElementFormSheetData<NoteRESource, RollNoteRuleElement> {
     selectorIsArray: boolean;
 }
 

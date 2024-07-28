@@ -15,6 +15,13 @@ class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySc
 
     declare slug: string;
 
+    constructor(data: RuleElementSource, options: RuleElementOptions) {
+        super({ priority: 9, ...data }, options);
+        if (this.invalid) return;
+
+        this.slug ??= sluggify(this.label);
+    }
+
     static override defineSchema(): MartialProficiencySchema {
         return {
             ...super.defineSchema(),
@@ -39,16 +46,10 @@ class MartialProficiencyRuleElement extends RuleElementPF2e<MartialProficiencySc
         };
     }
 
-    constructor(data: RuleElementSource, options: RuleElementOptions) {
-        super({ priority: 9, ...data }, options);
-
-        this.slug ??= sluggify(this.label);
-    }
-
     override onApplyActiveEffects(): void {
         if (!this.test()) return;
 
-        const rank = Math.clamped(Number(this.resolveValue(this.value)) || 1, 1, 4) as ZeroToFour;
+        const rank = Math.clamp(Number(this.resolveValue(this.value)) || 1, 1, 4) as ZeroToFour;
         const key = this.kind === "attack" ? "attacks" : "defenses";
         this.actor.system.proficiencies[key][this.slug] = {
             definition: this.resolveInjectedProperties(this.definition),

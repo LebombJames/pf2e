@@ -1,6 +1,6 @@
 import type { NPCPF2e } from "@actor";
-import { SkillAbbreviation } from "@actor/creature/data.ts";
 import { CreatureSheetPF2e, type CreatureSheetData } from "@actor/creature/sheet.ts";
+import { ModifierPF2e } from "@actor/modifiers.ts";
 import { NPCSkillsEditor } from "@actor/npc/skills-editor.ts";
 import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
 import { RecallKnowledgePopup } from "@actor/sheet/popups/recall-knowledge-popup.ts";
@@ -9,31 +9,33 @@ import { ATTRIBUTE_ABBREVIATIONS, MOVEMENT_TYPES, SAVE_TYPES } from "@actor/valu
 import { createTagifyTraits } from "@module/sheet/helpers.ts";
 import type { UserPF2e } from "@module/user/document.ts";
 import { DicePF2e } from "@scripts/dice.ts";
+import { eventToRollParams } from "@scripts/sheet-util.ts";
+import type { HTMLTagifyTagsElement } from "@system/html-elements/tagify-tags.ts";
+import type { StatisticRollParameters } from "@system/statistic/index.ts";
 import {
     getActionGlyph,
-    getActionIcon,
     htmlClosest,
     htmlQuery,
     htmlQueryAll,
     localizeList,
     setHasElement,
+    sortLabeledRecord,
     tagify,
+    traitSlugToObject,
 } from "@util";
 import * as R from "remeda";
 import { NPCConfig } from "./config.ts";
-import { NPCSkillData } from "./data.ts";
 import {
     NPCActionSheetData,
     NPCIdentificationSheetData,
     NPCSheetData,
-    NPCSkillSheetData,
     NPCSpeedSheetData,
     NPCSpellcastingSheetData,
     NPCStrikeSheetData,
     NPCSystemSheetData,
 } from "./types.ts";
 
-abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2e<TActor> {
+abstract class AbstractNPCSheet extends CreatureSheetPF2e<NPCPF2e> {
     protected readonly actorConfigClass = NPCConfig;
 
     static override get defaultOptions(): ActorSheetOptions {
@@ -50,23 +52,21 @@ abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2
      * Prepares items in the actor for easier access during sheet rendering.
      * @param sheetData Data from the actor associated to this sheet.
      */
-    override async prepareItems(sheetData: NPCSheetData<TActor>): Promise<void> {
+    override async prepareItems(sheetData: NPCSheetData): Promise<void> {
         this.#prepareSkills(sheetData.data);
         this.#prepareSaves(sheetData.data);
     }
 
-    override async getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData<TActor>> {
-        const sheetData = (await super.getData(options)) as PrePrepSheetData<TActor>;
+    override async getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData> {
+        const sheetData = (await super.getData(options)) as PrePrepSheetData;
 
         const rollData = this.actor.getRollData();
         sheetData.enrichedContent.publicNotes = await TextEditor.enrichHTML(sheetData.data.details.publicNotes, {
             rollData,
             secrets: this.actor.isOwner,
-            async: true,
         });
         sheetData.enrichedContent.privateNotes = await TextEditor.enrichHTML(sheetData.data.details.privateNotes, {
             rollData,
-            async: true,
         });
 
         sheetData.traitTagifyData = createTagifyTraits(this.actor.system.traits.value, {
@@ -74,38 +74,15 @@ abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2
             record: CONFIG.PF2E.creatureTraits,
         });
 
-        return sheetData as NPCSheetData<TActor>;
+        return sheetData as NPCSheetData;
     }
 
     #prepareSkills(sheetSystemData: NPCSystemSheetData): void {
-        // Prepare a list of skill IDs sorted by their localized name
-        // This will help in displaying the skills in alphabetical order in the sheet
-        const sortedSkillsIds = Object.keys(sheetSystemData.skills) as SkillAbbreviation[];
-
-        const skills = sheetSystemData.skills;
-        for (const shortForm of sortedSkillsIds) {
-            const skill = skills[shortForm as SkillAbbreviation];
+        for (const skill of Object.values(sheetSystemData.skills)) {
             skill.adjustedHigher = skill.value > Number(skill.base);
             skill.adjustedLower = skill.value < Number(skill.base);
         }
-
-        sortedSkillsIds.sort((a: SkillAbbreviation, b: SkillAbbreviation) => {
-            const skillA = skills[a];
-            const skillB = skills[b];
-
-            if (skillA.label < skillB.label) return -1;
-            if (skillA.label > skillB.label) return 1;
-
-            return 0;
-        });
-
-        const sortedSkills: Record<string, NPCSkillData> = {};
-
-        for (const skillId of sortedSkillsIds) {
-            sortedSkills[skillId] = skills[skillId];
-        }
-
-        sheetSystemData.sortedSkills = sortedSkills as Record<SkillAbbreviation, NPCSkillSheetData>;
+        sheetSystemData.skills = sortLabeledRecord(sheetSystemData.skills);
     }
 
     #prepareSaves(systemData: NPCSystemSheetData): void {
@@ -127,12 +104,39 @@ abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2
         const html = $html[0];
 
         // Tagify the traits selection
-        const traitsEl = htmlQuery<HTMLInputElement>(html, 'input[name="system.traits.value"]');
+        const traitsEl = htmlQuery<HTMLTagifyTagsElement>(html, 'tagify-tags[name="system.traits.value"]');
         tagify(traitsEl, { whitelist: CONFIG.PF2E.creatureTraits });
     }
 
     protected override activateClickListener(html: HTMLElement): SheetClickActionHandlers {
         const handlers = super.activateClickListener(html);
+
+        const baseRollCheck = handlers["roll-check"]!;
+        handlers["roll-check"] = (event, anchor) => {
+            const variantIdx = "variant" in anchor.dataset ? Number(anchor.dataset.variant) : null;
+            if (variantIdx === null) return baseRollCheck(event, anchor);
+
+            const statisticSlug = htmlClosest(anchor, "[data-statistic]")?.dataset.statistic ?? "";
+            const skill = this.actor.system.skills[statisticSlug];
+            const variant = skill?.special?.at(variantIdx);
+            if (!variant) return baseRollCheck(event, anchor);
+
+            const statistic = this.actor.getStatistic(statisticSlug);
+            const args: StatisticRollParameters = {
+                ...eventToRollParams(event, { type: "check" }),
+                modifiers: [
+                    new ModifierPF2e({
+                        slug: "variant",
+                        label: variant.label,
+                        modifier: variant.base - skill.base,
+                    }),
+                ],
+            };
+            if (anchor.dataset.secret !== undefined) {
+                args.rollMode = game.user.isGM ? "gmroll" : "blindroll";
+            }
+            return statistic?.roll(args);
+        };
 
         handlers["edit-skills"] = () => {
             new NPCSkillsEditor(this.actor).render(true);
@@ -142,7 +146,7 @@ abstract class AbstractNPCSheet<TActor extends NPCPF2e> extends CreatureSheetPF2
     }
 }
 
-class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
+class NPCSheetPF2e extends AbstractNPCSheet {
     static override get defaultOptions(): ActorSheetOptions {
         const options = super.defaultOptions;
         options.scrollY.push(".inventory-list", ".tab:not(.inventory)");
@@ -184,9 +188,12 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     override async getData(options?: Partial<ActorSheetOptions>): Promise<NPCSheetData> {
         const sheetData = (await super.getData(options)) as PrePrepSheetData;
 
-        // Show the token's name as the actor's name if the user has limited permission or this NPC is dead and lootable
-        if (this.actor.limited || this.isLootSheet) {
-            sheetData.actor.name = this.actor.token?.name ?? sheetData.actor.name;
+        if (this.isLootSheet || this.actor.limited) {
+            const tokenSetsNameVisibility = game.pf2e.settings.tokens.nameVisibility;
+            const canSeeName = !tokenSetsNameVisibility || !this.token || this.token.playersCanSeeName;
+            const actorName = canSeeName ? this.token?.name ?? this.actor.name : "";
+
+            sheetData.actor.name = actorName;
         }
 
         // Identification DCs
@@ -194,7 +201,7 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
             const data = this.actor.identificationDCs;
             const skills =
                 data.skills.length > 0
-                    ? localizeList(data.skills.map((s) => game.i18n.localize(CONFIG.PF2E.skillList[s])))
+                    ? localizeList(data.skills.map((s) => game.i18n.localize(CONFIG.PF2E.skills[s].label)))
                     : null;
             return {
                 standard: skills
@@ -233,11 +240,6 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
         } else {
             sheetData.eliteState = "inactive";
             sheetData.weakState = "inactive";
-        }
-
-        // Data for lootable token-actor sheets
-        if (this.isLootSheet) {
-            sheetData.actor.name = this.token?.name ?? this.actor.name;
         }
 
         const actorSource = this.actor._source;
@@ -321,19 +323,38 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
      * @param sheetData Data of the actor to be shown in the sheet.
      */
     async #prepareActions(sheetData: NPCSheetData): Promise<void> {
-        // Enrich strike descriptions
-        const attacks: NPCStrikeSheetData[] = sheetData.data.actions;
-        const actorRollData = this.actor.getRollData();
-        for (const attack of attacks) {
-            if (attack.description.length > 0) {
-                const itemRollData = attack.item.getRollData();
-                attack.description = await TextEditor.enrichHTML(attack.description, {
-                    rollData: { ...actorRollData, ...itemRollData },
-                    async: true,
-                });
-            }
-            attack.damageFormula = String(await attack.damage?.({ getFormula: true }));
-        }
+        const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
+
+        const attacks: NPCStrikeSheetData[] = R.sortBy(
+            await Promise.all(
+                sheetData.data.actions.map(async (attack) => {
+                    const item = attack.item;
+                    const traits = item.system.traits.value.map((t) =>
+                        traitSlugToObject(t, CONFIG.PF2E.npcAttackTraits),
+                    );
+                    const rollData = item.getRollData();
+                    const description = await TextEditor.enrichHTML(item.description, { rollData });
+                    const damageFormula = item.dealsDamage ? String(await attack.damage?.({ getFormula: true })) : null;
+                    const effects = ((): string => {
+                        const list = attack.additionalEffects.map((e) => game.i18n.localize(e.label));
+                        return listFormatter.format(list);
+                    })();
+
+                    return {
+                        ...R.pick(item, ["name", "sort"]),
+                        ...R.pick(attack, ["breakdown", "variants"]),
+                        _id: item.id,
+                        attackType: item.isMelee ? "PF2E.NPCAttackMelee" : "PF2E.NPCAttackRanged",
+                        traits,
+                        effects,
+                        description,
+                        damageFormula,
+                    };
+                }),
+            ),
+            (a) => a.name,
+            (a) => a.sort,
+        );
 
         const actions: NPCActionSheetData = {
             passive: { label: game.i18n.localize("PF2E.ActionTypePassive"), actions: [] },
@@ -349,26 +370,20 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
         );
 
         for (const item of abilities) {
-            const itemData = item.toObject(false);
-            const chatData = await item.getChatData();
-            const traits = chatData.traits ?? [];
+            const traits = item.system.traits.value.map((t) => traitSlugToObject(t, CONFIG.PF2E.actionTraits));
+            const glyph = getActionGlyph(item.actionCost);
+            const actionGroup = glyph ? "active" : "passive";
+            const frequency = item.system?.frequency || null;
+            const has = {
+                aura: item.traits.has("aura") || item.system.rules.some((r) => r.key === "Aura"),
+                deathNote: item.system.deathNote,
+                selfEffect: !!item.system.selfEffect,
+            };
 
-            const actionGroup = !item.actionCost ? "passive" : "active";
-
-            const hasAura =
-                actionGroup === "passive" &&
-                (item.system.traits.value.includes("aura") || !!item.system.rules.find((r) => r.key === "Aura"));
-
-            actions[actionGroup].actions.push({
-                ...itemData,
-                glyph: getActionGlyph(item.actionCost),
-                imageUrl: getActionIcon(item.actionCost),
-                chatData,
-                traits,
-                hasAura,
-            });
+            actions[actionGroup].actions.push({ _id: item.id, name: item.name, glyph, traits, frequency, has });
         }
 
+        sheetData.attacks = attacks;
         sheetData.actions = actions;
     }
 
@@ -419,7 +434,7 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
 
         if (this.isEditable) {
             handlers["generate-attack"] = async (event) => {
-                const { actor } = this;
+                const actor = this.actor;
                 const itemId = htmlClosest(event.target, "[data-item-id]")?.dataset.itemId ?? "";
                 const item = actor.items.get(itemId, { strict: true });
                 if (!item.isOfType("weapon")) return;
@@ -488,7 +503,7 @@ class NPCSheetPF2e extends AbstractNPCSheet<NPCPF2e> {
     }
 }
 
-class SimpleNPCSheet extends AbstractNPCSheet<NPCPF2e> {
+class SimpleNPCSheet extends AbstractNPCSheet {
     static override get defaultOptions(): ActorSheetOptions {
         const options = super.defaultOptions;
         options.classes.push("simple");
@@ -503,6 +518,6 @@ class SimpleNPCSheet extends AbstractNPCSheet<NPCPF2e> {
     }
 }
 
-type PrePrepSheetData<TActor extends NPCPF2e = NPCPF2e> = Partial<NPCSheetData> & CreatureSheetData<TActor>;
+type PrePrepSheetData = Partial<NPCSheetData> & CreatureSheetData<NPCPF2e>;
 
 export { AbstractNPCSheet, NPCSheetPF2e, SimpleNPCSheet };

@@ -63,7 +63,7 @@
                 },
                 "items": {
                     "00b8b": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Assurance",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Assurance"
@@ -76,10 +76,12 @@
                 },
                 "rules": [],
                 "slug": "farmhand",
-                "trainedLore": "Farming Lore",
                 "trainedSkills": {
+                    "lore": [
+                        "Farming Lore"
+                    ],
                     "value": [
-                        "ath"
+                        "athletics"
                     ]
                 },
                 "traits": {
@@ -132,67 +134,67 @@
                     {
                         "choices": [
                             {
-                                "label": "PF2E.SkillAcr",
+                                "label": "PF2E.Skill.Acrobatics",
                                 "value": "acrobatics"
                             },
                             {
-                                "label": "PF2E.SkillArc",
+                                "label": "PF2E.Skill.Arcana",
                                 "value": "arcana"
                             },
                             {
-                                "label": "PF2E.SkillAth",
+                                "label": "PF2E.Skill.Athletics",
                                 "value": "athletics"
                             },
                             {
-                                "label": "PF2E.SkillCra",
+                                "label": "PF2E.Skill.Crafting",
                                 "value": "crafting"
                             },
                             {
-                                "label": "PF2E.SkillDec",
+                                "label": "PF2E.Skill.Deception",
                                 "value": "deception"
                             },
                             {
-                                "label": "PF2E.SkillDip",
+                                "label": "PF2E.Skill.Diplomacy",
                                 "value": "diplomacy"
                             },
                             {
-                                "label": "PF2E.SkillItm",
+                                "label": "PF2E.Skill.Intimidation",
                                 "value": "intimidation"
                             },
                             {
-                                "label": "PF2E.SkillMed",
+                                "label": "PF2E.Skill.Medicine",
                                 "value": "medicine"
                             },
                             {
-                                "label": "PF2E.SkillNat",
+                                "label": "PF2E.Skill.Nature",
                                 "value": "nature"
                             },
                             {
-                                "label": "PF2E.SkillOcc",
+                                "label": "PF2E.Skill.Occultism",
                                 "value": "occultism"
                             },
                             {
-                                "label": "PF2E.SkillPrf",
+                                "label": "PF2E.Skill.Performance",
                                 "value": "performance"
                             },
                             {
-                                "label": "PF2E.SkillRel",
+                                "label": "PF2E.Skill.Religion",
                                 "value": "religion"
                             },
                             {
-                                "label": "PF2E.SkillSoc",
+                                "label": "PF2E.Skill.Society",
                                 "value": "society"
                             },
                             {
-                                "label": "PF2E.SkillSte",
+                                "label": "PF2E.Skill.Stealth",
                                 "value": "stealth"
                             },
                             {
-                                "label": "PF2E.SkillSur",
+                                "label": "PF2E.Skill.Survival",
                                 "value": "survival"
                             },
                             {
-                                "label": "PF2E.SkillThi",
+                                "label": "PF2E.Skill.Thievery",
                                 "value": "thievery"
                             },
                             {
@@ -321,7 +323,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -336,95 +337,37 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "XXmhP4ymJXtzNubm"
                             },
-                            "1": {
+                            {
                                 "id": "i6His96oNaHCeb2O"
                             },
-                            "2": {
+                            {
                                 "id": "w1yX7F93dfdWUTLu"
                             },
-                            "3": {
+                            {
                                 "id": "GUFNuO8dmIVG65Hg"
                             },
-                            "4": {
+                            {
                                 "id": "vxOjfPb799L0yKjP"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot1": {
                         "max": 2,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "jhw7CXgZQwc8jea2"
                             },
-                            "1": {
+                            {
                                 "id": "rL2Vbck5y14ih0S9"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     }
                 },
                 "slug": null,
@@ -672,7 +615,7 @@
                     "sourceId": "Compendium.pf2e.spells-srd.Item.SnjhtQYexDtNDdEg"
                 }
             },
-            "img": "systems/pf2e/icons/spells/stabelize.webp",
+            "img": "icons/magic/control/debuff-energy-hold-yellow.webp",
             "name": "Stabilize",
             "sort": 0,
             "system": {
@@ -1073,7 +1016,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "focus"
                 },
@@ -1087,74 +1029,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 0,
@@ -1670,7 +1545,7 @@
                 "containerId": null,
                 "damage": null,
                 "description": {
-                    "value": "<p><em>@UUID[Compendium.pf2e.spells-srd.Item.Breathe Fire]</em></p><hr /><p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>To Cast a Spell from a scroll, the spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack roll and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical material components and costs are provided when a scroll is created, so you don't need to provide them when Casting a Spell from a scroll. You must replace any required material component for that spell with a somatic component. If the spell requires a focus, you must have that focus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
+                    "value": "<p>@UUID[Compendium.pf2e.spells-srd.Item.Breathe Fire]</p><hr /><p>Casting a Spell from a scroll requires holding the scroll in one hand and activating it with a Cast a Spell activity using the normal number of actions for that spell.</p>\n<p>To Cast a Spell from a scroll, the spell must appear on your spell list. Because you're the one Casting the Spell, use your spell attack roll and spell DC. The spell also gains the appropriate trait for your tradition (arcane, divine, occult, or primal).</p>\n<p>Any physical material components and costs are provided when a scroll is created, so you don't need to provide them when Casting a Spell from a scroll. You must replace any required material component for that spell with a somatic component. If the spell requires a focus, you must have that focus to Cast the Spell from a scroll.</p>\n<hr />\n<p><em>Note: To create a scroll or wand of a specific spell, drag the spell from the compendium or compendium browser into the inventory of a PC, NPC, or loot actor.</em></p>"
                 },
                 "equipped": {
                     "carryType": "worn"
@@ -1702,7 +1577,7 @@
                 "size": "med",
                 "slug": "scroll-of-1st-level-spell",
                 "spell": {
-                    "_id": null,
+                    "_id": "QeLXA0W50PLW1XHY",
                     "flags": {
                         "core": {
                             "sourceId": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
@@ -2803,7 +2678,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Expert Spellcaster"
                     },
                     "zird8": {
-                        "img": "systems/pf2e/icons/features/classes/primal-hierophant.webp",
+                        "img": "icons/weapons/wands/wand-crook-yellow.webp",
                         "level": 19,
                         "name": "Primal Hierophant",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Primal Hierophant"
@@ -2858,7 +2733,7 @@
                 "trainedSkills": {
                     "additional": 2,
                     "value": [
-                        "nat"
+                        "nature"
                     ]
                 },
                 "traits": {
@@ -2983,7 +2858,7 @@
                 },
                 "category": "classfeature",
                 "description": {
-                    "value": "<p>As stewards of the natural order, druids find affronts to nature anathema. If you perform enough acts that are anathema to nature, you lose your magical abilities that come from the druid class, including your primal spellcasting and the benefits of your order. These abilities can be regained only if you demonstrate your repentance by conducting an <em>@UUID[Compendium.pf2e.spells-srd.Item.Atone]</em> ritual.</p>\n<p>The following acts are anathema to all druids:</p>\n<ul>\n<li>Using metal armor or shields.</li>\n<li>Despoiling natural places.</li>\n<li>Teaching the Druidic language to non-druids.</li>\n</ul>\n<p>Each druidic order also has additional anathema acts, detailed in the order's entry.</p>\n<p>See specific orders for more information.</p>"
+                    "value": "<p>As stewards of the natural order, druids find affronts to nature anathema. If you perform enough acts that are anathema to nature, you lose your magical abilities that come from the druid class, including your primal spellcasting and the benefits of your order. These abilities can be regained only if you demonstrate your repentance by conducting an @UUID[Compendium.pf2e.spells-srd.Item.Atone] ritual.</p>\n<p>The following acts are anathema to all druids:</p>\n<ul>\n<li>Using metal armor or shields.</li>\n<li>Despoiling natural places.</li>\n<li>Teaching the Druidic language to non-druids.</li>\n</ul>\n<p>Each druidic order also has additional anathema acts, detailed in the order's entry.</p>\n<p>See specific orders for more information.</p>"
                 },
                 "level": {
                     "value": 1
@@ -3294,7 +3169,7 @@
                 },
                 "category": "classfeature",
                 "description": {
-                    "value": "<p>You have a strong connection to beasts, and you are allied with a beast companion. You are trained in Athletics. You also gain the @UUID[Compendium.pf2e.feats-srd.Item.Animal Companion]{Animal Companion (Druid)} druid feat. You gain the <em>@UUID[Compendium.pf2e.spells-srd.Item.Heal Animal]</em> order spell. Committing wanton cruelty to animals or killing animals unnecessarily is anathema to your order. (This doesn't prevent you from defending yourself against animals or killing them cleanly for food.)</p>"
+                    "value": "<p>You have a strong connection to beasts, and you are allied with a beast companion. You are trained in Athletics. You also gain the @UUID[Compendium.pf2e.feats-srd.Item.Animal Companion]{Animal Companion (Druid)} druid feat. You gain the @UUID[Compendium.pf2e.spells-srd.Item.Heal Animal] order spell. Committing wanton cruelty to animals or killing animals unnecessarily is anathema to your order. (This doesn't prevent you from defending yourself against animals or killing them cleanly for food.)</p>"
                 },
                 "level": {
                     "value": 1
@@ -3312,7 +3187,7 @@
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.ath.rank",
+                        "path": "system.skills.athletics.rank",
                         "predicate": [
                             {
                                 "not": "feat:order-explorer:animal-order"
@@ -3726,52 +3601,52 @@
             }
         },
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 0
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 1
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 1
             },
-            "itm": {
+            "intimidation": {
                 "rank": 0
             },
-            "med": {
+            "medicine": {
                 "rank": 1
             },
-            "nat": {
+            "nature": {
                 "rank": 1
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 1
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

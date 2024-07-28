@@ -3,8 +3,8 @@ import type { DexterityModifierCapData } from "@actor/character/types.ts";
 import type { Abilities } from "@actor/creature/data.ts";
 import type { InitiativeTraceData } from "@actor/initiative.ts";
 import type { StatisticModifier } from "@actor/modifiers.ts";
-import type { ActorAlliance, AttributeString, SkillLongForm } from "@actor/types.ts";
-import type { ConsumablePF2e, MeleePF2e, WeaponPF2e } from "@item";
+import type { ActorAlliance, AttributeString, SkillSlug } from "@actor/types.ts";
+import type { MeleePF2e, WeaponPF2e } from "@item";
 import type { ItemSourcePF2e } from "@item/base/data/index.ts";
 import type { MigrationRecord, Rarity, Size, ValueAndMaybeMax, ZeroToTwo } from "@module/data.ts";
 import type { AutoChangeEntry } from "@module/rules/rule-element/ae-like.ts";
@@ -29,6 +29,7 @@ type ActorFlagsPF2e = foundry.documents.ActorFlags & {
         rollOptions: RollOptionFlags;
         /** IDs of granted items that are tracked */
         trackedItems: Record<string, string>;
+        hideStowed?: boolean;
         [key: string]: unknown;
     };
 };
@@ -85,6 +86,7 @@ interface ActorAttributes extends ActorAttributesSource {
     shield?: {
         raised: boolean;
         broken: boolean;
+        itemId: string | null;
     };
     flanking: {
         /** Whether the actor can flank at all */
@@ -138,6 +140,8 @@ type GangUpCircumstance =
     | number
     /** Requires the actor's animal companion to be adjacent to the target */
     | "animal-companion"
+    /** Requires the actor's eidolon to be adjacent to the target */
+    | "eidolon"
     /** The Gang Up rogue feat allows allies to flank with the gang-upper */
     | true;
 
@@ -175,7 +179,7 @@ type RollFunction<T extends RollParameters = RollParameters> = (
 type DamageRollFunction = (params?: DamageRollParams) => Promise<string | Rolled<DamageRoll> | null>;
 
 interface InitiativeData extends StatisticTraceData {
-    statistic: SkillLongForm | "perception";
+    statistic: SkillSlug | "perception";
     /**
      * If a pair of initiative rolls are tied, the next resolution step is the tiebreak priority. A lower value
      * constitutes a higher priority.
@@ -207,7 +211,7 @@ interface TraitViewData {
     /** An extra css class added to the UI marker for this trait. */
     cssClass?: string;
     /** The description of the trait */
-    description?: string;
+    description: string | null;
 }
 
 /** An strike which a character can use. */
@@ -228,8 +232,13 @@ interface StrikeData extends StatisticModifier {
     traits: TraitViewData[];
     /** Any options always applied to this strike */
     options: string[];
-    /** Whether the strike is ready (usually when the weapon corresponding with the strike is equipped) */
+    /**
+     * Whether the strike and its auxiliary actions are available (usually when the weapon corresponding with the
+     * strike is equipped)
+     */
     ready: boolean;
+    /** Whether striking itself, independent of the auxiliary actions, is possible */
+    canStrike: boolean;
     /** Alias for `attack`. */
     roll?: RollFunction<AttackRollParams>;
     /** Roll to attack with the given strike (with no MAP; see `variants` for MAPs.) */
@@ -245,8 +254,8 @@ interface StrikeData extends StatisticModifier {
 
     /** Ammunition choices and selected ammo if this is a ammo consuming weapon. */
     ammunition?: {
-        compatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
-        incompatible: (ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e>)[];
+        compatible: { id: string; label: string }[];
+        incompatible: { id: string; label: string }[];
         selected: {
             id: string;
             compatible: boolean;

@@ -27,14 +27,7 @@
         "rules": [
             {
                 "batchSizes": {
-                    "default": 1,
                     "other": [
-                        {
-                            "definition": [
-                                "item:base:alchemical-bomb"
-                            ],
-                            "quantity": 2
-                        },
                         {
                             "definition": [
                                 "item:category:ammo",
@@ -73,7 +66,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.skills.cra.rank",
+                "path": "system.skills.crafting.rank",
                 "value": 1
             }
         ],

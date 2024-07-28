@@ -1,14 +1,11 @@
-.default section.window-content {
-    padding: 0;
-    overflow: hidden;
-}
-
 @import "character/attribute-builder";
 @import "iwr-editor";
 
-.actor.sheet .window-content {
+.actor.sheet section.window-content {
     @import "../reset";
     font-family: var(--sans-serif);
+    overflow: hidden;
+    padding: 0;
 
     h1,
     h2,
@@ -23,6 +20,10 @@
         &:hover {
             text-shadow: none;
         }
+    }
+
+    .drag-handle {
+        cursor: hand;
     }
 
     i.fa-info-circle {
@@ -161,9 +162,35 @@
             text-shadow: 0 0 0.1em var(--text-light);
         }
     }
-}
 
-.actor.sheet {
+    ul.comma-separated {
+        display: inline;
+        list-style: none;
+        margin: 0 0 var(--space-3);
+        padding: 0;
+
+        li {
+            display: inline;
+            margin: 0;
+
+            &::after {
+                content: ",";
+            }
+
+            &.details-follow::after {
+                content: ";";
+            }
+
+            &:last-child::after {
+                content: "";
+            }
+        }
+
+        &.senses {
+            text-transform: lowercase;
+        }
+    }
+
     form.crb-style {
         display: grid;
         grid:
@@ -196,7 +223,6 @@
 
         .sheet-navigation {
             grid-area: nav;
-            margin-left: calc(-1 * var(--space-2));
         }
 
         .sheet-body {
@@ -222,7 +248,7 @@
                 color: var(--text-dark);
 
                 > .tab {
-                    padding: 0.6rem 0.6rem 0;
+                    padding: var(--space-10) var(--space-10) 0;
                     display: none;
 
                     &.active {
@@ -232,46 +258,13 @@
 
                 @import "spell-collection";
 
-                ul.option-toggles {
-                    @include frame-elegant;
-                    display: flex;
-                    flex-flow: column wrap;
-                    list-style: none;
-                    margin-bottom: var(--space-8);
-                    padding: var(--space-8) 1rem;
-
-                    > li {
-                        align-items: center;
-                        display: flex;
-                        width: 100%;
-
-                        label {
-                            align-items: center;
-                            display: flex;
-                            gap: var(--space-4);
-
-                            input {
-                                @include p-reset;
-                            }
-
-                            .unchecked-disabled {
-                                color: var(--color-text-dark-inactive);
-                            }
-
-                            select {
-                                margin-left: 0.25em;
-                            }
-                        }
-                    }
-                }
-
                 .directory-list {
                     > h3,
                     > li > h3 {
-                        @include p-reset;
                         color: var(--text-light);
                         font: 500 var(--font-size-16) / 1 var(--serif);
-                        margin-left: var(--space-8);
+                        margin: 0 0 0 var(--space-8);
+                        padding: 0;
                     }
 
                     .action-header {
@@ -301,10 +294,10 @@
                         }
 
                         .drag-handle {
-                            cursor: move;
                             color: var(--text-light);
                             flex-basis: 0;
                             margin-right: 0.25em;
+
                             i {
                                 padding-top: 0.25em;
                             }
@@ -403,6 +396,19 @@
                     @include requires-user-attention;
                 }
             }
+
+            a,
+            button {
+                &.inactive {
+                    color: var(--color-text-dark-6);
+                }
+
+                input[type="checkbox"] {
+                    margin: 0;
+                    height: var(--font-size-10);
+                    width: var(--font-size-10);
+                }
+            }
         }
 
         section.major > .subsection {
@@ -448,12 +454,26 @@
         }
     }
 
-    &.character {
-        @import "character/attack-popout";
+    /* Mystification data revealed to GMs */
+    .gm-mystified-data {
+        opacity: 0.75;
+    }
 
+    @import "coinage";
+}
+
+.actor.sheet {
+    &.character section.window-content {
         .crb-style {
             @import "character";
         }
+    }
+
+    &.attack-popout section.window-content {
+        background-image: url("/assets/sheet/background.webp");
+        background-position: 75% 10%;
+
+        @import "character/attack-popout";
     }
 
     &.vehicle .crb-style {
@@ -462,7 +482,6 @@
 }
 
 @import "spell-preparation";
-@import "coinage";
 
 /* Actor-type Imports */
 @import "familiar";
@@ -477,7 +496,4 @@
 
 @import "army";
 
-/* Mystification data revealed to GMs */
-.gm-mystified-data {
-    opacity: 0.75;
-}
+@import "item-transfer-dialog";

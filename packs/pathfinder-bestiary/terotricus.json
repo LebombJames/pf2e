@@ -27,16 +27,12 @@
                         "damageType": "bludgeoning"
                     },
                     "h1l03e7zn3spsfbwyqgb": {
-                        "damage": "2d6",
-                        "damageType": "spirit"
-                    },
-                    "4qdwn97etif23fslz0ux": {
-                        "damage": "2d6",
+                        "damage": "4d6",
                         "damageType": "spirit"
                     }
                 },
                 "description": {
-                    "value": "<p>Either Improved Grab of Improved Push</p>"
+                    "value": "<p>Either Improved Grab or Improved Push</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -48,8 +44,6 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "chaotic",
-                        "evil",
                         "magical",
                         "reach-20",
                         "unholy"
@@ -86,11 +80,7 @@
                         "damageType": "poison"
                     },
                     "hyvpifbojdctsdyzqdle": {
-                        "damage": "2d6",
-                        "damageType": "spirit"
-                    },
-                    "xxy8izksk8a6wnslgpuv": {
-                        "damage": "2d6",
+                        "damage": "4d6",
                         "damageType": "spirit"
                     }
                 },
@@ -107,8 +97,6 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "chaotic",
-                        "evil",
                         "magical",
                         "range-increment-80",
                         "unholy"
@@ -121,41 +109,6 @@
             "type": "melee"
         },
         {
-            "_id": "xsknvVvLR4sL1ugG",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "TkDV0wPhRzYy8sii",
             "flags": {
                 "core": {
@@ -164,7 +117,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Tremorsense (Imprecise) 120 feet",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -199,7 +152,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "+1 Status to All Saves vs. Magic",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -252,7 +205,7 @@
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Regeneration 25 (Deactivated by Cold)",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -292,7 +245,7 @@
             "_id": "9YuL1pu4ZHOAaxcZ",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Spore Cloud",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -334,7 +287,7 @@
             "_id": "7O6Ud0aHDjF3hlFD",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Infest Environs",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -372,7 +325,7 @@
             "_id": "fvSVZqV8GEHEzMVu",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Spore Blight",
-            "sort": 900000,
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -382,7 +335,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Plants and fungi are immune.</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:40]</p>\n<hr />\n<p><strong>Stage 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 2} (1 day)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled4} and @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} (1 day)</p>\n<p><strong>Stage 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.Controlled] by the terotricus (as <em>@UUID[Compendium.pf2e.spells-srd.Item.Dominate]</em>; [[/br 5d8 #Duration Controlled]]{5d8 days})</p>\n<p><strong>Stage 4</strong> dead</p>"
+                    "value": "<p>Plants and fungi are immune.</p>\n<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:40]</p>\n<hr />\n<p><strong>Stage 1</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 2} (1 day)</p>\n<p><strong>Stage 2</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 4} and @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} (1 day)</p>\n<p><strong>Stage 3</strong> @UUID[Compendium.pf2e.conditionitems.Item.Controlled] by the terotricus (as @UUID[Compendium.pf2e.spells-srd.Item.Dominate]; [[/br 5d8 #Duration Controlled]]{5d8 days})</p>\n<p><strong>Stage 4</strong> dead</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -404,7 +357,7 @@
             "_id": "1Vdy1h0xvUBMB9Mg",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Sticky Spores",
-            "sort": 1000000,
+            "sort": 900000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -439,7 +392,7 @@
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Grab",
-            "sort": 1100000,
+            "sort": 1000000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -474,7 +427,7 @@
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Push 20 feet (40 feet on a Critical Hit)",
-            "sort": 1200000,
+            "sort": 1100000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -499,131 +452,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "NrUYJaBHEiexBCXW",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 1300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 37
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "sNmkTkc2ReQIODmk",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 1400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 32
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "SFs8FkxyNRrgZKLA",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Intimidation",
-            "sort": 1500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "JRoJU0xJBuElkuKw",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Nature",
-            "sort": 1600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "xWyOhSPh3j7DbMJ7",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 1700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 31
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Terotricus",
@@ -769,6 +597,23 @@
             "will": {
                 "saveDetail": "",
                 "value": 33
+            }
+        },
+        "skills": {
+            "athletics": {
+                "base": 37
+            },
+            "deception": {
+                "base": 32
+            },
+            "intimidation": {
+                "base": 35
+            },
+            "nature": {
+                "base": 31
+            },
+            "survival": {
+                "base": 31
             }
         },
         "traits": {

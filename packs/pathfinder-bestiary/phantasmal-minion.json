@@ -61,31 +61,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "uc9ve6HOBc1nBqls",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 8
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Phantasmal Minion",
@@ -184,7 +159,7 @@
                 "value": -1
             },
             "privateNotes": "",
-            "publicNotes": "<p>This creature can be summoned with the spell <em>@UUID[Compendium.pf2e.spells-srd.Item.Phantasmal Minion]</em>.</p>",
+            "publicNotes": "<p>This creature can be summoned with the spell @UUID[Compendium.pf2e.spells-srd.Item.Phantasmal Minion].</p>",
             "publication": {
                 "license": "ORC",
                 "remaster": true,
@@ -216,6 +191,11 @@
             "will": {
                 "saveDetail": "",
                 "value": 0
+            }
+        },
+        "skills": {
+            "stealth": {
+                "base": 8
             }
         },
         "traits": {

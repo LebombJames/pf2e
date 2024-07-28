@@ -161,45 +161,10 @@
             "type": "melee"
         },
         {
-            "_id": "JKsilgygvz8sP0Ze",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 400000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "DMdB611N1sb19rtx",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Undead Crafter",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -229,7 +194,7 @@
             "_id": "G2MHcR67aZiGIBIl",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Jettison Cranium",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -263,7 +228,7 @@
             "_id": "OtWQPO05M1MuYUft",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Slosh",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -293,63 +258,13 @@
             "_id": "rbUPhPTB941Ay9CI",
             "img": "systems/pf2e/icons/default-icons/lore.svg",
             "name": "Lore (any known by its preserved heads)",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "description": {
                     "value": ""
                 },
                 "mod": {
                     "value": 19
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "nznjgX4CbGyxV3KR",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Occultism",
-            "sort": 900000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 22
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "88rzMYP4sRS05RxP",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Religion",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 22
                 },
                 "proficient": {
                     "value": 0
@@ -461,6 +376,14 @@
             "will": {
                 "saveDetail": "",
                 "value": 19
+            }
+        },
+        "skills": {
+            "occultism": {
+                "base": 22
+            },
+            "religion": {
+                "base": 22
             }
         },
         "spellcasting": {

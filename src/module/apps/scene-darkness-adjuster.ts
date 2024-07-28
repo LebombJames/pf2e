@@ -31,7 +31,7 @@ export class SceneDarknessAdjuster extends Application {
         };
     }
 
-    override async render(force = false, options: RenderOptions & { scenes?: ScenePF2e[] } = {}): Promise<this> {
+    override render(force = false, options: RenderOptions & { scenes?: ScenePF2e[] } = {}): this {
         if (!game.scenes.viewed) return this;
 
         // Adjust position of this application's window
@@ -43,9 +43,9 @@ export class SceneDarknessAdjuster extends Application {
         options.top = bounds.top - 3;
         if (this.rendered) return super.render(force, options);
 
-        await super.render(force, options);
+        super.render(force, options);
         const $element = $("#darkness-adjuster");
-        await $element.hide(0).fadeIn().promise();
+        $element.hide(0).fadeIn().promise();
 
         return this;
     }
@@ -64,7 +64,7 @@ export class SceneDarknessAdjuster extends Application {
 
         this.#slider = noUiSlider.create(slider, {
             range: { min: 0, max: 1 },
-            start: [0.25, game.scenes.viewed.darkness, 0.75],
+            start: [0.25, game.scenes.viewed.environment.darknessLevel, 0.75],
             connect: [true, false, false, true],
             behaviour: "snap-unconstrained-snap",
             pips: {
@@ -97,7 +97,7 @@ export class SceneDarknessAdjuster extends Application {
         this.#slider.on("slide", (values, thumbNumber) => {
             if (thumbNumber === 1 && canvas.scene) {
                 this.#noRefreshHook = true;
-                canvas.colorManager.initialize({ darknessLevel: Number(values[1]) });
+                canvas.environment.initialize({ environment: { darknessLevel: Number(values[1]) } });
                 canvas.app.ticker.add(() => {
                     this.#noRefreshHook = false;
                 });
@@ -110,7 +110,7 @@ export class SceneDarknessAdjuster extends Application {
                 const newValue = Number(values[1]);
                 await canvas.scene.update(
                     { darkness: newValue },
-                    { animateDarkness: Math.round(5000 * Math.abs(canvas.scene.darkness - newValue)) },
+                    { animateDarkness: Math.round(5000 * Math.abs(canvas.scene.environment.darknessLevel - newValue)) },
                 );
             }
         });

@@ -1,18 +1,17 @@
 import type { ActorPF2e } from "@actor";
 import { AutomaticBonusProgression as ABP } from "@actor/character/automatic-bonus-progression.ts";
-import { ItemSummaryData } from "@item/base/data/index.ts";
+import { RawItemChatData } from "@item/base/data/index.ts";
 import { PhysicalItemPF2e, getPropertyRuneSlots } from "@item/physical/index.ts";
 import { MAGIC_TRADITIONS } from "@item/spell/values.ts";
 import { UserPF2e } from "@module/user/index.ts";
 import { ErrorPF2e, setHasElement, signedInteger, sluggify } from "@util";
 import * as R from "remeda";
 import { ArmorSource, ArmorSystemData } from "./data.ts";
-import { ArmorCategory, ArmorGroup, BaseArmorType } from "./types.ts";
+import { ArmorCategory, ArmorGroup, ArmorTrait, BaseArmorType } from "./types.ts";
 
 class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
-    override isStackableWith(item: PhysicalItemPF2e<TParent>): boolean {
-        if (this.isEquipped || item.isEquipped) return false;
-        return super.isStackableWith(item);
+    static override get validTraits(): Record<ArmorTrait, string> {
+        return CONFIG.PF2E.armorTraits;
     }
 
     get isBarding(): boolean {
@@ -56,8 +55,8 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
     }
 
     /** Generate a list of strings for use in predication */
-    override getRollOptions(prefix = "armor"): string[] {
-        const rollOptions = super.getRollOptions(prefix);
+    override getRollOptions(prefix = this.type, options?: { includeGranter?: boolean }): string[] {
+        const rollOptions = super.getRollOptions(prefix, options);
         rollOptions.push(
             ...Object.entries({
                 [`category:${this.category}`]: true,
@@ -72,6 +71,11 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
         );
 
         return rollOptions;
+    }
+
+    override isStackableWith(item: PhysicalItemPF2e<TParent>): boolean {
+        if (this.isEquipped || item.isEquipped) return false;
+        return super.isStackableWith(item);
     }
 
     override prepareBaseData(): void {
@@ -97,7 +101,9 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
                 : null;
         const hasTraditionTraits = baseTraits.some((t) => setHasElement(MAGIC_TRADITIONS, t));
         const magicTrait = investedTrait && !hasTraditionTraits ? "magical" : null;
-        this.system.traits.value = R.uniq(R.compact([...baseTraits, investedTrait, magicTrait]).sort());
+        this.system.traits.value = R.unique([...baseTraits, investedTrait, magicTrait] as const)
+            .filter(R.isTruthy)
+            .sort();
     }
 
     override prepareDerivedData(): void {
@@ -122,14 +128,14 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
     override async getChatData(
         this: ArmorPF2e<ActorPF2e>,
         htmlOptions: EnrichmentOptions = {},
-    ): Promise<ItemSummaryData> {
+    ): Promise<RawItemChatData> {
         const properties = [
             CONFIG.PF2E.armorCategories[this.category],
             `${signedInteger(this.acBonus)} ${game.i18n.localize("PF2E.ArmorArmorLabel")}`,
             `${this.system.dexCap || 0} ${game.i18n.localize("PF2E.ArmorDexLabel")}`,
             `${this.system.checkPenalty || 0} ${game.i18n.localize("PF2E.ArmorCheckLabel")}`,
             this.speedPenalty ? `${this.system.speedPenalty} ${game.i18n.localize("PF2E.ArmorSpeedLabel")}` : null,
-        ];
+        ].filter(R.isTruthy);
 
         return this.processChatData(htmlOptions, {
             ...(await super.getChatData()),
@@ -150,10 +156,10 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
     /** Ensure correct shield/actual-armor usage */
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: DocumentUpdateContext<TParent>,
+        operation: DatabaseUpdateOperation<TParent>,
         user: UserPF2e,
     ): Promise<boolean | void> {
-        if (!changed.system) return super._preUpdate(changed, options, user);
+        if (!changed.system) return super._preUpdate(changed, operation, user);
 
         if (changed.system.acBonus !== undefined) {
             const integerValue = Math.floor(Number(changed.system.acBonus)) || 0;
@@ -175,7 +181,7 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
             changed.system.speedPenalty = Math.min(0, integerValue);
         }
 
-        return super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, operation, user);
     }
 }
 

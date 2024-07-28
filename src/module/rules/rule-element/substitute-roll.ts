@@ -15,7 +15,8 @@ class SubstituteRollRuleElement extends RuleElementPF2e<SubstituteRollSchema> {
     }
 
     static override defineSchema(): SubstituteRollSchema {
-        const { fields } = foundry.data;
+        const fields = foundry.data.fields;
+
         return {
             ...super.defineSchema(),
             selector: new fields.StringField({ required: true, blank: false, initial: "check" }),
@@ -48,7 +49,7 @@ class SubstituteRollRuleElement extends RuleElementPF2e<SubstituteRollSchema> {
     }
 
     override beforePrepareData(): void {
-        const value = Math.clamped(Math.trunc(Number(this.resolveValue(this.value))), 1, 20);
+        const value = Math.clamp(Math.trunc(Number(this.resolveValue(this.value))), 1, 20);
         if (Number.isNaN(value)) {
             return this.failValidation("value must resolve to a number");
         }

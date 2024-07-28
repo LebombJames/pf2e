@@ -13,7 +13,7 @@ export class CompendiumBrowserEquipmentTab extends CompendiumBrowserTab {
     templatePath = "systems/pf2e/templates/compendium-browser/partials/equipment.hbs";
 
     /* MiniSearch */
-    override searchFields = ["name"];
+    override searchFields = ["name", "originalName"];
     override storeFields = [
         "type",
         "name",
@@ -49,7 +49,7 @@ export class CompendiumBrowserEquipmentTab extends CompendiumBrowserTab {
         const physicalItemFields = [...baseFields, "system.level.value"];
         const runedItemFields = [...physicalItemFields, "system.runes"];
         const armorAndWeaponFields = [...runedItemFields, "system.category", "system.group"];
-        const indexFields = R.uniq([...armorAndWeaponFields]).sort();
+        const indexFields = R.unique([...armorAndWeaponFields]).sort();
         const publications = new Set<string>();
 
         for await (const { pack, index } of this.browser.packLoader.loadPacks(
@@ -108,14 +108,15 @@ export class CompendiumBrowserEquipmentTab extends CompendiumBrowserTab {
                     inventoryItems.push({
                         type: itemData.type,
                         name: itemData.name,
+                        originalName: itemData.originalName, // Added by Babele
                         img: itemData.img,
-                        uuid: `Compendium.${pack.collection}.${itemData._id}`,
+                        uuid: itemData.uuid,
                         level: itemData.system.level?.value ?? 0,
                         category: itemData.system.category ?? "",
                         group: itemData.system.group ?? "",
                         price: priceCoins,
                         priceInCopper: coinValue,
-                        traits: R.uniq(itemData.system.traits.value),
+                        traits: R.unique(itemData.system.traits.value),
                         rarity: itemData.system.traits.rarity,
                         source: sourceSlug,
                     });

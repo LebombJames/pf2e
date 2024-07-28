@@ -14,7 +14,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "flexible": false,
                     "value": "prepared"
@@ -28,189 +27,159 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
                 "slots": {
                     "slot0": {
                         "max": 5,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "c2o15fBbZZHmjgG5"
                             },
-                            "1": {
+                            {
                                 "id": "Ge9kocAO8hk4lBdt"
                             },
-                            "2": {
+                            {
                                 "id": "T1qjyg688hKIxhyu"
                             },
-                            "3": {
+                            {
                                 "id": "QA5v18NRTdeSrKxs"
                             },
-                            "4": {
+                            {
                                 "id": "8N5Sb8zrxKaopafI"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot1": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "Dal8REXEFZaBet4A"
                             },
-                            "1": {
+                            {
                                 "id": "Dal8REXEFZaBet4A"
                             },
-                            "2": {
+                            {
                                 "id": "B2LCzxNTxStXjie3"
                             },
-                            "3": {
+                            {
                                 "id": "FvtElTunnofbCIBc"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     },
                     "slot2": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "KZL0ggs4TLE0cSc6"
                             },
-                            "1": {
+                            {
                                 "id": "pP8BSuJbigEXnn6i"
                             },
-                            "2": {
+                            {
                                 "id": "599ucBO0UjiGfXYD"
                             },
-                            "3": {
+                            {
                                 "id": "CEaFvn8CDioP1sTH"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot3": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "BteJOMFvvolNED5P"
                             },
-                            "1": {
+                            {
                                 "id": "LNLoiMLOAQeGUoyT"
                             },
-                            "2": {
+                            {
                                 "id": "kEp2WkYtCri6OonX"
                             },
-                            "3": {
+                            {
                                 "id": "tnoXYHRyUuh2nAOH"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot4": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "SSIbM8CZ3IsjPlaZ"
                             },
-                            "1": {
+                            {
                                 "id": "k6I1n2GEakQ6244P"
                             },
-                            "2": {
+                            {
                                 "id": "7qxs5TWx3KWLx2Za"
                             },
-                            "3": {
+                            {
                                 "id": "N3lBfsSsPZ0v5uED"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot5": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "yhmk4eLaI6q7K5H8"
                             },
-                            "1": {
+                            {
                                 "id": "pQaz3DQ1SGZ1A1X8"
                             },
-                            "2": {
+                            {
                                 "id": "EZoPausNiuuQX935"
                             },
-                            "3": {
+                            {
                                 "id": "Fz24jM4cEawINvRZ"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot6": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "KZL0ggs4TLE0cSc6"
                             },
-                            "1": {
+                            {
                                 "id": "qCMWCGybETMgX6VO"
                             },
-                            "2": {
+                            {
                                 "id": "KQzCnYkH8f4FnC9C"
                             },
-                            "3": {
+                            {
                                 "id": "kkwkrsjsVRydSgAY"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot7": {
                         "max": 4,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "PNxXuMNTUFVDOhH6"
                             },
-                            "1": {
+                            {
                                 "id": "4GmHU9FBV1ea2H3G"
                             },
-                            "2": {
+                            {
                                 "id": "LttX7xvdM18hayr3"
                             },
-                            "3": {
+                            {
                                 "id": "LttX7xvdM18hayr3"
                             }
-                        },
-                        "value": 0
+                        ]
                     },
                     "slot8": {
                         "max": 3,
-                        "prepared": {
-                            "0": {
+                        "prepared": [
+                            {
                                 "id": "538h2qcbucEICTw3"
                             },
-                            "1": {
+                            {
                                 "id": "538h2qcbucEICTw3"
                             },
-                            "2": {
+                            {
                                 "id": "QwquekhtU8DvhenS"
                             }
-                        },
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
+                        ]
                     }
                 },
                 "slug": null,
@@ -236,7 +205,6 @@
                 "description": {
                     "value": ""
                 },
-                "displayLevels": {},
                 "prepared": {
                     "value": "focus"
                 },
@@ -249,74 +217,7 @@
                     "title": ""
                 },
                 "rules": [],
-                "showSlotlessLevels": {
-                    "value": true
-                },
-                "showUnpreparedSpells": {
-                    "value": false
-                },
-                "slots": {
-                    "slot0": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot1": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot10": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot11": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot2": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot3": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot4": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot5": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot6": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot7": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot8": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    },
-                    "slot9": {
-                        "max": 0,
-                        "prepared": [],
-                        "value": 0
-                    }
-                },
+                "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 36,
@@ -433,7 +334,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You transport the target into an extradimensional maze of eldritch origin and trap it there. Once each turn, the target can spend 1 action to attempt a Survival check or Perception check against your spell DC to escape the maze. The possible outcomes are as follows. Teleportation magic doesn't help the creature escape unless the magic can transport across planes, such as plane shift. When the spell ends, either because the target escaped or the duration ran out, the target returns to the space it occupied when it was banished, or to the nearest space if the original is now filled.</p>\n<hr /><strong>Critical Success</strong> The target escapes and the spell ends.\n<p><strong>Success</strong> The target is on the right path to the exit. If the target was already on the right path, it escapes the maze and the spell ends.</p>\n<p><strong>Failure</strong> The target makes no progress toward escape.</p>\n<p><strong>Critical Failure</strong> The target makes no progress toward escape, and if it was on the right path, it no longer is.</p>"
+                    "value": "<p>You transport the target into an extradimensional maze of eldritch origin and trap it there. Once each turn, the target can spend 1 action to attempt a Survival check or Perception check against your spell DC to escape the maze. The possible outcomes are as follows. Teleportation magic doesn't help the creature escape unless the magic can transport across planes, such as plane shift. When the spell ends, either because the target escaped or the duration ran out, the target returns to the space it occupied when it was banished, or to the nearest space if the original is now filled.</p>\n<hr /><p><strong>Critical Success</strong> The target escapes and the spell ends.</p>\n<p><strong>Success</strong> The target is on the right path to the exit. If the target was already on the right path, it escapes the maze and the spell ends.</p>\n<p><strong>Failure</strong> The target makes no progress toward escape.</p>\n<p><strong>Critical Failure</strong> The target makes no progress toward escape, and if it was on the right path, it no longer is.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -1130,7 +1031,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You conjure a poisonous fog. This functions as <em>@UUID[Compendium.pf2e.spells-srd.Item.Mist]</em>, except the area moves 10 feet away from you each round. You deal 6d8 poison damage to each breathing creature that starts its turn in the spell's area. You can Dismiss the spell.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d8.</p>"
+                    "value": "<p>You conjure a poisonous fog. This functions as @UUID[Compendium.pf2e.spells-srd.Item.Mist], except the area moves 10 feet away from you each round. You deal 6d8 poison damage to each breathing creature that starts its turn in the spell's area. You can Dismiss the spell.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d8.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -1479,7 +1380,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>You create an immobile sphere of force to either trap or protect the target, blocking anything that would pass through the sphere. The sphere has AC 5, Hardness 10, and 40 Hit Points. It's immune to critical hits and precision damage. Disintegrate destroys the sphere instantly. If the target is unwilling, the effects of the sphere depend on the target's Reflex save.</p>\n<hr /><strong>Critical Success</strong> The target disrupts the sphere's integrity, causing it to collapse entirely.\n<p><strong>Success</strong> The sphere functions normally but has only 10 Hit Points instead of 40.</p>\n<p><strong>Failure</strong> The sphere has its normal effect.</p>"
+                    "value": "<p>You create an immobile sphere of force to either trap or protect the target, blocking anything that would pass through the sphere. The sphere has AC 5, Hardness 10, and 40 Hit Points. It's immune to critical hits and precision damage. Disintegrate destroys the sphere instantly. If the target is unwilling, the effects of the sphere depend on the target's Reflex save.</p>\n<hr /><p><strong>Critical Success</strong> The target disrupts the sphere's integrity, causing it to collapse entirely.</p>\n<p><strong>Success</strong> The sphere functions normally but has only 10 Hit Points instead of 40.</p>\n<p><strong>Failure</strong> The sphere has its normal effect.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -1942,7 +1843,7 @@
                 },
                 "defense": null,
                 "description": {
-                    "value": "<p>You conjure an arrow of acid that keeps corroding the target after it hits. Make a spell attack against the target. On a hit, you deal 3d8 acid damage plus [[/r floor(@item.level/2)d6[persistent,acid]]] damage. On a critical hit, double the initial damage, but not the persistent damage.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The initial damage increases by 2d8, and the persistent acid damage increases by 1d6.</p>"
+                    "value": "<p>You conjure an arrow of acid that keeps corroding the target after it hits. Make a spell attack against the target. On a hit, you deal 3d8 acid damage plus @Damage[(floor(@item.rank/2))d6[persistent,acid]] damage. On a critical hit, double the initial damage, but not the persistent damage.</p><hr /><p><strong>Heightened (+2)</strong> The initial damage increases by 2d8, and the persistent acid damage increases by 1d6.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -2147,7 +2048,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr /><strong>Critical Success</strong> The target is unaffected.\n<p><strong>Success</strong> The target is plagued with uncontrollable laughter. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] and can't use actions or reactions for 1 round. It then suffers the failure effects.</p>"
+                    "value": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr /><p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is plagued with uncontrollable laughter. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.Prone] and can't use actions or reactions for 1 round. It then suffers the failure effects.</p>"
                 },
                 "duration": {
                     "sustained": true,
@@ -3312,45 +3213,10 @@
             "type": "melee"
         },
         {
-            "_id": "vW9bna7OUkxyfZxx",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 4400000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "hgAe4LDV9pOetFnG",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Eerie Flexibility",
-            "sort": 4500000,
+            "sort": 4400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -3385,7 +3251,7 @@
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Attack of Opportunity",
-            "sort": 4600000,
+            "sort": 4500000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -3415,7 +3281,7 @@
             "_id": "MSrCpe3iS4MlI9Or",
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Enervating Tug",
-            "sort": 4700000,
+            "sort": 4600000,
             "system": {
                 "actionType": {
                     "value": "free"
@@ -3425,7 +3291,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per turn</p>\n<p><strong>Requirements</strong> Helg's most recent action was to cast a non-cantrip necromancy spell</p>\n<hr />\n<p><strong>Effect</strong> Helg drains away the life force from a creature targeted by the spell, with a result depending on its Fortitude save (@Check[type:fortitude|dc:36]). This effect is magical and can be counteracted with <em>@UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic]</em> (Level 15, DC 36). This ability cannot affect a creature that critically succeeded at the spell's saving throw, if any.</p>\n<hr />\n<p><strong>Critical Success</strong> No effect.</p>\n<p><strong>Success</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} for 1 round.</p>\n<p><strong>Failure</strong> @UUID[Compendium.pf2e.conditionitems.Item.Fatigued].</p>\n<p><strong>Critical Failure</strong> Fatigued, and rest does not remove the creature's fatigued condition for 1 week.</p>"
+                    "value": "<p><strong>Frequency</strong> once per turn</p>\n<p><strong>Requirements</strong> Helg's most recent action was to cast a non-cantrip necromancy spell</p>\n<hr />\n<p><strong>Effect</strong> Helg drains away the life force from a creature targeted by the spell, with a result depending on its Fortitude save (@Check[type:fortitude|dc:36]). This effect is magical and can be counteracted with @UUID[Compendium.pf2e.spells-srd.Item.Dispel Magic] (Level 15, DC 36). This ability cannot affect a creature that critically succeeded at the spell's saving throw, if any.</p>\n<hr />\n<p><strong>Critical Success</strong> No effect.</p>\n<p><strong>Success</strong> @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} for 1 round.</p>\n<p><strong>Failure</strong> @UUID[Compendium.pf2e.conditionitems.Item.Fatigued].</p>\n<p><strong>Critical Failure</strong> Fatigued, and rest does not remove the creature's fatigued condition for 1 week.</p>"
                 },
                 "frequency": {
                     "max": 1,
@@ -3450,7 +3316,7 @@
             "_id": "YRcfAf2JSSaoxUCv",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Furious Claws",
-            "sort": 4800000,
+            "sort": 4700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -3485,7 +3351,7 @@
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Rend",
-            "sort": 4900000,
+            "sort": 4800000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -3510,197 +3376,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "KnZpH9lLGq7oF6GH",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 5000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 26
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [
-                    {
-                        "key": "FlatModifier",
-                        "label": "PF2E.SkillVariant.Squeeze",
-                        "predicate": [
-                            "action:squeeze"
-                        ],
-                        "selector": "acrobatics",
-                        "value": 4
-                    }
-                ],
-                "slug": null,
-                "variants": {
-                    "0": {
-                        "label": "+30 to Squeeze",
-                        "options": "action:squeeze"
-                    }
-                }
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "gWBs57RqqvHfPYps",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Arcana",
-            "sort": 5100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 29
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "NxyLXWGXlak2P59Q",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 5200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 28
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "GXax0iin1ckkl0AX",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 5300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "DJJcXs5Z0elZFaGs",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Occultism",
-            "sort": 5400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 27
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "yxoVUCpysy1Fbrlx",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 5500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 24
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "4NFvMidM5lKPBNLZ",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 5600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 22
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Helg Eats-The-Eaters",
@@ -3801,6 +3476,38 @@
             "will": {
                 "saveDetail": "",
                 "value": 26
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 26,
+                "special": [
+                    {
+                        "base": 30,
+                        "label": "to Squeeze",
+                        "predicate": [
+                            "action:squeeze"
+                        ]
+                    }
+                ]
+            },
+            "arcana": {
+                "base": 29
+            },
+            "athletics": {
+                "base": 28
+            },
+            "deception": {
+                "base": 21
+            },
+            "occultism": {
+                "base": 27
+            },
+            "stealth": {
+                "base": 24
+            },
+            "survival": {
+                "base": 22
             }
         },
         "spellcasting": {

@@ -138,12 +138,7 @@
 
     <div class="side-bar-section-content">
         <select name="system.initiative.statistic">
-            {{#select data.initiative.statistic}}
-                <option value="perception">{{localize "PF2E.PerceptionLabel"}}</option>
-                {{#each data.sortedSkills as |skill|}}
-                    <option value="{{skill.slug}}">{{skill.label}}</option>
-                {{/each}}
-            {{/select}}
+            {{selectOptions initiativeOptions selected=data.initiative.statistic localize=true sort=true}}
         </select>
     </div>
 </div>
@@ -191,7 +186,7 @@
 
 <div class="subsection iwr">
     <header>
-        <label{{#unless data.attributes.immunities}} class="empty"{{/unless}}>
+        <label{{#unless data.attributes.resistances}} class="empty"{{/unless}}>
             <i class="fa-solid fa-fw fa-shield-virus"></i>
             <span>{{localize "PF2E.ResistancesLabel"}}</span>
         </label>

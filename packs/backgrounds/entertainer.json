@@ -26,7 +26,7 @@
         },
         "items": {
             "q8t33": {
-                "img": "systems/pf2e/icons/features/feats/feats.webp",
+                "img": "icons/sundries/books/book-red-exclamation.webp",
                 "level": 1,
                 "name": "Fascinating Performance",
                 "uuid": "Compendium.pf2e.feats-srd.Item.Fascinating Performance"
@@ -38,10 +38,12 @@
             "title": "Pathfinder Player Core"
         },
         "rules": [],
-        "trainedLore": "Theatre Lore",
         "trainedSkills": {
+            "lore": [
+                "Theatre Lore"
+            ],
             "value": [
-                "prf"
+                "performance"
             ]
         },
         "traits": {

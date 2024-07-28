@@ -74,12 +74,7 @@
                     {
                         "or": [
                             "hunted-prey-game-hunter",
-                            {
-                                "eq": [
-                                    "grants-hunt-prey",
-                                    1
-                                ]
-                            }
+                            "grants-hunt-prey:1"
                         ]
                     }
                 ],
@@ -89,7 +84,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.skills.sur.rank",
+                "path": "system.skills.survival.rank",
                 "predicate": [
                     {
                         "gt": [
@@ -108,12 +103,7 @@
                     {
                         "or": [
                             "hunted-prey-game-hunter",
-                            {
-                                "eq": [
-                                    "grants-hunt-prey",
-                                    1
-                                ]
-                            }
+                            "grants-hunt-prey:1"
                         ]
                     }
                 ],

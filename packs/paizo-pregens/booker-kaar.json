@@ -136,67 +136,67 @@
                     {
                         "choices": [
                             {
-                                "label": "PF2E.SkillAcr",
+                                "label": "PF2E.Skill.Acrobatics",
                                 "value": "acrobatics"
                             },
                             {
-                                "label": "PF2E.SkillArc",
+                                "label": "PF2E.Skill.Arcana",
                                 "value": "arcana"
                             },
                             {
-                                "label": "PF2E.SkillAth",
+                                "label": "PF2E.Skill.Athletics",
                                 "value": "athletics"
                             },
                             {
-                                "label": "PF2E.SkillCra",
+                                "label": "PF2E.Skill.Crafting",
                                 "value": "crafting"
                             },
                             {
-                                "label": "PF2E.SkillDec",
+                                "label": "PF2E.Skill.Deception",
                                 "value": "deception"
                             },
                             {
-                                "label": "PF2E.SkillDip",
+                                "label": "PF2E.Skill.Diplomacy",
                                 "value": "diplomacy"
                             },
                             {
-                                "label": "PF2E.SkillItm",
+                                "label": "PF2E.Skill.Intimidation",
                                 "value": "intimidation"
                             },
                             {
-                                "label": "PF2E.SkillMed",
+                                "label": "PF2E.Skill.Medicine",
                                 "value": "medicine"
                             },
                             {
-                                "label": "PF2E.SkillNat",
+                                "label": "PF2E.Skill.Nature",
                                 "value": "nature"
                             },
                             {
-                                "label": "PF2E.SkillOcc",
+                                "label": "PF2E.Skill.Occultism",
                                 "value": "occultism"
                             },
                             {
-                                "label": "PF2E.SkillPrf",
+                                "label": "PF2E.Skill.Performance",
                                 "value": "performance"
                             },
                             {
-                                "label": "PF2E.SkillRel",
+                                "label": "PF2E.Skill.Religion",
                                 "value": "religion"
                             },
                             {
-                                "label": "PF2E.SkillSoc",
+                                "label": "PF2E.Skill.Society",
                                 "value": "society"
                             },
                             {
-                                "label": "PF2E.SkillSte",
+                                "label": "PF2E.Skill.Stealth",
                                 "value": "stealth"
                             },
                             {
-                                "label": "PF2E.SkillSur",
+                                "label": "PF2E.Skill.Survival",
                                 "value": "survival"
                             },
                             {
-                                "label": "PF2E.SkillThi",
+                                "label": "PF2E.Skill.Thievery",
                                 "value": "thievery"
                             },
                             {
@@ -276,7 +276,7 @@
                 },
                 "items": {
                     "ab9pz": {
-                        "img": "systems/pf2e/icons/features/feats/feats.webp",
+                        "img": "icons/sundries/books/book-red-exclamation.webp",
                         "level": 1,
                         "name": "Hefty Hauler",
                         "uuid": "Compendium.pf2e.feats-srd.Item.Hefty Hauler"
@@ -289,11 +289,13 @@
                 },
                 "rules": [],
                 "slug": "cannoneer",
-                "trainedLore": "Warfare",
                 "trainedSkills": {
                     "custom": "",
+                    "lore": [
+                        "Warfare"
+                    ],
                     "value": [
-                        "ath"
+                        "athletics"
                     ]
                 },
                 "traits": {
@@ -517,6 +519,18 @@
                 },
                 "rules": [
                     {
+                        "batchSizes": {
+                            "other": [
+                                {
+                                    "definition": [
+                                        "item:category:ammo",
+                                        "item:trait:alchemical",
+                                        "item:level:0"
+                                    ],
+                                    "quantity": 10
+                                }
+                            ]
+                        },
                         "craftableItems": [
                             "item:trait:alchemical",
                             {
@@ -1685,7 +1699,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Legend"
                     },
                     "rqnn0": {
-                        "img": "systems/pf2e/icons/features/classes/vigilant-senses.webp",
+                        "img": "icons/magic/perception/eye-tendrils-web-purple.webp",
                         "level": 7,
                         "name": "Vigilant Senses",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Perception Mastery"
@@ -1697,7 +1711,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Juggernaut"
                     },
                     "zmmy3": {
-                        "img": "systems/pf2e/icons/features/classes/greater-weapon-specialization.webp",
+                        "img": "icons/skills/melee/hand-grip-sword-orange.webp",
                         "level": 15,
                         "name": "Greater Weapon Specialization (Level 15)",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Greater Weapon Specialization"
@@ -2094,7 +2108,7 @@
                         "key": "Note",
                         "selector": "initiative",
                         "text": "{item|system.description.value}",
-                        "title": "<span class=\"pf2-icon\">F</span> {item|name}"
+                        "title": "<span class=\"action-glyph\">F</span> {item|name}"
                     }
                 ],
                 "slug": "living-fortification",
@@ -2142,7 +2156,7 @@
                 },
                 "category": "classfeature",
                 "description": {
-                    "value": "<p>You practice a unique combat style originated by dwarven siege engineers, using heavy weapons with wide attack areas to blast holes through enemy lines, clear an opening for your allies, and defend the conquered territory.</p>\n<p><strong>Slinger's Reload</strong> @UUID[Compendium.pf2e.actionspf2e.Item.Clear a Path]</p>\n<p><strong>Deeds</strong> <em>Initial </em>@UUID[Compendium.pf2e.actionspf2e.Item.Living Fortification]; <em>Advanced</em> @UUID[Compendium.pf2e.actionspf2e.Item.Spinning Crush]; <em>Greater</em> @UUID[Compendium.pf2e.actionspf2e.Item.Siegebreaker]</p>\n<p><strong>Way Skill</strong> Athletics</p>"
+                    "value": "<p>You practice a unique combat style originated by dwarven siege engineers, using heavy weapons with wide attack areas to blast holes through enemy lines, clear an opening for your allies, and defend the conquered territory.</p>\n<p><strong>Slinger's Reload</strong> @UUID[Compendium.pf2e.actionspf2e.Item.Clear a Path]</p>\n<p><strong>Deeds</strong> <em>Initial</em> @UUID[Compendium.pf2e.actionspf2e.Item.Living Fortification]; <em>Advanced</em> @UUID[Compendium.pf2e.actionspf2e.Item.Spinning Crush]; <em>Greater</em> @UUID[Compendium.pf2e.actionspf2e.Item.Siegebreaker]</p>\n<p><strong>Way Skill</strong> Athletics</p>"
                 },
                 "level": {
                     "value": 1
@@ -2176,7 +2190,7 @@
                     {
                         "key": "ActiveEffectLike",
                         "mode": "upgrade",
-                        "path": "system.skills.ath.rank",
+                        "path": "system.skills.athletics.rank",
                         "value": 1
                     }
                 ],
@@ -2402,52 +2416,52 @@
             }
         },
         "skills": {
-            "acr": {
+            "acrobatics": {
                 "rank": 1
             },
-            "arc": {
+            "arcana": {
                 "rank": 0
             },
-            "ath": {
+            "athletics": {
                 "rank": 0
             },
-            "cra": {
+            "crafting": {
                 "rank": 0
             },
-            "dec": {
+            "deception": {
                 "rank": 0
             },
-            "dip": {
+            "diplomacy": {
                 "rank": 0
             },
-            "itm": {
+            "intimidation": {
                 "rank": 2
             },
-            "med": {
+            "medicine": {
                 "rank": 1
             },
-            "nat": {
+            "nature": {
                 "rank": 0
             },
-            "occ": {
+            "occultism": {
                 "rank": 0
             },
-            "prf": {
+            "performance": {
                 "rank": 0
             },
-            "rel": {
+            "religion": {
                 "rank": 0
             },
-            "soc": {
+            "society": {
                 "rank": 0
             },
-            "ste": {
+            "stealth": {
                 "rank": 1
             },
-            "sur": {
+            "survival": {
                 "rank": 0
             },
-            "thi": {
+            "thievery": {
                 "rank": 0
             }
         }

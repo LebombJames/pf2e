@@ -19,7 +19,7 @@
         "prerequisites": {
             "value": [
                 {
-                    "value": "Intelligence 14"
+                    "value": "Intelligence +2"
                 }
             ]
         },
@@ -32,7 +32,7 @@
             {
                 "key": "ActiveEffectLike",
                 "mode": "upgrade",
-                "path": "system.skills.cra.rank",
+                "path": "system.skills.crafting.rank",
                 "value": 1
             },
             {

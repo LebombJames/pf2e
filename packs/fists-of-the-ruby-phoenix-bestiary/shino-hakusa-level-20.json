@@ -370,7 +370,9 @@
                 "rules": [
                     {
                         "key": "FlatModifier",
-                        "predicate": [],
+                        "predicate": [
+                            "necromancy"
+                        ],
                         "selector": "saving-throw",
                         "type": "status",
                         "value": 3
@@ -557,7 +559,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>(certain kill)</p>\n<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> Hakusa strikes a series of pressure points on her target's body that redirects its ki to the heart, before following up with a palm strike to the sternum. She makes a fingers Strike and a palm Strike, dealing damage as normal. If both hit, the target takes @Damage[8d10[void]] damage as its life energy escapes from its body in a shower of bird-shaped sparks. The target attempts a @Check[type:fortitude|dc:43] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes half the void damage.</p>\n<p><strong>Failure</strong> The target takes full damage, its life energy exploding violently from its back in a @Template[type:cone|distance:30] originating from the target. All of Hakusa's other enemies in the cone also take the void damage (@Check[type:fortitude|dc:43|basic:true] save).</p>\n<p><strong>Critical Failure</strong> As failure, but the target takes double void damage.</p>"
+                    "value": "<p><strong>Frequency</strong> once per round</p>\n<hr />\n<p><strong>Effect</strong> Hakusa strikes a series of pressure points on her target's body that redirects its ki to the heart, before following up with a palm strike to the sternum. She makes a fingers Strike and a palm Strike, dealing damage as normal. If both hit, the target takes @Damage[8d10[void]] damage as its life energy escapes from its body in a shower of bird-shaped sparks. The target attempts a @Check[type:fortitude|dc:43] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes half the void damage.</p>\n<p><strong>Failure</strong> The target takes full damage, its life energy exploding violently from its back in a @Template[type:cone|distance:30] originating from the target. All of Hakusa's other enemies in the cone also take the void damage (@Check[type:fortitude|dc:43|basic:true] save).</p>\n<p><strong>Critical Failure</strong> As failure, but the target takes double void damage.</p>"
                 },
                 "frequency": {
                     "max": 1,
@@ -574,161 +576,12 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
+                        "certain-kill",
                         "void"
                     ]
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "2xMl32CZdOEHxEMU",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 1300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 38
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "yxKnJRrV4zaURVF6",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 1400000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "1NFBzA76g3XZyrYu",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Deception",
-            "sort": 1500000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 33
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "sLj9vCZiHu1K7ohP",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Medicine",
-            "sort": 1600000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "Rh1WCfP6dvqpARwy",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Occultism",
-            "sort": 1700000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 35
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "7Idlt5PZBX0JhOOi",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Thievery",
-            "sort": 1800000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 33
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Shino Hakusa (Level 20)",
@@ -818,6 +671,26 @@
             "will": {
                 "saveDetail": "",
                 "value": 30
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 38
+            },
+            "athletics": {
+                "base": 35
+            },
+            "deception": {
+                "base": 33
+            },
+            "medicine": {
+                "base": 35
+            },
+            "occultism": {
+                "base": 35
+            },
+            "thievery": {
+                "base": 33
             }
         },
         "traits": {

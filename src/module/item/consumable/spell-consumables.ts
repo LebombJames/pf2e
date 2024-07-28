@@ -87,8 +87,8 @@ async function createConsumableFromSpell(
 
     const consumableSource = { ...consumable.toObject(), _id: null }; // Clear _id
 
-    const { traits } = consumableSource.system;
-    traits.value = R.uniq([...traits.value, ...spell.traits]);
+    const traits = consumableSource.system.traits;
+    traits.value = R.unique([...traits.value, ...spell.traits]);
     traits.rarity = spell.rarity;
     if (traits.value.includes("magical") && traits.value.some((t) => setHasElement(MAGIC_TRADITIONS, t))) {
         traits.value.splice(traits.value.indexOf("magical"), 1);
@@ -112,7 +112,11 @@ async function createConsumableFromSpell(
 
     // Cantrip deck casts at level 1
     if (type !== "cantripDeck5") {
-        consumableSource.system.spell = spell.clone({ "system.location.heightenedLevel": heightenedLevel }).toObject();
+        consumableSource.system.spell = fu.mergeObject(
+            spell._source,
+            { _id: fu.randomID(), system: { location: { value: null, heightenedLevel } } },
+            { inplace: false },
+        );
     }
 
     if (mystified) {

@@ -1,6 +1,6 @@
 import { IWRSource, Immunity, Resistance, Weakness } from "@actor/data/iwr.ts";
 import { IWRType } from "@actor/types.ts";
-import type { PredicatePF2e } from "@system/predication.ts";
+import type { Predicate } from "@system/predication.ts";
 import { DataUnionField, PredicateField, StrictArrayField, StrictStringField } from "@system/schema-data-fields.ts";
 import type { ArrayField, BooleanField, SchemaField, StringField } from "types/foundry/common/data/fields.d.ts";
 import { AELikeChangeMode } from "../ae-like.ts";
@@ -9,15 +9,14 @@ import { ModelPropsFromRESchema, RuleElementSchema, RuleElementSource, RuleValue
 
 /** @category RuleElement */
 abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElementPF2e<TSchema> {
-    abstract value: RuleValue;
+    abstract value: RuleValue | null;
 
     static get dictionary(): Record<string, string | undefined> {
         return {};
     }
 
     static override defineSchema(): IWRRuleSchema {
-        const { fields } = foundry.data;
-        const { DataModelValidationFailure } = foundry.data.validation;
+        const { fields, validation } = foundry.data;
 
         return {
             ...super.defineSchema(),
@@ -25,7 +24,7 @@ abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElement
             type: new fields.ArrayField(new StrictStringField({ required: true, blank: false, initial: undefined }), {
                 validate: (v) =>
                     (Array.isArray(v) && v.length > 0) ||
-                    new DataModelValidationFailure({ message: "must have at least one" }),
+                    new validation.DataModelValidationFailure({ message: "must have at least one" }),
             }),
             definition: new PredicateField({ required: false, initial: undefined }),
             exceptions: this.createExceptionsField(),
@@ -86,8 +85,8 @@ abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElement
     /** A reference to the pertinent property in actor system data */
     abstract get property(): IWRSource[];
 
-    #isValid(value: unknown): boolean {
-        const { dictionary } = this.constructor;
+    #isValidValue(value: unknown): boolean {
+        const dictionary = this.constructor.dictionary;
 
         const unrecognizedTypes = this.type.filter((t) => !(t in dictionary));
         if (unrecognizedTypes.length > 0) {
@@ -118,7 +117,7 @@ abstract class IWRRuleElement<TSchema extends IWRRuleSchema> extends RuleElement
         this.definition = this.resolveInjectedProperties(this.definition);
 
         const value = Math.floor(Number(this.resolveValue(this.value)));
-        if (!this.#isValid(value)) return;
+        if (!this.#isValidValue(value)) return;
 
         if (this.mode === "add") {
             this.property.push(...this.getIWR(value));
@@ -163,7 +162,7 @@ type IWRExceptionField<TType extends string = string> = DataUnionField<
     false
 >;
 
-type IWRException<TType extends IWRType = IWRType> = TType | { definition: PredicatePF2e; label: string };
+type IWRException<TType extends IWRType = IWRType> = TType | { definition: Predicate; label: string };
 
 type IWRChangeMode = Extract<AELikeChangeMode, "add" | "remove">;
 

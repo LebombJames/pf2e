@@ -93,11 +93,7 @@
         <label class="roll-mode">
             {{localize "PF2E.RollModeLabel"}}
             <select name="rollmode">
-                {{#select rollMode}}
-                    {{#each rollModes as |label key|}}
-                        <option value="{{key}}">{{localize label}}</option>
-                    {{/each}}
-                {{/select}}
+                {{selectOptions rollModes selected=rollMode localize=true}}
             </select>
         </label>
         <label data-tooltip="PF2E.Roll.Dialog.ShowDefaultHint">
@@ -129,7 +125,7 @@
 {{/inline}}
 
 {{#*inline "dice-row"}}
-    <div class="dialog-row{{#unless dice.enabled}} disabled{{/unless}}">
+    <div class="dialog-row{{#unless dice.enabled}} disabled{{#if dice.hideIfDisabled}} hidden{{/if}}{{/unless}}">
         <span class="mod">{{dice.label}}</span>
         <div class="value" data-tooltip="{{dice.typeLabel}}">
             <span class="dice-type damage color{{#if dice.damageType}} {{dice.damageType}}{{/if}}">

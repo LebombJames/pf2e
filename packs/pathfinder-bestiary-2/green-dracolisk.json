@@ -87,41 +87,6 @@
             "type": "melee"
         },
         {
-            "_id": "T30LeVWTmp9xhLg7",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
-            },
-            "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Darkvision",
-            "sort": 300000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "rules": [],
-                "slug": "darkvision",
-                "traits": {
-                    "rarity": "common",
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "kV8qUZKG2gXQGCKq",
             "flags": {
                 "core": {
@@ -129,8 +94,8 @@
                 }
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Tremorsense",
-            "sort": 400000,
+            "name": "Tremorsense 30 feet",
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -160,7 +125,7 @@
             "_id": "5RsDoTAVa9W8gKnx",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Draconic Resistance",
-            "sort": 500000,
+            "sort": 400000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -170,7 +135,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>A dracolisk has resistance 10 to the type of damage it produces with its breath weapon.</p>"
+                    "value": "<p>A green dracolisk has resistance 10 to poison damage.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -190,7 +155,7 @@
             "_id": "dZoSOjCNPr4EIzGG",
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Petrifying Glance",
-            "sort": 600000,
+            "sort": 500000,
             "system": {
                 "actionType": {
                     "value": "reaction"
@@ -224,7 +189,7 @@
             "_id": "KQAihkBcgo2L9lGv",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Breath Weapon",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -234,7 +199,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The dracolisk breathes a gout of energy based on its draconic heritage, as noted below. This breath weapon deals @Damage[6d10[poison]] damage, with a @Check[type:fortitude|dc:28|basic:true] save.</p>\n<p>The dracolisk can't use Breath Weapon again for [[/br 1d4 #Recharge Breath Weapon]]{1d4 rounds}.</p>\n<hr />\n<p><strong>Black</strong> @Template[type:cone|distance:30] of poison</p>"
+                    "value": "<p>The green dracolisk breathes a @Template[type:cone|distance:30] of energy. This breath weapon deals @Damage[6d10[poison]] damage, with a @Check[type:fortitude|dc:28|basic:true] save.</p>\n<p>The dracolisk can't use Breath Weapon again for [[/br 1d4 #Recharge Breath Weapon]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -256,7 +221,7 @@
             "_id": "BQDQsCBmg1gB3VSr",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Petrifying Gaze",
-            "sort": 800000,
+            "sort": 700000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -291,7 +256,7 @@
             "_id": "OUEVYrICDhOs5NML",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Savage Jaws",
-            "sort": 900000,
+            "sort": 800000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -316,106 +281,6 @@
                 }
             },
             "type": "action"
-        },
-        {
-            "_id": "0MhzhkarMs2ZDKgz",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Acrobatics",
-            "sort": 1000000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 17
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "RpIdozSI8gaXv29A",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Athletics",
-            "sort": 1100000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 21
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "X8rWLxO3gyBZN3ak",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Stealth",
-            "sort": 1200000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 17
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
-        },
-        {
-            "_id": "Kjnn907wCwU1waU3",
-            "img": "systems/pf2e/icons/default-icons/lore.svg",
-            "name": "Survival",
-            "sort": 1300000,
-            "system": {
-                "description": {
-                    "value": ""
-                },
-                "mod": {
-                    "value": 20
-                },
-                "proficient": {
-                    "value": 0
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null
-            },
-            "type": "lore"
         }
     ],
     "name": "Green Dracolisk",
@@ -528,6 +393,20 @@
             "will": {
                 "saveDetail": "",
                 "value": 18
+            }
+        },
+        "skills": {
+            "acrobatics": {
+                "base": 17
+            },
+            "athletics": {
+                "base": 21
+            },
+            "stealth": {
+                "base": 17
+            },
+            "survival": {
+                "base": 20
             }
         },
         "traits": {

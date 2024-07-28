@@ -26,12 +26,12 @@ export class Migration897ClearLayOnHandsDamage extends MigrationBase {
         }
 
         for (const overlay of Object.values(source.system.overlays ?? {})) {
-            if (!R.isObject(overlay) || !R.isObject(overlay.system?.damage)) {
+            if (!R.isPlainObject(overlay) || !R.isPlainObject(overlay.system?.damage)) {
                 continue;
             }
 
             const damagePartials = Object.values(overlay.system?.damage ?? {});
-            for (const partial of damagePartials.filter((p): p is SpellDamageSource => R.isObject(p))) {
+            for (const partial of damagePartials.filter((p): p is SpellDamageSource => R.isPlainObject(p))) {
                 if (partial?.formula === "6") {
                     partial.kinds = ["healing"];
                 } else {
@@ -57,7 +57,7 @@ export class Migration897ClearLayOnHandsDamage extends MigrationBase {
                                 type: "vitality",
                             },
                         },
-                        defense: { save: { basic: true, statistic: "fortitude" } },
+                        defense: { passive: null, save: { basic: true, statistic: "fortitude" } },
                         heightening: { damage: { "37YW4ZGhxx7Y2mdI": "1d6" }, interval: 1, type: "interval" },
                     },
                 },
@@ -97,7 +97,7 @@ export class Migration897ClearLayOnHandsDamage extends MigrationBase {
                                 type: "void",
                             },
                         },
-                        defense: { save: { basic: true, statistic: "fortitude" } },
+                        defense: { passive: null, save: { basic: true, statistic: "fortitude" } },
                         heightening: { damage: { Esn7klJ9WRsIFnrE: "1d6" }, interval: 1, type: "interval" },
                     },
                 },

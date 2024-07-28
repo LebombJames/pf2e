@@ -2,7 +2,7 @@
     {{#unless (or item.isRitual (and item.isFocusSpell (not item.isCantrip)))}}
         <div class="form-group">
             <label>{{localize "PF2E.SpellTraditionsLabel"}}</label>
-            <input class="tags paizo-style" name="system.traits.traditions" value="{{json data.traits.traditions}}" data-dtype="JSON" />
+            <tagify-tags class="tags paizo-style" name="system.traits.traditions" value="{{json data.traits.traditions}}" />
         </div>
     {{/unless}}
 
@@ -22,28 +22,16 @@
     </div>
 
     <div class="form-group">
-        <label>{{localize "PF2E.SpellRangeLabel"}}</label>
+        <label>{{localize "PF2E.TraitRange"}}</label>
         <input type="text" name="system.range.value" value="{{data.range.value}}" />
     </div>
 
     <div class="form-group">
-        <label>{{localize "PF2E.AreaLabel"}}</label>
+        <label>{{localize "PF2E.Area.InFeet"}}</label>
         <div class="details-container-two-columns">
-            <select name="system.area.value" data-dtype="Number">
-                <option value="0"></option>
-                {{#select data.area.value}}
-                    {{#each areaSizes as |label key|}}
-                        <option value="{{key}}">{{localize label}}</option>
-                    {{/each}}
-                {{/select}}
-            </select>
+            <input type="number" name="system.area.value" min="5" step="5" value="{{data.area.value}}" />
             <select name="system.area.type">
-                <option value=""></option>
-                {{#select data.area.type}}
-                    {{#each areaTypes as |label type|}}
-                        <option value="{{type}}">{{localize label}}</option>
-                    {{/each}}
-                {{/select}}
+                {{selectOptions areaShapes selected=data.area.type blank="" localize=true}}
             </select>
         </div>
     </div>
@@ -90,23 +78,18 @@
     <fieldset class="defense">
         <legend>{{localize "PF2E.Item.Spell.Defense.Label"}}</legend>
 
-        {{#if passiveDefense}}
-            <div class="form-group passive">
-                <label>{{localize "PF2E.ActionTypePassive"}}</label>
-                <div class="value">{{localize passiveDefense}}</div>
-            </div>
-        {{/if}}
+        <div class="form-group">
+            <label>{{localize "PF2E.ActionTypePassive"}}</label>
+            <select data-property="system.defense.passive.statistic" data-nullable>
+                {{selectOptions defensePassiveOptions selected=item.system.defense.passive.statistic blank="" localize=true}}
+            </select>
+        </div>
 
         <div class="form-group save">
             <label>{{localize "PF2E.SavingThrow"}}</label>
             <div class="form-fields">
                 <select name="system.defense.save.statistic">
-                    <option value=""></option>
-                    {{#select data.defense.save.statistic}}
-                        <option value="fortitude">{{localize "PF2E.SavesFortitude"}}</option>
-                        <option value="reflex">{{localize "PF2E.SavesReflex"}}</option>
-                        <option value="will">{{localize "PF2E.SavesWill"}}</option>
-                    {{/select}}
+                    {{selectOptions defenseSaveOptions selected=data.defense.save.statistic blank="" localize=true}}
                 </select>
                 <label {{#unless data.defense.save.statistic}}class="disabled"{{/unless}}>
                     {{localize "PF2E.Item.Spell.Defense.BasicSave"}}
@@ -138,19 +121,10 @@
                             <input type="checkbox" name="system.damage.{{id}}.applyMod" {{checked partial.applyMod}} />
                         </label>
                         <select name="system.damage.{{id}}.category">
-                            {{#select partial.category}}
-                                <option value=""></option>
-                                {{#each @root.damageSubtypes as |name type|}}
-                                    <option value="{{type}}">{{localize name}}</option>
-                                {{/each}}
-                            {{/select}}
+                            {{selectOptions @root.damageSubtypes selected=partial.category blank="" localize=true}}
                         </select>
                         <select name="system.damage.{{id}}.type">
-                            {{#select partial.type}}
-                                {{#each @root.damageTypes as |name type|}}
-                                    <option value="{{type}}">{{localize name}}</option>
-                                {{/each}}
-                            {{/select}}
+                            {{selectOptions @root.damageTypes selected=partial.type localize=true}}
                         </select>
                         <select class="kinds" name="system.damage.{{id}}.kinds" data-dtype="JSON">
                             {{#each (lookup @root.damageKinds id) as |kind|}}
@@ -170,14 +144,14 @@
                             ><i class="fa-solid fa-fw fa-edit"></i></a>
                             <a data-action="delete-damage-partial" data-id="{{id}}"><i class="fa-solid fa-fw fa-trash"></i></a>
                         </div>
+                        {{#if partial.materials}}
+                            <div class="materials">
+                                {{#each partial.materials as |material|}}
+                                    <div class="tag-legacy">{{localize (lookup @root.materials material)}}</div>
+                                {{/each}}
+                            </div>
+                        {{/if}}
                     </div>
-                    {{#if partial.materials}}
-                        <div class="materials">
-                            {{#each partial.materials as |material|}}
-                                <div class="tag-legacy">{{localize (lookup @root.materials material)}}</div>
-                            {{/each}}
-                        </div>
-                    {{/if}}
                 </div>
             {{/each}}
         </div>
@@ -215,11 +189,7 @@
         <div class="form-group">
             <label>{{localize "PF2E.SpellScalingInterval.Label"}}</label>
             <select name="system.heightening.interval" data-dtype="Number">
-                {{#select data.heightening.interval}}
-                    {{#each @root.heightenIntervals as |key|}}
-                        <option value="{{key}}">{{localize "PF2E.SpellScalingInterval.Selection" interval=key}}</option>
-                    {{/each}}
-                {{/select}}
+                {{selectOptions heightenIntervals selected=data.heightening.interval localize=true}}
             </select>
         </div>
 
