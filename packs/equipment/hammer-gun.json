@@ -16,7 +16,7 @@
         "category": "martial",
         "containerId": null,
         "damage": {
-            "damageType": "slashing",
+            "damageType": "piercing",
             "dice": 1,
             "die": "d6"
         },
@@ -53,8 +53,8 @@
             }
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
+            "license": "ORC",
+            "remaster": true,
             "title": "Pathfinder Guns & Gears"
         },
         "quantity": 1,

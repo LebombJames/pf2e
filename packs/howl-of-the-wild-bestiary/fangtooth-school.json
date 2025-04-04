@@ -45,7 +45,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Each enemy in the school's space takes @Damage[2d8[piercing]] damage (@Check[type:reflex|dc:19|basic:true] save)</p>"
+                    "value": "<p>Each enemy in the school's space takes @Damage[2d8[piercing]] damage (@Check[reflex|dc:19|basic] save)</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -159,7 +159,7 @@
                 "value": 3
             },
             "privateNotes": "",
-            "publicNotes": "<p>The fearsome teeth of this fish are so massive that it’s difficult for the creature to close its mouth. These fish must consider even much larger creatures as possible food, rising towards the surface during the darkness of night.</p>",
+            "publicNotes": "<p>The fearsome teeth of this fish are so massive that it's difficult for the creature to close its mouth. These fish must consider even much larger creatures as possible food, rising towards the surface during the darkness of night.</p>",
             "publication": {
                 "license": "ORC",
                 "remaster": true,
@@ -170,9 +170,23 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "low-light vision, scent (imprecise) 120 feet, wavesense (precise) 15 feet",
+            "details": "",
             "mod": 11,
-            "senses": []
+            "senses": [
+                {
+                    "type": "low-light-vision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 120,
+                    "type": "scent"
+                },
+                {
+                    "acuity": "precise",
+                    "range": 15,
+                    "type": "wavesense"
+                }
+            ]
         },
         "resources": {},
         "saves": {

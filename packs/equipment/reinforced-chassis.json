@@ -3,16 +3,16 @@
     "img": "icons/equipment/chest/breastplate-gorget-steel-white.webp",
     "name": "Reinforced Chassis",
     "system": {
-        "acBonus": 4,
+        "acBonus": 3,
         "baseItem": null,
         "bulk": {
             "value": 0
         },
-        "category": "medium",
-        "checkPenalty": -2,
+        "category": "unarmored",
+        "checkPenalty": 0,
         "containerId": null,
         "description": {
-            "value": ""
+            "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Reinforced Chassis]</p>\n<p>@Embed[Compendium.pf2e.feats-srd.Item.cilZUszwjSGB4p1W inline]</p>"
         },
         "dexCap": 1,
         "group": null,
@@ -32,8 +32,8 @@
             "value": {}
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
+            "license": "ORC",
+            "remaster": true,
             "title": "Pathfinder Guns & Gears"
         },
         "quantity": 1,
@@ -44,8 +44,8 @@
             "resilient": 0
         },
         "size": "med",
-        "speedPenalty": -5,
-        "strength": 3,
+        "speedPenalty": 0,
+        "strength": null,
         "traits": {
             "rarity": "rare",
             "value": [

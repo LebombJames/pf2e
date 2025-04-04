@@ -20,8 +20,8 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
+            "license": "ORC",
+            "remaster": true,
             "title": "Pathfinder Guns & Gears"
         },
         "rules": [
@@ -43,6 +43,7 @@
         "subfeatures": {
             "proficiencies": {
                 "gunslinger": {
+                    "attribute": null,
                     "rank": 3
                 }
             }

@@ -38,7 +38,9 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -81,7 +83,8 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "agile"
+                        "agile",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -122,10 +125,8 @@
         },
         {
             "_id": "SbsDaImCI4BsHZJm",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.3JOi2cMcGhT3eze1"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.3JOi2cMcGhT3eze1"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Rend",
@@ -169,7 +170,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Trigger</strong> The grisantian lion uses Rend</p>\n<hr />\n<p><strong>Effect</strong> The target's armor takes damage equal to the damage from Rend. The target can attempt a @Check[type:reflex|dc:29|basic:true] save to reduce this damage.</p>"
+                    "value": "<p><strong>Trigger</strong> The grisantian lion uses Rend</p>\n<hr />\n<p><strong>Effect</strong> The target's armor takes damage equal to the damage from Rend. The target can attempt a @Check[reflex|dc:29|basic] save to reduce this damage.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -187,10 +188,8 @@
         },
         {
             "_id": "TrvSXq6mPFlsP0lp",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Grab",
@@ -302,7 +301,7 @@
             "publication": {
                 "license": "OGL",
                 "remaster": false,
-                "title": "Pathfinder Lost Omens: Monsters of Myth"
+                "title": "Pathfinder Lost Omens Monsters of Myth"
             }
         },
         "initiative": {

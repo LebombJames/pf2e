@@ -11,7 +11,7 @@
         },
         "category": "classfeature",
         "description": {
-            "value": "<p>You learn an incredible discovery that advances your understanding of your field.</p>\n<p>When you use @UUID[Compendium.pf2e.classfeatures.Item.Quick Alchemy] to create any type of elixir of life, the creature drinking the elixir gains the maximum Hit Points possible for that elixir, instead of rolling to determine the number of Hit Points regained.</p>"
+            "value": "<p>When you use @UUID[Compendium.pf2e.classfeatures.Item.Quick Alchemy] to create any type of elixir of life, the creature healed by the item regains the maximum Hit Points possible, instead of rolling to determine the number of Hit Points regained.</p>"
         },
         "level": {
             "value": 13
@@ -20,11 +20,110 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder Core Rulebook"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core 2"
         },
-        "rules": [],
+        "rules": [
+            {
+                "domain": "inline-healing",
+                "key": "RollOption",
+                "option": "chirurgeon-greater-field-discovery",
+                "toggleable": true
+            },
+            {
+                "key": "DamageAlteration",
+                "mode": "downgrade",
+                "predicate": [
+                    "chirurgeon-greater-field-discovery",
+                    {
+                        "or": [
+                            "item:slug:elixir-of-life-minor",
+                            "item:slug:elixir-of-life-lesser",
+                            "item:slug:elixir-of-life-moderate",
+                            "item:slug:elixir-of-life-greater",
+                            "item:slug:elixir-of-life-major",
+                            "item:slug:elixir-of-life-true"
+                        ]
+                    }
+                ],
+                "property": "dice-number",
+                "selectors": [
+                    "inline-healing"
+                ],
+                "slug": "base",
+                "value": 0
+            },
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    "chirurgeon-greater-field-discovery",
+                    {
+                        "or": [
+                            "item:slug:elixir-of-life-minor",
+                            "item:slug:elixir-of-life-lesser",
+                            "item:slug:elixir-of-life-moderate",
+                            "item:slug:elixir-of-life-greater",
+                            "item:slug:elixir-of-life-major",
+                            "item:slug:elixir-of-life-true"
+                        ]
+                    }
+                ],
+                "selector": "inline-healing",
+                "slug": "chirurgeon-greater-field-discovery",
+                "value": 6
+            },
+            {
+                "key": "AdjustModifier",
+                "mode": "multiply",
+                "predicate": [
+                    "item:slug:elixir-of-life-lesser"
+                ],
+                "selector": "inline-healing",
+                "slug": "chirurgeon-greater-field-discovery",
+                "value": 3
+            },
+            {
+                "key": "AdjustModifier",
+                "mode": "multiply",
+                "predicate": [
+                    "item:slug:elixir-of-life-moderate"
+                ],
+                "selector": "inline-healing",
+                "slug": "chirurgeon-greater-field-discovery",
+                "value": 5
+            },
+            {
+                "key": "AdjustModifier",
+                "mode": "multiply",
+                "predicate": [
+                    "item:slug:elixir-of-life-greater"
+                ],
+                "selector": "inline-healing",
+                "slug": "chirurgeon-greater-field-discovery",
+                "value": 7
+            },
+            {
+                "key": "AdjustModifier",
+                "mode": "multiply",
+                "predicate": [
+                    "item:slug:elixir-of-life-major"
+                ],
+                "selector": "inline-healing",
+                "slug": "chirurgeon-greater-field-discovery",
+                "value": 8
+            },
+            {
+                "key": "AdjustModifier",
+                "mode": "multiply",
+                "predicate": [
+                    "item:slug:elixir-of-life-true"
+                ],
+                "selector": "inline-healing",
+                "slug": "chirurgeon-greater-field-discovery",
+                "value": 10
+            }
+        ],
         "traits": {
             "rarity": "common",
             "value": [

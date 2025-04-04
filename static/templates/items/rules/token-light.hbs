@@ -2,7 +2,7 @@
     <h4>
         <a data-rule-tab="basic"><i class="fa-solid fa-lightbulb"></i> {{localize "AMBIENT_LIGHT.SECTIONS.BASIC"}}</a>
         <a data-rule-tab="animation"><i class="fa-solid fa-play"></i> {{localize "AMBIENT_LIGHT.SECTIONS.ANIMATION"}}</a>
-        <a data-rule-tab="advanced"><i class="fa-solid fa-cogs"></i> {{localize "AMBIENT_LIGHT.SECTIONS.ADVANCED"}}</a>
+        <a data-rule-tab="advanced"><i class="fa-solid fa-gears"></i> {{localize "AMBIENT_LIGHT.SECTIONS.ADVANCED"}}</a>
     </h4>
 </nav>
 
@@ -29,7 +29,7 @@
     </fieldset>
 
     <div class="form-group slim">
-        <label>{{localize "LIGHT.FIELDS.angle.label" }} <span class="units">({{localize "Degrees"}})</span></label>
+        <label>{{localize "LIGHT.FIELDS.angle.label"}} <span class="units">({{localize "Degrees"}})</span></label>
         <div class="form-fields">
             <input type="number" name="system.rules.{{index}}.value.angle" value="{{light.angle}}" placeholder="360"/>
         </div>
@@ -60,7 +60,7 @@
         <label>{{localize "LIGHT.FIELDS.animation.type.label"}}</label>
         <div class="form-fields">
             <select name="system.rules.{{index}}.value.animation.type">
-                {{selectOptions lightAnimations selected=light.animation.type localize=true}}
+                {{selectOptions lightAnimations selected=light.animation.type blank="" localize=true}}
             </select>
         </div>
     </div>

@@ -20,16 +20,34 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder Advanced Player's Guide"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core 2"
         },
         "rules": [
             {
                 "adjustName": false,
                 "choices": {
                     "filter": [
-                        "item:tag:investigator-methodology"
+                        "item:tag:investigator-methodology",
+                        {
+                            "or": [
+                                {
+                                    "and": [
+                                        "class:investigator",
+                                        "item:tag:investigator-methodology"
+                                    ]
+                                },
+                                {
+                                    "and": [
+                                        "item:tag:investigator-methodology",
+                                        {
+                                            "not": "item:tag:class-archetype"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 },
                 "flag": "methodology",

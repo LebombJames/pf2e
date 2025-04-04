@@ -36,7 +36,8 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "reach-10"
+                        "reach-10",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -139,7 +140,10 @@
             "type": "melee"
         },
         {
-            "_id": "aHkhx52xZZTtPI25",
+            "_id": "inpR35cmul7fR7Ly",
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.kquBnQ0kObZztnBc"
+            },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "+1 Status to All Saves vs. Magic",
             "sort": 400000,
@@ -155,32 +159,23 @@
                     "value": ""
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Monster Core"
                 },
                 "rules": [
                     {
                         "key": "FlatModifier",
                         "predicate": [
-                            {
-                                "or": [
-                                    "magical",
-                                    "arcane",
-                                    "primal",
-                                    "occult",
-                                    "divine"
-                                ]
-                            }
+                            "item:magical"
                         ],
                         "selector": "saving-throw",
                         "type": "status",
                         "value": 1
                     }
                 ],
-                "slug": null,
+                "slug": "1-status-to-all-saves-vs-magic",
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
@@ -260,7 +255,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The peluda breathes a torrent of flames that deals @Damage[7d10[fire]] damage in a @Template[type:line|distance:60] (@Check[type:reflex|dc:29|basic:true] save).</p>\n<p>They can't use their Breath Weapon again for [[/br 1d4 #Recharge their Breath Weapon]]{1d4 rounds}.</p>"
+                    "value": "<p>The peluda breathes a torrent of flames that deals @Damage[7d10[fire]|options:area-damage] damage in a @Template[line|distance:60] (@Check[reflex|dc:29|basic|options:area-effect] save).</p>\n<p>They can't use their Breath Weapon again for [[/gmr 1d4 #Recharge their Breath Weapon]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -293,7 +288,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Saving Throw</strong> @Check[type:fortitude|dc:29]</p>\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[2d6[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1}, and off-guard (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 2}, and off-guard (1 round)</p>"
+                    "value": "<p><strong>Saving Throw</strong> @Check[fortitude|dc:29]</p>\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[2d6[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[2d6[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1}, and off-guard (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[2d6[poison]] damage, @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 2}, and off-guard (1 round)</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -325,7 +320,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The peluda bristles their quills and shakes, sending dozens of spear-like barbs in every direction. All creatures within 30 feet take @Damage[11d6[piercing]] damage (@Check[type:reflex|dc:29|basic:true] save) and are exposed to peluda venom if they take any damage.</p>\n<p>The peluda can't use Quill Barrage again for 1 minute.</p>"
+                    "value": "<p>The peluda bristles their quills and shakes, sending dozens of spear-like barbs in every direction. All creatures within 30 feet take @Damage[11d6[piercing]] damage (@Check[reflex|dc:29|basic] save) and are exposed to peluda venom if they take any damage.</p>\n<p>The peluda can't use Quill Barrage again for 1 minute.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -343,10 +338,8 @@
         },
         {
             "_id": "LYl70MYcQUy11TXM",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.LbnsT8yXchHMQT3t"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.LbnsT8yXchHMQT3t"
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Knockdown",

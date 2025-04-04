@@ -1,12 +1,12 @@
 <nav class="sheet-tabs tabs rule-tabs">
     <h4>
-        <a data-rule-tab="basic"><i class="fa-solid fa-cogs"></i> {{localize "PF2E.RuleEditor.Aura.Basic.Label"}}</a>
+        <a data-rule-tab="basics"><i class="fa-solid fa-cogs"></i> {{localize "PF2E.RuleEditor.General.Basics"}}</a>
         <a data-rule-tab="effects"><i class="fa-solid fa-play"></i> {{localize fields.effects.label}}</a>
         <a data-rule-tab="appearance"><i class="fa-solid fa-image"></i> {{localize fields.appearance.label}}</a>
     </h4>
 </nav>
 
-<div data-rule-tab="basic">
+<div data-rule-tab="basics">
     <div class="grid-item">
         <label>{{localize fields.radius.label}}</label>
         <div class="resolvable">
@@ -21,7 +21,7 @@
     <div class="grid-item">
         <label>
             {{localize fields.level.label}}
-            <i class="fa-solid fa-info-circle" data-tooltip="{{fields.level.hint}}"></i>
+            <i class="fa-solid fa-circle-info" data-tooltip="{{fields.level.hint}}"></i>
         </label>
         <div class="resolvable">
             {{{form.resolvableValue "level"}}}
@@ -41,7 +41,7 @@
         <div class="grid-item long-label">
             <label>
                 {{localize fields.mergeExisting.label}}
-                <i class="fa-solid fa-info-circle" data-tooltip="{{fields.mergeExisting.hint}}"></i>
+                <i class="fa-solid fa-circle-info" data-tooltip="{{fields.mergeExisting.hint}}"></i>
             </label>
             <div class="checkbox">
                 <input type="checkbox" name="system.rules.{{index}}.mergeExisting" {{checked object.mergeExisting}}/>
@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <!-- Not fully implemented
+        {{!-- Not fully implemented
         <div class="grid-item">
             <label>{{localize ../fields.effects.element.fields.events.label}}</label>
             <input type="text" class="pf2e-tagify tagify-events" name="system.rules.{{../index}}.effects.{{eid}}.events" value="{{json effect.events}}" data-dtype="JSON"/>
@@ -117,7 +117,7 @@
                 {{/if}}
             </div>
         </fieldset>
-        -->
+        --}}
 
         <div class="grid-item column-span-two">
             <label>{{localize ../fields.effects.element.fields.predicate.label}}</label>
@@ -212,7 +212,7 @@
                 <div class="three-items translation long-label">
                     <label>
                         {{localize fields.appearance.fields.texture.fields.translation.label}}
-                        <i class="fa-solid fa-info-circle" data-tooltip="{{fields.appearance.fields.texture.fields.translation.hint}}"></i>
+                        <i class="fa-solid fa-circle-info" data-tooltip="{{fields.appearance.fields.texture.fields.translation.hint}}"></i>
                     </label>
                     <input type="number"
                         name="system.rules.{{index}}.appearance.texture.translation.x"
@@ -232,7 +232,7 @@
                     <div class="three-items long-label">
                         <label>
                             {{localize fields.appearance.fields.texture.fields.playbackRate.label}}
-                            <i class="fa-solid fa-info-circle" data-tooltip="{{fields.appearance.fields.texture.fields.playbackRate.hint}}"></i>
+                            <i class="fa-solid fa-circle-info" data-tooltip="{{fields.appearance.fields.texture.fields.playbackRate.hint}}"></i>
                         </label>
                         {{rangePicker name=(concat "system.rules." index ".appearance.texture.playbackRate") value=object.appearance.texture.playbackRate placeholder="1" min="0" max="4" step="0.05"}}
                     </div>
@@ -240,7 +240,7 @@
                     <div class="grid-item long-label">
                         <label>
                             {{localize fields.appearance.fields.texture.fields.loop.label}}
-                            <i class="fa-solid fa-info-circle" data-tooltip="{{fields.appearance.fields.texture.fields.loop.hint}}"></i>
+                            <i class="fa-solid fa-circle-info" data-tooltip="{{fields.appearance.fields.texture.fields.loop.hint}}"></i>
                         </label>
                         <input type="checkbox" name="system.rules.{{index}}.appearance.texture.loop" {{checked object.appearance.texture.loop}}/>
                     </div>

@@ -62,6 +62,7 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
                 [`category:${this.category}`]: true,
                 [`group:${this.group ?? "none"}`]: true,
                 [`base:${this.baseType}`]: !!this.baseType,
+                [`strength:${this.system.strength}`]: typeof this.system.strength === "number",
                 [`rune:potency`]: this.system.runes.potency > 0,
                 [`rune:resilient`]: this.system.runes.resilient > 0,
             })
@@ -108,7 +109,6 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
 
     override prepareDerivedData(): void {
         super.prepareDerivedData();
-
         const potencyRune = this.isInvested && !ABP.isEnabled(this.actor) ? this.system.runes.potency : 0;
         const baseArmor = Number(this.system.acBonus) || 0;
         this.system.acBonus = baseArmor + potencyRune;
@@ -116,12 +116,27 @@ class ArmorPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Phy
 
     override prepareActorData(this: ArmorPF2e<ActorPF2e>): void {
         super.prepareActorData();
-        const { actor } = this;
+        const actor = this.actor;
         if (!actor) throw ErrorPF2e("This method may only be called from embedded items");
         if (!this.isEquipped) return;
 
-        for (const rollOption of this.getRollOptions("armor")) {
-            actor.rollOptions.all[rollOption] = true;
+        for (const option of this.getRollOptions("armor")) {
+            actor.rollOptions.all[option] = true;
+        }
+    }
+
+    override onPrepareSynthetics(): void {
+        super.onPrepareSynthetics();
+        const actor = this.actor;
+        if (!actor) throw ErrorPF2e("This method may only be called from embedded items");
+        if (!this.isEquipped) return;
+
+        const rollOptionsAll = this.actor.flags.pf2e.rollOptions.all;
+        for (const option of Object.keys(rollOptionsAll)) {
+            if (option.startsWith("armor:")) delete rollOptionsAll[option];
+        }
+        for (const option of this.getRollOptions("armor")) {
+            rollOptionsAll[option] = true;
         }
     }
 

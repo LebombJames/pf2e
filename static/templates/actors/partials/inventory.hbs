@@ -2,11 +2,6 @@
     {{#each inventory.sections as |section|}}
         <header>
             <h3 class="item-name">{{section.label}}</h3>
-            {{#if (and (includes section.types "equipment") @root.inventory.invested)}}
-                <span class="item-invested-total{{#if (gt @root.inventory.invested.value @root.inventory.invested.max)}} overinvested{{/if}}">
-                    {{localize "PF2E.InvestedLabel"}} ({{@root.inventory.invested.value}}/{{@root.inventory.invested.max}})
-                </span>
-            {{/if}}
             {{#if (or @root.inventory.showValueAlways (includes section.types "treasure"))}}
                 <span class="price">
                     {{~#if @root.inventory.showUnitBulkPrice~}}
@@ -37,6 +32,8 @@
                         data-filter="{{section.types}}"
                     ><i class="fa-solid fa-fw fa-search"></i></a>
                 </div>
+            {{else if (ne @root.actor.type "loot")}}
+                <div class="item-controls readonly"></div>
             {{/if}}
         </header>
         <ul class="items" data-item-list data-item-types="{{section.types}}"{{#if @root.isLootSheet}} data-loot{{/if}}>

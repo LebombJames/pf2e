@@ -1,6 +1,6 @@
 {
     "_id": "7U16hk57BHVM5QYs",
-    "img": "systems/pf2e/icons/equipment/worn-items/other-worn-items/reading-ring.webp",
+    "img": "icons/equipment/finger/ring-cabochon-silver-red.webp",
     "name": "Reading Ring (Greater)",
     "system": {
         "baseItem": null,
@@ -31,7 +31,7 @@
         "publication": {
             "license": "OGL",
             "remaster": false,
-            "title": "Pathfinder Lost Omens: The Grand Bazaar"
+            "title": "Pathfinder Lost Omens The Grand Bazaar"
         },
         "quantity": 1,
         "rules": [],

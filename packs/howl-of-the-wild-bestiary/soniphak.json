@@ -35,7 +35,8 @@
                 "slug": null,
                 "traits": {
                     "value": [
-                        "reach-15"
+                        "reach-15",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -79,7 +80,8 @@
                 "slug": null,
                 "traits": {
                     "value": [
-                        "agile"
+                        "agile",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -135,10 +137,8 @@
         },
         {
             "_id": "F3A1wbRFUhHW7CqK",
-            "flags": {
-                "core": {
-                    "sourceId": "Actor.OEY3bg3YOjRPkyzI.Item.iJajFZP5ZYRFW9er"
-                }
+            "_stats": {
+                "compendiumSource": "Actor.OEY3bg3YOjRPkyzI.Item.iJajFZP5ZYRFW9er"
             },
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Sensitive Echolocation",
@@ -268,7 +268,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The soniphak can focus its screech at a stone or rock surface within 60 feet to create an explosion in a @Template[type:burst|distance:15] from the point of impact. Creatures in the area take @Damage[5d6[piercing]] damage (@Check[type:reflex|dc:28|basic:true] save), and the area becomes difficult terrain due to fragments of loose stone.</p>"
+                    "value": "<p>The soniphak can focus its screech at a stone or rock surface within 60 feet to create an explosion in a @Template[burst|distance:15] from the point of impact. Creatures in the area take @Damage[5d6[piercing]] damage (@Check[reflex|dc:28|basic] save), and the area becomes difficult terrain due to fragments of loose stone.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -369,7 +369,7 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "no vision, sensitive echolocation (precise) 120 feet",
+            "details": "sensitive echolocation (precise) 120 feet",
             "mod": 21,
             "senses": [
                 {
@@ -377,7 +377,8 @@
                     "range": 120,
                     "type": "echolocation"
                 }
-            ]
+            ],
+            "vision": false
         },
         "resources": {},
         "saves": {

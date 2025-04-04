@@ -20,30 +20,30 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder Core Rulebook"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core 2"
         },
         "rules": [
             {
-                "definition": [
+                "itemType": "weapon",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "predicate": [
                     "item:category:unarmed"
                 ],
-                "key": "AdjustStrike",
-                "mode": "add",
-                "property": "weapon-traits",
+                "property": "traits",
                 "value": "magical"
             },
             {
-                "definition": [
-                    "item:trait:monk"
-                ],
-                "key": "AdjustStrike",
+                "itemType": "weapon",
+                "key": "ItemAlteration",
                 "mode": "add",
                 "predicate": [
+                    "item:trait:monk",
                     "feat:monastic-weaponry"
                 ],
-                "property": "weapon-traits",
+                "property": "traits",
                 "value": "magical"
             }
         ],

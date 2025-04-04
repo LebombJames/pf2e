@@ -107,6 +107,8 @@ export abstract class DataField<
 
     initial: this["options"]["initial"];
 
+    nullable: TNullable;
+
     /** The initially provided options which configure the data field */
     options: DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>;
 
@@ -684,7 +686,10 @@ type ArrayFieldOptions<
     TRequired extends boolean,
     TNullable extends boolean,
     THasInitial extends boolean,
-> = DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>;
+> = DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> & {
+    min?: number;
+    max?: number;
+};
 
 /** A subclass of `DataField` which deals with array-typed data. */
 export class ArrayField<
@@ -693,7 +698,7 @@ export class ArrayField<
             SourcePropFromDataField<TElementField>
         >[] = SourcePropFromDataField<TElementField>[],
         TModelProp extends object = ModelPropFromDataField<TElementField>[],
-        TRequired extends boolean = false,
+        TRequired extends boolean = true,
         TNullable extends boolean = false,
         THasInitial extends boolean = true,
     >
@@ -762,7 +767,7 @@ export interface ArrayField<
     TElementField extends DataField,
     TSourceProp extends Partial<SourcePropFromDataField<TElementField>>[] = SourcePropFromDataField<TElementField>[],
     TModelProp extends object = ModelPropFromDataField<TElementField>[],
-    TRequired extends boolean = false,
+    TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true,
 > extends DataField<TSourceProp, TModelProp, TRequired, TNullable, THasInitial> {
@@ -802,7 +807,7 @@ export class EmbeddedDataField<
     THasInitial extends boolean = true,
 > extends SchemaField<
     TModelProp["schema"]["fields"],
-    SourceFromSchema<TModelProp["schema"]["fields"]>,
+    TModelProp["_source"],
     TModelProp,
     TRequired,
     TNullable,
@@ -1006,6 +1011,15 @@ export class DocumentUUIDField<
     protected override _cast(value: unknown): string;
 }
 
+interface ForeignDocumentFieldOptions<
+    TSourceProp extends string,
+    TRequired extends boolean,
+    TNullable extends boolean,
+    THasInitial extends boolean,
+> extends StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> {
+    idOnly?: boolean;
+}
+
 /**
  * A special class of [StringField]{@link StringField} field which references another DataModel by its id.
  * This field may also be null to indicate that no foreign model is linked.
@@ -1023,7 +1037,7 @@ export class ForeignDocumentField<
      */
     constructor(
         model: ConstructorOf<abstract.DataModel>,
-        options?: StringFieldOptions<string, TRequired, TNullable, THasInitial>,
+        options?: ForeignDocumentFieldOptions<string, TRequired, TNullable, THasInitial>,
         context?: DataFieldContext,
     );
 
@@ -1199,11 +1213,13 @@ export class IntegerSortField<
  * A subclass of {@link SchemaField} which stores document metadata in the _stats field.
  * @mixes DocumentStats
  */
-export class DocumentStatsField extends SchemaField<DocumentStatsSchema> {
+export class DocumentStatsField<TDocumentUUID extends DocumentUUID = DocumentUUID> extends SchemaField<
+    DocumentStatsSchema<TDocumentUUID>
+> {
     constructor(options?: ObjectFieldOptions<DocumentStatsSchema, true, false, true>, context?: DataFieldContext);
 }
 
-type DocumentStatsSchema = {
+type DocumentStatsSchema<TDocumentUUID extends DocumentUUID = DocumentUUID> = {
     /** The package name of the system the Document was created in. */
     systemId: StringField<string, string, true, false, true>;
     /** The version of the system the Document was created or last modified in. */
@@ -1217,9 +1233,9 @@ type DocumentStatsSchema = {
     /** The ID of the user who last modified the Document. */
     lastModifiedBy: ForeignDocumentField<string>;
     /** The UUID of the compendium Document this one was imported from. */
-    compendiumSource: DocumentUUIDField<CompendiumUUID>;
+    compendiumSource: DocumentUUIDField<TDocumentUUID>;
     /** The UUID of the Document this one is a duplicate of. */
-    duplicateSource: DocumentUUIDField<DocumentUUID>;
+    duplicateSource: DocumentUUIDField<TDocumentUUID>;
 };
 
 export type DocumentStatsData = SourceFromSchema<DocumentStatsSchema>;

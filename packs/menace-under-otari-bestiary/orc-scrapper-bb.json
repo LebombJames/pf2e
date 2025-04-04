@@ -1,13 +1,11 @@
 {
-    "_id": "0oWKApY5FR8IO7GG",
+    "_id": "YReM6QbqwUz3UTP7",
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
             "_id": "4efOifXa4TffTvDf",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.equipment-srd.Item.JNt7GmLCCVz5BiEI"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.equipment-srd.Item.JNt7GmLCCVz5BiEI"
             },
             "img": "systems/pf2e/icons/equipment/weapons/javelin.webp",
             "name": "Javelin",
@@ -91,10 +89,8 @@
         },
         {
             "_id": "aa7n7sNvgW2PaDy9",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.equipment-srd.Item.War0uyLBx1jA0Ge7"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.equipment-srd.Item.War0uyLBx1jA0Ge7"
             },
             "img": "systems/pf2e/icons/equipment/weapons/battle-axe.webp",
             "name": "Battle Axe",
@@ -178,10 +174,8 @@
         },
         {
             "_id": "a5v7ywNdSf6LcbKh",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.equipment-srd.Item.AnwzlOs0njF9Jqnr"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.equipment-srd.Item.AnwzlOs0njF9Jqnr"
             },
             "img": "icons/equipment/chest/vest-leather-tattered-white.webp",
             "name": "Hide Armor",
@@ -331,7 +325,8 @@
                     "rarity": "common",
                     "value": [
                         "agile",
-                        "nonlethal"
+                        "nonlethal",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -391,10 +386,8 @@
         },
         {
             "_id": "CellesdPVQW5Dk8g",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.N1kstYbHScxgUQtN"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.N1kstYbHScxgUQtN"
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Ferocity",

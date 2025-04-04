@@ -30,17 +30,18 @@
                     "criticalFailure": "one-degree-better"
                 },
                 "key": "AdjustDegreeOfSuccess",
-                "selector": "fortitude",
-                "type": "save"
+                "selector": "fortitude"
             },
             {
                 "key": "Note",
                 "outcome": [
-                    "criticalFailure",
                     "failure"
                 ],
+                "predicate": [
+                    "damaging-effect"
+                ],
                 "selector": "fortitude",
-                "text": "When you roll a critical failure on a Fortitude save, you get a failure instead. When you fail a Fortitude save against an effect that deals damage, you halve the damage you take.",
+                "text": "PF2E.SpecificRule.SaveCriticalFailureToFailure.FailureHalfDamage.Fortitude",
                 "title": "{item|name}"
             }
         ],

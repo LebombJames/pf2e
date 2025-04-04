@@ -1,6 +1,6 @@
 <form class="{{cssClass}} crb-style{{#if isProficiencyLocked}} proficiency-lock{{/if}}" data-tooltip-class="pf2e" autocomplete="off">
     <aside>
-        <img class="logo" src="systems/pf2e/assets/pathfinder_logo.webp" height="56" alt="" srcset="" />
+        <img class="logo" src="systems/pf2e/assets/pathfinder_logo.webp" />
         <div class="sidebar" data-tab="sidebar">
             {{> "systems/pf2e/templates/actors/character/partials/sidebar.hbs"}}
         </div>
@@ -40,7 +40,7 @@
 
         {{!-- Skills and Proficiencies --}}
         <a class="item{{#unless tabVisibility.proficiencies}} hidden{{/unless}}" data-tab="proficiencies" data-tooltip="PF2E.TabSkillsLabel" role="tab" aria-label="{{localize "PF2E.TabSkillsLabel"}}">
-            <i class="fa-solid fa-hand-paper"></i>
+            <i class="fa-solid fa-hand"></i>
         </a>
 
         {{!-- Feats and Features --}}

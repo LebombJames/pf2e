@@ -76,7 +76,9 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -158,7 +160,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The whalesteed @UUID[Compendium.pf2e.actionspf2e.Item.Swim]{Swims} twice and then makes a snout Strike. As long as it moved at least 20 feet, it gains a +1 circumstance bonus to its attack roll. A Large or smaller creature hit by this attack must succeed at a @Check[type:fortitude|dc:16] save or be @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} for 1 round.</p>"
+                    "value": "<p>The whalesteed @UUID[Compendium.pf2e.actionspf2e.Item.Swim]{Swims} twice and then makes a snout Strike. As long as it moved at least 20 feet, it gains a +1 circumstance bonus to its attack roll. A Large or smaller creature hit by this attack must succeed at a @Check[fortitude|dc:16] save or be @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} for 1 round.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -251,7 +253,7 @@
             "publication": {
                 "license": "OGL",
                 "remaster": false,
-                "title": "Pathfinder Lost Omens: Travel Guide"
+                "title": "Pathfinder Lost Omens Travel Guide"
             }
         },
         "initiative": {

@@ -1,5 +1,5 @@
 {
-    "_id": "gvCCATlH9mPGWbsp",
+    "_id": "htK4dElL6YvFCLkz",
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
@@ -37,7 +37,8 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "reach-10"
+                        "reach-10",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -82,7 +83,8 @@
                     "rarity": "common",
                     "value": [
                         "agile",
-                        "reach-10"
+                        "reach-10",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -93,10 +95,8 @@
         },
         {
             "_id": "50Meu5uWTOPYtMu6",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.lR9R5Vld8Eu2Dha5"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.lR9R5Vld8Eu2Dha5"
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Regeneration 20 (Deactivated by Electricity or Fire)",
@@ -178,10 +178,8 @@
         },
         {
             "_id": "scw9HnbCVwAyFzok",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.3JOi2cMcGhT3eze1"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.3JOi2cMcGhT3eze1"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Rend",

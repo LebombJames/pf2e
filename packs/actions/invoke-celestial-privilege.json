@@ -16,13 +16,13 @@
         "publication": {
             "license": "OGL",
             "remaster": false,
-            "title": "Pathfinder Lost Omens: Ancestry Guide"
+            "title": "Pathfinder Lost Omens Ancestry Guide"
         },
         "rules": [
             {
                 "key": "FlatModifier",
                 "predicate": [
-                    "divine",
+                    "item:trait:divine",
                     "celestial-privilege"
                 ],
                 "selector": "saving-throw",

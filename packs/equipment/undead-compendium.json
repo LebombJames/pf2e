@@ -1,6 +1,6 @@
 {
     "_id": "4yUa5JicrhnHUggC",
-    "img": "systems/pf2e/icons/equipment/held-items/undead-compendium.webp",
+    "img": "icons/sundries/books/book-red-cross.webp",
     "name": "Undead Compendium",
     "system": {
         "baseItem": null,
@@ -31,7 +31,7 @@
         "publication": {
             "license": "OGL",
             "remaster": false,
-            "title": "Pathfinder Lost Omens: Knights of Lastwall"
+            "title": "Pathfinder Lost Omens Knights of Lastwall"
         },
         "quantity": 1,
         "rules": [

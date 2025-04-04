@@ -1,6 +1,6 @@
-import { ActionCost } from "@item/base/data/system.ts";
+import type { ActionCost } from "@item/base/data/system.ts";
 import * as R from "remeda";
-import Sortable from "sortablejs";
+import type Sortable from "sortablejs";
 
 /**
  * Given an array and a key function, create a map where the key is the value that
@@ -22,32 +22,6 @@ function groupBy<T, R>(array: T[], criterion: (value: T) => R): Map<R, T[]> {
         }
     }
     return result;
-}
-
-/**
- * Given an array, adds a certain amount of elements to it
- * until the desired length is being reached
- */
-function padArray<T>(array: T[], requiredLength: number, padWith: T): T[] {
-    const result = [...array];
-    for (let i = array.length; i < requiredLength; i += 1) {
-        result.push(padWith);
-    }
-    return result;
-}
-
-/** Given an object, returns a new object with the same keys, but with each value converted by a function. */
-function mapValues<K extends string | number | symbol, V, R>(
-    object: Record<K, V>,
-    mapping: (value: V, key: K) => R,
-): Record<K, R> {
-    return Object.entries<V>(object).reduce(
-        (result, [key, value]) => {
-            result[key as K] = mapping(value, key as K);
-            return result;
-        },
-        {} as Record<K, R>,
-    );
 }
 
 /**
@@ -173,11 +147,11 @@ function getActionTypeLabel(
 ): string | null {
     switch (type) {
         case "action":
-            return cost === 1 ? "PF2E.Item.Action.Type.Single" : "PF2E.Item.Action.Type.Activity";
+            return cost === 1 ? "PF2E.Item.Ability.Type.Single" : "PF2E.Item.Ability.Type.Activity";
         case "free":
-            return "PF2E.Item.Action.Type.Free";
+            return "PF2E.Item.Ability.Type.Free";
         case "reaction":
-            return "PF2E.Item.Action.Type.Reaction";
+            return "PF2E.Item.Ability.Type.Reaction";
         default:
             return null;
     }
@@ -243,9 +217,11 @@ function ErrorPF2e(message: string): Error {
     return Error(`PF2e System | ${message}`);
 }
 
+let pluralRules: Intl.PluralRules;
+
 /** Returns the number in an ordinal format, like 1st, 2nd, 3rd, 4th, etc. */
 function ordinalString(value: number): string {
-    const pluralRules = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
+    pluralRules ??= new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
     const suffix = game.i18n.localize(`PF2E.OrdinalSuffixes.${pluralRules.select(value)}`);
     return game.i18n.format("PF2E.OrdinalNumber", { value, suffix });
 }
@@ -358,7 +334,7 @@ function recursiveReplaceString(source: unknown, replace: (s: string) => string)
     if (typeof clone === "string") {
         return replace(clone);
     } else if (Array.isArray(clone)) {
-        return clone.map((e) => recursiveReplaceString(e, replace));
+        return clone.map((e): unknown => recursiveReplaceString(e, replace));
     } else if (R.isPlainObject(clone)) {
         for (const [key, value] of Object.entries(clone)) {
             clone[key] = recursiveReplaceString(value, replace);
@@ -388,16 +364,16 @@ function configFromLocalization<T extends Record<string, TranslationDictionaryVa
 
 /** Does the parameter look like an image file path? */
 function isImageFilePath(path: unknown): path is ImageFilePath {
-    return typeof path === "string" && Object.keys(CONST.IMAGE_FILE_EXTENSIONS).some((e) => path.endsWith(`.${e}`));
+    return typeof path === "string" && ImageHelper.hasImageExtension(path);
 }
 
 /** Does the parameter look like a video file path? */
-function isVideoFilePath(path: unknown): path is ImageFilePath {
-    return typeof path === "string" && Object.keys(CONST.VIDEO_FILE_EXTENSIONS).some((e) => path.endsWith(`.${e}`));
+function isVideoFilePath(path: unknown): path is VideoFilePath {
+    return typeof path === "string" && VideoHelper.hasVideoExtension(path);
 }
 
 function isImageOrVideoPath(path: unknown): path is ImageFilePath | VideoFilePath {
-    return isImageFilePath(path) || isVideoFilePath(path);
+    return typeof path === "string" && (ImageHelper.hasImageExtension(path) || VideoHelper.hasVideoExtension(path));
 }
 
 const SORTABLE_BASE_OPTIONS: Sortable.Options = {
@@ -439,10 +415,8 @@ export {
     isVideoFilePath,
     localizeList,
     localizer,
-    mapValues,
     objectHasKey,
     ordinalString,
-    padArray,
     parseHTML,
     recursiveReplaceString,
     setHasElement,

@@ -1,6 +1,7 @@
 // Note: tags html element is tagify, and .tags is paizo tag/traits styling. They are not mutually exclusive.
 
-.tags {
+// Temporary measure since V12 introduced core `.tags > .tag` styling
+.tags:not(.form-fields) {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -13,7 +14,7 @@
     .tag option {
         @include micro;
         align-items: center;
-        background-color: var(--color-pf-primary);
+        background-color: var(--color-bg-trait);
         border-radius: 2px;
         box-shadow: inset 0 0 0 1px rgba(black, 0.5);
         color: var(--color-text-trait);
@@ -80,6 +81,16 @@
 
         &.mystified {
             opacity: 0.7;
+        }
+    }
+}
+
+// Allow tags to recieve events and disable just the rarity dropdown
+tags.tagify {
+    &[disabled] {
+        pointer-events: inherit;
+        select.tag.rarity {
+            pointer-events: none;
         }
     }
 }
@@ -191,6 +202,10 @@
     padding: 0 var(--space-4);
     white-space: nowrap;
     width: auto;
+
+    .theme-dark & {
+        --tag-color: var(--color-form-hint);
+    }
 }
 
 .chat-message .tags {

@@ -107,7 +107,7 @@ interface TravelSpeedSheetOptions extends FormApplicationOptions {
     actors: CharacterPF2e[];
 }
 
-class TravelSpeedSheet extends FormApplication<{}, TravelSpeedSheetOptions> {
+class TravelSpeedSheet extends FormApplication<object, TravelSpeedSheetOptions> {
     private formData?: TravelFormData = undefined;
 
     static override get defaultOptions(): FormApplicationOptions {
@@ -207,8 +207,8 @@ class TravelSpeedSheet extends FormApplication<{}, TravelSpeedSheetOptions> {
         });
     }
 
-    override getData() {
-        const sheetData = super.getData();
+    override async getData() {
+        const sheetData = await super.getData();
         let data: SheetData;
         if (this.formData === undefined) {
             data = this.getInitialFormData(this.options.actors);

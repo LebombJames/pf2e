@@ -4,6 +4,7 @@ import { iterateAllItems } from "@actor/helpers.ts";
 import { ItemPF2e, ItemProxyPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { processChoicesFromData } from "@module/rules/helpers.ts";
 import { Predicate } from "@system/predication.ts";
 import { Progress } from "@system/progress.ts";
 import {
@@ -11,6 +12,7 @@ import {
     PredicateField,
     StrictArrayField,
     StrictBooleanField,
+    StrictNumberField,
     StrictObjectField,
     StrictStringField,
 } from "@system/schema-data-fields.ts";
@@ -30,6 +32,7 @@ import {
     UninflatedChoiceSet,
 } from "./data.ts";
 import { ChoiceSetPrompt } from "./prompt.ts";
+import fields = foundry.data.fields;
 
 /**
  * Present a set of options to the user and assign their selection to an injectable property
@@ -72,11 +75,11 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
         }
 
         // If ignored, disable this and all other rule elements on the item until a selection is made
-        if (this.ignored) {
+        if (this.ignored && !this.allowNoSelection) {
             for (const ruleData of this.item.system.rules) {
                 ruleData.ignored = true;
             }
-        } else {
+        } else if (this.selection !== undefined) {
             this.#setRollOption(this.selection);
 
             // Assign the selection to a flag on the parent item so that it may be referenced by other rules elements on
@@ -89,8 +92,6 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
     }
 
     static override defineSchema(): ChoiceSetSchema {
-        const fields = foundry.data.fields;
-
         return {
             ...super.defineSchema(),
             choices: new DataUnionField(
@@ -115,6 +116,31 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
                     }),
                 ],
                 { required: true, nullable: false, initial: undefined },
+            ),
+            selection: new DataUnionField(
+                [
+                    new StrictStringField<string, string, true, false, false>({
+                        required: true,
+                        nullable: false,
+                        initial: undefined,
+                    }),
+                    new StrictNumberField<number, number, true, false, false>({
+                        required: true,
+                        nullable: false,
+                        initial: undefined,
+                    }),
+                    new StrictBooleanField<true, false, false>({
+                        required: true,
+                        nullable: false,
+                        initial: undefined,
+                    }),
+                    new StrictObjectField<object, object, true, false, false>({
+                        required: true,
+                        nullable: false,
+                        initial: undefined,
+                    }),
+                ],
+                { required: false, nullable: true, initial: undefined },
             ),
             prompt: new fields.StringField({
                 required: false,
@@ -163,6 +189,9 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
             }
             return;
         }
+
+        // If this choice set is on a suppressed item, skip
+        if (this.item.isOfType("feat") && this.item.suppressed) return;
 
         const rollOptions = new Set([this.actor.getRollOptions(), this.item.getRollOptions("parent")].flat());
         const predicate = this.resolveInjectedProperties(this.predicate);
@@ -239,13 +268,14 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
      * @returns The array of choices to present to the user
      */
     async inflateChoices(rollOptions: Set<string>, tempItems: ItemPF2e<ActorPF2e>[]): Promise<PickableThing[]> {
+        const validate = R.isNullish(this.selection); // Skip validation if a preselection is made
         const choices = await (async () => {
             if (Array.isArray(this.choices)) {
-                return this.#choicesFromArray(this.choices, rollOptions);
+                return this.#choicesFromArray(this.choices, rollOptions, validate);
             }
 
             if (typeof this.choices === "string" || (R.isObjectType(this.choices) && this.choices.config)) {
-                return this.#choicesFromPath(this.choices, rollOptions);
+                return this.#choicesFromPath(this.choices, rollOptions, validate);
             }
 
             return R.isObjectType(this.choices) // ChoiceSetAttackQuery or ChoiceSetItemQuery
@@ -303,48 +333,33 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
         }
     }
 
-    #choicesFromArray(choices: PickableThing[], actorRollOptions: Set<string>): PickableThing[] {
-        return choices.filter((c) =>
-            this.resolveInjectedProperties(new Predicate(c.predicate ?? [])).test(actorRollOptions),
-        );
+    #choicesFromArray(choices: PickableThing[], actorRollOptions: Set<string>, validate: boolean): PickableThing[] {
+        return validate
+            ? choices.filter((c) =>
+                  this.resolveInjectedProperties(new Predicate(c.predicate ?? [])).test(actorRollOptions),
+              )
+            : choices;
     }
 
-    #choicesFromPath(choices: string | ChoiceSetConfig, actorRollOptions: Set<string>): PickableThing<string>[] {
+    #choicesFromPath(
+        pathOrConfig: string | ChoiceSetConfig,
+        actorRollOptions: Set<string>,
+        validate: boolean,
+    ): PickableThing<string>[] {
         const data =
-            typeof choices === "string"
-                ? fu.getProperty(CONFIG.PF2E, choices) ?? fu.getProperty(this.actor, choices) ?? {}
-                : fu.getProperty(CONFIG.PF2E, choices.config) ?? {};
-        const predicate = typeof choices === "string" ? null : choices.predicate;
+            typeof pathOrConfig === "string"
+                ? (fu.getProperty(CONFIG.PF2E, pathOrConfig) ?? fu.getProperty(this.actor, pathOrConfig) ?? {})
+                : (fu.getProperty(CONFIG.PF2E, pathOrConfig.config) ?? {});
+        const choices = processChoicesFromData(data);
 
-        // If this is an array, optionally run predicates on all the entries
-        if (Array.isArray(data)) {
-            if (!data.every((c) => R.isPlainObject(c) && typeof c.value === "string")) {
-                return [];
-            }
-            return data.filter((choice) =>
-                this.resolveInjectedProperties(new Predicate(choice.predicate ?? predicate ?? []), {
-                    injectables: { choice },
-                }).test(actorRollOptions),
-            );
-        }
-
-        // If this is an object with all string values or all string labels, optionally run the top level filter predicate
-        if (R.isObjectType(data)) {
-            const entries = Object.entries(data);
-            if (!entries.every(([_, c]) => typeof (R.isPlainObject(c) ? c.label : c) === "string")) {
-                return [];
-            }
-
-            return entries
-                .filter(([key, choice]) => {
-                    return this.resolveInjectedProperties(new Predicate(predicate ?? []), {
-                        injectables: { choice: { ...choice, value: key } },
-                    }).test(actorRollOptions);
-                })
-                .map(([value, data]) => ({ value, label: typeof data === "string" ? data : data.label }));
-        }
-
-        return [];
+        const predicate = !validate || typeof pathOrConfig === "string" ? null : pathOrConfig.predicate;
+        return validate
+            ? choices.filter((choice) =>
+                  this.resolveInjectedProperties(new Predicate(choice.predicate ?? fu.deepClone(predicate ?? [])), {
+                      injectables: { choice },
+                  }).test(actorRollOptions),
+              )
+            : choices;
     }
 
     #choicesFromOwnedItems(
@@ -371,7 +386,7 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
                 ...this.actor.itemTypes.weapon
                     .filter(
                         (i) =>
-                            i.slug === "handwraps-of-mighty-blows" &&
+                            i.system.traits.otherTags.includes("handwraps-of-mighty-blows") &&
                             predicate.test([...actorRollOptions, ...i.getRollOptions("item")]),
                     )
                     .map((h) => ({ img: h.img, label: h.name, value: "unarmed" })),
@@ -449,14 +464,16 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
                         "system.ancestry",
                         "system.baseItem",
                         "system.category",
+                        "system.damage.damageType",
                         "system.group",
                         "system.level",
                         "system.maxTakable",
-                        "system.potencyRune",
                         "system.range",
+                        "system.runes",
                         "system.sanctification",
                         "system.slug",
                         "system.traits",
+                        "system.usage",
                     ],
                 }),
             );
@@ -478,7 +495,8 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
 
         // Exclude any feat of which the character already has its maximum number and return final list
         const existing: Map<string, number> = new Map();
-        for (const feat of this.actor.itemTypes.feat) {
+        const actor = this.actor;
+        for (const feat of actor.itemTypes.feat) {
             const slug = feat.slug ?? sluggify(feat.name);
             existing.set(slug, (existing.get(slug) ?? 0) + 1);
         }
@@ -488,9 +506,16 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
         }
 
         return filteredItems
-            .filter((i) => (i.isOfType("feat") ? (existing.get(i.slug ?? sluggify(i.name)) ?? 0) < i.maxTakable : true))
+            .filter((item) => {
+                const slug = item.slug ?? sluggify(item.name);
+                if (item.isOfType("feat")) return (existing.get(slug) ?? 0) < item.maxTakable;
+                if (item.isOfType("heritage")) {
+                    return !actor.itemTypes.heritage.some((h) => (h.slug ?? sluggify(h.name)) === slug);
+                }
+                return true;
+            })
             .map((f) => ({
-                value: choices.slugsAsValues ? f.slug ?? sluggify(f.name) : f.uuid,
+                value: choices.slugsAsValues ? (f.slug ?? sluggify(f.name)) : f.uuid,
                 label: f.name,
                 img: f.img,
             }));
@@ -511,7 +536,7 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
         // If the selection was a UUID, the roll option had its suffix appended at item creation
         const suffix = UUIDUtils.isItemUUID(selection) ? "" : `:${selection}`;
         this.actor.rollOptions.all[`${this.rollOption}${suffix}`] = true;
-        this.parent.rollOptions.add(`${this.rollOption}${suffix}`);
+        this.parent.specialOptions.push(`${this.rollOption}${suffix}`);
     }
 
     /**  Change the name of the parent item after a selection is made */

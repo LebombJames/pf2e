@@ -245,7 +245,7 @@ export function registerSettings(): void {
         name: "PF2E.SETTINGS.Homebrew.Name",
         label: "PF2E.SETTINGS.Homebrew.Label",
         hint: "PF2E.SETTINGS.Homebrew.Hint",
-        icon: "fa-solid fa-beer",
+        icon: "fa-solid fa-beer-mug-empty",
         type: HomebrewElements,
         restricted: true,
     });
@@ -274,15 +274,6 @@ export function registerSettings(): void {
                 : game.pf2e.settings.campaign.feats.sections;
             resetActors(game.actors.filter((a) => a.isOfType("character")));
         },
-    });
-
-    // This only exists to not break existing macros (yet). We'll keep it for a few versions
-    game.settings.register("pf2e", "RAI.TreatWoundsAltSkills", {
-        name: "Treat Wounds Macro Compat",
-        scope: "world",
-        config: false,
-        default: true,
-        type: Boolean,
     });
 
     // Increase brightness of darkness color for GMs

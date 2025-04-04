@@ -1,17 +1,18 @@
 import { ActorPF2e } from "@actor";
+import { ModifierPF2e } from "@actor/modifiers.ts";
 import { SAVE_TYPES } from "@actor/values.ts";
 import { ItemPF2e } from "@item";
-import { ActionTrait } from "@item/ability/types.ts";
+import { AbilityTrait } from "@item/ability/types.ts";
 import { EFFECT_AREA_SHAPES } from "@item/spell/values.ts";
 import { ChatMessageFlagsPF2e, ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { calculateDC } from "@module/dc.ts";
-import { eventToRollParams } from "@scripts/sheet-util.ts";
+import { eventToRollParams } from "@module/sheet/helpers.ts";
+import { resolveActorAndItemFromHTML, resolveSheetDocument } from "@scripts/helpers.ts";
 import { CheckDC } from "@system/degree-of-success.ts";
 import { Statistic, StatisticRollParameters } from "@system/statistic/index.ts";
 import { TextEditorPF2e } from "@system/text-editor.ts";
 import { ErrorPF2e, getActionGlyph, htmlClosest, htmlQueryAll, sluggify, splitListString, tupleHasValue } from "@util";
 import { getSelectedActors } from "@util/token-actor-utils.ts";
-import { UUIDUtils } from "@util/uuid.ts";
 import * as R from "remeda";
 
 const inlineSelector = ["action", "check", "effect-area"].map((keyword) => `[data-pf2-${keyword}]`).join(",");
@@ -90,7 +91,7 @@ export class InlineRollLinks {
     static #makeRepostHtml(target: HTMLElement, defaultVisibility: string): string {
         const flavor = game.i18n.localize(target.dataset.pf2RepostFlavor ?? "");
         const showDC = target.dataset.pf2ShowDc ?? defaultVisibility;
-        return `<span data-visibility="${showDC}">${flavor}</span> ${target.outerHTML}`.trim();
+        return (flavor ? `<span data-visibility="${showDC}">${flavor}</span> ` : "") + `${target.outerHTML}`.trim();
     }
 
     static #onClickInlineAction(event: MouseEvent, link: HTMLAnchorElement | HTMLSpanElement): void {
@@ -102,7 +103,7 @@ export class InlineRollLinks {
             ? { scope: "check", value: Number(pf2Dc) || 0, visibility }
             : pf2Dc;
         const maybeTraits = splitListString(pf2Traits ?? "");
-        const traits = maybeTraits.filter((trait): trait is ActionTrait => trait in CONFIG.PF2E.actionTraits);
+        const traits = maybeTraits.filter((trait): trait is AbilityTrait => trait in CONFIG.PF2E.actionTraits);
         const rollOptions = R.unique(
             [maybeTraits, traits.map((trait) => `item:trait:${trait}`), splitListString(pf2Options ?? "")].flat(),
         );
@@ -130,40 +131,38 @@ export class InlineRollLinks {
     }
 
     static async #onClickInlineCheck(event: MouseEvent, link: HTMLAnchorElement | HTMLSpanElement): Promise<void> {
-        const { pf2Check, pf2Dc, pf2Traits, pf2Label, pf2Defense, pf2Adjustment, pf2Roller, pf2RollOptions } =
-            link.dataset;
+        const { pf2Check, pf2Dc, pf2Traits, pf2Label, pf2Adjustment, pf2Roller, pf2RollOptions } = link.dataset;
+        const against = link.dataset.against || link.dataset.pf2Defense; // pf2Defense is only checked for backwards compat
         const overrideTraits = "overrideTraits" in link.dataset;
         const targetOwner = "targetOwner" in link.dataset;
 
         if (!pf2Check) return;
 
-        const foundryDoc = resolveDocument(link);
-        const parent = resolveActor(foundryDoc);
+        const { actor: parentActor, item: itemFromDoc, sheetActor } = resolveActorAndItemFromHTML(link);
         const actors = ((): ActorPF2e[] => {
             switch (pf2Roller) {
                 case "self":
-                    return parent?.canUserModify(game.user, "update") ? [parent] : [];
+                    return parentActor?.canUserModify(game.user, "update") ? [parentActor] : [];
                 case "party":
-                    if (parent?.isOfType("party")) return [parent];
+                    if (parentActor?.isOfType("party")) return [parentActor];
                     return [game.actors.party].filter(R.isTruthy);
             }
 
             // If this is inside a sheet, return the actor always
-            const actorFromSheet = resolveActor(resolveSheetDocument(link));
-            if (actorFromSheet && !actorFromSheet.isOfType("loot", "party") && actorFromSheet.isOwner) {
-                return [actorFromSheet];
+            if (sheetActor && !sheetActor.isOfType("loot", "party") && sheetActor.isOwner) {
+                return [sheetActor];
             }
 
-            // If the parent is a party actor, return it (likely kingmaker)
-            if (parent?.isOfType("party")) {
-                return [parent];
+            // If the rolling actor is a party actor, return it (likely kingmaker)
+            if (parentActor?.isOfType("party")) {
+                return [parentActor];
             }
 
             // Get selected actors, but fallback to parent if its not a save
             const rollingActors = getSelectedActors({ exclude: ["loot"], assignedFallback: true });
             const isSave = tupleHasValue(SAVE_TYPES, pf2Check);
-            if (rollingActors.length === 0 && parent && !isSave) {
-                return [parent];
+            if (rollingActors.length === 0 && parentActor && !isSave) {
+                return [parentActor];
             }
 
             return rollingActors;
@@ -175,7 +174,7 @@ export class InlineRollLinks {
         }
 
         const maybeTraits = splitListString(pf2Traits ?? "");
-        const additionalTraits = maybeTraits.filter((t): t is ActionTrait => t in CONFIG.PF2E.actionTraits);
+        const additionalTraits = maybeTraits.filter((t): t is AbilityTrait => t in CONFIG.PF2E.actionTraits);
 
         const extraRollOptions = R.unique(
             [maybeTraits, additionalTraits.map((t) => `item:trait:${t}`), splitListString(pf2RollOptions ?? "")].flat(),
@@ -203,7 +202,7 @@ export class InlineRollLinks {
         // Get actual traits for display in chat cards
         const abilityTraits = isSavingThrow
             ? []
-            : extraRollOptions.filter((t): t is ActionTrait => t in CONFIG.PF2E.actionTraits);
+            : extraRollOptions.filter((t): t is AbilityTrait => t in CONFIG.PF2E.actionTraits);
 
         // Pre-emptively grab statistics to visibly error if the statistic is missing from all of them
         const actorStatistics = actors.map((actor) => ({ actor, statistic: actor.getStatistic(pf2Check) }));
@@ -214,71 +213,84 @@ export class InlineRollLinks {
             return;
         }
 
-        for (const { actor, statistic } of actorStatistics) {
+        for (const { actor: rollingActor, statistic } of actorStatistics) {
             if (!statistic) {
-                console.warn(ErrorPF2e(`Skip rolling unknown statistic ${pf2Check} for actor ${actor.name}`).message);
+                console.warn(
+                    ErrorPF2e(`Skip rolling unknown statistic ${pf2Check} for actor ${rollingActor.name}`).message,
+                );
                 continue;
             }
 
-            const targetActor = pf2Defense ? (targetOwner ? parent : game.user.targets.first()?.actor) : null;
-
-            const dcValue = (() => {
-                const adjustment = Number(pf2Adjustment) || 0;
-                if (pf2Dc === "@self.level") {
-                    return calculateDC(actor.level) + adjustment;
-                }
-                return Number(pf2Dc ?? "NaN") + adjustment;
-            })();
-
-            const dc = ((): CheckDC | null => {
-                if (Number.isInteger(dcValue)) {
-                    return { label: pf2Label, value: dcValue };
-                } else if (pf2Defense) {
-                    const defenseStat = targetActor?.getStatistic(pf2Defense);
-                    return defenseStat
-                        ? {
-                              statistic: defenseStat.dc,
-                              scope: "check",
-                              value: defenseStat.dc.value,
-                          }
-                        : null;
-                }
-                return null;
-            })();
+            // Determine if this actor is the origin/target. Currently we only guess based on if its a save
+            const rollerRole = tupleHasValue(["origin", "target"], link.dataset.rollerRole)
+                ? link.dataset.rollerRole
+                : isSavingThrow
+                  ? "target"
+                  : "origin";
+            const opposingRole = rollerRole === "target" ? "origin" : "target";
+            const targetActor =
+                against && rollerRole === "target"
+                    ? rollingActor
+                    : targetOwner
+                      ? parentActor
+                      : (game.user.targets.first()?.actor ?? null);
+            const opposingActor = rollerRole === "target" ? parentActor : targetActor;
+            const originActor = rollerRole === "origin" ? rollingActor : parentActor;
 
             // Retrieve the item if:
             // (2) The item is an action or,
             // (1) The check is a saving throw and the item is not a weapon.
             // Exclude weapons so that roll notes on strikes from incapacitation abilities continue to work.
-            const item = (() => {
-                const itemFromDoc =
-                    foundryDoc instanceof ItemPF2e
-                        ? foundryDoc
-                        : foundryDoc instanceof ChatMessagePF2e
-                          ? foundryDoc.item
-                          : null;
-
-                return itemFromDoc?.isOfType("action", "feat", "campaignFeature") ||
-                    (isSavingThrow && !itemFromDoc?.isOfType("weapon"))
-                    ? itemFromDoc
+            const item =
+                itemFromDoc?.actor &&
+                (itemFromDoc.isOfType("action", "feat", "campaignFeature") ||
+                    (isSavingThrow && !itemFromDoc?.isOfType("weapon")))
+                    ? (itemFromDoc as ItemPF2e<ActorPF2e>)
                     : null;
+
+            const dc = ((): CheckDC | null => {
+                const dcValue = pf2Dc === "@self.level" ? calculateDC(rollingActor.level) : Number(pf2Dc ?? "NaN");
+                const adjustment = Number(pf2Adjustment) || 0;
+
+                if (Number.isInteger(dcValue)) {
+                    return { label: pf2Label, value: dcValue + adjustment };
+                } else if (against) {
+                    const defenseStat = opposingActor?.getStatistic(against)?.clone({
+                        modifiers: adjustment
+                            ? [new ModifierPF2e({ label: "PF2E.InlineCheck.DCAdjustment", modifier: adjustment })]
+                            : [],
+                        rollOptions: [
+                            item?.isOfType("action", "feat") ? `${opposingRole}:action:slug:${item.slug}` : null,
+                        ].filter(R.isTruthy),
+                    });
+                    if (defenseStat) {
+                        return {
+                            label:
+                                defenseStat.dc.label ??
+                                game.i18n.format("PF2E.InlineCheck.DCWithName", { name: defenseStat.label }),
+                            statistic: defenseStat.dc,
+                            scope: "check",
+                            value: defenseStat.dc.value,
+                        };
+                    }
+                }
+
+                return null;
             })();
 
             const args: StatisticRollParameters = {
                 ...eventRollParams,
                 extraRollOptions,
-                origin: isSavingThrow && parent instanceof ActorPF2e ? parent : null,
+                origin: originActor,
                 dc,
-                target: !isSavingThrow && dc?.statistic ? targetActor : null,
+                target: dc?.statistic ? targetActor : null,
                 item,
                 traits: abilityTraits,
             };
 
             // Use a special header for checks against defenses
             const itemIsEncounterAction =
-                !overrideTraits &&
-                !!(item?.isOfType("action", "feat") && item.actionCost) &&
-                !["flat-check", "saving-throw"].includes(statistic.check.type);
+                !overrideTraits && rollerRole === "origin" && !!(item?.isOfType("action", "feat") && item.actionCost);
             if (itemIsEncounterAction) {
                 const subtitleLocKey =
                     pf2Check in CONFIG.PF2E.magicTraditions
@@ -318,7 +330,7 @@ export class InlineRollLinks {
             return;
         }
 
-        const foundryDoc = resolveDocument(link);
+        const { actor, item, message } = resolveActorAndItemFromHTML(link);
         const data: DeepPartial<foundry.documents.MeasuredTemplateSource> = JSON.parse(pf2TemplateData ?? "{}");
         data.distance ||= Number(pf2Distance);
         data.fillColor ||= game.user.color;
@@ -349,16 +361,10 @@ export class InlineRollLinks {
             flags.pf2e.areaShape = pf2EffectArea;
         }
 
-        const messageId =
-            foundryDoc instanceof ChatMessagePF2e
-                ? foundryDoc.id
-                : htmlClosest(link, "[data-message-id]")?.dataset.messageId ?? null;
-        if (messageId) {
-            flags.pf2e.messageId = messageId;
+        if (message) {
+            flags.pf2e.messageId = message.id;
         }
 
-        const actor = resolveActor(foundryDoc);
-        const item = foundryDoc instanceof ItemPF2e ? foundryDoc : null;
         if (item) {
             const origin = item.getOriginData();
             flags.pf2e.origin = origin;
@@ -381,9 +387,8 @@ export class InlineRollLinks {
             return;
         }
 
-        const foundryDoc = resolveDocument(target);
-        const actor = resolveActor(foundryDoc);
-        const defaultVisibility = (actor ?? foundryDoc)?.hasPlayerOwner ? "all" : "gm";
+        const { actor, appDocument } = resolveActorAndItemFromHTML(target);
+        const defaultVisibility = (actor ?? appDocument)?.hasPlayerOwner ? "all" : "gm";
         const content = (() => {
             if (target.parentElement?.dataset?.pf2Checkgroup !== undefined) {
                 const content = htmlQueryAll(target.parentElement, inlineSelector)
@@ -404,8 +409,8 @@ export class InlineRollLinks {
         // the origin flag.
         const message = game.messages.get(htmlClosest(target, "[data-message-id]")?.dataset.messageId ?? "");
         const flags: DeepPartial<ChatMessageFlagsPF2e> =
-            foundryDoc instanceof JournalEntry
-                ? { pf2e: { journalEntry: foundryDoc.uuid } }
+            appDocument instanceof JournalEntry
+                ? { pf2e: { journalEntry: appDocument.uuid } }
                 : message?.flags.pf2e.origin
                   ? { pf2e: { origin: fu.deepClone(message.flags.pf2e.origin) } }
                   : {};
@@ -415,39 +420,13 @@ export class InlineRollLinks {
 
     /** Give inline damage-roll links from items flavor text of the item name */
     static flavorDamageRolls(html: HTMLElement, document: ClientDocument | null = null): void {
-        const actor = resolveActor(document ?? resolveDocument(html));
+        const actor = resolveActor(document ?? resolveActorAndItemFromHTML(html).actor);
         for (const rollLink of htmlQueryAll(html, "a.inline-roll[data-damage-roll]")) {
             const itemId = htmlClosest(rollLink, "[data-item-id]")?.dataset.itemId;
             const item = actor?.items.get(itemId ?? "");
             if (item) rollLink.dataset.flavor ||= item.name;
         }
     }
-}
-
-function resolveSheetDocument(html: HTMLElement): ClientDocument | null {
-    const sheet: { id?: string; document?: unknown } | null =
-        ui.windows[Number(html.closest<HTMLElement>(".app.sheet")?.dataset.appid)] ?? null;
-    const doc = sheet?.document;
-    return doc && (doc instanceof ActorPF2e || doc instanceof ItemPF2e || doc instanceof JournalEntry) ? doc : null;
-}
-
-/** Attempt to derive the related document via the sheet or chat message, handling any item summaries */
-function resolveDocument(html: HTMLElement): ClientDocument | null {
-    // If an item UUID is provided, utilize it
-    if (UUIDUtils.isItemUUID(html.dataset.itemUuid)) {
-        const document = fromUuidSync(html.dataset.itemUuid);
-        if (document instanceof foundry.abstract.Document) return document;
-    }
-
-    // Attempt to figure out the document from the sheet. This might be an item description or actor notes.
-    const sheetDocument = resolveSheetDocument(html);
-    if (sheetDocument) {
-        return sheetDocument;
-    }
-
-    // Return the chat message if there is one
-    const messageId = htmlClosest(html, "[data-message-id]")?.dataset.messageId;
-    return messageId ? game.messages.get(messageId) ?? null : null;
 }
 
 /** Retrieve an actor via a passed document. Handles item owners and chat message actors. */

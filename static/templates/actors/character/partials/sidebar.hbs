@@ -83,7 +83,7 @@
             </div>
         </li>
         <li class="resolve">
-            <label for="{{options.id}}-pc-resolve" class="sidebar_label">{{localize "PF2E.ResolvePointsShortLabel"}}</label>
+            <label for="{{options.id}}-pc-resolve" class="sidebar_label">{{localize "PF2E.Actor.Resource.Resolve"}}</label>
             <div class="hp-max stamina-group">
                 <input
                     id="{{options.id}}-pc-resolve"
@@ -183,10 +183,10 @@
         <div class="status">
             {{#if data.attributes.shield.destroyed}}
                 <span class="sidebar_label">{{localize "PF2E.Item.Physical.Destroyed"}}</span>
-                <i class="fa-regular fa-times-circle"></i>
+                <i class="fa-regular fa-circle-xmark"></i>
             {{else}}
                 <span class="sidebar_label">{{localize "PF2E.Item.Physical.Broken"}}</span>
-                {{#if data.attributes.shield.broken}}<i class="fa-regular fa-times-circle"></i>{{else}}<i class="fa-regular fa-circle"></i>{{/if}}
+                {{#if data.attributes.shield.broken}}<i class="fa-regular fa-circle-xmark"></i>{{else}}<i class="fa-regular fa-circle"></i>{{/if}}
             {{/if}}
         </div>
     </div>
@@ -194,6 +194,21 @@
 {{#with data.attributes.ac}}
     {{> "systems/pf2e/templates/actors/partials/modifiers-tooltip.hbs" title="PF2E.ArmorClassLabel"}}
 {{/with}}
+
+{{#if specialResources}}
+    <header>
+        <h2>{{localize "PF2E.Actor.Resources"}}</h2>
+    </header>
+    <ol>
+        {{#each specialResources as |resource|}}
+            <li class="special-resource">
+                <span class="label">{{resource.label}}</span>
+                <input type="text" data-resource="{{resource.slug}}" value="{{resource.value}}" />
+                / {{resource.max}}
+            </li>
+        {{/each}}
+    </ol>
+{{/if}}
 
 {{!-- Perception --}}
 <header>
@@ -279,7 +294,7 @@
     <h2>{{localize "PF2E.ImmunitiesLabel"}}</h2>
     {{#if editable}}
         <button type="button" data-action="edit-immunities">
-            <i class="fa-solid fa-edit"></i> {{localize "PF2E.Edit"}}
+            <i class="fa-solid fa-pen-to-square"></i> {{localize "PF2E.Edit"}}
         </a>
     {{/if}}
 </header>
@@ -294,7 +309,7 @@
     <h2>{{localize "PF2E.WeaknessesLabel"}}</h2>
     {{#if editable}}
         <button type="button" data-action="edit-weaknesses">
-            <i class="fa-solid fa-edit"></i> {{localize "PF2E.Edit"}}
+            <i class="fa-solid fa-pen-to-square"></i> {{localize "PF2E.Edit"}}
         </button>
     {{/if}}
 </header>
@@ -309,7 +324,7 @@
     <h2>{{localize "PF2E.ResistancesLabel"}}</h2>
     {{#if editable}}
         <button type="button" data-action="edit-resistances">
-            <i class="fa-solid fa-edit"></i> {{localize "PF2E.Edit"}}
+            <i class="fa-solid fa-pen-to-square"></i> {{localize "PF2E.Edit"}}
         </button>
     {{/if}}
 </header>

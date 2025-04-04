@@ -43,10 +43,8 @@
         },
         {
             "_id": "it8V6trXRaEs8bg1",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.spells-srd.Item.vLA0q0WOK2YPuJs6"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.spells-srd.Item.vLA0q0WOK2YPuJs6"
             },
             "img": "systems/pf2e/icons/spells/charm.webp",
             "name": "Charm (At Will)",
@@ -159,7 +157,9 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -202,7 +202,8 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "agile"
+                        "agile",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -213,10 +214,8 @@
         },
         {
             "_id": "MYOFzFbpGCWFCD85",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.g26YiEIfSHCpLocV"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.g26YiEIfSHCpLocV"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Constrict",
@@ -230,7 +229,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>@Damage[(1d10+9)[piercing]], @Check[type:fortitude|dc:26|basic:true] (@UUID[Compendium.pf2e.conditionitems.Item.Grabbed] by jaws only)</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                    "value": "<p>@Damage[(1d10+9)[piercing]], @Check[fortitude|dc:26|basic] (@UUID[Compendium.pf2e.conditionitems.Item.Grabbed] by jaws only)</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -320,7 +319,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>A creature @UUID[Compendium.pf2e.conditionitems.Item.Grabbed] in the kishi's jaws can barely speak; a creature must succeed at a @Check[type:flat|dc:8] check to provide verbal components for spells, doing so in a choked whisper.</p>"
+                    "value": "<p>A creature @UUID[Compendium.pf2e.conditionitems.Item.Grabbed] in the kishi's jaws can barely speak; a creature must succeed at a @Check[flat|dc:8] check to provide verbal components for spells, doing so in a choked whisper.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -338,10 +337,8 @@
         },
         {
             "_id": "2nEKM6ZrGJImSDZh",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Grab",

@@ -36,6 +36,7 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
+                        "unarmed",
                         "unholy"
                     ]
                 },
@@ -47,10 +48,8 @@
         },
         {
             "_id": "TF4ZUPn2jeFMb9Fz",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.fJSNOw4zHGbIm4bZ"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.fJSNOw4zHGbIm4bZ"
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Fast Healing 5",

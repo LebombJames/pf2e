@@ -98,7 +98,7 @@
             ],
             "stealth": {
                 "details": "<p>(expert)</p>",
-                "value": 6
+                "value": 16
             },
             "weaknesses": [
                 {
@@ -111,7 +111,7 @@
         "creatureType": "",
         "details": {
             "description": "<p>Several clockwork humanoid figures armed with spinning blades move throughout the area.</p>",
-            "disable": "<p>@Check[type:thievery|dc:25|traits:action:disable-a-device] (expert) to deactivate the clockworks from the control panel. Two successes are needed to deactivate the trap.</p>",
+            "disable": "<p>@Check[thievery|dc:25|traits:action:disable-a-device] (expert) to deactivate the clockworks from the control panel. Two successes are needed to deactivate the trap.</p>",
             "isComplex": true,
             "level": {
                 "value": 7

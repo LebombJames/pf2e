@@ -16,7 +16,7 @@
                 },
                 "category": null,
                 "description": {
-                    "value": "<p><strong>Trigger</strong> Anyone Travels or Reconnoiters this hex</p>\n<hr />\n<p><strong>Effect</strong> If the characters are Traveling, one of them (determined randomly) steps in a trap. If the characters are Reconnoitering, [[/br 1d4]] of them (determined randomly) step in a trap. When a creature steps in a trap, the trap makes a bear trap Strike against the creature.</p>"
+                    "value": "<p><strong>Trigger</strong> Anyone Travels or Reconnoiters this hex</p>\n<hr />\n<p><strong>Effect</strong> If the characters are Traveling, one of them (determined randomly) steps in a trap. If the characters are Reconnoitering, [[/gmr 1d4]] of them (determined randomly) step in a trap. When a creature steps in a trap, the trap makes a bear trap Strike against the creature.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -96,7 +96,7 @@
         "creatureType": "",
         "details": {
             "description": "<p>Several dozen spike snares are littered across this hex.</p>\n<hr />\n<p><strong>Treasure:</strong> Each time a PC triggers a trap, the trap is destroyed. If all the traps are disabled, materials to craft six spike snares can be salvaged.</p>",
-            "disable": "<p>@Check[type:survival|dc:17] (made as an individual hexploration activity) to locate and disarm all the traps by hand.</p>",
+            "disable": "<p>@Check[survival|dc:17] (made as an individual hexploration activity) to locate and disarm all the traps by hand.</p>",
             "isComplex": false,
             "level": {
                 "value": 3

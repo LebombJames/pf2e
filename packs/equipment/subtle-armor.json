@@ -1,6 +1,6 @@
 {
     "_id": "j42OKMXPsp6Mg7nY",
-    "img": "systems/pf2e/icons/default-icons/equipment.svg",
+    "img": "icons/equipment/chest/shirt-collared-yellow.webp",
     "name": "Subtle Armor",
     "system": {
         "baseItem": null,
@@ -31,7 +31,7 @@
         "publication": {
             "license": "OGL",
             "remaster": false,
-            "title": "Pathfinder Lost Omens: Firebrands"
+            "title": "Pathfinder Lost Omens Firebrands"
         },
         "quantity": 1,
         "rules": [],

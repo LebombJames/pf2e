@@ -12,7 +12,8 @@ import { Grouping } from "@system/damage/terms.ts";
 import { PERSISTENT_DAMAGE_IMAGES } from "@system/damage/values.ts";
 import { DegreeOfSuccess } from "@system/degree-of-success.ts";
 import { Statistic } from "@system/statistic/index.ts";
-import { ErrorPF2e, createHTMLElement, traitSlugToObject } from "@util";
+import { ErrorPF2e, createHTMLElement } from "@util";
+import { traitSlugToObject } from "@util/tags.ts";
 import * as R from "remeda";
 import { ConditionSource, ConditionSystemData, PersistentDamageData } from "./data.ts";
 import { ConditionKey, ConditionSlug } from "./types.ts";
@@ -76,16 +77,20 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
 
     /** Create a textual breakdown of what applied this condition */
     get breakdown(): string | null {
-        if (!this.active) return null;
+        const actor = this.actor;
+        if (!this.active || !actor) return null;
 
-        const granters = R.unique(
-            (
-                this.actor?.conditions.bySlug(this.slug).map((condition) => {
-                    const { appliedBy } = condition;
-                    return !appliedBy?.isOfType("condition") || appliedBy?.active ? appliedBy : null;
-                }) ?? []
-            ).filter(R.isTruthy),
-        );
+        const granters = !this.appliedBy
+            ? []
+            : R.unique(
+                  actor.conditions
+                      .bySlug(this.slug)
+                      .map((condition) => {
+                          const appliedBy = condition.appliedBy;
+                          return !appliedBy?.isOfType("condition") || appliedBy?.active ? appliedBy : null;
+                      })
+                      .filter(R.isNonNull),
+              );
 
         const list = granters
             .map((p) => reduceItemName(p.name))
@@ -104,7 +109,7 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
     }
 
     /** Include damage type and possibly category for persistent-damage conditions */
-    override getRollOptions(prefix: string, options?: { includeGranter?: boolean }): string[] {
+    override getRollOptions(prefix = this.type, options?: { includeGranter?: boolean }): string[] {
         const rollOptions = super.getRollOptions(prefix, options);
         if (this.system.persistent) {
             const { damageType } = this.system.persistent;
@@ -188,7 +193,7 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
         });
 
         // Append numeric badge value to condition name, set item image according to configured style
-        if (typeof this.badge?.value === "number") {
+        if (this.isEmbedded && typeof this.badge?.value === "number") {
             this.name = `${this.name} ${this.badge.value}`;
         }
         const folder = CONFIG.PF2E.statusEffects.iconDir;
@@ -231,31 +236,38 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
         const deactivate = (condition: ConditionPF2e<ActorPF2e>): void => {
             condition.active = false;
             condition.system.references.overriddenBy.push({ id: this.id, type: "condition" as const });
+            // This is only needed if a late-arriving (typically in-memory) condition needs to deactivate
+            // already-processed condition in the actor's items collection
+            for (const rule of condition.rules) {
+                rule.ignored = true;
+            }
         };
 
         const conditions = this.actor.conditions.active;
 
-        // Deactivate conditions naturally overridden by this one
-        if (this.system.overrides.length > 0) {
-            const overridden = conditions.filter((c) => this.system.overrides.includes(c.key));
-            for (const condition of overridden) {
-                deactivate(condition);
+        const ofSameType = conditions.filter((c) => c !== this && c.key === this.key);
+        for (const other of ofSameType) {
+            const otherIsGTE = other.value === this.value || (other.value && this.value && other.value >= this.value);
+            if (other.slug === "persistent-damage") {
+                const thisValue = this.system.persistent?.expectedValue ?? 0;
+                const otherValue = other.system.persistent?.expectedValue ?? 0;
+                if (thisValue >= otherValue) deactivate(other);
+            } else if (otherIsGTE && this.inMemoryOnly) {
+                // Defer to other, gte condition if this one is in-memory-only
+                return deactivate(this);
+            } else if (this.value === other.value && (!this.isLocked || other.isLocked)) {
+                // Deactivate other, equal-valued conditions if this condition isn't locked or both are locked
+                deactivate(other);
+            } else if (!otherIsGTE) {
+                // Deactivate other conditions of lower values
+                deactivate(other);
             }
         }
 
-        const ofSameType = conditions.filter((c) => c !== this && c.key === this.key);
-        for (const condition of ofSameType) {
-            if (condition.slug === "persistent-damage") {
-                const thisValue = this.system.persistent?.expectedValue ?? 0;
-                const otherValue = condition.system.persistent?.expectedValue ?? 0;
-                if (thisValue >= otherValue) {
-                    deactivate(condition);
-                }
-            } else if (this.value === condition.value && (!this.isLocked || condition.isLocked)) {
-                // Deactivate other equal valued conditions if this condition isn't locked or both are locked
-                deactivate(condition);
-            } else if (this.value && condition.value && this.value > condition.value) {
-                // Deactivate other conditions with a lower or equal value
+        // Deactivate conditions naturally overridden by this one
+        if (this.system.overrides.length > 0) {
+            const overridden = conditions.filter((c) => c.active && this.system.overrides.includes(c.key));
+            for (const condition of overridden) {
                 deactivate(condition);
             }
         }

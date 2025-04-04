@@ -82,7 +82,8 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "reach-10"
+                        "reach-10",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -139,10 +140,8 @@
         },
         {
             "_id": "GoUIra7KXFd9kUhH",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3"
             },
             "img": "systems/pf2e/icons/actions/ThreeActions.webp",
             "name": "Trample",
@@ -156,7 +155,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Large or smaller, foot, @Check[type:reflex|dc:25|basic:true]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                    "value": "<p>Large or smaller, foot, @Check[reflex|dc:25|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
                 },
                 "publication": {
                     "license": "ORC",

@@ -40,7 +40,8 @@
                     "rarity": "common",
                     "value": [
                         "agile",
-                        "reach-10"
+                        "reach-10",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -82,7 +83,9 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -212,10 +215,8 @@
         },
         {
             "_id": "2rc7rftQQ1MLECXG",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.uJSseLa57HZYSMUu"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Swallow Whole",
@@ -249,10 +250,8 @@
         },
         {
             "_id": "NWWUgiN78Gu0F9Wh",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.Tkd8sH4pwFIPzqTr"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Grab",
@@ -340,7 +339,7 @@
             "publication": {
                 "license": "OGL",
                 "remaster": false,
-                "title": "Pathfinder Lost Omens: The Mwangi Expanse"
+                "title": "Pathfinder Lost Omens The Mwangi Expanse"
             }
         },
         "initiative": {

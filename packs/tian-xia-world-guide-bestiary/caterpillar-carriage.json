@@ -37,7 +37,8 @@
                 "slug": null,
                 "traits": {
                     "value": [
-                        "reach-15"
+                        "reach-15",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -90,10 +91,8 @@
         },
         {
             "_id": "FWHQqKF02AdeRIo3",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.j2wsK6IsW5yMW1jW"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.j2wsK6IsW5yMW1jW"
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Tremorsense (Imprecise) 100 feet",
@@ -125,10 +124,8 @@
         },
         {
             "_id": "b4NfyiednnjYVppk",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.qCCLZhnp2HhP3Ex6"
             },
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Darkvision",
@@ -189,10 +186,8 @@
         },
         {
             "_id": "QWpmg2UYabAAfgBg",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.g26YiEIfSHCpLocV"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.g26YiEIfSHCpLocV"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Constrict",
@@ -206,7 +201,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>@Damage[(4d10+4)[bludgeoning]], @Check[type:fortitude|dc:40|basic:true]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
+                    "value": "<p>@Damage[(4d10+4)[bludgeoning]], @Check[fortitude|dc:40|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Constrict]</p>"
                 },
                 "publication": {
                     "license": "ORC",
@@ -282,10 +277,8 @@
         },
         {
             "_id": "UWBmMSInR02kn2xE",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.UNah0bxXxkcZjxO3"
             },
             "img": "systems/pf2e/icons/actions/ThreeActions.webp",
             "name": "Trample",
@@ -299,7 +292,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Huge or Smaller, Wheel, @Check[type:reflex|dc:40|basic:true]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+                    "value": "<p>Huge or Smaller, Wheel, @Check[reflex|dc:40|basic]</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
                 },
                 "publication": {
                     "license": "ORC",
@@ -317,10 +310,8 @@
         },
         {
             "_id": "QWv5Vv7zD5qTJFxR",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.i18TlebMzwONyPhI"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.i18TlebMzwONyPhI"
             },
             "img": "systems/pf2e/icons/actions/FreeAction.webp",
             "name": "Improved Grab",
@@ -441,16 +432,25 @@
             "publication": {
                 "license": "ORC",
                 "remaster": true,
-                "title": "Pathfinder Lost Omens: Tian Xia World Guide"
+                "title": "Pathfinder Lost Omens Tian Xia World Guide"
             }
         },
         "initiative": {
             "statistic": "perception"
         },
         "perception": {
-            "details": "darkvision, tremorsense (imprecise) 100 feet",
+            "details": "",
             "mod": 30,
-            "senses": []
+            "senses": [
+                {
+                    "type": "darkvision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 100,
+                    "type": "tremorsense"
+                }
+            ]
         },
         "resources": {},
         "saves": {

@@ -20,9 +20,9 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder Core Rulebook"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Guns & Gears"
         },
         "rules": [],
         "subfeatures": {
@@ -40,7 +40,9 @@
         },
         "traits": {
             "rarity": "common",
-            "value": []
+            "value": [
+                "inventor"
+            ]
         }
     },
     "type": "feat"

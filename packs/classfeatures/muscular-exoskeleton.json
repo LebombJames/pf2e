@@ -1,6 +1,6 @@
 {
     "_id": "OkxoJWrOXhM25mhi",
-    "img": "systems/pf2e/icons/features/classes/muscular-exoskeleton.webp",
+    "img": "icons/commodities/tech/metal-pistons.webp",
     "name": "Muscular Exoskeleton",
     "system": {
         "actionType": {
@@ -20,8 +20,8 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
+            "license": "ORC",
+            "remaster": true,
             "title": "Pathfinder Guns & Gears"
         },
         "rules": [

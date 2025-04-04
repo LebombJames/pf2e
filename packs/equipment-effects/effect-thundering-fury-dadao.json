@@ -4,7 +4,7 @@
     "name": "Effect: Thundering Fury Dadao",
     "system": {
         "description": {
-            "value": "<p>The <em>thundering fury dadao</em> gains the agile and forceful traits.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.equipment-srd.Item.Thundering Fury Dadao]</p>\n<p>The <em>thundering fury dadao</em> gains the agile and forceful traits.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -22,21 +22,23 @@
         },
         "rules": [
             {
-                "definition": [
+                "itemType": "weapon",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "predicate": [
                     "item:slug:thundering-fury-dadao"
                 ],
-                "key": "AdjustStrike",
-                "mode": "add",
-                "property": "weapon-traits",
+                "property": "traits",
                 "value": "agile"
             },
             {
-                "definition": [
+                "itemType": "weapon",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "predicate": [
                     "item:slug:thundering-fury-dadao"
                 ],
-                "key": "AdjustStrike",
-                "mode": "add",
-                "property": "weapon-traits",
+                "property": "traits",
                 "value": "forceful"
             }
         ],

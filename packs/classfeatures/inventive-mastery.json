@@ -20,14 +20,15 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
+            "license": "ORC",
+            "remaster": true,
             "title": "Pathfinder Guns & Gears"
         },
         "rules": [],
         "subfeatures": {
             "proficiencies": {
                 "inventor": {
+                    "attribute": null,
                     "rank": 3
                 }
             }

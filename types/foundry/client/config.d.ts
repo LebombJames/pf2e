@@ -6,6 +6,7 @@ import type {
     PointSoundSource,
     PointVisionSource,
 } from "../client-esm/canvas/sources/module.ts";
+import type { TokenRingConfig } from "../client-esm/canvas/tokens/module.ts";
 import type * as terms from "../client-esm/dice/terms/module.d.ts";
 import abstract = foundry.abstract;
 import data = foundry.data;
@@ -49,6 +50,11 @@ declare global {
             time: boolean;
         };
 
+        time: {
+            roundTime: number;
+            turnTime: number;
+        };
+
         compendium: {
             /**
              * Configure a table of compendium UUID redirects. Must be configured before the game *ready* hook is fired.
@@ -78,6 +84,13 @@ declare global {
                 ): TActor;
             };
             collection: ConstructorOf<Actors<Actor<null>>>;
+            compendiumIndexFields: string[];
+            compendiumBanner: ImageFilePath;
+            sidebarIcon: string;
+            dataModels: Record<string, ConstructorOf<abstract.TypeDataModel<Actor, data.fields.DataSchema>>>;
+            typeLabels: Record<string, string | undefined>;
+            typeIcons: Record<string, string>;
+            trackableAttributes: object;
             sheetClasses: Record<
                 string,
                 Record<
@@ -92,8 +105,6 @@ declare global {
                     }
                 >
             >;
-            typeIcons: Record<string, string>;
-            typeLabels: Record<string, string | undefined>;
         };
 
         /** Configuration for the Cards primary Document type */
@@ -269,7 +280,7 @@ declare global {
                 string,
                 ConstructorOf<abstract.TypeDataModel<abstract.Document, data.fields.DataSchema>>
             >;
-            typeLabels: {};
+            typeLabels: Record<string, string>;
             typeIcons: Record<string, string>;
             defaultType: string;
             sidebarIcon: string;
@@ -316,6 +327,7 @@ declare global {
             documentClass: ConstructorOf<TTokenDocument>;
             objectClass: ConstructorOf<NonNullable<TTokenDocument["object"]>>;
             prototypeSheetClass: ConstructorOf<TTokenDocument["sheet"]>;
+            ring: TokenRingConfig;
         };
 
         /** Configuration for the Wall embedded document type and its representation on the game Canvas */
@@ -672,7 +684,7 @@ declare global {
                 f: typeof terms.FateDie;
                 [key: string]: ConstructorOf<terms.DiceTerm>;
             };
-            randomUniform: Function;
+            randomUniform: () => number;
         };
 
         /** The control icons used for rendering common HUD operations */

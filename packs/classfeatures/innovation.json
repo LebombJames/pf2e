@@ -1,6 +1,6 @@
 {
     "_id": "jIAgXe2FetAKBwt7",
-    "img": "systems/pf2e/icons/features/classes/innovation.webp",
+    "img": "icons/commodities/tech/bulb.webp",
     "name": "Innovation",
     "system": {
         "actionType": {
@@ -20,8 +20,8 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
+            "license": "ORC",
+            "remaster": true,
             "title": "Pathfinder Guns & Gears"
         },
         "rules": [
@@ -29,7 +29,25 @@
                 "adjustName": false,
                 "choices": {
                     "filter": [
-                        "item:tag:inventor-innovation"
+                        "item:tag:inventor-innovation",
+                        {
+                            "or": [
+                                {
+                                    "and": [
+                                        "class:inventor",
+                                        "item:tag:inventor-innovation"
+                                    ]
+                                },
+                                {
+                                    "and": [
+                                        "item:tag:inventor-innovation",
+                                        {
+                                            "not": "item:tag:class-archetype"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 },
                 "flag": "innovation",

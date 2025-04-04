@@ -36,7 +36,8 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "agile"
+                        "agile",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -78,7 +79,9 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -119,7 +122,9 @@
                 "slug": "jaws",
                 "traits": {
                     "rarity": "common",
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -262,10 +267,8 @@
         },
         {
             "_id": "LcZLS93hTrGELAY4",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP"
             },
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Trip",

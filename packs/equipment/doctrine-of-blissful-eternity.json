@@ -1,6 +1,6 @@
 {
     "_id": "OVyGHaHjYI2DBV0h",
-    "img": "systems/pf2e/icons/default-icons/equipment.svg",
+    "img": "icons/sundries/books/book-purple-detail.webp",
     "name": "Doctrine of Blissful Eternity",
     "system": {
         "baseItem": null,
@@ -31,7 +31,7 @@
         "publication": {
             "license": "OGL",
             "remaster": false,
-            "title": "Pathfinder Lost Omens: Impossible Lands"
+            "title": "Pathfinder Lost Omens Impossible Lands"
         },
         "quantity": 1,
         "rules": [],

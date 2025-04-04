@@ -57,10 +57,13 @@
         ],
         "traits": {
             "otherTags": [
+                "witch-elementalist-patron",
                 "witch-patron"
             ],
             "rarity": "common",
-            "value": []
+            "value": [
+                "witch"
+            ]
         }
     },
     "type": "feat"

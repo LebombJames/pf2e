@@ -57,21 +57,24 @@
                 "key": "FlatModifier",
                 "predicate": [
                     "self:action:slug:elemental-blast",
-                    "melee"
+                    "item:melee"
                 ],
                 "selector": "elemental-blast-damage",
                 "slug": "melee-elemental-blast",
                 "type": "ability"
             },
             {
-                "key": "DamageDice",
-                "override": {
-                    "diceNumber": "max(1 + floor((@actor.level - 1) / 4), 1)"
-                },
+                "key": "DamageAlteration",
+                "mode": "override",
                 "predicate": [
                     "class:kineticist"
                 ],
-                "selector": "elemental-blast-damage"
+                "property": "dice-number",
+                "selectors": [
+                    "elemental-blast-damage"
+                ],
+                "slug": "base",
+                "value": "max(1 + floor((@actor.level - 1) / 4), 1)"
             }
         ],
         "traits": {

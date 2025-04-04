@@ -26,22 +26,23 @@
         },
         "rules": [
             {
-                "key": "Note",
-                "outcome": [
-                    "failure",
-                    "criticalFailure"
-                ],
-                "selector": "will",
-                "text": "PF2E.SpecificRule.SaveCriticalFailureToFailure.FailureHalfDamage.Will",
-                "title": "{item|name}"
-            },
-            {
                 "adjustment": {
                     "criticalFailure": "one-degree-better"
                 },
                 "key": "AdjustDegreeOfSuccess",
+                "selector": "will"
+            },
+            {
+                "key": "Note",
+                "outcome": [
+                    "failure"
+                ],
+                "predicate": [
+                    "damaging-effect"
+                ],
                 "selector": "will",
-                "type": "save"
+                "text": "PF2E.SpecificRule.SaveCriticalFailureToFailure.FailureHalfDamage.Will",
+                "title": "{item|name}"
             }
         ],
         "subfeatures": {
@@ -53,7 +54,9 @@
         },
         "traits": {
             "rarity": "common",
-            "value": []
+            "value": [
+                "bard"
+            ]
         }
     },
     "type": "feat"

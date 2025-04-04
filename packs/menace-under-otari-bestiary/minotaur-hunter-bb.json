@@ -1,13 +1,11 @@
 {
-    "_id": "wCmlY4TixUlPm5Qx",
+    "_id": "vN2alMciNlKpBpKN",
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
             "_id": "6BFWEsQhdXfrdnwm",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.equipment-srd.Item.8COlYvHe6hKCXY8x"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.equipment-srd.Item.8COlYvHe6hKCXY8x"
             },
             "img": "icons/weapons/axes/axe-double-engraved.webp",
             "name": "Greataxe",
@@ -164,7 +162,9 @@
                 "rules": [],
                 "slug": null,
                 "traits": {
-                    "value": []
+                    "value": [
+                        "unarmed"
+                    ]
                 },
                 "weaponType": {
                     "value": "melee"
@@ -348,9 +348,13 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "darkvision",
+            "details": "",
             "mod": 12,
-            "senses": []
+            "senses": [
+                {
+                    "type": "darkvision"
+                }
+            ]
         },
         "resources": {},
         "saves": {

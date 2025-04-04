@@ -35,7 +35,8 @@
                 "slug": null,
                 "traits": {
                     "value": [
-                        "agile"
+                        "agile",
+                        "unarmed"
                     ]
                 },
                 "weaponType": {
@@ -46,10 +47,8 @@
         },
         {
             "_id": "wymsHfsPASWtV1xM",
-            "flags": {
-                "core": {
-                    "sourceId": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.W7SbTykXrNwxDzJc"
-                }
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.W7SbTykXrNwxDzJc"
             },
             "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Reactive Strike",
@@ -248,9 +247,18 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "darkvision, scent (imprecise) 30 feet",
+            "details": "",
             "mod": 23,
-            "senses": []
+            "senses": [
+                {
+                    "type": "darkvision"
+                },
+                {
+                    "acuity": "imprecise",
+                    "range": 30,
+                    "type": "scent"
+                }
+            ]
         },
         "resources": {},
         "saves": {

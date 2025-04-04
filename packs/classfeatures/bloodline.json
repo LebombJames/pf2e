@@ -20,16 +20,34 @@
             "value": []
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder Core Rulebook"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Player Core 2"
         },
         "rules": [
             {
                 "adjustName": false,
                 "choices": {
                     "filter": [
-                        "item:tag:sorcerer-bloodline"
+                        "item:tag:sorcerer-bloodline",
+                        {
+                            "or": [
+                                {
+                                    "and": [
+                                        "class:sorcerer",
+                                        "item:tag:sorcerer-bloodline"
+                                    ]
+                                },
+                                {
+                                    "and": [
+                                        "item:tag:sorcerer-bloodline",
+                                        {
+                                            "not": "item:tag:class-archetype"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
                     ]
                 },
                 "flag": "bloodline",
